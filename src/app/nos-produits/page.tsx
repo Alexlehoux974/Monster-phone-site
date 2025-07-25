@@ -3,7 +3,6 @@
 import { useState, useMemo } from 'react';
 import Header from '@/components/Header';
 import Sidebar from '@/components/Sidebar';
-import PromoBanner from '@/components/PromoBanner';
 import { allProducts } from '@/data/products';
 
 export default function SmartphonesPage() {
@@ -30,10 +29,8 @@ export default function SmartphonesPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <PromoBanner />
-      <div className="pt-10">
-        <Header />
-        <div className="flex">
+      <Header />
+      <div className="flex">
         <Sidebar
           products={products}
           selectedCategory={selectedCategory}
@@ -84,7 +81,6 @@ export default function SmartphonesPage() {
           )}
         </main>
         </div>
-      </div>
     </div>
   );
 }

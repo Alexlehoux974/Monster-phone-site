@@ -2,15 +2,13 @@
 
 import { motion } from 'framer-motion';
 import Header from '@/components/Header';
-import PromoBanner from '@/components/PromoBanner';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Clock, Star, Gift, Percent, ShoppingCart } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Star, ShoppingCart } from 'lucide-react';
 
 export default function PromotionsPage() {
   return (
     <div className="min-h-screen bg-gray-50">
-      <PromoBanner />
       <div className="pt-10">
         <Header />
         
@@ -23,20 +21,20 @@ export default function PromotionsPage() {
             transition={{ duration: 0.5 }}
             className="text-center mb-12"
           >
-            <div className="inline-flex items-center gap-2 bg-red-100 text-red-600 px-4 py-2 rounded-full text-sm font-medium mb-4">
-              <Gift className="w-4 h-4" />
-              SOLDES D&apos;HIVER EN COURS
+            <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-600 px-4 py-2 rounded-full text-sm font-medium mb-4">
+              <MapPin className="w-4 h-4" />
+              MONSTER PHONE BOUTIQUE RÉUNION
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Offres Exceptionnelles
+              Votre boutique spécialisée
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Profitez de nos promotions exclusives sur une sélection d&apos;accessoires premium. 
-              Stocks limités, dépêchez-vous !
+              Découvrez notre gamme complète d'accessoires et smartphones gaming à La Réunion. 
+              Service personnalisé et expertise locale depuis 2018.
             </p>
           </motion.div>
 
-          {/* Stats rapides */}
+          {/* Services Réunion */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -44,29 +42,29 @@ export default function PromotionsPage() {
             className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16"
           >
             <div className="bg-white p-6 rounded-lg shadow-sm border text-center">
-              <Percent className="w-12 h-12 text-red-600 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">Jusqu&apos;à -50%</h3>
+              <MapPin className="w-12 h-12 text-blue-600 mx-auto mb-4" />
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">Livraison Île</h3>
               <p className="text-gray-600">
-                Sur une sélection d&apos;accessoires
+                Livraison partout à La Réunion sous 48h
               </p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-sm border text-center">
-              <Clock className="w-12 h-12 text-orange-600 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">Offre limitée</h3>
+              <Phone className="w-12 h-12 text-green-600 mx-auto mb-4" />
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">Service Local</h3>
               <p className="text-gray-600">
-                Jusqu&apos;au 31 janvier 2024
+                Équipe technique basée à La Réunion
               </p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-sm border text-center">
               <Star className="w-12 h-12 text-yellow-600 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">Produits premium</h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">Garantie 24 mois</h3>
               <p className="text-gray-600">
-                Qualité garantie 6 mois
+                Service après-vente garanti
               </p>
             </div>
           </motion.div>
 
-          {/* Offres principales */}
+          {/* Nos marques */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -74,89 +72,62 @@ export default function PromotionsPage() {
             className="mb-16"
           >
             <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
-              Offres Flash
+              Nos marques partenaires
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {/* Offre 1 */}
+              {/* HONOR */}
               <div className="bg-white rounded-lg shadow-sm border overflow-hidden">
-                <div className="relative">
-                  <div className="absolute top-4 left-4 z-10">
-                    <Badge className="bg-red-500 text-white">-30%</Badge>
-                  </div>
-                  <div className="bg-gradient-to-br from-blue-500 to-purple-600 h-48 flex items-center justify-center">
-                    <div className="text-white text-center">
-                      <h3 className="text-xl font-bold mb-2">Casques MUVIT</h3>
-                      <p className="text-sm opacity-90">Collection Enfant</p>
-                    </div>
+                <div className="bg-gradient-to-br from-blue-500 to-purple-600 h-48 flex items-center justify-center">
+                  <div className="text-white text-center">
+                    <h3 className="text-xl font-bold mb-2">HONOR</h3>
+                    <p className="text-sm opacity-90">Smartphones premium</p>
                   </div>
                 </div>
                 <div className="p-6">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="text-2xl font-bold text-gray-900">34,99€</span>
-                    <span className="text-lg text-gray-500 line-through">49,99€</span>
-                  </div>
                   <p className="text-gray-600 mb-4">
-                    Casques pour enfants avec limitation de volume
+                    Smartphones gaming haute performance, garantie constructeur 24 mois
                   </p>
-                  <Button className="w-full">
+                  <Button className="w-full" variant="outline">
                     <ShoppingCart className="w-4 h-4 mr-2" />
-                    Ajouter au panier
+                    Voir les produits
                   </Button>
                 </div>
               </div>
 
-              {/* Offre 2 */}
+              {/* MUVIT */}
               <div className="bg-white rounded-lg shadow-sm border overflow-hidden">
-                <div className="relative">
-                  <div className="absolute top-4 left-4 z-10">
-                    <Badge className="bg-red-500 text-white">-25%</Badge>
-                  </div>
-                  <div className="bg-gradient-to-br from-green-500 to-teal-600 h-48 flex items-center justify-center">
-                    <div className="text-white text-center">
-                      <h3 className="text-xl font-bold mb-2">Câbles MY-WAY</h3>
-                      <p className="text-sm opacity-90">Lumineux premium</p>
-                    </div>
+                <div className="bg-gradient-to-br from-green-500 to-teal-600 h-48 flex items-center justify-center">
+                  <div className="text-white text-center">
+                    <h3 className="text-xl font-bold mb-2">MUVIT</h3>
+                    <p className="text-sm opacity-90">Accessoires innovants</p>
                   </div>
                 </div>
                 <div className="p-6">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="text-2xl font-bold text-gray-900">22,49€</span>
-                    <span className="text-lg text-gray-500 line-through">29,99€</span>
-                  </div>
                   <p className="text-gray-600 mb-4">
-                    Câbles USB-C Lightning avec éclairage LED
+                    Coques, housses et accessoires de protection de qualité européenne
                   </p>
-                  <Button className="w-full">
+                  <Button className="w-full" variant="outline">
                     <ShoppingCart className="w-4 h-4 mr-2" />
-                    Ajouter au panier
+                    Voir les produits
                   </Button>
                 </div>
               </div>
 
-              {/* Offre 3 */}
+              {/* MY WAY */}
               <div className="bg-white rounded-lg shadow-sm border overflow-hidden">
-                <div className="relative">
-                  <div className="absolute top-4 left-4 z-10">
-                    <Badge className="bg-red-500 text-white">-40%</Badge>
-                  </div>
-                  <div className="bg-gradient-to-br from-purple-500 to-pink-600 h-48 flex items-center justify-center">
-                    <div className="text-white text-center">
-                      <h3 className="text-xl font-bold mb-2">Coques MUVIT</h3>
-                      <p className="text-sm opacity-90">Protection premium</p>
-                    </div>
+                <div className="bg-gradient-to-br from-purple-500 to-pink-600 h-48 flex items-center justify-center">
+                  <div className="text-white text-center">
+                    <h3 className="text-xl font-bold mb-2">MY WAY</h3>
+                    <p className="text-sm opacity-90">Câbles & chargeurs</p>
                   </div>
                 </div>
                 <div className="p-6">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="text-2xl font-bold text-gray-900">11,99€</span>
-                    <span className="text-lg text-gray-500 line-through">19,99€</span>
-                  </div>
                   <p className="text-gray-600 mb-4">
-                    Coques transparentes ultra-résistantes
+                    Câbles lumineux, batteries portables et solutions de charge
                   </p>
-                  <Button className="w-full">
+                  <Button className="w-full" variant="outline">
                     <ShoppingCart className="w-4 h-4 mr-2" />
-                    Ajouter au panier
+                    Voir les produits
                   </Button>
                 </div>
               </div>
@@ -164,7 +135,7 @@ export default function PromotionsPage() {
           </motion.div>
 
 
-          {/* Call to action */}
+          {/* Contact Réunion */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -172,21 +143,31 @@ export default function PromotionsPage() {
             className="bg-white rounded-lg shadow-sm border p-8 text-center"
           >
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Ne manquez plus aucune offre !
+              Besoin de conseils ?
             </h2>
             <p className="text-lg text-gray-600 mb-6">
-              Inscrivez-vous à notre newsletter pour être informé en avant-première de nos promotions
+              Notre équipe d'experts à La Réunion est là pour vous conseiller
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Votre adresse email"
-                className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              />
-              <Button className="px-6 py-3">
-                S&apos;abonner
-              </Button>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+              <div className="flex flex-col items-center">
+                <Phone className="w-8 h-8 text-blue-600 mb-2" />
+                <p className="font-semibold">0262 XX XX XX</p>
+                <p className="text-sm text-gray-600">Lun-Sam 9h-18h</p>
+              </div>
+              <div className="flex flex-col items-center">
+                <Mail className="w-8 h-8 text-green-600 mb-2" />
+                <p className="font-semibold">contact@monster-phone-reunion.com</p>
+                <p className="text-sm text-gray-600">Réponse sous 24h</p>
+              </div>
+              <div className="flex flex-col items-center">
+                <MapPin className="w-8 h-8 text-purple-600 mb-2" />
+                <p className="font-semibold">Sainte-Marie</p>
+                <p className="text-sm text-gray-600">Showroom sur RDV</p>
+              </div>
             </div>
+            <Button className="px-6 py-3">
+              Nous contacter
+            </Button>
           </motion.div>
         </div>
         </main>

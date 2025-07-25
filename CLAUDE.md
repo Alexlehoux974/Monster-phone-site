@@ -41,32 +41,41 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Project Structure
 ```
 src/
-├── app/                    # Pages Next.js App Router
-│   ├── page.tsx           # Accueil (Header + MonsterPhoneHero)
-│   ├── nos-produits/      # Listing produits avec filtres
-│   ├── accessoires/       # Page accessoires
-│   └── [produit]/         # Pages produits individuelles
-├── components/            # Composants UI
-│   ├── Header.tsx         # Navigation avec menus hiérarchiques
-│   ├── MonsterPhoneHero.tsx # Hero page d'accueil
-│   └── ProductCard.tsx    # Cartes produits
+├── app/                    # Next.js App Router pages
+│   ├── page.tsx           # Homepage (Header + MonsterPhoneHero)
+│   ├── nos-produits/      # Product listing with filters
+│   ├── accessoires/       # Accessories page
+│   ├── promotions/        # Promotions page
+│   ├── reparation/        # Repair services page
+│   └── test-*/            # Test pages for development
+├── components/            # Reusable UI components
+│   ├── Header.tsx         # Navigation with hierarchical menus
+│   ├── MonsterPhoneHero.tsx # Homepage hero section
+│   ├── ProductCard.tsx    # Product display cards
+│   ├── Footer.tsx         # Site footer
+│   └── ui/               # UI primitives (Radix-based)
 ├── data/
-│   └── products.ts        # Export Airtable (source de vérité)
-└── types/
-    └── index.ts           # Interfaces TypeScript
+│   └── products.ts        # Airtable export (source of truth)
+├── types/
+│   └── index.ts           # TypeScript interfaces
+├── hooks/                 # Custom React hooks
+└── lib/
+    └── utils.ts           # Utility functions
 ```
 
 ### Key Development Patterns
 
 **Image Handling**: All product images are served from GitHub CDN. Images may return `text/plain` instead of actual images due to repository access issues. Use Next.js Image component for optimization.
 
-**Data Management**: Product data is statically imported from `/src/data/products.ts` which contains Airtable export. Update this file when product data changes.
+**Data Management**: Product data is statically imported from `/src/data/products.ts` which contains Airtable export. Note: There's a type mismatch between the Product interface in `/src/data/products.ts` and `/src/types/index.ts` - the data file uses simplified field names while types file uses French field names from Airtable.
 
 **Navigation**: Hierarchical menu system (Categories → Subcategories → Brands → Products) with hover-based navigation and URL parameters (`/nos-produits?category=...&brand=...`).
 
-**TypeScript**: Strict mode enabled. Product interface defined in `/src/types/index.ts`.
+**TypeScript**: Strict mode enabled. Two Product interfaces exist - one in `/src/data/products.ts` (simplified) and one in `/src/types/index.ts` (Airtable fields). This inconsistency may cause type errors.
 
-### 3. Development Commands
+**UI Components**: Uses Radix UI primitives in `/src/components/ui/` for accessible components (Button, Card, Badge) with class-variance-authority for styling variants.
+
+## Development Commands
 
 ```bash
 # Development
@@ -83,47 +92,50 @@ netstat -tlnp | grep 3001     # Check port availability
 rm -rf .next                   # Clean build cache
 ```
 
-### 4. Résolution de Problèmes Courants
+## Common Issues & Troubleshooting
 
-#### A. Server ne démarre pas
-1. Vérifier processus existants : `ps aux | grep next`
-2. Killer si nécessaire : `kill -9 [PID]`
-3. Check port disponible : `netstat -tlnp | grep 3001`
-4. Rebuild si erreurs : `npm run build`
+### Server Won't Start
+1. Check existing processes: `ps aux | grep next`
+2. Kill if necessary: `kill -9 [PID]`
+3. Check port availability: `netstat -tlnp | grep 3001`
+4. Rebuild if errors: `npm run build`
 
-#### B. Images ne chargent pas
-1. Tester URL image directement dans navigateur
-2. Vérifier accès repo GitHub
-3. Alternative : chercher images dans Google Drive
-4. Utiliser placeholder temporaire si nécessaire
+### Images Not Loading
+1. Test image URL directly in browser
+2. Verify GitHub repository access
+3. Alternative: search for images in Google Drive
+4. Use temporary placeholder if necessary
 
-#### C. Menus déroulants bugués
-1. Vérifier événements mouse (enter/leave)
-2. Check z-index et overlay conflicts
-3. Tester navigation hierarchique (categories → subcategories → brands)
+### Dropdown Menus Broken
+1. Check mouse events (enter/leave)
+2. Verify z-index and overlay conflicts
+3. Test hierarchical navigation (categories → subcategories → brands)
 
-#### D. Build Errors
-1. Clean : `rm -rf .next`
-2. Rebuild : `npm run build`
-3. Vérifier TypeScript errors
-4. Check imports et exports
+### Build Errors
+1. Clean: `rm -rf .next`
+2. Rebuild: `npm run build`
+3. Check TypeScript errors
+4. Verify imports and exports
 
-## 🎯 Fonctionnalités Clés
+### TypeScript Interface Mismatch
+The project has conflicting Product interfaces. Use the interface from `/src/data/products.ts` for actual data operations, as it matches the exported data structure.
 
-### 1. Navigation Hiérarchique
-- **Structure** : Categories → Subcategories → Brands → Products
-- **Comportement** : Hover pour navigation, click pour sélection
-- **URLs** : `/nos-produits?category=...&brand=...`
+## Key Features
 
-### 2. Hero Page Gaming
-- **Component** : MonsterPhoneHero avec animations Framer Motion
-- **Design** : Background Aurora, particules, shimmer text
-- **CTA** : Liens vers catalogue et promotions
+### Hierarchical Navigation
+- **Structure**: Categories → Subcategories → Brands → Products
+- **Behavior**: Hover for navigation, click for selection
+- **URLs**: `/nos-produits?category=...&brand=...`
 
-### 3. Catalogue Produits
-- **Filtrage** : Par marque, catégorie, prix
-- **Display** : Grid responsive avec ProductCard
-- **SEO** : URLs optimisées et meta données
+### Gaming Hero Section
+- **Component**: MonsterPhoneHero with Framer Motion animations
+- **Design**: Aurora background, particles, shimmer text effects
+- **CTA**: Links to catalog and promotions
+
+### Product Catalog
+- **Filtering**: By brand, category, price range
+- **Display**: Responsive grid with ProductCard components
+- **SEO**: Optimized URLs and meta data
 
 ## MCP Integrations
 
@@ -145,3 +157,5 @@ rm -rf .next                   # Clean build cache
 **Navigation System**: Complex hierarchical dropdown menus rely on mouse events (enter/leave). Test thoroughly on different devices.
 
 **Build Process**: Clean `.next` directory if encountering build issues. TypeScript strict mode is enabled.
+
+**Type Safety**: Project has two conflicting Product interfaces which may cause development issues. The interface in `/src/data/products.ts` matches the actual data structure.

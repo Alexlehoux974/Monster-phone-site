@@ -3,7 +3,6 @@
 import { useState, useMemo } from 'react';
 import Header from '@/components/Header';
 import Sidebar from '@/components/Sidebar';
-import PromoBanner from '@/components/PromoBanner';
 import { allProducts } from '@/data/products';
 
 export default function AccessoiresPage() {
@@ -40,9 +39,7 @@ export default function AccessoiresPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <PromoBanner />
-      <div className="pt-10">
-        <Header />
+      <Header />
         <div className="flex">
         <Sidebar
           products={products}
@@ -119,7 +116,6 @@ export default function AccessoiresPage() {
           )}
         </main>
         </div>
-      </div>
     </div>
   );
 }
