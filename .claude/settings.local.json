@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run dev:*)",
+      "Bash(rm:*)",
+      "Bash(npm run build:*)",
+      "Bash(curl:*)",
+      "Bash(find:*)",
+      "Bash(npm start:*)",
+      "Bash(pkill:*)",
+      "Bash(kill:*)",
+      "mcp__sequentialthinking__sequentialthinking",
+      "Bash(git add:*)"
+    ],
+    "deny": []
+  }
+}

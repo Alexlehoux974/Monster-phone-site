@@ -1,0 +1,81 @@
+
+> monster-phone-boutique@0.1.0 dev
+> next dev --turbopack
+
+ ⚠ Warning: Found multiple lockfiles. Selecting /root/package-lock.json.
+   Consider removing the lockfiles at:
+   * /root/monster-phone-dev/monster-phone-boutique/package-lock.json
+
+ ⚠ Port 3000 is in use by process 103441, using available port 3002 instead.
+   ▲ Next.js 15.4.2 (Turbopack)
+   - Local:        http://localhost:3002
+   - Network:      http://193.203.191.71:3002
+
+ ✓ Starting...
+ ✓ Ready in 1622ms
+ ○ Compiling / ...
+ ✓ Compiled / in 10.7s
+ GET / 200 in 11516ms
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MY-WAY/Images/Cables-Lumineux/USB-C-Lightning/CABLE_USB-C_LIGHTNING.jpg received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MUVIT/Images/Casques-Enfant/Pika/CASQUE_PIKA.jpg received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MUVIT/Images/Casques-Enfant/Pika/CASQUE_PIKA.jpg received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MY-WAY/Images/Cables-Lumineux/USB-C-Lightning/CABLE_USB-C_LIGHTNING.jpg received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
+ ✓ Compiled in 352ms
+ ✓ Compiled in 153ms
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
+ ✓ Compiled in 1621ms
+ ✓ Compiled in 213ms
+ ✓ Compiled / in 182ms
+ GET / 200 in 1241ms
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MUVIT/Images/Casques-Enfant/Pika/CASQUE_PIKA.jpg received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MY-WAY/Images/Cables-Lumineux/USB-C-Lightning/CABLE_USB-C_LIGHTNING.jpg received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MUVIT/Images/Casques-Enfant/Pika/CASQUE_PIKA.jpg received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MY-WAY/Images/Cables-Lumineux/USB-C-Lightning/CABLE_USB-C_LIGHTNING.jpg received text/plain; charset=utf-8
+ GET / 200 in 614ms
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MY-WAY/Images/Cables-Lumineux/USB-C-Lightning/CABLE_USB-C_LIGHTNING.jpg received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MUVIT/Images/Casques-Enfant/Pika/CASQUE_PIKA.jpg received text/plain; charset=utf-8
+ ✓ Compiled in 223ms
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
+ GET / 200 in 630ms
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MY-WAY/Images/Cables-Lumineux/USB-C-Lightning/CABLE_USB-C_LIGHTNING.jpg received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MUVIT/Images/Casques-Enfant/Pika/CASQUE_PIKA.jpg received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
+ ✓ Compiled in 844ms
+ ✓ Compiled in 163ms
+ ✓ Compiled / in 35ms
+ GET / 200 in 262ms
+ ✓ Compiled in 2s
+ ✓ Compiled / in 27ms
+ GET / 200 in 325ms
+ GET / 200 in 580ms
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MY-WAY/Images/Cables-Lumineux/USB-C-Lightning/CABLE_USB-C_LIGHTNING.jpg received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MUVIT/Images/Casques-Enfant/Pika/CASQUE_PIKA.jpg received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
+ ✓ Compiled in 548ms
+ ✓ Compiled / in 24ms
+ GET / 200 in 299ms
+ GET / 200 in 525ms
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
