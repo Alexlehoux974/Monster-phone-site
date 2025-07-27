@@ -10,7 +10,18 @@
       "Bash(pkill:*)",
       "Bash(kill:*)",
       "mcp__sequentialthinking__sequentialthinking",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git remote add:*)",
+      "Bash(git remote set-url:*)",
+      "Bash(git push:*)",
+      "mcp__airtable__list_bases",
+      "mcp__airtable__list_tables",
+      "mcp__airtable__create_record",
+      "mcp__airtable__list_records",
+      "mcp__airtable__update_records",
+      "Bash(timeout:*)",
+      "Bash(ls:*)",
+      "Bash(npm run lint)"
     ],
     "deny": []
   }

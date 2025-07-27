@@ -2,15 +2,12 @@
 
 import { motion } from 'framer-motion';
 import Header from '@/components/Header';
-import PromoBanner from '@/components/PromoBanner';
 import { Shield, Clock, Award } from 'lucide-react';
 
 export default function ReparationPage() {
   return (
     <div className="min-h-screen bg-gray-50">
-      <PromoBanner />
-      <div className="pt-10">
-        <Header />
+      <Header />
         
         <main className="px-4 sm:px-6 lg:px-8 py-8">
         <div className="max-w-6xl mx-auto">
@@ -108,7 +105,6 @@ export default function ReparationPage() {
 
         </div>
         </main>
-      </div>
 
       {/* Footer */}
       <footer className="bg-gray-800 text-white py-8 mt-16">

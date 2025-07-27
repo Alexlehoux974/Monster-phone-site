@@ -349,6 +349,11 @@ export interface CategoryStructure {
 export const menuStructure: {
   smartphones: CategoryStructure[];
   accessoires: CategoryStructure[];
+  casquesAudio: CategoryStructure[];
+  montres: CategoryStructure[];
+  luminaire: CategoryStructure[];
+  accessoiresMonster: CategoryStructure[];
+  muvit: CategoryStructure[];
 } = {
   smartphones: [
     {
@@ -419,6 +424,88 @@ export const menuStructure: {
         {
           name: "MUVIT",
           products: allProducts.filter(p => p.category === "Accessoires" && p.brand === "MUVIT")
+        }
+      ]
+    }
+  ],
+  casquesAudio: [
+    {
+      name: "Casques",
+      brands: [
+        {
+          name: "Placeholder",
+          products: [] // À remplir avec les vrais produits de casques de l'Airtable
+        }
+      ]
+    },
+    {
+      name: "Écouteurs", 
+      brands: [
+        {
+          name: "Placeholder",
+          products: [] // À remplir avec les vrais produits d'écouteurs de l'Airtable
+        }
+      ]
+    },
+    {
+      name: "Enceintes",
+      brands: [
+        {
+          name: "Placeholder", 
+          products: [] // À remplir avec les vrais produits d'enceintes de l'Airtable
+        }
+      ]
+    },
+    {
+      name: "Casques Enfant",
+      brands: [
+        {
+          name: "MUVIT",
+          products: allProducts.filter(p => p.category === "Casques Enfant" && p.brand === "MUVIT")
+        }
+      ]
+    }
+  ],
+  montres: [
+    {
+      name: "Montres Connectées",
+      brands: [
+        {
+          name: "Placeholder",
+          products: [] // À remplir avec les vrais produits de montres de l'Airtable
+        }
+      ]
+    }
+  ],
+  luminaire: [
+    {
+      name: "Luminaire Monster",
+      brands: [
+        {
+          name: "Placeholder",
+          products: [] // À remplir avec les vrais produits d'éclairage gaming de l'Airtable
+        }
+      ]
+    }
+  ],
+  accessoiresMonster: [
+    {
+      name: "Accessoires Monster",
+      brands: [
+        {
+          name: "MONSTER",
+          products: allProducts.filter(p => p.brand === "MONSTER")
+        }
+      ]
+    }
+  ],
+  muvit: [
+    {
+      name: "Produits MUVIT",
+      brands: [
+        {
+          name: "MUVIT",
+          products: allProducts.filter(p => p.brand === "MUVIT")
         }
       ]
     }

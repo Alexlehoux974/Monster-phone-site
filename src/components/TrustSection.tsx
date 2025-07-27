@@ -1,6 +1,66 @@
 'use client';
+import { useState, useEffect, useRef } from 'react';
 
 export default function TrustSection() {
+  const [isVisible, setIsVisible] = useState(false);
+  const [animatedStats, setAnimatedStats] = useState({
+    clients: 0,
+    rating: 0,
+    delivery: 0,
+    satisfaction: 0
+  });
+  const statsRef = useRef<HTMLDivElement>(null);
+
+  const finalStats = {
+    clients: 16472,
+    rating: 4.8,
+    delivery: 24,
+    satisfaction: 98
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isVisible) {
+          setIsVisible(true);
+          animateNumbers();
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (statsRef.current) {
+      observer.observe(statsRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [isVisible]);
+
+  const animateNumbers = () => {
+    const duration = 2000; // 2 seconds
+    const steps = 60;
+    const stepDuration = duration / steps;
+
+    let currentStep = 0;
+    const timer = setInterval(() => {
+      currentStep++;
+      const progress = currentStep / steps;
+      const easeOut = 1 - Math.pow(1 - progress, 3);
+
+      setAnimatedStats({
+        clients: Math.floor(finalStats.clients * easeOut),
+        rating: parseFloat((finalStats.rating * easeOut).toFixed(1)),
+        delivery: Math.floor(finalStats.delivery * easeOut),
+        satisfaction: Math.floor(finalStats.satisfaction * easeOut)
+      });
+
+      if (currentStep >= steps) {
+        clearInterval(timer);
+        setAnimatedStats(finalStats);
+      }
+    }, stepDuration);
+  };
+
   const trustFeatures = [
     {
       icon: (
@@ -9,8 +69,8 @@ export default function TrustSection() {
         </svg>
       ),
       title: "Livraison Express",
-      description: "24h/48h partout en France",
-      detail: "Gratuite dès 50€ d'achat"
+      description: "partout à la Réunion",
+      detail: "24h/48H - Gratuite dès 50€ d'achat"
     },
     {
       icon: (
@@ -67,12 +127,6 @@ export default function TrustSection() {
   return (
     <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Plus de 10 000 clients nous font confiance pour leurs achats high-tech. 
-            Découvrez pourquoi Monster Phone est votre partenaire technologie de confiance.
-          </p>
-        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {trustFeatures.map((feature, index) => (
@@ -93,24 +147,73 @@ export default function TrustSection() {
           ))}
         </div>
 
-        {/* Statistiques */}
-        <div className="mt-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-white">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 text-center">
-            <div>
-              <div className="text-3xl font-bold mb-2">10 000+</div>
-              <div className="text-blue-100">Clients satisfaits</div>
+        {/* Statistiques avec animations */}
+        <div 
+          ref={statsRef}
+          className="mt-16 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 rounded-3xl p-8 text-white shadow-2xl overflow-hidden relative"
+        >
+          {/* Effet de fond animé */}
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-purple-400/20 animate-pulse"></div>
+          
+          <div className="relative z-10">
+            <h3 className="text-2xl font-bold text-center mb-8 text-white">
+              Nos Chiffres Clés
+            </h3>
+            
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+              <div className="group hover:scale-105 transition-transform duration-300">
+                <div className="text-4xl lg:text-5xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-100">
+                  {animatedStats.clients.toLocaleString('fr-FR')}
+                </div>
+                <div className="text-blue-100 text-sm lg:text-base font-medium">
+                  Clients satisfaits
+                </div>
+              </div>
+              
+              <div className="group hover:scale-105 transition-transform duration-300">
+                <div className="text-4xl lg:text-5xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-green-100">
+                  {animatedStats.rating}/5
+                </div>
+                <div className="text-blue-100 text-sm lg:text-base font-medium">
+                  Note moyenne
+                </div>
+              </div>
+              
+              <div className="group hover:scale-105 transition-transform duration-300">
+                <div className="text-4xl lg:text-5xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-orange-300 to-orange-100">
+                  24/48
+                </div>
+                <div className="text-blue-100 text-sm lg:text-base font-medium">
+                  Livraison 24h à 48h
+                </div>
+              </div>
+              
+              <div className="group hover:scale-105 transition-transform duration-300">
+                <div className="text-4xl lg:text-5xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-pink-300 to-pink-100">
+                  {animatedStats.satisfaction}%
+                </div>
+                <div className="text-blue-100 text-sm lg:text-base font-medium">
+                  Taux de satisfaction
+                </div>
+              </div>
             </div>
-            <div>
-              <div className="text-3xl font-bold mb-2">4.8/5</div>
-              <div className="text-blue-100">Note moyenne</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold mb-2">24h</div>
-              <div className="text-blue-100">Livraison express</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold mb-2">99.2%</div>
-              <div className="text-blue-100">Taux de satisfaction</div>
+            
+            {/* Indicateurs visuels supplémentaires */}
+            <div className="mt-8 pt-6 border-t border-white/20">
+              <div className="flex flex-wrap justify-center gap-6 text-sm text-blue-100">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                  <span>Service actif 24h/7j</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+                  <span>Livraison express</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+                  <span>Support technique dédié</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
