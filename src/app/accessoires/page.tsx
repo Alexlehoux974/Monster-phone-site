@@ -101,7 +101,7 @@ export default function AccessoiresPage() {
                 </div>
                 <div className="p-4">
                   <h3 className="font-semibold text-gray-900 mb-1">{product.name}</h3>
-                  <p className="text-sm text-gray-600 mb-1">{product.brand}</p>
+                  <p className="text-sm text-gray-700 mb-1">{product.brand}</p>
                   <p className="text-sm text-blue-600 mb-2">{product.category}</p>
                   <p className="text-lg font-bold text-blue-600">{product.price}</p>
                 </div>
@@ -111,7 +111,7 @@ export default function AccessoiresPage() {
 
           {filteredProducts.length === 0 && (
             <div className="text-center py-12">
-              <p className="text-gray-500">Aucun accessoire trouvé</p>
+              <p className="text-gray-700">Aucun accessoire trouvé</p>
             </div>
           )}
         </main>

@@ -65,15 +65,17 @@ src/
 
 ### Key Development Patterns
 
-**Image Handling**: All product images are served from GitHub CDN. Images may return `text/plain` instead of actual images due to repository access issues. Use Next.js Image component for optimization.
+**Image Handling**: All product images are served from GitHub CDN (`raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/`). Images may return `text/plain` instead of actual images due to repository access issues. Next.js Image component is configured with the GitHub remote pattern in `next.config.ts`.
 
-**Data Management**: Product data is statically imported from `/src/data/products.ts` which contains Airtable export. Note: There's a type mismatch between the Product interface in `/src/data/products.ts` and `/src/types/index.ts` - the data file uses simplified field names while types file uses French field names from Airtable.
+**Data Management**: Product data is statically imported from `/src/data/products.ts` which contains Airtable export. **Critical**: There's a type mismatch between the Product interface in `/src/data/products.ts` (simplified field names like `name`, `brand`) and `/src/types/index.ts` (French Airtable field names like `'Nom du Produit'`, `'Marque'`). Use the `/src/data/products.ts` interface for data operations.
 
-**Navigation**: Hierarchical menu system (Categories → Subcategories → Brands → Products) with hover-based navigation and URL parameters (`/nos-produits?category=...&brand=...`).
+**Navigation**: Complex hierarchical dropdown menu system in Header component with hover-based state management. Uses React state (`hoveredCategory`, `hoveredSubcategory`, `hoveredBrand`) for multi-level navigation. URL parameters for filtering: `/nos-produits?category=...&brand=...`.
 
-**TypeScript**: Strict mode enabled. Two Product interfaces exist - one in `/src/data/products.ts` (simplified) and one in `/src/types/index.ts` (Airtable fields). This inconsistency may cause type errors.
+**State Management**: Client-side React state for navigation menus, no external state management library. Component state handles dropdown visibility and hover interactions.
 
-**UI Components**: Uses Radix UI primitives in `/src/components/ui/` for accessible components (Button, Card, Badge) with class-variance-authority for styling variants.
+**Styling**: Tailwind CSS v4 with custom configuration, Radix UI primitives in `/src/components/ui/`, class-variance-authority for component variants, Framer Motion for animations (hero section).
+
+**TypeScript Configuration**: Strict mode enabled with path aliases (`@/*` → `./src/*`). ESLint configured to ignore build errors in `next.config.ts`.
 
 ## Development Commands
 
@@ -85,11 +87,13 @@ npm start                      # Start production server (default port 3000)
 npm start -- -p 3001         # Start production server on port 3001
 npm run lint                   # ESLint code linting
 
-# Common debugging
+# Testing and debugging
 curl -I http://localhost:3001/ # Test server response
+curl -I [image-url]           # Test individual image URLs from GitHub CDN
 ps aux | grep next            # Check running processes
 netstat -tlnp | grep 3001     # Check port availability
-rm -rf .next                   # Clean build cache
+rm -rf .next                   # Clean build cache when TypeScript errors persist
+npm run build && npm start -- -p 3001  # Full production build test
 ```
 
 ## Common Issues & Troubleshooting
@@ -118,7 +122,11 @@ rm -rf .next                   # Clean build cache
 4. Verify imports and exports
 
 ### TypeScript Interface Mismatch
-The project has conflicting Product interfaces. Use the interface from `/src/data/products.ts` for actual data operations, as it matches the exported data structure.
+**Critical Issue**: The project has two conflicting Product interfaces:
+- `/src/data/products.ts`: Uses simplified English field names (`name`, `brand`, `category`, `price`)
+- `/src/types/index.ts`: Uses French Airtable field names (`'Nom du Produit'`, `'Marque'`, `'Catégorie'`)
+
+**Solution**: Always use the interface from `/src/data/products.ts` for data operations as it matches the actual exported data structure. The `/src/types/index.ts` interface appears to be outdated Airtable field mappings.
 
 ## Key Features
 
@@ -158,4 +166,13 @@ The project has conflicting Product interfaces. Use the interface from `/src/dat
 
 **Build Process**: Clean `.next` directory if encountering build issues. TypeScript strict mode is enabled.
 
-**Type Safety**: Project has two conflicting Product interfaces which may cause development issues. The interface in `/src/data/products.ts` matches the actual data structure.
+**Type Safety**: Project has two conflicting Product interfaces which will cause TypeScript errors. Always use the interface from `/src/data/products.ts` as it matches the actual data structure.
+
+**Font Configuration**: Uses Geist fonts (sans and mono) from next/font/google, but layout.tsx still has default create-next-app metadata instead of Monster Phone Boutique branding.
+
+**Build Configuration**: ESLint ignores build errors (`ignoreDuringBuilds: true` in next.config.ts), which may hide important issues during development.
+
+## Memory
+
+### Workflow and Verification
+- Lorsque tu as fini de réaliser la demande de l'utilisateur et que tu es prêt à revenir vers lui pour attendre de nouvelles instructions, visite avant le projet avec playwright pour t'assurer que c'est vraiment fini.

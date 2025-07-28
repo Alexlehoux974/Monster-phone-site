@@ -29,7 +29,7 @@ export default function ServiceApresVentePage() {
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
                 Service après-vente
               </h1>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              <p className="text-xl text-gray-700 max-w-3xl mx-auto">
                 Notre équipe dédiée à La Réunion vous accompagne avant, pendant et après votre achat. 
                 Un service personnalisé pour votre satisfaction complète.
               </p>
@@ -47,7 +47,7 @@ export default function ServiceApresVentePage() {
                   <Phone className="w-6 h-6 text-green-600" />
                   <h3 className="text-xl font-bold text-gray-900">Support téléphonique</h3>
                 </div>
-                <ul className="space-y-2 text-gray-600 mb-4">
+                <ul className="space-y-2 text-gray-700 mb-4">
                   <li>• Conseils avant achat</li>
                   <li>• Assistance à la configuration</li>
                   <li>• Résolution de problèmes</li>
@@ -66,7 +66,7 @@ export default function ServiceApresVentePage() {
                   <Mail className="w-6 h-6 text-blue-600" />
                   <h3 className="text-xl font-bold text-gray-900">Support par email</h3>
                 </div>
-                <ul className="space-y-2 text-gray-600 mb-4">
+                <ul className="space-y-2 text-gray-700 mb-4">
                   <li>• Demandes détaillées</li>
                   <li>• Envoi de documents</li>
                   <li>• Suivi de dossier</li>
@@ -95,7 +95,7 @@ export default function ServiceApresVentePage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-4">Nos services techniques</h3>
-                  <ul className="space-y-3 text-gray-600">
+                  <ul className="space-y-3 text-gray-700">
                     <li className="flex items-start gap-2">
                       <Wrench className="w-5 h-5 text-blue-600 mt-0.5" />
                       <span>Diagnostic gratuit sous 48h</span>
@@ -121,7 +121,7 @@ export default function ServiceApresVentePage() {
 
                 <div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-4">Informations pratiques</h3>
-                  <div className="space-y-3 text-gray-600">
+                  <div className="space-y-3 text-gray-700">
                     <div className="flex items-start gap-2">
                       <MapPin className="w-5 h-5 text-green-600 mt-0.5" />
                       <div>
@@ -158,7 +158,7 @@ export default function ServiceApresVentePage() {
                     <Phone className="w-8 h-8 text-blue-600" />
                   </div>
                   <h3 className="font-semibold text-gray-900 mb-2">1. Contactez-nous</h3>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-gray-700">
                     Appelez-nous ou envoyez un email avec votre problème et votre numéro de commande
                   </p>
                 </div>
@@ -168,7 +168,7 @@ export default function ServiceApresVentePage() {
                     <Headphones className="w-8 h-8 text-green-600" />
                   </div>
                   <h3 className="font-semibold text-gray-900 mb-2">2. Diagnostic</h3>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-gray-700">
                     Notre équipe effectue un premier diagnostic et vous propose une solution
                   </p>
                 </div>
@@ -178,7 +178,7 @@ export default function ServiceApresVentePage() {
                     <Wrench className="w-8 h-8 text-purple-600" />
                   </div>
                   <h3 className="font-semibold text-gray-900 mb-2">3. Résolution</h3>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-gray-700">
                     Réparation, échange ou remboursement selon le cas et la garantie
                   </p>
                 </div>
@@ -201,21 +201,21 @@ export default function ServiceApresVentePage() {
                     <Clock className="w-8 h-8 text-green-600" />
                   </div>
                   <h3 className="font-semibold text-gray-900 mb-2">Réactivité</h3>
-                  <p className="text-sm text-gray-600">Réponse sous 24h maximum à vos demandes</p>
+                  <p className="text-sm text-gray-700">Réponse sous 24h maximum à vos demandes</p>
                 </div>
                 <div>
                   <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
                     <MapPin className="w-8 h-8 text-blue-600" />
                   </div>
                   <h3 className="font-semibold text-gray-900 mb-2">Proximité</h3>
-                  <p className="text-sm text-gray-600">Équipe locale basée à La Réunion</p>
+                  <p className="text-sm text-gray-700">Équipe locale basée à La Réunion</p>
                 </div>
                 <div>
                   <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
                     <Headphones className="w-8 h-8 text-purple-600" />
                   </div>
                   <h3 className="font-semibold text-gray-900 mb-2">Expertise</h3>
-                  <p className="text-sm text-gray-600">Techniciens formés sur toutes nos marques</p>
+                  <p className="text-sm text-gray-700">Techniciens formés sur toutes nos marques</p>
                 </div>
               </div>
             </motion.div>

@@ -9,22 +9,22 @@ import { menuStructure, type CategoryStructure, type Product } from '@/data/prod
 
 // Composant pour la barre d'urgence promotionnelle
 const PromoBar = () => (
-  <div className="bg-gradient-to-r from-red-600 via-orange-600 to-red-600 text-white py-2 px-4 relative overflow-hidden">
+  <div className="bg-gradient-to-r from-red-600 via-orange-600 to-red-600 text-white py-3 px-4 relative overflow-hidden">
     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer" />
     <div className="max-w-7xl mx-auto text-center relative z-10">
-      <div className="flex items-center justify-center gap-4 text-sm font-semibold flex-wrap">
-        <div className="flex items-center gap-1">
-          <Truck className="w-4 h-4" />
+      <div className="flex items-center justify-center gap-6 text-base font-semibold flex-wrap">
+        <div className="flex items-center gap-2">
+          <Truck className="w-5 h-5" />
           <span>LIVRAISON EXPRESS 24H/48H À LA RÉUNION</span>
         </div>
         <span className="hidden sm:block">•</span>
-        <div className="flex items-center gap-1">
-          <Flame className="w-4 h-4" />
+        <div className="flex items-center gap-2">
+          <Flame className="w-5 h-5" />
           <span>LIVRAISON GRATUITE DÈS 50€</span>
         </div>
         <span className="hidden sm:block">•</span>
-        <div className="flex items-center gap-1">
-          <Shield className="w-4 h-4" />
+        <div className="flex items-center gap-2">
+          <Shield className="w-5 h-5" />
           <span>GARANTIE 2 ANS</span>
         </div>
       </div>
@@ -59,7 +59,7 @@ const DropdownMenu = ({
         {/* Colonne des catégories - maintenant première colonne */}
         <div className="w-64 bg-gray-50 border-r border-gray-200">
           <div className="p-4 border-b border-gray-200">
-            <h3 className="font-semibold text-gray-900 text-base">Nos articles</h3>
+            <h3 className="font-semibold text-gray-900 text-lg">Nos articles</h3>
           </div>
           <div className="py-2">
             {categories.map((category) => (
@@ -67,7 +67,7 @@ const DropdownMenu = ({
                 <Link
                   href={`/nos-produits?category=${encodeURIComponent(category.name)}`}
                   className={cn(
-                    "block px-4 py-3 text-sm font-medium transition-colors",
+                    "block px-4 py-3 text-base font-medium transition-colors",
                     hoveredCategory === category.name 
                       ? "bg-blue-50 text-blue-700" 
                       : "text-gray-700 hover:text-blue-600 hover:bg-gray-100"
@@ -100,7 +100,7 @@ const DropdownMenu = ({
               return (
                 <>
                   <div className="p-4 border-b border-gray-200 bg-green-50">
-                    <h4 className="font-semibold text-gray-900 text-sm">{category.name}</h4>
+                    <h4 className="font-semibold text-gray-900 text-base">{category.name}</h4>
                   </div>
                   <div className="py-2">
                     {category.brands.map((brand) => (
@@ -108,7 +108,7 @@ const DropdownMenu = ({
                         <Link
                           href={`/nos-produits?brand=${encodeURIComponent(brand.name)}`}
                           className={cn(
-                            "block px-4 py-3 text-sm font-medium transition-colors",
+                            "block px-4 py-3 text-base font-medium transition-colors",
                             hoveredBrand === brand.name 
                               ? "bg-green-50 text-green-700" 
                               : "text-gray-700 hover:text-green-600 hover:bg-gray-100"
@@ -141,8 +141,8 @@ const DropdownMenu = ({
               return (
                 <>
                   <div className="p-4 border-b border-gray-200">
-                    <h4 className="font-semibold text-gray-900 text-sm">Collection {hoveredBrand}</h4>
-                    <p className="text-xs text-gray-600 mt-1">{products.length} produits disponibles</p>
+                    <h4 className="font-semibold text-gray-900 text-base">Collection {hoveredBrand}</h4>
+                    <p className="text-sm text-gray-600 mt-1">{products.length} produits disponibles</p>
                   </div>
                   <div className="py-2 max-h-80 overflow-y-auto">
                     {products.slice(0, 5).map((product) => (
@@ -165,11 +165,11 @@ const DropdownMenu = ({
                               </div>
                             )}
                             <div className="flex-1 min-w-0">
-                              <p className="text-sm font-medium text-gray-900 line-clamp-1">
+                              <p className="text-base font-medium text-gray-900 line-clamp-1">
                                 {product.name}
                               </p>
                               {product.price && (
-                                <p className="text-sm font-semibold text-blue-600 mt-1">
+                                <p className="text-base font-semibold text-blue-600 mt-1">
                                   {product.price}
                                 </p>
                               )}
@@ -185,7 +185,7 @@ const DropdownMenu = ({
                       <div className="px-4 py-3">
                         <Link
                           href={`/nos-produits?brand=${encodeURIComponent(hoveredBrand)}`}
-                          className="text-xs font-medium text-blue-600 hover:text-blue-800"
+                          className="text-sm font-medium text-blue-600 hover:text-blue-800"
                           onClick={onClose}
                         >
                           Voir tous les {products.length} produits →
@@ -232,7 +232,7 @@ export default function Header() {
 
 
   // Navigation (sans Accueil car intégré dans le logo)
-  const navigation = [];
+  const navigation: Array<{ name: string; href: string; icon: React.ReactNode }> = [];
 
   return (
     <div className="sticky top-0 z-50">
@@ -247,16 +247,16 @@ export default function Header() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header principal */}
-          <div className="flex justify-between items-center h-20">
+          <div className="flex justify-between items-center h-24">
             {/* Logo avec lien d'accueil */}
             <div className="flex-shrink-0 mr-8">
               <Link href="/" className="flex items-center hover:opacity-90 transition-opacity">
                 <Image 
                   src="/LOGO-MONSTER-PHONE.png" 
                   alt="Monster Phone - Spécialiste Gaming Mobile La Réunion" 
-                  width={160} 
-                  height={80}
-                  className="h-12 w-auto"
+                  width={200} 
+                  height={100}
+                  className="h-16 w-auto"
                 />
               </Link>
             </div>
@@ -281,11 +281,11 @@ export default function Header() {
                 onMouseLeave={handleMouseLeave}
               >
                 <button
-                  className="flex items-center gap-2 text-gray-700 hover:text-blue-600 px-3 py-2 text-base font-bold transition-colors rounded-lg hover:bg-blue-50"
+                  className="flex items-center gap-2 text-gray-700 hover:text-blue-600 px-4 py-3 text-lg font-bold transition-colors rounded-lg hover:bg-blue-50"
                 >
-                  <Smartphone className="w-4 h-4" />
+                  <Smartphone className="w-5 h-5" />
                   <span>Smartphones</span>
-                  <ChevronDown className="w-4 h-4" />
+                  <ChevronDown className="w-5 h-5" />
                 </button>
                 
                 <DropdownMenu
@@ -303,11 +303,11 @@ export default function Header() {
                 onMouseLeave={handleMouseLeave}
               >
                 <button
-                  className="flex items-center gap-2 text-gray-700 hover:text-blue-600 px-3 py-2 text-base font-bold transition-colors rounded-lg hover:bg-blue-50"
+                  className="flex items-center gap-2 text-gray-700 hover:text-blue-600 px-4 py-3 text-lg font-bold transition-colors rounded-lg hover:bg-blue-50"
                 >
-                  <Watch className="w-4 h-4" />
+                  <Watch className="w-5 h-5" />
                   <span>Montres</span>
-                  <ChevronDown className="w-4 h-4" />
+                  <ChevronDown className="w-5 h-5" />
                 </button>
                 
                 <DropdownMenu
@@ -325,11 +325,11 @@ export default function Header() {
                 onMouseLeave={handleMouseLeave}
               >
                 <button
-                  className="flex items-center gap-2 text-gray-700 hover:text-blue-600 px-3 py-2 text-base font-bold transition-colors rounded-lg hover:bg-blue-50"
+                  className="flex items-center gap-2 text-gray-700 hover:text-blue-600 px-4 py-3 text-lg font-bold transition-colors rounded-lg hover:bg-blue-50"
                 >
-                  <Headphones className="w-4 h-4" />
+                  <Headphones className="w-5 h-5" />
                   <span>Audio</span>
-                  <ChevronDown className="w-4 h-4" />
+                  <ChevronDown className="w-5 h-5" />
                 </button>
                 
                 <DropdownMenu
@@ -347,11 +347,11 @@ export default function Header() {
                 onMouseLeave={handleMouseLeave}
               >
                 <button
-                  className="flex items-center gap-2 text-gray-700 hover:text-blue-600 px-3 py-2 text-base font-bold transition-colors rounded-lg hover:bg-blue-50"
+                  className="flex items-center gap-2 text-gray-700 hover:text-blue-600 px-4 py-3 text-lg font-bold transition-colors rounded-lg hover:bg-blue-50"
                 >
-                  <Lightbulb className="w-4 h-4" />
+                  <Lightbulb className="w-5 h-5" />
                   <span>Luminaire</span>
-                  <ChevronDown className="w-4 h-4" />
+                  <ChevronDown className="w-5 h-5" />
                 </button>
                 
                 <DropdownMenu
@@ -369,11 +369,11 @@ export default function Header() {
                 onMouseLeave={handleMouseLeave}
               >
                 <button
-                  className="flex items-center gap-2 text-gray-700 hover:text-blue-600 px-3 py-2 text-base font-bold transition-colors rounded-lg hover:bg-blue-50"
+                  className="flex items-center gap-2 text-gray-700 hover:text-blue-600 px-4 py-3 text-lg font-bold transition-colors rounded-lg hover:bg-blue-50"
                 >
-                  <Package className="w-4 h-4" />
+                  <Package className="w-5 h-5" />
                   <span>Accessoires</span>
-                  <ChevronDown className="w-4 h-4" />
+                  <ChevronDown className="w-5 h-5" />
                 </button>
                 
                 <DropdownMenu
@@ -391,11 +391,11 @@ export default function Header() {
                 onMouseLeave={handleMouseLeave}
               >
                 <button
-                  className="flex items-center gap-2 text-gray-700 hover:text-blue-600 px-3 py-2 text-base font-bold transition-colors rounded-lg hover:bg-blue-50"
+                  className="flex items-center gap-2 text-gray-700 hover:text-blue-600 px-4 py-3 text-lg font-bold transition-colors rounded-lg hover:bg-blue-50"
                 >
-                  <Star className="w-4 h-4" />
+                  <Star className="w-5 h-5" />
                   <span>MUVIT</span>
-                  <ChevronDown className="w-4 h-4" />
+                  <ChevronDown className="w-5 h-5" />
                 </button>
                 
                 <DropdownMenu
@@ -413,21 +413,21 @@ export default function Header() {
                 href="/nos-produits?category=Smartphones"
                 className="flex items-center gap-2 text-gray-700 hover:text-blue-600 px-3 py-2 text-base font-bold transition-colors rounded-lg hover:bg-blue-50"
               >
-                <Smartphone className="w-4 h-4" />
+                <Smartphone className="w-5 h-5" />
                 <span>Smartphones</span>
               </Link>
               <Link
                 href="/nos-produits?category=Montres+Connectées"
                 className="flex items-center gap-2 text-gray-700 hover:text-blue-600 px-3 py-2 text-base font-bold transition-colors rounded-lg hover:bg-blue-50"
               >
-                <Watch className="w-4 h-4" />
+                <Watch className="w-5 h-5" />
                 <span>Montres</span>
               </Link>
               <Link
                 href="/nos-produits"
                 className="flex items-center gap-2 text-gray-700 hover:text-blue-600 px-3 py-2 text-base font-bold transition-colors rounded-lg hover:bg-blue-50"
               >
-                <Package className="w-4 h-4" />
+                <Package className="w-5 h-5" />
                 <span>Accessoires</span>
               </Link>
             </nav>
@@ -441,7 +441,7 @@ export default function Header() {
                   placeholder="Rechercher un produit..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-64 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-sm"
+                  className="w-72 px-5 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-base"
                 />
                 <button className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-gray-400 hover:text-blue-600 transition-colors">
                   <Search className="h-4 w-4" />
@@ -451,29 +451,29 @@ export default function Header() {
               {/* Actions */}
               <div className="flex items-center space-x-2">
                 {/* Recherche mobile */}
-                <button className="lg:hidden p-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
-                  <Search className="h-5 w-5" />
+                <button className="lg:hidden p-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                  <Search className="h-6 w-6" />
                 </button>
                 
                 {/* Panier */}
-                <button className="relative p-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
-                  <ShoppingCart className="h-5 w-5" />
-                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-medium">
+                <button className="relative p-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                  <ShoppingCart className="h-6 w-6" />
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center font-medium">
                     0
                   </span>
                 </button>
 
                 {/* Compte */}
-                <button className="p-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
-                  <User className="h-5 w-5" />
+                <button className="p-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                  <User className="h-6 w-6" />
                 </button>
 
                 {/* CTA */}
                 <div className="hidden md:block ml-4">
                   <Link href="/nos-produits">
-                    <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg font-medium text-sm shadow-md hover:shadow-lg transition-shadow">
-                      <span className="flex items-center gap-1">
-                        <Zap className="w-4 h-4" />
+                    <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-medium text-base shadow-md hover:shadow-lg transition-shadow">
+                      <span className="flex items-center gap-2">
+                        <Zap className="w-5 h-5" />
                         Découvrir
                       </span>
                     </button>
@@ -482,10 +482,10 @@ export default function Header() {
 
                 {/* Menu mobile */}
                 <button
-                  className="lg:hidden p-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                  className="lg:hidden p-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                   onClick={() => setIsMenuOpen(!isMenuOpen)}
                 >
-                  {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+                  {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
                 </button>
               </div>
             </div>
@@ -556,7 +556,7 @@ export default function Header() {
                     placeholder="Rechercher un produit..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-sm"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-base"
                   />
                   <Search className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
                 </div>
