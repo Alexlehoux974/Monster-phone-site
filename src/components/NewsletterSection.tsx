@@ -112,14 +112,14 @@ export default function NewsletterSection() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h3 className="text-3xl font-bold text-white mb-4 animate-fade-in">
+            <h3 className="text-5xl font-bold text-white mb-4 animate-fade-in">
               🎉 Félicitations ! Inscription réussie !
             </h3>
-            <p className="text-xl text-white/90 mb-6">
+            <p className="text-3xl text-white/90 mb-6">
               Votre code promo <strong className="text-yellow-300">WELCOME10</strong> vous attend dans votre boîte mail !
             </p>
             <div className="bg-yellow-400/20 border border-yellow-300/50 rounded-lg p-4">
-              <p className="text-white font-medium">
+              <p className="text-xl text-white font-medium">
                 ✨ Première surprise : Livraison gratuite sur votre première commande
               </p>
             </div>
@@ -166,13 +166,13 @@ export default function NewsletterSection() {
             <div className={`text-left lg:text-left transform transition-all duration-1000 ${isVisible ? 'translate-x-0 opacity-100' : '-translate-x-20 opacity-0'}`}>
               <div className="relative">
                 <div className="absolute -top-4 -left-4 w-8 h-8 bg-yellow-400 rounded-full animate-ping opacity-75"></div>
-                <h2 className="text-4xl lg:text-5xl font-black mb-6 bg-gradient-to-r from-white via-yellow-200 to-white bg-clip-text text-transparent leading-tight">
+                <h2 className="text-6xl lg:text-7xl font-black mb-6 bg-gradient-to-r from-white via-yellow-200 to-white bg-clip-text text-transparent leading-tight">
                   💥 Club VIP Monster Phone
                 </h2>
               </div>
               
-              <p className="text-xl lg:text-2xl text-white/95 mb-8 font-medium leading-relaxed">
-                Rejoignez l'élite tech ! <span className="text-yellow-300 font-bold">{subscriberCount.toLocaleString()}</span> membres profitent déjà d'avantages exclusifs.
+              <p className="text-3xl lg:text-4xl text-white/95 mb-8 font-medium leading-relaxed">
+                Rejoignez l'élite tech ! <span className="text-yellow-300 font-bold">{subscriberCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}</span> membres profitent déjà d'avantages exclusifs.
               </p>
               
               {/* Avantages avec animations */}
@@ -189,7 +189,7 @@ export default function NewsletterSection() {
                     style={{ transitionDelay: item.delay }}
                   >
                     <div className="text-2xl mr-4 group-hover:scale-110 transition-transform">{item.icon}</div>
-                    <span className="text-white/95 font-medium text-lg group-hover:text-yellow-300 transition-colors">{item.text}</span>
+                    <span className="text-white/95 font-medium text-2xl group-hover:text-yellow-300 transition-colors">{item.text}</span>
                     <div className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity">
                       <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
                     </div>
@@ -206,7 +206,7 @@ export default function NewsletterSection() {
                       <div className="bg-yellow-400 text-gray-900 px-3 py-1 rounded-full text-sm font-black mr-3 animate-bounce">
                         🎯 BONUS VIP
                       </div>
-                      <span className="text-white font-bold text-lg">
+                      <span className="text-white font-bold text-2xl">
                         -15% sur votre première commande
                       </span>
                     </div>
@@ -220,7 +220,7 @@ export default function NewsletterSection() {
                     <div className="bg-green-400 text-gray-900 px-2 py-1 rounded-full text-xs font-bold mr-3">
                       CADEAU
                     </div>
-                    <span className="text-white/95 font-medium">
+                    <span className="text-white/95 font-medium text-xl">
                       + Coque protection offerte (valeur 25€)
                     </span>
                   </div>
@@ -235,13 +235,13 @@ export default function NewsletterSection() {
                 <div className="w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full flex items-center justify-center mx-auto mb-3 animate-spin" style={{animationDuration: '3s'}}>
                   <span className="text-2xl">⭐</span>
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-2">Rejoindre le Club VIP</h3>
-                <p className="text-white/80">Accès immédiat aux avantages exclusifs</p>
+                <h3 className="text-4xl font-bold text-white mb-2">Rejoindre le Club VIP</h3>
+                <p className="text-2xl text-white/80">Accès immédiat aux avantages exclusifs</p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="relative">
-                  <label htmlFor="newsletter-email" className="block text-sm font-semibold text-white/90 mb-3">
+                  <label htmlFor="newsletter-email" className="block text-lg font-semibold text-white/90 mb-3">
                     🎯 Votre email VIP
                   </label>
                   <div className="relative">
@@ -252,7 +252,7 @@ export default function NewsletterSection() {
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="votre@email.com"
                       required
-                      className="w-full px-6 py-4 rounded-xl bg-white/25 border-2 border-white/30 text-white placeholder-white/60 focus:outline-none focus:ring-4 focus:ring-yellow-400/50 focus:border-yellow-400/50 transition-all duration-300 text-lg font-medium"
+                      className="w-full px-6 py-4 rounded-xl bg-white/25 border-2 border-white/30 text-white placeholder-white/70 focus:outline-none focus:ring-4 focus:ring-yellow-400/50 focus:border-yellow-400/50 transition-all duration-300 text-xl font-medium"
                     />
                     <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
                       <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
@@ -267,7 +267,7 @@ export default function NewsletterSection() {
                     required
                     className="mt-1 rounded border-white/30 bg-white/20 text-yellow-500 focus:ring-yellow-400/50 w-5 h-5"
                   />
-                  <label htmlFor="newsletter-consent" className="text-sm text-white/90 leading-relaxed">
+                  <label htmlFor="newsletter-consent" className="text-lg text-white/90 leading-relaxed">
                     ✅ J'accepte de recevoir les offres VIP Monster Phone et j'ai lu la{' '}
                     <a href="#" className="underline hover:text-yellow-300 transition-colors">politique de confidentialité</a>
                   </label>
@@ -276,7 +276,7 @@ export default function NewsletterSection() {
                 <button
                   type="submit"
                   disabled={isLoading || !email}
-                  className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-gray-900 px-8 py-4 rounded-xl font-black text-lg hover:from-yellow-300 hover:to-orange-400 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl border-2 border-yellow-300/50"
+                  className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-gray-900 px-8 py-5 rounded-xl font-black text-2xl hover:from-yellow-300 hover:to-orange-400 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl border-2 border-yellow-300/50"
                 >
                   {isLoading ? (
                     <>
@@ -303,8 +303,8 @@ export default function NewsletterSection() {
                 <div className="text-center mb-4">
                   <div className="inline-flex items-center bg-green-500/20 backdrop-blur-lg rounded-full px-4 py-2 border border-green-400/30">
                     <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse mr-2"></div>
-                    <span className="text-green-300 font-bold text-lg">
-                      {subscriberCount.toLocaleString()} membres VIP actifs
+                    <span className="text-green-300 font-bold text-xl">
+                      {subscriberCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')} membres VIP actifs
                     </span>
                   </div>
                 </div>
@@ -328,17 +328,17 @@ export default function NewsletterSection() {
                     <div className="w-10 h-10 bg-white/20 rounded-full border-3 border-white flex items-center justify-center text-xs font-bold">+{Math.floor(subscriberCount/100)}</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-white font-bold text-lg">⭐ 4.9/5</div>
-                    <div className="text-white/70 text-sm">Satisfaction client</div>
+                    <div className="text-white font-bold text-xl">⭐ 4.9/5</div>
+                    <div className="text-white/70 text-base">Satisfaction client</div>
                   </div>
                 </div>
                 
                 {/* Testimonial rapide */}
                 <div className="mt-4 bg-white/10 rounded-lg p-3 border border-white/20">
-                  <p className="text-white/90 text-sm italic text-center">
+                  <p className="text-white/90 text-base italic text-center">
                     "Meilleur site tech de la Réunion ! Livraison ultra rapide 🚀"
                   </p>
-                  <p className="text-white/70 text-xs text-center mt-1">- Sarah M., membre VIP depuis 2023</p>
+                  <p className="text-white/70 text-sm text-center mt-1">- Sarah M., membre VIP depuis 2023</p>
                 </div>
               </div>
             </div>
@@ -358,8 +358,8 @@ export default function NewsletterSection() {
                 style={{ transitionDelay: `${1 + (index * 0.1)}s` }}
               >
                 <div className="text-3xl mb-2">{item.icon}</div>
-                <div className="font-bold text-white text-sm">{item.title}</div>
-                <div className="text-white/70 text-xs">{item.desc}</div>
+                <div className="font-bold text-white text-base">{item.title}</div>
+                <div className="text-white/70 text-sm">{item.desc}</div>
               </div>
             ))}
           </div>

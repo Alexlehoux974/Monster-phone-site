@@ -165,7 +165,7 @@ export default function TrustSection() {
                 <div className="text-4xl lg:text-5xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-100">
                   {animatedStats.clients.toLocaleString('fr-FR')}
                 </div>
-                <div className="text-blue-100 text-sm lg:text-base font-medium">
+                <div className="text-white text-sm lg:text-base font-medium">
                   Clients satisfaits
                 </div>
               </div>
@@ -174,7 +174,7 @@ export default function TrustSection() {
                 <div className="text-4xl lg:text-5xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-green-100">
                   {animatedStats.rating}/5
                 </div>
-                <div className="text-blue-100 text-sm lg:text-base font-medium">
+                <div className="text-white text-sm lg:text-base font-medium">
                   Note moyenne
                 </div>
               </div>
@@ -183,7 +183,7 @@ export default function TrustSection() {
                 <div className="text-4xl lg:text-5xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-orange-300 to-orange-100">
                   24/48
                 </div>
-                <div className="text-blue-100 text-sm lg:text-base font-medium">
+                <div className="text-white text-sm lg:text-base font-medium">
                   Livraison 24h à 48h
                 </div>
               </div>
@@ -192,7 +192,7 @@ export default function TrustSection() {
                 <div className="text-4xl lg:text-5xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-pink-300 to-pink-100">
                   {animatedStats.satisfaction}%
                 </div>
-                <div className="text-blue-100 text-sm lg:text-base font-medium">
+                <div className="text-white text-sm lg:text-base font-medium">
                   Taux de satisfaction
                 </div>
               </div>
@@ -200,7 +200,7 @@ export default function TrustSection() {
             
             {/* Indicateurs visuels supplémentaires */}
             <div className="mt-8 pt-6 border-t border-white/20">
-              <div className="flex flex-wrap justify-center gap-6 text-sm text-blue-100">
+              <div className="flex flex-wrap justify-center gap-6 text-sm text-white">
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
                   <span>Service actif 24h/7j</span>

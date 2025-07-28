@@ -127,7 +127,7 @@ export default function ServiceApresVentePage() {
 
   return (
     <>
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 overflow-x-hidden">
         <Header />
         
         <main className="px-4 sm:px-6 lg:px-8 py-8">
@@ -144,13 +144,13 @@ export default function ServiceApresVentePage() {
                 <Headphones className="w-4 h-4" />
                 SERVICE APRÈS-VENTE
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
                 Service Après-Vente
               </h1>
-              <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+              <p className="text-2xl text-gray-900 max-w-3xl mx-auto">
                 Un service client d'excellence pour vous accompagner après votre achat
               </p>
-              <div className="mt-4 text-sm text-gray-700">
+              <div className="mt-4 text-sm text-gray-900">
                 <Calendar className="w-4 h-4 inline mr-1" />
                 Dernière mise à jour : 28 juillet 2025
               </div>
@@ -164,25 +164,25 @@ export default function ServiceApresVentePage() {
               className="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg p-8 mb-8 text-center"
             >
               <Award className="w-16 h-16 mx-auto mb-4" />
-              <h2 className="text-3xl font-bold mb-2">Votre Satisfaction, Notre Priorité</h2>
-              <p className="text-xl opacity-90 mb-4">
+              <h2 className="text-4xl font-bold mb-2">Votre Satisfaction, Notre Priorité</h2>
+              <p className="text-2xl mb-4">
                 Service après-vente professionnel et réactif à La Réunion
               </p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
                 <div className="bg-white/10 rounded-lg p-3">
                   <Clock className="w-6 h-6 mx-auto mb-2" />
                   <div className="font-semibold">Réactivité</div>
-                  <div className="text-sm opacity-80">Réponse &lt; 2h</div>
+                  <div className="text-sm">Réponse &lt; 2h</div>
                 </div>
                 <div className="bg-white/10 rounded-lg p-3">
                   <Shield className="w-6 h-6 mx-auto mb-2" />
                   <div className="font-semibold">Expertise</div>
-                  <div className="text-sm opacity-80">Techniciens certifiés</div>
+                  <div className="text-sm">Techniciens certifiés</div>
                 </div>
                 <div className="bg-white/10 rounded-lg p-3">
                   <Star className="w-6 h-6 mx-auto mb-2" />
                   <div className="font-semibold">Qualité</div>
-                  <div className="text-sm opacity-80">Satisfaction 98%</div>
+                  <div className="text-sm">Satisfaction 98%</div>
                 </div>
               </div>
             </motion.div>
@@ -194,7 +194,7 @@ export default function ServiceApresVentePage() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="mb-8"
             >
-              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+              <h2 className="text-3xl font-bold text-gray-900 mb-6 flex items-center gap-2">
                 <Settings className="w-6 h-6 text-blue-600" />
                 Nos services après-vente
               </h2>
@@ -218,8 +218,8 @@ export default function ServiceApresVentePage() {
                         </div>
                         <div className="flex-1">
                           <h3 className="font-bold text-lg mb-2">{service.title}</h3>
-                          <p className="text-sm opacity-80 mb-3">{service.description}</p>
-                          <ul className="space-y-1 text-xs opacity-70">
+                          <p className="text-sm mb-3">{service.description}</p>
+                          <ul className="space-y-1 text-xs">
                             {service.details.map((detail, i) => (
                               <li key={i} className="flex items-center gap-1">
                                 <CheckCircle className="w-3 h-3 flex-shrink-0" />
@@ -242,7 +242,7 @@ export default function ServiceApresVentePage() {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="bg-white rounded-lg shadow-sm border p-8 mb-8"
             >
-              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+              <h2 className="text-3xl font-bold text-gray-900 mb-6 flex items-center gap-2">
                 <Shield className="w-6 h-6 text-green-600" />
                 Garanties constructeur
               </h2>
@@ -263,14 +263,14 @@ export default function ServiceApresVentePage() {
                         </div>
                         <div>
                           <h3 className="font-semibold text-gray-900">{garantie.category}</h3>
-                          <div className="text-sm text-gray-700">Marques: {garantie.fabricants.join(', ')}</div>
+                          <div className="text-sm text-gray-900">Marques: {garantie.fabricants.join(', ')}</div>
                         </div>
                       </div>
                       <div className="bg-green-50 text-green-700 px-3 py-1 rounded-full text-sm font-medium">
                         Garantie {garantie.duree}
                       </div>
                     </div>
-                    <p className="text-gray-700 text-sm">
+                    <p className="text-gray-900 text-sm">
                       <strong>Couverture :</strong> {garantie.couverture}
                     </p>
                   </motion.div>
@@ -282,7 +282,7 @@ export default function ServiceApresVentePage() {
                   <AlertTriangle className="w-5 h-5 text-amber-600 mt-1 flex-shrink-0" />
                   <div>
                     <h4 className="font-semibold text-amber-900 mb-1">Important</h4>
-                    <p className="text-amber-800 text-sm">
+                    <p className="text-amber-900 text-sm">
                       La garantie ne couvre pas les dommages dus à une mauvaise utilisation, chute, contact avec l'eau ou usure normale. Conservez votre facture d'achat.
                     </p>
                   </div>
@@ -297,7 +297,7 @@ export default function ServiceApresVentePage() {
               transition={{ duration: 0.5, delay: 0.4 }}
               className="bg-white rounded-lg shadow-sm border p-8 mb-8"
             >
-              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+              <h2 className="text-3xl font-bold text-gray-900 mb-6 flex items-center gap-2">
                 <FileText className="w-6 h-6 text-purple-600" />
                 Procédure de prise en charge
               </h2>
@@ -320,7 +320,7 @@ export default function ServiceApresVentePage() {
                         {step.step}
                       </div>
                       <h3 className="font-semibold text-gray-900 mb-2">{step.title}</h3>
-                      <p className="text-sm text-gray-700">{step.description}</p>
+                      <p className="text-sm text-gray-900">{step.description}</p>
                     </motion.div>
                   );
                 })}
@@ -331,15 +331,15 @@ export default function ServiceApresVentePage() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                   <div className="flex items-center gap-2">
                     <Clock className="w-4 h-4 text-blue-600" />
-                    <span><strong>Diagnostic :</strong> 24-48h</span>
+                    <span className="text-gray-900"><strong>Diagnostic :</strong> 24-48h</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Clock className="w-4 h-4 text-green-600" />
-                    <span><strong>Réparation :</strong> 3-7 jours</span>
+                    <span className="text-gray-900"><strong>Réparation :</strong> 3-7 jours</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Clock className="w-4 h-4 text-purple-600" />
-                    <span><strong>Échange :</strong> Immédiat si stock</span>
+                    <span className="text-gray-900"><strong>Échange :</strong> Immédiat si stock</span>
                   </div>
                 </div>
               </div>
@@ -352,34 +352,34 @@ export default function ServiceApresVentePage() {
               transition={{ duration: 0.5, delay: 0.5 }}
               className="bg-white rounded-lg shadow-sm border p-8 mb-8"
             >
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Problèmes fréquents et solutions</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">Problèmes fréquents et solutions</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <h3 className="font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                  <h3 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
                     <Settings className="w-5 h-5 text-blue-600" />
                     Problèmes techniques
                   </h3>
-                  <ul className="space-y-2 text-sm text-gray-700">
-                    <li>• Écran cassé ou qui ne s'allume plus</li>
-                    <li>• Batterie qui se décharge rapidement</li>
-                    <li>• Problème de charge ou connecteur défaillant</li>
-                    <li>• Dysfonctionnement du son ou micro</li>
-                    <li>• Appareil photo ou caméra défectueuse</li>
+                  <ul className="space-y-2 text-sm">
+                    <li className="text-gray-900">• Écran cassé ou qui ne s'allume plus</li>
+                    <li className="text-gray-900">• Batterie qui se décharge rapidement</li>
+                    <li className="text-gray-900">• Problème de charge ou connecteur défaillant</li>
+                    <li className="text-gray-900">• Dysfonctionnement du son ou micro</li>
+                    <li className="text-gray-900">• Appareil photo ou caméra défectueuse</li>
                   </ul>
                 </div>
                 
                 <div>
-                  <h3 className="font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                  <h3 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
                     <RefreshCw className="w-5 h-5 text-green-600" />
                     Solutions proposées
                   </h3>
-                  <ul className="space-y-2 text-sm text-gray-700">
-                    <li>• Réparation avec pièces d'origine</li>
-                    <li>• Échange standard si sous garantie</li>
-                    <li>• Diagnostic approfondi gratuit</li>
-                    <li>• Devis transparent avant intervention</li>
-                    <li>• Suivi personnalisé de la réparation</li>
+                  <ul className="space-y-2 text-sm">
+                    <li className="text-gray-900">• Réparation avec pièces d'origine</li>
+                    <li className="text-gray-900">• Échange standard si sous garantie</li>
+                    <li className="text-gray-900">• Diagnostic approfondi gratuit</li>
+                    <li className="text-gray-900">• Devis transparent avant intervention</li>
+                    <li className="text-gray-900">• Suivi personnalisé de la réparation</li>
                   </ul>
                 </div>
               </div>
@@ -393,8 +393,8 @@ export default function ServiceApresVentePage() {
               className="bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-lg p-8 text-center"
             >
               <Headphones className="w-12 h-12 mx-auto mb-4" />
-              <h2 className="text-2xl font-bold mb-4">Contactez notre SAV</h2>
-              <p className="text-lg opacity-90 mb-6">
+              <h2 className="text-3xl font-bold mb-4">Contactez notre SAV</h2>
+              <p className="text-xl mb-6">
                 Une question ? Un problème ? Notre équipe vous accompagne
               </p>
               
@@ -402,19 +402,19 @@ export default function ServiceApresVentePage() {
                 <div className="bg-white/10 rounded-lg p-4">
                   <Phone className="w-6 h-6 mx-auto mb-2" />
                   <div className="font-semibold">Hotline SAV</div>
-                  <div className="opacity-80">0262 XX XX XX<br />Lun-Sam 9h-18h</div>
+                  <div>0262 XX XX XX<br />Lun-Sam 9h-18h</div>
                 </div>
                 
                 <div className="bg-white/10 rounded-lg p-4">
                   <Mail className="w-6 h-6 mx-auto mb-2" />
                   <div className="font-semibold">Email SAV</div>
-                  <div className="opacity-80">sav@<br />monster-phone-reunion.com</div>
+                  <div>sav@<br />monster-phone-reunion.com</div>
                 </div>
                 
                 <div className="bg-white/10 rounded-lg p-4">
                   <MapPin className="w-6 h-6 mx-auto mb-2" />
                   <div className="font-semibold">Atelier</div>
-                  <div className="opacity-80">Zone Industrielle<br />Sainte-Marie</div>
+                  <div>Zone Industrielle<br />Sainte-Marie</div>
                 </div>
               </div>
               

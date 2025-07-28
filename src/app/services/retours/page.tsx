@@ -9,7 +9,7 @@ import { RotateCcw, Calendar, FileText, RefreshCw, AlertCircle, CheckCircle } fr
 
 export default function RetoursPage() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 overflow-x-hidden">
       <div className="pt-10">
         <Header />
         

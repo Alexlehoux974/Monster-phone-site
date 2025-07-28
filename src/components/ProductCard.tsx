@@ -56,24 +56,24 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
             <div>
               {/* Marque et nom */}
               <div className="flex items-center justify-between mb-2">
-                <p className="text-sm font-medium text-gray-700 uppercase tracking-wide">
+                <p className="text-base font-medium text-gray-800 uppercase tracking-wide">
                   {product.Marque}
                 </p>
                 <div className="flex items-center space-x-2">
-                  <button className="text-gray-700 hover:text-red-500 transition-colors">
+                  <button className="text-gray-800 hover:text-red-500 transition-colors">
                     <Heart className="h-5 w-5" />
                   </button>
                 </div>
               </div>
               
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              <h3 className="text-2xl font-semibold text-gray-900 mb-2">
                 <Link href={`/produits/${productSlug}`} className="hover:text-blue-600 transition-colors">
                   {product['Nom du Produit']}
                 </Link>
               </h3>
               
               {/* Description */}
-              <p className="text-gray-800 mb-4">
+              <p className="text-lg text-gray-800 mb-4">
                 {truncateText(product['Description SEO'], 150)}
               </p>
               
@@ -90,16 +90,16 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
                       />
                     ))}
                   </div>
-                  <span className="text-sm text-gray-700">(42)</span>
+                  <span className="text-base text-gray-800">(42)</span>
                 </div>
                 
                 {product['Variantes/Couleurs'] && (
-                  <span className="text-sm text-gray-700">
+                  <span className="text-base text-gray-800">
                     {product['Variantes/Couleurs'].split(',').length} variante(s)
                   </span>
                 )}
                 
-                <span className="inline-flex items-center text-sm text-green-600">
+                <span className="inline-flex items-center text-base text-green-600">
                   <span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
                   En stock
                 </span>
@@ -109,7 +109,7 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
             {/* Prix et actions */}
             <div className="flex items-center justify-between">
               <div>
-                <span className="text-2xl font-bold text-gray-900">
+                <span className="text-3xl font-bold text-gray-900">
                   {formatPrice(price)}
                 </span>
               </div>
@@ -117,12 +117,12 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
               <div className="flex items-center space-x-3">
                 <Link
                   href={`/produits/${productSlug}`}
-                  className="text-blue-600 hover:text-blue-700 font-medium transition-colors"
+                  className="text-lg text-blue-600 hover:text-blue-700 font-medium transition-colors"
                 >
                   Voir détail
                 </Link>
-                <button className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2">
-                  <ShoppingCart className="h-4 w-4" />
+                <button className="bg-blue-600 text-white px-6 py-3 text-lg rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2">
+                  <ShoppingCart className="h-5 w-5" />
                   <span>Ajouter</span>
                 </button>
               </div>
@@ -154,7 +154,7 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
             <div className="flex space-x-2">
               <button className="bg-white p-2 rounded-full shadow-md hover:bg-gray-50 transition-colors">
-                <Heart className="h-4 w-4 text-gray-700" />
+                <Heart className="h-4 w-4 text-gray-800" />
               </button>
               <button className="bg-blue-600 p-2 rounded-full shadow-md hover:bg-blue-700 transition-colors">
                 <ShoppingCart className="h-4 w-4 text-white" />
@@ -167,19 +167,19 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
       {/* Contenu */}
       <div className="p-4">
         {/* Marque */}
-        <p className="text-xs font-medium text-gray-700 uppercase tracking-wide mb-1">
+        <p className="text-sm font-medium text-gray-800 uppercase tracking-wide mb-1">
           {product.Marque}
         </p>
 
         {/* Nom du produit */}
-        <h3 className="text-sm font-semibold text-gray-900 mb-2 line-clamp-2">
+        <h3 className="text-base font-semibold text-gray-900 mb-2 line-clamp-2">
           <Link href={`/produits/${productSlug}`} className="hover:text-blue-600 transition-colors">
             {truncateText(product['Nom du Produit'], 60)}
           </Link>
         </h3>
 
         {/* Description courte */}
-        <p className="text-xs text-gray-800 mb-3 line-clamp-2">
+        <p className="text-sm text-gray-800 mb-3 line-clamp-2">
           {truncateText(product['Description SEO'], 80)}
         </p>
 
@@ -197,12 +197,12 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
                 />
               ))}
             </div>
-            <span className="text-xs text-gray-700">(42)</span>
+            <span className="text-sm text-gray-800">(42)</span>
           </div>
 
           {/* Variantes */}
           {product['Variantes/Couleurs'] && (
-            <span className="text-xs text-gray-700">
+            <span className="text-sm text-gray-800">
               {product['Variantes/Couleurs'].split(',').length} variante(s)
             </span>
           )}
@@ -211,14 +211,14 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
         {/* Prix et action */}
         <div className="flex items-center justify-between">
           <div>
-            <span className="text-lg font-bold text-gray-900">
+            <span className="text-xl font-bold text-gray-900">
               {formatPrice(price)}
             </span>
           </div>
           
           <Link
             href={`/produits/${productSlug}`}
-            className="bg-blue-600 text-white px-3 py-1.5 text-xs font-medium rounded-lg hover:bg-blue-700 transition-colors"
+            className="bg-blue-600 text-white px-4 py-2 text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors"
           >
             Voir détail
           </Link>
@@ -226,7 +226,7 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
 
         {/* Stock */}
         <div className="mt-2 flex items-center">
-          <span className="inline-flex items-center text-xs text-green-600">
+          <span className="inline-flex items-center text-sm text-green-600">
             <span className="w-2 h-2 bg-green-500 rounded-full mr-1.5"></span>
             En stock
           </span>

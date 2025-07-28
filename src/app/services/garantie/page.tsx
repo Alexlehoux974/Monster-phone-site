@@ -9,7 +9,7 @@ import { Shield, Clock, FileText, Wrench, AlertTriangle, CheckCircle } from 'luc
 
 export default function GarantiePage() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 overflow-x-hidden">
       <div className="pt-10">
         <Header />
         

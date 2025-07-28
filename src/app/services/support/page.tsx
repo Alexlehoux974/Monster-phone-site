@@ -9,7 +9,7 @@ import { Monitor, Smartphone, Settings, HelpCircle, Book, Video } from 'lucide-r
 
 export default function SupportTechniquePage() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 overflow-x-hidden">
       <div className="pt-10">
         <Header />
         

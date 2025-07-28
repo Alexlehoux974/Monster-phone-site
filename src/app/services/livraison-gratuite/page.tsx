@@ -100,7 +100,7 @@ export default function LivraisonGratuitePage() {
 
   return (
     <>
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 overflow-x-hidden">
         <Header />
         
         <main className="px-4 sm:px-6 lg:px-8 py-8">
@@ -120,10 +120,10 @@ export default function LivraisonGratuitePage() {
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
                 Livraison Gratuite dès 50€
               </h1>
-              <p className="text-xl text-gray-800 max-w-3xl mx-auto">
+              <p className="text-xl text-gray-900 max-w-3xl mx-auto">
                 Recevez vos produits gaming partout à La Réunion, rapidement et en toute sécurité
               </p>
-              <div className="mt-4 text-sm text-gray-700">
+              <div className="mt-4 text-sm text-gray-900">
                 <Calendar className="w-4 h-4 inline mr-1" />
                 Dernière mise à jour : 28 juillet 2025
               </div>
@@ -138,7 +138,7 @@ export default function LivraisonGratuitePage() {
             >
               <Euro className="w-16 h-16 mx-auto mb-4" />
               <h2 className="text-3xl font-bold mb-2">50€ d'achat = Livraison GRATUITE</h2>
-              <p className="text-xl opacity-90 mb-4">
+              <p className="text-xl opacity-100 mb-4">
                 Profitez de la livraison gratuite partout à La Réunion
               </p>
               <div className="inline-flex items-center gap-2 bg-white/20 px-4 py-2 rounded-full">
@@ -176,8 +176,8 @@ export default function LivraisonGratuitePage() {
                         </div>
                         <h3 className="font-bold text-lg mb-2">{option.title}</h3>
                         <div className="text-2xl font-bold mb-2">{option.price}</div>
-                        <div className="text-sm opacity-80 mb-2">Délai : {option.time}</div>
-                        <p className="text-sm opacity-70">{option.description}</p>
+                        <div className="text-sm text-gray-900 mb-2">Délai : {option.time}</div>
+                        <p className="text-sm text-gray-900">{option.description}</p>
                       </div>
                     </motion.div>
                   );
@@ -208,9 +208,9 @@ export default function LivraisonGratuitePage() {
                   >
                     <div className="text-center mb-3">
                       <h3 className="font-bold text-lg">{zone.zone}</h3>
-                      <div className="text-sm opacity-80">Délai : {zone.time}</div>
+                      <div className="text-sm text-gray-900">Délai : {zone.time}</div>
                     </div>
-                    <ul className="text-xs space-y-1 opacity-70">
+                    <ul className="text-xs space-y-1 text-gray-900">
                       {zone.areas.map((area, i) => (
                         <li key={i}>• {area}</li>
                       ))}
@@ -222,7 +222,7 @@ export default function LivraisonGratuitePage() {
               <div className="mt-6 p-4 bg-gray-50 rounded-lg">
                 <div className="flex items-start gap-3">
                   <AlertCircle className="w-5 h-5 text-amber-600 mt-1 flex-shrink-0" />
-                  <p className="text-sm text-gray-700">
+                  <p className="text-sm text-gray-900">
                     <strong>Note :</strong> Les délais sont donnés à titre indicatif et peuvent varier selon les conditions météorologiques et la disponibilité du transporteur. Les Hauts de l'île peuvent nécessiter un délai supplémentaire.
                   </p>
                 </div>
@@ -247,7 +247,7 @@ export default function LivraisonGratuitePage() {
                     <span className="text-2xl font-bold text-blue-600">1</span>
                   </div>
                   <h3 className="font-semibold mb-2">Commandez</h3>
-                  <p className="text-sm text-gray-800">
+                  <p className="text-sm text-gray-900">
                     Passez votre commande en ligne avant 16h
                   </p>
                 </div>
@@ -257,7 +257,7 @@ export default function LivraisonGratuitePage() {
                     <span className="text-2xl font-bold text-green-600">2</span>
                   </div>
                   <h3 className="font-semibold mb-2">Préparation</h3>
-                  <p className="text-sm text-gray-800">
+                  <p className="text-sm text-gray-900">
                     Votre commande est préparée avec soin
                   </p>
                 </div>
@@ -267,7 +267,7 @@ export default function LivraisonGratuitePage() {
                     <span className="text-2xl font-bold text-purple-600">3</span>
                   </div>
                   <h3 className="font-semibold mb-2">Expédition</h3>
-                  <p className="text-sm text-gray-800">
+                  <p className="text-sm text-gray-900">
                     Envoi et suivi par SMS/email
                   </p>
                 </div>
@@ -277,7 +277,7 @@ export default function LivraisonGratuitePage() {
                     <span className="text-2xl font-bold text-orange-600">4</span>
                   </div>
                   <h3 className="font-semibold mb-2">Réception</h3>
-                  <p className="text-sm text-gray-800">
+                  <p className="text-sm text-gray-900">
                     Livraison à l'adresse indiquée
                   </p>
                 </div>
@@ -302,7 +302,7 @@ export default function LivraisonGratuitePage() {
                     <CheckCircle className="w-5 h-5 text-green-600 mt-1 flex-shrink-0" />
                     <div>
                       <h3 className="font-semibold text-gray-900">Emballage sécurisé</h3>
-                      <p className="text-gray-800 text-sm">
+                      <p className="text-gray-900 text-sm">
                         Protection optimale avec emballage bulle et carton renforcé
                       </p>
                     </div>
@@ -312,7 +312,7 @@ export default function LivraisonGratuitePage() {
                     <CheckCircle className="w-5 h-5 text-green-600 mt-1 flex-shrink-0" />
                     <div>
                       <h3 className="font-semibold text-gray-900">Suivi en temps réel</h3>
-                      <p className="text-gray-800 text-sm">
+                      <p className="text-gray-900 text-sm">
                         SMS et email de confirmation à chaque étape
                       </p>
                     </div>
@@ -322,7 +322,7 @@ export default function LivraisonGratuitePage() {
                     <CheckCircle className="w-5 h-5 text-green-600 mt-1 flex-shrink-0" />
                     <div>
                       <h3 className="font-semibold text-gray-900">Assurance transport</h3>
-                      <p className="text-gray-800 text-sm">
+                      <p className="text-gray-900 text-sm">
                         Produits assurés pendant le transport
                       </p>
                     </div>
@@ -334,7 +334,7 @@ export default function LivraisonGratuitePage() {
                     <CheckCircle className="w-5 h-5 text-green-600 mt-1 flex-shrink-0" />
                     <div>
                       <h3 className="font-semibold text-gray-900">Livraison en main propre</h3>
-                      <p className="text-gray-800 text-sm">
+                      <p className="text-gray-900 text-sm">
                         Remise contre signature ou à personne de confiance
                       </p>
                     </div>
@@ -344,7 +344,7 @@ export default function LivraisonGratuitePage() {
                     <CheckCircle className="w-5 h-5 text-green-600 mt-1 flex-shrink-0" />
                     <div>
                       <h3 className="font-semibold text-gray-900">Reprogrammation gratuite</h3>
-                      <p className="text-gray-800 text-sm">
+                      <p className="text-gray-900 text-sm">
                         Possibilité de reprogrammer la livraison si absent
                       </p>
                     </div>
@@ -354,7 +354,7 @@ export default function LivraisonGratuitePage() {
                     <CheckCircle className="w-5 h-5 text-green-600 mt-1 flex-shrink-0" />
                     <div>
                       <h3 className="font-semibold text-gray-900">Service client dédié</h3>
-                      <p className="text-gray-800 text-sm">
+                      <p className="text-gray-900 text-sm">
                         Support livraison 6j/7 de 9h à 18h
                       </p>
                     </div>
@@ -374,7 +374,7 @@ export default function LivraisonGratuitePage() {
                 <AlertCircle className="w-6 h-6 text-amber-600 mt-1 flex-shrink-0" />
                 <div>
                   <h3 className="font-semibold text-amber-900 mb-2">Informations importantes</h3>
-                  <ul className="space-y-2 text-amber-800 text-sm">
+                  <ul className="space-y-2 text-amber-900 text-sm">
                     <li>• <strong>Seuil de gratuité :</strong> 50€ HT (hors frais de port éventuels)</li>
                     <li>• <strong>Commandes avant 16h :</strong> Expédition le jour même</li>
                     <li>• <strong>Weekend et jours fériés :</strong> Pas de livraison, préparation reportée</li>
@@ -394,7 +394,7 @@ export default function LivraisonGratuitePage() {
             >
               <Truck className="w-12 h-12 mx-auto mb-4" />
               <h2 className="text-2xl font-bold mb-4">Questions sur votre livraison ?</h2>
-              <p className="text-lg opacity-90 mb-6">
+              <p className="text-lg opacity-100 mb-6">
                 Notre équipe est là pour vous accompagner
               </p>
               
@@ -402,19 +402,19 @@ export default function LivraisonGratuitePage() {
                 <div className="bg-white/10 rounded-lg p-4">
                   <div className="w-6 h-6 mx-auto mb-2 flex items-center justify-center">📞</div>
                   <div className="font-semibold">Service livraison</div>
-                  <div className="opacity-80">0262 XX XX XX<br />Lun-Sam 9h-18h</div>
+                  <div className="text-white">0262 XX XX XX<br />Lun-Sam 9h-18h</div>
                 </div>
                 
                 <div className="bg-white/10 rounded-lg p-4">
                   <div className="w-6 h-6 mx-auto mb-2 flex items-center justify-center">✉️</div>
                   <div className="font-semibold">Email support</div>
-                  <div className="opacity-80">livraison@<br />monster-phone-reunion.com</div>
+                  <div className="text-white">livraison@<br />monster-phone-reunion.com</div>
                 </div>
                 
                 <div className="bg-white/10 rounded-lg p-4">
                   <Star className="w-6 h-6 mx-auto mb-2" />
                   <div className="font-semibold">Suivi commande</div>
-                  <div className="opacity-80">Tracking SMS<br />+ Email automatique</div>
+                  <div className="text-white">Tracking SMS<br />+ Email automatique</div>
                 </div>
               </div>
             </motion.div>

@@ -128,7 +128,7 @@ export default function PlanDuSitePage() {
 
   return (
     <>
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 overflow-x-hidden">
         <Header />
         
         <main className="px-4 sm:px-6 lg:px-8 py-8">
@@ -148,10 +148,10 @@ export default function PlanDuSitePage() {
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
                 Plan du Site
               </h1>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              <p className="text-xl text-gray-700 max-w-3xl mx-auto">
                 Retrouvez facilement toutes les sections de Monster Phone Boutique
               </p>
-              <div className="mt-4 text-sm text-gray-500">
+              <div className="mt-4 text-sm text-gray-700">
                 <Calendar className="w-4 h-4 inline mr-1" />
                 Dernière mise à jour : 28 juillet 2025
               </div>
@@ -234,7 +234,7 @@ export default function PlanDuSitePage() {
               </h2>
               
               <div className="bg-white rounded-lg shadow-sm border p-6">
-                <p className="text-gray-600 mb-4">
+                <p className="text-gray-700 mb-4">
                   Découvrez tous nos produits par marque :
                 </p>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -278,7 +278,7 @@ export default function PlanDuSitePage() {
                         <div className="font-semibold text-gray-900 group-hover:text-purple-600 transition-colors">
                           {page.title}
                         </div>
-                        <div className="text-sm text-gray-600 mt-1">
+                        <div className="text-sm text-gray-700 mt-1">
                           {page.description}
                         </div>
                       </div>
@@ -308,7 +308,7 @@ export default function PlanDuSitePage() {
                       <ShoppingBag className="w-8 h-8 text-blue-600" />
                     </div>
                     <h3 className="font-semibold text-gray-900 mb-2">Livraison 48h</h3>
-                    <p className="text-sm text-gray-600">Partout à La Réunion, gratuit dès 50€</p>
+                    <p className="text-sm text-gray-700">Partout à La Réunion, gratuit dès 50€</p>
                   </div>
                   
                   <div className="text-center">
@@ -316,7 +316,7 @@ export default function PlanDuSitePage() {
                       <Wrench className="w-8 h-8 text-green-600" />
                     </div>
                     <h3 className="font-semibold text-gray-900 mb-2">Réparations</h3>
-                    <p className="text-sm text-gray-600">Atelier agréé, réparations express</p>
+                    <p className="text-sm text-gray-700">Atelier agréé, réparations express</p>
                   </div>
                   
                   <div className="text-center">
@@ -324,7 +324,7 @@ export default function PlanDuSitePage() {
                       <Phone className="w-8 h-8 text-purple-600" />
                     </div>
                     <h3 className="font-semibold text-gray-900 mb-2">Support</h3>
-                    <p className="text-sm text-gray-600">Équipe technique dédiée</p>
+                    <p className="text-sm text-gray-700">Équipe technique dédiée</p>
                   </div>
                 </div>
               </div>

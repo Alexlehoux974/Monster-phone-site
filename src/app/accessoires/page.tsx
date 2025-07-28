@@ -38,7 +38,7 @@ export default function AccessoiresPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 overflow-x-hidden">
       <Header />
         <div className="flex">
         <Sidebar
@@ -53,7 +53,7 @@ export default function AccessoiresPage() {
         
         <main className="flex-1 lg:ml-80 px-4 sm:px-6 lg:px-8 py-8">
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">Accessoires</h1>
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">Accessoires</h1>
             
             {/* Filtres rapides */}
             <div className="flex flex-wrap gap-2 mb-6">
@@ -64,7 +64,7 @@ export default function AccessoiresPage() {
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                     selectedCategory === filter.category
                       ? 'bg-blue-600 text-white'
-                      : 'bg-white text-gray-700 hover:bg-gray-100'
+                      : 'bg-white text-gray-800 hover:bg-gray-100'
                   }`}
                 >
                   {filter.icon} {filter.name}
@@ -72,7 +72,7 @@ export default function AccessoiresPage() {
               ))}
               <button
                 onClick={() => setSelectedCategory('')}
-                className="px-4 py-2 rounded-full text-sm font-medium bg-gray-200 text-gray-700 hover:bg-gray-300 transition-colors"
+                className="px-4 py-2 rounded-full text-sm font-medium bg-gray-200 text-gray-800 hover:bg-gray-300 transition-colors"
               >
                 Tous les accessoires
               </button>
@@ -100,10 +100,10 @@ export default function AccessoiresPage() {
                   />
                 </div>
                 <div className="p-4">
-                  <h3 className="font-semibold text-gray-900 mb-1">{product.name}</h3>
-                  <p className="text-sm text-gray-700 mb-1">{product.brand}</p>
-                  <p className="text-sm text-blue-600 mb-2">{product.category}</p>
-                  <p className="text-lg font-bold text-blue-600">{product.price}</p>
+                  <h3 className="font-semibold text-lg text-gray-900 mb-1">{product.name}</h3>
+                  <p className="text-base text-gray-800 mb-1">{product.brand}</p>
+                  <p className="text-base text-blue-600 mb-2">{product.category}</p>
+                  <p className="text-xl font-bold text-blue-600">{product.price}</p>
                 </div>
               </div>
             ))}
@@ -111,7 +111,7 @@ export default function AccessoiresPage() {
 
           {filteredProducts.length === 0 && (
             <div className="text-center py-12">
-              <p className="text-gray-700">Aucun accessoire trouvé</p>
+              <p className="text-lg text-gray-800">Aucun accessoire trouvé</p>
             </div>
           )}
         </main>

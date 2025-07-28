@@ -14,10 +14,10 @@ export default function FeaturedProducts() {
     <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">
             Nos Produits Phares
           </h2>
-          <p className="text-lg text-gray-800 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-800 max-w-2xl mx-auto">
             Découvrez notre sélection d&apos;accessoires et smartphones gaming, 
             choisis pour leur innovation et leur qualité exceptionnelle.
           </p>
@@ -54,7 +54,7 @@ export default function FeaturedProducts() {
               {/* Contenu */}
               <div className="p-6">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-medium text-blue-600">{product.brand}</span>
+                  <span className="text-base font-medium text-blue-600">{product.brand}</span>
                   <div className="flex text-yellow-400">
                     {[...Array(5)].map((_, i) => (
                       <svg key={i} className="w-4 h-4 fill-current" viewBox="0 0 20 20">
@@ -64,11 +64,11 @@ export default function FeaturedProducts() {
                   </div>
                 </div>
 
-                <h3 className="font-bold text-lg text-gray-900 mb-2 line-clamp-2">
+                <h3 className="font-bold text-xl text-gray-900 mb-2 line-clamp-2">
                   {product.name}
                 </h3>
 
-                <p className="text-gray-800 text-sm mb-4 line-clamp-2">
+                <p className="text-gray-800 text-base mb-4 line-clamp-2">
                   {product.description}
                 </p>
 
@@ -79,7 +79,7 @@ export default function FeaturedProducts() {
                         {product.price}
                       </span>
                     )}
-                    <span className="text-xs text-gray-700">
+                    <span className="text-sm text-gray-800">
                       {product.variants}
                     </span>
                   </div>

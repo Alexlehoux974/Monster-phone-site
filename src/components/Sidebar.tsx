@@ -133,7 +133,7 @@ export default function Sidebar({
         {/* Filtres actifs */}
         {activeFiltersCount > 0 && (
           <div className="p-4 border-b border-gray-200 bg-gray-50">
-            <div className="text-sm font-medium text-gray-700 mb-2">Filtres actifs :</div>
+            <div className="text-sm font-medium text-gray-800 mb-2">Filtres actifs :</div>
             <div className="flex flex-col gap-1">
               {selectedCategory && (
                 <Badge 
@@ -180,22 +180,22 @@ export default function Sidebar({
                 >
                   <span className="font-medium text-sm">{category}</span>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs text-gray-700">
+                    <span className="text-xs text-gray-800">
                       ({Object.values(brands).flat().length})
                     </span>
-                    <button
+                    <div
                       onClick={(e) => {
                         e.stopPropagation();
                         toggleCategory(category);
                       }}
-                      className="p-1 hover:bg-gray-200 rounded"
+                      className="p-1 hover:bg-gray-200 rounded cursor-pointer"
                     >
                       {expandedCategories.has(category) ? (
                         <ChevronDown className="w-4 h-4" />
                       ) : (
                         <ChevronRight className="w-4 h-4" />
                       )}
-                    </button>
+                    </div>
                   </div>
                 </button>
 
@@ -215,27 +215,27 @@ export default function Sidebar({
                             <button
                               onClick={() => handleBrandClick(brand)}
                               className={`w-full flex items-center justify-between p-2 text-left hover:bg-gray-100 transition-colors ${
-                                selectedBrand === brand ? 'bg-blue-50 text-blue-700' : 'text-gray-700'
+                                selectedBrand === brand ? 'bg-blue-50 text-blue-700' : 'text-gray-800'
                               }`}
                             >
                               <span className="text-sm font-medium">{brand}</span>
                               <div className="flex items-center gap-2">
-                                <span className="text-xs text-gray-700">
+                                <span className="text-xs text-gray-800">
                                   ({brandProducts.length})
                                 </span>
-                                <button
+                                <div
                                   onClick={(e) => {
                                     e.stopPropagation();
                                     toggleBrand(category, brand);
                                   }}
-                                  className="p-1 hover:bg-gray-200 rounded"
+                                  className="p-1 hover:bg-gray-200 rounded cursor-pointer"
                                 >
                                   {expandedBrands.has(`${category}-${brand}`) ? (
                                     <ChevronDown className="w-3 h-3" />
                                   ) : (
                                     <ChevronRight className="w-3 h-3" />
                                   )}
-                                </button>
+                                </div>
                               </div>
                             </button>
 
@@ -262,7 +262,7 @@ export default function Sidebar({
                                         <div className="truncate" title={product.name}>
                                           {product.name}
                                         </div>
-                                        <div className="text-xs text-gray-700 mt-1">
+                                        <div className="text-xs text-gray-800 mt-1">
                                           {product.price}€
                                         </div>
                                       </button>

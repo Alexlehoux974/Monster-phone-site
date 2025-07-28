@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import './contact.css';
 import Head from 'next/head';
 import { motion } from 'framer-motion';
 import Header from '@/components/Header';
@@ -80,7 +81,7 @@ export default function ContactPage() {
 
   return (
     <>
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 overflow-x-hidden">
         <Header />
         
         <main className="px-4 sm:px-6 lg:px-8 py-8">
@@ -97,13 +98,13 @@ export default function ContactPage() {
                 <MapPin className="w-4 h-4" />
                 CONTACT RÉUNION
               </div>
-              <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+              <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6">
                 Contactez-nous
                 <span className="flex items-center justify-center gap-2 mt-2">
                   🇷🇪
                 </span>
               </h1>
-              <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+              <p className="text-2xl text-gray-900 max-w-3xl mx-auto">
                 Notre équipe d'experts est à votre écoute pour vous conseiller sur nos produits gaming 
                 et vous accompagner dans vos projets high-tech.
               </p>
@@ -120,7 +121,7 @@ export default function ContactPage() {
               >
                 <div className="flex items-center gap-3 mb-6">
                   <MessageSquare className="w-6 h-6 text-blue-600" />
-                  <h2 className="text-2xl font-bold text-gray-900">Envoyez-nous un message</h2>
+                  <h2 className="text-3xl font-bold text-gray-900">Envoyez-nous un message</h2>
                 </div>
 
                 {submitStatus === 'success' && (
@@ -129,11 +130,11 @@ export default function ContactPage() {
                     animate={{ opacity: 1, y: 0 }}
                     className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6"
                   >
-                    <div className="flex items-center gap-2 text-green-800">
+                    <div className="flex items-center gap-2 text-green-900">
                       <CheckCircle className="w-5 h-5" />
                       <span className="font-medium">Message envoyé avec succès !</span>
                     </div>
-                    <p className="text-green-700 text-sm mt-1">
+                    <p className="text-green-900 text-sm mt-1">
                       Nous vous répondrons dans les 24h ouvrées.
                     </p>
                   </motion.div>
@@ -142,7 +143,7 @@ export default function ContactPage() {
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                      <label htmlFor="name" className="block text-sm font-semibold text-gray-900 mb-2">
                         Nom complet *
                       </label>
                       <input
@@ -156,7 +157,7 @@ export default function ContactPage() {
                       />
                     </div>
                     <div>
-                      <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                      <label htmlFor="phone" className="block text-sm font-semibold text-gray-900 mb-2">
                         Téléphone
                       </label>
                       <input
@@ -171,7 +172,7 @@ export default function ContactPage() {
                   </div>
 
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="email" className="block text-sm font-semibold text-gray-900 mb-2">
                       Email *
                     </label>
                     <input
@@ -186,7 +187,7 @@ export default function ContactPage() {
                   </div>
 
                   <div>
-                    <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="subject" className="block text-sm font-semibold text-gray-900 mb-2">
                       Sujet *
                     </label>
                     <select
@@ -196,7 +197,7 @@ export default function ContactPage() {
                       required
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                     >
-                      <option value="">Sélectionnez un sujet</option>
+                      <option value="" className="text-gray-900">Sélectionnez un sujet</option>
                       <option value="info-produit">Information produit</option>
                       <option value="commande">Question sur une commande</option>
                       <option value="sav">Service après-vente</option>
@@ -207,7 +208,7 @@ export default function ContactPage() {
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="message" className="block text-sm font-semibold text-gray-900 mb-2">
                       Message *
                     </label>
                     <textarea
@@ -250,7 +251,7 @@ export default function ContactPage() {
               >
                 {/* Coordonnées */}
                 <div className="bg-white rounded-lg shadow-sm border p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                     <Building className="w-5 h-5 text-blue-600" />
                     Monster Phone Boutique
                   </h3>
@@ -259,7 +260,7 @@ export default function ContactPage() {
                       <MapPin className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
                       <div>
                         <p className="font-medium text-gray-900">Adresse</p>
-                        <p className="text-gray-800">
+                        <p className="text-gray-900">
                           Zone Industrielle<br />
                           97438 Sainte-Marie<br />
                           La Réunion
@@ -271,7 +272,7 @@ export default function ContactPage() {
                       <Phone className="w-5 h-5 text-green-600 flex-shrink-0" />
                       <div>
                         <p className="font-medium text-gray-900">Téléphone</p>
-                        <p className="text-gray-800">0262 XX XX XX</p>
+                        <p className="text-gray-900">0262 XX XX XX</p>
                       </div>
                     </div>
                     
@@ -279,7 +280,7 @@ export default function ContactPage() {
                       <Mail className="w-5 h-5 text-purple-600 flex-shrink-0" />
                       <div>
                         <p className="font-medium text-gray-900">Email</p>
-                        <p className="text-gray-800">contact@monster-phone-reunion.com</p>
+                        <p className="text-gray-900">contact@monster-phone-reunion.com</p>
                       </div>
                     </div>
                   </div>
@@ -287,26 +288,26 @@ export default function ContactPage() {
 
                 {/* Horaires */}
                 <div className="bg-white rounded-lg shadow-sm border p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                     <Clock className="w-5 h-5 text-green-600" />
                     Horaires d'ouverture
                   </h3>
                   <div className="space-y-2">
                     <div className="flex justify-between">
-                      <span className="text-gray-800">Lundi - Vendredi</span>
+                      <span className="text-gray-900">Lundi - Vendredi</span>
                       <span className="font-medium text-gray-900">9h00 - 18h00</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-800">Samedi</span>
+                      <span className="text-gray-900">Samedi</span>
                       <span className="font-medium text-gray-900">9h00 - 16h00</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-800">Dimanche</span>
+                      <span className="text-gray-900">Dimanche</span>
                       <span className="font-medium text-red-600">Fermé</span>
                     </div>
                   </div>
                   <div className="mt-4 p-3 bg-blue-50 rounded-lg">
-                    <p className="text-sm text-blue-800">
+                    <p className="text-sm text-blue-900">
                       <Calendar className="w-4 h-4 inline mr-1" />
                       Showroom sur rendez-vous uniquement
                     </p>
@@ -315,7 +316,7 @@ export default function ContactPage() {
 
                 {/* Spécialités */}
                 <div className="bg-white rounded-lg shadow-sm border p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                     <Smartphone className="w-5 h-5 text-purple-600" />
                     Nos spécialités
                   </h3>
@@ -345,7 +346,7 @@ export default function ContactPage() {
                     <AlertCircle className="w-5 h-5 text-red-600" />
                     <h3 className="font-bold text-red-900">Urgences</h3>
                   </div>
-                  <p className="text-red-800 text-sm">
+                  <p className="text-red-900 text-sm">
                     Pour les réparations urgentes ou les problèmes techniques critiques, 
                     contactez-nous directement par téléphone aux heures d'ouverture.
                   </p>
@@ -360,7 +361,7 @@ export default function ContactPage() {
               transition={{ duration: 0.5, delay: 0.6 }}
               className="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg p-8 text-center"
             >
-              <h2 className="text-3xl font-bold mb-4">
+              <h2 className="text-4xl font-bold mb-4">
                 Pourquoi choisir Monster Phone ?
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
@@ -369,21 +370,21 @@ export default function ContactPage() {
                     <MapPin className="w-8 h-8" />
                   </div>
                   <h3 className="font-semibold mb-2">Service local</h3>
-                  <p className="text-sm opacity-90">Équipe technique basée à La Réunion</p>
+                  <p className="text-sm text-white">Équipe technique basée à La Réunion</p>
                 </div>
                 <div className="text-center">
                   <div className="bg-white/10 rounded-full p-4 w-16 h-16 mx-auto mb-4 flex items-center justify-center">
                     <Navigation className="w-8 h-8" />
                   </div>
                   <h3 className="font-semibold mb-2">Livraison 48h</h3>
-                  <p className="text-sm opacity-90">Partout sur l'île, gratuit dès 50€</p>
+                  <p className="text-sm text-white">Partout sur l'île, gratuit dès 50€</p>
                 </div>
                 <div className="text-center">
                   <div className="bg-white/10 rounded-full p-4 w-16 h-16 mx-auto mb-4 flex items-center justify-center">
                     <CheckCircle className="w-8 h-8" />
                   </div>
                   <h3 className="font-semibold mb-2">Garantie 24 mois</h3>
-                  <p className="text-sm opacity-90">Service après-vente garanti</p>
+                  <p className="text-sm text-white">Service après-vente garanti</p>
                 </div>
               </div>
             </motion.div>

@@ -68,10 +68,10 @@ export default function TestimonialsSection() {
     <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <h2 className="text-5xl font-bold text-gray-900 mb-4">
             Ce que disent nos clients
           </h2>
-          <p className="text-lg text-gray-800 max-w-2xl mx-auto">
+          <p className="text-2xl text-gray-800 max-w-2xl mx-auto">
             Découvrez l&apos;avis de nos clients qui ont choisi Monster Phone 
             pour leurs achats technologiques. Leur satisfaction est notre priorité.
           </p>
@@ -91,17 +91,17 @@ export default function TestimonialsSection() {
               </div>
 
               {/* Commentaire */}
-              <blockquote className="text-xl text-gray-700 italic mb-8 leading-relaxed">
+              <blockquote className="text-3xl text-gray-800 italic mb-8 leading-relaxed">
                 &ldquo;{testimonials[currentTestimonial].comment}&rdquo;
               </blockquote>
 
               {/* Informations client */}
               <div className="flex items-center justify-center space-x-4">
                 <div className="text-center">
-                  <div className="font-semibold text-gray-900">
+                  <div className="font-semibold text-xl text-gray-900">
                     {testimonials[currentTestimonial].name}
                   </div>
-                  <div className="text-sm text-gray-700 flex items-center justify-center space-x-2">
+                  <div className="text-lg text-gray-800 flex items-center justify-center space-x-2">
                     <span>{testimonials[currentTestimonial].location}</span>
                     {testimonials[currentTestimonial].verified && (
                       <>
@@ -110,12 +110,12 @@ export default function TestimonialsSection() {
                           <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                           </svg>
-                          <span className="text-xs">Achat vérifié</span>
+                          <span className="text-base">Achat vérifié</span>
                         </div>
                       </>
                     )}
                   </div>
-                  <div className="text-sm text-blue-600 font-medium">
+                  <div className="text-lg text-blue-600 font-medium">
                     {testimonials[currentTestimonial].product}
                   </div>
                 </div>
@@ -143,18 +143,18 @@ export default function TestimonialsSection() {
         <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto text-center">
           <div className="bg-white rounded-lg p-6 shadow-md">
             <div className="text-3xl font-bold text-blue-600 mb-2">4.8/5</div>
-            <div className="text-gray-800">Note moyenne</div>
-            <div className="text-sm text-gray-700 mt-1">Sur 2,847 avis</div>
+            <div className="text-lg text-gray-800">Note moyenne</div>
+            <div className="text-base text-gray-800 mt-1">Sur 2,847 avis</div>
           </div>
           <div className="bg-white rounded-lg p-6 shadow-md">
             <div className="text-3xl font-bold text-green-600 mb-2">98%</div>
-            <div className="text-gray-800">Recommandent</div>
-            <div className="text-sm text-gray-700 mt-1">Monster Phone</div>
+            <div className="text-lg text-gray-800">Recommandent</div>
+            <div className="text-base text-gray-800 mt-1">Monster Phone</div>
           </div>
           <div className="bg-white rounded-lg p-6 shadow-md">
             <div className="text-3xl font-bold text-purple-600 mb-2">24h</div>
-            <div className="text-gray-800">Réponse SAV</div>
-            <div className="text-sm text-gray-700 mt-1">Temps moyen</div>
+            <div className="text-lg text-gray-800">Réponse SAV</div>
+            <div className="text-base text-gray-800 mt-1">Temps moyen</div>
           </div>
         </div>
 

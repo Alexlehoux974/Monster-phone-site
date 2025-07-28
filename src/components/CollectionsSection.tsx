@@ -38,10 +38,10 @@ export default function CollectionsSection() {
     <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <h2 className="text-5xl font-bold text-gray-900 mb-4">
             Nos Collections
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-2xl text-gray-700 max-w-2xl mx-auto">
             Explorez nos univers dédiés à chaque passion. Du gaming aux enfants, 
             en passant par l&apos;innovation, trouvez la collection qui vous correspond.
           </p>
@@ -72,19 +72,19 @@ export default function CollectionsSection() {
 
                 {/* Contenu */}
                 <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                  <h3 className="text-2xl font-bold mb-2 group-hover:transform group-hover:translate-y-[-4px] transition-transform duration-300">
+                  <h3 className="text-4xl font-bold mb-2 group-hover:transform group-hover:translate-y-[-4px] transition-transform duration-300">
                     {collection.title}
                   </h3>
                   
-                  <p className="text-white/90 mb-4 leading-relaxed">
+                  <p className="text-xl text-white mb-4 leading-relaxed">
                     {collection.description}
                   </p>
 
                   {/* Features */}
                   <ul className="space-y-1 mb-6 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
                     {collection.features.map((feature, i) => (
-                      <li key={i} className="flex items-center text-sm text-white/90">
-                        <svg className="w-4 h-4 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <li key={i} className="flex items-center text-lg text-white">
+                        <svg className="w-5 h-5 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
                         {feature}
@@ -95,10 +95,10 @@ export default function CollectionsSection() {
                   {/* CTA */}
                   <Link 
                     href={collection.link}
-                    className="inline-flex items-center bg-white text-gray-900 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transform hover:scale-105 transition-all duration-300"
+                    className="inline-flex items-center bg-white text-gray-900 px-7 py-4 text-lg rounded-lg font-semibold hover:bg-gray-100 transform hover:scale-105 transition-all duration-300"
                   >
                     Découvrir
-                    <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
                   </Link>
@@ -110,16 +110,16 @@ export default function CollectionsSection() {
 
         {/* Section marques partenaires */}
         <div className="mt-16 text-center">
-          <h3 className="text-xl font-semibold text-gray-900 mb-8">
+          <h3 className="text-3xl font-semibold text-gray-900 mb-8">
             Nos marques partenaires
           </h3>
           <div className="flex flex-wrap justify-center items-center gap-8 opacity-60 hover:opacity-100 transition-opacity duration-300">
-            <div className="text-2xl font-bold text-gray-700">HONOR</div>
-            <div className="text-2xl font-bold text-gray-700">MUVIT</div>
-            <div className="text-2xl font-bold text-gray-700">MY WAY</div>
-            <div className="text-2xl font-bold text-gray-700">MONSTER</div>
+            <div className="text-4xl font-bold text-gray-800">HONOR</div>
+            <div className="text-4xl font-bold text-gray-800">MUVIT</div>
+            <div className="text-4xl font-bold text-gray-800">MY WAY</div>
+            <div className="text-4xl font-bold text-gray-800">MONSTER</div>
           </div>
-          <p className="text-sm text-gray-500 mt-4">
+          <p className="text-lg text-gray-700 mt-4">
             Partenaires officiels pour vous garantir l&apos;authenticité de tous nos produits
           </p>
         </div>

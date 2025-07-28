@@ -12,207 +12,54 @@
    - Network:      http://193.203.191.71:3001
 
  ✓ Starting...
- ✓ Ready in 1341ms
+ ✓ Ready in 1166ms
  ○ Compiling / ...
- ✓ Compiled / in 9s
- HEAD / 200 in 9785ms
- GET / 200 in 253ms
+ ✓ Compiled / in 7.2s
+ HEAD / 200 in 7849ms
+ HEAD / 200 in 563ms
+ GET / 200 in 550ms
  ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
  ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ✓ Compiled in 2.5s
- ✓ Compiled in 350ms
- ✓ Compiled in 600ms
- ✓ Compiled in 235ms
- ✓ Compiled in 152ms
- ✓ Compiled in 193ms
- ✓ Compiled in 174ms
- ✓ Compiled in 306ms
- ✓ Compiled in 180ms
- ✓ Compiled in 166ms
- ✓ Compiled in 155ms
- ✓ Compiled in 188ms
- HEAD / 200 in 1480ms
- ✓ Compiled in 169ms
- ✓ Compiled in 190ms
- ✓ Compiled in 168ms
- ✓ Compiled in 162ms
- ✓ Compiled in 181ms
- ✓ Compiled in 178ms
- ✓ Compiled in 123ms
- ✓ Compiled in 217ms
- ✓ Compiled in 211ms
- ✓ Compiled in 350ms
- ✓ Compiled in 2.2s
- ✓ Compiled in 977ms
- GET / 200 in 1187ms
- GET / 200 in 91ms
- ✓ Compiled in 369ms
- GET / 200 in 316ms
- GET / 200 in 62ms
- ✓ Compiled in 415ms
- GET / 200 in 233ms
- GET / 200 in 68ms
- GET / 200 in 270ms
- GET / 200 in 86ms
- ✓ Compiled in 263ms
- GET / 200 in 248ms
- GET / 200 in 73ms
- ✓ Compiled in 618ms
- ✓ Compiled in 214ms
- ○ Compiling /contact ...
- ✓ Compiled /contact in 6.4s
- HEAD /contact 200 in 6969ms
- ○ Compiling /promotions ...
- ✓ Compiled /promotions in 900ms
- HEAD /promotions 200 in 1121ms
- ○ Compiling /legal/conditions-generales ...
- ✓ Compiled /legal/conditions-generales in 918ms
- HEAD /legal/conditions-generales 200 in 1067ms
- GET / 200 in 790ms
- GET /legal/conditions-generales 200 in 69ms
- GET /legal/conditions-generales 200 in 75ms
- GET /legal/conditions-generales 200 in 71ms
- GET /legal/conditions-generales 200 in 77ms
- GET /contact 200 in 93ms
- GET /contact 200 in 69ms
- GET /contact 200 in 57ms
- GET /legal/conditions-generales 200 in 70ms
- ○ Compiling /legal/confidentialite ...
- ✓ Compiled /legal/confidentialite in 607ms
- GET /legal/confidentialite 200 in 677ms
- ○ Compiling /legal/mentions-legales ...
- ✓ Compiled /legal/mentions-legales in 512ms
- GET /legal/mentions-legales 200 in 588ms
- ○ Compiling /legal/plan-du-site ...
- ✓ Compiled /legal/plan-du-site in 670ms
- GET /legal/plan-du-site 200 in 751ms
- GET /legal/conditions-generales 200 in 96ms
- GET /legal/conditions-generales 200 in 72ms
- ✓ Compiled in 725ms
- GET /legal/conditions-generales 200 in 642ms
- GET /legal/conditions-generales 200 in 323ms
- ✓ Compiled in 422ms
- GET /legal/conditions-generales 200 in 287ms
- GET /legal/conditions-generales 200 in 69ms
- ✓ Compiled in 337ms
- GET /legal/conditions-generales 200 in 249ms
- GET /legal/conditions-generales 200 in 74ms
- ✓ Compiled in 444ms
- GET /legal/conditions-generales 200 in 278ms
- GET /legal/conditions-generales 200 in 71ms
- ✓ Compiled in 240ms
  ○ Compiling /services/livraison-gratuite ...
- ✓ Compiled /services/livraison-gratuite in 943ms
- GET /services/livraison-gratuite 200 in 1082ms
+ ✓ Compiled /services/livraison-gratuite in 821ms
+ GET /services/livraison-gratuite 200 in 893ms
  ○ Compiling /services/retours-30-jours ...
- ✓ Compiled /services/retours-30-jours in 522ms
- GET /services/retours-30-jours 200 in 601ms
- GET /legal/conditions-generales 200 in 255ms
- ✓ Compiled /services/service-apres-vente in 425ms
- ⨯ ./src/app/services/service-apres-vente/page.tsx:175:67
-Parsing ecmascript source code failed
-[0m [90m 173 |[39m                   [33m<[39m[33mClock[39m className[33m=[39m[32m"w-6 h-6 mx-auto mb-2"[39m [33m/[39m[33m>[39m
- [90m 174 |[39m                   [33m<[39m[33mdiv[39m className[33m=[39m[32m"font-semibold"[39m[33m>[39m[33mRéactivité[39m[33m<[39m[33m/[39m[33mdiv[39m[33m>[39m
-[31m[1m>[22m[39m[90m 175 |[39m                   [33m<[39m[33mdiv[39m className[33m=[39m[32m"text-sm opacity-80"[39m[33m>[39m[33mRéponse[39m [33m<[39m [35m2[39mh[33m<[39m[33m/[39m[33mdiv[39m[33m>[39m
- [90m     |[39m                                                                   [31m[1m^[22m[39m
- [90m 176 |[39m                 [33m<[39m[33m/[39m[33mdiv[39m[33m>[39m
- [90m 177 |[39m                 [33m<[39m[33mdiv[39m className[33m=[39m[32m"bg-white/10 rounded-lg p-3"[39m[33m>[39m
- [90m 178 |[39m                   [33m<[39m[33mShield[39m className[33m=[39m[32m"w-6 h-6 mx-auto mb-2"[39m [33m/[39m[33m>[39m[0m
-
-Expected '</', got 'h'
-
-
- ○ Compiling /_error ...
- ✓ Compiled /_error in 2.5s
- GET /services/service-apres-vente 500 in 3220ms
- ⨯ ./src/app/services/service-apres-vente/page.tsx:175:67
-Parsing ecmascript source code failed
-[0m [90m 173 |[39m                   [33m<[39m[33mClock[39m className[33m=[39m[32m"w-6 h-6 mx-auto mb-2"[39m [33m/[39m[33m>[39m
- [90m 174 |[39m                   [33m<[39m[33mdiv[39m className[33m=[39m[32m"font-semibold"[39m[33m>[39m[33mRéactivité[39m[33m<[39m[33m/[39m[33mdiv[39m[33m>[39m
-[31m[1m>[22m[39m[90m 175 |[39m                   [33m<[39m[33mdiv[39m className[33m=[39m[32m"text-sm opacity-80"[39m[33m>[39m[33mRéponse[39m [33m<[39m [35m2[39mh[33m<[39m[33m/[39m[33mdiv[39m[33m>[39m
- [90m     |[39m                                                                   [31m[1m^[22m[39m
- [90m 176 |[39m                 [33m<[39m[33m/[39m[33mdiv[39m[33m>[39m
- [90m 177 |[39m                 [33m<[39m[33mdiv[39m className[33m=[39m[32m"bg-white/10 rounded-lg p-3"[39m[33m>[39m
- [90m 178 |[39m                   [33m<[39m[33mShield[39m className[33m=[39m[32m"w-6 h-6 mx-auto mb-2"[39m [33m/[39m[33m>[39m[0m
-
-Expected '</', got 'h'
-
-
- GET /services/service-apres-vente 500 in 206ms
- ✓ Compiled in 925ms
- ✓ Compiled /services/service-apres-vente in 45ms
- GET /services/service-apres-vente 200 in 700ms
- HEAD /services/service-apres-vente 200 in 206ms
+ ✓ Compiled /services/retours-30-jours in 567ms
+ GET /services/retours-30-jours 200 in 624ms
+ ○ Compiling /legal/conditions-generales ...
+ ✓ Compiled /legal/conditions-generales in 662ms
+ GET /legal/conditions-generales 200 in 716ms
+ ○ Compiling /services/service-apres-vente ...
+ ✓ Compiled /services/service-apres-vente in 505ms
+ GET /services/service-apres-vente 200 in 563ms
  ○ Compiling /services/support-technique ...
- ✓ Compiled /services/support-technique in 608ms
- HEAD /services/support-technique 200 in 866ms
- HEAD /services/livraison-gratuite 200 in 836ms
- HEAD /services/retours-30-jours 200 in 422ms
- GET /services/livraison-gratuite 200 in 86ms
- GET /services/retours-30-jours 200 in 70ms
- GET /legal/conditions-generales 200 in 117ms
- GET /services/service-apres-vente 200 in 84ms
- GET /services/support-technique 200 in 76ms
- GET /contact 200 in 248ms
- GET /legal/conditions-generales 200 in 70ms
- GET /legal/confidentialite 200 in 258ms
- ✓ Compiled in 163ms
- ✓ Compiled in 137ms
- ✓ Compiled in 124ms
- ✓ Compiled in 125ms
- ✓ Compiled in 134ms
- ✓ Compiled in 111ms
- ✓ Compiled in 104ms
- ✓ Compiled in 215ms
- ✓ Compiled in 217ms
- ✓ Compiled in 191ms
- ✓ Compiled in 140ms
- ✓ Compiled in 158ms
- ✓ Compiled in 128ms
- GET /services/livraison-gratuite 200 in 74ms
- GET /services/service-apres-vente 200 in 531ms
- GET /services/service-apres-vente 200 in 89ms
- GET /services/support-technique 200 in 262ms
- GET /contact 200 in 262ms
- GET /legal/conditions-generales 200 in 235ms
- ✓ Compiled in 125ms
- ✓ Compiled in 106ms
- ✓ Compiled in 114ms
- ✓ Compiled in 132ms
- ✓ Compiled in 132ms
- ✓ Compiled in 113ms
- ✓ Compiled in 126ms
- ✓ Compiled in 86ms
- ✓ Compiled in 110ms
- ✓ Compiled in 115ms
- GET / 200 in 234ms
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
+ ✓ Compiled /services/support-technique in 564ms
+ GET /services/support-technique 200 in 613ms
+ ○ Compiling /contact ...
+ ✓ Compiled /contact in 530ms
+ GET /contact 200 in 694ms
+ GET /legal/conditions-generales 200 in 64ms
+ ○ Compiling /legal/confidentialite ...
+ ✓ Compiled /legal/confidentialite in 510ms
+ GET /legal/confidentialite 200 in 572ms
+ ✓ Compiled /legal/mentions-legales in 413ms
+ GET /legal/mentions-legales 200 in 472ms
+ GET /legal/mentions-legales 200 in 41ms
+ ✓ Compiled /legal/plan-du-site in 397ms
+ GET /legal/plan-du-site 200 in 474ms
  ○ Compiling /nos-produits ...
- ✓ Compiled /nos-produits in 684ms
- GET /nos-produits 200 in 741ms
- GET / 200 in 84ms
+ ✓ Compiled /nos-produits in 540ms
+ GET /nos-produits 200 in 591ms
+ GET / 200 in 43ms
  ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
  ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MUVIT/Images/Casques-Enfant/Licorne/CASQUE_LICORNE.jpg received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MUVIT/Images/Casques-Enfant/Pika/CASQUE_PIKA.jpg received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MUVIT/Images/Casques-Enfant/Lapin/CASQUE_LAPIN.jpg received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MUVIT/Images/Casques-Enfant/Dragon/CASQUE_DRAGON.jpg received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MUVIT/Images/Casques-Enfant/Chat/CASQUE_CHAT.jpg received text/plain; charset=utf-8
- GET /nos-produits?brand=MUVIT 200 in 89ms
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MONSTER/Images/N-Lite-206/N_LITE_206.jpeg received text/plain; charset=utf-8
- GET /nos-produits?brand=MONSTER 200 in 74ms
- ✓ Compiled in 338ms
- ✓ Compiled in 346ms
- ✓ Compiled in 154ms
- ✓ Compiled in 192ms
- ✓ Compiled in 206ms
- ✓ Compiled in 132ms
- ✓ Compiled in 392ms
- ✓ Compiled in 127ms
- ✓ Compiled in 102ms
- ✓ Compiled in 121ms
- ✓ Compiled in 126ms
- ✓ Compiled in 137ms
- ✓ Compiled in 199ms
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
+ GET /nos-produits?category=Smartphones 200 in 46ms
+ GET / 200 in 69ms
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
+ ✓ Compiled /accessoires in 466ms
+ GET /accessoires 200 in 520ms
+ GET / 200 in 57ms
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8

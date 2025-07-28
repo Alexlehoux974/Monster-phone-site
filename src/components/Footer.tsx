@@ -173,14 +173,14 @@ export default function Footer() {
                 />
               </motion.div>
             </Link>
-            <p className="text-gray-300 text-sm">
+            <p className="text-gray-100 text-base">
               Votre boutique spécialisée en téléphones gaming et accessoires high-tech. 
               Des produits innovants pour les passionnés de technologie.
             </p>
             <div className="flex space-x-4">
               <motion.a 
                 href="#" 
-                className="text-gray-800 hover:text-white transition-colors"
+                className="text-gray-300 hover:text-white transition-colors"
                 whileHover={{ scale: 1.2, y: -2 }}
                 transition={{ duration: 0.2 }}
               >
@@ -190,7 +190,7 @@ export default function Footer() {
               </motion.a>
               <motion.a 
                 href="#" 
-                className="text-gray-800 hover:text-white transition-colors"
+                className="text-gray-300 hover:text-white transition-colors"
                 whileHover={{ scale: 1.2, y: -2 }}
                 transition={{ duration: 0.2, delay: 0.1 }}
               >
@@ -200,7 +200,7 @@ export default function Footer() {
               </motion.a>
               <motion.a 
                 href="#" 
-                className="text-gray-800 hover:text-white transition-colors"
+                className="text-gray-300 hover:text-white transition-colors"
                 whileHover={{ scale: 1.2, y: -2 }}
                 transition={{ duration: 0.2, delay: 0.2 }}
               >
@@ -210,7 +210,7 @@ export default function Footer() {
               </motion.a>
               <motion.a 
                 href="#" 
-                className="text-gray-800 hover:text-white transition-colors"
+                className="text-gray-300 hover:text-white transition-colors"
                 whileHover={{ scale: 1.2, y: -2 }}
                 transition={{ duration: 0.2, delay: 0.3 }}
               >
@@ -228,24 +228,24 @@ export default function Footer() {
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            <h3 className="font-semibold text-lg mb-4">
+            <h3 className="font-semibold text-xl mb-4">
               <FooterTextShimmer duration={5}>Navigation</FooterTextShimmer>
             </h3>
             <ul className="space-y-2">
               <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
-                <Link href="/nos-produits" className="text-gray-300 hover:text-white transition-colors">Tous nos produits</Link>
+                <Link href="/nos-produits" className="text-gray-100 hover:text-white transition-colors">Tous nos produits</Link>
               </motion.li>
               <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
-                <Link href="/nos-produits?category=Smartphones" className="text-gray-300 hover:text-white transition-colors">Smartphones</Link>
+                <Link href="/nos-produits?category=Smartphones" className="text-gray-100 hover:text-white transition-colors">Smartphones</Link>
               </motion.li>
               <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
-                <Link href="/accessoires" className="text-gray-300 hover:text-white transition-colors">Accessoires</Link>
+                <Link href="/accessoires" className="text-gray-100 hover:text-white transition-colors">Accessoires</Link>
               </motion.li>
               <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
-                <Link href="/promotions" className="text-gray-300 hover:text-white transition-colors">Promotions</Link>
+                <Link href="/promotions" className="text-gray-100 hover:text-white transition-colors">Promotions</Link>
               </motion.li>
               <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
-                <Link href="/reparation" className="text-gray-300 hover:text-white transition-colors">Réparation</Link>
+                <Link href="/reparation" className="text-gray-100 hover:text-white transition-colors">Réparation</Link>
               </motion.li>
             </ul>
           </motion.div>
@@ -257,24 +257,24 @@ export default function Footer() {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <h3 className="font-semibold text-lg mb-4">
+            <h3 className="font-semibold text-xl mb-4">
               <FooterTextShimmer duration={6}>Services</FooterTextShimmer>
             </h3>
             <ul className="space-y-2">
               <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
-                <Link href="/services/livraison-gratuite" className="text-gray-300 hover:text-white transition-colors">Livraison gratuite dès 50€</Link>
+                <Link href="/services/livraison-gratuite" className="text-gray-100 hover:text-white transition-colors">Livraison gratuite dès 50€</Link>
               </motion.li>
               <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
-                <Link href="/services/retours-30-jours" className="text-gray-300 hover:text-white transition-colors">Retours sous 30 jours</Link>
+                <Link href="/services/retours-30-jours" className="text-gray-100 hover:text-white transition-colors">Retours sous 30 jours</Link>
               </motion.li>
               <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
-                <Link href="/legal/conditions-generales" className="text-gray-300 hover:text-white transition-colors">Garantie constructeur</Link>
+                <Link href="/legal/conditions-generales" className="text-gray-100 hover:text-white transition-colors">Garantie constructeur</Link>
               </motion.li>
               <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
-                <Link href="/services/service-apres-vente" className="text-gray-300 hover:text-white transition-colors">Service après-vente</Link>
+                <Link href="/services/service-apres-vente" className="text-gray-100 hover:text-white transition-colors">Service après-vente</Link>
               </motion.li>
               <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
-                <Link href="/services/support-technique" className="text-gray-300 hover:text-white transition-colors">Support technique</Link>
+                <Link href="/services/support-technique" className="text-gray-100 hover:text-white transition-colors">Support technique</Link>
               </motion.li>
             </ul>
           </motion.div>
@@ -286,24 +286,24 @@ export default function Footer() {
             transition={{ duration: 0.6, delay: 0.3 }}
             viewport={{ once: true }}
           >
-            <h3 className="font-semibold text-lg mb-4">
+            <h3 className="font-semibold text-xl mb-4">
               <FooterTextShimmer duration={7}>Contact & Légal</FooterTextShimmer>
             </h3>
             <ul className="space-y-2">
               <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
-                <Link href="/contact" className="text-gray-300 hover:text-white transition-colors">Nous contacter</Link>
+                <Link href="/contact" className="text-gray-100 hover:text-white transition-colors">Nous contacter</Link>
               </motion.li>
               <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
-                <Link href="/legal/conditions-generales" className="text-gray-300 hover:text-white transition-colors">Conditions générales</Link>
+                <Link href="/legal/conditions-generales" className="text-gray-100 hover:text-white transition-colors">Conditions générales</Link>
               </motion.li>
               <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
-                <Link href="/legal/confidentialite" className="text-gray-300 hover:text-white transition-colors">Politique de confidentialité</Link>
+                <Link href="/legal/confidentialite" className="text-gray-100 hover:text-white transition-colors">Politique de confidentialité</Link>
               </motion.li>
               <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
-                <Link href="/legal/mentions-legales" className="text-gray-300 hover:text-white transition-colors">Mentions légales</Link>
+                <Link href="/legal/mentions-legales" className="text-gray-100 hover:text-white transition-colors">Mentions légales</Link>
               </motion.li>
               <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
-                <Link href="/legal/plan-du-site" className="text-gray-300 hover:text-white transition-colors">Plan du site</Link>
+                <Link href="/legal/plan-du-site" className="text-gray-100 hover:text-white transition-colors">Plan du site</Link>
               </motion.li>
             </ul>
           </motion.div>
@@ -335,7 +335,7 @@ export default function Footer() {
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </motion.svg>
-              <span className="text-sm text-gray-300">Livraison 24h/48h</span>
+              <span className="text-base text-gray-100">Livraison 24h/48h</span>
             </motion.div>
             <motion.div 
               className="flex items-center justify-center space-x-2"
@@ -352,7 +352,7 @@ export default function Footer() {
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
               </motion.svg>
-              <span className="text-sm text-gray-300">Paiement sécurisé</span>
+              <span className="text-base text-gray-100">Paiement sécurisé</span>
             </motion.div>
             <motion.div 
               className="flex items-center justify-center space-x-2"
@@ -369,7 +369,7 @@ export default function Footer() {
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
               </motion.svg>
-              <span className="text-sm text-gray-300">Satisfaction garantie</span>
+              <span className="text-base text-gray-100">Satisfaction garantie</span>
             </motion.div>
           </motion.div>
         </div>
@@ -385,39 +385,39 @@ export default function Footer() {
             transition={{ duration: 0.6, delay: 0.5 }}
             viewport={{ once: true }}
           >
-            <div className="text-sm text-gray-800 mb-4 md:mb-0">
+            <div className="text-base text-gray-200 mb-4 md:mb-0">
               © 2024 Monster Phone Boutique. Tous droits réservés.
             </div>
             <div className="flex items-center space-x-4">
-              <span className="text-sm text-gray-800">Moyens de paiement :</span>
+              <span className="text-base text-gray-200">Moyens de paiement :</span>
               <div className="flex space-x-2">
                 <motion.div 
                   className="w-8 h-5 bg-blue-600 rounded flex items-center justify-center"
                   whileHover={{ scale: 1.1, y: -2 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <span className="text-white text-xs font-bold">CB</span>
+                  <span className="text-white text-sm font-bold">CB</span>
                 </motion.div>
                 <motion.div 
                   className="w-8 h-5 bg-red-600 rounded flex items-center justify-center"
                   whileHover={{ scale: 1.1, y: -2 }}
                   transition={{ duration: 0.2, delay: 0.05 }}
                 >
-                  <span className="text-white text-xs font-bold">VI</span>
+                  <span className="text-white text-sm font-bold">VI</span>
                 </motion.div>
                 <motion.div 
                   className="w-8 h-5 bg-yellow-500 rounded flex items-center justify-center"
                   whileHover={{ scale: 1.1, y: -2 }}
                   transition={{ duration: 0.2, delay: 0.1 }}
                 >
-                  <span className="text-white text-xs font-bold">MC</span>
+                  <span className="text-white text-sm font-bold">MC</span>
                 </motion.div>
                 <motion.div 
                   className="w-8 h-5 bg-blue-500 rounded flex items-center justify-center"
                   whileHover={{ scale: 1.1, y: -2 }}
                   transition={{ duration: 0.2, delay: 0.15 }}
                 >
-                  <span className="text-white text-xs font-bold">PP</span>
+                  <span className="text-white text-sm font-bold">PP</span>
                 </motion.div>
               </div>
             </div>

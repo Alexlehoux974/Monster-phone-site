@@ -1,0 +1,10 @@
+/* Amélioration du contraste des placeholders */
+input::placeholder,
+textarea::placeholder {
+  color: #111827; /* text-gray-900 */
+  opacity: 1;
+}
+
+select option:first-child {
+  color: #111827; /* text-gray-900 */
+}

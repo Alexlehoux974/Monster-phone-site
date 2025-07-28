@@ -16,7 +16,7 @@ export default function FeaturesSection() {
           <h3 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Pourquoi choisir Monster Phone ?
           </h3>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-100 max-w-3xl mx-auto">
             Nous révolutionnons l&apos;expérience gaming mobile avec des accessoires de qualité premium
           </p>
         </motion.div>
@@ -54,7 +54,7 @@ export default function FeaturesSection() {
             >
               <feature.icon className="w-12 h-12 text-purple-400 mx-auto mb-4" />
               <h4 className="text-xl font-bold text-white mb-2">{feature.title}</h4>
-              <p className="text-gray-300">{feature.description}</p>
+              <p className="text-gray-100">{feature.description}</p>
             </motion.div>
           ))}
         </div>

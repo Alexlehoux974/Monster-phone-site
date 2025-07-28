@@ -12,7 +12,7 @@ const PromoBar = () => (
   <div className="bg-gradient-to-r from-red-600 via-orange-600 to-red-600 text-white py-3 px-4 relative overflow-hidden">
     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer" />
     <div className="max-w-7xl mx-auto text-center relative z-10">
-      <div className="flex items-center justify-center gap-6 text-base font-semibold flex-wrap">
+      <div className="flex items-center justify-center gap-6 text-lg font-semibold flex-wrap">
         <div className="flex items-center gap-2">
           <Truck className="w-5 h-5" />
           <span>LIVRAISON EXPRESS 24H/48H À LA RÉUNION</span>
@@ -59,7 +59,7 @@ const DropdownMenu = ({
         {/* Colonne des catégories - maintenant première colonne */}
         <div className="w-64 bg-gray-50 border-r border-gray-200">
           <div className="p-4 border-b border-gray-200">
-            <h3 className="font-semibold text-gray-900 text-lg">Nos articles</h3>
+            <h3 className="font-semibold text-gray-900 text-xl">Nos articles</h3>
           </div>
           <div className="py-2">
             {categories.map((category) => (
@@ -70,7 +70,7 @@ const DropdownMenu = ({
                     "block px-4 py-3 text-base font-medium transition-colors",
                     hoveredCategory === category.name 
                       ? "bg-blue-50 text-blue-700" 
-                      : "text-gray-700 hover:text-blue-600 hover:bg-gray-100"
+                      : "text-gray-900 hover:text-blue-600 hover:bg-gray-100"
                   )}
                   onMouseEnter={() => {
                     setHoveredCategory(category.name);
@@ -81,7 +81,7 @@ const DropdownMenu = ({
                   <div className="flex items-center justify-between">
                     <span>{category.name}</span>
                     {category.brands && category.brands.length > 0 && (
-                      <ArrowRight className="w-4 h-4 text-gray-700" />
+                      <ArrowRight className="w-4 h-4 text-gray-900" />
                     )}
                   </div>
                 </Link>
@@ -100,7 +100,7 @@ const DropdownMenu = ({
               return (
                 <>
                   <div className="p-4 border-b border-gray-200 bg-green-50">
-                    <h4 className="font-semibold text-gray-900 text-base">{category.name}</h4>
+                    <h4 className="font-semibold text-gray-900 text-lg">{category.name}</h4>
                   </div>
                   <div className="py-2">
                     {category.brands.map((brand) => (
@@ -108,17 +108,17 @@ const DropdownMenu = ({
                         <Link
                           href={`/nos-produits?brand=${encodeURIComponent(brand.name)}`}
                           className={cn(
-                            "block px-4 py-3 text-base font-medium transition-colors",
+                            "block px-4 py-3 text-lg font-medium transition-colors",
                             hoveredBrand === brand.name 
                               ? "bg-green-50 text-green-700" 
-                              : "text-gray-700 hover:text-green-600 hover:bg-gray-100"
+                              : "text-gray-900 hover:text-green-600 hover:bg-gray-100"
                           )}
                           onMouseEnter={() => setHoveredBrand(brand.name)}
                           onClick={onClose}
                         >
                           <div>
                             <span className="font-medium">{brand.name}</span>
-                            <span className="text-xs text-gray-700 block">({brand.products.length} produits)</span>
+                            <span className="text-sm text-gray-900 block">({brand.products.length} produits)</span>
                           </div>
                         </Link>
                       </div>
@@ -141,8 +141,8 @@ const DropdownMenu = ({
               return (
                 <>
                   <div className="p-4 border-b border-gray-200">
-                    <h4 className="font-semibold text-gray-900 text-base">Collection {hoveredBrand}</h4>
-                    <p className="text-sm text-gray-800 mt-1">{products.length} produits disponibles</p>
+                    <h4 className="font-semibold text-gray-900 text-lg">Collection {hoveredBrand}</h4>
+                    <p className="text-base text-gray-900 mt-1">{products.length} produits disponibles</p>
                   </div>
                   <div className="py-2 max-h-80 overflow-y-auto">
                     {products.slice(0, 5).map((product) => (
@@ -165,15 +165,15 @@ const DropdownMenu = ({
                               </div>
                             )}
                             <div className="flex-1 min-w-0">
-                              <p className="text-base font-medium text-gray-900 line-clamp-1">
+                              <p className="text-lg font-medium text-gray-900 line-clamp-1">
                                 {product.name}
                               </p>
                               {product.price && (
-                                <p className="text-base font-semibold text-blue-600 mt-1">
+                                <p className="text-lg font-semibold text-blue-600 mt-1">
                                   {product.price}
                                 </p>
                               )}
-                              <p className="text-xs text-gray-700 mt-1 line-clamp-2">
+                              <p className="text-sm text-gray-900 mt-1 line-clamp-2">
                                 {product.description}
                               </p>
                             </div>
@@ -185,7 +185,7 @@ const DropdownMenu = ({
                       <div className="px-4 py-3">
                         <Link
                           href={`/nos-produits?brand=${encodeURIComponent(hoveredBrand)}`}
-                          className="text-sm font-medium text-blue-600 hover:text-blue-800"
+                          className="text-base font-medium text-blue-600 hover:text-blue-800"
                           onClick={onClose}
                         >
                           Voir tous les {products.length} produits →
@@ -245,7 +245,7 @@ export default function Header() {
           isScrolled ? "shadow-lg bg-white/98" : ""
         )}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-x-hidden">
           {/* Header principal */}
           <div className="flex justify-between items-center h-24">
             {/* Logo avec lien d'accueil */}
@@ -257,6 +257,7 @@ export default function Header() {
                   width={200} 
                   height={100}
                   className="h-16 w-auto"
+                  priority
                 />
               </Link>
             </div>
@@ -267,7 +268,7 @@ export default function Header() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="flex items-center gap-2 text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors rounded-lg hover:bg-blue-50"
+                  className="flex items-center gap-2 text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors rounded-lg hover:bg-blue-50"
                 >
                   {item.icon}
                   <span>{item.name}</span>
@@ -281,11 +282,17 @@ export default function Header() {
                 onMouseLeave={handleMouseLeave}
               >
                 <button
-                  className="flex items-center gap-2 text-gray-700 hover:text-blue-600 px-4 py-3 text-lg font-bold transition-colors rounded-lg hover:bg-blue-50"
+                  className={`flex items-center gap-2 px-4 py-3 text-lg font-bold transition-colors rounded-lg ${
+                    dropdownOpen === 'smartphones' 
+                      ? 'text-blue-600 bg-blue-50' 
+                      : 'text-gray-900 hover:text-blue-600 hover:bg-blue-50'
+                  }`}
                 >
                   <Smartphone className="w-5 h-5" />
                   <span>Smartphones</span>
-                  <ChevronDown className="w-5 h-5" />
+                  <ChevronDown className={`w-5 h-5 transition-transform ${
+                    dropdownOpen === 'smartphones' ? 'rotate-180' : ''
+                  }`} />
                 </button>
                 
                 <DropdownMenu
@@ -303,7 +310,7 @@ export default function Header() {
                 onMouseLeave={handleMouseLeave}
               >
                 <button
-                  className="flex items-center gap-2 text-gray-700 hover:text-blue-600 px-4 py-3 text-lg font-bold transition-colors rounded-lg hover:bg-blue-50"
+                  className="flex items-center gap-2 text-gray-900 hover:text-blue-600 px-4 py-3 text-lg font-bold transition-colors rounded-lg hover:bg-blue-50"
                 >
                   <Watch className="w-5 h-5" />
                   <span>Montres</span>
@@ -325,7 +332,7 @@ export default function Header() {
                 onMouseLeave={handleMouseLeave}
               >
                 <button
-                  className="flex items-center gap-2 text-gray-700 hover:text-blue-600 px-4 py-3 text-lg font-bold transition-colors rounded-lg hover:bg-blue-50"
+                  className="flex items-center gap-2 text-gray-900 hover:text-blue-600 px-4 py-3 text-lg font-bold transition-colors rounded-lg hover:bg-blue-50"
                 >
                   <Headphones className="w-5 h-5" />
                   <span>Audio</span>
@@ -347,7 +354,7 @@ export default function Header() {
                 onMouseLeave={handleMouseLeave}
               >
                 <button
-                  className="flex items-center gap-2 text-gray-700 hover:text-blue-600 px-4 py-3 text-lg font-bold transition-colors rounded-lg hover:bg-blue-50"
+                  className="flex items-center gap-2 text-gray-900 hover:text-blue-600 px-4 py-3 text-lg font-bold transition-colors rounded-lg hover:bg-blue-50"
                 >
                   <Lightbulb className="w-5 h-5" />
                   <span>Luminaire</span>
@@ -369,7 +376,7 @@ export default function Header() {
                 onMouseLeave={handleMouseLeave}
               >
                 <button
-                  className="flex items-center gap-2 text-gray-700 hover:text-blue-600 px-4 py-3 text-lg font-bold transition-colors rounded-lg hover:bg-blue-50"
+                  className="flex items-center gap-2 text-gray-900 hover:text-blue-600 px-4 py-3 text-lg font-bold transition-colors rounded-lg hover:bg-blue-50"
                 >
                   <Package className="w-5 h-5" />
                   <span>Accessoires</span>
@@ -391,7 +398,7 @@ export default function Header() {
                 onMouseLeave={handleMouseLeave}
               >
                 <button
-                  className="flex items-center gap-2 text-gray-700 hover:text-blue-600 px-4 py-3 text-lg font-bold transition-colors rounded-lg hover:bg-blue-50"
+                  className="flex items-center gap-2 text-gray-900 hover:text-blue-600 px-4 py-3 text-lg font-bold transition-colors rounded-lg hover:bg-blue-50"
                 >
                   <Star className="w-5 h-5" />
                   <span>MUVIT</span>
@@ -411,21 +418,21 @@ export default function Header() {
             <nav className="hidden lg:flex xl:hidden items-center space-x-1">
               <Link
                 href="/nos-produits?category=Smartphones"
-                className="flex items-center gap-2 text-gray-700 hover:text-blue-600 px-3 py-2 text-base font-bold transition-colors rounded-lg hover:bg-blue-50"
+                className="flex items-center gap-2 text-gray-900 hover:text-blue-600 px-3 py-2 text-base font-bold transition-colors rounded-lg hover:bg-blue-50"
               >
                 <Smartphone className="w-5 h-5" />
                 <span>Smartphones</span>
               </Link>
               <Link
                 href="/nos-produits?category=Montres+Connectées"
-                className="flex items-center gap-2 text-gray-700 hover:text-blue-600 px-3 py-2 text-base font-bold transition-colors rounded-lg hover:bg-blue-50"
+                className="flex items-center gap-2 text-gray-900 hover:text-blue-600 px-3 py-2 text-base font-bold transition-colors rounded-lg hover:bg-blue-50"
               >
                 <Watch className="w-5 h-5" />
                 <span>Montres</span>
               </Link>
               <Link
                 href="/nos-produits"
-                className="flex items-center gap-2 text-gray-700 hover:text-blue-600 px-3 py-2 text-base font-bold transition-colors rounded-lg hover:bg-blue-50"
+                className="flex items-center gap-2 text-gray-900 hover:text-blue-600 px-3 py-2 text-base font-bold transition-colors rounded-lg hover:bg-blue-50"
               >
                 <Package className="w-5 h-5" />
                 <span>Accessoires</span>
@@ -441,9 +448,9 @@ export default function Header() {
                   placeholder="Rechercher un produit..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-72 px-5 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-base"
+                  className="w-48 xl:w-72 px-5 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-base"
                 />
-                <button className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-gray-700 hover:text-blue-600 transition-colors">
+                <button className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-gray-900 hover:text-blue-600 transition-colors">
                   <Search className="h-4 w-4" />
                 </button>
               </div>
@@ -451,12 +458,12 @@ export default function Header() {
               {/* Actions */}
               <div className="flex items-center space-x-2">
                 {/* Recherche mobile */}
-                <button className="lg:hidden p-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                <button className="lg:hidden p-3 text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
                   <Search className="h-6 w-6" />
                 </button>
                 
                 {/* Panier */}
-                <button className="relative p-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                <button className="relative p-3 text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
                   <ShoppingCart className="h-6 w-6" />
                   <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center font-medium">
                     0
@@ -464,7 +471,7 @@ export default function Header() {
                 </button>
 
                 {/* Compte */}
-                <button className="p-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                <button className="p-3 text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
                   <User className="h-6 w-6" />
                 </button>
 
@@ -482,7 +489,7 @@ export default function Header() {
 
                 {/* Menu mobile */}
                 <button
-                  className="lg:hidden p-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                  className="lg:hidden p-3 text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                   onClick={() => setIsMenuOpen(!isMenuOpen)}
                 >
                   {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -499,7 +506,7 @@ export default function Header() {
                   <Link
                     key={item.name}
                     href={item.href}
-                    className="flex items-center gap-3 px-4 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                    className="flex items-center gap-3 px-4 py-3 text-base font-medium text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {item.icon}
@@ -509,7 +516,7 @@ export default function Header() {
                 
                 <Link
                   href="/nos-produits?category=Montres+Connectées"
-                  className="flex items-center gap-3 px-4 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                  className="flex items-center gap-3 px-4 py-3 text-base font-medium text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <span>Montres Connectées</span>
@@ -517,7 +524,7 @@ export default function Header() {
                 
                 <Link
                   href="/nos-produits?category=Luminaire+Monster"
-                  className="flex items-center gap-3 px-4 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                  className="flex items-center gap-3 px-4 py-3 text-base font-medium text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <span>Luminaire Monster</span>
@@ -525,7 +532,7 @@ export default function Header() {
                 
                 <Link
                   href="/nos-produits?category=Casques+et+Audio"
-                  className="flex items-center gap-3 px-4 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                  className="flex items-center gap-3 px-4 py-3 text-base font-medium text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <span>Casques et Audio</span>
@@ -533,7 +540,7 @@ export default function Header() {
                 
                 <Link
                   href="/nos-produits?category=Accessoires+Monster"
-                  className="flex items-center gap-3 px-4 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                  className="flex items-center gap-3 px-4 py-3 text-base font-medium text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <span>Accessoires Monster</span>
@@ -541,7 +548,7 @@ export default function Header() {
                 
                 <Link
                   href="/nos-produits?brand=MUVIT"
-                  className="flex items-center gap-3 px-4 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                  className="flex items-center gap-3 px-4 py-3 text-base font-medium text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <span>Produits MUVIT</span>
@@ -558,7 +565,7 @@ export default function Header() {
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-base"
                   />
-                  <Search className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-700" />
+                  <Search className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-900" />
                 </div>
               </div>
 

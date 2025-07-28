@@ -17,7 +17,8 @@ import {
   Filter,
   TrendingDown,
   Gift,
-  Zap
+  Zap,
+  Package
 } from 'lucide-react';
 import { allProducts, type Product } from '@/data/products';
 
@@ -103,7 +104,7 @@ export default function PromotionsPage() {
 
   return (
     <>
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 overflow-x-hidden">
         <Header />
         
         <main className="px-4 sm:px-6 lg:px-8 py-8">
@@ -124,7 +125,7 @@ export default function PromotionsPage() {
                 Promos Monster Phone
                 <span className="block text-red-600">à La Réunion</span>
               </h1>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+              <p className="text-xl text-gray-700 max-w-3xl mx-auto mb-8">
                 Découvrez nos offres exceptionnelles sur une sélection de smartphones gaming, 
                 accessoires et gadgets high-tech. Promotions limitées dans le temps !
               </p>
@@ -133,15 +134,15 @@ export default function PromotionsPage() {
               <div className="flex items-center justify-center gap-8 text-center">
                 <div className="bg-white rounded-lg px-6 py-4 shadow-sm border">
                   <div className="text-2xl font-bold text-red-600">{filteredProducts.length}</div>
-                  <div className="text-sm text-gray-600">Produits en promo</div>
+                  <div className="text-sm text-gray-700">Produits en promo</div>
                 </div>
                 <div className="bg-white rounded-lg px-6 py-4 shadow-sm border">
                   <div className="text-2xl font-bold text-green-600">Jusqu'à -30%</div>
-                  <div className="text-sm text-gray-600">Réductions max</div>
+                  <div className="text-sm text-gray-700">Réductions max</div>
                 </div>
                 <div className="bg-white rounded-lg px-6 py-4 shadow-sm border">
                   <div className="text-2xl font-bold text-blue-600">48h</div>
-                  <div className="text-sm text-gray-600">Livraison Réunion</div>
+                  <div className="text-sm text-gray-700">Livraison Réunion</div>
                 </div>
               </div>
             </motion.div>
@@ -170,7 +171,7 @@ export default function PromotionsPage() {
             >
               <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
                 <div className="flex items-center gap-4">
-                  <Filter className="w-5 h-5 text-gray-400" />
+                  <Filter className="w-5 h-5 text-gray-700" />
                   <div className="flex flex-wrap gap-2">
                     <Button
                       variant={selectedCategory === 'all' ? 'default' : 'outline'}
@@ -193,7 +194,7 @@ export default function PromotionsPage() {
                 </div>
                 
                 <div className="flex items-center gap-2">
-                  <span className="text-sm text-gray-600">Trier par:</span>
+                  <span className="text-sm text-gray-700">Trier par:</span>
                   <select
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value as 'discount' | 'price' | 'name')}
@@ -236,7 +237,7 @@ export default function PromotionsPage() {
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center">
-                        <Package className="w-16 h-16 text-gray-300" />
+                        <Package className="w-16 h-16 text-gray-400" />
                       </div>
                     )}
                     
@@ -271,13 +272,13 @@ export default function PromotionsPage() {
                       <span className="text-lg font-bold text-red-600">
                         {product.promotion?.promoPrice}
                       </span>
-                      <span className="text-sm text-gray-500 line-through">
+                      <span className="text-sm text-gray-700 line-through">
                         {product.promotion?.originalPrice}
                       </span>
                     </div>
 
                     {/* Description courte */}
-                    <p className="text-sm text-gray-600 line-clamp-2 mb-4">
+                    <p className="text-sm text-gray-700 line-clamp-2 mb-4">
                       {product.description}
                     </p>
 
@@ -305,11 +306,11 @@ export default function PromotionsPage() {
                 animate={{ opacity: 1 }}
                 className="text-center py-12"
               >
-                <Gift className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+                <Gift className="w-16 h-16 text-gray-400 mx-auto mb-4" />
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
                   Aucune promotion dans cette catégorie
                 </h3>
-                <p className="text-gray-600">
+                <p className="text-gray-700">
                   Essayez une autre catégorie ou consultez tous nos produits.
                 </p>
                 <Button asChild className="mt-4">

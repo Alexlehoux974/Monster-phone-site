@@ -136,7 +136,7 @@ export default function SupportTechniquePage() {
 
   return (
     <>
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 overflow-x-hidden">
         <Header />
         
         <main className="px-4 sm:px-6 lg:px-8 py-8">
@@ -153,13 +153,13 @@ export default function SupportTechniquePage() {
                 <Monitor className="w-4 h-4" />
                 SUPPORT TECHNIQUE
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
                 Support Technique
               </h1>
-              <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+              <p className="text-2xl text-gray-900 max-w-3xl mx-auto">
                 Assistance technique experte pour tous vos appareils gaming et téléphonie
               </p>
-              <div className="mt-4 text-sm text-gray-700">
+              <div className="mt-4 text-sm text-gray-900">
                 <Calendar className="w-4 h-4 inline mr-1" />
                 Dernière mise à jour : 28 juillet 2025
               </div>
@@ -173,25 +173,25 @@ export default function SupportTechniquePage() {
               className="bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg p-8 mb-8 text-center"
             >
               <Zap className="w-16 h-16 mx-auto mb-4" />
-              <h2 className="text-3xl font-bold mb-2">Expertise Technique Gaming</h2>
-              <p className="text-xl opacity-90 mb-4">
+              <h2 className="text-4xl font-bold mb-2">Expertise Technique Gaming</h2>
+              <p className="text-2xl mb-4">
                 Nos techniciens certifiés vous accompagnent pour optimiser vos performances
               </p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
                 <div className="bg-white/10 rounded-lg p-3">
                   <Users className="w-6 h-6 mx-auto mb-2" />
                   <div className="font-semibold">Équipe dédiée</div>
-                  <div className="text-sm opacity-80">5 techniciens experts</div>
+                  <div className="text-sm">5 techniciens experts</div>
                 </div>
                 <div className="bg-white/10 rounded-lg p-3">
                   <Clock className="w-6 h-6 mx-auto mb-2" />
                   <div className="font-semibold">Disponibilité</div>
-                  <div className="text-sm opacity-80">6 jours / 7</div>
+                  <div className="text-sm">6 jours / 7</div>
                 </div>
                 <div className="bg-white/10 rounded-lg p-3">
                   <CheckCircle className="w-6 h-6 mx-auto mb-2" />
                   <div className="font-semibold">Satisfaction</div>
-                  <div className="text-sm opacity-80">99% de réussite</div>
+                  <div className="text-sm">99% de réussite</div>
                 </div>
               </div>
             </motion.div>
@@ -203,7 +203,7 @@ export default function SupportTechniquePage() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="mb-8"
             >
-              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+              <h2 className="text-3xl font-bold text-gray-900 mb-6 flex items-center gap-2">
                 <Settings className="w-6 h-6 text-blue-600" />
                 Nos services de support
               </h2>
@@ -227,8 +227,8 @@ export default function SupportTechniquePage() {
                         </div>
                         <div className="flex-1">
                           <h3 className="font-bold text-lg mb-2">{service.title}</h3>
-                          <p className="text-sm opacity-80 mb-3">{service.description}</p>
-                          <ul className="space-y-1 text-xs opacity-70">
+                          <p className="text-sm mb-3">{service.description}</p>
+                          <ul className="space-y-1 text-xs">
                             {service.services.map((item, i) => (
                               <li key={i} className="flex items-center gap-1">
                                 <CheckCircle className="w-3 h-3 flex-shrink-0" />
@@ -251,7 +251,7 @@ export default function SupportTechniquePage() {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="bg-white rounded-lg shadow-sm border p-8 mb-8"
             >
-              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+              <h2 className="text-3xl font-bold text-gray-900 mb-6 flex items-center gap-2">
                 <MessageCircle className="w-6 h-6 text-green-600" />
                 Canaux de support disponibles
               </h2>
@@ -273,10 +273,10 @@ export default function SupportTechniquePage() {
                         </div>
                         <div>
                           <h3 className="font-semibold">{channel.title}</h3>
-                          <p className="text-xs opacity-80">{channel.description}</p>
+                          <p className="text-xs">{channel.description}</p>
                         </div>
                       </div>
-                      <div className="space-y-1 text-xs opacity-70">
+                      <div className="space-y-1 text-xs">
                         <div><strong>Disponibilité :</strong> {channel.availability}</div>
                         <div><strong>Temps de réponse :</strong> {channel.response}</div>
                       </div>
@@ -293,7 +293,7 @@ export default function SupportTechniquePage() {
               transition={{ duration: 0.5, delay: 0.4 }}
               className="bg-white rounded-lg shadow-sm border p-8 mb-8"
             >
-              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+              <h2 className="text-3xl font-bold text-gray-900 mb-6 flex items-center gap-2">
                 <HelpCircle className="w-6 h-6 text-purple-600" />
                 Support FAQ - Questions fréquentes
               </h2>
@@ -311,13 +311,13 @@ export default function SupportTechniquePage() {
                       <HelpCircle className="w-5 h-5 text-purple-600 mt-0.5 flex-shrink-0" />
                       {item.question}
                     </h3>
-                    <p className="text-gray-700 text-sm pl-7">{item.answer}</p>
+                    <p className="text-gray-800 text-sm pl-7">{item.answer}</p>
                   </motion.div>
                 ))}
               </div>
               
               <div className="mt-6 p-4 bg-gray-50 rounded-lg text-center">
-                <p className="text-gray-700 text-sm">
+                <p className="text-gray-800 text-sm">
                   Vous ne trouvez pas la réponse à votre question ? 
                   <br />
                   <strong>Contactez directement notre support technique !</strong>
@@ -332,7 +332,7 @@ export default function SupportTechniquePage() {
               transition={{ duration: 0.5, delay: 0.5 }}
               className="bg-white rounded-lg shadow-sm border p-8 mb-8"
             >
-              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+              <h2 className="text-3xl font-bold text-gray-900 mb-6 flex items-center gap-2">
                 <Smartphone className="w-6 h-6 text-orange-600" />
                 Services spécialisés
               </h2>
@@ -343,7 +343,7 @@ export default function SupportTechniquePage() {
                     <Download className="w-8 h-8 text-blue-600" />
                   </div>
                   <h3 className="font-semibold text-gray-900 mb-2">Mise à jour firmware</h3>
-                  <p className="text-sm text-gray-700">
+                  <p className="text-sm text-gray-800">
                     Installation des dernières versions système et correction de bugs
                   </p>
                 </div>
@@ -353,7 +353,7 @@ export default function SupportTechniquePage() {
                     <Wifi className="w-8 h-8 text-green-600" />
                   </div>
                   <h3 className="font-semibold text-gray-900 mb-2">Configuration réseau</h3>
-                  <p className="text-sm text-gray-700">
+                  <p className="text-sm text-gray-800">
                     Paramétrage WiFi, 4G/5G, VPN et optimisation connexion
                   </p>
                 </div>
@@ -363,7 +363,7 @@ export default function SupportTechniquePage() {
                     <Monitor className="w-8 h-8 text-purple-600" />
                   </div>
                   <h3 className="font-semibold text-gray-900 mb-2">Setup gaming</h3>
-                  <p className="text-sm text-gray-700">
+                  <p className="text-sm text-gray-800">
                     Configuration optimale pour les jeux mobiles et streaming
                   </p>
                 </div>
@@ -400,8 +400,8 @@ export default function SupportTechniquePage() {
               className="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg p-8 text-center"
             >
               <Monitor className="w-12 h-12 mx-auto mb-4" />
-              <h2 className="text-2xl font-bold mb-4">Besoin d'assistance technique ?</h2>
-              <p className="text-lg opacity-90 mb-6">
+              <h2 className="text-3xl font-bold mb-4">Besoin d'assistance technique ?</h2>
+              <p className="text-xl mb-6">
                 Nos experts sont à votre disposition pour résoudre tous vos problèmes
               </p>
               
@@ -409,19 +409,19 @@ export default function SupportTechniquePage() {
                 <div className="bg-white/10 rounded-lg p-4">
                   <Phone className="w-6 h-6 mx-auto mb-2" />
                   <div className="font-semibold">Hotline technique</div>
-                  <div className="opacity-80">0262 XX XX XX<br />Lun-Sam 8h-20h</div>
+                  <div>0262 XX XX XX<br />Lun-Sam 8h-20h</div>
                 </div>
                 
                 <div className="bg-white/10 rounded-lg p-4">
                   <Mail className="w-6 h-6 mx-auto mb-2" />
                   <div className="font-semibold">Email support</div>
-                  <div className="opacity-80">support@<br />monster-phone-reunion.com</div>
+                  <div>support@<br />monster-phone-reunion.com</div>
                 </div>
                 
                 <div className="bg-white/10 rounded-lg p-4">
                   <MessageCircle className="w-6 h-6 mx-auto mb-2" />
                   <div className="font-semibold">Chat en ligne</div>
-                  <div className="opacity-80">Disponible 24h/7j<br />Réponse immédiate</div>
+                  <div>Disponible 24h/7j<br />Réponse immédiate</div>
                 </div>
               </div>
               
