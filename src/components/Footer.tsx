@@ -180,7 +180,7 @@ export default function Footer() {
             <div className="flex space-x-4">
               <motion.a 
                 href="#" 
-                className="text-gray-400 hover:text-white transition-colors"
+                className="text-gray-800 hover:text-white transition-colors"
                 whileHover={{ scale: 1.2, y: -2 }}
                 transition={{ duration: 0.2 }}
               >
@@ -190,7 +190,7 @@ export default function Footer() {
               </motion.a>
               <motion.a 
                 href="#" 
-                className="text-gray-400 hover:text-white transition-colors"
+                className="text-gray-800 hover:text-white transition-colors"
                 whileHover={{ scale: 1.2, y: -2 }}
                 transition={{ duration: 0.2, delay: 0.1 }}
               >
@@ -200,7 +200,7 @@ export default function Footer() {
               </motion.a>
               <motion.a 
                 href="#" 
-                className="text-gray-400 hover:text-white transition-colors"
+                className="text-gray-800 hover:text-white transition-colors"
                 whileHover={{ scale: 1.2, y: -2 }}
                 transition={{ duration: 0.2, delay: 0.2 }}
               >
@@ -210,7 +210,7 @@ export default function Footer() {
               </motion.a>
               <motion.a 
                 href="#" 
-                className="text-gray-400 hover:text-white transition-colors"
+                className="text-gray-800 hover:text-white transition-colors"
                 whileHover={{ scale: 1.2, y: -2 }}
                 transition={{ duration: 0.2, delay: 0.3 }}
               >
@@ -385,11 +385,11 @@ export default function Footer() {
             transition={{ duration: 0.6, delay: 0.5 }}
             viewport={{ once: true }}
           >
-            <div className="text-sm text-gray-400 mb-4 md:mb-0">
+            <div className="text-sm text-gray-800 mb-4 md:mb-0">
               © 2024 Monster Phone Boutique. Tous droits réservés.
             </div>
             <div className="flex items-center space-x-4">
-              <span className="text-sm text-gray-400">Moyens de paiement :</span>
+              <span className="text-sm text-gray-800">Moyens de paiement :</span>
               <div className="flex space-x-2">
                 <motion.div 
                   className="w-8 h-5 bg-blue-600 rounded flex items-center justify-center"

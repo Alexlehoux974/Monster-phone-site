@@ -104,10 +104,10 @@ export default function RetoursPolitiquePage() {
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
                 Retours sous 30 Jours
               </h1>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              <p className="text-xl text-gray-800 max-w-3xl mx-auto">
                 Votre satisfaction est garantie. Retournez vos achats sous 30 jours pour un remboursement intégral.
               </p>
-              <div className="mt-4 text-sm text-gray-500">
+              <div className="mt-4 text-sm text-gray-700">
                 <Calendar className="w-4 h-4 inline mr-1" />
                 Dernière mise à jour : 28 juillet 2025
               </div>
@@ -145,7 +145,7 @@ export default function RetoursPolitiquePage() {
                     <CheckCircle className="w-5 h-5 text-green-600 mt-1 flex-shrink-0" />
                     <div>
                       <h3 className="font-semibold text-gray-900">Délai de 30 jours</h3>
-                      <p className="text-gray-600 text-sm">
+                      <p className="text-gray-800 text-sm">
                         À partir de la date de réception de votre commande
                       </p>
                     </div>
@@ -155,7 +155,7 @@ export default function RetoursPolitiquePage() {
                     <CheckCircle className="w-5 h-5 text-green-600 mt-1 flex-shrink-0" />
                     <div>
                       <h3 className="font-semibold text-gray-900">État neuf</h3>
-                      <p className="text-gray-600 text-sm">
+                      <p className="text-gray-800 text-sm">
                         Produit non utilisé, dans son emballage d'origine
                       </p>
                     </div>
@@ -165,7 +165,7 @@ export default function RetoursPolitiquePage() {
                     <CheckCircle className="w-5 h-5 text-green-600 mt-1 flex-shrink-0" />
                     <div>
                       <h3 className="font-semibold text-gray-900">Accessoires complets</h3>
-                      <p className="text-gray-600 text-sm">
+                      <p className="text-gray-800 text-sm">
                         Tous les accessoires, manuels et emballages inclus
                       </p>
                     </div>
@@ -177,7 +177,7 @@ export default function RetoursPolitiquePage() {
                     <CheckCircle className="w-5 h-5 text-green-600 mt-1 flex-shrink-0" />
                     <div>
                       <h3 className="font-semibold text-gray-900">Facture d'achat</h3>
-                      <p className="text-gray-600 text-sm">
+                      <p className="text-gray-800 text-sm">
                         Présentation de la facture ou justificatif d'achat
                       </p>
                     </div>
@@ -187,7 +187,7 @@ export default function RetoursPolitiquePage() {
                     <CheckCircle className="w-5 h-5 text-green-600 mt-1 flex-shrink-0" />
                     <div>
                       <h3 className="font-semibold text-gray-900">Retour gratuit</h3>
-                      <p className="text-gray-600 text-sm">
+                      <p className="text-gray-800 text-sm">
                         Aucun frais de retour à La Réunion
                       </p>
                     </div>
@@ -197,7 +197,7 @@ export default function RetoursPolitiquePage() {
                     <CheckCircle className="w-5 h-5 text-green-600 mt-1 flex-shrink-0" />
                     <div>
                       <h3 className="font-semibold text-gray-900">Remboursement rapide</h3>
-                      <p className="text-gray-600 text-sm">
+                      <p className="text-gray-800 text-sm">
                         Remboursement sous 48h après vérification
                       </p>
                     </div>

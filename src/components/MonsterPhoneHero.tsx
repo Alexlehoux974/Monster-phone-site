@@ -276,7 +276,7 @@ const ProductCard = ({ product, index }: { product: Product; index: number }) =>
               <Star
                 key={i}
                 className={`w-4 h-4 ${
-                  i < product.rating ? "text-yellow-400 fill-current" : "text-gray-400"
+                  i < product.rating ? "text-yellow-400 fill-current" : "text-gray-600"
                 }`}
               />
             ))}
@@ -286,7 +286,7 @@ const ProductCard = ({ product, index }: { product: Product; index: number }) =>
         <div className="flex items-center justify-between">
           <div>
             <span className="text-2xl font-bold text-white">{product.price}</span>
-            <span className="text-sm text-gray-400 line-through ml-2">{product.originalPrice}</span>
+            <span className="text-sm text-gray-600 line-through ml-2">{product.originalPrice}</span>
           </div>
           <Button className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600">
             <ShoppingCart className="w-4 h-4 mr-2" />
@@ -445,7 +445,7 @@ const MonsterPhoneHero = () => {
                 <div className="text-3xl md:text-4xl font-bold text-white mb-1">
                   {stat.number}
                 </div>
-                <div className="text-gray-400 text-sm font-medium tracking-wide">{stat.label}</div>
+                <div className="text-gray-700 text-sm font-medium tracking-wide">{stat.label}</div>
               </motion.div>
             ))}
           </motion.div>

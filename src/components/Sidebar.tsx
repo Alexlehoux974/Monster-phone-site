@@ -108,7 +108,7 @@ export default function Sidebar({
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-gray-200">
           <div className="flex items-center">
-            <Filter className="w-5 h-5 mr-2 text-gray-600" />
+            <Filter className="w-5 h-5 mr-2 text-gray-800" />
             <h2 className="font-semibold text-gray-900">Filtres</h2>
             {activeFiltersCount > 0 && (
               <Badge variant="secondary" className="ml-2">
@@ -180,7 +180,7 @@ export default function Sidebar({
                 >
                   <span className="font-medium text-sm">{category}</span>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs text-gray-500">
+                    <span className="text-xs text-gray-700">
                       ({Object.values(brands).flat().length})
                     </span>
                     <button
@@ -220,7 +220,7 @@ export default function Sidebar({
                             >
                               <span className="text-sm font-medium">{brand}</span>
                               <div className="flex items-center gap-2">
-                                <span className="text-xs text-gray-500">
+                                <span className="text-xs text-gray-700">
                                   ({brandProducts.length})
                                 </span>
                                 <button
@@ -256,13 +256,13 @@ export default function Sidebar({
                                         className={`w-full text-left p-2 text-sm hover:bg-gray-50 transition-colors border-l-2 ${
                                           selectedProduct === product.name
                                             ? 'border-blue-500 bg-blue-50 text-blue-700'
-                                            : 'border-gray-200 text-gray-600'
+                                            : 'border-gray-200 text-gray-800'
                                         }`}
                                       >
                                         <div className="truncate" title={product.name}>
                                           {product.name}
                                         </div>
-                                        <div className="text-xs text-gray-500 mt-1">
+                                        <div className="text-xs text-gray-700 mt-1">
                                           {product.price}€
                                         </div>
                                       </button>
@@ -284,7 +284,7 @@ export default function Sidebar({
 
         {/* Footer avec statistiques */}
         <div className="p-4 border-t border-gray-200 bg-gray-50">
-          <div className="text-xs text-gray-600 space-y-1">
+          <div className="text-xs text-gray-800 space-y-1">
             <div>Total produits: {products.length}</div>
             <div>Catégories: {Object.keys(hierarchy).length}</div>
             <div>Marques: {new Set(products.map(p => p.brand)).size}</div>

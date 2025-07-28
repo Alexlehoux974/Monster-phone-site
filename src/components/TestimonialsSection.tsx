@@ -71,7 +71,7 @@ export default function TestimonialsSection() {
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
             Ce que disent nos clients
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-800 max-w-2xl mx-auto">
             Découvrez l&apos;avis de nos clients qui ont choisi Monster Phone 
             pour leurs achats technologiques. Leur satisfaction est notre priorité.
           </p>
@@ -101,7 +101,7 @@ export default function TestimonialsSection() {
                   <div className="font-semibold text-gray-900">
                     {testimonials[currentTestimonial].name}
                   </div>
-                  <div className="text-sm text-gray-500 flex items-center justify-center space-x-2">
+                  <div className="text-sm text-gray-700 flex items-center justify-center space-x-2">
                     <span>{testimonials[currentTestimonial].location}</span>
                     {testimonials[currentTestimonial].verified && (
                       <>
@@ -143,18 +143,18 @@ export default function TestimonialsSection() {
         <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto text-center">
           <div className="bg-white rounded-lg p-6 shadow-md">
             <div className="text-3xl font-bold text-blue-600 mb-2">4.8/5</div>
-            <div className="text-gray-600">Note moyenne</div>
-            <div className="text-sm text-gray-500 mt-1">Sur 2,847 avis</div>
+            <div className="text-gray-800">Note moyenne</div>
+            <div className="text-sm text-gray-700 mt-1">Sur 2,847 avis</div>
           </div>
           <div className="bg-white rounded-lg p-6 shadow-md">
             <div className="text-3xl font-bold text-green-600 mb-2">98%</div>
-            <div className="text-gray-600">Recommandent</div>
-            <div className="text-sm text-gray-500 mt-1">Monster Phone</div>
+            <div className="text-gray-800">Recommandent</div>
+            <div className="text-sm text-gray-700 mt-1">Monster Phone</div>
           </div>
           <div className="bg-white rounded-lg p-6 shadow-md">
             <div className="text-3xl font-bold text-purple-600 mb-2">24h</div>
-            <div className="text-gray-600">Réponse SAV</div>
-            <div className="text-sm text-gray-500 mt-1">Temps moyen</div>
+            <div className="text-gray-800">Réponse SAV</div>
+            <div className="text-sm text-gray-700 mt-1">Temps moyen</div>
           </div>
         </div>
 

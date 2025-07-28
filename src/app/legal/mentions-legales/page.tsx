@@ -43,10 +43,10 @@ export default function MentionsLegalesPage() {
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
                 Mentions Légales
               </h1>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              <p className="text-xl text-gray-800 max-w-3xl mx-auto">
                 Informations légales relatives au site Monster Phone Boutique
               </p>
-              <div className="mt-4 text-sm text-gray-500">
+              <div className="mt-4 text-sm text-gray-700">
                 <Calendar className="w-4 h-4 inline mr-1" />
                 Dernière mise à jour : 28 juillet 2025
               </div>
@@ -58,7 +58,7 @@ export default function MentionsLegalesPage() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="bg-white rounded-lg shadow-sm border p-8"
             >
-              <div className="prose prose-gray max-w-none">
+              <div className="prose prose-slate max-w-none text-gray-900">
                 
                 <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                   <Building className="w-6 h-6 text-blue-600" />

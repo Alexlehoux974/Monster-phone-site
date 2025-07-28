@@ -120,10 +120,10 @@ export default function LivraisonGratuitePage() {
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
                 Livraison Gratuite dès 50€
               </h1>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              <p className="text-xl text-gray-800 max-w-3xl mx-auto">
                 Recevez vos produits gaming partout à La Réunion, rapidement et en toute sécurité
               </p>
-              <div className="mt-4 text-sm text-gray-500">
+              <div className="mt-4 text-sm text-gray-700">
                 <Calendar className="w-4 h-4 inline mr-1" />
                 Dernière mise à jour : 28 juillet 2025
               </div>
@@ -247,7 +247,7 @@ export default function LivraisonGratuitePage() {
                     <span className="text-2xl font-bold text-blue-600">1</span>
                   </div>
                   <h3 className="font-semibold mb-2">Commandez</h3>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-gray-800">
                     Passez votre commande en ligne avant 16h
                   </p>
                 </div>
@@ -257,7 +257,7 @@ export default function LivraisonGratuitePage() {
                     <span className="text-2xl font-bold text-green-600">2</span>
                   </div>
                   <h3 className="font-semibold mb-2">Préparation</h3>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-gray-800">
                     Votre commande est préparée avec soin
                   </p>
                 </div>
@@ -267,7 +267,7 @@ export default function LivraisonGratuitePage() {
                     <span className="text-2xl font-bold text-purple-600">3</span>
                   </div>
                   <h3 className="font-semibold mb-2">Expédition</h3>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-gray-800">
                     Envoi et suivi par SMS/email
                   </p>
                 </div>
@@ -277,7 +277,7 @@ export default function LivraisonGratuitePage() {
                     <span className="text-2xl font-bold text-orange-600">4</span>
                   </div>
                   <h3 className="font-semibold mb-2">Réception</h3>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-gray-800">
                     Livraison à l'adresse indiquée
                   </p>
                 </div>
@@ -302,7 +302,7 @@ export default function LivraisonGratuitePage() {
                     <CheckCircle className="w-5 h-5 text-green-600 mt-1 flex-shrink-0" />
                     <div>
                       <h3 className="font-semibold text-gray-900">Emballage sécurisé</h3>
-                      <p className="text-gray-600 text-sm">
+                      <p className="text-gray-800 text-sm">
                         Protection optimale avec emballage bulle et carton renforcé
                       </p>
                     </div>
@@ -312,7 +312,7 @@ export default function LivraisonGratuitePage() {
                     <CheckCircle className="w-5 h-5 text-green-600 mt-1 flex-shrink-0" />
                     <div>
                       <h3 className="font-semibold text-gray-900">Suivi en temps réel</h3>
-                      <p className="text-gray-600 text-sm">
+                      <p className="text-gray-800 text-sm">
                         SMS et email de confirmation à chaque étape
                       </p>
                     </div>
@@ -322,7 +322,7 @@ export default function LivraisonGratuitePage() {
                     <CheckCircle className="w-5 h-5 text-green-600 mt-1 flex-shrink-0" />
                     <div>
                       <h3 className="font-semibold text-gray-900">Assurance transport</h3>
-                      <p className="text-gray-600 text-sm">
+                      <p className="text-gray-800 text-sm">
                         Produits assurés pendant le transport
                       </p>
                     </div>
@@ -334,7 +334,7 @@ export default function LivraisonGratuitePage() {
                     <CheckCircle className="w-5 h-5 text-green-600 mt-1 flex-shrink-0" />
                     <div>
                       <h3 className="font-semibold text-gray-900">Livraison en main propre</h3>
-                      <p className="text-gray-600 text-sm">
+                      <p className="text-gray-800 text-sm">
                         Remise contre signature ou à personne de confiance
                       </p>
                     </div>
@@ -344,7 +344,7 @@ export default function LivraisonGratuitePage() {
                     <CheckCircle className="w-5 h-5 text-green-600 mt-1 flex-shrink-0" />
                     <div>
                       <h3 className="font-semibold text-gray-900">Reprogrammation gratuite</h3>
-                      <p className="text-gray-600 text-sm">
+                      <p className="text-gray-800 text-sm">
                         Possibilité de reprogrammer la livraison si absent
                       </p>
                     </div>
@@ -354,7 +354,7 @@ export default function LivraisonGratuitePage() {
                     <CheckCircle className="w-5 h-5 text-green-600 mt-1 flex-shrink-0" />
                     <div>
                       <h3 className="font-semibold text-gray-900">Service client dédié</h3>
-                      <p className="text-gray-600 text-sm">
+                      <p className="text-gray-800 text-sm">
                         Support livraison 6j/7 de 9h à 18h
                       </p>
                     </div>

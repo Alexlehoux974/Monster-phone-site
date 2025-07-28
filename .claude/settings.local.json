@@ -21,7 +21,12 @@
       "mcp__airtable__update_records",
       "Bash(timeout:*)",
       "Bash(ls:*)",
-      "Bash(npm run lint)"
+      "Bash(npm run lint)",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_install",
+      "mcp__playwright__browser_close",
+      "Bash(true)",
+      "Bash(git commit:*)"
     ],
     "deny": []
   }

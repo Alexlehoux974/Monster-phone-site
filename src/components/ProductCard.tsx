@@ -56,11 +56,11 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
             <div>
               {/* Marque et nom */}
               <div className="flex items-center justify-between mb-2">
-                <p className="text-sm font-medium text-gray-500 uppercase tracking-wide">
+                <p className="text-sm font-medium text-gray-700 uppercase tracking-wide">
                   {product.Marque}
                 </p>
                 <div className="flex items-center space-x-2">
-                  <button className="text-gray-400 hover:text-red-500 transition-colors">
+                  <button className="text-gray-700 hover:text-red-500 transition-colors">
                     <Heart className="h-5 w-5" />
                   </button>
                 </div>
@@ -73,7 +73,7 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
               </h3>
               
               {/* Description */}
-              <p className="text-gray-600 mb-4">
+              <p className="text-gray-800 mb-4">
                 {truncateText(product['Description SEO'], 150)}
               </p>
               
@@ -90,11 +90,11 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
                       />
                     ))}
                   </div>
-                  <span className="text-sm text-gray-500">(42)</span>
+                  <span className="text-sm text-gray-700">(42)</span>
                 </div>
                 
                 {product['Variantes/Couleurs'] && (
-                  <span className="text-sm text-gray-500">
+                  <span className="text-sm text-gray-700">
                     {product['Variantes/Couleurs'].split(',').length} variante(s)
                   </span>
                 )}
@@ -167,7 +167,7 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
       {/* Contenu */}
       <div className="p-4">
         {/* Marque */}
-        <p className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-1">
+        <p className="text-xs font-medium text-gray-700 uppercase tracking-wide mb-1">
           {product.Marque}
         </p>
 
@@ -179,7 +179,7 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
         </h3>
 
         {/* Description courte */}
-        <p className="text-xs text-gray-600 mb-3 line-clamp-2">
+        <p className="text-xs text-gray-800 mb-3 line-clamp-2">
           {truncateText(product['Description SEO'], 80)}
         </p>
 
@@ -197,12 +197,12 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
                 />
               ))}
             </div>
-            <span className="text-xs text-gray-500">(42)</span>
+            <span className="text-xs text-gray-700">(42)</span>
           </div>
 
           {/* Variantes */}
           {product['Variantes/Couleurs'] && (
-            <span className="text-xs text-gray-500">
+            <span className="text-xs text-gray-700">
               {product['Variantes/Couleurs'].split(',').length} variante(s)
             </span>
           )}

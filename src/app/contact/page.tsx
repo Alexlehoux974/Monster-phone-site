@@ -259,7 +259,7 @@ export default function ContactPage() {
                       <MapPin className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
                       <div>
                         <p className="font-medium text-gray-900">Adresse</p>
-                        <p className="text-gray-600">
+                        <p className="text-gray-800">
                           Zone Industrielle<br />
                           97438 Sainte-Marie<br />
                           La Réunion

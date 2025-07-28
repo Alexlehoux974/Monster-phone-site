@@ -17,7 +17,7 @@ export default function FeaturedProducts() {
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
             Nos Produits Phares
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-800 max-w-2xl mx-auto">
             Découvrez notre sélection d&apos;accessoires et smartphones gaming, 
             choisis pour leur innovation et leur qualité exceptionnelle.
           </p>
@@ -68,7 +68,7 @@ export default function FeaturedProducts() {
                   {product.name}
                 </h3>
 
-                <p className="text-gray-600 text-sm mb-4 line-clamp-2">
+                <p className="text-gray-800 text-sm mb-4 line-clamp-2">
                   {product.description}
                 </p>
 
@@ -79,7 +79,7 @@ export default function FeaturedProducts() {
                         {product.price}
                       </span>
                     )}
-                    <span className="text-xs text-gray-500">
+                    <span className="text-xs text-gray-700">
                       {product.variants}
                     </span>
                   </div>

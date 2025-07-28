@@ -159,7 +159,7 @@ export default function SupportTechniquePage() {
               <p className="text-xl text-gray-700 max-w-3xl mx-auto">
                 Assistance technique experte pour tous vos appareils gaming et téléphonie
               </p>
-              <div className="mt-4 text-sm text-gray-500">
+              <div className="mt-4 text-sm text-gray-700">
                 <Calendar className="w-4 h-4 inline mr-1" />
                 Dernière mise à jour : 28 juillet 2025
               </div>

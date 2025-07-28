@@ -81,7 +81,7 @@ const DropdownMenu = ({
                   <div className="flex items-center justify-between">
                     <span>{category.name}</span>
                     {category.brands && category.brands.length > 0 && (
-                      <ArrowRight className="w-4 h-4 text-gray-400" />
+                      <ArrowRight className="w-4 h-4 text-gray-700" />
                     )}
                   </div>
                 </Link>
@@ -118,7 +118,7 @@ const DropdownMenu = ({
                         >
                           <div>
                             <span className="font-medium">{brand.name}</span>
-                            <span className="text-xs text-gray-500 block">({brand.products.length} produits)</span>
+                            <span className="text-xs text-gray-700 block">({brand.products.length} produits)</span>
                           </div>
                         </Link>
                       </div>
@@ -142,7 +142,7 @@ const DropdownMenu = ({
                 <>
                   <div className="p-4 border-b border-gray-200">
                     <h4 className="font-semibold text-gray-900 text-base">Collection {hoveredBrand}</h4>
-                    <p className="text-sm text-gray-600 mt-1">{products.length} produits disponibles</p>
+                    <p className="text-sm text-gray-800 mt-1">{products.length} produits disponibles</p>
                   </div>
                   <div className="py-2 max-h-80 overflow-y-auto">
                     {products.slice(0, 5).map((product) => (
@@ -173,7 +173,7 @@ const DropdownMenu = ({
                                   {product.price}
                                 </p>
                               )}
-                              <p className="text-xs text-gray-500 mt-1 line-clamp-2">
+                              <p className="text-xs text-gray-700 mt-1 line-clamp-2">
                                 {product.description}
                               </p>
                             </div>
@@ -443,7 +443,7 @@ export default function Header() {
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-72 px-5 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-base"
                 />
-                <button className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-gray-400 hover:text-blue-600 transition-colors">
+                <button className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-gray-700 hover:text-blue-600 transition-colors">
                   <Search className="h-4 w-4" />
                 </button>
               </div>
@@ -558,7 +558,7 @@ export default function Header() {
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-base"
                   />
-                  <Search className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                  <Search className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-700" />
                 </div>
               </div>
 
