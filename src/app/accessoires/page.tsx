@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import Sidebar from '@/components/Sidebar';
 import { allProducts } from '@/data/products';
 
@@ -116,6 +117,7 @@ export default function AccessoiresPage() {
           )}
         </main>
         </div>
+      <Footer />
     </div>
   );
 }

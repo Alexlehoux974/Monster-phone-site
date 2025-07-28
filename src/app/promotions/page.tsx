@@ -1,13 +1,14 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useMemo, useEffect, useRef } from 'react';
+import { motion, useMotionValue, useMotionTemplate, animate } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import { 
   Flame, 
   Tag, 
@@ -31,9 +32,190 @@ const promotionProducts = [
   { productId: "recAB3cD4f5gH67i", discount: 10, originalPrice: "159€", promoPrice: "143€" }   // Écouteurs
 ];
 
+// Client-only Floating Particles
+const ClientParticles = () => {
+  const [mounted, setMounted] = useState(false);
+  const [particles, setParticles] = useState<Array<{
+    left: string;
+    top: string;
+    duration: number;
+    delay: number;
+  }>>([]);
+
+  useEffect(() => {
+    setMounted(true);
+    const newParticles = [...Array(15)].map(() => ({
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+      duration: 3 + Math.random() * 2,
+      delay: Math.random() * 2,
+    }));
+    setParticles(newParticles);
+  }, []);
+
+  if (!mounted) {
+    return <div className="absolute inset-0 pointer-events-none" />;
+  }
+
+  return (
+    <div className="absolute inset-0 pointer-events-none">
+      {particles.map((particle, i) => (
+        <motion.div
+          key={i}
+          className="absolute w-2 h-2 bg-white/30 rounded-full"
+          style={{
+            left: particle.left,
+            top: particle.top,
+          }}
+          animate={{
+            y: [0, -20, 0],
+            opacity: [0.3, 0.8, 0.3],
+            scale: [1, 1.2, 1],
+          }}
+          transition={{
+            duration: particle.duration,
+            repeat: Infinity,
+            delay: particle.delay,
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
+// Sparkles Component
+const SparklesCore = ({ className, particleDensity = 80, speed = 1 }: {
+  className?: string;
+  particleDensity?: number;
+  speed?: number;
+}) => {
+  const [mounted, setMounted] = useState(false);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  
+  useEffect(() => {
+    if (!mounted) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+
+    const particles: Array<{
+      x: number;
+      y: number;
+      size: number;
+      speedX: number;
+      speedY: number;
+      opacity: number;
+    }> = [];
+
+    for (let i = 0; i < particleDensity; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 2 + 0.5,
+        speedX: (Math.random() - 0.5) * speed,
+        speedY: (Math.random() - 0.5) * speed,
+        opacity: Math.random() * 0.8 + 0.2,
+      });
+    }
+
+    const animateParticles = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      particles.forEach((particle) => {
+        particle.x += particle.speedX;
+        particle.y += particle.speedY;
+
+        if (particle.x < 0 || particle.x > canvas.width) particle.speedX *= -1;
+        if (particle.y < 0 || particle.y > canvas.height) particle.speedY *= -1;
+
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${particle.opacity})`;
+        ctx.fill();
+      });
+
+      requestAnimationFrame(animateParticles);
+    };
+
+    animateParticles();
+
+    const handleResize = () => {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [particleDensity, speed, mounted]);
+
+  if (!mounted) {
+    return <div className={className} />;
+  }
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className={cn("absolute inset-0 pointer-events-none", className)}
+    />
+  );
+};
+
+// Text Shimmer Component
+const TextShimmer = ({ children, className, duration = 2 }: { children: string; className?: string; duration?: number }) => {
+  return (
+    <motion.span
+      className={cn(
+        "relative inline-block bg-[length:250%_100%,auto] bg-clip-text",
+        "text-transparent [--base-color:#a1a1aa] [--base-gradient-color:#000]",
+        "[--bg:linear-gradient(90deg,#0000_calc(50%-var(--spread)),var(--base-gradient-color),#0000_calc(50%+var(--spread)))] [background-repeat:no-repeat,padding-box]",
+        "dark:[--base-color:#71717a] dark:[--base-gradient-color:#ffffff]",
+        className
+      )}
+      initial={{ backgroundPosition: "100% center" }}
+      animate={{ backgroundPosition: "0% center" }}
+      transition={{
+        repeat: Infinity,
+        duration,
+        ease: "linear",
+      }}
+      style={{
+        "--spread": `${children.length * 2}px`,
+        backgroundImage: `var(--bg), linear-gradient(var(--base-color), var(--base-color))`,
+      } as React.CSSProperties}
+    >
+      {children}
+    </motion.span>
+  );
+};
+
 export default function PromotionsPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [sortBy, setSortBy] = useState<'discount' | 'price' | 'name'>('discount');
+
+  // Aurora background animation
+  const color = useMotionValue("#DC2626");
+
+  useEffect(() => {
+    animate(color, ["#DC2626", "#EA580C", "#D97706", "#CA8A04", "#DC2626"], {
+      ease: "easeInOut",
+      duration: 8,
+      repeat: Infinity,
+      repeatType: "reverse",
+    });
+  }, [color]);
+
+  const backgroundImage = useMotionTemplate`radial-gradient(125% 125% at 50% 0%, #020617 50%, ${color})`;
+  const border = useMotionTemplate`1px solid ${color}`;
+  const boxShadow = useMotionTemplate`0px 4px 24px ${color}`;
 
   // Créer la liste des produits en promotion avec leurs infos de promotion
   const productsWithPromotions = useMemo(() => {
@@ -110,42 +292,88 @@ export default function PromotionsPage() {
         <main className="px-4 sm:px-6 lg:px-8 py-8">
           <div className="max-w-7xl mx-auto">
             
-            {/* Hero Section */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="text-center mb-12"
+            {/* Hero Section with Aurora Background */}
+            <motion.section
+              style={{ backgroundImage }}
+              className="relative -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 py-16 overflow-hidden rounded-2xl mb-12"
             >
-              <div className="inline-flex items-center gap-2 bg-red-100 text-red-600 px-4 py-2 rounded-full text-sm font-medium mb-4">
-                <Flame className="w-4 h-4" />
-                PROMOTIONS EXCLUSIVES
-              </div>
-              <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-                Promos Monster Phone
-                <span className="block text-red-600">à La Réunion</span>
-              </h1>
-              <p className="text-xl text-gray-700 max-w-3xl mx-auto mb-8">
-                Découvrez nos offres exceptionnelles sur une sélection de smartphones gaming, 
-                accessoires et gadgets high-tech. Promotions limitées dans le temps !
-              </p>
-              
-              {/* Compteur d'offres */}
-              <div className="flex items-center justify-center gap-8 text-center">
-                <div className="bg-white rounded-lg px-6 py-4 shadow-sm border">
-                  <div className="text-2xl font-bold text-red-600">{filteredProducts.length}</div>
-                  <div className="text-sm text-gray-700">Produits en promo</div>
-                </div>
-                <div className="bg-white rounded-lg px-6 py-4 shadow-sm border">
-                  <div className="text-2xl font-bold text-green-600">Jusqu'à -30%</div>
-                  <div className="text-sm text-gray-700">Réductions max</div>
-                </div>
-                <div className="bg-white rounded-lg px-6 py-4 shadow-sm border">
-                  <div className="text-2xl font-bold text-blue-600">48h</div>
-                  <div className="text-sm text-gray-700">Livraison Réunion</div>
-                </div>
-              </div>
-            </motion.div>
+              {/* Sparkles Background */}
+              <SparklesCore
+                className="absolute inset-0 rounded-2xl"
+                particleDensity={100}
+                speed={0.5}
+              />
+
+              {/* Floating Elements */}
+              <ClientParticles />
+
+              {/* Main Content */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="relative z-10 text-center"
+              >
+                <motion.div 
+                  style={{ border, boxShadow }}
+                  className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm font-medium mb-4"
+                >
+                  <Flame className="w-4 h-4" />
+                  PROMOTIONS EXCLUSIVES
+                </motion.div>
+                <motion.h1 
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.1 }}
+                  className="text-4xl md:text-6xl font-bold text-white mb-6"
+                >
+                  Promos{" "}
+                  <TextShimmer className="text-4xl md:text-6xl font-bold">
+                    Monster Phone
+                  </TextShimmer>
+                  <span className="block">à La Réunion</span>
+                </motion.h1>
+                <motion.p 
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.3 }}
+                  className="text-xl text-gray-100 max-w-3xl mx-auto mb-8"
+                >
+                  Découvrez nos offres exceptionnelles sur une sélection de smartphones gaming, 
+                  accessoires et gadgets high-tech. Promotions limitées dans le temps !
+                </motion.p>
+                
+                {/* Compteur d'offres */}
+                <motion.div 
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.5 }}
+                  className="flex items-center justify-center gap-8 text-center"
+                >
+                  <motion.div 
+                    whileHover={{ scale: 1.05 }}
+                    className="bg-white/10 backdrop-blur-md rounded-lg px-6 py-4 border border-white/20"
+                  >
+                    <div className="text-2xl font-bold text-white">{filteredProducts.length}</div>
+                    <div className="text-sm text-gray-100">Produits en promo</div>
+                  </motion.div>
+                  <motion.div 
+                    whileHover={{ scale: 1.05 }}
+                    className="bg-white/10 backdrop-blur-md rounded-lg px-6 py-4 border border-white/20"
+                  >
+                    <div className="text-2xl font-bold text-green-400">Jusqu'à -30%</div>
+                    <div className="text-sm text-gray-100">Réductions max</div>
+                  </motion.div>
+                  <motion.div 
+                    whileHover={{ scale: 1.05 }}
+                    className="bg-white/10 backdrop-blur-md rounded-lg px-6 py-4 border border-white/20"
+                  >
+                    <div className="text-2xl font-bold text-blue-400">48h</div>
+                    <div className="text-sm text-gray-100">Livraison Réunion</div>
+                  </motion.div>
+                </motion.div>
+              </motion.div>
+            </motion.section>
 
             {/* Bannière d'urgence */}
             <motion.div

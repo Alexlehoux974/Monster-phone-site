@@ -6,8 +6,8 @@ import React, { useRef, useEffect, useState } from "react";
 import { motion, useMotionValue, useMotionTemplate, animate } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-// Footer Sparkles Component (Version allégée)
-const FooterSparkles = ({ className, particleDensity = 30, speed = 0.3 }: {
+// Footer Sparkles Component (Version hero améliorée)
+const FooterSparkles = ({ className, particleDensity = 80, speed = 0.5 }: {
   className?: string;
   particleDensity?: number;
   speed?: number;
@@ -47,10 +47,10 @@ const FooterSparkles = ({ className, particleDensity = 30, speed = 0.3 }: {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        size: Math.random() * 1.5 + 0.5,
+        size: Math.random() * 2 + 0.5,
         speedX: (Math.random() - 0.5) * speed,
         speedY: (Math.random() - 0.5) * speed,
-        opacity: Math.random() * 0.4 + 0.1,
+        opacity: Math.random() * 0.8 + 0.2,
       });
     }
 
@@ -90,19 +90,71 @@ const FooterSparkles = ({ className, particleDensity = 30, speed = 0.3 }: {
   return (
     <canvas
       ref={canvasRef}
-      className={cn("absolute inset-0 pointer-events-none opacity-40", className)}
+      className={cn("absolute inset-0 pointer-events-none", className)}
     />
   );
 };
 
-// Footer Text Shimmer Component (Version adaptée)
-const FooterTextShimmer = ({ children, className, duration = 4 }: { children: string; className?: string; duration?: number }) => {
+// Client-only Floating Particles (identique au hero)
+const ClientParticles = () => {
+  const [mounted, setMounted] = useState(false);
+  const [particles, setParticles] = useState<Array<{
+    left: string;
+    top: string;
+    duration: number;
+    delay: number;
+  }>>([]);
+
+  useEffect(() => {
+    setMounted(true);
+    const newParticles = [...Array(15)].map(() => ({
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+      duration: 3 + Math.random() * 2,
+      delay: Math.random() * 2,
+    }));
+    setParticles(newParticles);
+  }, []);
+
+  if (!mounted) {
+    return <div className="absolute inset-0 pointer-events-none" />;
+  }
+
+  return (
+    <div className="absolute inset-0 pointer-events-none">
+      {particles.map((particle, i) => (
+        <motion.div
+          key={i}
+          className="absolute w-2 h-2 bg-white/30 rounded-full"
+          style={{
+            left: particle.left,
+            top: particle.top,
+          }}
+          animate={{
+            y: [0, -20, 0],
+            opacity: [0.3, 0.8, 0.3],
+            scale: [1, 1.2, 1],
+          }}
+          transition={{
+            duration: particle.duration,
+            repeat: Infinity,
+            delay: particle.delay,
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
+// Footer Text Shimmer Component (identique au hero)
+const FooterTextShimmer = ({ children, className, duration = 2 }: { children: string; className?: string; duration?: number }) => {
   return (
     <motion.span
       className={cn(
         "relative inline-block bg-[length:250%_100%,auto] bg-clip-text",
-        "text-transparent [--base-color:#d1d5db] [--base-gradient-color:#ffffff]",
+        "text-transparent [--base-color:#a1a1aa] [--base-gradient-color:#ffffff]",
         "[--bg:linear-gradient(90deg,#0000_calc(50%-var(--spread)),var(--base-gradient-color),#0000_calc(50%+var(--spread)))] [background-repeat:no-repeat,padding-box]",
+        "dark:[--base-color:#71717a] dark:[--base-gradient-color:#ffffff]",
         className
       )}
       initial={{ backgroundPosition: "100% center" }}
@@ -111,10 +163,9 @@ const FooterTextShimmer = ({ children, className, duration = 4 }: { children: st
         repeat: Infinity,
         duration,
         ease: "linear",
-        repeatDelay: 2,
       }}
       style={{
-        "--spread": `${children.length * 1.5}px`,
+        "--spread": `${children.length * 2}px`,
         backgroundImage: `var(--bg), linear-gradient(var(--base-color), var(--base-color))`,
       } as React.CSSProperties}
     >
@@ -124,19 +175,19 @@ const FooterTextShimmer = ({ children, className, duration = 4 }: { children: st
 };
 
 export default function Footer() {
-  // Aurora background animation (version footer)
-  const color = useMotionValue("#374151");
+  // Aurora background animation (identique au hero)
+  const color = useMotionValue("#8B5CF6");
 
   useEffect(() => {
-    animate(color, ["#374151", "#4B5563", "#6B7280", "#374151"], {
+    animate(color, ["#8B5CF6", "#3B82F6", "#10B981", "#F59E0B", "#EF4444", "#8B5CF6"], {
       ease: "easeInOut",
-      duration: 12,
+      duration: 8,
       repeat: Infinity,
       repeatType: "reverse",
     });
   }, [color]);
 
-  const backgroundImage = useMotionTemplate`radial-gradient(80% 80% at 50% 100%, #111827 40%, ${color})`;
+  const backgroundImage = useMotionTemplate`radial-gradient(125% 125% at 50% 100%, #020617 50%, ${color})`;
   
   return (
     <motion.footer 
@@ -145,6 +196,9 @@ export default function Footer() {
     >
       {/* Sparkles Background */}
       <FooterSparkles className="absolute inset-0" />
+
+      {/* Floating Elements */}
+      <ClientParticles />
       
       {/* Section principale */}
       <div className="relative z-10 container mx-auto px-4 py-12">
@@ -173,9 +227,10 @@ export default function Footer() {
                 />
               </motion.div>
             </Link>
-            <p className="text-gray-100 text-base">
-              Votre boutique spécialisée en téléphones gaming et accessoires high-tech. 
-              Des produits innovants pour les passionnés de technologie.
+            <p className="text-gray-100 text-base leading-relaxed">
+              Votre boutique spécialisée en smartphones gaming et accessoires high-tech à La Réunion.
+              <br />
+              Des produits innovants pour les passionnés de technologie aux meilleurs prix.
             </p>
             <div className="flex space-x-4">
               <motion.a 
@@ -229,7 +284,7 @@ export default function Footer() {
             viewport={{ once: true }}
           >
             <h3 className="font-semibold text-xl mb-4">
-              <FooterTextShimmer duration={5}>Navigation</FooterTextShimmer>
+              <FooterTextShimmer duration={2}>Navigation</FooterTextShimmer>
             </h3>
             <ul className="space-y-2">
               <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
@@ -258,7 +313,7 @@ export default function Footer() {
             viewport={{ once: true }}
           >
             <h3 className="font-semibold text-xl mb-4">
-              <FooterTextShimmer duration={6}>Services</FooterTextShimmer>
+              <FooterTextShimmer duration={2}>Services</FooterTextShimmer>
             </h3>
             <ul className="space-y-2">
               <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
@@ -287,7 +342,7 @@ export default function Footer() {
             viewport={{ once: true }}
           >
             <h3 className="font-semibold text-xl mb-4">
-              <FooterTextShimmer duration={7}>Contact & Légal</FooterTextShimmer>
+              <FooterTextShimmer duration={2}>Contact & Légal</FooterTextShimmer>
             </h3>
             <ul className="space-y-2">
               <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>

@@ -1,65 +1,31 @@
 
-> monster-phone-boutique@0.1.0 dev
-> next dev --turbopack
+> monster-phone-boutique@0.1.0 start
+> next start -p 3001
 
- ⚠ Warning: Found multiple lockfiles. Selecting /root/package-lock.json.
-   Consider removing the lockfiles at:
-   * /root/monster-phone-dev/monster-phone-boutique/package-lock.json
-
- ⚠ Port 3000 is in use by process 103441, using available port 3001 instead.
-   ▲ Next.js 15.4.2 (Turbopack)
+   ▲ Next.js 15.4.2
    - Local:        http://localhost:3001
    - Network:      http://193.203.191.71:3001
 
  ✓ Starting...
- ✓ Ready in 1166ms
- ○ Compiling / ...
- ✓ Compiled / in 7.2s
- HEAD / 200 in 7849ms
- HEAD / 200 in 563ms
- GET / 200 in 550ms
+ ⚠ Warning: Found multiple lockfiles. Selecting /root/package-lock.json.
+   Consider removing the lockfiles at:
+   * /root/monster-phone-dev/monster-phone-boutique/package-lock.json
+
+ ✓ Ready in 771ms
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
  ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
  ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ○ Compiling /services/livraison-gratuite ...
- ✓ Compiled /services/livraison-gratuite in 821ms
- GET /services/livraison-gratuite 200 in 893ms
- ○ Compiling /services/retours-30-jours ...
- ✓ Compiled /services/retours-30-jours in 567ms
- GET /services/retours-30-jours 200 in 624ms
- ○ Compiling /legal/conditions-generales ...
- ✓ Compiled /legal/conditions-generales in 662ms
- GET /legal/conditions-generales 200 in 716ms
- ○ Compiling /services/service-apres-vente ...
- ✓ Compiled /services/service-apres-vente in 505ms
- GET /services/service-apres-vente 200 in 563ms
- ○ Compiling /services/support-technique ...
- ✓ Compiled /services/support-technique in 564ms
- GET /services/support-technique 200 in 613ms
- ○ Compiling /contact ...
- ✓ Compiled /contact in 530ms
- GET /contact 200 in 694ms
- GET /legal/conditions-generales 200 in 64ms
- ○ Compiling /legal/confidentialite ...
- ✓ Compiled /legal/confidentialite in 510ms
- GET /legal/confidentialite 200 in 572ms
- ✓ Compiled /legal/mentions-legales in 413ms
- GET /legal/mentions-legales 200 in 472ms
- GET /legal/mentions-legales 200 in 41ms
- ✓ Compiled /legal/plan-du-site in 397ms
- GET /legal/plan-du-site 200 in 474ms
- ○ Compiling /nos-produits ...
- ✓ Compiled /nos-produits in 540ms
- GET /nos-produits 200 in 591ms
- GET / 200 in 43ms
  ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
  ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
  ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- GET /nos-produits?category=Smartphones 200 in 46ms
- GET / 200 in 69ms
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
  ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
  ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ✓ Compiled /accessoires in 466ms
- GET /accessoires 200 in 520ms
- GET / 200 in 57ms
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
  ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
  ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8

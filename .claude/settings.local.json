@@ -29,7 +29,9 @@
       "Bash(git commit:*)",
       "Bash(fuser:*)",
       "mcp__playwright__browser_take_screenshot",
-      "mcp__playwright__browser_tab_new"
+      "mcp__playwright__browser_tab_new",
+      "Bash(npm install:*)",
+      "Bash(node:*)"
     ],
     "deny": []
   }
