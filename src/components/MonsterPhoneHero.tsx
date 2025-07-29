@@ -285,7 +285,7 @@ const ProductCard = ({ product, index }: { product: Product; index: number }) =>
         </div>
         <div className="flex items-center justify-between">
           <div>
-            <span className="text-2xl font-bold text-white">{product.price}</span>
+            <span className="text-xl font-bold text-white">{product.price}</span>
             <span className="text-sm text-gray-200 line-through ml-2">{product.originalPrice}</span>
           </div>
           <Button className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600">
@@ -375,10 +375,10 @@ const MonsterPhoneHero = () => {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-6xl md:text-8xl font-bold text-white mb-6 leading-tight"
+            className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight"
           >
             Libérez le{" "}
-            <TextShimmer className="text-6xl md:text-8xl font-bold">
+            <TextShimmer className="text-4xl md:text-6xl font-bold">
               Monster
             </TextShimmer>
             <br />
@@ -390,7 +390,7 @@ const MonsterPhoneHero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-2xl md:text-3xl text-gray-100 mb-8 max-w-3xl mx-auto">
+            className="text-xl md:text-2xl text-gray-100 mb-8 max-w-3xl mx-auto">
             Découvrez notre collection exclusive de smartphones et d&apos;accessoires gaming.
           </motion.p>
 
@@ -441,7 +441,7 @@ const MonsterPhoneHero = () => {
                 <div className="flex justify-center mb-2">
                   <stat.icon className="w-8 h-8 text-purple-400" />
                 </div>
-                <div className="text-4xl md:text-5xl font-bold text-white mb-1">
+                <div className="text-3xl md:text-4xl font-bold text-white mb-1">
                   {stat.number}
                 </div>
                 <div className="text-gray-100 text-base font-medium tracking-wide">{stat.label}</div>

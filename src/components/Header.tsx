@@ -37,12 +37,14 @@ const DropdownMenu = ({
   trigger, 
   categories, 
   isOpen, 
-  onClose 
+  onClose,
+  alignRight = false
 }: { 
   trigger: string;
   categories: CategoryStructure[];
   isOpen: boolean;
   onClose: () => void;
+  alignRight?: boolean;
 }) => {
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
   const [hoveredSubcategory, setHoveredSubcategory] = useState<string | null>(null);
@@ -52,7 +54,9 @@ const DropdownMenu = ({
 
   return (
     <div 
-      className="absolute top-full left-0 mt-2 bg-white shadow-xl border border-gray-200 rounded-lg z-[70] min-w-[600px] overflow-hidden"
+      className={`absolute top-full mt-2 bg-white shadow-xl border border-gray-200 rounded-lg z-[150] min-w-[600px] overflow-hidden ${
+        alignRight ? 'right-0' : 'left-0'
+      }`}
       style={{ boxShadow: "0 20px 40px -8px rgba(0, 0, 0, 0.15)" }}
     >
       <div className="flex min-h-[350px]">
@@ -235,40 +239,38 @@ export default function Header() {
   const navigation: Array<{ name: string; href: string; icon: React.ReactNode }> = [];
 
   return (
-    <div className="sticky top-0 z-50">
+    <div className="sticky top-0 z-[100]">
       {/* Barre promotionnelle */}
       <PromoBar />
       
       <header 
         className={cn(
-          "bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100 transition-all duration-300",
+          "bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100 transition-all duration-300 overflow-visible",
           isScrolled ? "shadow-lg bg-white/98" : ""
         )}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-x-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header principal */}
-          <div className="flex justify-between items-center h-24">
-            {/* Logo avec lien d'accueil */}
-            <div className="flex-shrink-0 mr-8">
-              <Link href="/" className="flex items-center hover:opacity-90 transition-opacity">
-                <Image 
-                  src="/LOGO-MONSTER-PHONE.png" 
-                  alt="Monster Phone - Spécialiste Gaming Mobile La Réunion" 
-                  width={200} 
-                  height={100}
-                  className="h-16 w-auto"
-                  priority
-                />
-              </Link>
-            </div>
+          <div className="flex items-center gap-4 h-16 overflow-visible">
+            {/* Logo */}
+            <Link href="/" className="flex-shrink-0 hover:opacity-90 transition-opacity">
+              <Image 
+                src="/LOGO-MONSTER-PHONE.png" 
+                alt="Monster Phone" 
+                width={120} 
+                height={60}
+                className="h-10 w-auto"
+                priority
+              />
+            </Link>
 
-            {/* Navigation desktop */}
-            <nav className="hidden xl:flex items-center space-x-0.5">
+            {/* Navigation centrale */}
+            <nav className="hidden xl:flex items-center gap-0.5 flex-1 overflow-visible">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="flex items-center gap-2 text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors rounded-lg hover:bg-blue-50"
+                  className="flex items-center gap-1 text-gray-900 hover:text-blue-600 px-2 py-1.5 text-xs font-medium transition-colors rounded-lg hover:bg-blue-50"
                 >
                   {item.icon}
                   <span>{item.name}</span>
@@ -282,15 +284,15 @@ export default function Header() {
                 onMouseLeave={handleMouseLeave}
               >
                 <button
-                  className={`flex items-center gap-2 px-4 py-3 text-lg font-bold transition-colors rounded-lg ${
+                  className={`flex items-center gap-1 px-2 py-1.5 text-xs font-bold transition-colors rounded-lg ${
                     dropdownOpen === 'smartphones' 
                       ? 'text-blue-600 bg-blue-50' 
                       : 'text-gray-900 hover:text-blue-600 hover:bg-blue-50'
                   }`}
                 >
-                  <Smartphone className="w-5 h-5" />
+                  <Smartphone className="w-3 h-3" />
                   <span>Smartphones</span>
-                  <ChevronDown className={`w-5 h-5 transition-transform ${
+                  <ChevronDown className={`w-3 h-3 transition-transform ${
                     dropdownOpen === 'smartphones' ? 'rotate-180' : ''
                   }`} />
                 </button>
@@ -310,11 +312,11 @@ export default function Header() {
                 onMouseLeave={handleMouseLeave}
               >
                 <button
-                  className="flex items-center gap-2 text-gray-900 hover:text-blue-600 px-4 py-3 text-lg font-bold transition-colors rounded-lg hover:bg-blue-50"
+                  className="flex items-center gap-1 text-gray-900 hover:text-blue-600 px-2 py-1.5 text-xs font-bold transition-colors rounded-lg hover:bg-blue-50"
                 >
-                  <Watch className="w-5 h-5" />
+                  <Watch className="w-3 h-3" />
                   <span>Montres</span>
-                  <ChevronDown className="w-5 h-5" />
+                  <ChevronDown className="w-4 h-4" />
                 </button>
                 
                 <DropdownMenu
@@ -332,11 +334,11 @@ export default function Header() {
                 onMouseLeave={handleMouseLeave}
               >
                 <button
-                  className="flex items-center gap-2 text-gray-900 hover:text-blue-600 px-4 py-3 text-lg font-bold transition-colors rounded-lg hover:bg-blue-50"
+                  className="flex items-center gap-1 text-gray-900 hover:text-blue-600 px-2 py-1.5 text-xs font-bold transition-colors rounded-lg hover:bg-blue-50"
                 >
-                  <Headphones className="w-5 h-5" />
+                  <Headphones className="w-3 h-3" />
                   <span>Audio</span>
-                  <ChevronDown className="w-5 h-5" />
+                  <ChevronDown className="w-4 h-4" />
                 </button>
                 
                 <DropdownMenu
@@ -354,11 +356,11 @@ export default function Header() {
                 onMouseLeave={handleMouseLeave}
               >
                 <button
-                  className="flex items-center gap-2 text-gray-900 hover:text-blue-600 px-4 py-3 text-lg font-bold transition-colors rounded-lg hover:bg-blue-50"
+                  className="flex items-center gap-1 text-gray-900 hover:text-blue-600 px-2 py-1.5 text-xs font-bold transition-colors rounded-lg hover:bg-blue-50"
                 >
-                  <Lightbulb className="w-5 h-5" />
+                  <Lightbulb className="w-3 h-3" />
                   <span>Luminaire</span>
-                  <ChevronDown className="w-5 h-5" />
+                  <ChevronDown className="w-4 h-4" />
                 </button>
                 
                 <DropdownMenu
@@ -366,6 +368,7 @@ export default function Header() {
                   categories={menuStructure.luminaire}
                   isOpen={dropdownOpen === 'luminaire'}
                   onClose={closeDropdown}
+                  alignRight={true}
                 />
               </div>
               
@@ -376,11 +379,11 @@ export default function Header() {
                 onMouseLeave={handleMouseLeave}
               >
                 <button
-                  className="flex items-center gap-2 text-gray-900 hover:text-blue-600 px-4 py-3 text-lg font-bold transition-colors rounded-lg hover:bg-blue-50"
+                  className="flex items-center gap-1 text-gray-900 hover:text-blue-600 px-2 py-1.5 text-xs font-bold transition-colors rounded-lg hover:bg-blue-50"
                 >
-                  <Package className="w-5 h-5" />
+                  <Package className="w-3 h-3" />
                   <span>Accessoires</span>
-                  <ChevronDown className="w-5 h-5" />
+                  <ChevronDown className="w-4 h-4" />
                 </button>
                 
                 <DropdownMenu
@@ -388,6 +391,7 @@ export default function Header() {
                   categories={menuStructure.accessoiresMonster}
                   isOpen={dropdownOpen === 'accessoires'}
                   onClose={closeDropdown}
+                  alignRight={true}
                 />
               </div>
               
@@ -398,11 +402,11 @@ export default function Header() {
                 onMouseLeave={handleMouseLeave}
               >
                 <button
-                  className="flex items-center gap-2 text-gray-900 hover:text-blue-600 px-4 py-3 text-lg font-bold transition-colors rounded-lg hover:bg-blue-50"
+                  className="flex items-center gap-1 text-gray-900 hover:text-blue-600 px-2 py-1.5 text-xs font-bold transition-colors rounded-lg hover:bg-blue-50"
                 >
-                  <Star className="w-5 h-5" />
+                  <Star className="w-3 h-3" />
                   <span>MUVIT</span>
-                  <ChevronDown className="w-5 h-5" />
+                  <ChevronDown className="w-4 h-4" />
                 </button>
                 
                 <DropdownMenu
@@ -410,7 +414,22 @@ export default function Header() {
                   categories={menuStructure.muvit}
                   isOpen={dropdownOpen === 'muvit'}
                   onClose={closeDropdown}
+                  alignRight={true}
                 />
+              </div>
+              
+              {/* Barre de recherche desktop */}
+              <div className="relative ml-2">
+                <input
+                  type="text"
+                  placeholder="Rechercher..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-32 px-3 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-xs"
+                />
+                <button className="absolute right-1.5 top-1/2 -translate-y-1/2 p-0.5 text-gray-900 hover:text-blue-600 transition-colors">
+                  <Search className="h-3 w-3" />
+                </button>
               </div>
             </nav>
             
@@ -439,62 +458,40 @@ export default function Header() {
               </Link>
             </nav>
 
-            {/* Section droite */}
-            <div className="flex items-center space-x-3">
-              {/* Barre de recherche desktop */}
-              <div className="hidden lg:flex relative">
-                <input
-                  type="text"
-                  placeholder="Rechercher un produit..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-48 xl:w-72 px-5 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-base"
-                />
-                <button className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-gray-900 hover:text-blue-600 transition-colors">
-                  <Search className="h-4 w-4" />
-                </button>
-              </div>
+            {/* Actions */}
+            <div className="flex items-center gap-1 flex-shrink-0">
+              {/* Recherche mobile */}
+              <button className="lg:hidden p-1 text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                <Search className="h-4 w-4" />
+              </button>
+              
+              {/* Panier */}
+              <button className="relative p-1 text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                <ShoppingCart className="h-4 w-4" />
+                <span className="absolute -top-0.5 -right-0.5 bg-red-500 text-white text-[8px] rounded-full h-3 w-3 flex items-center justify-center font-medium">
+                  0
+                </span>
+              </button>
 
-              {/* Actions */}
-              <div className="flex items-center space-x-2">
-                {/* Recherche mobile */}
-                <button className="lg:hidden p-3 text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
-                  <Search className="h-6 w-6" />
-                </button>
-                
-                {/* Panier */}
-                <button className="relative p-3 text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
-                  <ShoppingCart className="h-6 w-6" />
-                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center font-medium">
-                    0
-                  </span>
-                </button>
+              {/* Compte */}
+              <button className="p-1 text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                <User className="h-4 w-4" />
+              </button>
 
-                {/* Compte */}
-                <button className="p-3 text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
-                  <User className="h-6 w-6" />
+              {/* CTA */}
+              <Link href="/nos-produits" className="hidden lg:block">
+                <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-3 py-1.5 rounded-lg font-medium text-xs shadow-md hover:shadow-lg transition-shadow">
+                  Découvrir
                 </button>
+              </Link>
 
-                {/* CTA */}
-                <div className="hidden md:block ml-4">
-                  <Link href="/nos-produits">
-                    <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-medium text-base shadow-md hover:shadow-lg transition-shadow">
-                      <span className="flex items-center gap-2">
-                        <Zap className="w-5 h-5" />
-                        Découvrir
-                      </span>
-                    </button>
-                  </Link>
-                </div>
-
-                {/* Menu mobile */}
-                <button
-                  className="lg:hidden p-3 text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
-                  onClick={() => setIsMenuOpen(!isMenuOpen)}
-                >
-                  {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-                </button>
-              </div>
+              {/* Menu mobile */}
+              <button
+                className="lg:hidden p-1 text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+              >
+                {isMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+              </button>
             </div>
           </div>
 

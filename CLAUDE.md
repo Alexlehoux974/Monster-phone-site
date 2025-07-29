@@ -4,164 +4,155 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**Monster Phone Boutique** - E-commerce Next.js 15 application for gaming phone accessories targeting La Réunion market.
+**Monster Phone Boutique** - E-commerce Next.js 15 application for gaming phone accessories targeting La Réunion market (974).
 
-**Tech Stack**: Next.js 15.4.2 + React 19 + TypeScript, Tailwind CSS v4 + Radix UI + Framer Motion  
-**Data Sources**: Airtable for products, GitHub repository for images, Google Drive for documents  
-**Language**: French (fr) interface with La Réunion specific content (974)
+**Tech Stack**: 
+- Next.js 15.4.2 + React 19 + TypeScript (strict mode)
+- Tailwind CSS v4 + Radix UI + Framer Motion  
+- No backend API - static data architecture
+- French language interface
+
+**Data Sources**: 
+- Airtable base "E-commerce - Monster Phone Produits" (15 products exported statically)
+- GitHub CDN for images (currently broken - returns text/plain)
+- Future: Google Drive integration planned
 
 ## Development Commands
 
 ```bash
 # Development
-npm run dev                    # Development server with Turbopack (auto-detects available port)
+npm run dev                    # Turbopack dev server (auto-detects port, defaults to 3000)
 npm run build                  # Production build
-npm start -- -p 3001         # Start production server on port 3001 (required for deployment)
-npm run lint                   # ESLint code linting
+npm start -- -p 3001           # Production server (must use port 3001)
+npm run lint                   # ESLint validation
 
-# Troubleshooting
-curl -I http://localhost:3001/ # Test server response
-ps aux | grep next            # Check running processes  
-kill -9 [PID]                 # Kill stuck Next.js process
-netstat -tlnp | grep 3001     # Check port availability
-rm -rf .next                   # Clean build cache for TypeScript errors
+# Common Issues & Solutions
+ps aux | grep next             # Find stuck Next.js processes
+kill -9 [PID]                  # Kill stuck process
+rm -rf .next                   # Clear build cache for TypeScript errors
+npm run build && npm start -- -p 3001  # Full production test
 ```
 
 ## Architecture & Key Patterns
 
 ### Data Architecture
-- **Airtable Base**: "E-commerce - Monster Phone Produits" with 15 products across 7 categories
-- **Brands**: HONOR (smartphones), MY WAY (cables), MUVIT (kids accessories), MONSTER (power banks)
-- **Product Data**: Static export in `/src/data/products.ts` (authoritative source)
-- **Menu Structure**: Hierarchical organization with categories → subcategories → brands → products
-- **GitHub CDN**: Images from `raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/`
+- **Single Source of Truth**: `/src/data/products.ts` (538 lines)
+  - 15 products: 3 HONOR phones, 12 accessories
+  - Brands: HONOR, MY WAY, MUVIT, MONSTER
+  - Categories: Smartphones, Audio & Son, Chargement & Énergie, Créativité & Enfants
+- **Menu Structure**: `menuStructure` object provides 4-level navigation hierarchy
+- **Static Pattern**: No API calls, manual Airtable exports
 
-### Critical Data Issues
-**⚠️ Image Loading Problem**: GitHub repository returns `text/plain` instead of images
-- **Error Pattern**: `The requested resource isn't a valid image... received text/plain; charset=utf-8`
-- **Impact**: All product images fail to load
-- **Workaround**: Implement fallback images or use alternative CDN
+### Critical Known Issues
 
-**⚠️ TypeScript Interface Conflict**: 
-- `/src/data/products.ts`: English fields (`name`, `brand`, `category`, `price`) ✅ **Use This**
-- `/src/types/index.ts`: French Airtable fields (`'Nom du Produit'`, `'Marque'`) ❌ **Outdated**
-- **Solution**: Always use `/src/data/products.ts` interface - it matches actual data structure
+**1. Image Loading Broken** ⚠️
+- GitHub CDN returns `text/plain` instead of images
+- All product images fail to load
+- Error: "The requested resource isn't a valid image"
+- **TODO**: Implement fallback images or migrate CDN
 
-### Navigation Architecture
-**Header Component**: Complex multi-level dropdown system with hover states
-- **Structure**: Categories → Subcategories → Brands → Products (4 levels deep)
-- **State Management**: `hoveredCategory`, `hoveredSubcategory`, `hoveredBrand` hooks
-- **URL Routing**: `/nos-produits?category=...&brand=...` query parameters
-- **Known Issue**: Mouse event conflicts with z-index layers (z-[70] required)
+**2. TypeScript Interface Mismatch** ⚠️
+- `/src/data/products.ts`: Uses English fields ✅ **CORRECT**
+- `/src/types/index.ts`: Uses French Airtable fields ❌ **OUTDATED - DO NOT USE**
+- Always import from `/src/data/products.ts`
 
-**Menu Data Source**: `menuStructure` object in `/src/data/products.ts`
-- **smartphones**: HONOR products only  
-- **accessoires**: Complex hierarchy (Audio & Son, Chargement & Énergie, Créativité & Enfants)
-- **Placeholder Categories**: Empty categories for future expansion
+**3. Port Configuration**
+- Development: Auto-detects (warning shows port 3002 when 3000 in use)
+- Production: **MUST use port 3001** for deployment
 
-### Project Structure & Patterns
+### Navigation System
+**Header Component** (300+ lines):
+- Multi-level dropdown: Categories → Subcategories → Brands → Products
+- State hooks: `hoveredCategory`, `hoveredSubcategory`, `hoveredBrand`
+- URL pattern: `/nos-produits?category=...&brand=...`
+- Z-index requirement: minimum z-[70] for dropdowns
+
+### Component Architecture
 ```
 src/
 ├── app/                    # Next.js 15 App Router
-│   ├── page.tsx           # Homepage with component composition
+│   ├── page.tsx           # Homepage (component composition)
 │   ├── nos-produits/      # Product catalog with filtering
-│   ├── accessoires/       # Accessories showcase
-│   ├── services/          # Business pages (livraison, garantie, SAV)
-│   ├── legal/             # Legal compliance (RGPD, mentions-legales)
-│   └── layout.tsx         # Root layout with French locale
+│   ├── accessoires/       # Accessories showcase page
+│   ├── services/          # Business services (SAV, livraison, garantie)
+│   ├── legal/             # Legal pages (RGPD compliance)
+│   └── layout.tsx         # Root layout (lang="fr", Geist font)
 ├── components/            
-│   ├── Header.tsx         # Complex navigation (300+ lines)
-│   ├── MonsterPhoneHero.tsx # Framer Motion hero animations
-│   ├── ProductCard.tsx    # Product display with image fallbacks
-│   ├── Footer.tsx         # Business info and legal links
-│   └── ui/               # Radix UI primitives (button, card, badge)
+│   ├── Header.tsx         # Complex navigation with PromoBar
+│   ├── MonsterPhoneHero.tsx # Framer Motion animations
+│   ├── ProductCard.tsx    # Product display component
+│   ├── Footer.tsx         # Business info and links
+│   └── ui/               # Radix UI primitives
 ├── data/
-│   └── products.ts        # Single source of truth (530+ lines)
-├── lib/
-│   └── utils.ts           # Tailwind class merging utilities
-└── types/
-    └── index.ts           # Legacy interfaces (do not use)
+│   └── products.ts        # Product data + menu structure
+└── lib/
+    └── utils.ts           # cn() helper for Tailwind
 ```
 
-**Key Architecture Patterns**:
-- **Component Composition**: Homepage built from discrete sections
-- **Static Data**: No API calls, all data in `/src/data/products.ts`
-- **Image Optimization**: Next.js Image with GitHub CDN remote patterns
-- **French Localization**: All content in French, targeting La Réunion market
+### Key Patterns
+- **Component Composition**: Homepage sections as separate components
+- **Static Data**: No loading states needed, instant rendering
+- **French First**: All user-facing content in French
+- **La Réunion Focus**: 974 area code, local delivery emphasis
 
-### Common Issues & Solutions
+## Configuration Details
 
-**Development Server Issues**
-```bash
-# Port conflicts (common with multiple Next.js projects)
-ps aux | grep next         # Find existing processes
-kill -9 [PID]             # Kill stuck processes
-npm run dev                # Turbopack auto-selects available port
+**Next.js Config (`next.config.ts`)**:
+- ESLint: `ignoreDuringBuilds: true` (hides type errors!)
+- Images: Remote patterns for GitHub CDN configured
+- Turbopack: Enabled for fast dev builds
 
-# Production server startup
-npm run build && npm start -- -p 3001  # Required port for deployment
-```
+**TypeScript Config**:
+- Strict mode enabled
+- Target: ES2017
+- Path alias: `@/*` → `./src/*`
+- Module resolution: bundler
 
-**Image Loading Failures** 
-- **Root Cause**: GitHub repository access returns `text/plain` instead of images
-- **Detection**: Check `dev.log` for "requested resource isn't a valid image" errors
-- **Temporary Fix**: Test individual image URLs in browser
-- **Long-term**: Implement fallback placeholders or migrate to reliable CDN
+**Tailwind CSS v4**:
+- PostCSS configuration present
+- Custom utilities via `cn()` helper
+- Radix UI component styling
 
-**TypeScript & Build Problems**
-```bash
-rm -rf .next               # Clear Next.js cache
-npm run build              # Check for type errors (strict mode enabled)
-npm run lint               # ESLint validation (build errors ignored in config)
-```
+## Testing Approach
 
-**Navigation Dropdown Issues**
-- **Problem**: Mouse hover states conflict with z-index layering
-- **Solution**: Use z-[70] minimum for dropdown overlays
-- **Debug**: Check React state in dev tools (`hoveredCategory`, `hoveredSubcategory`)
+Currently no formal testing framework. Validation process:
+1. `npm run build` - Catch TypeScript errors
+2. `npm run lint` - ESLint validation  
+3. Manual browser testing
+4. Check dev.log for image loading errors
 
-## Configuration & Deployment
+## Deployment Requirements
 
-**Next.js Configuration (`next.config.ts`)**:
-- ESLint ignores build errors (`ignoreDuringBuilds: true`) - may hide TypeScript issues
-- Image optimization configured for GitHub CDN remote patterns
-- Turbopack enabled for development builds
+1. **Port 3001 Required**: Production must use this specific port
+2. **Build Validation**: Always run `npm run build` before deploy
+3. **Image Fallbacks**: Critical - implement placeholder images
+4. **French Content**: Verify all text is properly localized
+5. **Performance**: Test navigation dropdowns on mobile
 
-**TypeScript Setup**:
-- **Strict Mode**: Enabled with ES2017 target
-- **Path Aliases**: `@/*` maps to `./src/*`  
-- **Import Resolution**: Bundler moduleResolution for Next.js 15
+## Common Development Tasks
 
-**Production Requirements**:
-- **Port 3001**: Required for deployment to avoid conflicts
-- **Build Validation**: Always test production build before deployment
-- **Image Fallbacks**: Critical due to GitHub CDN reliability issues
+### Adding New Products
+1. Update `/src/data/products.ts` with new product data
+2. Ensure product follows existing interface (English fields)
+3. Add to appropriate category in `menuStructure`
+4. Test navigation dropdown shows new product
 
-## MCP Integration Points
+### Fixing Image Issues
+1. Check if GitHub repo is accessible
+2. Test individual image URLs in browser
+3. Implement fallback in `ProductCard.tsx`
+4. Consider alternative CDN solution
 
-**Data Sources**:
-- **Airtable MCP**: Product database "E-commerce - Monster Phone Produits" (15 products, 7 categories)
-- **Google Drive MCP**: Product documentation, alternative images, business documents
-- **WhatsApp MCP**: Customer communication and support (if configured)
+### Updating Navigation
+1. Edit `menuStructure` in `/src/data/products.ts`
+2. Test all hover states in Header component
+3. Verify z-index layering (minimum z-[70])
+4. Check mobile menu functionality
 
-**Integration Pattern**: Static data export from Airtable to `/src/data/products.ts` rather than real-time API calls
+## Performance Considerations
 
-## Development Best Practices
-
-**Code Quality**:
-- Follow existing French naming conventions for user-facing content
-- Use TypeScript interfaces from `/src/data/products.ts` (not `/src/types/index.ts`)
-- Maintain component composition pattern established in homepage
-- Implement image fallbacks for GitHub CDN reliability issues
-
-**Testing & Verification**:
-- Always verify production build with `npm run build` before deployment
-- Monitor `dev.log` and `server.log` for image loading errors  
-- Test dropdown navigation behavior across different screen sizes
-- Validate French content and La Réunion specific references (974 area code)
-
-**Performance Considerations**:
-- Leverage Turbopack for fast development builds
-- Static data eliminates API latency but requires manual updates
-- Next.js Image optimization helps with GitHub CDN issues when images load correctly
-- Complex dropdown navigation may impact mobile performance
+- **Turbopack**: Fast refresh in development
+- **Static Data**: No API latency, instant page loads
+- **Image Optimization**: Next.js Image component (when CDN works)
+- **Bundle Size**: Monitor with `npm run build` output
+- **Navigation Complexity**: May impact mobile performance
