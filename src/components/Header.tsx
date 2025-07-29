@@ -9,22 +9,22 @@ import { menuStructure, type CategoryStructure, type Product } from '@/data/prod
 
 // Composant pour la barre d'urgence promotionnelle
 const PromoBar = () => (
-  <div className="bg-gradient-to-r from-red-600 via-orange-600 to-red-600 text-white py-3 px-4 relative overflow-hidden">
+  <div className="bg-gradient-to-r from-red-600 via-orange-600 to-red-600 text-white py-2 px-3 relative overflow-hidden">
     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer" />
     <div className="max-w-7xl mx-auto text-center relative z-10">
-      <div className="flex items-center justify-center gap-6 text-lg font-semibold flex-wrap">
-        <div className="flex items-center gap-2">
-          <Truck className="w-5 h-5" />
+      <div className="flex items-center justify-center gap-4 text-sm font-medium flex-wrap">
+        <div className="flex items-center gap-1.5">
+          <Truck className="w-4 h-4" />
           <span>LIVRAISON EXPRESS 24H/48H À LA RÉUNION</span>
         </div>
-        <span className="hidden sm:block">•</span>
-        <div className="flex items-center gap-2">
-          <Flame className="w-5 h-5" />
+        <span className="hidden sm:block text-xs">•</span>
+        <div className="flex items-center gap-1.5">
+          <Flame className="w-4 h-4" />
           <span>LIVRAISON GRATUITE DÈS 50€</span>
         </div>
-        <span className="hidden sm:block">•</span>
-        <div className="flex items-center gap-2">
-          <Shield className="w-5 h-5" />
+        <span className="hidden sm:block text-xs">•</span>
+        <div className="flex items-center gap-1.5">
+          <Shield className="w-4 h-4" />
           <span>GARANTIE 2 ANS</span>
         </div>
       </div>
@@ -239,15 +239,12 @@ export default function Header() {
   const navigation: Array<{ name: string; href: string; icon: React.ReactNode }> = [];
 
   return (
-    <div className="sticky top-0 z-[100]">
+    <div className="fixed top-0 left-0 right-0 z-[100]">
       {/* Barre promotionnelle */}
       <PromoBar />
       
       <header 
-        className={cn(
-          "bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100 transition-all duration-300 overflow-visible",
-          isScrolled ? "shadow-lg bg-white/98" : ""
-        )}
+        className="bg-white backdrop-blur-md shadow-lg border-b border-gray-200 transition-all duration-300 overflow-visible"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header principal */}
@@ -418,20 +415,21 @@ export default function Header() {
                 />
               </div>
               
-              {/* Barre de recherche desktop */}
-              <div className="relative ml-2">
-                <input
-                  type="text"
-                  placeholder="Rechercher..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-32 px-3 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-xs"
-                />
-                <button className="absolute right-1.5 top-1/2 -translate-y-1/2 p-0.5 text-gray-900 hover:text-blue-600 transition-colors">
-                  <Search className="h-3 w-3" />
-                </button>
-              </div>
             </nav>
+            
+            {/* Barre de recherche desktop */}
+            <div className="relative hidden xl:flex ml-auto mr-4">
+              <input
+                type="text"
+                placeholder="Rechercher..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-40 px-3 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-xs"
+              />
+              <button className="absolute right-1.5 top-1/2 -translate-y-1/2 p-0.5 text-gray-900 hover:text-blue-600 transition-colors">
+                <Search className="h-3 w-3" />
+              </button>
+            </div>
             
             {/* Navigation tablette (version simplifiée) */}
             <nav className="hidden lg:flex xl:hidden items-center space-x-1">
@@ -466,20 +464,20 @@ export default function Header() {
               </button>
               
               {/* Panier */}
-              <button className="relative p-1 text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
-                <ShoppingCart className="h-4 w-4" />
-                <span className="absolute -top-0.5 -right-0.5 bg-red-500 text-white text-[8px] rounded-full h-3 w-3 flex items-center justify-center font-medium">
+              <button className="relative p-1.5 text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                <ShoppingCart className="h-5 w-5" />
+                <span className="absolute -top-0.5 -right-0.5 bg-red-500 text-white text-[9px] rounded-full h-3.5 w-3.5 flex items-center justify-center font-medium">
                   0
                 </span>
               </button>
 
               {/* Compte */}
-              <button className="p-1 text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
-                <User className="h-4 w-4" />
+              <button className="p-1.5 text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                <User className="h-5 w-5" />
               </button>
 
               {/* CTA */}
-              <Link href="/nos-produits" className="hidden lg:block">
+              <Link href="/nos-produits" className="hidden lg:block ml-3">
                 <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-3 py-1.5 rounded-lg font-medium text-xs shadow-md hover:shadow-lg transition-shadow">
                   Découvrir
                 </button>

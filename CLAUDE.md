@@ -6,13 +6,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **Monster Phone Boutique** - E-commerce Next.js 15 application for gaming phone accessories targeting La Réunion market (974).
 
-**Tech Stack**: 
+**Tech Stack**:
 - Next.js 15.4.2 + React 19 + TypeScript (strict mode)
-- Tailwind CSS v4 + Radix UI + Framer Motion  
+- Tailwind CSS v4 + Radix UI + Framer Motion
 - No backend API - static data architecture
 - French language interface
 
-**Data Sources**: 
+**Data Sources**:
 - Airtable base "E-commerce - Monster Phone Produits" (15 products exported statically)
 - GitHub CDN for images (currently broken - returns text/plain)
 - Future: Google Drive integration planned
@@ -117,7 +117,7 @@ src/
 
 Currently no formal testing framework. Validation process:
 1. `npm run build` - Catch TypeScript errors
-2. `npm run lint` - ESLint validation  
+2. `npm run lint` - ESLint validation
 3. Manual browser testing
 4. Check dev.log for image loading errors
 

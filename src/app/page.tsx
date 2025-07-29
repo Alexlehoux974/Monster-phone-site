@@ -12,13 +12,15 @@ export default function Home() {
   return (
     <div className="min-h-screen overflow-x-hidden">
       <Header />
-      <MonsterPhoneHero />
-      <FeaturedProducts />
-      <TrustSection />
-      <FeaturesSection />
-      <TestimonialsSection />
-      <NewsletterSection />
-      <Footer />
+      <div className="pt-[110px]">
+        <MonsterPhoneHero />
+        <FeaturedProducts />
+        <TrustSection />
+        <FeaturesSection />
+        <TestimonialsSection />
+        <NewsletterSection />
+        <Footer />
+      </div>
     </div>
   );
 }

@@ -31,7 +31,8 @@ export default function SmartphonesPage() {
   return (
     <div className="min-h-screen bg-gray-50 overflow-x-hidden">
       <Header />
-      <div className="flex">
+      <div className="pt-[110px]">
+        <div className="flex">
         <Sidebar
           products={products}
           selectedCategory={selectedCategory}
@@ -82,7 +83,8 @@ export default function SmartphonesPage() {
           )}
         </main>
         </div>
-      <Footer />
+        <Footer />
+      </div>
     </div>
   );
 }
