@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { CartProvider } from "@/contexts/CartContext";
+import { AuthProvider } from "@/contexts/AuthContext";
+import StructuredData from "@/components/StructuredData";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,8 +16,43 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Monster Phone Boutique | Téléphones Gaming La Réunion 974",
+  title: {
+    default: "Monster Phone Boutique | Téléphones Gaming La Réunion 974",
+    template: "%s | Monster Phone Boutique"
+  },
   description: "Monster Phone Boutique - Spécialiste smartphones gaming HONOR, accessoires MUVIT à La Réunion. Service après-vente, livraison gratuite dès 50€.",
+  keywords: ["Monster Phone", "smartphones gaming", "HONOR", "MUVIT", "La Réunion", "974", "accessoires téléphone", "gaming mobile"],
+  authors: [{ name: "Monster Phone Boutique" }],
+  creator: "Monster Phone Boutique",
+  publisher: "Monster Phone Boutique",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL('https://monsterphone.re'),
+  openGraph: {
+    type: 'website',
+    locale: 'fr_FR',
+    url: 'https://monsterphone.re',
+    siteName: 'Monster Phone Boutique',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+      }
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: '@monsterphone974',
+    creator: '@monsterphone974',
+  },
+  verification: {
+    google: 'google-site-verification-code',
+  },
+  category: 'e-commerce',
 };
 
 export default function RootLayout({
@@ -26,11 +64,21 @@ export default function RootLayout({
     <html lang="fr">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#2563eb" />
+        <StructuredData type="organization" />
+        <StructuredData type="website" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
       >
-        {children}
+        <AuthProvider>
+          <CartProvider>
+            {children}
+          </CartProvider>
+        </AuthProvider>
       </body>
     </html>
   );

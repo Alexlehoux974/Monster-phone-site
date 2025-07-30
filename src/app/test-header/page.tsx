@@ -3,7 +3,9 @@ import Header from '@/components/Header';
 export default function TestHeader() {
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header />
+      <div className="pt-24">
+        <Header />
+      </div>
       <div className="p-8">
         <h1 className="text-3xl font-bold mb-4">Test du Header</h1>
         <p className="text-lg">Cette page est pour tester le header et ses menus déroulants.</p>

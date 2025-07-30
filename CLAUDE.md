@@ -17,21 +17,54 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - GitHub CDN for images (currently broken - returns text/plain)
 - Future: Google Drive integration planned
 
+**Key Dependencies**:
+- `framer-motion` (^12.23.6) - Hero animations and UI transitions
+- `@radix-ui/react-slot` - Composable component primitives
+- `lucide-react` - Icon library
+- `clsx` + `tailwind-merge` - Conditional className utilities
+- `class-variance-authority` - Component variant management
+- `playwright` (^1.54.1) - Installed but not configured for testing
+
 ## Development Commands
 
 ```bash
 # Development
-npm run dev                    # Turbopack dev server (auto-detects port, defaults to 3000)
+npm run dev                    # Turbopack dev server (binds to 0.0.0.0, auto-detects port)
 npm run build                  # Production build
 npm start -- -p 3001           # Production server (must use port 3001)
-npm run lint                   # ESLint validation
+npm run lint                   # ESLint validation (Next.js core-web-vitals)
 
 # Common Issues & Solutions
 ps aux | grep next             # Find stuck Next.js processes
 kill -9 [PID]                  # Kill stuck process
 rm -rf .next                   # Clear build cache for TypeScript errors
 npm run build && npm start -- -p 3001  # Full production test
+
+# Development Files Created
+dev.log                        # Development server output log
+server.log                     # Production server log
 ```
+
+## Utility Functions Available
+
+The project includes several utility functions in `/src/lib/utils.ts`:
+- `cn()` - Tailwind CSS class merging with clsx
+- `formatPrice()` - Format numbers as EUR currency (French locale)
+- `parseGitHubImages()` - Extract image URLs from newline-separated strings
+- `generateSlug()` - Create URL-safe slugs from text
+- `truncateText()` - Text truncation with ellipsis
+
+## Important Development Notes
+
+**Core Package.json Scripts**:
+- `dev`: Uses `--turbopack` flag and binds to `0.0.0.0` (accessible from network)
+- `start`: Must be run with `-p 3001` flag for production deployment
+- No test scripts configured despite Playwright dependency
+
+**React/Next.js Versions**:
+- React 19.1.0 (latest) + Next.js 15.4.2
+- Uses Next.js App Router (not Pages Router)
+- TypeScript strict mode enabled
 
 ## Architecture & Key Patterns
 
@@ -40,6 +73,7 @@ npm run build && npm start -- -p 3001  # Full production test
   - 15 products: 3 HONOR phones, 12 accessories
   - Brands: HONOR, MY WAY, MUVIT, MONSTER
   - Categories: Smartphones, Audio & Son, Chargement & Énergie, Créativité & Enfants
+- **Product Interface**: TypeScript interface with 13 fields (id, name, brand, category, sku, price, description, metaTitle, metaDescription, urlSlug, keywords, images[], variants, status)
 - **Menu Structure**: `menuStructure` object provides 4-level navigation hierarchy
 - **Static Pattern**: No API calls, manual Airtable exports
 
@@ -52,9 +86,10 @@ npm run build && npm start -- -p 3001  # Full production test
 - **TODO**: Implement fallback images or migrate CDN
 
 **2. TypeScript Interface Mismatch** ⚠️
-- `/src/data/products.ts`: Uses English fields ✅ **CORRECT**
+- `/src/data/products.ts`: Uses English fields ✅ **CORRECT** - This is the single source of truth
 - `/src/types/index.ts`: Uses French Airtable fields ❌ **OUTDATED - DO NOT USE**
-- Always import from `/src/data/products.ts`
+- Always import `Product` interface and `allProducts` array from `/src/data/products.ts`
+- The Product interface has: id, name, brand, category, sku, price?, description, metaTitle, metaDescription, urlSlug, keywords, images[], variants, status
 
 **3. Port Configuration**
 - Development: Auto-detects (warning shows port 3002 when 3000 in use)
@@ -74,8 +109,19 @@ src/
 │   ├── page.tsx           # Homepage (component composition)
 │   ├── nos-produits/      # Product catalog with filtering
 │   ├── accessoires/       # Accessories showcase page
-│   ├── services/          # Business services (SAV, livraison, garantie)
+│   ├── services/          # Business services (multiple sub-routes)
+│   │   ├── garantie/      # Warranty information
+│   │   ├── livraison/     # Delivery options
+│   │   ├── retours/       # Return policy
+│   │   ├── sav/           # After-sales service
+│   │   └── support/       # Technical support
 │   ├── legal/             # Legal pages (RGPD compliance)
+│   │   ├── conditions-generales/
+│   │   ├── confidentialite/
+│   │   ├── mentions-legales/
+│   │   └── plan-du-site/
+│   ├── contact/           # Contact form page
+│   ├── promotions/        # Promotional offers
 │   └── layout.tsx         # Root layout (lang="fr", Geist font)
 ├── components/            
 │   ├── Header.tsx         # Complex navigation with PromoBar
@@ -98,28 +144,38 @@ src/
 ## Configuration Details
 
 **Next.js Config (`next.config.ts`)**:
-- ESLint: `ignoreDuringBuilds: true` (hides type errors!)
-- Images: Remote patterns for GitHub CDN configured
-- Turbopack: Enabled for fast dev builds
+- ESLint: `ignoreDuringBuilds: true` ⚠️ (bypasses type errors during build!)
+- Images: Remote patterns for GitHub CDN configured (raw.githubusercontent.com)
+- Turbopack: Enabled via --turbopack flag in dev script
+- **WARNING**: Build process ignores ESLint errors - must run `npm run lint` manually
 
-**TypeScript Config**:
+**TypeScript Config (`tsconfig.json`)**:
 - Strict mode enabled
 - Target: ES2017
 - Path alias: `@/*` → `./src/*`
 - Module resolution: bundler
+- JSX: preserve
+- Includes: all .ts/.tsx files, excludes node_modules
 
 **Tailwind CSS v4**:
-- PostCSS configuration present
-- Custom utilities via `cn()` helper
-- Radix UI component styling
+- PostCSS configuration with @tailwindcss/postcss
+- Custom utilities via `cn()` helper (clsx + tailwind-merge)
+- Radix UI component styling integration
+
+**ESLint Config (`eslint.config.mjs`)**:
+- Extends: next/core-web-vitals, next/typescript
+- Uses FlatCompat for configuration compatibility
+- **WARNING**: `ignoreDuringBuilds: true` in next.config.ts bypasses type errors during build!
 
 ## Testing Approach
 
 Currently no formal testing framework. Validation process:
-1. `npm run build` - Catch TypeScript errors
-2. `npm run lint` - ESLint validation
+1. `npm run build` - Catch TypeScript errors (Note: ESLint errors ignored due to next.config.ts setting)
+2. `npm run lint` - ESLint validation (run manually as build skips it)
 3. Manual browser testing
 4. Check dev.log for image loading errors
+
+**Note**: No test files exist despite Playwright being installed as a dependency. No test scripts configured in package.json.
 
 ## Deployment Requirements
 
@@ -156,3 +212,15 @@ Currently no formal testing framework. Validation process:
 - **Image Optimization**: Next.js Image component (when CDN works)
 - **Bundle Size**: Monitor with `npm run build` output
 - **Navigation Complexity**: May impact mobile performance
+
+## Project Context
+
+This project is part of a multi-project repository structure where `/monster-phone-dev/monster-phone-boutique/` is a subdirectory. The parent directory contains other projects including School (Skool clone), WhatsApp MCP server, SuperClaude Framework, and Animations demos.
+
+## Component Styling Patterns
+
+- **Radix UI Components**: Located in `/src/components/ui/` (badge.tsx, button.tsx, card.tsx)
+- **CVA (Class Variance Authority)**: Used for component variants in UI primitives
+- **Tailwind Merge**: All className props should use `cn()` helper to properly merge classes
+- **Framer Motion**: Used for hero animations and page transitions
+```

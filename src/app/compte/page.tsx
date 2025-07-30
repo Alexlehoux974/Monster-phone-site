@@ -1,0 +1,609 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import { useAuth } from '@/contexts/AuthContext';
+import { useRouter } from 'next/navigation';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import { User, Mail, Phone, MapPin, Package, LogOut, ChevronRight, Shield, Calendar } from 'lucide-react';
+
+export default function ComptePage() {
+  const { user, isAuthenticated, login, register, logout, updateProfile, isLoading } = useAuth();
+  const router = useRouter();
+  const [activeTab, setActiveTab] = useState('profile');
+  const [isLoginMode, setIsLoginMode] = useState(true);
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    name: '',
+    phone: '',
+    address: {
+      street: '',
+      city: '',
+      postalCode: '',
+      country: 'France',
+    },
+  });
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Rediriger si non connecté (optionnel - on peut aussi afficher le formulaire de connexion)
+  useEffect(() => {
+    if (!isLoading && isAuthenticated && user) {
+      setFormData(prev => ({
+        ...prev,
+        name: user.name || '',
+        phone: user.phone || '',
+        address: user.address || prev.address,
+      }));
+    }
+  }, [isAuthenticated, user, isLoading]);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    if (name.startsWith('address.')) {
+      const addressField = name.split('.')[1];
+      setFormData(prev => ({
+        ...prev,
+        address: {
+          ...prev.address,
+          [addressField]: value,
+        },
+      }));
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
+  };
+
+  const handleAuthSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    setIsSubmitting(true);
+
+    try {
+      if (isLoginMode) {
+        await login(formData.email, formData.password);
+        setSuccess('Connexion réussie !');
+      } else {
+        await register(formData.email, formData.password, formData.name);
+        setSuccess('Inscription réussie !');
+      }
+      // Réinitialiser le formulaire
+      setFormData(prev => ({ ...prev, email: '', password: '' }));
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Une erreur est survenue');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleProfileUpdate = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    setSuccess('');
+    setIsSubmitting(true);
+
+    try {
+      await updateProfile({
+        name: formData.name,
+        phone: formData.phone,
+        address: formData.address,
+      });
+      setSuccess('Profil mis à jour avec succès !');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Erreur lors de la mise à jour');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleLogout = () => {
+    logout();
+    router.push('/');
+  };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
+
+  const tabs = [
+    { id: 'profile', label: 'Mon Profil', icon: User },
+    { id: 'orders', label: 'Mes Commandes', icon: Package },
+    { id: 'security', label: 'Sécurité', icon: Shield },
+  ];
+
+  const mockOrders = [
+    {
+      id: 'CMD001',
+      date: '2024-01-15',
+      status: 'Livrée',
+      total: 859.00,
+      items: 2,
+    },
+    {
+      id: 'CMD002',
+      date: '2024-01-20',
+      status: 'En cours',
+      total: 45.99,
+      items: 1,
+    },
+  ];
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <Header />
+      
+      <main className="container mx-auto px-4 py-8 mt-20">
+        <div className="max-w-6xl mx-auto">
+          <h1 className="text-3xl font-bold mb-8">
+            {isAuthenticated ? 'Mon Compte' : 'Connexion / Inscription'}
+          </h1>
+
+          {!isAuthenticated ? (
+            // Formulaire de connexion/inscription
+            <div className="max-w-md mx-auto bg-white rounded-lg shadow-lg p-8">
+              <div className="flex mb-6">
+                <button
+                  onClick={() => setIsLoginMode(true)}
+                  className={`flex-1 py-2 text-center font-medium rounded-l-lg transition-colors ${
+                    isLoginMode
+                      ? 'bg-blue-600 text-white'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  Connexion
+                </button>
+                <button
+                  onClick={() => setIsLoginMode(false)}
+                  className={`flex-1 py-2 text-center font-medium rounded-r-lg transition-colors ${
+                    !isLoginMode
+                      ? 'bg-blue-600 text-white'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  Inscription
+                </button>
+              </div>
+
+              <form onSubmit={handleAuthSubmit} className="space-y-4">
+                {!isLoginMode && (
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Nom complet
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      required={!isLoginMode}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="Jean Dupont"
+                    />
+                  </div>
+                )}
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="jean.dupont@example.com"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Mot de passe
+                  </label>
+                  <input
+                    type="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleInputChange}
+                    required
+                    minLength={6}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="••••••••"
+                  />
+                  {!isLoginMode && (
+                    <p className="text-xs text-gray-500 mt-1">
+                      Minimum 6 caractères
+                    </p>
+                  )}
+                </div>
+
+                {error && (
+                  <div className="p-3 bg-red-50 border border-red-200 text-red-700 rounded-lg text-sm">
+                    {error}
+                  </div>
+                )}
+
+                {success && (
+                  <div className="p-3 bg-green-50 border border-green-200 text-green-700 rounded-lg text-sm">
+                    {success}
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors disabled:bg-gray-400"
+                >
+                  {isSubmitting ? 'Chargement...' : isLoginMode ? 'Se connecter' : 'S\'inscrire'}
+                </button>
+              </form>
+
+              <div className="mt-6 text-center text-sm text-gray-600">
+                {isLoginMode ? (
+                  <p>
+                    Pas encore de compte ?{' '}
+                    <button
+                      onClick={() => setIsLoginMode(false)}
+                      className="text-blue-600 hover:underline font-medium"
+                    >
+                      Inscrivez-vous
+                    </button>
+                  </p>
+                ) : (
+                  <p>
+                    Déjà un compte ?{' '}
+                    <button
+                      onClick={() => setIsLoginMode(true)}
+                      className="text-blue-600 hover:underline font-medium"
+                    >
+                      Connectez-vous
+                    </button>
+                  </p>
+                )}
+              </div>
+            </div>
+          ) : (
+            // Dashboard utilisateur connecté
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+              {/* Sidebar */}
+              <div className="lg:col-span-1">
+                <div className="bg-white rounded-lg shadow-lg p-6">
+                  <div className="flex items-center space-x-4 mb-6">
+                    <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
+                      <User className="w-8 h-8 text-blue-600" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold">{user?.name}</h3>
+                      <p className="text-sm text-gray-600">{user?.email}</p>
+                    </div>
+                  </div>
+
+                  <nav className="space-y-2">
+                    {tabs.map((tab) => {
+                      const Icon = tab.icon;
+                      return (
+                        <button
+                          key={tab.id}
+                          onClick={() => setActiveTab(tab.id)}
+                          className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors ${
+                            activeTab === tab.id
+                              ? 'bg-blue-50 text-blue-600'
+                              : 'hover:bg-gray-50 text-gray-700'
+                          }`}
+                        >
+                          <Icon className="w-5 h-5" />
+                          <span className="font-medium">{tab.label}</span>
+                          <ChevronRight className="w-4 h-4 ml-auto" />
+                        </button>
+                      );
+                    })}
+                    
+                    <button
+                      onClick={handleLogout}
+                      className="w-full flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-red-50 text-red-600 transition-colors"
+                    >
+                      <LogOut className="w-5 h-5" />
+                      <span className="font-medium">Déconnexion</span>
+                    </button>
+                  </nav>
+                </div>
+              </div>
+
+              {/* Content */}
+              <div className="lg:col-span-3">
+                <div className="bg-white rounded-lg shadow-lg p-8">
+                  {activeTab === 'profile' && (
+                    <>
+                      <h2 className="text-2xl font-bold mb-6">Informations Personnelles</h2>
+                      
+                      <form onSubmit={handleProfileUpdate} className="space-y-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                              <User className="inline w-4 h-4 mr-1" />
+                              Nom complet
+                            </label>
+                            <input
+                              type="text"
+                              name="name"
+                              value={formData.name}
+                              onChange={handleInputChange}
+                              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            />
+                          </div>
+
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                              <Mail className="inline w-4 h-4 mr-1" />
+                              Email
+                            </label>
+                            <input
+                              type="email"
+                              value={user?.email}
+                              disabled
+                              className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-500"
+                            />
+                          </div>
+
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                              <Phone className="inline w-4 h-4 mr-1" />
+                              Téléphone
+                            </label>
+                            <input
+                              type="tel"
+                              name="phone"
+                              value={formData.phone}
+                              onChange={handleInputChange}
+                              placeholder="+262 6 92 XX XX XX"
+                              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            />
+                          </div>
+
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                              <Calendar className="inline w-4 h-4 mr-1" />
+                              Membre depuis
+                            </label>
+                            <input
+                              type="text"
+                              value={new Date(user?.createdAt || '').toLocaleDateString('fr-FR')}
+                              disabled
+                              className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-500"
+                            />
+                          </div>
+                        </div>
+
+                        <div>
+                          <h3 className="text-lg font-semibold mb-4 flex items-center">
+                            <MapPin className="w-5 h-5 mr-2" />
+                            Adresse de livraison
+                          </h3>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="md:col-span-2">
+                              <label className="block text-sm font-medium text-gray-700 mb-1">
+                                Rue
+                              </label>
+                              <input
+                                type="text"
+                                name="address.street"
+                                value={formData.address.street}
+                                onChange={handleInputChange}
+                                placeholder="123 Rue de la Paix"
+                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                              />
+                            </div>
+
+                            <div>
+                              <label className="block text-sm font-medium text-gray-700 mb-1">
+                                Ville
+                              </label>
+                              <input
+                                type="text"
+                                name="address.city"
+                                value={formData.address.city}
+                                onChange={handleInputChange}
+                                placeholder="Saint-Denis"
+                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                              />
+                            </div>
+
+                            <div>
+                              <label className="block text-sm font-medium text-gray-700 mb-1">
+                                Code postal
+                              </label>
+                              <input
+                                type="text"
+                                name="address.postalCode"
+                                value={formData.address.postalCode}
+                                onChange={handleInputChange}
+                                placeholder="97400"
+                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+                        {error && (
+                          <div className="p-3 bg-red-50 border border-red-200 text-red-700 rounded-lg text-sm">
+                            {error}
+                          </div>
+                        )}
+
+                        {success && (
+                          <div className="p-3 bg-green-50 border border-green-200 text-green-700 rounded-lg text-sm">
+                            {success}
+                          </div>
+                        )}
+
+                        <button
+                          type="submit"
+                          disabled={isSubmitting}
+                          className="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors disabled:bg-gray-400"
+                        >
+                          {isSubmitting ? 'Mise à jour...' : 'Enregistrer les modifications'}
+                        </button>
+                      </form>
+                    </>
+                  )}
+
+                  {activeTab === 'orders' && (
+                    <>
+                      <h2 className="text-2xl font-bold mb-6">Historique des Commandes</h2>
+                      
+                      {mockOrders.length > 0 ? (
+                        <div className="space-y-4">
+                          {mockOrders.map((order) => (
+                            <div
+                              key={order.id}
+                              className="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow"
+                            >
+                              <div className="flex justify-between items-start mb-4">
+                                <div>
+                                  <h3 className="font-semibold text-lg">Commande #{order.id}</h3>
+                                  <p className="text-sm text-gray-600">
+                                    {new Date(order.date).toLocaleDateString('fr-FR', {
+                                      day: 'numeric',
+                                      month: 'long',
+                                      year: 'numeric',
+                                    })}
+                                  </p>
+                                </div>
+                                <span
+                                  className={`px-3 py-1 rounded-full text-sm font-medium ${
+                                    order.status === 'Livrée'
+                                      ? 'bg-green-100 text-green-800'
+                                      : 'bg-yellow-100 text-yellow-800'
+                                  }`}
+                                >
+                                  {order.status}
+                                </span>
+                              </div>
+
+                              <div className="flex justify-between items-center">
+                                <p className="text-sm text-gray-600">
+                                  {order.items} article{order.items > 1 ? 's' : ''}
+                                </p>
+                                <p className="font-semibold text-lg">
+                                  {order.total.toFixed(2)} €
+                                </p>
+                              </div>
+
+                              <button className="mt-4 text-blue-600 hover:text-blue-800 font-medium text-sm flex items-center">
+                                Voir les détails
+                                <ChevronRight className="w-4 h-4 ml-1" />
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="text-center py-12">
+                          <Package className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+                          <p className="text-gray-600">Aucune commande pour le moment</p>
+                          <button
+                            onClick={() => router.push('/nos-produits')}
+                            className="mt-4 text-blue-600 hover:text-blue-800 font-medium"
+                          >
+                            Découvrir nos produits
+                          </button>
+                        </div>
+                      )}
+                    </>
+                  )}
+
+                  {activeTab === 'security' && (
+                    <>
+                      <h2 className="text-2xl font-bold mb-6">Sécurité du Compte</h2>
+                      
+                      <div className="space-y-6">
+                        <div className="border border-gray-200 rounded-lg p-6">
+                          <h3 className="font-semibold mb-4">Changer le mot de passe</h3>
+                          <form className="space-y-4">
+                            <div>
+                              <label className="block text-sm font-medium text-gray-700 mb-1">
+                                Mot de passe actuel
+                              </label>
+                              <input
+                                type="password"
+                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                placeholder="••••••••"
+                              />
+                            </div>
+
+                            <div>
+                              <label className="block text-sm font-medium text-gray-700 mb-1">
+                                Nouveau mot de passe
+                              </label>
+                              <input
+                                type="password"
+                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                placeholder="••••••••"
+                              />
+                            </div>
+
+                            <div>
+                              <label className="block text-sm font-medium text-gray-700 mb-1">
+                                Confirmer le nouveau mot de passe
+                              </label>
+                              <input
+                                type="password"
+                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                placeholder="••••••••"
+                              />
+                            </div>
+
+                            <button
+                              type="submit"
+                              className="bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+                            >
+                              Mettre à jour le mot de passe
+                            </button>
+                          </form>
+                        </div>
+
+                        <div className="border border-gray-200 rounded-lg p-6">
+                          <h3 className="font-semibold mb-4">Sessions actives</h3>
+                          <div className="space-y-3">
+                            <div className="flex justify-between items-center">
+                              <div>
+                                <p className="font-medium">Session actuelle</p>
+                                <p className="text-sm text-gray-600">La Réunion, France</p>
+                              </div>
+                              <span className="text-sm text-green-600">Active</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="border border-red-200 rounded-lg p-6 bg-red-50">
+                          <h3 className="font-semibold text-red-800 mb-2">Zone dangereuse</h3>
+                          <p className="text-sm text-red-700 mb-4">
+                            La suppression de votre compte est irréversible. Toutes vos données seront perdues.
+                          </p>
+                          <button className="text-red-600 hover:text-red-800 font-medium text-sm border border-red-300 px-4 py-2 rounded-lg hover:bg-red-100 transition-colors">
+                            Supprimer mon compte
+                          </button>
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </main>
+
+      <Footer />
+    </div>
+  );
+}

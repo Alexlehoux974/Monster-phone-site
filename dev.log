@@ -1,329 +1,167 @@
-
-> monster-phone-boutique@0.1.0 dev
-> next dev --turbopack
-
  ⚠ Warning: Found multiple lockfiles. Selecting /root/package-lock.json.
    Consider removing the lockfiles at:
    * /root/monster-phone-dev/monster-phone-boutique/package-lock.json
 
- ⚠ Port 3000 is in use by process 103441, using available port 3002 instead.
    ▲ Next.js 15.4.2 (Turbopack)
-   - Local:        http://localhost:3002
-   - Network:      http://193.203.191.71:3002
+   - Local:        http://localhost:3000
+   - Network:      http://0.0.0.0:3000
 
  ✓ Starting...
- ✓ Ready in 1622ms
+ ✓ Ready in 1451ms
  ○ Compiling / ...
- ✓ Compiled / in 10.7s
- GET / 200 in 11516ms
+ ✓ Compiled / in 9.4s
+ GET / 200 in 10304ms
+ GET / 200 in 240ms
  ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MY-WAY/Images/Cables-Lumineux/USB-C-Lightning/CABLE_USB-C_LIGHTNING.jpg received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MUVIT/Images/Casques-Enfant/Pika/CASQUE_PIKA.jpg received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MUVIT/Images/Casques-Enfant/Pika/CASQUE_PIKA.jpg received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MY-WAY/Images/Cables-Lumineux/USB-C-Lightning/CABLE_USB-C_LIGHTNING.jpg received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
- ✓ Compiled in 352ms
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
+ ○ Compiling /services/livraison-gratuite ...
+ ✓ Compiled /services/livraison-gratuite in 1131ms
+ GET /services/livraison-gratuite 200 in 1234ms
+ ○ Compiling /services/retours-30-jours ...
+ ✓ Compiled /services/retours-30-jours in 668ms
+ GET /services/retours-30-jours 200 in 735ms
+ ○ Compiling /legal/conditions-generales ...
+ ✓ Compiled /legal/conditions-generales in 687ms
+ GET /legal/conditions-generales 200 in 757ms
+ ○ Compiling /services/service-apres-vente ...
+ ✓ Compiled /services/service-apres-vente in 512ms
+ GET /services/service-apres-vente 200 in 584ms
+ ○ Compiling /services/support-technique ...
+ ✓ Compiled /services/support-technique in 731ms
+ GET /services/support-technique 200 in 872ms
+ GET / 200 in 232ms
+ GET /legal/conditions-generales 200 in 56ms
+ GET /services/retours-30-jours 200 in 55ms
+ GET /services/livraison-gratuite 200 in 66ms
+ ○ Compiling /contact ...
+ ✓ Compiled /contact in 1271ms
+ GET /contact 200 in 1334ms
+ GET /contact 200 in 49ms
+ GET /legal/conditions-generales 200 in 55ms
+ ○ Compiling /legal/confidentialite ...
+ ✓ Compiled /legal/confidentialite in 575ms
+ GET /legal/confidentialite 200 in 712ms
+ ✓ Compiled in 446ms
+ ✓ Compiled in 191ms
+ ✓ Compiled in 182ms
+ ✓ Compiled in 149ms
  ✓ Compiled in 153ms
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ✓ Compiled in 1621ms
- ✓ Compiled in 213ms
- ✓ Compiled / in 182ms
- GET / 200 in 1241ms
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MUVIT/Images/Casques-Enfant/Pika/CASQUE_PIKA.jpg received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MY-WAY/Images/Cables-Lumineux/USB-C-Lightning/CABLE_USB-C_LIGHTNING.jpg received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MUVIT/Images/Casques-Enfant/Pika/CASQUE_PIKA.jpg received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MY-WAY/Images/Cables-Lumineux/USB-C-Lightning/CABLE_USB-C_LIGHTNING.jpg received text/plain; charset=utf-8
- GET / 200 in 614ms
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MY-WAY/Images/Cables-Lumineux/USB-C-Lightning/CABLE_USB-C_LIGHTNING.jpg received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MUVIT/Images/Casques-Enfant/Pika/CASQUE_PIKA.jpg received text/plain; charset=utf-8
- ✓ Compiled in 223ms
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
- GET / 200 in 630ms
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MY-WAY/Images/Cables-Lumineux/USB-C-Lightning/CABLE_USB-C_LIGHTNING.jpg received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MUVIT/Images/Casques-Enfant/Pika/CASQUE_PIKA.jpg received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ✓ Compiled in 844ms
- ✓ Compiled in 163ms
- ✓ Compiled / in 35ms
- GET / 200 in 262ms
- ✓ Compiled in 2s
- ✓ Compiled / in 27ms
- GET / 200 in 325ms
- GET / 200 in 580ms
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MY-WAY/Images/Cables-Lumineux/USB-C-Lightning/CABLE_USB-C_LIGHTNING.jpg received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MUVIT/Images/Casques-Enfant/Pika/CASQUE_PIKA.jpg received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ✓ Compiled in 548ms
- ✓ Compiled / in 24ms
- GET / 200 in 299ms
- GET / 200 in 525ms
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ✓ Compiled in 1252ms
- GET / 200 in 1386ms
- GET / 200 in 144ms
- ✓ Compiled in 356ms
- GET / 200 in 291ms
- GET / 200 in 83ms
- ✓ Compiled in 253ms
- GET / 200 in 260ms
- GET / 200 in 71ms
- ✓ Compiled in 376ms
- GET / 200 in 336ms
- GET / 200 in 82ms
- ✓ Compiled in 263ms
- GET / 200 in 283ms
- GET / 200 in 106ms
- ✓ Compiled in 588ms
- GET / 200 in 799ms
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
- ○ Compiling /services/retours ...
- ✓ Compiled /services/retours in 2.8s
- ⨯ ./src/app/services/retours/page.tsx:167:67
-Parsing ecmascript source code failed
-[0m [90m 165 |[39m                   [33m<[39m[33mli[39m className[33m=[39m[32m"flex items-start gap-2"[39m[33m>[39m
- [90m 166 |[39m                     [33m<[39m[33mdiv[39m className[33m=[39m[32m"w-2 h-2 bg-green-600 rounded-full mt-2"[39m[33m>[39m[33m<[39m[33m/[39m[33mdiv[39m[33m>[39m
-[31m[1m>[22m[39m[90m 167 |[39m                     [33m<[39m[33mspan[39m[33m>[39m[33m<[39m[33mstrong[39m[33m>[39m[33mGratuit[39m[33m<[39m[33m/[39m[33mstrong[39m[33m>[39m pour commandes [33m>[39m [35m100[39m€[33m<[39m[33m/[39m[33mspan[39m[33m>[39m
- [90m     |[39m                                                                   [31m[1m^[22m[39m
- [90m 168 |[39m                   [33m<[39m[33m/[39m[33mli[39m[33m>[39m
- [90m 169 |[39m                   [33m<[39m[33mli[39m className[33m=[39m[32m"flex items-start gap-2"[39m[33m>[39m
- [90m 170 |[39m                     [33m<[39m[33mdiv[39m className[33m=[39m[32m"w-2 h-2 bg-blue-600 rounded-full mt-2"[39m[33m>[39m[33m<[39m[33m/[39m[33mdiv[39m[33m>[39m[0m
-
-Unexpected token. Did you mean `{'>'}` or `&gt;`?
-
-
- ○ Compiling /_error ...
- ✓ Compiled /_error in 3.5s
- GET /services/retours 500 in 6693ms
- ⨯ ./src/app/services/retours/page.tsx:167:67
-Parsing ecmascript source code failed
-[0m [90m 165 |[39m                   [33m<[39m[33mli[39m className[33m=[39m[32m"flex items-start gap-2"[39m[33m>[39m
- [90m 166 |[39m                     [33m<[39m[33mdiv[39m className[33m=[39m[32m"w-2 h-2 bg-green-600 rounded-full mt-2"[39m[33m>[39m[33m<[39m[33m/[39m[33mdiv[39m[33m>[39m
-[31m[1m>[22m[39m[90m 167 |[39m                     [33m<[39m[33mspan[39m[33m>[39m[33m<[39m[33mstrong[39m[33m>[39m[33mGratuit[39m[33m<[39m[33m/[39m[33mstrong[39m[33m>[39m pour commandes [33m>[39m [35m100[39m€[33m<[39m[33m/[39m[33mspan[39m[33m>[39m
- [90m     |[39m                                                                   [31m[1m^[22m[39m
- [90m 168 |[39m                   [33m<[39m[33m/[39m[33mli[39m[33m>[39m
- [90m 169 |[39m                   [33m<[39m[33mli[39m className[33m=[39m[32m"flex items-start gap-2"[39m[33m>[39m
- [90m 170 |[39m                     [33m<[39m[33mdiv[39m className[33m=[39m[32m"w-2 h-2 bg-blue-600 rounded-full mt-2"[39m[33m>[39m[33m<[39m[33m/[39m[33mdiv[39m[33m>[39m[0m
-
-Unexpected token. Did you mean `{'>'}` or `&gt;`?
-
-
- GET /services/retours 500 in 53ms
- ✓ Compiled in 1510ms
- ✓ Compiled /services/retours in 97ms
- GET /services/retours 200 in 754ms
- GET /services/retours 200 in 155ms
+ ✓ Compiled in 194ms
+ ✓ Compiled in 120ms
+ GET /legal/confidentialite 200 in 71ms
+ ✓ Compiled in 184ms
+ GET /legal/confidentialite 200 in 928ms
+ ○ Compiling /legal/mentions-legales ...
+ ✓ Compiled /legal/mentions-legales in 955ms
+ GET /legal/mentions-legales 200 in 1032ms
+ ✓ Compiled /legal/conditions-generales in 25ms
+ GET /legal/conditions-generales 200 in 260ms
+ ✓ Compiled /legal/plan-du-site in 495ms
+ GET /legal/plan-du-site 200 in 587ms
+ GET /contact 200 in 214ms
+ GET /services/livraison-gratuite 200 in 225ms
+ GET /services/retours-30-jours 200 in 186ms
+ GET /legal/conditions-generales 200 in 167ms
+ GET /services/service-apres-vente 200 in 302ms
+ ○ Compiling /nos-produits ...
+ ✓ Compiled /nos-produits in 844ms
+ GET /nos-produits 200 in 902ms
+ ○ Compiling /accessoires ...
+ ✓ Compiled /accessoires in 674ms
+ GET /accessoires 200 in 755ms
+ ✓ Compiled in 417ms
+ ✓ Compiled in 300ms
+ ✓ Compiled in 335ms
+ ✓ Compiled in 344ms
+ ✓ Compiled in 1119ms
  GET / 200 in 102ms
  ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
  ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
- ○ Compiling /services/garantie ...
- ✓ Compiled /services/garantie in 18.2s
- ⨯ ./src/app/services/garantie/page.tsx:7:1
-Export Tool doesn't exist in target module
-[0m [90m  5 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m'@/components/ui/button'[39m[33m;[39m
- [90m  6 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m'@/components/ui/badge'[39m[33m;[39m
-[31m[1m>[22m[39m[90m  7 |[39m [36mimport[39m { [33mShield[39m[33m,[39m [33mClock[39m[33m,[39m [33mFileText[39m[33m,[39m [33mTool[39m[33m,[39m [33mAlertTriangle[39m[33m,[39m [33mCheckCircle[39m } [36mfrom[39m [32m'lucide-react'[39m[33m;[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m  8 |[39m
- [90m  9 |[39m [36mexport[39m [36mdefault[39m [36mfunction[39m [33mGarantiePage[39m() {
- [90m 10 |[39m   [36mreturn[39m ([0m
-
-The export Tool was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript) <exports>.
-Did you mean to import ToolCase?
-All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
-
-Import traces:
-  Client Component Browser:
-    ./src/app/services/garantie/page.tsx [Client Component Browser]
-    ./src/app/services/garantie/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/services/garantie/page.tsx [Client Component SSR]
-    ./src/app/services/garantie/page.tsx [Server Component]
-
-
-
-./src/app/services/garantie/page.tsx:7:1
-Export Tool doesn't exist in target module
-[0m [90m  5 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m'@/components/ui/button'[39m[33m;[39m
- [90m  6 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m'@/components/ui/badge'[39m[33m;[39m
-[31m[1m>[22m[39m[90m  7 |[39m [36mimport[39m { [33mShield[39m[33m,[39m [33mClock[39m[33m,[39m [33mFileText[39m[33m,[39m [33mTool[39m[33m,[39m [33mAlertTriangle[39m[33m,[39m [33mCheckCircle[39m } [36mfrom[39m [32m'lucide-react'[39m[33m;[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m  8 |[39m
- [90m  9 |[39m [36mexport[39m [36mdefault[39m [36mfunction[39m [33mGarantiePage[39m() {
- [90m 10 |[39m   [36mreturn[39m ([0m
-
-The export Tool was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript) <exports>.
-Did you mean to import ToolCase?
-All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
-
-Import traces:
-  Client Component Browser:
-    ./src/app/services/garantie/page.tsx [Client Component Browser]
-    ./src/app/services/garantie/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/services/garantie/page.tsx [Client Component SSR]
-    ./src/app/services/garantie/page.tsx [Server Component]
-
-
- GET /services/garantie 500 in 18504ms
- GET / 200 in 645ms
- ✓ Compiled in 902ms
- GET / 200 in 200ms
  ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
- ✓ Compiled /services/garantie in 33ms
- GET /services/garantie 200 in 370ms
- GET / 200 in 82ms
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ○ Compiling /services/sav ...
- ✓ Compiled /services/sav in 819ms
- GET /services/sav 200 in 899ms
- GET / 200 in 80ms
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ○ Compiling /services/support ...
- ✓ Compiled /services/support in 637ms
- GET /services/support 200 in 724ms
+ ✓ Compiled in 1311ms
+ ✓ Compiled / in 130ms
+ GET / 200 in 1167ms
+ GET / 200 in 248ms
+ GET / 200 in 152ms
+ GET / 200 in 121ms
+ GET / 200 in 104ms
+ GET / 200 in 136ms
+ GET / 200 in 98ms
+ ✓ Compiled / in 24ms
+ GET / 200 in 7279ms
  GET / 200 in 83ms
+ GET / 200 in 98ms
+ GET / 200 in 96ms
+ GET / 200 in 516ms
+ GET / 200 in 89ms
  ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
  ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ○ Compiling /services/livraison ...
- ✓ Compiled /services/livraison in 618ms
- GET /services/livraison 200 in 691ms
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
+ ✓ Compiled in 737ms
+ GET / 200 in 367ms
+ GET / 200 in 98ms
+ ✓ Compiled in 498ms
+ GET / 200 in 247ms
+ GET / 200 in 83ms
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
+ ✓ Compiled in 368ms
+ ✓ Compiled in 411ms
+ GET / 200 in 266ms
+ GET / 200 in 72ms
+ ✓ Compiled in 365ms
+ ✓ Compiled in 3.8s
+ ✓ Compiled in 702ms
+ ✓ Compiled in 3s
+ ✓ Compiled in 3.6s
+ ✓ Compiled in 242ms
+ ✓ Compiled in 419ms
+ ✓ Compiled in 864ms
+ ✓ Compiled / in 20ms
+ GET / 200 in 296ms
+ GET / 200 in 83ms
  GET / 200 in 99ms
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ✓ Compiled in 160ms
- ✓ Compiled in 385ms
- ✓ Compiled in 141ms
- ✓ Compiled in 391ms
- ✓ Compiled in 550ms
- ✓ Compiled in 572ms
- ✓ Compiled in 132ms
- ✓ Compiled in 389ms
- ✓ Compiled in 124ms
- ✓ Compiled in 407ms
- GET / 200 in 465ms
- GET /services/livraison 200 in 658ms
+ GET / 200 in 63ms
+ GET / 200 in 83ms
+ GET / 200 in 106ms
+ GET / 200 in 86ms
+ GET / 200 in 67ms
+ GET / 200 in 90ms
+ GET / 200 in 94ms
+ GET / 200 in 73ms
+ GET / 200 in 87ms
+ GET / 200 in 89ms
+ GET / 200 in 253ms
+ GET / 200 in 222ms
+ GET / 200 in 78ms
+ ✓ Compiled in 188ms
+ ✓ Compiled / in 36ms
+ GET / 200 in 277ms
+ ✓ Compiled in 2.5s
+ GET / 200 in 127ms
+ ✓ Compiled in 2.4s
+ ✓ Compiled / in 33ms
+ GET / 200 in 305ms
+ GET / 200 in 220ms
+ GET / 200 in 99ms
+ GET / 200 in 126ms
+ GET / 200 in 68ms
+ GET / 200 in 66ms
+ GET / 200 in 88ms
  GET / 200 in 71ms
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
+ GET / 200 in 90ms
+ GET / 200 in 69ms
+ GET / 200 in 78ms
+ GET / 200 in 112ms
+ ✓ Compiled /_not-found/page in 453ms
+ GET /manifest.json 404 in 722ms
+ GET /produit/honor-200-pro-smartphone-flagship 404 in 86ms
  ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ✓ Compiled in 554ms
- ✓ Compiled in 154ms
- ✓ Compiled in 253ms
- ✓ Compiled in 179ms
- ✓ Compiled in 0ms
- GET /services/retours 200 in 283ms
- GET / 200 in 246ms
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- GET /services/garantie 200 in 321ms
- ✓ Compiled in 1295ms
- ✓ Compiled in 198ms
- ✓ Compiled in 0ms
- GET / 200 in 303ms
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ✓ Compiled in 171ms
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ✓ Compiled in 418ms
- ✓ Compiled in 550ms
- ✓ Compiled in 265ms
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ✓ Compiled in 151ms
- GET / 200 in 812ms
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
- ✓ Compiled in 168ms
- ✓ Compiled in 128ms
- ✓ Compiled in 144ms
- GET / 200 in 732ms
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- HEAD / 200 in 228ms
- GET / 200 in 234ms
- GET / 200 in 243ms
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ✓ Compiled in 141ms
- ✓ Compiled in 155ms
- ✓ Compiled in 2.3s
- ✓ Compiled in 7.8s
- ✓ Compiled in 5.2s
- ⚠ Fast Refresh had to perform a full reload due to a runtime error.
- ✓ Compiled in 130ms
- ⨯ ReferenceError: Wrench is not defined
-    at Header (src/components/Header.tsx:466:61)
-  464 |     { name: 'Accueil', href: '/', icon: null },
-  465 |     { name: 'Smartphones', href: '/nos-produits?category=Smartphones', icon: null },
-> 466 |     { name: 'Services', href: '/services/reparation', icon: <Wrench className="w-4 h-4" /> },
-      |                                                             ^
-  467 |   ];
-  468 |
-  469 |   return ( {
-  digest: '3400178542'
-}
- GET / 500 in 1206ms
- ✓ Compiled in 2s
- ⚠ Fast Refresh had to perform a full reload due to a runtime error.
- ⚠ Fast Refresh had to perform a full reload due to a runtime error.
- ⚠ Fast Refresh had to perform a full reload due to a runtime error.
- ⚠ Fast Refresh had to perform a full reload due to a runtime error.
- ⨯ [Error: ENOENT: no such file or directory, open '/root/monster-phone-dev/monster-phone-boutique/.next/server/app/page/app-build-manifest.json'] {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/root/monster-phone-dev/monster-phone-boutique/.next/server/app/page/app-build-manifest.json'
-}
- ⨯ [Error: ENOENT: no such file or directory, open '/root/monster-phone-dev/monster-phone-boutique/.next/server/pages/_app/build-manifest.json'] {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/root/monster-phone-dev/monster-phone-boutique/.next/server/pages/_app/build-manifest.json'
-}
-[Error: ENOENT: no such file or directory, open '/root/monster-phone-dev/monster-phone-boutique/.next/server/app/page/app-build-manifest.json'] {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/root/monster-phone-dev/monster-phone-boutique/.next/server/app/page/app-build-manifest.json'
-}
- ⨯ [Error: ENOENT: no such file or directory, open '/root/monster-phone-dev/monster-phone-boutique/.next/server/pages/_app/build-manifest.json'] {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/root/monster-phone-dev/monster-phone-boutique/.next/server/pages/_app/build-manifest.json'
-}
-[Error: ENOENT: no such file or directory, open '/root/monster-phone-dev/monster-phone-boutique/.next/server/pages/_app/build-manifest.json'] {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/root/monster-phone-dev/monster-phone-boutique/.next/server/pages/_app/build-manifest.json'
-}
+ GET /produit/honor-200-pro-smartphone-flagship 404 in 121ms
+ GET / 200 in 388ms
+ ○ Compiling /compte ...
+ ✓ Compiled /compte in 644ms
+ GET /compte 200 in 825ms
+ GET /icon-144x144.png 404 in 112ms
+ GET / 200 in 250ms
+ GET /icon-144x144.png 404 in 104ms

@@ -3,12 +3,9 @@
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Search, ShoppingCart, User, Menu, X, ChevronDown, ArrowRight, Phone, Clock, Shield, Truck, Flame, Zap, Wrench, Smartphone, Watch, Headphones, Lightbulb, Package, Star, Trash2, CreditCard, Plus, Minus } from 'lucide-react';
+import { Search, ShoppingCart, User, Menu, X, ChevronDown, ArrowRight, Phone, Clock, Shield, Truck, Flame, Zap, Wrench, Smartphone, Watch, Headphones, Lightbulb, Package, Star } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { menuStructure, type CategoryStructure, type Product } from '@/data/products';
-import { useCart } from '@/contexts/CartContext';
-import { useAuth } from '@/contexts/AuthContext';
-import { useRouter } from 'next/navigation';
 
 // Composant pour la barre d'urgence promotionnelle
 const PromoBar = () => (
@@ -215,12 +212,6 @@ export default function Header() {
   const [searchQuery, setSearchQuery] = useState('');
   const [dropdownOpen, setDropdownOpen] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  
-  const { items, removeFromCart, updateQuantity, getCartTotal, getItemCount } = useCart();
-  const { isAuthenticated } = useAuth();
-  const router = useRouter();
-  const cartRef = useRef<HTMLDivElement>(null);
 
   // Gestion du scroll
   useEffect(() => {
@@ -230,23 +221,6 @@ export default function Header() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  // Fermer le panier quand on clique en dehors
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (cartRef.current && !cartRef.current.contains(event.target as Node)) {
-        setIsCartOpen(false);
-      }
-    };
-
-    if (isCartOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [isCartOpen]);
 
   const handleMouseEnter = (menu: string) => {
     setDropdownOpen(menu);
@@ -489,156 +463,18 @@ export default function Header() {
                 <Search className="h-4 w-4" />
               </button>
               
-              {/* Panier avec aperçu */}
-              <div className="relative" ref={cartRef}>
-                <button 
-                  onClick={() => setIsCartOpen(!isCartOpen)}
-                  className="relative p-1.5 text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
-                >
-                  <ShoppingCart className="h-5 w-5" />
-                  {getItemCount() > 0 && (
-                    <span className="absolute -top-0.5 -right-0.5 bg-red-500 text-white text-[9px] rounded-full h-3.5 w-3.5 flex items-center justify-center font-medium">
-                      {getItemCount()}
-                    </span>
-                  )}
-                </button>
-
-                {/* Dropdown du panier */}
-                {isCartOpen && (
-                  <div className="absolute right-0 mt-2 w-96 bg-white rounded-lg shadow-2xl border border-gray-200 z-50">
-                    <div className="p-4 border-b border-gray-200">
-                      <h3 className="font-semibold text-lg flex items-center justify-between">
-                        Mon Panier ({getItemCount()} article{getItemCount() > 1 ? 's' : ''})
-                        <button
-                          onClick={() => setIsCartOpen(false)}
-                          className="text-gray-400 hover:text-gray-600"
-                        >
-                          <X className="w-5 h-5" />
-                        </button>
-                      </h3>
-                    </div>
-
-                    {items.length === 0 ? (
-                      <div className="p-8 text-center">
-                        <ShoppingCart className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-                        <p className="text-gray-600">Votre panier est vide</p>
-                        <Link
-                          href="/nos-produits"
-                          onClick={() => setIsCartOpen(false)}
-                          className="mt-4 inline-block text-blue-600 hover:text-blue-800 font-medium"
-                        >
-                          Découvrir nos produits
-                        </Link>
-                      </div>
-                    ) : (
-                      <>
-                        <div className="max-h-80 overflow-y-auto">
-                          {items.map((item) => {
-                            const price = parseFloat(item.product.price?.replace('€', '') || '0');
-                            return (
-                              <div key={`${item.product.id}-${item.variant}`} className="p-4 border-b border-gray-100 hover:bg-gray-50">
-                                <div className="flex items-start space-x-3">
-                                  <div className="relative w-16 h-16 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
-                                    {item.product.images[0] ? (
-                                      <Image
-                                        src={item.product.images[0]}
-                                        alt={item.product.name}
-                                        fill
-                                        className="object-contain"
-                                        onError={(e) => {
-                                          e.currentTarget.src = '/placeholder-product.png';
-                                        }}
-                                      />
-                                    ) : (
-                                      <div className="w-full h-full flex items-center justify-center">
-                                        <Package className="w-6 h-6 text-gray-400" />
-                                      </div>
-                                    )}
-                                  </div>
-                                  <div className="flex-1">
-                                    <h4 className="text-sm font-medium line-clamp-1">{item.product.name}</h4>
-                                    <p className="text-xs text-gray-600 mt-1">
-                                      {item.quantity} × {price.toFixed(2)} €
-                                    </p>
-                                    <div className="flex items-center gap-2 mt-2">
-                                      <button
-                                        onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
-                                        className="text-gray-400 hover:text-gray-600"
-                                      >
-                                        <Minus className="w-4 h-4" />
-                                      </button>
-                                      <span className="text-sm font-medium">{item.quantity}</span>
-                                      <button
-                                        onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
-                                        className="text-gray-400 hover:text-gray-600"
-                                      >
-                                        <Plus className="w-4 h-4" />
-                                      </button>
-                                    </div>
-                                  </div>
-                                  <div className="text-right">
-                                    <p className="font-semibold text-sm">
-                                      {(price * item.quantity).toFixed(2)} €
-                                    </p>
-                                    <button
-                                      onClick={() => removeFromCart(item.product.id)}
-                                      className="text-red-500 hover:text-red-700 mt-1"
-                                    >
-                                      <Trash2 className="w-4 h-4" />
-                                    </button>
-                                  </div>
-                                </div>
-                              </div>
-                            );
-                          })}
-                        </div>
-
-                        {/* Total et actions */}
-                        <div className="p-4 bg-gray-50">
-                          <div className="flex justify-between items-center mb-4">
-                            <span className="font-semibold text-lg">Total</span>
-                            <span className="font-bold text-xl text-blue-600">
-                              {getCartTotal().toFixed(2)} €
-                            </span>
-                          </div>
-                          <div className="space-y-2">
-                            <Link
-                              href="/panier"
-                              onClick={() => setIsCartOpen(false)}
-                              className="block w-full text-center bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-medium hover:bg-gray-200 transition-colors"
-                            >
-                              Voir le panier
-                            </Link>
-                            <button
-                              onClick={() => {
-                                setIsCartOpen(false);
-                                router.push('/checkout');
-                              }}
-                              className="w-full bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
-                            >
-                              <CreditCard className="w-4 h-4" />
-                              Paiement rapide
-                            </button>
-                          </div>
-                          {getCartTotal() < 50 && (
-                            <p className="text-xs text-gray-600 text-center mt-3">
-                              Plus que {(50 - getCartTotal()).toFixed(2)} € pour la livraison gratuite !
-                            </p>
-                          )}
-                        </div>
-                      </>
-                    )}
-                  </div>
-                )}
-              </div>
+              {/* Panier */}
+              <button className="relative p-1.5 text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                <ShoppingCart className="h-5 w-5" />
+                <span className="absolute -top-0.5 -right-0.5 bg-red-500 text-white text-[9px] rounded-full h-3.5 w-3.5 flex items-center justify-center font-medium">
+                  0
+                </span>
+              </button>
 
               {/* Compte */}
-              <Link
-                href="/compte"
-                className="p-1.5 text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors inline-block"
-              >
+              <button className="p-1.5 text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
                 <User className="h-5 w-5" />
-              </Link>
+              </button>
 
               {/* CTA */}
               <Link href="/nos-produits" className="hidden lg:block ml-3">

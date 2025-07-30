@@ -8,17 +8,14 @@ import { allProducts } from '@/data/products';
 import { Button } from '@/components/ui/button';
 import { Filter, X } from 'lucide-react';
 
-export default function AccessoiresPage() {
+export default function SmartphonesPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedBrand, setSelectedBrand] = useState<string>('');
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [selectedProduct, setSelectedProduct] = useState<string>('');
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  // Filtrer uniquement les accessoires (pas les smartphones)
-  const products = useMemo(() => {
-    return allProducts.filter(product => product.category !== 'Smartphones');
-  }, []);
+  const products = allProducts;
 
   const filteredProducts = useMemo(() => {
     return products.filter(product => {
@@ -33,13 +30,6 @@ export default function AccessoiresPage() {
       return matchesSearch && matchesBrand && matchesCategory && matchesProduct;
     });
   }, [products, searchQuery, selectedBrand, selectedCategory, selectedProduct]);
-
-  // Filtres rapides pour les accessoires
-  const quickFilters = [
-    { name: 'Coques', category: 'Coques & Protection', icon: '📱' },
-    { name: 'Audio', category: 'Audio', icon: '🎧' },
-    { name: 'Batteries', category: 'Batteries', icon: '🔋' },
-  ];
 
   return (
     <div className="min-h-screen bg-gray-50 overflow-x-hidden">
@@ -95,10 +85,10 @@ export default function AccessoiresPage() {
           {/* Contenu principal */}
           <main className="px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
             <div className="max-w-[1600px] mx-auto">
-              {/* Header avec recherche et bouton filtres mobile */}
+              {/* Header avec recherche */}
               <div className="mb-6">
                 <div className="flex items-center justify-between mb-4">
-                  <h1 className="text-3xl lg:text-4xl font-bold text-gray-900">Accessoires</h1>
+                  <h1 className="text-3xl lg:text-4xl font-bold text-gray-900">Nos Produits</h1>
                   
                   {/* Bouton filtres mobile */}
                   <Button
@@ -112,33 +102,10 @@ export default function AccessoiresPage() {
                   </Button>
                 </div>
                 
-                {/* Filtres rapides */}
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {quickFilters.map((filter) => (
-                    <button
-                      key={filter.name}
-                      onClick={() => setSelectedCategory(filter.category)}
-                      className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                        selectedCategory === filter.category
-                          ? 'bg-blue-600 text-white'
-                          : 'bg-white text-gray-800 hover:bg-gray-100 border border-gray-200'
-                      }`}
-                    >
-                      {filter.icon} {filter.name}
-                    </button>
-                  ))}
-                  <button
-                    onClick={() => setSelectedCategory('')}
-                    className="px-4 py-2 rounded-full text-sm font-medium bg-gray-200 text-gray-800 hover:bg-gray-300 transition-colors"
-                  >
-                    Tous les accessoires
-                  </button>
-                </div>
-
                 <div className="relative">
                   <input
                     type="text"
-                    placeholder="Rechercher un accessoire..."
+                    placeholder="Rechercher un produit..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -148,7 +115,7 @@ export default function AccessoiresPage() {
                 {/* Résultats */}
                 <div className="mt-4 flex items-center justify-between">
                   <p className="text-sm text-gray-600">
-                    {filteredProducts.length} accessoire{filteredProducts.length > 1 ? 's' : ''} trouvé{filteredProducts.length > 1 ? 's' : ''}
+                    {filteredProducts.length} produit{filteredProducts.length > 1 ? 's' : ''} trouvé{filteredProducts.length > 1 ? 's' : ''}
                   </p>
                 </div>
               </div>
@@ -171,11 +138,10 @@ export default function AccessoiresPage() {
                       <h3 className="font-semibold text-sm lg:text-base text-gray-900 mb-1 line-clamp-2">
                         {product.name}
                       </h3>
-                      <p className="text-xs lg:text-sm text-gray-600 mb-1">{product.brand}</p>
-                      <p className="text-xs lg:text-sm text-blue-600 mb-2">{product.category}</p>
+                      <p className="text-xs lg:text-sm text-gray-600 mb-2">{product.brand}</p>
                       <div className="flex items-center justify-between">
                         <p className="text-lg lg:text-xl font-bold text-blue-600">
-                          {product.price ? `${product.price}€` : 'Prix sur demande'}
+                          {product.price}€
                         </p>
                         <Button size="sm" className="text-xs lg:text-sm">
                           Voir
@@ -189,7 +155,7 @@ export default function AccessoiresPage() {
               {/* Message si aucun produit */}
               {filteredProducts.length === 0 && (
                 <div className="text-center py-16">
-                  <p className="text-lg text-gray-600 mb-4">Aucun accessoire trouvé</p>
+                  <p className="text-lg text-gray-600 mb-4">Aucun produit trouvé</p>
                   <Button
                     variant="outline"
                     onClick={() => {

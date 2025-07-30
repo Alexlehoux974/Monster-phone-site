@@ -31,7 +31,14 @@
       "mcp__playwright__browser_take_screenshot",
       "mcp__playwright__browser_tab_new",
       "Bash(npm install:*)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "mcp__airtable__describe_table",
+      "mcp__airtable__delete_records",
+      "mcp__airtable__create_field",
+      "mcp__airtable__search_records",
+      "mcp__airtable__create_table",
+      "Bash(cp:*)",
+      "mcp__playwright__browser_tab_list"
     ],
     "deny": []
   }
