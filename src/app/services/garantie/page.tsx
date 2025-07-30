@@ -31,7 +31,7 @@ export default function GarantiePage() {
               </h1>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                 Tous nos produits bénéficient de la garantie constructeur. 
-                Service après-vente assuré directement à La Réunion pour votre tranquillité d'esprit.
+                Service après-vente assuré directement à La Réunion pour votre tranquillité d&apos;esprit.
               </p>
             </motion.div>
 

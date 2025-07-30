@@ -3,11 +3,11 @@
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Search, ShoppingCart, User, Menu, X, ChevronDown, ArrowRight, Phone, Clock, Shield, Truck, Flame, Zap, Wrench, Smartphone, Watch, Headphones, Lightbulb, Package, Star, Trash2, CreditCard, Plus, Minus } from 'lucide-react';
+import { Search, ShoppingCart, User, Menu, X, ChevronDown, ArrowRight, Shield, Truck, Flame, Smartphone, Watch, Headphones, Lightbulb, Package, Star, Trash2, CreditCard, Plus, Minus } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { menuStructure, type CategoryStructure, type Product } from '@/data/products';
+import { menuStructure, type CategoryStructure } from '@/data/products';
 import { useCart } from '@/contexts/CartContext';
-import { useAuth } from '@/contexts/AuthContext';
+// import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
 
 // Composant pour la barre d'urgence promotionnelle
@@ -37,20 +37,18 @@ const PromoBar = () => (
 
 // Composant DropdownMenu simplifié et stable
 const DropdownMenu = ({ 
-  trigger, 
   categories, 
   isOpen, 
   onClose,
   alignRight = false
 }: { 
-  trigger: string;
   categories: CategoryStructure[];
   isOpen: boolean;
   onClose: () => void;
   alignRight?: boolean;
 }) => {
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
-  const [hoveredSubcategory, setHoveredSubcategory] = useState<string | null>(null);
+  // const [hoveredSubcategory, setHoveredSubcategory] = useState<string | null>(null);
   const [hoveredBrand, setHoveredBrand] = useState<string | null>(null);
 
   if (!isOpen) return null;
@@ -218,7 +216,7 @@ export default function Header() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   
   const { items, removeFromCart, updateQuantity, getCartTotal, getItemCount } = useCart();
-  const { isAuthenticated } = useAuth();
+  // const { isAuthenticated } = useAuth();
   const router = useRouter();
   const cartRef = useRef<HTMLDivElement>(null);
 
@@ -321,7 +319,6 @@ export default function Header() {
                 </button>
                 
                 <DropdownMenu
-                  trigger="Smartphones"
                   categories={menuStructure.smartphones}
                   isOpen={dropdownOpen === 'smartphones'}
                   onClose={closeDropdown}
@@ -343,7 +340,6 @@ export default function Header() {
                 </button>
                 
                 <DropdownMenu
-                  trigger="Montres"
                   categories={menuStructure.montres}
                   isOpen={dropdownOpen === 'montres'}
                   onClose={closeDropdown}
@@ -365,7 +361,6 @@ export default function Header() {
                 </button>
                 
                 <DropdownMenu
-                  trigger="Audio"
                   categories={menuStructure.casquesAudio}
                   isOpen={dropdownOpen === 'audio'}
                   onClose={closeDropdown}
@@ -387,7 +382,6 @@ export default function Header() {
                 </button>
                 
                 <DropdownMenu
-                  trigger="Luminaire"
                   categories={menuStructure.luminaire}
                   isOpen={dropdownOpen === 'luminaire'}
                   onClose={closeDropdown}
@@ -410,7 +404,6 @@ export default function Header() {
                 </button>
                 
                 <DropdownMenu
-                  trigger="Accessoires"
                   categories={menuStructure.accessoiresMonster}
                   isOpen={dropdownOpen === 'accessoires'}
                   onClose={closeDropdown}
@@ -433,7 +426,6 @@ export default function Header() {
                 </button>
                 
                 <DropdownMenu
-                  trigger="MUVIT"
                   categories={menuStructure.muvit}
                   isOpen={dropdownOpen === 'muvit'}
                   onClose={closeDropdown}

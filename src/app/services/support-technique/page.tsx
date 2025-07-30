@@ -45,7 +45,7 @@ export default function SupportTechniquePage() {
       description: "Paramétrage complet de votre nouvel appareil",
       icon: Settings,
       color: "blue",
-      services: ["Transfert de données", "Installation d'applications", "Configuration comptes", "Personnalisation interface"]
+      services: ["Transfert de données", "Installation d&apos;applications", "Configuration comptes", "Personnalisation interface"]
     },
     {
       title: "Formation utilisateur",
@@ -401,7 +401,7 @@ export default function SupportTechniquePage() {
               className="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg p-8 text-center"
             >
               <Monitor className="w-12 h-12 mx-auto mb-4" />
-              <h2 className="text-3xl font-bold mb-4">Besoin d'assistance technique ?</h2>
+              <h2 className="text-3xl font-bold mb-4">Besoin d&apos;assistance technique ?</h2>
               <p className="text-xl mb-6">
                 Nos experts sont à votre disposition pour résoudre tous vos problèmes
               </p>
@@ -428,8 +428,8 @@ export default function SupportTechniquePage() {
               
               <div className="mt-6 p-4 bg-white/10 rounded-lg">
                 <p className="text-sm">
-                  <strong>Service d'urgence :</strong> Intervention express sous 2H pour les professionnels<br />
-                  <strong>Formation sur site :</strong> Déplacement pour formation d'équipes en entreprise
+                  <strong>Service d&apos;urgence :</strong> Intervention express sous 2H pour les professionnels<br />
+                  <strong>Formation sur site :</strong> Déplacement pour formation d&apos;équipes en entreprise
                 </p>
               </div>
             </motion.div>

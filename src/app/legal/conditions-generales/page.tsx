@@ -64,10 +64,10 @@ export default function ConditionsGeneralesPage() {
                 
                 <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                   <ScrollText className="w-6 h-6 text-blue-600" />
-                  Article 1 - Objet et champ d'application
+                  Article 1 - Objet et champ d&apos;application
                 </h2>
                 <p>
-                  Les présentes conditions générales de vente s'appliquent à toutes les commandes passées sur le site 
+                  Les présentes conditions générales de vente s&apos;appliquent à toutes les commandes passées sur le site 
                   monster-phone-boutique.fr exploité par Monster Phone Boutique, société située à La Réunion.
                 </p>
                 <p>
@@ -83,8 +83,8 @@ export default function ConditionsGeneralesPage() {
                 <ul className="list-disc pl-6 space-y-2">
                   <li>Les prix sont exprimés en euros toutes taxes comprises (TTC)</li>
                   <li>Les prix incluent la TVA au taux en vigueur à La Réunion</li>
-                  <li>Les prix peuvent être modifiés à tout moment mais ne s'appliquent qu'aux commandes futures</li>
-                  <li>Frais de livraison : gratuits dès 50€ d'achat, sinon forfait de 5€ sur toute l'île</li>
+                  <li>Les prix peuvent être modifiés à tout moment mais ne s&apos;appliquent qu&apos;aux commandes futures</li>
+                  <li>Frais de livraison : gratuits dès 50€ d&apos;achat, sinon forfait de 5€ sur toute l&apos;île</li>
                 </ul>
 
                 <h3 className="text-lg font-semibold text-gray-800 mb-2 mt-4">2.2 Modalités de paiement</h3>
@@ -108,10 +108,10 @@ export default function ConditionsGeneralesPage() {
 
                 <h3 className="text-lg font-semibold text-gray-800 mb-2 mt-4">3.2 Délais</h3>
                 <ul className="list-disc pl-6 space-y-2">
-                  <li><strong>Express (24h)</strong> : Nord et Ouest de l'île - 10€</li>
-                  <li><strong>Standard (48h)</strong> : Toute l'île - Gratuit dès 50€</li>
+                  <li><strong>Express (24h)</strong> : Nord et Ouest de l&apos;île - 10€</li>
+                  <li><strong>Standard (48h)</strong> : Toute l&apos;île - Gratuit dès 50€</li>
                   <li><strong>Retrait en boutique</strong> : Gratuit, sur RDV à Sainte-Marie</li>
-                  <li><strong>Zones difficiles d'accès</strong> : 72h maximum + 5€</li>
+                  <li><strong>Zones difficiles d&apos;accès</strong> : 72h maximum + 5€</li>
                 </ul>
 
                 <h2 className="text-2xl font-bold text-gray-900 mb-4 mt-8 flex items-center gap-2">
@@ -120,7 +120,7 @@ export default function ConditionsGeneralesPage() {
                 </h2>
                 <h3 className="text-lg font-semibold text-gray-800 mb-2">4.1 Droit de rétractation</h3>
                 <p>
-                  Conformément au Code de la consommation, vous disposez d'un délai de 14 jours francs 
+                  Conformément au Code de la consommation, vous disposez d&apos;un délai de 14 jours francs 
                   pour retourner votre produit sans avoir à justifier de motifs ni à payer de pénalités.
                 </p>
 
@@ -134,16 +134,16 @@ export default function ConditionsGeneralesPage() {
 
                 <h3 className="text-lg font-semibold text-gray-800 mb-2 mt-4">4.3 Conditions de retour</h3>
                 <ul className="list-disc pl-6 space-y-2">
-                  <li>Produit dans son emballage d'origine</li>
+                  <li>Produit dans son emballage d&apos;origine</li>
                   <li>Accessoires et notice inclus</li>
-                  <li>Aucune trace d'usure ou de choc</li>
+                  <li>Aucune trace d&apos;usure ou de choc</li>
                   <li>Film plastique de protection non retiré (smartphones)</li>
                 </ul>
 
                 <h2 className="text-2xl font-bold text-gray-900 mb-4 mt-8">Article 5 - Responsabilité</h2>
                 <p>
                   Monster Phone Boutique ne saurait être tenue responsable des dommages de toute nature 
-                  qui pourraient résulter d'une mauvaise utilisation des produits vendus. 
+                  qui pourraient résulter d&apos;une mauvaise utilisation des produits vendus. 
                   La responsabilité de Monster Phone Boutique est limitée au montant de la commande.
                 </p>
 
@@ -156,8 +156,8 @@ export default function ConditionsGeneralesPage() {
 
                 <h2 className="text-2xl font-bold text-gray-900 mb-4 mt-8">Article 7 - Protection des données</h2>
                 <p>
-                  Conformément à la loi "Informatique et Libertés" et au RGPD, vous disposez d'un droit 
-                  d'accès, de modification et de suppression des données vous concernant. 
+                  Conformément à la loi &quot;Informatique et Libertés&quot; et au RGPD, vous disposez d&apos;un droit 
+                  d&apos;accès, de modification et de suppression des données vous concernant. 
                   Pour exercer ce droit, contactez-nous à contact@monster-phone-reunion.com.
                 </p>
 

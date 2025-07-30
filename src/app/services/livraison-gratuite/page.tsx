@@ -54,7 +54,7 @@ export default function LivraisonGratuitePage() {
       areas: ["Saint-Pierre", "Le Tampon", "Saint-Joseph", "Saint-Philippe"]
     },
     {
-      zone: "Est de l'île",
+      zone: "Est de l&apos;île",
       time: "48h",
       color: "orange",
       areas: ["Sainte-Marie", "Sainte-Suzanne", "Saint-André", "Bras-Panon"]
@@ -138,7 +138,7 @@ export default function LivraisonGratuitePage() {
               className="bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-lg p-8 mb-8 text-center"
             >
               <Euro className="w-16 h-16 mx-auto mb-4" />
-              <h2 className="text-3xl font-bold mb-2">50€ d'achat = Livraison GRATUITE</h2>
+              <h2 className="text-3xl font-bold mb-2">50€ d&apos;achat = Livraison GRATUITE</h2>
               <p className="text-xl opacity-100 mb-4">
                 Profitez de la livraison gratuite partout à La Réunion
               </p>
@@ -224,7 +224,7 @@ export default function LivraisonGratuitePage() {
                 <div className="flex items-start gap-3">
                   <AlertCircle className="w-5 h-5 text-amber-600 mt-1 flex-shrink-0" />
                   <p className="text-sm text-gray-900">
-                    <strong>Note :</strong> Les délais sont donnés à titre indicatif et peuvent varier selon les conditions météorologiques et la disponibilité du transporteur. Les Hauts de l'île peuvent nécessiter un délai supplémentaire.
+                    <strong>Note :</strong> Les délais sont donnés à titre indicatif et peuvent varier selon les conditions météorologiques et la disponibilité du transporteur. Les Hauts de l&apos;île peuvent nécessiter un délai supplémentaire.
                   </p>
                 </div>
               </div>
@@ -279,7 +279,7 @@ export default function LivraisonGratuitePage() {
                   </div>
                   <h3 className="font-semibold mb-2">Réception</h3>
                   <p className="text-sm text-gray-900">
-                    Livraison à l'adresse indiquée
+                    Livraison à l&apos;adresse indiquée
                   </p>
                 </div>
               </div>

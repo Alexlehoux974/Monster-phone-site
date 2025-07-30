@@ -56,7 +56,7 @@ export default function ServiceApresVentePage() {
       description: "Atelier agréé et techniciens certifiés",
       icon: Settings,
       color: "purple",
-      details: ["Diagnostic gratuit", "Devis transparent", "Pièces d'origine"]
+      details: ["Diagnostic gratuit", "Devis transparent", "Pièces d&apos;origine"]
     },
     {
       title: "Suivi personnalisé",
@@ -149,7 +149,7 @@ export default function ServiceApresVentePage() {
                 Service Après-Vente
               </h1>
               <p className="text-2xl text-gray-900 max-w-3xl mx-auto">
-                Un service client d'excellence pour vous accompagner après votre achat
+                Un service client d&apos;excellence pour vous accompagner après votre achat
               </p>
               <div className="mt-4 text-sm text-gray-900">
                 <Calendar className="w-4 h-4 inline mr-1" />
@@ -284,7 +284,7 @@ export default function ServiceApresVentePage() {
                   <div>
                     <h4 className="font-semibold text-amber-900 mb-1">Important</h4>
                     <p className="text-amber-900 text-sm">
-                      La garantie ne couvre pas les dommages dus à une mauvaise utilisation, chute, contact avec l'eau ou usure normale. Conservez votre facture d'achat.
+                      La garantie ne couvre pas les dommages dus à une mauvaise utilisation, chute, contact avec l&apos;eau ou usure normale. Conservez votre facture d&apos;achat.
                     </p>
                   </div>
                 </div>
@@ -362,7 +362,7 @@ export default function ServiceApresVentePage() {
                     Problèmes techniques
                   </h3>
                   <ul className="space-y-2 text-sm">
-                    <li className="text-gray-900">• Écran cassé ou qui ne s'allume plus</li>
+                    <li className="text-gray-900">• Écran cassé ou qui ne s&apos;allume plus</li>
                     <li className="text-gray-900">• Batterie qui se décharge rapidement</li>
                     <li className="text-gray-900">• Problème de charge ou connecteur défaillant</li>
                     <li className="text-gray-900">• Dysfonctionnement du son ou micro</li>
@@ -376,7 +376,7 @@ export default function ServiceApresVentePage() {
                     Solutions proposées
                   </h3>
                   <ul className="space-y-2 text-sm">
-                    <li className="text-gray-900">• Réparation avec pièces d'origine</li>
+                    <li className="text-gray-900">• Réparation avec pièces d&apos;origine</li>
                     <li className="text-gray-900">• Échange standard si sous garantie</li>
                     <li className="text-gray-900">• Diagnostic approfondi gratuit</li>
                     <li className="text-gray-900">• Devis transparent avant intervention</li>

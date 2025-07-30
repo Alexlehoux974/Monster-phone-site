@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 export default function TrustSection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -18,25 +18,7 @@ export default function TrustSection() {
     satisfaction: 98
   };
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !isVisible) {
-          setIsVisible(true);
-          animateNumbers();
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    if (statsRef.current) {
-      observer.observe(statsRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, [isVisible]);
-
-  const animateNumbers = () => {
+  const animateNumbers = useCallback(() => {
     const duration = 2000; // 2 seconds
     const steps = 60;
     const stepDuration = duration / steps;
@@ -59,7 +41,25 @@ export default function TrustSection() {
         setAnimatedStats(finalStats);
       }
     }, stepDuration);
-  };
+  }, [finalStats]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isVisible) {
+          setIsVisible(true);
+          animateNumbers();
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (statsRef.current) {
+      observer.observe(statsRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [isVisible, animateNumbers]);
 
   const trustFeatures = [
     {
@@ -70,7 +70,7 @@ export default function TrustSection() {
       ),
       title: "Livraison Express",
       description: "partout à la Réunion",
-      detail: "24h/48H - Gratuite dès 50€ d'achat"
+      detail: "24h/48H - Gratuite dès 50€ d&apos;achat"
     },
     {
       icon: (
@@ -80,7 +80,7 @@ export default function TrustSection() {
       ),
       title: "Garantie Constructeur",
       description: "2 ans minimum sur tous nos produits",
-      detail: "Extension possible jusqu'à 3 ans"
+      detail: "Extension possible jusqu&apos;à 3 ans"
     },
     {
       icon: (
@@ -90,7 +90,7 @@ export default function TrustSection() {
       ),
       title: "Support Technique",
       description: "Assistance 7j/7 par téléphone",
-      detail: "Équipe d'experts à votre service"
+      detail: "Équipe d&apos;experts à votre service"
     },
     {
       icon: (
@@ -99,7 +99,7 @@ export default function TrustSection() {
         </svg>
       ),
       title: "Retour Facile",
-      description: "30 jours pour changer d'avis",
+      description: "30 jours pour changer d&apos;avis",
       detail: "Remboursement intégral garanti"
     },
     {

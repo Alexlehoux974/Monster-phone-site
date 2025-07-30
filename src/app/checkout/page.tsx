@@ -25,7 +25,7 @@ import {
 
 export default function CheckoutPage() {
   const { items, getCartTotal, clearCart } = useCart();
-  const { user, isAuthenticated } = useAuth();
+  const { user } = useAuth();
   const router = useRouter();
   const [isProcessing, setIsProcessing] = useState(false);
   const [orderComplete, setOrderComplete] = useState(false);
@@ -257,7 +257,7 @@ export default function CheckoutPage() {
 
             <h1 className="text-3xl font-bold mb-6">Finaliser ma commande</h1>
 
-            {/* Indicateur d'étapes */}
+            {/* Indicateur d&apos;étapes */}
             <div className="flex items-center justify-between max-w-2xl">
               {steps.map((step, index) => {
                 const Icon = step.icon;
@@ -580,7 +580,7 @@ export default function CheckoutPage() {
                           <div className="grid grid-cols-2 gap-4">
                             <div>
                               <label className="block text-sm font-medium text-gray-700 mb-1">
-                                Date d'expiration *
+                                Date d&apos;expiration *
                               </label>
                               <input
                                 type="text"
@@ -708,7 +708,7 @@ export default function CheckoutPage() {
                               className="mt-1 mr-3"
                             />
                             <div>
-                              <p className="font-medium">S'inscrire à la newsletter</p>
+                              <p className="font-medium">S&apos;inscrire à la newsletter</p>
                               <p className="text-sm text-gray-600">
                                 Recevez nos offres exclusives et nouveautés
                               </p>
@@ -725,7 +725,7 @@ export default function CheckoutPage() {
                             />
                             <div>
                               <p className="font-medium">
-                                J'accepte les conditions générales de vente *
+                                J&apos;accepte les conditions générales de vente *
                               </p>
                               {errors.terms && (
                                 <p className="text-red-500 text-xs mt-1">{errors.terms}</p>

@@ -15,9 +15,7 @@ import {
   MapPin,
   Calendar,
   Smartphone,
-  CreditCard,
-  Truck
-} from 'lucide-react';
+  CreditCard } from 'lucide-react';
 
 export default function RetoursPolitiquePage() {
   useEffect(() => {
@@ -68,7 +66,7 @@ export default function RetoursPolitiquePage() {
   const excludedProducts = [
     "Produits personnalisés ou gravés",
     "Écouteurs et accessoires audio (hygiène)",
-    "Produits endommagés par l'utilisateur",
+    "Produits endommagés par l&apos;utilisateur",
     "Téléphones avec activation SIM"
   ];
 
@@ -157,7 +155,7 @@ export default function RetoursPolitiquePage() {
                     <div>
                       <h3 className="font-semibold text-gray-900">État neuf</h3>
                       <p className="text-gray-800 text-sm">
-                        Produit non utilisé, dans son emballage d'origine
+                        Produit non utilisé, dans son emballage d&apos;origine
                       </p>
                     </div>
                   </div>
@@ -177,9 +175,9 @@ export default function RetoursPolitiquePage() {
                   <div className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-green-600 mt-1 flex-shrink-0" />
                     <div>
-                      <h3 className="font-semibold text-gray-900">Facture d'achat</h3>
+                      <h3 className="font-semibold text-gray-900">Facture d&apos;achat</h3>
                       <p className="text-gray-800 text-sm">
-                        Présentation de la facture ou justificatif d'achat
+                        Présentation de la facture ou justificatif d&apos;achat
                       </p>
                     </div>
                   </div>
@@ -260,7 +258,7 @@ export default function RetoursPolitiquePage() {
                 <div className="flex items-start gap-3 mb-4">
                   <AlertCircle className="w-5 h-5 text-red-600 mt-1 flex-shrink-0" />
                   <p className="text-red-800">
-                    Pour des raisons d'hygiène et de sécurité, certains produits ne peuvent pas être retournés :
+                    Pour des raisons d&apos;hygiène et de sécurité, certains produits ne peuvent pas être retournés :
                   </p>
                 </div>
                 
@@ -362,7 +360,7 @@ export default function RetoursPolitiquePage() {
               className="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg p-8 text-center"
             >
               <Smartphone className="w-12 h-12 mx-auto mb-4" />
-              <h2 className="text-2xl font-bold mb-4">Besoin d'un retour ?</h2>
+              <h2 className="text-2xl font-bold mb-4">Besoin d&apos;un retour ?</h2>
               <p className="text-lg opacity-90 mb-6">
                 Contactez notre service client pour initier votre demande de retour
               </p>

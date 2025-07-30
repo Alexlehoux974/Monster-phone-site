@@ -3,8 +3,8 @@
 import { motion } from 'framer-motion';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+import { } from '@/components/ui/button';
+import { } from '@/components/ui/badge';
 import { Headphones, MapPin, Clock, Phone, Mail, Wrench } from 'lucide-react';
 
 export default function ServiceApresVentePage() {

@@ -214,7 +214,7 @@ export default function PanierPage() {
                   <Truck className="w-8 h-8 text-blue-600 flex-shrink-0" />
                   <div>
                     <p className="font-semibold text-sm">Livraison gratuite</p>
-                    <p className="text-xs text-gray-600">Dès 50€ d'achat</p>
+                    <p className="text-xs text-gray-600">Dès 50€ d&apos;achat</p>
                   </div>
                 </div>
                 <div className="bg-white rounded-lg p-4 flex items-center space-x-3">
@@ -332,7 +332,7 @@ export default function PanierPage() {
 
                 {/* Informations supplémentaires */}
                 <div className="mt-6 space-y-2 text-xs text-gray-600">
-                  <p>✓ Livraison gratuite dès 50€ d'achat</p>
+                  <p>✓ Livraison gratuite dès 50€ d&apos;achat</p>
                   <p>✓ Retours gratuits sous 30 jours</p>
                   <p>✓ Service client disponible 7j/7</p>
                   <p>✓ Garantie satisfait ou remboursé</p>

@@ -1,8 +1,16 @@
 import { Product } from '@/data/products';
 
+interface BreadcrumbItem {
+  name: string;
+  url: string;
+}
+
 interface StructuredDataProps {
   type: 'organization' | 'product' | 'breadcrumb' | 'website';
-  data?: any;
+  data?: {
+    product?: Product;
+    items?: BreadcrumbItem[];
+  };
 }
 
 export default function StructuredData({ type, data }: StructuredDataProps) {
@@ -119,7 +127,7 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
         return {
           '@context': 'https://schema.org',
           '@type': 'BreadcrumbList',
-          itemListElement: data.items.map((item: any, index: number) => ({
+          itemListElement: data.items.map((item: BreadcrumbItem, index: number) => ({
             '@type': 'ListItem',
             position: index + 1,
             name: item.name,

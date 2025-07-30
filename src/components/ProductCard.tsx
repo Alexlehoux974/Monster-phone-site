@@ -1,11 +1,11 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
-import { Heart, ShoppingCart, Star, Package, Check } from 'lucide-react';
+import { Heart, ShoppingCart, Star, Check } from 'lucide-react';
 import { Product } from '@/data/products';
 import { useCart } from '@/contexts/CartContext';
 import { useState } from 'react';
+import ImageWithFallback from './ImageWithFallback';
 
 interface ProductCardProps {
   product: Product;
@@ -18,7 +18,7 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
   const [isAdding, setIsAdding] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
-  const mainImage = product.images[0] || '/placeholder-product.png';
+  const mainImage = product.images[0] || '/placeholder-product.svg';
   const price = parseFloat(product.price?.replace('€', '') || '0');
 
   const handleAddToCart = async (e: React.MouseEvent) => {
@@ -69,15 +69,13 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
             <Link href={`/produit/${product.urlSlug || product.id}`}>
               <div className="relative h-full">
                 {getBadge()}
-                <Image
+                <ImageWithFallback
                   src={mainImage}
                   alt={product.name}
                   fill
                   className="object-contain rounded-lg group-hover:scale-105 transition-transform duration-300"
                   sizes="128px"
-                  onError={(e) => {
-                    e.currentTarget.src = '/placeholder-product.png';
-                  }}
+                  fallbackSrc="/placeholder-product.svg"
                 />
               </div>
             </Link>
@@ -147,22 +145,14 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
       <Link href={`/produit/${product.urlSlug || product.id}`}>
         <div className="relative aspect-square overflow-hidden rounded-t-lg bg-gray-50">
           {getBadge()}
-          {mainImage ? (
-            <Image
-              src={mainImage}
-              alt={product.name}
-              fill
-              className="object-contain p-4 group-hover:scale-110 transition-transform duration-300"
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              onError={(e) => {
-                e.currentTarget.src = '/placeholder-product.png';
-              }}
-            />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center">
-              <Package className="w-16 h-16 text-gray-300" />
-            </div>
-          )}
+          <ImageWithFallback
+            src={mainImage}
+            alt={product.name}
+            fill
+            className="object-contain p-4 group-hover:scale-110 transition-transform duration-300"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            fallbackSrc="/placeholder-product.svg"
+          />
         </div>
       </Link>
 

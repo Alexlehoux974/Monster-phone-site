@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import './contact.css';
-import Head from 'next/head';
 import { motion } from 'framer-motion';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -15,7 +14,6 @@ import {
   Clock, 
   Send,
   MessageSquare,
-  User,
   Building,
   Smartphone,
   CheckCircle,
@@ -106,7 +104,7 @@ export default function ContactPage() {
                 </span>
               </h1>
               <p className="text-2xl text-gray-900 max-w-3xl mx-auto">
-                Notre équipe d'experts est à votre écoute pour vous conseiller sur nos produits gaming 
+                Notre équipe d&apos;experts est à votre écoute pour vous conseiller sur nos produits gaming 
                 et vous accompagner dans vos projets high-tech.
               </p>
             </motion.div>
@@ -291,7 +289,7 @@ export default function ContactPage() {
                 <div className="bg-white rounded-lg shadow-sm border p-6">
                   <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                     <Clock className="w-5 h-5 text-green-600" />
-                    Horaires d'ouverture
+                    Horaires d&apos;ouverture
                   </h3>
                   <div className="space-y-2">
                     <div className="flex justify-between">
@@ -349,7 +347,7 @@ export default function ContactPage() {
                   </div>
                   <p className="text-red-900 text-sm">
                     Pour les réparations urgentes ou les problèmes techniques critiques, 
-                    contactez-nous directement par téléphone aux heures d'ouverture.
+                    contactez-nous directement par téléphone aux heures d&apos;ouverture.
                   </p>
                 </div>
               </motion.div>
@@ -378,7 +376,7 @@ export default function ContactPage() {
                     <Navigation className="w-8 h-8" />
                   </div>
                   <h3 className="font-semibold mb-2">Livraison 48h</h3>
-                  <p className="text-sm text-white">Partout sur l'île, gratuit dès 50€</p>
+                  <p className="text-sm text-white">Partout sur l&apos;île, gratuit dès 50€</p>
                 </div>
                 <div className="text-center">
                   <div className="bg-white/10 rounded-full p-4 w-16 h-16 mx-auto mb-4 flex items-center justify-center">

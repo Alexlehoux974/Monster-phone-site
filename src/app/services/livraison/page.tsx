@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { Button } from '@/components/ui/button';
+import { } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Truck, MapPin, Clock, Euro, Package, Plane } from 'lucide-react';
 
@@ -45,14 +45,14 @@ export default function LivraisonPage() {
               <div className="bg-white p-6 rounded-lg shadow-sm border">
                 <div className="flex items-center gap-3 mb-4">
                   <MapPin className="w-6 h-6 text-blue-600" />
-                  <h3 className="text-xl font-bold text-gray-900">Toute l'île de la Réunion</h3>
+                  <h3 className="text-xl font-bold text-gray-900">Toute l&apos;île de la Réunion</h3>
                 </div>
                 <ul className="space-y-2 text-gray-600">
                   <li>• Saint-Denis et agglomération</li>
                   <li>• Saint-Paul et la côte ouest</li>
                   <li>• Saint-Pierre et le sud</li>
-                  <li>• Saint-André et l'est</li>
-                  <li>• Cirques et hauts de l'île</li>
+                  <li>• Saint-André et l&apos;est</li>
+                  <li>• Cirques et hauts de l&apos;île</li>
                 </ul>
               </div>
 
@@ -138,10 +138,10 @@ export default function LivraisonPage() {
                 <div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-4">Points relais</h3>
                   <ul className="space-y-2 text-gray-600">
-                    <li>• Plus de 50 points relais sur l'île</li>
-                    <li>• Horaires étendus (souvent jusqu'à 19h)</li>
+                    <li>• Plus de 50 points relais sur l&apos;île</li>
+                    <li>• Horaires étendus (souvent jusqu&apos;à 19h)</li>
                     <li>• Conservation 10 jours ouvrés</li>
-                    <li>• SMS d'alerte dès réception</li>
+                    <li>• SMS d&apos;alerte dès réception</li>
                     <li>• Tarif préférentiel : -1€ sur livraison</li>
                   </ul>
                 </div>

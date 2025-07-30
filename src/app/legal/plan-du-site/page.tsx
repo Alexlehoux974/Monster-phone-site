@@ -17,7 +17,6 @@ import {
   Clock,
   Smartphone,
   Headphones,
-  Watch,
   Gift,
   Wrench,
   ArrowRight
@@ -103,7 +102,7 @@ export default function PlanDuSitePage() {
     {
       title: "Mentions Légales",
       url: "/legal/mentions-legales",
-      description: "Informations légales de l'entreprise"
+      description: "Informations légales de l&apos;entreprise"
     },
     {
       title: "Plan du Site",

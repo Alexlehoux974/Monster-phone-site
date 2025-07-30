@@ -15,7 +15,7 @@ export default function TestHeader() {
             <ul className="mt-2 space-y-2">
               <li>✓ La barre de recherche est à droite de MUVIT</li>
               <li>✓ Tous les menus peuvent être survolés</li>
-              <li>✓ Les dropdowns s'affichent correctement</li>
+              <li>✓ Les dropdowns s&apos;affichent correctement</li>
               <li>✓ On peut cliquer sur tous les liens</li>
               <li>✓ Les sous-menus fonctionnent</li>
             </ul>

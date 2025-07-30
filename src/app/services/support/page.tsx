@@ -30,8 +30,8 @@ export default function SupportTechniquePage() {
                 Support technique
               </h1>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Besoin d'aide avec vos appareils ? Notre équipe technique à La Réunion 
-                vous accompagne dans la configuration et l'utilisation de vos produits.
+                Besoin d&apos;aide avec vos appareils ? Notre équipe technique à La Réunion 
+                vous accompagne dans la configuration et l&apos;utilisation de vos produits.
               </p>
             </motion.div>
 
@@ -70,7 +70,7 @@ export default function SupportTechniquePage() {
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">Formation</h3>
                 <p className="text-gray-600 text-sm mb-4">
-                  Conseils d'utilisation et astuces pour optimiser vos appareils
+                  Conseils d&apos;utilisation et astuces pour optimiser vos appareils
                 </p>
                 <Badge className="bg-purple-100 text-purple-800">Sur demande</Badge>
               </div>
@@ -93,7 +93,7 @@ export default function SupportTechniquePage() {
                   <ul className="space-y-2 text-gray-600">
                     <li>• Configuration initiale et transfert de données</li>
                     <li>• Paramétrage des comptes et synchronisation</li>
-                    <li>• Installation et configuration d'applications</li>
+                    <li>• Installation et configuration d&apos;applications</li>
                     <li>• Optimisation des performances gaming</li>
                     <li>• Mise à jour logicielle et sécurité</li>
                     <li>• Résolution de problèmes de connectivité</li>
@@ -122,7 +122,7 @@ export default function SupportTechniquePage() {
               className="mb-12"
             >
               <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">
-                Comment obtenir de l'aide ?
+                Comment obtenir de l&apos;aide ?
               </h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -165,7 +165,7 @@ export default function SupportTechniquePage() {
                   </div>
                   <h3 className="font-semibold text-gray-900 mb-2">Intervention domicile</h3>
                   <p className="text-sm text-gray-600 mb-3">
-                    Service premium à domicile sur l'île
+                    Service premium à domicile sur l&apos;île
                   </p>
                   <Button size="sm" variant="outline">Demander</Button>
                 </div>
@@ -196,7 +196,7 @@ export default function SupportTechniquePage() {
                   </div>
                   <div className="bg-blue-50 p-3 rounded-lg mt-4">
                     <p className="text-sm text-blue-800">
-                      ⚡ Support d'urgence disponible sur demande
+                      ⚡ Support d&apos;urgence disponible sur demande
                     </p>
                   </div>
                 </div>
@@ -238,10 +238,10 @@ export default function SupportTechniquePage() {
               className="bg-purple-50 rounded-lg border p-8 text-center"
             >
               <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                Besoin d'assistance technique ?
+                Besoin d&apos;assistance technique ?
               </h2>
               <p className="text-gray-600 mb-6">
-                Notre équipe d'experts à La Réunion est prête à vous aider
+                Notre équipe d&apos;experts à La Réunion est prête à vous aider
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button className="bg-purple-600 hover:bg-purple-700">

@@ -11,7 +11,6 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { 
   Flame, 
-  Tag, 
   Clock, 
   Star, 
   ShoppingCart,
@@ -21,7 +20,7 @@ import {
   Zap,
   Package
 } from 'lucide-react';
-import { allProducts, type Product } from '@/data/products';
+import { allProducts } from '@/data/products';
 
 // Simuler des promotions sur certains produits populaires
 const promotionProducts = [
@@ -48,8 +47,7 @@ const ClientParticles = () => {
       left: `${Math.random() * 100}%`,
       top: `${Math.random() * 100}%`,
       duration: 3 + Math.random() * 2,
-      delay: Math.random() * 2,
-    }));
+      delay: Math.random() * 2 }));
     setParticles(newParticles);
   }, []);
 
@@ -65,18 +63,15 @@ const ClientParticles = () => {
           className="absolute w-2 h-2 bg-white/30 rounded-full"
           style={{
             left: particle.left,
-            top: particle.top,
-          }}
+            top: particle.top }}
           animate={{
             y: [0, -20, 0],
             opacity: [0.3, 0.8, 0.3],
-            scale: [1, 1.2, 1],
-          }}
+            scale: [1, 1.2, 1] }}
           transition={{
             duration: particle.duration,
             repeat: Infinity,
-            delay: particle.delay,
-          }}
+            delay: particle.delay }}
         />
       ))}
     </div>
@@ -123,8 +118,7 @@ const SparklesCore = ({ className, particleDensity = 80, speed = 1 }: {
         size: Math.random() * 2 + 0.5,
         speedX: (Math.random() - 0.5) * speed,
         speedY: (Math.random() - 0.5) * speed,
-        opacity: Math.random() * 0.8 + 0.2,
-      });
+        opacity: Math.random() * 0.8 + 0.2 });
     }
 
     const animateParticles = () => {
@@ -185,12 +179,10 @@ const TextShimmer = ({ children, className, duration = 2 }: { children: string; 
       transition={{
         repeat: Infinity,
         duration,
-        ease: "linear",
-      }}
+        ease: "linear" }}
       style={{
         "--spread": `${children.length * 2}px`,
-        backgroundImage: `var(--bg), linear-gradient(var(--base-color), var(--base-color))`,
-      } as React.CSSProperties}
+        backgroundImage: `var(--bg), linear-gradient(var(--base-color), var(--base-color))` } as React.CSSProperties}
     >
       {children}
     </motion.span>
@@ -209,8 +201,7 @@ export default function PromotionsPage() {
       ease: "easeInOut",
       duration: 8,
       repeat: Infinity,
-      repeatType: "reverse",
-    });
+      repeatType: "reverse" });
   }, [color]);
 
   const backgroundImage = useMotionTemplate`radial-gradient(125% 125% at 50% 0%, #020617 50%, ${color})`;
@@ -344,7 +335,7 @@ export default function PromotionsPage() {
                   accessoires et gadgets high-tech. Promotions limitées dans le temps !
                 </motion.p>
                 
-                {/* Compteur d'offres */}
+                {/* Compteur d&apos;offres */}
                 <motion.div 
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -362,7 +353,7 @@ export default function PromotionsPage() {
                     whileHover={{ scale: 1.05 }}
                     className="bg-white/10 backdrop-blur-md rounded-lg px-6 py-4 border border-white/20"
                   >
-                    <div className="text-2xl font-bold text-green-400">Jusqu'à -30%</div>
+                    <div className="text-2xl font-bold text-green-400">Jusqu&apos;à -30%</div>
                     <div className="text-sm text-gray-100">Réductions max</div>
                   </motion.div>
                   <motion.div 
@@ -376,7 +367,7 @@ export default function PromotionsPage() {
               </motion.div>
             </motion.section>
 
-            {/* Bannière d'urgence */}
+            {/* Bannière d&apos;urgence */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -470,7 +461,7 @@ export default function PromotionsPage() {
                       </div>
                     )}
                     
-                    {/* Overlay avec bouton d'action */}
+                    {/* Overlay avec bouton d&apos;action */}
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
                       <Button
                         size="sm"

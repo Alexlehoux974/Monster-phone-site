@@ -1,3 +1,7 @@
+
+> monster-phone-boutique@0.1.0 dev
+> next dev --turbopack -H 0.0.0.0
+
  ⚠ Warning: Found multiple lockfiles. Selecting /root/package-lock.json.
    Consider removing the lockfiles at:
    * /root/monster-phone-dev/monster-phone-boutique/package-lock.json
@@ -7,161 +11,46 @@
    - Network:      http://0.0.0.0:3000
 
  ✓ Starting...
- ✓ Ready in 1451ms
+ ✓ Ready in 1132ms
  ○ Compiling / ...
- ✓ Compiled / in 9.4s
- GET / 200 in 10304ms
- GET / 200 in 240ms
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
+ ✓ Compiled / in 7.7s
+ HEAD / 200 in 8882ms
  ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ○ Compiling /services/livraison-gratuite ...
- ✓ Compiled /services/livraison-gratuite in 1131ms
- GET /services/livraison-gratuite 200 in 1234ms
- ○ Compiling /services/retours-30-jours ...
- ✓ Compiled /services/retours-30-jours in 668ms
- GET /services/retours-30-jours 200 in 735ms
- ○ Compiling /legal/conditions-generales ...
- ✓ Compiled /legal/conditions-generales in 687ms
- GET /legal/conditions-generales 200 in 757ms
- ○ Compiling /services/service-apres-vente ...
- ✓ Compiled /services/service-apres-vente in 512ms
- GET /services/service-apres-vente 200 in 584ms
- ○ Compiling /services/support-technique ...
- ✓ Compiled /services/support-technique in 731ms
- GET /services/support-technique 200 in 872ms
- GET / 200 in 232ms
- GET /legal/conditions-generales 200 in 56ms
- GET /services/retours-30-jours 200 in 55ms
- GET /services/livraison-gratuite 200 in 66ms
- ○ Compiling /contact ...
- ✓ Compiled /contact in 1271ms
- GET /contact 200 in 1334ms
- GET /contact 200 in 49ms
- GET /legal/conditions-generales 200 in 55ms
- ○ Compiling /legal/confidentialite ...
- ✓ Compiled /legal/confidentialite in 575ms
- GET /legal/confidentialite 200 in 712ms
- ✓ Compiled in 446ms
- ✓ Compiled in 191ms
- ✓ Compiled in 182ms
- ✓ Compiled in 149ms
- ✓ Compiled in 153ms
- ✓ Compiled in 194ms
- ✓ Compiled in 120ms
- GET /legal/confidentialite 200 in 71ms
- ✓ Compiled in 184ms
- GET /legal/confidentialite 200 in 928ms
- ○ Compiling /legal/mentions-legales ...
- ✓ Compiled /legal/mentions-legales in 955ms
- GET /legal/mentions-legales 200 in 1032ms
- ✓ Compiled /legal/conditions-generales in 25ms
- GET /legal/conditions-generales 200 in 260ms
- ✓ Compiled /legal/plan-du-site in 495ms
- GET /legal/plan-du-site 200 in 587ms
- GET /contact 200 in 214ms
- GET /services/livraison-gratuite 200 in 225ms
- GET /services/retours-30-jours 200 in 186ms
- GET /legal/conditions-generales 200 in 167ms
- GET /services/service-apres-vente 200 in 302ms
+ GET / 200 in 223ms
  ○ Compiling /nos-produits ...
- ✓ Compiled /nos-produits in 844ms
- GET /nos-produits 200 in 902ms
- ○ Compiling /accessoires ...
- ✓ Compiled /accessoires in 674ms
- GET /accessoires 200 in 755ms
- ✓ Compiled in 417ms
- ✓ Compiled in 300ms
- ✓ Compiled in 335ms
- ✓ Compiled in 344ms
- ✓ Compiled in 1119ms
- GET / 200 in 102ms
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
+ ✓ Compiled /nos-produits in 850ms
+ HEAD /nos-produits 200 in 1011ms
+ ○ Compiling /contact ...
+ ✓ Compiled /contact in 625ms
+ HEAD /contact 200 in 786ms
+ ○ Compiling /panier ...
+ ✓ Compiled /panier in 616ms
+ HEAD /panier 200 in 800ms
+ GET / 200 in 225ms
+ GET / 200 in 195ms
+ GET / 200 in 328ms
+ GET / 200 in 1370ms
  ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
  ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ✓ Compiled in 1311ms
- ✓ Compiled / in 130ms
- GET / 200 in 1167ms
- GET / 200 in 248ms
- GET / 200 in 152ms
- GET / 200 in 121ms
- GET / 200 in 104ms
- GET / 200 in 136ms
- GET / 200 in 98ms
- ✓ Compiled / in 24ms
- GET / 200 in 7279ms
- GET / 200 in 83ms
- GET / 200 in 98ms
- GET / 200 in 96ms
- GET / 200 in 516ms
- GET / 200 in 89ms
+ GET / 200 in 770ms
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
+ GET /nos-produits 200 in 298ms
+ GET /nos-produits 200 in 192ms
+ GET /contact 200 in 242ms
+ GET / 200 in 200ms
+ GET / 200 in 212ms
+ GET / 200 in 341ms
+ GET / 200 in 766ms
  ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
  ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
+ GET /nos-produits 200 in 357ms
  ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ✓ Compiled in 737ms
- GET / 200 in 367ms
- GET / 200 in 98ms
- ✓ Compiled in 498ms
- GET / 200 in 247ms
- GET / 200 in 83ms
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
+ GET /contact 200 in 653ms
+ GET /panier 200 in 217ms
+ GET / 200 in 217ms
+ ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/200-Pro/HONOR-200-PRO-1280x800-1.jpg received text/plain; charset=utf-8
  ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- ✓ Compiled in 368ms
- ✓ Compiled in 411ms
- GET / 200 in 266ms
- GET / 200 in 72ms
- ✓ Compiled in 365ms
- ✓ Compiled in 3.8s
- ✓ Compiled in 702ms
- ✓ Compiled in 3s
- ✓ Compiled in 3.6s
- ✓ Compiled in 242ms
- ✓ Compiled in 419ms
- ✓ Compiled in 864ms
- ✓ Compiled / in 20ms
- GET / 200 in 296ms
- GET / 200 in 83ms
- GET / 200 in 99ms
- GET / 200 in 63ms
- GET / 200 in 83ms
- GET / 200 in 106ms
- GET / 200 in 86ms
- GET / 200 in 67ms
- GET / 200 in 90ms
- GET / 200 in 94ms
- GET / 200 in 73ms
- GET / 200 in 87ms
- GET / 200 in 89ms
- GET / 200 in 253ms
- GET / 200 in 222ms
- GET / 200 in 78ms
- ✓ Compiled in 188ms
- ✓ Compiled / in 36ms
- GET / 200 in 277ms
- ✓ Compiled in 2.5s
- GET / 200 in 127ms
- ✓ Compiled in 2.4s
- ✓ Compiled / in 33ms
- GET / 200 in 305ms
- GET / 200 in 220ms
- GET / 200 in 99ms
- GET / 200 in 126ms
- GET / 200 in 68ms
- GET / 200 in 66ms
- GET / 200 in 88ms
- GET / 200 in 71ms
- GET / 200 in 90ms
- GET / 200 in 69ms
- GET / 200 in 78ms
- GET / 200 in 112ms
- ✓ Compiled /_not-found/page in 453ms
- GET /manifest.json 404 in 722ms
- GET /produit/honor-200-pro-smartphone-flagship 404 in 86ms
- ⨯ The requested resource isn't a valid image for https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Images/X5B/Honor-X5b-main.webp received text/plain; charset=utf-8
- GET /produit/honor-200-pro-smartphone-flagship 404 in 121ms
- GET / 200 in 388ms
- ○ Compiling /compte ...
- ✓ Compiled /compte in 644ms
- GET /compte 200 in 825ms
- GET /icon-144x144.png 404 in 112ms
- GET / 200 in 250ms
- GET /icon-144x144.png 404 in 104ms
+ ✓ Compiled /_not-found/page in 304ms
+ GET /icon-144x144.png 404 in 421ms

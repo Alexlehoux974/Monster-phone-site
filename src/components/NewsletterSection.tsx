@@ -48,7 +48,7 @@ export default function NewsletterSection() {
     }, 50);
   };
 
-  // Compte à rebours de l'offre
+  // Compte à rebours de l&apos;offre
   useEffect(() => {
     const timer = setInterval(() => {
       setCountdown(prev => {
@@ -152,7 +152,7 @@ export default function NewsletterSection() {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-6xl mx-auto text-white">
-          {/* Badge d'urgence flottant */}
+          {/* Badge d&apos;urgence flottant */}
           <div className="text-center mb-8">
             <div className="inline-flex items-center bg-red-500/90 backdrop-blur-lg text-white px-6 py-2 rounded-full font-bold animate-bounce border border-red-400/50">
               <span className="w-2 h-2 bg-white rounded-full mr-2 animate-ping"></span>
@@ -172,7 +172,7 @@ export default function NewsletterSection() {
               </div>
               
               <p className="text-3xl lg:text-4xl text-white/95 mb-8 font-medium leading-relaxed">
-                Rejoignez l'élite tech ! <span className="text-yellow-300 font-bold">{subscriberCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}</span> membres profitent déjà d'avantages exclusifs.
+                Rejoignez l&apos;élite tech ! <span className="text-yellow-300 font-bold">{subscriberCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}</span> membres profitent déjà d&apos;avantages exclusifs.
               </p>
               
               {/* Avantages avec animations */}
@@ -268,7 +268,7 @@ export default function NewsletterSection() {
                     className="mt-1 rounded border-white/30 bg-white/20 text-yellow-500 focus:ring-yellow-400/50 w-5 h-5"
                   />
                   <label htmlFor="newsletter-consent" className="text-lg text-white/90 leading-relaxed">
-                    ✅ J'accepte de recevoir les offres VIP Monster Phone et j'ai lu la{' '}
+                    ✅ J&apos;accepte de recevoir les offres VIP Monster Phone et j&apos;ai lu la{' '}
                     <a href="#" className="underline hover:text-yellow-300 transition-colors">politique de confidentialité</a>
                   </label>
                 </div>
@@ -336,7 +336,7 @@ export default function NewsletterSection() {
                 {/* Testimonial rapide */}
                 <div className="mt-4 bg-white/10 rounded-lg p-3 border border-white/20">
                   <p className="text-white/90 text-base italic text-center">
-                    "Meilleur site tech de la Réunion ! Livraison ultra rapide 🚀"
+                    &quot;Meilleur site tech de la Réunion ! Livraison ultra rapide 🚀&quot;
                   </p>
                   <p className="text-white/70 text-sm text-center mt-1">- Sarah M., membre VIP depuis 2023</p>
                 </div>

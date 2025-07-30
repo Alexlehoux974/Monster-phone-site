@@ -38,7 +38,16 @@
       "mcp__airtable__search_records",
       "mcp__airtable__create_table",
       "Bash(cp:*)",
-      "mcp__playwright__browser_tab_list"
+      "mcp__playwright__browser_tab_list",
+      "Bash(mkdir:*)",
+      "Bash(npm test)",
+      "Bash(npm run lint:*)",
+      "Bash(touch:*)",
+      "Bash(grep:*)",
+      "Bash(npx eslint:*)",
+      "Bash(npx next lint:*)",
+      "Bash(npx playwright:*)",
+      "Bash(npm run test:e2e:*)"
     ],
     "deny": []
   }

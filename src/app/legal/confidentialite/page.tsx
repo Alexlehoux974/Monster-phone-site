@@ -177,7 +177,7 @@ export default function ConfidentialitePage() {
                       </tr>
                       <tr className="border-b border-amber-200">
                         <td className="py-2">Newsletter</td>
-                        <td className="py-2">Jusqu'à désinscription</td>
+                        <td className="py-2">Jusqu&apos;à désinscription</td>
                       </tr>
                       <tr>
                         <td className="py-2">Cookies</td>
@@ -197,7 +197,7 @@ export default function ConfidentialitePage() {
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                   <div className="border border-blue-200 bg-blue-50 p-4 rounded-lg">
-                    <h4 className="font-semibold text-blue-900 mb-2">Droit d'accès</h4>
+                    <h4 className="font-semibold text-blue-900 mb-2">Droit d&apos;accès</h4>
                     <p className="text-sm text-blue-900">
                       Obtenir la confirmation que vos données sont traitées et y accéder
                     </p>
@@ -209,7 +209,7 @@ export default function ConfidentialitePage() {
                     </p>
                   </div>
                   <div className="border border-red-200 bg-red-50 p-4 rounded-lg">
-                    <h4 className="font-semibold text-red-900 mb-2">Droit à l'effacement</h4>
+                    <h4 className="font-semibold text-red-900 mb-2">Droit à l&apos;effacement</h4>
                     <p className="text-sm text-red-900">
                       Supprimer vos données dans certaines conditions
                     </p>
@@ -232,7 +232,7 @@ export default function ConfidentialitePage() {
                   <li>Téléphone : 0262 XX XX XX</li>
                 </ul>
                 <p className="text-sm text-gray-900 mt-2">
-                  Nous vous répondrons dans un délai d'un mois. Une pièce d'identité pourra être demandée.
+                  Nous vous répondrons dans un délai d&apos;un mois. Une pièce d&apos;identité pourra être demandée.
                 </p>
 
                 <h2 className="text-2xl font-bold text-gray-900 mb-4 mt-8">7. Sécurité des données</h2>
@@ -252,7 +252,7 @@ export default function ConfidentialitePage() {
                 <h3 className="text-lg font-semibold text-gray-900 mb-2 mt-4">Types de cookies</h3>
                 <ul className="list-disc pl-6 space-y-1">
                   <li><strong>Techniques</strong> : Nécessaires au fonctionnement (panier, connexion)</li>
-                  <li><strong>Statistiques</strong> : Mesure d'audience anonyme (Google Analytics)</li>
+                  <li><strong>Statistiques</strong> : Mesure d&apos;audience anonyme (Google Analytics)</li>
                   <li><strong>Marketing</strong> : Personnalisation des offres (avec consentement)</li>
                 </ul>
 

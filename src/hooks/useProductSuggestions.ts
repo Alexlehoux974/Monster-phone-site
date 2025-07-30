@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Product, allProducts } from '@/data/products';
+import { allProducts } from '@/data/products';
 import { CartItem } from '@/contexts/CartContext';
 
 export function useProductSuggestions(cartItems: CartItem[], limit: number = 4) {

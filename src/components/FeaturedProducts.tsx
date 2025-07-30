@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { allProducts, Product } from '@/data/products';
+import { allProducts } from '@/data/products';
 
 export default function FeaturedProducts() {
   // Sélection de 6 produits phares stratégiques de différentes catégories
@@ -24,7 +24,7 @@ export default function FeaturedProducts() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredProducts.map((product, index) => (
+          {featuredProducts.map((product) => (
             <div key={product.sku} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group">
               {/* Image container */}
               <div className="relative h-64 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden">

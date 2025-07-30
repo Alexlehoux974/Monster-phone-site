@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+import { } from '@/components/ui/badge';
 import { RotateCcw, Calendar, FileText, RefreshCw, AlertCircle, CheckCircle } from 'lucide-react';
 
 export default function RetoursPage() {
@@ -30,7 +30,7 @@ export default function RetoursPage() {
                 Retours sous 30 jours
               </h1>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Vous n'êtes pas satisfait de votre achat ? Pas de problème ! 
+                Vous n&apos;êtes pas satisfait de votre achat ? Pas de problème ! 
                 Retournez vos produits sous 30 jours à La Réunion, remboursement garanti.
               </p>
             </motion.div>
@@ -54,10 +54,10 @@ export default function RetoursPage() {
                   </h3>
                   <ul className="space-y-2 text-gray-600">
                     <li>• Accessoires en parfait état</li>
-                    <li>• Emballage d'origine conservé</li>
+                    <li>• Emballage d&apos;origine conservé</li>
                     <li>• Smartphones non utilisés</li>
                     <li>• Produits non personnalisés</li>
-                    <li>• Facture d'achat fournie</li>
+                    <li>• Facture d&apos;achat fournie</li>
                   </ul>
                 </div>
 
@@ -68,8 +68,8 @@ export default function RetoursPage() {
                   </h3>
                   <ul className="space-y-2 text-gray-600">
                     <li>• Coques personnalisées</li>
-                    <li>• Produits endommagés par l'usage</li>
-                    <li>• Écouteurs pour raisons d'hygiène</li>
+                    <li>• Produits endommagés par l&apos;usage</li>
+                    <li>• Écouteurs pour raisons d&apos;hygiène</li>
                     <li>• Accessoires modifiés</li>
                     <li>• Produits soldés (selon mention)</li>
                   </ul>
@@ -105,7 +105,7 @@ export default function RetoursPage() {
                   </div>
                   <h3 className="font-semibold text-gray-900 mb-2">2. Validation</h3>
                   <p className="text-sm text-gray-600">
-                    Nous validons votre demande sous 24h et vous envoyons l'étiquette retour
+                    Nous validons votre demande sous 24h et vous envoyons l&apos;étiquette retour
                   </p>
                 </div>
 
@@ -115,7 +115,7 @@ export default function RetoursPage() {
                   </div>
                   <h3 className="font-semibold text-gray-900 mb-2">3. Renvoi</h3>
                   <p className="text-sm text-gray-600">
-                    Renvoyez le produit avec l'étiquette fournie via notre transporteur partenaire
+                    Renvoyez le produit avec l&apos;étiquette fournie via notre transporteur partenaire
                   </p>
                 </div>
 

@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { Building, Globe, Shield, Phone, Mail, MapPin, Calendar } from 'lucide-react';
+import { Building, Globe, Shield, Phone, MapPin, Calendar } from 'lucide-react';
 
 export default function MentionsLegalesPage() {
   useEffect(() => {
@@ -64,7 +64,7 @@ export default function MentionsLegalesPage() {
                 
                 <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                   <Building className="w-6 h-6 text-blue-600" />
-                  1. Informations sur l'entreprise
+                  1. Informations sur l&apos;entreprise
                 </h2>
                 
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
@@ -87,7 +87,7 @@ export default function MentionsLegalesPage() {
                     </div>
                     <div>
                       <h3 className="font-semibold text-blue-900 mb-2">APE/NAF</h3>
-                      <p className="text-blue-800">4741Z - Commerce de détail d'ordinateurs</p>
+                      <p className="text-blue-800">4741Z - Commerce de détail d&apos;ordinateurs</p>
                     </div>
                     <div>
                       <h3 className="font-semibold text-blue-900 mb-2">N° TVA</h3>
@@ -160,16 +160,16 @@ export default function MentionsLegalesPage() {
                   5. Propriété intellectuelle
                 </h2>
                 
-                <h3 className="text-lg font-semibold text-gray-800 mb-2">5.1 Droits d'auteur</h3>
+                <h3 className="text-lg font-semibold text-gray-800 mb-2">5.1 Droits d&apos;auteur</h3>
                 <p>
                   Le site monster-phone-boutique.fr, sa structure, son contenu, ses textes, images, 
                   sons, vidéos, et tous les éléments qui le composent sont protégés par le droit 
-                  d'auteur et appartiennent à Monster Phone Boutique ou à ses partenaires.
+                  d&apos;auteur et appartiennent à Monster Phone Boutique ou à ses partenaires.
                 </p>
 
                 <h3 className="text-lg font-semibold text-gray-800 mb-2 mt-4">5.2 Marques</h3>
                 <p>
-                  Les marques "Monster Phone", "Monster Phone Boutique" et tous les logos associés 
+                  Les marques &quot;Monster Phone&quot;, &quot;Monster Phone Boutique&quot; et tous les logos associés 
                   sont des marques déposées de Monster Phone Boutique. Toute reproduction non 
                   autorisée constitue une contrefaçon.
                 </p>
@@ -185,8 +185,8 @@ export default function MentionsLegalesPage() {
                 
                 <h3 className="text-lg font-semibold text-gray-800 mb-2">6.1 Contenu du site</h3>
                 <p>
-                  Monster Phone Boutique s'efforce d'assurer l'exactitude des informations diffusées 
-                  sur le site, mais ne peut garantir l'exactitude, la précision ou l'exhaustivité 
+                  Monster Phone Boutique s&apos;efforce d&apos;assurer l&apos;exactitude des informations diffusées 
+                  sur le site, mais ne peut garantir l&apos;exactitude, la précision ou l&apos;exhaustivité 
                   des informations mises à disposition.
                 </p>
 
@@ -200,7 +200,7 @@ export default function MentionsLegalesPage() {
                 <h3 className="text-lg font-semibold text-gray-800 mb-2 mt-4">6.3 Liens externes</h3>
                 <p>
                   Le site peut contenir des liens vers des sites tiers. Monster Phone Boutique 
-                  n'exerce aucun contrôle sur ces sites et décline toute responsabilité quant 
+                  n&apos;exerce aucun contrôle sur ces sites et décline toute responsabilité quant 
                   à leur contenu.
                 </p>
 
@@ -215,7 +215,7 @@ export default function MentionsLegalesPage() {
 
                 <h2 className="text-2xl font-bold text-gray-900 mb-4 mt-8">8. Cookies</h2>
                 <p>
-                  Le site utilise des cookies pour améliorer l'expérience utilisateur. 
+                  Le site utilise des cookies pour améliorer l&apos;expérience utilisateur. 
                   Vous pouvez gérer vos préférences via le bandeau cookies ou les paramètres 
                   de votre navigateur.
                 </p>
@@ -223,7 +223,7 @@ export default function MentionsLegalesPage() {
                 <h2 className="text-2xl font-bold text-gray-900 mb-4 mt-8">9. Droit applicable</h2>
                 <p>
                   Les présentes mentions légales sont soumises au droit français. 
-                  Tout litige relatif à l'utilisation du site relève de la compétence 
+                  Tout litige relatif à l&apos;utilisation du site relève de la compétence 
                   exclusive des tribunaux de Saint-Denis de La Réunion.
                 </p>
 
