@@ -11,14 +11,14 @@ export default function TrustSection() {
   });
   const statsRef = useRef<HTMLDivElement>(null);
 
-  const finalStats = {
-    clients: 16472,
-    rating: 4.8,
-    delivery: 24,
-    satisfaction: 98
-  };
-
   const animateNumbers = useCallback(() => {
+    const finalStats = {
+      clients: 16472,
+      rating: 4.8,
+      delivery: 24,
+      satisfaction: 98
+    };
+
     const duration = 2000; // 2 seconds
     const steps = 60;
     const stepDuration = duration / steps;
@@ -41,7 +41,7 @@ export default function TrustSection() {
         setAnimatedStats(finalStats);
       }
     }, stepDuration);
-  }, [finalStats]);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
+import Image from 'next/image';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Sidebar from '@/components/Sidebar';
@@ -160,11 +161,12 @@ export default function AccessoiresPage() {
                     key={product.id} 
                     className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-200 group cursor-pointer"
                   >
-                    <div className="aspect-square bg-gray-100 rounded-t-lg overflow-hidden">
-                      <img
+                    <div className="aspect-square bg-gray-100 rounded-t-lg overflow-hidden relative">
+                      <Image
                         src={product.images?.[0] || '/placeholder.jpg'}
                         alt={product.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-200"
                       />
                     </div>
                     <div className="p-3 lg:p-4">

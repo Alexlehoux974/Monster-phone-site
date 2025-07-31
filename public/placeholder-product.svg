@@ -1,4 +1,6 @@
-<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
-  <rect width="400" height="300" fill="#f3f4f6"/>
-  <text x="50%" y="50%" font-family="Arial, sans-serif" font-size="20" fill="#9ca3af" text-anchor="middle" dominant-baseline="middle">Image non disponible</text>
+<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="300" fill="#F3F4F6"/>
+  <rect x="125" y="75" width="150" height="150" rx="10" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="2"/>
+  <path d="M175 125 L225 125 L225 175 L175 175 Z" fill="#D1D5DB"/>
+  <text x="200" y="250" font-family="Arial, sans-serif" font-size="14" fill="#6B7280" text-anchor="middle">Image non disponible</text>
 </svg>

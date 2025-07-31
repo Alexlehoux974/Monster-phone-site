@@ -47,7 +47,8 @@
       "Bash(npx eslint:*)",
       "Bash(npx next lint:*)",
       "Bash(npx playwright:*)",
-      "Bash(npm run test:e2e:*)"
+      "Bash(npm run test:e2e:*)",
+      "Bash(npm test:*)"
     ],
     "deny": []
   }

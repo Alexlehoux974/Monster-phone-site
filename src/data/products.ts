@@ -326,6 +326,188 @@ export const allProducts: Product[] = [
     variants: "Pack recharge standard",
     status: "Brouillon",
     price: "14.90€"
+  },
+
+  // NOUVEAUX PRODUITS GAMING - MONSTER
+  {
+    id: "recGAMING001",
+    name: "MONSTER Gaming Controller RGB",
+    brand: "MONSTER",
+    category: "Accessoires Gaming",
+    sku: "MONSTER-CTRL-RGB",
+    description: "Manette gaming MONSTER RGB avec connexion Bluetooth 5.0, compatible tous smartphones. Éclairage RGB personnalisable, batterie 15h.",
+    metaTitle: "Manette Gaming MONSTER RGB - Controller Smartphone Pro",
+    metaDescription: "Manette gaming MONSTER avec RGB personnalisable. Bluetooth 5.0, 15h d'autonomie, compatible Android/iOS.",
+    urlSlug: "manette-gaming-monster-rgb",
+    keywords: "manette gaming, controller, RGB, MONSTER, bluetooth, smartphone gaming, pro gaming",
+    images: [
+      "/placeholder-product.svg"
+    ],
+    variants: "RGB Pro Edition",
+    status: "Publié",
+    price: "79.90€"
+  },
+  {
+    id: "recGAMING002",
+    name: "MONSTER Cooling Fan Pro",
+    brand: "MONSTER",
+    category: "Accessoires Gaming",
+    sku: "MONSTER-COOL-PRO",
+    description: "Ventilateur refroidisseur MONSTER pour smartphone gaming. Système de refroidissement actif, compatible tous modèles.",
+    metaTitle: "Refroidisseur Gaming MONSTER Pro - Cooling Fan Smartphone",
+    metaDescription: "Ventilateur gaming MONSTER Pro pour refroidir votre smartphone. Performance maximale sans throttling.",
+    urlSlug: "refroidisseur-gaming-monster-pro",
+    keywords: "refroidisseur, cooling fan, gaming, MONSTER, ventilateur smartphone, pro gaming",
+    images: [
+      "/placeholder-product.svg"
+    ],
+    variants: "Version Pro",
+    status: "Publié",
+    price: "49.90€"
+  },
+  {
+    id: "recGAMING003",
+    name: "MONSTER Gaming Triggers",
+    brand: "MONSTER",
+    category: "Accessoires Gaming",
+    sku: "MONSTER-TRIG-SET",
+    description: "Gâchettes gaming MONSTER pour smartphone. Pack de 4 triggers tactiles, installation rapide, compatible tous jeux.",
+    metaTitle: "Gâchettes Gaming MONSTER - Triggers Smartphone Pro",
+    metaDescription: "Triggers gaming MONSTER pour transformer votre smartphone en console. Pack 4 gâchettes tactiles pro.",
+    urlSlug: "gachettes-gaming-monster",
+    keywords: "triggers, gâchettes, gaming, MONSTER, accessoire gaming, mobile gaming",
+    images: [
+      "/placeholder-product.svg"
+    ],
+    variants: "Pack 4 triggers",
+    status: "Publié",
+    price: "29.90€"
+  },
+  {
+    id: "recGAMING004",
+    name: "MONSTER Gaming Dock Station",
+    brand: "MONSTER",
+    category: "Accessoires Gaming",
+    sku: "MONSTER-DOCK-PRO",
+    description: "Station d'accueil gaming MONSTER avec hub USB-C, charge rapide 65W, sortie HDMI 4K. Transformez votre smartphone en PC gaming.",
+    metaTitle: "Dock Gaming MONSTER - Station d'Accueil Pro Smartphone",
+    metaDescription: "Station gaming MONSTER avec hub USB-C, charge 65W et HDMI 4K. Console de jeu mobile ultime.",
+    urlSlug: "dock-gaming-monster-pro",
+    keywords: "dock station, hub USB-C, gaming dock, MONSTER, charge rapide, HDMI 4K",
+    images: [
+      "/placeholder-product.svg"
+    ],
+    variants: "Pro Gaming Edition",
+    status: "Publié",
+    price: "129.90€"
+  },
+  {
+    id: "recGAMING005",
+    name: "MONSTER Gaming Earbuds Pro",
+    brand: "MONSTER",
+    category: "Audio Gaming",
+    sku: "MONSTER-EARBUDS-PRO",
+    description: "Écouteurs gaming MONSTER avec latence ultra-faible, son surround 7.1 virtuel, micro antibruit. La perfection pour le gaming mobile.",
+    metaTitle: "Écouteurs Gaming MONSTER Pro - Earbuds Low Latency",
+    metaDescription: "Écouteurs gaming MONSTER Pro avec latence minimale et son 7.1. Expérience gaming mobile ultime.",
+    urlSlug: "ecouteurs-gaming-monster-pro",
+    keywords: "écouteurs gaming, earbuds, low latency, MONSTER, 7.1 surround, gaming audio",
+    images: [
+      "/placeholder-audio.svg"
+    ],
+    variants: "Black Pro Edition",
+    status: "Publié",
+    price: "99.90€"
+  },
+  {
+    id: "recGAMING006",
+    name: "MONSTER RGB Gaming Stand",
+    brand: "MONSTER",
+    category: "Accessoires Gaming",
+    sku: "MONSTER-STAND-RGB",
+    description: "Support gaming MONSTER avec éclairage RGB synchronisé, angle ajustable, charge sans fil 15W intégrée.",
+    metaTitle: "Support Gaming MONSTER RGB - Stand Premium Smartphone",
+    metaDescription: "Support gaming MONSTER RGB avec charge sans fil 15W. Design premium pour setup gaming mobile.",
+    urlSlug: "support-gaming-monster-rgb",
+    keywords: "support gaming, RGB, MONSTER, charge sans fil, gaming stand, setup gaming",
+    images: [
+      "/placeholder-product.svg"
+    ],
+    variants: "RGB Edition",
+    status: "Publié",
+    price: "59.90€"
+  },
+  {
+    id: "recPOWER001",
+    name: "MONSTER PowerBank Gaming 20000mAh",
+    brand: "MONSTER",
+    category: "Batteries Portables",
+    sku: "MONSTER-PB-20K",
+    description: "Batterie externe MONSTER 20000mAh spécial gaming. Charge rapide 65W, 3 ports USB-C/USB-A, affichage LED.",
+    metaTitle: "PowerBank Gaming MONSTER 20000mAh - Batterie Pro",
+    metaDescription: "Batterie externe MONSTER 20000mAh avec charge 65W. Gaming non-stop avec affichage LED.",
+    urlSlug: "powerbank-gaming-monster-20000",
+    keywords: "batterie externe, powerbank, 20000mAh, MONSTER, charge rapide, gaming",
+    images: [
+      "/placeholder-charger.svg"
+    ],
+    variants: "20000mAh Pro",
+    status: "Publié",
+    price: "89.90€"
+  },
+  {
+    id: "recCASE001",
+    name: "HONOR Magic5 Pro Gaming Case MONSTER",
+    brand: "MONSTER",
+    category: "Coques & Protection",
+    sku: "MONSTER-CASE-HM5P",
+    description: "Coque gaming MONSTER pour HONOR Magic5 Pro. Protection militaire, système de refroidissement intégré, design RGB.",
+    metaTitle: "Coque Gaming MONSTER HONOR Magic5 Pro - Protection RGB",
+    metaDescription: "Coque gaming MONSTER pour HONOR Magic5 Pro avec refroidissement et RGB. Protection ultime.",
+    urlSlug: "coque-gaming-monster-honor-magic5-pro",
+    keywords: "coque gaming, HONOR Magic5 Pro, MONSTER, protection, RGB, refroidissement",
+    images: [
+      "/placeholder-product.svg"
+    ],
+    variants: "Carbon Black RGB",
+    status: "Publié",
+    price: "49.90€"
+  },
+  {
+    id: "recCASE002",
+    name: "HONOR 90 Gaming Case MONSTER",
+    brand: "MONSTER",
+    category: "Coques & Protection",
+    sku: "MONSTER-CASE-H90",
+    description: "Coque gaming MONSTER pour HONOR 90. Design ergonomique avec grips latéraux, protection renforcée, compatible triggers.",
+    metaTitle: "Coque Gaming MONSTER HONOR 90 - Protection Pro",
+    metaDescription: "Coque gaming MONSTER pour HONOR 90 avec grips ergonomiques. Conçue pour le gaming intensif.",
+    urlSlug: "coque-gaming-monster-honor-90",
+    keywords: "coque gaming, HONOR 90, MONSTER, protection, ergonomique, triggers",
+    images: [
+      "/placeholder-product.svg"
+    ],
+    variants: "Pro Gaming Black",
+    status: "Publié",
+    price: "39.90€"
+  },
+  {
+    id: "recCASE003",
+    name: "HONOR X8a Gaming Case MONSTER",
+    brand: "MONSTER",
+    category: "Coques & Protection",
+    sku: "MONSTER-CASE-HX8A",
+    description: "Coque gaming MONSTER pour HONOR X8a. Protection antichoc, design aéré pour refroidissement optimal, compatible accessoires.",
+    metaTitle: "Coque Gaming MONSTER HONOR X8a - Protection Gaming",
+    metaDescription: "Coque gaming MONSTER pour HONOR X8a avec ventilation optimale. Protection gaming abordable.",
+    urlSlug: "coque-gaming-monster-honor-x8a",
+    keywords: "coque gaming, HONOR X8a, MONSTER, protection, ventilation, gaming",
+    images: [
+      "/placeholder-product.svg"
+    ],
+    variants: "Gaming Edition",
+    status: "Publié",
+    price: "34.90€"
   }
 ];
 

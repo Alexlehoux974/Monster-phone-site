@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Search, ShoppingCart, User, Menu, X, ChevronDown, ArrowRight, Shield, Truck, Flame, Smartphone, Watch, Headphones, Lightbulb, Package, Star, Trash2, CreditCard, Plus, Minus } from 'lucide-react';
+import { Search, ShoppingCart, User, Menu, X, ChevronDown, ChevronRight, ArrowRight, Shield, Truck, Flame, Smartphone, Watch, Headphones, Lightbulb, Package, Star, Trash2, CreditCard, Plus, Minus } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { menuStructure, type CategoryStructure } from '@/data/products';
 import { useCart } from '@/contexts/CartContext';
@@ -208,11 +208,277 @@ const DropdownMenu = ({
   );
 };
 
+// Composant pour le menu mobile avec navigation complète
+const MobileMenu = ({ 
+  onClose, 
+  searchQuery, 
+  setSearchQuery 
+}: { 
+  onClose: () => void;
+  searchQuery: string;
+  setSearchQuery: (query: string) => void;
+}) => {
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [activeBrand, setActiveBrand] = useState<string | null>(null);
+  
+  // Empêcher le scroll du body quand le menu est ouvert
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, []);
+
+  // Toutes les catégories du menu
+  const allCategories = [
+    { name: 'Smartphones', icon: <Smartphone className="w-5 h-5" />, data: menuStructure.smartphones },
+    { name: 'Montres', icon: <Watch className="w-5 h-5" />, data: menuStructure.montres },
+    { name: 'Audio', icon: <Headphones className="w-5 h-5" />, data: menuStructure.casquesAudio },
+    { name: 'Luminaire', icon: <Lightbulb className="w-5 h-5" />, data: menuStructure.luminaire },
+    { name: 'Accessoires', icon: <Package className="w-5 h-5" />, data: menuStructure.accessoiresMonster },
+    { name: 'MUVIT', icon: <Star className="w-5 h-5" />, data: menuStructure.muvit },
+  ];
+
+  const resetNavigation = () => {
+    setActiveCategory(null);
+    setActiveBrand(null);
+  };
+
+  return (
+    <>
+      {/* Backdrop */}
+      <div 
+        className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-[190]"
+        onClick={onClose}
+      />
+      
+      {/* Menu sliding */}
+      <div className="lg:hidden fixed inset-y-0 right-0 w-full max-w-sm bg-white z-[200] transform transition-transform duration-300 ease-out shadow-2xl animate-slide-in-right">
+        {/* Header du menu mobile */}
+        <div className="sticky top-0 bg-white border-b border-gray-200 z-10">
+        <div className="flex items-center justify-between p-4">
+          <h2 className="text-lg font-bold text-gray-900">Menu</h2>
+          <button
+            onClick={onClose}
+            className="p-2 text-gray-500 hover:text-gray-700 rounded-lg hover:bg-gray-100"
+          >
+            <X className="w-6 h-6" />
+          </button>
+        </div>
+        
+        {/* Fil d'ariane */}
+        {(activeCategory || activeBrand) && (
+          <div className="px-4 pb-3 flex items-center gap-2 text-sm overflow-x-auto">
+            <button
+              onClick={resetNavigation}
+              className="text-blue-600 hover:text-blue-800 whitespace-nowrap"
+            >
+              Menu
+            </button>
+            {activeCategory && (
+              <>
+                <ChevronRight className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                <button
+                  onClick={() => setActiveBrand(null)}
+                  className={cn(
+                    "whitespace-nowrap",
+                    activeBrand ? "text-blue-600 hover:text-blue-800" : "text-gray-900"
+                  )}
+                >
+                  {activeCategory}
+                </button>
+              </>
+            )}
+            {activeBrand && (
+              <>
+                <ChevronRight className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                <span className="text-gray-900 whitespace-nowrap">{activeBrand}</span>
+              </>
+            )}
+          </div>
+        )}
+      </div>
+
+      {/* Contenu scrollable */}
+      <div className="h-full overflow-y-auto pb-20">
+        {/* Vue principale - Catégories */}
+        {!activeCategory && (
+          <div className="p-4 space-y-2">
+            {/* Recherche mobile */}
+            <div className="mb-6">
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Rechercher un produit..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+              </div>
+            </div>
+
+            {/* Catégories principales */}
+            <div className="space-y-2">
+              {allCategories.map((category) => (
+              <button
+                key={category.name}
+                onClick={() => setActiveCategory(category.name)}
+                className="w-full flex items-center justify-between p-4 text-left bg-gray-50 active:bg-gray-200 rounded-lg transition-colors min-h-[56px]"
+              >
+                <div className="flex items-center gap-3">
+                  {category.icon}
+                  <span className="font-medium text-gray-900">{category.name}</span>
+                </div>
+                <ChevronRight className="w-5 h-5 text-gray-400" />
+              </button>
+              ))}
+            </div>
+
+            {/* Liens rapides */}
+            <div className="mt-6 pt-6 border-t border-gray-200">
+              <h3 className="text-sm font-medium text-gray-500 mb-3">Liens rapides</h3>
+              <Link
+                href="/promotions"
+                onClick={onClose}
+                className="block p-4 bg-red-50 active:bg-red-200 rounded-lg transition-colors min-h-[56px]"
+              >
+                <div className="flex items-center gap-3">
+                  <Flame className="w-5 h-5 text-red-600" />
+                  <span className="font-medium text-red-900">Promotions</span>
+                </div>
+              </Link>
+            </div>
+          </div>
+        )}
+
+        {/* Vue des marques */}
+        {activeCategory && !activeBrand && (
+          <div className="p-4 space-y-2">
+            {(() => {
+              const category = allCategories.find(c => c.name === activeCategory);
+              const categoryData = category?.data[0];
+              
+              if (!categoryData?.brands) return null;
+
+              return (
+                <>
+                  {/* Lien vers toute la catégorie */}
+                  <Link
+                    href={`/nos-produits?category=${encodeURIComponent(categoryData.name)}`}
+                    onClick={onClose}
+                    className="block p-4 bg-blue-50 active:bg-blue-200 rounded-lg transition-colors mb-4 min-h-[56px]"
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="font-medium text-blue-900">Voir tous les {categoryData.name}</span>
+                      <ArrowRight className="w-5 h-5 text-blue-600" />
+                    </div>
+                  </Link>
+
+                  {/* Liste des marques */}
+                  {categoryData.brands.map((brand) => (
+                    <button
+                      key={brand.name}
+                      onClick={() => setActiveBrand(brand.name)}
+                      className="w-full flex items-center justify-between p-4 text-left bg-gray-50 active:bg-gray-200 rounded-lg transition-colors min-h-[56px]"
+                    >
+                      <div>
+                        <span className="font-medium text-gray-900">{brand.name}</span>
+                        <span className="block text-sm text-gray-600 mt-1">
+                          {brand.products.length} produit{brand.products.length > 1 ? 's' : ''}
+                        </span>
+                      </div>
+                      <ChevronRight className="w-5 h-5 text-gray-400" />
+                    </button>
+                  ))}
+                </>
+              );
+            })()}
+          </div>
+        )}
+
+        {/* Vue des produits */}
+        {activeCategory && activeBrand && (
+          <div className="p-4 space-y-3">
+            {(() => {
+              const category = allCategories.find(c => c.name === activeCategory);
+              const categoryData = category?.data[0];
+              const brand = categoryData?.brands?.find(b => b.name === activeBrand);
+              const products = brand?.products || [];
+
+              return (
+                <>
+                  {/* Lien vers tous les produits de la marque */}
+                  <Link
+                    href={`/nos-produits?brand=${encodeURIComponent(activeBrand)}`}
+                    onClick={onClose}
+                    className="block p-4 bg-green-50 active:bg-green-200 rounded-lg transition-colors mb-4 min-h-[56px]"
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="font-medium text-green-900">
+                        Voir tous les produits {activeBrand}
+                      </span>
+                      <ArrowRight className="w-5 h-5 text-green-600" />
+                    </div>
+                  </Link>
+
+                  {/* Liste des produits */}
+                  {products.map((product) => (
+                    <Link
+                      key={product.id}
+                      href={`/produit/${product.urlSlug || product.id}`}
+                      onClick={onClose}
+                      className="block p-4 bg-white border border-gray-200 active:border-blue-500 active:bg-gray-50 rounded-lg transition-all min-h-[72px]"
+                    >
+                      <div className="flex items-start gap-4">
+                        {product.images && product.images.length > 0 && (
+                          <div className="w-16 h-16 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
+                            <Image
+                              src={product.images[0]}
+                              alt={product.name}
+                              width={64}
+                              height={64}
+                              className="w-full h-full object-contain"
+                            />
+                          </div>
+                        )}
+                        <div className="flex-1 min-w-0">
+                          <h4 className="font-medium text-gray-900 line-clamp-2">
+                            {product.name}
+                          </h4>
+                          {product.price && (
+                            <p className="text-lg font-bold text-blue-600 mt-1">
+                              {product.price}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </>
+              );
+            })()}
+          </div>
+        )}
+      </div>
+
+      {/* CTA fixe en bas */}
+      <div className="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4">
+        <Link href="/nos-produits" onClick={onClose}>
+          <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-lg font-bold text-base shadow-lg hover:shadow-xl transition-all">
+            🎮 Découvrir tous nos produits
+          </button>
+        </Link>
+      </div>
+      </div>
+    </>
+  );
+};
+
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [dropdownOpen, setDropdownOpen] = useState<string | null>(null);
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   
   const { items, removeFromCart, updateQuantity, getCartTotal, getItemCount } = useCart();
@@ -220,14 +486,7 @@ export default function Header() {
   const router = useRouter();
   const cartRef = useRef<HTMLDivElement>(null);
 
-  // Gestion du scroll
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  // Gestion du scroll - supprimé car non utilisé
 
   // Fermer le panier quand on clique en dehors
   useEffect(() => {
@@ -651,87 +910,11 @@ export default function Header() {
 
           {/* Menu mobile */}
           {isMenuOpen && (
-            <div className="lg:hidden border-t border-gray-100 bg-white">
-              <div className="py-3 space-y-1">
-                {navigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className="flex items-center gap-3 px-4 py-3 text-base font-medium text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.icon}
-                    <span>{item.name}</span>
-                  </Link>
-                ))}
-                
-                <Link
-                  href="/nos-produits?category=Montres+Connectées"
-                  className="flex items-center gap-3 px-4 py-3 text-base font-medium text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  <span>Montres Connectées</span>
-                </Link>
-                
-                <Link
-                  href="/nos-produits?category=Luminaire+Monster"
-                  className="flex items-center gap-3 px-4 py-3 text-base font-medium text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  <span>Luminaire Monster</span>
-                </Link>
-                
-                <Link
-                  href="/nos-produits?category=Casques+et+Audio"
-                  className="flex items-center gap-3 px-4 py-3 text-base font-medium text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  <span>Casques et Audio</span>
-                </Link>
-                
-                <Link
-                  href="/nos-produits?category=Accessoires+Monster"
-                  className="flex items-center gap-3 px-4 py-3 text-base font-medium text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  <span>Accessoires Monster</span>
-                </Link>
-                
-                <Link
-                  href="/nos-produits?brand=MUVIT"
-                  className="flex items-center gap-3 px-4 py-3 text-base font-medium text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  <span>Produits MUVIT</span>
-                </Link>
-              </div>
-              
-              {/* Recherche mobile */}
-              <div className="px-4 pb-3">
-                <div className="relative">
-                  <input
-                    type="text"
-                    placeholder="Rechercher un produit..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-base"
-                  />
-                  <Search className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-900" />
-                </div>
-              </div>
-
-              {/* CTA mobile */}
-              <div className="px-4 pb-3">
-                <Link href="/nos-produits">
-                  <button
-                    className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-lg font-medium text-base shadow-md"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    🎮 Découvrir nos produits gaming
-                  </button>
-                </Link>
-              </div>
-            </div>
+            <MobileMenu 
+              onClose={() => setIsMenuOpen(false)}
+              searchQuery={searchQuery}
+              setSearchQuery={setSearchQuery}
+            />
           )}
         </div>
       </header>

@@ -20,24 +20,27 @@ interface CartContextType {
   isInCart: (productId: string) => boolean;
 }
 
-const CartContext = createContext<CartContextType | undefined>(undefined);
+export const CartContext = createContext<CartContextType | undefined>(undefined);
 
-export function CartProvider({ children }: { children: ReactNode }) {
-  const [items, setItems] = useState<CartItem[]>([]);
+export function CartProvider({ children, initialItems }: { children: ReactNode; initialItems?: CartItem[] }) {
+  const [items, setItems] = useState<CartItem[]>(initialItems || []);
   const [isLoaded, setIsLoaded] = useState(false);
 
   // Charger le panier depuis localStorage au montage
   useEffect(() => {
-    const savedCart = localStorage.getItem('monsterphone-cart');
-    if (savedCart) {
-      try {
-        setItems(JSON.parse(savedCart));
-      } catch (error) {
-        console.error('Erreur lors du chargement du panier:', error);
+    // Si on a des items initiaux (tests), ne pas charger depuis localStorage
+    if (!initialItems) {
+      const savedCart = localStorage.getItem('monsterphone-cart');
+      if (savedCart) {
+        try {
+          setItems(JSON.parse(savedCart));
+        } catch (error) {
+          console.error('Erreur lors du chargement du panier:', error);
+        }
       }
     }
     setIsLoaded(true);
-  }, []);
+  }, [initialItems]);
 
   // Sauvegarder le panier dans localStorage à chaque changement
   useEffect(() => {
@@ -48,17 +51,22 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const addToCart = (product: Product, quantity = 1, variant?: string) => {
     setItems(currentItems => {
-      const existingItem = currentItems.find(item => 
-        item.product.id === product.id && item.variant === variant
+      // Pour les tests avec variants, on vérifie si le produit avec ce variant existe déjà
+      const existingItemIndex = currentItems.findIndex(item => 
+        item.product.id === product.id && 
+        (variant ? item.variant === variant : !item.variant)
       );
 
-      if (existingItem) {
-        return currentItems.map(item =>
-          item.product.id === product.id && item.variant === variant
-            ? { ...item, quantity: item.quantity + quantity }
-            : item
-        );
+      if (existingItemIndex !== -1) {
+        // Le produit existe déjà, on met à jour la quantité
+        const newItems = [...currentItems];
+        newItems[existingItemIndex] = {
+          ...newItems[existingItemIndex],
+          quantity: newItems[existingItemIndex].quantity + quantity
+        };
+        return newItems;
       } else {
+        // Nouveau produit ou nouvelle variante
         return [...currentItems, { product, quantity, variant }];
       }
     });

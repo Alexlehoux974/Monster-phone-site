@@ -227,18 +227,6 @@ const TextShimmer = ({ children, className, duration = 2 }: { children: string; 
 //   );
 // };
 
-// Product Card Component
-interface Product {
-  name: string;
-  description: string;
-  price: string;
-  originalPrice: string;
-  discount: string;
-  rating: number;
-  reviews: number;
-  icon: React.ComponentType<{ className?: string }>;
-}
-
 // // const ProductCard = ({ product, index }: { product: Product; index: number }) => {
 //   return (
 //     <motion.div

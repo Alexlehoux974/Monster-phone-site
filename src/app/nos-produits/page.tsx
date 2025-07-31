@@ -1,12 +1,14 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
+import Image from 'next/image';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Sidebar from '@/components/Sidebar';
 import { allProducts } from '@/data/products';
 import { Button } from '@/components/ui/button';
 import { Filter, X } from 'lucide-react';
+import ProductCardSkeleton from '@/components/ProductCardSkeleton';
 
 export default function SmartphonesPage() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -14,6 +16,15 @@ export default function SmartphonesPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [selectedProduct, setSelectedProduct] = useState<string>('');
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Simuler un chargement initial
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const products = allProducts;
 
@@ -122,34 +133,43 @@ export default function SmartphonesPage() {
 
               {/* Grille de produits optimisée */}
               <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 gap-4 lg:gap-5">
-                {filteredProducts.map((product) => (
-                  <div 
-                    key={product.id} 
-                    className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-200 group cursor-pointer"
-                  >
-                    <div className="aspect-square bg-gray-100 rounded-t-lg overflow-hidden">
-                      <img
-                        src={product.images?.[0] || '/placeholder.jpg'}
-                        alt={product.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
-                      />
-                    </div>
-                    <div className="p-3 lg:p-4">
-                      <h3 className="font-semibold text-sm lg:text-base text-gray-900 mb-1 line-clamp-2">
-                        {product.name}
-                      </h3>
-                      <p className="text-xs lg:text-sm text-gray-600 mb-2">{product.brand}</p>
-                      <div className="flex items-center justify-between">
-                        <p className="text-lg lg:text-xl font-bold text-blue-600">
-                          {product.price ? `${product.price}€` : 'Prix sur demande'}
-                        </p>
-                        <Button size="sm" className="text-xs lg:text-sm">
-                          Voir
-                        </Button>
+                {isLoading ? (
+                  // Afficher les skeletons pendant le chargement
+                  Array.from({ length: 12 }).map((_, index) => (
+                    <ProductCardSkeleton key={index} viewMode="grid" />
+                  ))
+                ) : (
+                  // Afficher les produits
+                  filteredProducts.map((product) => (
+                    <div 
+                      key={product.id} 
+                      className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-200 group cursor-pointer"
+                    >
+                      <div className="aspect-square bg-gray-100 rounded-t-lg overflow-hidden relative">
+                        <Image
+                          src={product.images?.[0] || '/placeholder.jpg'}
+                          alt={product.name}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-200"
+                        />
+                      </div>
+                      <div className="p-3 lg:p-4">
+                        <h3 className="font-semibold text-sm lg:text-base text-gray-900 mb-1 line-clamp-2">
+                          {product.name}
+                        </h3>
+                        <p className="text-xs lg:text-sm text-gray-600 mb-2">{product.brand}</p>
+                        <div className="flex items-center justify-between">
+                          <p className="text-lg lg:text-xl font-bold text-blue-600">
+                            {product.price ? `${product.price}€` : 'Prix sur demande'}
+                          </p>
+                          <Button size="sm" className="text-xs lg:text-sm">
+                            Voir
+                          </Button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))
+                )}
               </div>
 
               {/* Message si aucun produit */}

@@ -320,10 +320,11 @@ export default function CheckoutPage() {
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">
+                          <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
                             Prénom *
                           </label>
                           <input
+                            id="firstName"
                             type="text"
                             name="firstName"
                             value={formData.firstName}
@@ -338,10 +339,11 @@ export default function CheckoutPage() {
                         </div>
 
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">
+                          <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">
                             Nom *
                           </label>
                           <input
+                            id="lastName"
                             type="text"
                             name="lastName"
                             value={formData.lastName}
@@ -356,11 +358,12 @@ export default function CheckoutPage() {
                         </div>
 
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">
+                          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                             <Mail className="inline w-4 h-4 mr-1" />
                             Email *
                           </label>
                           <input
+                            id="email"
                             type="email"
                             name="email"
                             value={formData.email}
@@ -375,11 +378,12 @@ export default function CheckoutPage() {
                         </div>
 
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">
+                          <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
                             <Phone className="inline w-4 h-4 mr-1" />
                             Téléphone *
                           </label>
                           <input
+                            id="phone"
                             type="tel"
                             name="phone"
                             value={formData.phone}
@@ -395,10 +399,11 @@ export default function CheckoutPage() {
                         </div>
 
                         <div className="md:col-span-2">
-                          <label className="block text-sm font-medium text-gray-700 mb-1">
+                          <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">
                             Adresse *
                           </label>
                           <input
+                            id="address"
                             type="text"
                             name="address"
                             value={formData.address}
@@ -414,10 +419,11 @@ export default function CheckoutPage() {
                         </div>
 
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">
+                          <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-1">
                             Ville *
                           </label>
                           <input
+                            id="city"
                             type="text"
                             name="city"
                             value={formData.city}
@@ -433,10 +439,11 @@ export default function CheckoutPage() {
                         </div>
 
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">
+                          <label htmlFor="postalCode" className="block text-sm font-medium text-gray-700 mb-1">
                             Code postal *
                           </label>
                           <input
+                            id="postalCode"
                             type="text"
                             name="postalCode"
                             value={formData.postalCode}
@@ -539,10 +546,11 @@ export default function CheckoutPage() {
                       {formData.paymentMethod === 'card' && (
                         <div className="space-y-4">
                           <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                            <label htmlFor="cardNumber" className="block text-sm font-medium text-gray-700 mb-1">
                               Numéro de carte *
                             </label>
                             <input
+                              id="cardNumber"
                               type="text"
                               name="cardNumber"
                               value={formData.cardNumber}
@@ -559,10 +567,11 @@ export default function CheckoutPage() {
                           </div>
 
                           <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                            <label htmlFor="cardName" className="block text-sm font-medium text-gray-700 mb-1">
                               Nom sur la carte *
                             </label>
                             <input
+                              id="cardName"
                               type="text"
                               name="cardName"
                               value={formData.cardName}
@@ -579,10 +588,11 @@ export default function CheckoutPage() {
 
                           <div className="grid grid-cols-2 gap-4">
                             <div>
-                              <label className="block text-sm font-medium text-gray-700 mb-1">
+                              <label htmlFor="cardExpiry" className="block text-sm font-medium text-gray-700 mb-1">
                                 Date d&apos;expiration *
                               </label>
                               <input
+                                id="cardExpiry"
                                 type="text"
                                 name="cardExpiry"
                                 value={formData.cardExpiry}
@@ -599,10 +609,11 @@ export default function CheckoutPage() {
                             </div>
 
                             <div>
-                              <label className="block text-sm font-medium text-gray-700 mb-1">
+                              <label htmlFor="cardCvv" className="block text-sm font-medium text-gray-700 mb-1">
                                 CVV *
                               </label>
                               <input
+                                id="cardCvv"
                                 type="text"
                                 name="cardCvv"
                                 value={formData.cardCvv}

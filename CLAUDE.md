@@ -34,6 +34,21 @@ npm run build                  # Production build
 npm start -- -p 3001           # Production server (must use port 3001)
 npm run lint                   # ESLint validation (Next.js core-web-vitals)
 
+# Testing
+npm run test                   # Run Jest unit tests
+npm run test:watch             # Run Jest in watch mode
+npm run test:coverage          # Generate test coverage report
+npm run test:e2e               # Run Playwright E2E tests
+npm run test:e2e:ui            # Open Playwright test UI
+npm run test:e2e:debug         # Debug Playwright tests
+npm run test:e2e:report        # Show Playwright test report
+
+# Run specific tests
+npm test -- smoke              # Run tests matching "smoke"
+npm test -- --testPathPattern=components  # Test specific directory
+npx playwright test homepage   # Run specific E2E test file
+npx playwright test -g "navigation"  # Run tests matching pattern
+
 # Common Issues & Solutions
 ps aux | grep next             # Find stuck Next.js processes
 kill -9 [PID]                  # Kill stuck process
@@ -59,7 +74,7 @@ The project includes several utility functions in `/src/lib/utils.ts`:
 **Core Package.json Scripts**:
 - `dev`: Uses `--turbopack` flag and binds to `0.0.0.0` (accessible from network)
 - `start`: Must be run with `-p 3001` flag for production deployment
-- No test scripts configured despite Playwright dependency
+- Full test suite configured with Jest for unit tests and Playwright for E2E tests
 
 **React/Next.js Versions**:
 - React 19.1.0 (latest) + Next.js 15.4.2
@@ -67,6 +82,14 @@ The project includes several utility functions in `/src/lib/utils.ts`:
 - TypeScript strict mode enabled
 
 ## Architecture & Key Patterns
+
+### High-Level Architecture
+This is a Next.js 15 e-commerce application using:
+- **App Router**: Modern Next.js routing with server components
+- **Context API**: For cart and authentication state management
+- **Static Data**: No backend API, all product data is hardcoded
+- **SEO Optimized**: Structured data, metadata, and sitemap generation
+- **Responsive Design**: Mobile-first approach with Tailwind CSS
 
 ### Data Architecture
 - **Single Source of Truth**: `/src/data/products.ts` (538 lines)
@@ -76,6 +99,11 @@ The project includes several utility functions in `/src/lib/utils.ts`:
 - **Product Interface**: TypeScript interface with 13 fields (id, name, brand, category, sku, price, description, metaTitle, metaDescription, urlSlug, keywords, images[], variants, status)
 - **Menu Structure**: `menuStructure` object provides 4-level navigation hierarchy
 - **Static Pattern**: No API calls, manual Airtable exports
+
+### State Management
+- **CartContext** (`/src/contexts/CartContext.tsx`): Shopping cart state and operations
+- **AuthContext** (`/src/contexts/AuthContext.tsx`): User authentication state (mock implementation)
+- Both contexts wrap the entire app in the root layout
 
 ### Critical Known Issues
 
@@ -141,6 +169,19 @@ src/
 - **French First**: All user-facing content in French
 - **La Réunion Focus**: 974 area code, local delivery emphasis
 
+### SEO & Metadata Architecture
+- **Dynamic Metadata**: Each page exports metadata via `metadata.ts` files
+- **Structured Data**: JSON-LD schemas for organization and website
+- **Sitemap Generation**: Automatic via `sitemap.ts`
+- **Robots.txt**: Generated dynamically via `robots.ts`
+- **Open Graph**: Full social media preview support
+
+### Routing Patterns
+- **Product URLs**: `/produit/[slug]` - Dynamic routes based on `urlSlug`
+- **Category Filtering**: `/nos-produits?category=X&brand=Y` - Query params
+- **Service Pages**: Multiple sub-routes under `/services/`
+- **Legal Pages**: RGPD-compliant pages under `/legal/`
+
 ## Configuration Details
 
 **Next.js Config (`next.config.ts`)**:
@@ -169,13 +210,31 @@ src/
 
 ## Testing Approach
 
-Currently no formal testing framework. Validation process:
-1. `npm run build` - Catch TypeScript errors (Note: ESLint errors ignored due to next.config.ts setting)
-2. `npm run lint` - ESLint validation (run manually as build skips it)
-3. Manual browser testing
-4. Check dev.log for image loading errors
+### Unit Testing (Jest)
+- **Configuration**: `jest.config.js` with Next.js preset
+- **Test Files**: Place in `src/__tests__/` or alongside components as `*.test.tsx`
+- **Coverage**: Configured to exclude boilerplate files
+- **Mocks**: Next.js router and browser APIs pre-configured in `jest.setup.js`
 
-**Note**: No test files exist despite Playwright being installed as a dependency. No test scripts configured in package.json.
+### E2E Testing (Playwright)
+- **Configuration**: `playwright.config.ts` with multi-browser support
+- **Test Files**: Located in `/e2e/` directory
+- **Browsers**: Chrome, Firefox, Safari + mobile viewports
+- **Base URL**: http://localhost:3000
+- **Key Test Suites**:
+  - `smoke.spec.ts`: Basic functionality checks
+  - `homepage.spec.ts`: Homepage tests
+  - `products.spec.ts`: Product catalog tests
+  - `navigation.spec.ts`: Navigation flow tests
+  - `cart.spec.ts`: Shopping cart functionality
+  - `contact.spec.ts`: Contact form tests
+  - `responsive.spec.ts`: Mobile responsiveness
+
+### Test Validation Process
+1. `npm run lint` - ESLint validation (manual due to build bypass)
+2. `npm run test` - Unit test suite
+3. `npm run test:e2e` - Full E2E test suite
+4. `npm run build` - TypeScript compilation check
 
 ## Deployment Requirements
 
