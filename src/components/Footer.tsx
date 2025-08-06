@@ -425,26 +425,46 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Copyright et moyens de paiement */}
+      {/* Section Moyens de Paiement - Zone dédiée et mise en valeur */}
+      <div className="relative border-t border-gray-700/50 backdrop-blur-sm bg-gradient-to-r from-blue-900/10 to-purple-900/10">
+        <div className="relative z-10 container mx-auto px-4 py-8">
+          <motion.div 
+            className="text-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <h3 className="text-lg font-semibold text-white mb-6">
+              Paiement Sécurisé & Certifié
+            </h3>
+            <PaymentLogos />
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Copyright et informations légales */}
       <div className="relative border-t border-gray-700/50 backdrop-blur-sm">
         <div className="relative z-10 container mx-auto px-4 py-4">
           <motion.div 
             className="flex flex-col md:flex-row justify-between items-center"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
             viewport={{ once: true }}
           >
-            <div className="flex items-center gap-2 text-base text-gray-200 mb-4 md:mb-0">
+            <div className="flex items-center gap-2 text-sm text-gray-300 mb-2 md:mb-0">
               <span>© 2024 Monster Phone Boutique. Tous droits réservés.</span>
-              <svg className="w-5 h-5 text-gray-200" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-              </svg>
-              <span className="text-sm">La Réunion</span>
+              <span className="hidden md:inline text-gray-500">|</span>
+              <span className="flex items-center gap-1">
+                <svg className="w-4 h-4 text-gray-400" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                </svg>
+                La Réunion 974
+              </span>
             </div>
-            <div className="flex flex-col md:flex-row items-center md:space-x-4 space-y-3 md:space-y-0">
-              <span className="text-base text-gray-200">Moyens de paiement :</span>
-              <PaymentLogos />
+            <div className="text-xs text-gray-400">
+              Développé avec ❤️ par ARA-CORP / Digiqo.fr
             </div>
           </motion.div>
         </div>

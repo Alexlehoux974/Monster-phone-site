@@ -5,7 +5,7 @@ import FeaturedProducts from '@/components/FeaturedProducts';
 import FeaturesSection from '@/components/FeaturesSection';
 // import CollectionsSection from '@/components/CollectionsSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
-import NewsletterSection from '@/components/NewsletterSection';
+// import NewsletterSection from '@/components/NewsletterSection';
 import Footer from '@/components/Footer';
 import type { Metadata } from 'next';
 
@@ -61,7 +61,6 @@ export default function Home() {
         <TrustSection />
         <FeaturesSection />
         <TestimonialsSection />
-        <NewsletterSection />
         <Footer />
       </div>
     </div>

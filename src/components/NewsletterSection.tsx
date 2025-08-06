@@ -141,14 +141,6 @@ export default function NewsletterSection() {
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-pink-400/10 rounded-full blur-2xl animate-pulse" style={{animationDelay: '2s'}}></div>
       </div>
       
-      {/* Grille de points décoratifs */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="grid grid-cols-12 gap-4 h-full">
-          {[...Array(144)].map((_, i) => (
-            <div key={i} className="w-1 h-1 bg-white rounded-full animate-pulse" style={{animationDelay: `${(i * 0.1)}s`}}></div>
-          ))}
-        </div>
-      </div>
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-6xl mx-auto text-white">
