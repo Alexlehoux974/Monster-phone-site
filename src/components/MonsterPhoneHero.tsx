@@ -4,7 +4,7 @@ import React, { useRef, useEffect, useState } from "react";
 import Link from "next/link";
 import { motion, useMotionValue, animate, useMotionTemplate } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { ShoppingCart, Users, ThumbsUp, Truck } from "lucide-react";
+import { ShoppingCart, Users, ThumbsUp, Truck, Sparkles, TrendingDown, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 // import { Card } from "@/components/ui/card";
 // import { Badge } from "@/components/ui/badge";
@@ -364,7 +364,28 @@ const MonsterPhoneHero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
             className="text-xl md:text-2xl text-gray-100 mb-8 max-w-3xl mx-auto">
-            Découvrez notre collection exclusive de smartphones et d&apos;accessoires gaming.
+            Découvrez notre collection exclusive de{" "}
+            <motion.span
+              className="inline-block font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent"
+              animate={{
+                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+              }}
+              transition={{
+                duration: 5,
+                ease: "linear",
+                repeat: Infinity,
+              }}
+              style={{
+                backgroundSize: "200% 200%",
+              }}
+              whileHover={{
+                scale: 1.05,
+                transition: { duration: 0.2 }
+              }}
+            >
+              Smartphones
+            </motion.span>
+            {" "}et d&apos;accessoires gaming.
           </motion.p>
 
           {/* CTA Buttons */}
@@ -380,17 +401,60 @@ const MonsterPhoneHero = () => {
               whileTap={{ scale: 0.95 }}
             >
               <Link href="/nos-produits">
-                <Button className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-4 text-lg">
+                <Button className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-4 text-lg shadow-lg">
                   <ShoppingCart className="w-5 h-5 mr-2" />
                   Découvrir la Collection
                 </Button>
               </Link>
             </motion.div>
-            <Link href="/promotions">
-              <Button variant="outline" className="border-white/30 text-white hover:bg-white/10 px-8 py-4 text-lg">
-                Voir les Offres Spéciales
-              </Button>
-            </Link>
+            
+            <motion.div
+              className="relative"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {/* Badge animé */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 1, duration: 0.3 }}
+                className="absolute -top-2 -right-2 z-10"
+              >
+                <motion.span
+                  animate={{ rotate: [0, 5, -5, 0] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                  className="inline-flex items-center px-2 py-1 rounded-full text-xs font-bold bg-red-500 text-white shadow-lg"
+                >
+                  -50%
+                </motion.span>
+              </motion.div>
+              
+              <Link href="/promotions">
+                <Button className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-8 py-4 text-lg shadow-xl border-0 font-semibold">
+                  <Sparkles className="w-5 h-5 mr-2 animate-pulse" />
+                  Offres Spéciales
+                  <TrendingDown className="w-4 h-4 ml-2" />
+                </Button>
+              </Link>
+            </motion.div>
+          </motion.div>
+
+          {/* Message d'urgence */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.2, duration: 0.5 }}
+            className="flex items-center justify-center gap-2 text-sm text-orange-300 mb-8"
+          >
+            <Clock className="w-4 h-4 animate-pulse" />
+            <span className="font-medium">
+              Offre limitée • Livraison gratuite aujourd'hui seulement
+            </span>
+            <motion.span
+              animate={{ opacity: [1, 0.5, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="inline-block w-2 h-2 bg-orange-400 rounded-full"
+            />
           </motion.div>
 
           {/* Stats */}

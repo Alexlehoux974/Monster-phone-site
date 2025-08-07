@@ -35,7 +35,7 @@ const PromoBar = () => (
   </div>
 );
 
-// Composant DropdownMenu simplifié et stable
+// Composant DropdownMenu avec structure simple à 3 colonnes
 const DropdownMenu = ({ 
   categories, 
   isOpen, 
@@ -48,209 +48,198 @@ const DropdownMenu = ({
   alignRight?: boolean;
 }) => {
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
-  const [hoveredSubcategory, setHoveredSubcategory] = useState<string | null>(null);
   const [hoveredBrand, setHoveredBrand] = useState<string | null>(null);
   
-  // Obtenir les produits par catégorie ou marque
+  // Obtenir les produits en fonction de la sélection
   const getProductsForDisplay = () => {
-    if (hoveredBrand) {
-      return getProductsByBrand(hoveredBrand) || [];
-    }
-    if (hoveredCategory) {
-      return getProductsByCategory(hoveredCategory) || [];
+    if (hoveredBrand && hoveredCategory) {
+      // Obtenir tous les produits de la marque
+      const brandProducts = getProductsByBrand(hoveredBrand) || [];
+      // Filtrer par catégorie si nécessaire
+      return brandProducts.filter(p => p.category === hoveredCategory);
     }
     return [];
+  };
+
+  // Obtenir toutes les marques uniques pour une catégorie
+  const getBrandsForCategory = (categoryName: string) => {
+    const products = getProductsByCategory(categoryName);
+    const brands = new Set<string>();
+    products.forEach(p => {
+      if (p.brand) brands.add(p.brand);
+    });
+    return Array.from(brands).sort();
   };
 
   if (!isOpen) return null;
 
   return (
     <div 
-      className={`absolute top-full mt-2 bg-white shadow-xl border border-gray-200 rounded-lg z-[150] min-w-[600px] overflow-hidden ${
+      className={`absolute top-full mt-1 bg-white shadow-2xl border border-gray-200 rounded-xl z-[150] overflow-hidden ${
         alignRight ? 'right-0' : 'left-0'
       }`}
-      style={{ boxShadow: "0 20px 40px -8px rgba(0, 0, 0, 0.15)" }}
+      style={{ 
+        boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+        minWidth: hoveredBrand ? "800px" : hoveredCategory ? "600px" : "400px"
+      }}
     >
-      <div className="flex min-h-[350px]">
-        {/* Colonne des catégories - maintenant première colonne */}
-        <div className="w-64 bg-gray-50 border-r border-gray-200">
-          <div className="p-4 border-b border-gray-200">
-            <h3 className="font-semibold text-gray-900 text-xl">Nos articles</h3>
+      <div className="flex min-h-[400px]">
+        {/* Colonne 1: Catégories */}
+        <div className="w-56 bg-gradient-to-b from-gray-50 to-white border-r border-gray-200">
+          <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-indigo-50">
+            <h3 className="font-bold text-gray-900 text-lg">Nos Produits</h3>
           </div>
-          <div className="py-2">
-            {categories.map((category) => (
+          <div className="py-3">
+            {categories && categories.length > 0 && categories.map((category) => (
               <div key={category.name}>
-                <Link
-                  href={`/nos-produits?category=${encodeURIComponent(category.name)}`}
+                <button
                   className={cn(
-                    "block px-4 py-3 text-base font-medium transition-colors",
+                    "w-full text-left px-4 py-3 text-sm font-medium transition-all duration-200",
                     hoveredCategory === category.name 
-                      ? "bg-blue-50 text-blue-700" 
-                      : "text-gray-900 hover:text-blue-600 hover:bg-gray-100"
+                      ? "bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 border-l-4 border-blue-600" 
+                      : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
                   )}
                   onMouseEnter={() => {
                     setHoveredCategory(category.name);
-                    setHoveredSubcategory(null);
                     setHoveredBrand(null);
                   }}
-                  onClick={onClose}
                 >
                   <div className="flex items-center justify-between">
-                    <span>{category.name}</span>
-                    {(category.subcategories || category.brands) && (
-                      <ArrowRight className="w-4 h-4 text-gray-900" />
-                    )}
+                    <span className="font-semibold">{category.name}</span>
+                    <ChevronRight className={cn(
+                      "w-4 h-4 transition-transform",
+                      hoveredCategory === category.name ? "translate-x-1" : ""
+                    )} />
                   </div>
-                </Link>
+                </button>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Colonne des sous-catégories ou marques */}
+        {/* Colonne 2: Marques */}
         {hoveredCategory && (
-          <div className="w-64 border-r border-gray-200">
+          <div className="w-56 bg-white border-r border-gray-200">
             {(() => {
-              const category = categories.find(c => c.name === hoveredCategory);
-              if (!category) return null;
+              const brands = getBrandsForCategory(hoveredCategory);
+              
+              if (brands.length === 0) return null;
 
-              // Si la catégorie a des sous-catégories
-              if (category.subcategories) {
-                return (
-                  <>
-                    <div className="p-4 border-b border-gray-200 bg-green-50">
-                      <h4 className="font-semibold text-gray-900 text-lg">Types</h4>
-                    </div>
-                    <div className="py-2">
-                      {category.subcategories.map((subcat) => (
-                        <div key={subcat.name}>
-                          <Link
-                            href={`/nos-produits?category=${encodeURIComponent(category.name)}&subcategory=${encodeURIComponent(subcat.slug)}`}
+              return (
+                <>
+                  <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-purple-50 to-pink-50">
+                    <h4 className="font-bold text-gray-900 text-base">Marques</h4>
+                  </div>
+                  <div className="py-3">
+                    {brands.map((brand) => {
+                      const brandProducts = getProductsByBrand(brand).filter(p => p.category === hoveredCategory);
+                      return (
+                        <div key={brand}>
+                          <button
                             className={cn(
-                              "block px-4 py-3 text-base font-medium transition-colors",
-                              hoveredSubcategory === subcat.name 
-                                ? "bg-green-50 text-green-700" 
-                                : "text-gray-900 hover:text-green-600 hover:bg-gray-100"
+                              "w-full text-left px-4 py-3 text-sm transition-all duration-200",
+                              hoveredBrand === brand 
+                                ? "bg-gradient-to-r from-purple-50 to-pink-50 text-purple-700 border-l-4 border-purple-600" 
+                                : "text-gray-700 hover:text-purple-600 hover:bg-gray-50"
                             )}
-                            onMouseEnter={() => {
-                              setHoveredSubcategory(subcat.name);
-                              setHoveredBrand(subcat.brands?.[0] || null);
-                            }}
-                            onClick={onClose}
+                            onMouseEnter={() => setHoveredBrand(brand)}
                           >
                             <div className="flex items-center justify-between">
-                              <span>{subcat.name}</span>
-                              {subcat.brands && <ChevronRight className="w-4 h-4" />}
-                            </div>
-                          </Link>
-                        </div>
-                      ))}
-                    </div>
-                  </>
-                );
-              }
-              
-              // Si la catégorie a directement des marques
-              if (category.brands) {
-                return (
-                  <>
-                    <div className="p-4 border-b border-gray-200 bg-green-50">
-                      <h4 className="font-semibold text-gray-900 text-lg">Marques</h4>
-                    </div>
-                    <div className="py-2">
-                      {category.brands.map((brand) => {
-                        const brandProducts = getProductsByBrand(brand);
-                        return (
-                          <div key={brand}>
-                            <Link
-                              href={`/nos-produits?brand=${encodeURIComponent(brand)}`}
-                              className={cn(
-                                "block px-4 py-3 text-lg font-medium transition-colors",
-                                hoveredBrand === brand 
-                                  ? "bg-green-50 text-green-700" 
-                                  : "text-gray-900 hover:text-green-600 hover:bg-gray-100"
-                              )}
-                              onMouseEnter={() => setHoveredBrand(brand)}
-                              onClick={onClose}
-                            >
                               <div>
-                                <span className="font-medium">{brand}</span>
-                                <span className="text-sm text-gray-900 block">({brandProducts.length} produits)</span>
+                                <span className="font-medium text-base">{brand}</span>
+                                <span className="block text-xs text-gray-500 mt-0.5">
+                                  {brandProducts.length} produit{brandProducts.length > 1 ? 's' : ''}
+                                </span>
                               </div>
-                            </Link>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </>
-                );
-              }
-
-              return null;
+                              <ChevronRight className={cn(
+                                "w-4 h-4 transition-transform",
+                                hoveredBrand === brand ? "translate-x-1" : ""
+                              )} />
+                            </div>
+                          </button>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </>
+              );
             })()}
           </div>
         )}
 
-        {/* Colonne des produits */}
+        {/* Colonne 3: Produits */}
         {hoveredBrand && (
-          <div className="flex-1 bg-gray-50">
+          <div className="flex-1 bg-gradient-to-b from-gray-50 to-white">
             {(() => {
               const products = getProductsForDisplay() || [];
 
               return (
                 <>
-                  <div className="p-4 border-b border-gray-200">
-                    <h4 className="font-semibold text-gray-900 text-lg">Collection {hoveredBrand}</h4>
-                    <p className="text-base text-gray-900 mt-1">{products.length} produits disponibles</p>
+                  <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-orange-50 to-red-50">
+                    <h4 className="font-bold text-gray-900 text-base">
+                      Collection {hoveredBrand}
+                    </h4>
+                    <p className="text-sm text-gray-600 mt-1">{products.length} produit{products.length > 1 ? 's' : ''} disponible{products.length > 1 ? 's' : ''}</p>
                   </div>
-                  <div className="py-2 max-h-80 overflow-y-auto">
-                    {products && products.length > 0 ? products.slice(0, 5).map((product) => (
-                      <div key={product.id}>
-                        <Link
-                          href={`/produit/${product.urlSlug || product.id}`}
-                          className="block px-4 py-3 hover:bg-white transition-colors"
-                          onClick={onClose}
-                        >
-                          <div className="flex items-start space-x-3">
-                            {product.images && product.images.length > 0 && (
-                              <div className="w-12 h-12 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
-                                <Image
-                                  src={product.images[0]}
-                                  alt={product.name}
-                                  width={48}
-                                  height={48}
-                                  className="w-full h-full object-cover"
-                                />
-                              </div>
-                            )}
-                            <div className="flex-1 min-w-0">
-                              <p className="text-lg font-medium text-gray-900 line-clamp-1">
-                                {product.name}
-                              </p>
-                              {product.price && (
-                                <p className="text-lg font-semibold text-blue-600 mt-1">
-                                  {typeof product.price === 'number' 
-                                    ? `${product.price.toFixed(2)} €` 
-                                    : product.price}
-                                </p>
+                  <div className="py-3 max-h-[400px] overflow-y-auto">
+                    {products && products.length > 0 ? (
+                      <>
+                        {products.slice(0, 6).map((product) => (
+                          <Link
+                            key={product.id}
+                            href={`/produit/${product.urlSlug || product.id}`}
+                            className="block px-4 py-3 hover:bg-gradient-to-r hover:from-orange-50 hover:to-transparent transition-all duration-200"
+                            onClick={onClose}
+                          >
+                            <div className="flex items-start space-x-3">
+                              {product.images && product.images.length > 0 && (
+                                <div className="w-14 h-14 bg-white border border-gray-200 rounded-lg overflow-hidden flex-shrink-0 shadow-sm">
+                                  <Image
+                                    src={product.images[0]}
+                                    alt={product.name}
+                                    width={56}
+                                    height={56}
+                                    className="w-full h-full object-contain"
+                                  />
+                                </div>
                               )}
-                              <p className="text-sm text-gray-900 mt-1 line-clamp-2">
-                                {product.shortDescription || product.description}
-                              </p>
+                              <div className="flex-1 min-w-0">
+                                <p className="text-sm font-semibold text-gray-900 line-clamp-1">
+                                  {product.name}
+                                </p>
+                                {product.price && (
+                                  <p className="text-base font-bold text-red-600 mt-1">
+                                    {typeof product.price === 'number' 
+                                      ? `${product.price.toFixed(2)} €` 
+                                      : product.price}
+                                  </p>
+                                )}
+                                {product.shortDescription && (
+                                  <p className="text-xs text-gray-600 mt-1 line-clamp-2">
+                                    {product.shortDescription}
+                                  </p>
+                                )}
+                              </div>
                             </div>
+                          </Link>
+                        ))}
+                        {products.length > 6 && (
+                          <div className="px-4 py-3 border-t border-gray-100">
+                            <Link
+                              href={`/nos-produits?category=${encodeURIComponent(hoveredCategory)}&brand=${encodeURIComponent(hoveredBrand)}`}
+                              className="flex items-center justify-center text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors"
+                              onClick={onClose}
+                            >
+                              Voir tous les {products.length} produits
+                              <ArrowRight className="w-4 h-4 ml-1" />
+                            </Link>
                           </div>
-                        </Link>
-                      </div>
-                    )) : null}
-                    {products && products.length > 5 && (
-                      <div className="px-4 py-3">
-                        <Link
-                          href={`/nos-produits?brand=${encodeURIComponent(hoveredBrand)}`}
-                          className="text-base font-medium text-blue-600 hover:text-blue-800"
-                          onClick={onClose}
-                        >
-                          Voir tous les {products.length} produits →
-                        </Link>
+                        )}
+                      </>
+                    ) : (
+                      <div className="p-8 text-center text-gray-500">
+                        <Package className="w-12 h-12 mx-auto mb-3 text-gray-300" />
+                        <p className="text-sm">Aucun produit disponible</p>
                       </div>
                     )}
                   </div>
@@ -285,15 +274,16 @@ const MobileMenu = ({
     };
   }, []);
 
-  // Toutes les catégories du menu
-  const allCategories = [
-    { name: 'Smartphones', icon: <Smartphone className="w-5 h-5" />, data: menuStructure.smartphones },
-    { name: 'Montres', icon: <Watch className="w-5 h-5" />, data: menuStructure.montres },
-    { name: 'Audio', icon: <Headphones className="w-5 h-5" />, data: menuStructure.casquesAudio },
-    { name: 'Luminaire', icon: <Lightbulb className="w-5 h-5" />, data: menuStructure.luminaire },
-    { name: 'Accessoires', icon: <Package className="w-5 h-5" />, data: menuStructure.accessoiresMonster },
-    { name: 'MUVIT', icon: <Star className="w-5 h-5" />, data: menuStructure.muvit },
-  ];
+  // Utiliser menuStructure directement depuis products.ts
+  const getCategoryIcon = (categoryName: string) => {
+    const lowerName = categoryName.toLowerCase();
+    if (lowerName.includes('smartphones')) return <Smartphone className="w-5 h-5" />;
+    if (lowerName.includes('tablettes')) return <Package className="w-5 h-5" />;
+    if (lowerName.includes('montres')) return <Watch className="w-5 h-5" />;
+    if (lowerName.includes('audio') || lowerName.includes('chargement')) return <Headphones className="w-5 h-5" />;
+    if (lowerName.includes('créativité') || lowerName.includes('led')) return <Lightbulb className="w-5 h-5" />;
+    return <Package className="w-5 h-5" />;
+  };
 
   const resetNavigation = () => {
     setActiveCategory(null);
@@ -376,14 +366,14 @@ const MobileMenu = ({
 
             {/* Catégories principales */}
             <div className="space-y-2">
-              {allCategories.map((category) => (
+              {menuStructure && menuStructure.length > 0 && menuStructure.map((category) => (
               <button
                 key={category.name}
                 onClick={() => setActiveCategory(category.name)}
                 className="w-full flex items-center justify-between p-4 text-left bg-gray-50 active:bg-gray-200 rounded-lg transition-colors min-h-[56px]"
               >
                 <div className="flex items-center gap-3">
-                  {category.icon}
+                  {getCategoryIcon(category.name)}
                   <span className="font-medium text-gray-900">{category.name}</span>
                 </div>
                 <ChevronRight className="w-5 h-5 text-gray-400" />
@@ -412,41 +402,49 @@ const MobileMenu = ({
         {activeCategory && !activeBrand && (
           <div className="p-4 space-y-2">
             {(() => {
-              const category = allCategories.find(c => c.name === activeCategory);
-              const categoryData = category?.data[0];
+              // Obtenir toutes les marques pour cette catégorie
+              const products = getProductsByCategory(activeCategory);
+              const brands = new Set<string>();
+              products.forEach(p => {
+                if (p.brand) brands.add(p.brand);
+              });
+              const uniqueBrands = Array.from(brands).sort();
               
-              if (!categoryData?.brands) return null;
+              if (uniqueBrands.length === 0) return null;
 
               return (
                 <>
                   {/* Lien vers toute la catégorie */}
                   <Link
-                    href={`/nos-produits?category=${encodeURIComponent(categoryData.name)}`}
+                    href={`/nos-produits?category=${encodeURIComponent(activeCategory)}`}
                     onClick={onClose}
                     className="block p-4 bg-blue-50 active:bg-blue-200 rounded-lg transition-colors mb-4 min-h-[56px]"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="font-medium text-blue-900">Voir tous les {categoryData.name}</span>
+                      <span className="font-medium text-blue-900">Voir tous les {activeCategory}</span>
                       <ArrowRight className="w-5 h-5 text-blue-600" />
                     </div>
                   </Link>
 
                   {/* Liste des marques */}
-                  {categoryData.brands.map((brand) => (
-                    <button
-                      key={brand.name}
-                      onClick={() => setActiveBrand(brand.name)}
-                      className="w-full flex items-center justify-between p-4 text-left bg-gray-50 active:bg-gray-200 rounded-lg transition-colors min-h-[56px]"
-                    >
-                      <div>
-                        <span className="font-medium text-gray-900">{brand.name}</span>
-                        <span className="block text-sm text-gray-600 mt-1">
-                          {brand.products.length} produit{brand.products.length > 1 ? 's' : ''}
-                        </span>
-                      </div>
-                      <ChevronRight className="w-5 h-5 text-gray-400" />
-                    </button>
-                  ))}
+                  {uniqueBrands.map((brand) => {
+                    const brandProducts = getProductsByBrand(brand).filter(p => p.category === activeCategory);
+                    return (
+                      <button
+                        key={brand}
+                        onClick={() => setActiveBrand(brand)}
+                        className="w-full flex items-center justify-between p-4 text-left bg-gray-50 active:bg-gray-200 rounded-lg transition-colors min-h-[56px]"
+                      >
+                        <div>
+                          <span className="font-medium text-gray-900">{brand}</span>
+                          <span className="block text-sm text-gray-600 mt-1">
+                            {brandProducts.length} produit{brandProducts.length > 1 ? 's' : ''}
+                          </span>
+                        </div>
+                        <ChevronRight className="w-5 h-5 text-gray-400" />
+                      </button>
+                    );
+                  })}
                 </>
               );
             })()}
@@ -457,16 +455,13 @@ const MobileMenu = ({
         {activeCategory && activeBrand && (
           <div className="p-4 space-y-3">
             {(() => {
-              const category = allCategories.find(c => c.name === activeCategory);
-              const categoryData = category?.data[0];
-              const brand = categoryData?.brands?.find(b => b.name === activeBrand);
-              const products = brand?.products || [];
+              const products = getProductsByBrand(activeBrand).filter(p => p.category === activeCategory);
 
               return (
                 <>
-                  {/* Lien vers tous les produits de la marque */}
+                  {/* Lien vers tous les produits de la marque dans cette catégorie */}
                   <Link
-                    href={`/nos-produits?brand=${encodeURIComponent(activeBrand)}`}
+                    href={`/nos-produits?category=${encodeURIComponent(activeCategory)}&brand=${encodeURIComponent(activeBrand)}`}
                     onClick={onClose}
                     className="block p-4 bg-green-50 active:bg-green-200 rounded-lg transition-colors mb-4 min-h-[56px]"
                   >
@@ -479,7 +474,7 @@ const MobileMenu = ({
                   </Link>
 
                   {/* Liste des produits */}
-                  {products.map((product) => (
+                  {products && products.length > 0 && products.map((product) => (
                     <Link
                       key={product.id}
                       href={`/produit/${product.urlSlug || product.id}`}
@@ -541,6 +536,24 @@ export default function Header() {
   // const { isAuthenticated } = useAuth();
   const router = useRouter();
   const cartRef = useRef<HTMLDivElement>(null);
+  
+  // Helper pour obtenir les catégories depuis menuStructure
+  const getMenuCategory = (categoryName: string): CategoryStructure[] => {
+    const category = menuStructure.find(cat => 
+      cat.name.toLowerCase() === categoryName.toLowerCase() ||
+      cat.slug === categoryName
+    );
+    return category ? [category] : [];
+  };
+  
+  // Helper pour obtenir toutes les catégories avec des produits
+  const getAllCategories = (): CategoryStructure[] => {
+    return menuStructure.filter(cat => {
+      // Vérifier s'il y a des produits dans cette catégorie
+      const products = getProductsByCategory(cat.name);
+      return products && products.length > 0;
+    });
+  };
 
   // Gestion du scroll - supprimé car non utilisé
 
@@ -587,7 +600,7 @@ export default function Header() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header principal */}
-          <div className="flex items-center gap-4 h-16 overflow-visible">
+          <div className="flex items-center gap-4 h-20 overflow-visible">
             {/* Logo */}
             <Link href="/" className="flex-shrink-0 hover:opacity-90 transition-opacity">
               <Image 
@@ -602,7 +615,7 @@ export default function Header() {
 
             {/* Navigation centrale */}
             <nav className="hidden xl:flex items-center gap-0.5 flex-1 overflow-visible">
-              {navigation.map((item) => (
+              {navigation && navigation.length > 0 && navigation.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
@@ -615,136 +628,186 @@ export default function Header() {
               
               {/* Menu déroulant Smartphones */}
               <div 
-                className="relative"
+                className="relative group"
                 onMouseEnter={() => handleMouseEnter('smartphones')}
-                onMouseLeave={handleMouseLeave}
+                onMouseLeave={(e) => {
+                  // Check if we're leaving to go to the dropdown menu
+                  const relatedTarget = e.relatedTarget as HTMLElement;
+                  if (!relatedTarget || !e.currentTarget.contains(relatedTarget)) {
+                    setTimeout(() => {
+                      if (dropdownOpen === 'smartphones') {
+                        handleMouseLeave();
+                      }
+                    }, 100);
+                  }
+                }}
               >
                 <button
-                  className={`flex items-center gap-1 px-2 py-1.5 text-xs font-bold transition-colors rounded-lg ${
+                  className={`flex items-center gap-1.5 px-3 py-2 text-sm font-bold transition-all duration-200 rounded-lg ${
                     dropdownOpen === 'smartphones' 
-                      ? 'text-blue-600 bg-blue-50' 
+                      ? 'text-blue-600 bg-blue-50 shadow-sm' 
                       : 'text-gray-900 hover:text-blue-600 hover:bg-blue-50'
                   }`}
                 >
-                  <Smartphone className="w-3 h-3" />
+                  <Smartphone className="w-4 h-4" />
                   <span>Smartphones</span>
-                  <ChevronDown className={`w-3 h-3 transition-transform ${
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${
                     dropdownOpen === 'smartphones' ? 'rotate-180' : ''
                   }`} />
                 </button>
                 
                 <DropdownMenu
-                  categories={menuStructure.smartphones}
+                  categories={getMenuCategory('smartphones')}
                   isOpen={dropdownOpen === 'smartphones'}
+                  onClose={closeDropdown}
+                />
+              </div>
+
+              {/* Menu déroulant Tablettes */}
+              <div 
+                className="relative group"
+                onMouseEnter={() => handleMouseEnter('tablettes')}
+                onMouseLeave={(e) => {
+                  const relatedTarget = e.relatedTarget as HTMLElement;
+                  if (!relatedTarget || !e.currentTarget.contains(relatedTarget)) {
+                    setTimeout(() => {
+                      if (dropdownOpen === 'tablettes') {
+                        handleMouseLeave();
+                      }
+                    }, 100);
+                  }
+                }}
+              >
+                <button
+                  className={`flex items-center gap-1.5 px-3 py-2 text-sm font-bold transition-all duration-200 rounded-lg ${
+                    dropdownOpen === 'tablettes' 
+                      ? 'text-blue-600 bg-blue-50 shadow-sm' 
+                      : 'text-gray-900 hover:text-blue-600 hover:bg-blue-50'
+                  }`}
+                >
+                  <Package className="w-4 h-4" />
+                  <span>Tablettes</span>
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                    dropdownOpen === 'tablettes' ? 'rotate-180' : ''
+                  }`} />
+                </button>
+                
+                <DropdownMenu
+                  categories={getMenuCategory('tablettes')}
+                  isOpen={dropdownOpen === 'tablettes'}
                   onClose={closeDropdown}
                 />
               </div>
 
               {/* Menu déroulant Montres */}
               <div 
-                className="relative"
+                className="relative group"
                 onMouseEnter={() => handleMouseEnter('montres')}
-                onMouseLeave={handleMouseLeave}
+                onMouseLeave={(e) => {
+                  const relatedTarget = e.relatedTarget as HTMLElement;
+                  if (!relatedTarget || !e.currentTarget.contains(relatedTarget)) {
+                    setTimeout(() => {
+                      if (dropdownOpen === 'montres') {
+                        handleMouseLeave();
+                      }
+                    }, 100);
+                  }
+                }}
               >
                 <button
-                  className="flex items-center gap-1 text-gray-900 hover:text-blue-600 px-2 py-1.5 text-xs font-bold transition-colors rounded-lg hover:bg-blue-50"
+                  className={`flex items-center gap-1.5 px-3 py-2 text-sm font-bold transition-all duration-200 rounded-lg ${
+                    dropdownOpen === 'montres' 
+                      ? 'text-blue-600 bg-blue-50 shadow-sm' 
+                      : 'text-gray-900 hover:text-blue-600 hover:bg-blue-50'
+                  }`}
                 >
-                  <Watch className="w-3 h-3" />
+                  <Watch className="w-4 h-4" />
                   <span>Montres</span>
-                  <ChevronDown className="w-4 h-4" />
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                    dropdownOpen === 'montres' ? 'rotate-180' : ''
+                  }`} />
                 </button>
                 
                 <DropdownMenu
-                  categories={menuStructure.montres}
+                  categories={getMenuCategory('montres connectées')}
                   isOpen={dropdownOpen === 'montres'}
                   onClose={closeDropdown}
                 />
               </div>
-              
-              {/* Menu déroulant Audio */}
-              <div 
-                className="relative"
-                onMouseEnter={() => handleMouseEnter('audio')}
-                onMouseLeave={handleMouseLeave}
-              >
-                <button
-                  className="flex items-center gap-1 text-gray-900 hover:text-blue-600 px-2 py-1.5 text-xs font-bold transition-colors rounded-lg hover:bg-blue-50"
-                >
-                  <Headphones className="w-3 h-3" />
-                  <span>Audio</span>
-                  <ChevronDown className="w-4 h-4" />
-                </button>
-                
-                <DropdownMenu
-                  categories={menuStructure.casquesAudio}
-                  isOpen={dropdownOpen === 'audio'}
-                  onClose={closeDropdown}
-                />
-              </div>
-              
-              {/* Menu déroulant Luminaire */}
-              <div 
-                className="relative"
-                onMouseEnter={() => handleMouseEnter('luminaire')}
-                onMouseLeave={handleMouseLeave}
-              >
-                <button
-                  className="flex items-center gap-1 text-gray-900 hover:text-blue-600 px-2 py-1.5 text-xs font-bold transition-colors rounded-lg hover:bg-blue-50"
-                >
-                  <Lightbulb className="w-3 h-3" />
-                  <span>Luminaire</span>
-                  <ChevronDown className="w-4 h-4" />
-                </button>
-                
-                <DropdownMenu
-                  categories={menuStructure.luminaire}
-                  isOpen={dropdownOpen === 'luminaire'}
-                  onClose={closeDropdown}
-                  alignRight={true}
-                />
-              </div>
-              
+
               {/* Menu déroulant Accessoires */}
               <div 
-                className="relative"
+                className="relative group"
                 onMouseEnter={() => handleMouseEnter('accessoires')}
-                onMouseLeave={handleMouseLeave}
+                onMouseLeave={(e) => {
+                  const relatedTarget = e.relatedTarget as HTMLElement;
+                  if (!relatedTarget || !e.currentTarget.contains(relatedTarget)) {
+                    setTimeout(() => {
+                      if (dropdownOpen === 'accessoires') {
+                        handleMouseLeave();
+                      }
+                    }, 100);
+                  }
+                }}
               >
                 <button
-                  className="flex items-center gap-1 text-gray-900 hover:text-blue-600 px-2 py-1.5 text-xs font-bold transition-colors rounded-lg hover:bg-blue-50"
+                  className={`flex items-center gap-1.5 px-3 py-2 text-sm font-bold transition-all duration-200 rounded-lg ${
+                    dropdownOpen === 'accessoires' 
+                      ? 'text-blue-600 bg-blue-50 shadow-sm' 
+                      : 'text-gray-900 hover:text-blue-600 hover:bg-blue-50'
+                  }`}
                 >
-                  <Package className="w-3 h-3" />
+                  <Headphones className="w-4 h-4" />
                   <span>Accessoires</span>
-                  <ChevronDown className="w-4 h-4" />
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                    dropdownOpen === 'accessoires' ? 'rotate-180' : ''
+                  }`} />
                 </button>
                 
                 <DropdownMenu
-                  categories={menuStructure.accessoiresMonster}
+                  categories={getAllCategories().filter(cat => 
+                    cat.name.includes('Audio') || 
+                    cat.name.includes('Chargement') || 
+                    cat.name.includes('Créativité')
+                  )}
                   isOpen={dropdownOpen === 'accessoires'}
                   onClose={closeDropdown}
-                  alignRight={true}
                 />
               </div>
-              
-              {/* Menu déroulant MUVIT */}
+
+              {/* Menu déroulant LED */}
               <div 
-                className="relative"
-                onMouseEnter={() => handleMouseEnter('muvit')}
-                onMouseLeave={handleMouseLeave}
+                className="relative group"
+                onMouseEnter={() => handleMouseEnter('led')}
+                onMouseLeave={(e) => {
+                  const relatedTarget = e.relatedTarget as HTMLElement;
+                  if (!relatedTarget || !e.currentTarget.contains(relatedTarget)) {
+                    setTimeout(() => {
+                      if (dropdownOpen === 'led') {
+                        handleMouseLeave();
+                      }
+                    }, 100);
+                  }
+                }}
               >
                 <button
-                  className="flex items-center gap-1 text-gray-900 hover:text-blue-600 px-2 py-1.5 text-xs font-bold transition-colors rounded-lg hover:bg-blue-50"
+                  className={`flex items-center gap-1.5 px-3 py-2 text-sm font-bold transition-all duration-200 rounded-lg ${
+                    dropdownOpen === 'led' 
+                      ? 'text-blue-600 bg-blue-50 shadow-sm' 
+                      : 'text-gray-900 hover:text-blue-600 hover:bg-blue-50'
+                  }`}
                 >
-                  <Star className="w-3 h-3" />
-                  <span>MUVIT</span>
-                  <ChevronDown className="w-4 h-4" />
+                  <Lightbulb className="w-4 h-4" />
+                  <span>LED</span>
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                    dropdownOpen === 'led' ? 'rotate-180' : ''
+                  }`} />
                 </button>
                 
                 <DropdownMenu
-                  categories={menuStructure.muvit}
-                  isOpen={dropdownOpen === 'muvit'}
+                  categories={getMenuCategory('créativité & enfants')}
+                  isOpen={dropdownOpen === 'led'}
                   onClose={closeDropdown}
-                  alignRight={true}
                 />
               </div>
               
@@ -784,8 +847,15 @@ export default function Header() {
                 href="/nos-produits"
                 className="flex items-center gap-2 text-gray-900 hover:text-blue-600 px-3 py-2 text-base font-bold transition-colors rounded-lg hover:bg-blue-50"
               >
-                <Package className="w-5 h-5" />
+                <Headphones className="w-5 h-5" />
                 <span>Accessoires</span>
+              </Link>
+              <Link
+                href="/nos-produits?category=Créativité+%26+Enfants"
+                className="flex items-center gap-2 text-gray-900 hover:text-blue-600 px-3 py-2 text-base font-bold transition-colors rounded-lg hover:bg-blue-50"
+              >
+                <Lightbulb className="w-5 h-5" />
+                <span>LED</span>
               </Link>
             </nav>
 
@@ -840,7 +910,7 @@ export default function Header() {
                     ) : (
                       <>
                         <div className="max-h-80 overflow-y-auto">
-                          {items.map((item) => {
+                          {items && items.length > 0 && items.map((item) => {
                             const price = parseFloat(item.product.price?.replace('€', '') || '0');
                             return (
                               <div key={`${item.product.id}-${item.variant}`} className="p-4 border-b border-gray-100 hover:bg-gray-50">
