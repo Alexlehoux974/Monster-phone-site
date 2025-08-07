@@ -54,10 +54,10 @@ const DropdownMenu = ({
   // Obtenir les produits par catégorie ou marque
   const getProductsForDisplay = () => {
     if (hoveredBrand) {
-      return getProductsByBrand(hoveredBrand);
+      return getProductsByBrand(hoveredBrand) || [];
     }
     if (hoveredCategory) {
-      return getProductsByCategory(hoveredCategory);
+      return getProductsByCategory(hoveredCategory) || [];
     }
     return [];
   };
@@ -195,7 +195,7 @@ const DropdownMenu = ({
         {hoveredBrand && (
           <div className="flex-1 bg-gray-50">
             {(() => {
-              const products = getProductsForDisplay();
+              const products = getProductsForDisplay() || [];
 
               return (
                 <>
@@ -204,7 +204,7 @@ const DropdownMenu = ({
                     <p className="text-base text-gray-900 mt-1">{products.length} produits disponibles</p>
                   </div>
                   <div className="py-2 max-h-80 overflow-y-auto">
-                    {products.slice(0, 5).map((product) => (
+                    {products && products.length > 0 ? products.slice(0, 5).map((product) => (
                       <div key={product.id}>
                         <Link
                           href={`/produit/${product.urlSlug || product.id}`}
@@ -241,8 +241,8 @@ const DropdownMenu = ({
                           </div>
                         </Link>
                       </div>
-                    ))}
-                    {products.length > 5 && (
+                    )) : null}
+                    {products && products.length > 5 && (
                       <div className="px-4 py-3">
                         <Link
                           href={`/nos-produits?brand=${encodeURIComponent(hoveredBrand)}`}
