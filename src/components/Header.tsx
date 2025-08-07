@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Search, ShoppingCart, User, Menu, X, ChevronDown, ChevronRight, ArrowRight, Shield, Truck, Flame, Smartphone, Watch, Headphones, Lightbulb, Package, Star, Trash2, CreditCard, Plus, Minus } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { menuStructure, type CategoryStructure } from '@/data/products';
+import { menuStructure, type CategoryStructure, allProducts, getProductsByCategory, getProductsByBrand } from '@/data/products';
 import { useCart } from '@/contexts/CartContext';
 // import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
@@ -48,8 +48,19 @@ const DropdownMenu = ({
   alignRight?: boolean;
 }) => {
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
-  // const [hoveredSubcategory, setHoveredSubcategory] = useState<string | null>(null);
+  const [hoveredSubcategory, setHoveredSubcategory] = useState<string | null>(null);
   const [hoveredBrand, setHoveredBrand] = useState<string | null>(null);
+  
+  // Obtenir les produits par catégorie ou marque
+  const getProductsForDisplay = () => {
+    if (hoveredBrand) {
+      return getProductsByBrand(hoveredBrand);
+    }
+    if (hoveredCategory) {
+      return getProductsByCategory(hoveredCategory);
+    }
+    return [];
+  };
 
   if (!isOpen) return null;
 
@@ -79,13 +90,14 @@ const DropdownMenu = ({
                   )}
                   onMouseEnter={() => {
                     setHoveredCategory(category.name);
+                    setHoveredSubcategory(null);
                     setHoveredBrand(null);
                   }}
                   onClick={onClose}
                 >
                   <div className="flex items-center justify-between">
                     <span>{category.name}</span>
-                    {category.brands && category.brands.length > 0 && (
+                    {(category.subcategories || category.brands) && (
                       <ArrowRight className="w-4 h-4 text-gray-900" />
                     )}
                   </div>
@@ -95,42 +107,86 @@ const DropdownMenu = ({
           </div>
         </div>
 
-        {/* Colonne des marques */}
+        {/* Colonne des sous-catégories ou marques */}
         {hoveredCategory && (
           <div className="w-64 border-r border-gray-200">
             {(() => {
               const category = categories.find(c => c.name === hoveredCategory);
-              if (!category || !category.brands) return null;
+              if (!category) return null;
 
-              return (
-                <>
-                  <div className="p-4 border-b border-gray-200 bg-green-50">
-                    <h4 className="font-semibold text-gray-900 text-lg">{category.name}</h4>
-                  </div>
-                  <div className="py-2">
-                    {category.brands.map((brand) => (
-                      <div key={brand.name}>
-                        <Link
-                          href={`/nos-produits?brand=${encodeURIComponent(brand.name)}`}
-                          className={cn(
-                            "block px-4 py-3 text-lg font-medium transition-colors",
-                            hoveredBrand === brand.name 
-                              ? "bg-green-50 text-green-700" 
-                              : "text-gray-900 hover:text-green-600 hover:bg-gray-100"
-                          )}
-                          onMouseEnter={() => setHoveredBrand(brand.name)}
-                          onClick={onClose}
-                        >
-                          <div>
-                            <span className="font-medium">{brand.name}</span>
-                            <span className="text-sm text-gray-900 block">({brand.products.length} produits)</span>
+              // Si la catégorie a des sous-catégories
+              if (category.subcategories) {
+                return (
+                  <>
+                    <div className="p-4 border-b border-gray-200 bg-green-50">
+                      <h4 className="font-semibold text-gray-900 text-lg">Types</h4>
+                    </div>
+                    <div className="py-2">
+                      {category.subcategories.map((subcat) => (
+                        <div key={subcat.name}>
+                          <Link
+                            href={`/nos-produits?category=${encodeURIComponent(category.name)}&subcategory=${encodeURIComponent(subcat.slug)}`}
+                            className={cn(
+                              "block px-4 py-3 text-base font-medium transition-colors",
+                              hoveredSubcategory === subcat.name 
+                                ? "bg-green-50 text-green-700" 
+                                : "text-gray-900 hover:text-green-600 hover:bg-gray-100"
+                            )}
+                            onMouseEnter={() => {
+                              setHoveredSubcategory(subcat.name);
+                              setHoveredBrand(subcat.brands?.[0] || null);
+                            }}
+                            onClick={onClose}
+                          >
+                            <div className="flex items-center justify-between">
+                              <span>{subcat.name}</span>
+                              {subcat.brands && <ChevronRight className="w-4 h-4" />}
+                            </div>
+                          </Link>
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                );
+              }
+              
+              // Si la catégorie a directement des marques
+              if (category.brands) {
+                return (
+                  <>
+                    <div className="p-4 border-b border-gray-200 bg-green-50">
+                      <h4 className="font-semibold text-gray-900 text-lg">Marques</h4>
+                    </div>
+                    <div className="py-2">
+                      {category.brands.map((brand) => {
+                        const brandProducts = getProductsByBrand(brand);
+                        return (
+                          <div key={brand}>
+                            <Link
+                              href={`/nos-produits?brand=${encodeURIComponent(brand)}`}
+                              className={cn(
+                                "block px-4 py-3 text-lg font-medium transition-colors",
+                                hoveredBrand === brand 
+                                  ? "bg-green-50 text-green-700" 
+                                  : "text-gray-900 hover:text-green-600 hover:bg-gray-100"
+                              )}
+                              onMouseEnter={() => setHoveredBrand(brand)}
+                              onClick={onClose}
+                            >
+                              <div>
+                                <span className="font-medium">{brand}</span>
+                                <span className="text-sm text-gray-900 block">({brandProducts.length} produits)</span>
+                              </div>
+                            </Link>
                           </div>
-                        </Link>
-                      </div>
-                    ))}
-                  </div>
-                </>
-              );
+                        );
+                      })}
+                    </div>
+                  </>
+                );
+              }
+
+              return null;
             })()}
           </div>
         )}
@@ -139,9 +195,7 @@ const DropdownMenu = ({
         {hoveredBrand && (
           <div className="flex-1 bg-gray-50">
             {(() => {
-              const category = categories.find(c => c.name === hoveredCategory);
-              const brand = category?.brands?.find(b => b.name === hoveredBrand);
-              const products = brand?.products || [];
+              const products = getProductsForDisplay();
 
               return (
                 <>
@@ -175,11 +229,13 @@ const DropdownMenu = ({
                               </p>
                               {product.price && (
                                 <p className="text-lg font-semibold text-blue-600 mt-1">
-                                  {product.price}
+                                  {typeof product.price === 'number' 
+                                    ? `${product.price.toFixed(2)} €` 
+                                    : product.price}
                                 </p>
                               )}
                               <p className="text-sm text-gray-900 mt-1 line-clamp-2">
-                                {product.description}
+                                {product.shortDescription || product.description}
                               </p>
                             </div>
                           </div>

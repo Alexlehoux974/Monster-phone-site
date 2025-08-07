@@ -12,11 +12,23 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Mode clair forcé pour l'e-commerce */
+:root {
+  --background: #ffffff;
+  --foreground: #0f172a;
+  --primary: #ef4444;
+  --primary-hover: #dc2626;
+  --secondary: #1e293b;
+  --accent: #fbbf24;
+  --success: #10b981;
+  --info: #3b82f6;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --muted: #f8fafc;
+  --muted-foreground: #64748b;
+  --border: #e2e8f0;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
 }
 
 body {
@@ -56,6 +68,41 @@ body {
 /* Amélioration du smooth scroll */
 html {
   scroll-behavior: smooth;
+}
+
+/* Styles pour les pages produits */
+.product-description {
+  line-height: 1.8;
+  color: var(--foreground);
+}
+
+.product-badge {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+  box-shadow: 0 4px 14px 0 rgba(239, 68, 68, 0.3);
+}
+
+/* Amélioration des tabs */
+.tabs-trigger-active {
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Cards et sections */
+.product-section {
+  background: linear-gradient(to bottom, #ffffff, #fafafa);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Boutons optimisés */
+.btn-primary {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  box-shadow: 0 4px 14px 0 rgba(239, 68, 68, 0.25);
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px 0 rgba(239, 68, 68, 0.35);
 }
 
 /* Focus states améliorés pour l'accessibilité */

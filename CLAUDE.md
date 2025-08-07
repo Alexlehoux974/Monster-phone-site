@@ -62,7 +62,7 @@ npm run build && npm start -- -p 3001  # Full production test
   - 15 products: 3 HONOR phones, 12 accessories
   - Brands: HONOR, MY WAY, MUVIT, MONSTER
   - Categories: Smartphones, Audio & Son, Chargement & Énergie, Créativité & Enfants
-- **Product Interface**: TypeScript interface with 13 fields including id, name, brand, category, price, images
+- **Product Interface**: TypeScript interface with 18 fields including id, name, brand, category, price, images
 - **Menu Structure**: `menuStructure` object provides 4-level navigation hierarchy
 - **Static Pattern**: No API calls, manual Airtable exports
 
@@ -78,9 +78,10 @@ npm run build && npm start -- -p 3001  # Full production test
 - Development: Auto-detects (warning shows port 3002 when 3000 in use)
 - Production: **MUST use port 3001** for deployment
 
-**3. Non-persistent Cart**
-- Cart state resets on page reload
-- Uses React Context without localStorage persistence
+**3. Cart Persistence** ✅ (Fixed)
+- Cart now persists using localStorage with key `monsterphone-cart`
+- Automatically saves/loads on state changes
+- Test mode support via `initialItems` prop
 
 ### Navigation System
 **Header Component** (`/src/components/Header.tsx`):
@@ -107,7 +108,7 @@ src/
 │   ├── Footer.tsx         # Business info and links
 │   └── ui/               # Radix UI primitives
 ├── contexts/
-│   ├── CartContext.tsx    # Shopping cart state management
+│   ├── CartContext.tsx    # Shopping cart state management (with localStorage)
 │   └── AuthContext.tsx    # User authentication (mock)
 ├── data/
 │   └── products.ts        # Product data + menu structure

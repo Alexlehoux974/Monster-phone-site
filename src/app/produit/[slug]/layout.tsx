@@ -7,7 +7,9 @@ type Props = {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const product = allProducts.find(p => p.urlSlug === params.slug || p.id === params.slug);
+  // Dans Next.js 15, params doit être awaited
+  const { slug } = await params;
+  const product = allProducts.find(p => p.urlSlug === slug || p.id === slug);
   
   if (!product) {
     return {
@@ -16,7 +18,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  const price = parseFloat(product.price?.replace('€', '') || '0');
+  // Le prix est maintenant un nombre
+  const price = typeof product.price === 'number' 
+    ? product.price 
+    : typeof product.price === 'string'
+      ? parseFloat(product.price?.replace('€', '') || '0')
+      : 0;
   
   return {
     title: `${product.name} - ${product.brand}`,
