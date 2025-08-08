@@ -25,11 +25,6 @@ const PromoBar = () => (
           <Flame className="w-4 h-4" />
           <span>LIVRAISON GRATUITE DÈS 50€</span>
         </div>
-        <span className="hidden sm:block text-xs">•</span>
-        <div className="flex items-center gap-1.5">
-          <Shield className="w-4 h-4" />
-          <span>GARANTIE 2 ANS</span>
-        </div>
       </div>
     </div>
   </div>
@@ -530,12 +525,14 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [dropdownOpen, setDropdownOpen] = useState<string | null>(null);
+  const [clickedMenu, setClickedMenu] = useState<string | null>(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
   
   const { items, removeFromCart, updateQuantity, getCartTotal, getItemCount } = useCart();
   // const { isAuthenticated } = useAuth();
   const router = useRouter();
   const cartRef = useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
   
   // Helper pour obtenir les catégories depuis menuStructure
   const getMenuCategory = (categoryName: string): CategoryStructure[] => {
@@ -574,16 +571,53 @@ export default function Header() {
     };
   }, [isCartOpen]);
 
+  // Fermer le menu dropdown quand on clique en dehors
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setClickedMenu(null);
+        setDropdownOpen(null);
+      }
+    };
+
+    if (clickedMenu) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [clickedMenu]);
+
   const handleMouseEnter = (menu: string) => {
-    setDropdownOpen(menu);
+    // Ne pas activer le hover si un menu est déjà ouvert par clic
+    if (!clickedMenu) {
+      setDropdownOpen(menu);
+    }
   };
 
   const handleMouseLeave = () => {
-    setDropdownOpen(null);
+    // Ne pas fermer si le menu est ouvert par clic
+    if (!clickedMenu) {
+      setDropdownOpen(null);
+    }
+  };
+
+  const handleMenuClick = (menu: string) => {
+    if (clickedMenu === menu) {
+      // Si le même menu est cliqué, le fermer
+      setClickedMenu(null);
+      setDropdownOpen(null);
+    } else {
+      // Ouvrir le nouveau menu et fermer l'ancien
+      setClickedMenu(menu);
+      setDropdownOpen(menu);
+    }
   };
 
   const closeDropdown = () => {
     setDropdownOpen(null);
+    setClickedMenu(null);
   };
 
 
@@ -614,7 +648,7 @@ export default function Header() {
             </Link>
 
             {/* Navigation centrale */}
-            <nav className="hidden xl:flex items-center gap-0.5 flex-1 overflow-visible">
+            <nav className="hidden xl:flex items-center gap-0.5 flex-1 overflow-visible" ref={menuRef}>
               {navigation && navigation.length > 0 && navigation.map((item) => (
                 <Link
                   key={item.name}
@@ -630,21 +664,15 @@ export default function Header() {
               <div 
                 className="relative group"
                 onMouseEnter={() => handleMouseEnter('smartphones')}
-                onMouseLeave={(e) => {
-                  // Check if we're leaving to go to the dropdown menu
-                  const relatedTarget = e.relatedTarget as HTMLElement;
-                  if (!relatedTarget || !e.currentTarget.contains(relatedTarget)) {
-                    setTimeout(() => {
-                      if (dropdownOpen === 'smartphones') {
-                        handleMouseLeave();
-                      }
-                    }, 100);
-                  }
-                }}
+                onMouseLeave={() => handleMouseLeave()}
               >
                 <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleMenuClick('smartphones');
+                  }}
                   className={`flex items-center gap-1.5 px-3 py-2 text-sm font-bold transition-all duration-200 rounded-lg ${
-                    dropdownOpen === 'smartphones' 
+                    dropdownOpen === 'smartphones' || clickedMenu === 'smartphones'
                       ? 'text-blue-600 bg-blue-50 shadow-sm' 
                       : 'text-gray-900 hover:text-blue-600 hover:bg-blue-50'
                   }`}
@@ -652,13 +680,13 @@ export default function Header() {
                   <Smartphone className="w-4 h-4" />
                   <span>Smartphones</span>
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                    dropdownOpen === 'smartphones' ? 'rotate-180' : ''
+                    dropdownOpen === 'smartphones' || clickedMenu === 'smartphones' ? 'rotate-180' : ''
                   }`} />
                 </button>
                 
                 <DropdownMenu
                   categories={getMenuCategory('smartphones')}
-                  isOpen={dropdownOpen === 'smartphones'}
+                  isOpen={dropdownOpen === 'smartphones' || clickedMenu === 'smartphones'}
                   onClose={closeDropdown}
                 />
               </div>
@@ -667,20 +695,15 @@ export default function Header() {
               <div 
                 className="relative group"
                 onMouseEnter={() => handleMouseEnter('tablettes')}
-                onMouseLeave={(e) => {
-                  const relatedTarget = e.relatedTarget as HTMLElement;
-                  if (!relatedTarget || !e.currentTarget.contains(relatedTarget)) {
-                    setTimeout(() => {
-                      if (dropdownOpen === 'tablettes') {
-                        handleMouseLeave();
-                      }
-                    }, 100);
-                  }
-                }}
+                onMouseLeave={() => handleMouseLeave()}
               >
                 <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleMenuClick('tablettes');
+                  }}
                   className={`flex items-center gap-1.5 px-3 py-2 text-sm font-bold transition-all duration-200 rounded-lg ${
-                    dropdownOpen === 'tablettes' 
+                    dropdownOpen === 'tablettes' || clickedMenu === 'tablettes'
                       ? 'text-blue-600 bg-blue-50 shadow-sm' 
                       : 'text-gray-900 hover:text-blue-600 hover:bg-blue-50'
                   }`}
@@ -688,13 +711,13 @@ export default function Header() {
                   <Package className="w-4 h-4" />
                   <span>Tablettes</span>
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                    dropdownOpen === 'tablettes' ? 'rotate-180' : ''
+                    dropdownOpen === 'tablettes' || clickedMenu === 'tablettes' ? 'rotate-180' : ''
                   }`} />
                 </button>
                 
                 <DropdownMenu
                   categories={getMenuCategory('tablettes')}
-                  isOpen={dropdownOpen === 'tablettes'}
+                  isOpen={dropdownOpen === 'tablettes' || clickedMenu === 'tablettes'}
                   onClose={closeDropdown}
                 />
               </div>
@@ -703,20 +726,15 @@ export default function Header() {
               <div 
                 className="relative group"
                 onMouseEnter={() => handleMouseEnter('montres')}
-                onMouseLeave={(e) => {
-                  const relatedTarget = e.relatedTarget as HTMLElement;
-                  if (!relatedTarget || !e.currentTarget.contains(relatedTarget)) {
-                    setTimeout(() => {
-                      if (dropdownOpen === 'montres') {
-                        handleMouseLeave();
-                      }
-                    }, 100);
-                  }
-                }}
+                onMouseLeave={() => handleMouseLeave()}
               >
                 <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleMenuClick('montres');
+                  }}
                   className={`flex items-center gap-1.5 px-3 py-2 text-sm font-bold transition-all duration-200 rounded-lg ${
-                    dropdownOpen === 'montres' 
+                    dropdownOpen === 'montres' || clickedMenu === 'montres'
                       ? 'text-blue-600 bg-blue-50 shadow-sm' 
                       : 'text-gray-900 hover:text-blue-600 hover:bg-blue-50'
                   }`}
@@ -724,13 +742,13 @@ export default function Header() {
                   <Watch className="w-4 h-4" />
                   <span>Montres</span>
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                    dropdownOpen === 'montres' ? 'rotate-180' : ''
+                    dropdownOpen === 'montres' || clickedMenu === 'montres' ? 'rotate-180' : ''
                   }`} />
                 </button>
                 
                 <DropdownMenu
                   categories={getMenuCategory('montres connectées')}
-                  isOpen={dropdownOpen === 'montres'}
+                  isOpen={dropdownOpen === 'montres' || clickedMenu === 'montres'}
                   onClose={closeDropdown}
                 />
               </div>
@@ -739,20 +757,15 @@ export default function Header() {
               <div 
                 className="relative group"
                 onMouseEnter={() => handleMouseEnter('accessoires')}
-                onMouseLeave={(e) => {
-                  const relatedTarget = e.relatedTarget as HTMLElement;
-                  if (!relatedTarget || !e.currentTarget.contains(relatedTarget)) {
-                    setTimeout(() => {
-                      if (dropdownOpen === 'accessoires') {
-                        handleMouseLeave();
-                      }
-                    }, 100);
-                  }
-                }}
+                onMouseLeave={() => handleMouseLeave()}
               >
                 <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleMenuClick('accessoires');
+                  }}
                   className={`flex items-center gap-1.5 px-3 py-2 text-sm font-bold transition-all duration-200 rounded-lg ${
-                    dropdownOpen === 'accessoires' 
+                    dropdownOpen === 'accessoires' || clickedMenu === 'accessoires'
                       ? 'text-blue-600 bg-blue-50 shadow-sm' 
                       : 'text-gray-900 hover:text-blue-600 hover:bg-blue-50'
                   }`}
@@ -760,7 +773,7 @@ export default function Header() {
                   <Headphones className="w-4 h-4" />
                   <span>Accessoires</span>
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                    dropdownOpen === 'accessoires' ? 'rotate-180' : ''
+                    dropdownOpen === 'accessoires' || clickedMenu === 'accessoires' ? 'rotate-180' : ''
                   }`} />
                 </button>
                 
@@ -770,7 +783,7 @@ export default function Header() {
                     cat.name.includes('Chargement') || 
                     cat.name.includes('Créativité')
                   )}
-                  isOpen={dropdownOpen === 'accessoires'}
+                  isOpen={dropdownOpen === 'accessoires' || clickedMenu === 'accessoires'}
                   onClose={closeDropdown}
                 />
               </div>
@@ -779,20 +792,15 @@ export default function Header() {
               <div 
                 className="relative group"
                 onMouseEnter={() => handleMouseEnter('led')}
-                onMouseLeave={(e) => {
-                  const relatedTarget = e.relatedTarget as HTMLElement;
-                  if (!relatedTarget || !e.currentTarget.contains(relatedTarget)) {
-                    setTimeout(() => {
-                      if (dropdownOpen === 'led') {
-                        handleMouseLeave();
-                      }
-                    }, 100);
-                  }
-                }}
+                onMouseLeave={() => handleMouseLeave()}
               >
                 <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleMenuClick('led');
+                  }}
                   className={`flex items-center gap-1.5 px-3 py-2 text-sm font-bold transition-all duration-200 rounded-lg ${
-                    dropdownOpen === 'led' 
+                    dropdownOpen === 'led' || clickedMenu === 'led'
                       ? 'text-blue-600 bg-blue-50 shadow-sm' 
                       : 'text-gray-900 hover:text-blue-600 hover:bg-blue-50'
                   }`}
@@ -800,13 +808,13 @@ export default function Header() {
                   <Lightbulb className="w-4 h-4" />
                   <span>LED</span>
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                    dropdownOpen === 'led' ? 'rotate-180' : ''
+                    dropdownOpen === 'led' || clickedMenu === 'led' ? 'rotate-180' : ''
                   }`} />
                 </button>
                 
                 <DropdownMenu
                   categories={getMenuCategory('créativité & enfants')}
-                  isOpen={dropdownOpen === 'led'}
+                  isOpen={dropdownOpen === 'led' || clickedMenu === 'led'}
                   onClose={closeDropdown}
                 />
               </div>
