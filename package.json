@@ -43,7 +43,6 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.4.2",
-    "glob": "^11.0.3",
     "jest": "^30.0.5",
     "jest-environment-jsdom": "^30.0.5",
     "tailwindcss": "^4",

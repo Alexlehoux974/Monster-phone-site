@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { allProducts } from '@/data/products';
 
 type Props = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
   children: React.ReactNode;
 };
 
@@ -18,12 +18,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  // Le prix est maintenant un nombre
-  const price = typeof product.price === 'number' 
-    ? product.price 
-    : typeof product.price === 'string'
-      ? parseFloat(product.price?.replace('€', '') || '0')
-      : 0;
+  // Le prix est maintenant un nombre dans l'interface Product
+  const price = product.price;
   
   return {
     title: `${product.name} - ${product.brand}`,
@@ -57,7 +53,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     other: {
       'product:price:amount': price.toFixed(2),
       'product:price:currency': 'EUR',
-      'product:availability': product.status === 'Publié' || product.status === 'available' ? 'in stock' : 'out of stock',
+      'product:availability': product.status === 'active' ? 'in stock' : 'out of stock',
       'product:brand': product.brand,
       'product:category': product.category,
     },

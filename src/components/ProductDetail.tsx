@@ -97,7 +97,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                 -{product.discount}%
               </Badge>
             )}
-            {product.badges?.new && (
+            {product.badges?.includes('Nouveau') && (
               <Badge className="absolute top-4 right-4 z-10 bg-blue-500 text-white">
                 Nouveau
               </Badge>
@@ -173,15 +173,15 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                       key={i}
                       className={cn(
                         "h-5 w-5",
-                        i < Math.floor(product.rating.average)
+                        i < Math.floor(product.rating?.average || 0)
                           ? "text-yellow-400 fill-current"
                           : "text-gray-300"
                       )}
                     />
                   ))}
-                  <span className="ml-2 font-semibold">{product.rating.average}</span>
+                  <span className="ml-2 font-semibold">{product.rating?.average || 0}</span>
                 </div>
-                <span className="text-gray-600">({product.rating.count} avis)</span>
+                <span className="text-gray-600">({product.rating?.count || 0} avis)</span>
               </div>
             )}
           </div>
@@ -408,37 +408,6 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                 })}
               </div>
             
-              {product.features && product.features.length > 0 && (
-                <div className="mt-8">
-                  <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                    <Star className="h-5 w-5 text-yellow-500" />
-                    Points forts
-                  </h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {product.features.map((feature, index) => (
-                      <div key={index} className="flex items-start gap-3 p-3 bg-gradient-to-r from-green-50 to-transparent rounded-lg border border-green-100">
-                        <Check className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                        <span className="text-gray-700 font-medium">{feature}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-            {product.das && (
-              <div className="bg-blue-50 rounded-lg p-4 mt-6">
-                <div className="flex items-center gap-2 mb-2">
-                  <Info className="h-5 w-5 text-blue-600" />
-                  <span className="font-semibold">Information DAS</span>
-                </div>
-                <p className="text-sm text-gray-600">
-                  DAS (Débit d'Absorption Spécifique) : {product.das} W/kg
-                </p>
-                <p className="text-xs text-gray-500 mt-1">
-                  Le DAS maximal autorisé est de 2 W/kg pour la tête et le tronc.
-                </p>
-              </div>
-            )}
 
               {product.repairabilityIndex && (
                 <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-6 mt-6 border border-green-200">
@@ -501,14 +470,14 @@ export default function ProductDetail({ product }: ProductDetailProps) {
               <div className="bg-gray-50 rounded-lg p-6">
                 <div className="flex items-center gap-6">
                   <div className="text-center">
-                    <p className="text-4xl font-bold">{product.rating.average}</p>
+                    <p className="text-4xl font-bold">{product.rating?.average || 0}</p>
                     <div className="flex items-center mt-2">
                       {Array.from({ length: 5 }).map((_, i) => (
                         <Star
                           key={i}
                           className={cn(
                             "h-4 w-4",
-                            i < Math.floor(product.rating.average)
+                            i < Math.floor(product.rating?.average || 0)
                               ? "text-yellow-400 fill-current"
                               : "text-gray-300"
                           )}
@@ -516,14 +485,14 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                       ))}
                     </div>
                     <p className="text-sm text-gray-600 mt-1">
-                      {product.rating.count} avis vérifiés
+                      {product.rating?.count || 0} avis vérifiés
                     </p>
                   </div>
                   
                   <div className="flex-1 space-y-2">
                     {[5, 4, 3, 2, 1].map((stars) => {
-                      const percentage = product.rating.distribution 
-                        ? (product.rating.distribution[stars] / product.rating.count) * 100
+                      const percentage = product.rating?.distribution 
+                        ? (product.rating?.distribution[stars as keyof typeof product.rating.distribution] / (product.rating?.count || 1)) * 100
                         : 0;
                       return (
                         <div key={stars} className="flex items-center gap-2">

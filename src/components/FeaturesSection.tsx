@@ -5,7 +5,7 @@ import { Shield, Zap, Star, Headphones } from "lucide-react";
 
 export default function FeaturesSection() {
   return (
-    <section className="py-20 px-4 bg-gradient-to-b from-black to-purple-900/20">
+    <section className="py-20 px-4 bg-gradient-to-b from-black to-purple-950">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}

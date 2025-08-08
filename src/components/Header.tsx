@@ -221,7 +221,7 @@ const DropdownMenu = ({
                         {products.length > 6 && (
                           <div className="px-4 py-3 border-t border-gray-100">
                             <Link
-                              href={`/nos-produits?category=${encodeURIComponent(hoveredCategory)}&brand=${encodeURIComponent(hoveredBrand)}`}
+                              href={`/nos-produits?category=${encodeURIComponent(hoveredCategory || '')}&brand=${encodeURIComponent(hoveredBrand || '')}`}
                               className="flex items-center justify-center text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors"
                               onClick={onClose}
                             >
@@ -919,7 +919,8 @@ export default function Header() {
                       <>
                         <div className="max-h-80 overflow-y-auto">
                           {items && items.length > 0 && items.map((item) => {
-                            const price = parseFloat(item.product.price?.replace('€', '') || '0');
+                            // Price is already a number in the Product interface
+                            const price = item.product.price;
                             return (
                               <div key={`${item.product.id}-${item.variant}`} className="p-4 border-b border-gray-100 hover:bg-gray-50">
                                 <div className="flex items-start space-x-3">

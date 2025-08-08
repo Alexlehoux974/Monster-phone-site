@@ -93,14 +93,14 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
                     key={i}
                     className={cn(
                       "w-4 h-4",
-                      i < Math.floor(product.rating.average)
+                      i < Math.floor(product.rating?.average || 0)
                         ? "fill-yellow-400 text-yellow-400"
                         : "text-gray-300"
                     )}
                   />
                 ))}
                 <span className="text-sm text-gray-600 ml-1">
-                  ({product.rating.average}) • {product.rating.count} avis
+                  ({product.rating?.average || 0}) • {product.rating?.count || 0} avis
                 </span>
               </div>
             )}
@@ -179,12 +179,12 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
                 -{product.discount}%
               </Badge>
             )}
-            {product.badges?.new && (
+            {product.badges?.includes('Nouveau') && (
               <Badge className="bg-blue-500 text-white">
                 Nouveau
               </Badge>
             )}
-            {product.badges?.bestseller && (
+            {product.badges?.includes('Bestseller') && (
               <Badge className="bg-orange-500 text-white">
                 <Zap className="w-3 h-3 mr-1" />
                 Best-seller
@@ -234,14 +234,14 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
                 key={i}
                 className={cn(
                   "w-4 h-4",
-                  i < Math.floor(product.rating.average)
+                  i < Math.floor(product.rating?.average || 0)
                     ? "fill-yellow-400 text-yellow-400"
                     : "text-gray-300"
                 )}
               />
             ))}
             <span className="text-sm text-gray-600 ml-1">
-              ({product.rating.average})
+              ({product.rating?.average || 0})
             </span>
           </div>
         )}

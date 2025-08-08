@@ -62,7 +62,8 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
       case 'product':
         if (!data || !data.product) return null;
         const product: Product = data.product;
-        const price = parseFloat(product.price?.replace('€', '') || '0');
+        // Price is already a number in the Product interface
+        const price = product.price;
         
         return {
           '@context': 'https://schema.org',
@@ -78,7 +79,7 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
             '@type': 'Offer',
             price: price.toFixed(2),
             priceCurrency: 'EUR',
-            availability: product.status === 'Publié' || product.status === 'available' 
+            availability: product.status === 'active' 
               ? 'https://schema.org/InStock' 
               : 'https://schema.org/OutOfStock',
             seller: {

@@ -70,7 +70,7 @@ export default function TrustSection() {
       ),
       title: "Livraison Express",
       description: "partout à la Réunion",
-      detail: "24h/48H - Gratuite dès 50€ d&apos;achat"
+      detail: "24h/48H - Gratuite dès 50€ d'achat"
     },
     {
       icon: (
@@ -80,17 +80,17 @@ export default function TrustSection() {
       ),
       title: "Garantie Constructeur",
       description: "2 ans minimum sur tous nos produits",
-      detail: "Extension possible jusqu&apos;à 3 ans"
+      detail: "Extension possible jusqu'à 3 ans"
     },
     {
       icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h2a8 8 0 108 8v2a8 8 0 11-8-8V10zm8 8V10h2a8 8 0 108 8v2a8 8 0 11-8-8V10z" />
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
         </svg>
       ),
       title: "Support Technique",
       description: "Assistance 7j/7 par téléphone",
-      detail: "Équipe d&apos;experts à votre service"
+      detail: "Équipe d'experts à votre service"
     },
     {
       icon: (
@@ -99,7 +99,7 @@ export default function TrustSection() {
         </svg>
       ),
       title: "Retour Facile",
-      description: "30 jours pour changer d&apos;avis",
+      description: "30 jours pour changer d'avis",
       detail: "Remboursement intégral garanti"
     },
     {
@@ -150,10 +150,10 @@ export default function TrustSection() {
         {/* Statistiques avec animations */}
         <div 
           ref={statsRef}
-          className="mt-16 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 rounded-3xl p-8 text-white shadow-2xl overflow-hidden relative"
+          className="mt-16 bg-gradient-to-br from-slate-900 via-purple-900 to-indigo-950 rounded-3xl p-8 text-white shadow-2xl overflow-hidden relative ring-1 ring-white/10 backdrop-blur-sm"
         >
           {/* Effet de fond animé */}
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-purple-400/20 animate-pulse"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10 animate-pulse"></div>
           
           <div className="relative z-10">
             <h3 className="text-2xl font-bold text-center mb-8 text-white">
@@ -199,8 +199,8 @@ export default function TrustSection() {
             </div>
             
             {/* Indicateurs visuels supplémentaires */}
-            <div className="mt-8 pt-6 border-t border-white/20">
-              <div className="flex flex-wrap justify-center gap-6 text-sm text-white">
+            <div className="mt-8 pt-6 border-t border-white/30">
+              <div className="flex flex-wrap justify-center gap-6 text-sm text-white font-medium">
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
                   <span>Service actif 24h/7j</span>

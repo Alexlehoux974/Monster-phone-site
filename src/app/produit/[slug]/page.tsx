@@ -7,9 +7,9 @@ import FeaturedProducts from '@/components/FeaturedProducts';
 import { allProducts, getProductBySlug, getProductsByBrand } from '@/data/products';
 
 interface ProductPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 // Générer les métadonnées dynamiques pour le SEO
@@ -91,33 +91,12 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
       bestRating: 5,
       worstRating: 1,
     } : undefined,
-    review: product.rating?.reviews?.map(review => ({
-      '@type': 'Review',
-      reviewRating: {
-        '@type': 'Rating',
-        ratingValue: review.rating,
-        bestRating: 5,
-        worstRating: 1,
-      },
-      author: {
-        '@type': 'Person',
-        name: review.author,
-      },
-      datePublished: review.date,
-      reviewBody: review.comment,
-    })),
     additionalProperty: [
       ...(product.specifications?.map(spec => ({
         '@type': 'PropertyValue',
         name: spec.label,
         value: spec.value,
       })) || []),
-      ...(product.das ? [{
-        '@type': 'PropertyValue',
-        name: 'DAS',
-        value: product.das,
-        unitText: 'W/kg',
-      }] : []),
       ...(product.repairabilityIndex ? [{
         '@type': 'PropertyValue',
         name: 'Indice de réparabilité',
@@ -172,12 +151,10 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
       'product:condition': 'new',
       'product:brand': product.brand,
       'product:category': product.category,
-    },
-    ...(jsonLd && {
-      other: {
+      ...(jsonLd && {
         'application/ld+json': JSON.stringify(jsonLd),
-      },
-    }),
+      }),
+    },
   };
 }
 

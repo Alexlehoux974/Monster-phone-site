@@ -101,7 +101,8 @@ export default function PanierPage() {
                 {/* Produits */}
                 <div className="divide-y divide-gray-200">
                   {items.map((item) => {
-                    const price = parseFloat(item.product.price?.replace('€', '') || '0');
+                    // Price is already a number in the Product interface
+                    const price = item.product.price;
                     const itemTotal = price * item.quantity;
                     
                     return (
