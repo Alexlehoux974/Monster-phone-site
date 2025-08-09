@@ -4221,8 +4221,8 @@ export const allProducts: Product[] = [
   },
   {
     id: 'led-005',
-    name: 'RGB Gaming Light Bars Pro',
-    brand: 'Gaming Tech',
+    name: 'MONSTER RGB Gaming Light Bars Pro',
+    brand: 'MONSTER',
     category: 'LED',
     subcategory: 'Barres LED',
     price: 39.99,
@@ -4254,8 +4254,8 @@ export const allProducts: Product[] = [
   },
   {
     id: 'led-006',
-    name: 'Smart LED Panel Hexagonal Kit',
-    brand: 'Tech Light',
+    name: 'MONSTER Smart LED Panel Hexagonal Kit',
+    brand: 'MONSTER',
     category: 'LED',
     subcategory: 'Panneaux LED',
     price: 89.99,
@@ -4288,8 +4288,8 @@ export const allProducts: Product[] = [
   },
   {
     id: 'led-007',
-    name: 'Ambient TV LED Backlight 4K',
-    brand: 'Vision Light',
+    name: 'MONSTER Ambient TV LED Backlight 4K',
+    brand: 'MONSTER',
     category: 'LED',
     subcategory: 'Rétroéclairage TV',
     price: 34.99,
@@ -4322,8 +4322,8 @@ export const allProducts: Product[] = [
   },
   {
     id: 'led-008',
-    name: 'Projecteur LED Galaxy Starlight',
-    brand: 'Cosmic Light',
+    name: 'MONSTER Projecteur LED Galaxy Starlight',
+    brand: 'MONSTER',
     category: 'LED',
     subcategory: 'Projecteurs',
     price: 44.99,
@@ -4356,8 +4356,8 @@ export const allProducts: Product[] = [
   },
   {
     id: 'led-009',
-    name: 'LED Ring Light Studio Pro 18"',
-    brand: 'Photo Light',
+    name: 'MONSTER LED Ring Light Studio Pro 18"',
+    brand: 'MONSTER',
     category: 'LED',
     subcategory: 'Éclairage Studio',
     price: 79.99,
@@ -4390,8 +4390,8 @@ export const allProducts: Product[] = [
   },
   {
     id: 'led-010',
-    name: 'Smart Bulb RGB WiFi Pack x4',
-    brand: 'Home Light',
+    name: 'MONSTER Smart Bulb RGB WiFi Pack x4',
+    brand: 'MONSTER',
     category: 'LED',
     subcategory: 'Ampoules Smart',
     price: 54.99,
@@ -4421,6 +4421,166 @@ export const allProducts: Product[] = [
     sku: 'HL-BULB-RGB-4',
     urlSlug: 'smart-bulb-rgb-wifi-pack-4',
     badges: ['Smart Home', 'Économique']
+  },
+  {
+    id: 'led-011',
+    name: 'MONSTER LED Strip Gaming Setup 5M',
+    brand: 'MONSTER',
+    category: 'LED',
+    subcategory: 'Bandeaux LED',
+    price: 29.99,
+    originalPrice: 39.99,
+    discount: 25,
+    rating: 4.6,
+    reviews: 85,
+    images: ['/placeholder-product.png'],
+    description: 'Bandeau LED spécialement conçu pour les setups gaming avec synchronisation musique et effets dynamiques.',
+    shortDescription: 'Bandeau LED 5M gaming avec sync musique',
+    specifications: {
+      'Longueur': '5 mètres',
+      'LEDs': '150 LEDs',
+      'Couleurs': 'RGB + Blanc',
+      'Modes': '20 modes',
+      'Contrôle': 'App + Télécommande'
+    },
+    features: [
+      'Synchronisation musique',
+      'Effets gaming dynamiques',
+      'Application mobile dédiée',
+      'Installation facile'
+    ],
+    stockQuantity: 25,
+    sku: 'MON-LED-GAME5M',
+    urlSlug: 'monster-led-strip-gaming-setup-5m',
+    badges: ['Gaming', 'Sync musique']
+  },
+  {
+    id: 'led-012',
+    name: 'MONSTER Cube LED Modulaire Smart',
+    brand: 'MONSTER',
+    category: 'LED',
+    subcategory: 'Panneaux LED',
+    price: 49.99,
+    originalPrice: 69.99,
+    discount: 29,
+    rating: 4.7,
+    reviews: 62,
+    images: ['/placeholder-product.png'],
+    description: 'Cubes LED modulaires connectables pour créer des designs lumineux personnalisés.',
+    shortDescription: '6 cubes LED modulaires WiFi',
+    specifications: {
+      'Dimensions': '10x10x10 cm par cube',
+      'Quantité': '6 cubes',
+      'Couleurs': '16 millions',
+      'Contrôle': 'WiFi + Bluetooth',
+      'Compatibilité': 'Alexa, Google Home'
+    },
+    features: [
+      'Design modulaire',
+      'Connexion magnétique',
+      'Contrôle vocal',
+      'Effets personnalisables'
+    ],
+    stockQuantity: 18,
+    sku: 'MON-CUBE-LED',
+    urlSlug: 'monster-cube-led-modulaire-smart',
+    badges: ['Modulaire', 'Smart']
+  },
+  {
+    id: 'led-013',
+    name: 'MONSTER Lightning Pro Corner RGB',
+    brand: 'MONSTER',
+    category: 'LED',
+    subcategory: 'Barres LED',
+    price: 44.99,
+    originalPrice: 59.99,
+    discount: 25,
+    rating: 4.5,
+    reviews: 93,
+    images: ['/placeholder-product.png'],
+    description: 'Barres LED d\'angle pour un éclairage immersif des coins de pièce.',
+    shortDescription: '2 barres LED d\'angle RGB 1m',
+    specifications: {
+      'Longueur': '1 mètre par barre',
+      'Quantité': '2 barres',
+      'Angle': '90 degrés',
+      'Couleurs': 'RGB + Blanc',
+      'Installation': 'Adhésif 3M'
+    },
+    features: [
+      'Design pour angles',
+      'Éclairage immersif',
+      'Télécommande RF',
+      'Installation simple'
+    ],
+    stockQuantity: 30,
+    sku: 'MON-CORNER-RGB',
+    urlSlug: 'monster-lightning-pro-corner-rgb',
+    badges: ['Design', 'Corner']
+  },
+  {
+    id: 'led-014',
+    name: 'MONSTER Flood Light Extérieur 50W',
+    brand: 'MONSTER',
+    category: 'LED',
+    subcategory: 'Projecteurs',
+    price: 59.99,
+    originalPrice: 79.99,
+    discount: 25,
+    rating: 4.8,
+    reviews: 107,
+    images: ['/placeholder-product.png'],
+    description: 'Projecteur LED extérieur puissant avec détection de mouvement et résistance IP65.',
+    shortDescription: 'Projecteur LED 50W IP65 avec détecteur',
+    specifications: {
+      'Puissance': '50W',
+      'Luminosité': '5000 lumens',
+      'Température': '6500K',
+      'Détection': 'Capteur PIR 10m',
+      'Résistance': 'IP65'
+    },
+    features: [
+      'Détection de mouvement',
+      'Résistant aux intempéries',
+      'Économe en énergie',
+      'Longue durée de vie'
+    ],
+    stockQuantity: 15,
+    sku: 'MON-FLOOD-50W',
+    urlSlug: 'monster-flood-light-exterieur-50w',
+    badges: ['Extérieur', 'IP65']
+  },
+  {
+    id: 'led-015',
+    name: 'MONSTER Infinity Mirror LED 3D',
+    brand: 'MONSTER',
+    category: 'LED',
+    subcategory: 'Déco LED',
+    price: 89.99,
+    originalPrice: 119.99,
+    discount: 25,
+    rating: 4.9,
+    reviews: 76,
+    images: ['/placeholder-product.png'],
+    description: 'Miroir infini LED 3D pour une décoration futuriste avec effets de profondeur illimités.',
+    shortDescription: 'Miroir infini LED 40x40cm avec effets 3D',
+    specifications: {
+      'Dimensions': '40x40 cm',
+      'Profondeur': 'Effet infini',
+      'Couleurs': 'RGB programmable',
+      'Modes': '25 animations',
+      'Contrôle': 'App + Commande vocale'
+    },
+    features: [
+      'Effet 3D infini',
+      'Contrôle vocal',
+      '25 animations',
+      'Cadre aluminium premium'
+    ],
+    stockQuantity: 12,
+    sku: 'MON-INFINITY-3D',
+    urlSlug: 'monster-infinity-mirror-led-3d',
+    badges: ['Premium', '3D Effect']
   }
 ];
 

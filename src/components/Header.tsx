@@ -48,7 +48,6 @@ const DropdownMenu = ({
   const [hoveredSubcategory, setHoveredSubcategory] = useState<string | null>(null);
   const [hoveredBrand, setHoveredBrand] = useState<string | null>(null);
   const [hoveredAccessorySubcategory, setHoveredAccessorySubcategory] = useState<string | null>(null);
-  const [hoveredLEDSubcategory, setHoveredLEDSubcategory] = useState<string | null>(null);
   
   // Réinitialiser les états quand le menu se ferme
   useEffect(() => {
@@ -57,7 +56,6 @@ const DropdownMenu = ({
       setHoveredSubcategory(null);
       setHoveredBrand(null);
       setHoveredAccessorySubcategory(null);
-      setHoveredLEDSubcategory(null);
     }
   }, [isOpen]);
   
@@ -192,7 +190,6 @@ const DropdownMenu = ({
                             setHoveredAccessorySubcategory(null);
                           } else if (menuType === 'led') {
                             setHoveredCategory('LED');
-                            setHoveredLEDSubcategory(null);
                           } else {
                             setHoveredCategory(categoryName as string);
                           }
@@ -253,60 +250,6 @@ const DropdownMenu = ({
         </div>
 
         {/* Colonne 2: Sous-catégories ou Marques ou Produits */}
-        {menuType === 'led' && hoveredBrand && (
-          <div className="w-56 bg-white border-r border-gray-200">
-            <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-green-50 to-emerald-50">
-              <h4 className="font-bold text-gray-900 text-base">Sous-catégories</h4>
-            </div>
-            <div className="py-3">
-              {(() => {
-                // Obtenir toutes les sous-catégories pour cette marque LED
-                const subcategoriesSet = new Set<string>();
-                allProducts.forEach(p => {
-                  if (p.brand === hoveredBrand && p.category === 'LED' && p.subcategory) {
-                    subcategoriesSet.add(p.subcategory);
-                  }
-                });
-                const subcategories = Array.from(subcategoriesSet).sort();
-                
-                return subcategories.map((subcat) => {
-                  const subcatProducts = allProducts.filter(p => 
-                    p.brand === hoveredBrand && 
-                    p.subcategory === subcat &&
-                    p.category === 'LED'
-                  );
-                  
-                  return (
-                    <div key={subcat}>
-                      <button
-                        className={cn(
-                          "w-full text-left px-4 py-3 text-sm transition-all duration-200",
-                          hoveredLEDSubcategory === subcat 
-                            ? "bg-gradient-to-r from-green-50 to-emerald-50 text-green-700 border-l-4 border-green-600" 
-                            : "text-gray-700 hover:text-green-600 hover:bg-gray-50"
-                        )}
-                        onMouseEnter={() => setHoveredLEDSubcategory(subcat)}
-                      >
-                        <div className="flex items-center justify-between">
-                          <div>
-                            <span className="font-medium text-base">{subcat}</span>
-                            <span className="block text-xs text-gray-500 mt-0.5">
-                              {subcatProducts.length} produit{subcatProducts.length > 1 ? 's' : ''}
-                            </span>
-                          </div>
-                          <ChevronRight className={cn(
-                            "w-4 h-4 transition-transform",
-                            hoveredLEDSubcategory === subcat ? "translate-x-1" : ""
-                          )} />
-                        </div>
-                      </button>
-                    </div>
-                  );
-                });
-              })()}
-            </div>
-          </div>
-        )}
         {menuType === 'accessoires' && hoveredBrand && (
           <div className="w-56 bg-white border-r border-gray-200">
             <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-green-50 to-emerald-50">
@@ -525,7 +468,7 @@ const DropdownMenu = ({
 
         {/* Colonne Produits */}
         {((menuType === 'accessoires' && hoveredBrand && hoveredAccessorySubcategory) || 
-          (menuType === 'led' && hoveredBrand && hoveredLEDSubcategory) ||
+          (menuType === 'led' && hoveredBrand) ||
           (menuType !== 'accessoires' && menuType !== 'led' && hoveredBrand)) && (
           <div className="flex-1 bg-gradient-to-b from-gray-50 to-white">
             {(() => {
@@ -539,7 +482,6 @@ const DropdownMenu = ({
                 : menuType === 'led'
                 ? allProducts.filter(p => 
                     p.brand === hoveredBrand && 
-                    p.subcategory === hoveredLEDSubcategory &&
                     p.category === 'LED'
                   )
                 : getProductsForDisplay() || [];
@@ -549,7 +491,6 @@ const DropdownMenu = ({
                   <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-orange-50 to-red-50">
                     <h4 className="font-bold text-gray-900 text-base">
                       {menuType === 'accessoires' ? `${hoveredAccessorySubcategory}` : 
-                       menuType === 'led' ? `${hoveredLEDSubcategory}` :
                        `Collection ${hoveredBrand}`}
                     </h4>
                     <p className="text-sm text-gray-600 mt-1">{products.length} produit{products.length > 1 ? 's' : ''} disponible{products.length > 1 ? 's' : ''}</p>
