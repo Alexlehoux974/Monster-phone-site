@@ -50,7 +50,8 @@
       "Bash(npm run test:e2e:*)",
       "Bash(npm test:*)",
       "Bash(convert:*)",
-      "Bash(wget:*)"
+      "Bash(wget:*)",
+      "mcp__playwright__browser_snapshot"
     ],
     "deny": []
   }

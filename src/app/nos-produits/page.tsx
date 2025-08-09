@@ -1,7 +1,9 @@
 'use client';
 
 import { useState, useMemo, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
+import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Sidebar from '@/components/Sidebar';
@@ -11,12 +13,27 @@ import { Filter, X } from 'lucide-react';
 import ProductCardSkeleton from '@/components/ProductCardSkeleton';
 
 export default function SmartphonesPage() {
+  const searchParams = useSearchParams();
+  
+  // Initialize state from URL params
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedBrand, setSelectedBrand] = useState<string>('');
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [selectedProduct, setSelectedProduct] = useState<string>('');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+
+  // Read URL parameters on mount and when they change
+  useEffect(() => {
+    const brand = searchParams.get('brand') || '';
+    const category = searchParams.get('category') || '';
+    const subcategory = searchParams.get('subcategory') || '';
+    const search = searchParams.get('search') || '';
+    
+    setSelectedBrand(brand);
+    setSelectedCategory(category);
+    setSearchQuery(search);
+  }, [searchParams]);
 
   // Simuler un chargement initial
   useEffect(() => {
@@ -141,9 +158,10 @@ export default function SmartphonesPage() {
                 ) : (
                   // Afficher les produits
                   filteredProducts.map((product) => (
-                    <div 
-                      key={product.id} 
-                      className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-200 group cursor-pointer"
+                    <Link 
+                      href={`/produit/${product.urlSlug}`}
+                      key={product.id}
+                      className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-200 group cursor-pointer block"
                     >
                       <div className="aspect-square bg-gray-100 rounded-t-lg overflow-hidden relative">
                         <Image
@@ -152,6 +170,11 @@ export default function SmartphonesPage() {
                           fill
                           className="object-cover group-hover:scale-105 transition-transform duration-200"
                         />
+                        {product.discount && product.discount > 0 && (
+                          <div className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded-md text-xs font-bold">
+                            -{product.discount}%
+                          </div>
+                        )}
                       </div>
                       <div className="p-3 lg:p-4">
                         <h3 className="font-semibold text-sm lg:text-base text-gray-900 mb-1 line-clamp-2">
@@ -159,15 +182,22 @@ export default function SmartphonesPage() {
                         </h3>
                         <p className="text-xs lg:text-sm text-gray-600 mb-2">{product.brand}</p>
                         <div className="flex items-center justify-between">
-                          <p className="text-lg lg:text-xl font-bold text-blue-600">
-                            {product.price ? `${product.price}€` : 'Prix sur demande'}
-                          </p>
+                          <div>
+                            <p className="text-lg lg:text-xl font-bold text-blue-600">
+                              {product.price ? `${product.price}€` : 'Prix sur demande'}
+                            </p>
+                            {product.originalPrice && product.originalPrice > product.price && (
+                              <p className="text-sm text-gray-500 line-through">
+                                {product.originalPrice}€
+                              </p>
+                            )}
+                          </div>
                           <Button size="sm" className="text-xs lg:text-sm">
                             Voir
                           </Button>
                         </div>
                       </div>
-                    </div>
+                    </Link>
                   ))
                 )}
               </div>

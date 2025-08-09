@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Search, ShoppingCart, User, Menu, X, ChevronDown, ChevronRight, ArrowRight, Shield, Truck, Flame, Smartphone, Watch, Headphones, Lightbulb, Package, Star, Trash2, CreditCard, Plus, Minus } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { menuStructure, type CategoryStructure, allProducts, getProductsByCategory, getProductsByBrand } from '@/data/products';
+import { menuStructure, type CategoryStructure, allProducts, getProductsByCategory, getProductsByBrand, brandMenuStructure, getBrandsByCategory, getProductsByBrandAndCategory } from '@/data/products';
 import { useCart } from '@/contexts/CartContext';
 // import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
@@ -30,40 +30,83 @@ const PromoBar = () => (
   </div>
 );
 
-// Composant DropdownMenu avec structure simple à 3 colonnes
+// Composant DropdownMenu avec support complet des sous-catégories
 const DropdownMenu = ({ 
   categories, 
   isOpen, 
   onClose,
-  alignRight = false
+  alignRight = false,
+  menuType
 }: { 
   categories: CategoryStructure[];
   isOpen: boolean;
   onClose: () => void;
   alignRight?: boolean;
+  menuType?: string;
 }) => {
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
+  const [hoveredSubcategory, setHoveredSubcategory] = useState<string | null>(null);
   const [hoveredBrand, setHoveredBrand] = useState<string | null>(null);
+  const [hoveredAccessorySubcategory, setHoveredAccessorySubcategory] = useState<string | null>(null);
+  const [hoveredLEDSubcategory, setHoveredLEDSubcategory] = useState<string | null>(null);
+  
+  // Réinitialiser les états quand le menu se ferme
+  useEffect(() => {
+    if (!isOpen) {
+      setHoveredCategory(null);
+      setHoveredSubcategory(null);
+      setHoveredBrand(null);
+      setHoveredAccessorySubcategory(null);
+      setHoveredLEDSubcategory(null);
+    }
+  }, [isOpen]);
   
   // Obtenir les produits en fonction de la sélection
   const getProductsForDisplay = () => {
-    if (hoveredBrand && hoveredCategory) {
-      // Obtenir tous les produits de la marque
+    if (hoveredBrand) {
       const brandProducts = getProductsByBrand(hoveredBrand) || [];
-      // Filtrer par catégorie si nécessaire
-      return brandProducts.filter(p => p.category === hoveredCategory);
+      
+      // Si on a une sous-catégorie sélectionnée
+      if (hoveredSubcategory) {
+        return brandProducts.filter(p => 
+          p.subcategory === hoveredSubcategory && 
+          p.category === hoveredCategory
+        );
+      }
+      
+      // Sinon filtrer par catégorie
+      if (hoveredCategory) {
+        return brandProducts.filter(p => p.category === hoveredCategory);
+      }
     }
     return [];
   };
 
-  // Obtenir toutes les marques uniques pour une catégorie
-  const getBrandsForCategory = (categoryName: string) => {
-    const products = getProductsByCategory(categoryName);
+  // Obtenir toutes les marques pour une catégorie ou sous-catégorie
+  const getBrandsForSelection = () => {
     const brands = new Set<string>();
-    products.forEach(p => {
-      if (p.brand) brands.add(p.brand);
-    });
+    
+    if (hoveredSubcategory) {
+      // Obtenir les marques pour la sous-catégorie
+      allProducts.forEach(p => {
+        if (p.subcategory === hoveredSubcategory && p.category === hoveredCategory && p.brand) {
+          brands.add(p.brand);
+        }
+      });
+    } else if (hoveredCategory) {
+      // Obtenir les marques pour la catégorie
+      const categoryProducts = getProductsByCategory(hoveredCategory);
+      categoryProducts.forEach(p => {
+        if (p.brand) brands.add(p.brand);
+      });
+    }
+    
     return Array.from(brands).sort();
+  };
+
+  // Trouver la catégorie actuellement survolée
+  const getCurrentCategory = () => {
+    return categories.find(cat => cat.name === hoveredCategory);
   };
 
   if (!isOpen) return null;
@@ -75,48 +118,311 @@ const DropdownMenu = ({
       }`}
       style={{ 
         boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
-        minWidth: hoveredBrand ? "800px" : hoveredCategory ? "600px" : "400px"
+        minWidth: menuType === 'accessoires' && hoveredBrand && hoveredAccessorySubcategory ? "1000px" :
+                  menuType === 'accessoires' && hoveredBrand ? "600px" :
+                  hoveredBrand && hoveredSubcategory ? "1200px" : 
+                  hoveredBrand ? "1000px" : 
+                  hoveredSubcategory ? "800px" : 
+                  hoveredCategory ? "600px" : "400px"
       }}
     >
       <div className="flex min-h-[400px]">
         {/* Colonne 1: Catégories */}
         <div className="w-56 bg-gradient-to-b from-gray-50 to-white border-r border-gray-200">
           <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-indigo-50">
-            <h3 className="font-bold text-gray-900 text-lg">Nos Produits</h3>
+            <h3 className="font-bold text-gray-900 text-lg">
+              {(menuType === 'smartphones' || menuType === 'led' || menuType === 'montres' || menuType === 'tablettes' || menuType === 'accessoires') ? 'Marques' : 'Nos Produits'}
+            </h3>
           </div>
           <div className="py-3">
-            {categories && categories.length > 0 && categories.map((category) => (
-              <div key={category.name}>
-                <button
-                  className={cn(
-                    "w-full text-left px-4 py-3 text-sm font-medium transition-all duration-200",
-                    hoveredCategory === category.name 
-                      ? "bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 border-l-4 border-blue-600" 
-                      : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
-                  )}
-                  onMouseEnter={() => {
-                    setHoveredCategory(category.name);
-                    setHoveredBrand(null);
-                  }}
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="font-semibold">{category.name}</span>
-                    <ChevronRight className={cn(
-                      "w-4 h-4 transition-transform",
-                      hoveredCategory === category.name ? "translate-x-1" : ""
-                    )} />
+            {(menuType === 'smartphones' || menuType === 'led' || menuType === 'montres' || menuType === 'tablettes' || menuType === 'accessoires') ? (
+              // Pour Smartphones, LED, Montres, Tablettes et Accessoires, afficher les marques directement
+              (() => {
+                const categoryName = menuType === 'smartphones' ? 'Smartphones' : 
+                                   menuType === 'montres' ? 'Montres' :
+                                   menuType === 'tablettes' ? 'Tablettes' : 
+                                   menuType === 'accessoires' ? ['Audio', 'Chargement', 'Créativité', 'Accessoires'] :
+                                   menuType === 'led' ? 'LED' : 'Accessoires';
+                
+                // Pour accessoires et LED, on récupère les marques de toutes les catégories concernées
+                const brands = menuType === 'accessoires' 
+                  ? (() => {
+                      const brandsSet = new Set<string>();
+                      allProducts.forEach(p => {
+                        if ((p.category === 'Audio' || p.category === 'Chargement' || 
+                             p.category === 'Créativité' || p.category === 'Accessoires') && p.brand) {
+                          brandsSet.add(p.brand);
+                        }
+                      });
+                      return Array.from(brandsSet).sort();
+                    })()
+                  : menuType === 'led'
+                  ? (() => {
+                      const brandsSet = new Set<string>();
+                      allProducts.forEach(p => {
+                        if (p.category === 'LED' && p.brand) {
+                          brandsSet.add(p.brand);
+                        }
+                      });
+                      return Array.from(brandsSet).sort();
+                    })()
+                  : getBrandsByCategory(categoryName as string);
+                return brands.length > 0 ? brands.map((brand) => {
+                  const brandProducts = menuType === 'accessoires'
+                    ? allProducts.filter(p => 
+                        p.brand === brand && 
+                        (p.category === 'Audio' || p.category === 'Chargement' || 
+                         p.category === 'Créativité' || p.category === 'Accessoires')
+                      )
+                    : menuType === 'led'
+                    ? allProducts.filter(p => p.brand === brand && p.category === 'LED')
+                    : getProductsByBrandAndCategory(brand, categoryName as string);
+                  return (
+                    <div key={brand}>
+                      <button
+                        className={cn(
+                          "w-full text-left px-4 py-3 text-sm font-medium transition-all duration-200",
+                          hoveredBrand === brand 
+                            ? "bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 border-l-4 border-blue-600" 
+                            : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                        )}
+                        onMouseEnter={() => {
+                          if (menuType === 'accessoires') {
+                            setHoveredCategory('Accessoires');
+                            setHoveredAccessorySubcategory(null);
+                          } else if (menuType === 'led') {
+                            setHoveredCategory('LED');
+                            setHoveredLEDSubcategory(null);
+                          } else {
+                            setHoveredCategory(categoryName as string);
+                          }
+                          setHoveredSubcategory(null);
+                          setHoveredBrand(brand);
+                        }}
+                      >
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <span className="font-semibold text-base">{brand}</span>
+                            <span className="block text-xs text-gray-500 mt-0.5">
+                              {brandProducts.length} produit{brandProducts.length > 1 ? 's' : ''}
+                            </span>
+                          </div>
+                          <ChevronRight className={cn(
+                            "w-4 h-4 transition-transform",
+                            hoveredBrand === brand ? "translate-x-1" : ""
+                          )} />
+                        </div>
+                      </button>
+                    </div>
+                  );
+                }) : (
+                  <div className="px-4 py-3 text-sm text-gray-500">
+                    Aucune marque disponible
                   </div>
-                </button>
-              </div>
-            ))}
+                );
+              })()
+            ) : (
+              // Pour les autres menus, afficher les catégories normalement
+              categories && categories.length > 0 && categories.map((category) => (
+                <div key={category.name}>
+                  <button
+                    className={cn(
+                      "w-full text-left px-4 py-3 text-sm font-medium transition-all duration-200",
+                      hoveredCategory === category.name 
+                        ? "bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 border-l-4 border-blue-600" 
+                        : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                    )}
+                    onMouseEnter={() => {
+                      setHoveredCategory(category.name);
+                      setHoveredSubcategory(null);
+                      setHoveredBrand(null);
+                    }}
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="font-semibold">{category.name}</span>
+                      <ChevronRight className={cn(
+                        "w-4 h-4 transition-transform",
+                        hoveredCategory === category.name ? "translate-x-1" : ""
+                      )} />
+                    </div>
+                  </button>
+                </div>
+              ))
+            )}
           </div>
         </div>
 
-        {/* Colonne 2: Marques */}
-        {hoveredCategory && (
+        {/* Colonne 2: Sous-catégories ou Marques ou Produits */}
+        {menuType === 'led' && hoveredBrand && (
+          <div className="w-56 bg-white border-r border-gray-200">
+            <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-green-50 to-emerald-50">
+              <h4 className="font-bold text-gray-900 text-base">Sous-catégories</h4>
+            </div>
+            <div className="py-3">
+              {(() => {
+                // Obtenir toutes les sous-catégories pour cette marque LED
+                const subcategoriesSet = new Set<string>();
+                allProducts.forEach(p => {
+                  if (p.brand === hoveredBrand && p.category === 'LED' && p.subcategory) {
+                    subcategoriesSet.add(p.subcategory);
+                  }
+                });
+                const subcategories = Array.from(subcategoriesSet).sort();
+                
+                return subcategories.map((subcat) => {
+                  const subcatProducts = allProducts.filter(p => 
+                    p.brand === hoveredBrand && 
+                    p.subcategory === subcat &&
+                    p.category === 'LED'
+                  );
+                  
+                  return (
+                    <div key={subcat}>
+                      <button
+                        className={cn(
+                          "w-full text-left px-4 py-3 text-sm transition-all duration-200",
+                          hoveredLEDSubcategory === subcat 
+                            ? "bg-gradient-to-r from-green-50 to-emerald-50 text-green-700 border-l-4 border-green-600" 
+                            : "text-gray-700 hover:text-green-600 hover:bg-gray-50"
+                        )}
+                        onMouseEnter={() => setHoveredLEDSubcategory(subcat)}
+                      >
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <span className="font-medium text-base">{subcat}</span>
+                            <span className="block text-xs text-gray-500 mt-0.5">
+                              {subcatProducts.length} produit{subcatProducts.length > 1 ? 's' : ''}
+                            </span>
+                          </div>
+                          <ChevronRight className={cn(
+                            "w-4 h-4 transition-transform",
+                            hoveredLEDSubcategory === subcat ? "translate-x-1" : ""
+                          )} />
+                        </div>
+                      </button>
+                    </div>
+                  );
+                });
+              })()}
+            </div>
+          </div>
+        )}
+        {menuType === 'accessoires' && hoveredBrand && (
+          <div className="w-56 bg-white border-r border-gray-200">
+            <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-green-50 to-emerald-50">
+              <h4 className="font-bold text-gray-900 text-base">Sous-catégories</h4>
+            </div>
+            <div className="py-3">
+              {(() => {
+                // Obtenir toutes les sous-catégories pour cette marque
+                const subcategoriesSet = new Set<string>();
+                allProducts.forEach(p => {
+                  if (p.brand === hoveredBrand && 
+                      (p.category === 'Audio' || p.category === 'Chargement' || 
+                       p.category === 'Créativité' || p.category === 'Accessoires') && 
+                      p.subcategory) {
+                    subcategoriesSet.add(p.subcategory);
+                  }
+                });
+                const subcategories = Array.from(subcategoriesSet).sort();
+                
+                return subcategories.map((subcat) => {
+                  const subcatProducts = allProducts.filter(p => 
+                    p.brand === hoveredBrand && 
+                    p.subcategory === subcat &&
+                    (p.category === 'Audio' || p.category === 'Chargement' || 
+                     p.category === 'Créativité' || p.category === 'Accessoires')
+                  );
+                  
+                  return (
+                    <div key={subcat}>
+                      <button
+                        className={cn(
+                          "w-full text-left px-4 py-3 text-sm transition-all duration-200",
+                          hoveredAccessorySubcategory === subcat 
+                            ? "bg-gradient-to-r from-green-50 to-emerald-50 text-green-700 border-l-4 border-green-600" 
+                            : "text-gray-700 hover:text-green-600 hover:bg-gray-50"
+                        )}
+                        onMouseEnter={() => setHoveredAccessorySubcategory(subcat)}
+                      >
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <span className="font-medium text-base">{subcat}</span>
+                            <span className="block text-xs text-gray-500 mt-0.5">
+                              {subcatProducts.length} produit{subcatProducts.length > 1 ? 's' : ''}
+                            </span>
+                          </div>
+                          <ChevronRight className={cn(
+                            "w-4 h-4 transition-transform",
+                            hoveredAccessorySubcategory === subcat ? "translate-x-1" : ""
+                          )} />
+                        </div>
+                      </button>
+                    </div>
+                  );
+                });
+              })()}
+            </div>
+          </div>
+        )}
+        {hoveredCategory && !((menuType === 'smartphones' || menuType === 'led' || menuType === 'montres' || menuType === 'tablettes' || menuType === 'accessoires')) && (
           <div className="w-56 bg-white border-r border-gray-200">
             {(() => {
-              const brands = getBrandsForCategory(hoveredCategory);
+              
+              const currentCategory = getCurrentCategory();
+              
+              // Si la catégorie a des sous-catégories, les afficher
+              if (currentCategory?.subcategories && currentCategory.subcategories.length > 0) {
+                return (
+                  <>
+                    <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-green-50 to-emerald-50">
+                      <h4 className="font-bold text-gray-900 text-base">Sous-catégories</h4>
+                    </div>
+                    <div className="py-3">
+                      {currentCategory.subcategories.map((subcat) => {
+                        // Compter les produits dans cette sous-catégorie
+                        const subcatProducts = allProducts.filter(p => 
+                          p.category === hoveredCategory && 
+                          p.subcategory === subcat.name
+                        );
+                        
+                        return (
+                          <div key={subcat.name}>
+                            <button
+                              className={cn(
+                                "w-full text-left px-4 py-3 text-sm transition-all duration-200",
+                                hoveredSubcategory === subcat.name 
+                                  ? "bg-gradient-to-r from-green-50 to-emerald-50 text-green-700 border-l-4 border-green-600" 
+                                  : "text-gray-700 hover:text-green-600 hover:bg-gray-50"
+                              )}
+                              onMouseEnter={() => {
+                                setHoveredSubcategory(subcat.name);
+                                setHoveredBrand(null);
+                              }}
+                            >
+                              <div className="flex items-center justify-between">
+                                <div>
+                                  <span className="font-medium text-base">{subcat.name}</span>
+                                  <span className="block text-xs text-gray-500 mt-0.5">
+                                    {subcatProducts.length} produit{subcatProducts.length > 1 ? 's' : ''}
+                                  </span>
+                                </div>
+                                <ChevronRight className={cn(
+                                  "w-4 h-4 transition-transform",
+                                  hoveredSubcategory === subcat.name ? "translate-x-1" : ""
+                                )} />
+                              </div>
+                            </button>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </>
+                );
+              }
+              
+              // Sinon, afficher directement les marques
+              const brands = getBrandsForSelection();
               
               if (brands.length === 0) return null;
 
@@ -162,17 +468,89 @@ const DropdownMenu = ({
           </div>
         )}
 
-        {/* Colonne 3: Produits */}
-        {hoveredBrand && (
+        {/* Colonne 3: Marques (si sous-catégorie sélectionnée) */}
+        {hoveredSubcategory && !((menuType === 'smartphones' || menuType === 'led' || menuType === 'montres' || menuType === 'tablettes')) && (
+          <div className="w-56 bg-white border-r border-gray-200">
+            {(() => {
+              
+              const brands = getBrandsForSelection();
+              
+              if (brands.length === 0) return null;
+
+              return (
+                <>
+                  <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-purple-50 to-pink-50">
+                    <h4 className="font-bold text-gray-900 text-base">Marques</h4>
+                  </div>
+                  <div className="py-3">
+                    {brands.map((brand) => {
+                      const brandProducts = allProducts.filter(p => 
+                        p.category === hoveredCategory && 
+                        p.subcategory === hoveredSubcategory && 
+                        p.brand === brand
+                      );
+                      return (
+                        <div key={brand}>
+                          <button
+                            className={cn(
+                              "w-full text-left px-4 py-3 text-sm transition-all duration-200",
+                              hoveredBrand === brand 
+                                ? "bg-gradient-to-r from-purple-50 to-pink-50 text-purple-700 border-l-4 border-purple-600" 
+                                : "text-gray-700 hover:text-purple-600 hover:bg-gray-50"
+                            )}
+                            onMouseEnter={() => setHoveredBrand(brand)}
+                          >
+                            <div className="flex items-center justify-between">
+                              <div>
+                                <span className="font-medium text-base">{brand}</span>
+                                <span className="block text-xs text-gray-500 mt-0.5">
+                                  {brandProducts.length} produit{brandProducts.length > 1 ? 's' : ''}
+                                </span>
+                              </div>
+                              <ChevronRight className={cn(
+                                "w-4 h-4 transition-transform",
+                                hoveredBrand === brand ? "translate-x-1" : ""
+                              )} />
+                            </div>
+                          </button>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </>
+              );
+            })()}
+          </div>
+        )}
+
+        {/* Colonne Produits */}
+        {((menuType === 'accessoires' && hoveredBrand && hoveredAccessorySubcategory) || 
+          (menuType === 'led' && hoveredBrand && hoveredLEDSubcategory) ||
+          (menuType !== 'accessoires' && menuType !== 'led' && hoveredBrand)) && (
           <div className="flex-1 bg-gradient-to-b from-gray-50 to-white">
             {(() => {
-              const products = getProductsForDisplay() || [];
+              const products = menuType === 'accessoires' 
+                ? allProducts.filter(p => 
+                    p.brand === hoveredBrand && 
+                    p.subcategory === hoveredAccessorySubcategory &&
+                    (p.category === 'Audio' || p.category === 'Chargement' || 
+                     p.category === 'Créativité' || p.category === 'Accessoires')
+                  )
+                : menuType === 'led'
+                ? allProducts.filter(p => 
+                    p.brand === hoveredBrand && 
+                    p.subcategory === hoveredLEDSubcategory &&
+                    p.category === 'LED'
+                  )
+                : getProductsForDisplay() || [];
 
               return (
                 <>
                   <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-orange-50 to-red-50">
                     <h4 className="font-bold text-gray-900 text-base">
-                      Collection {hoveredBrand}
+                      {menuType === 'accessoires' ? `${hoveredAccessorySubcategory}` : 
+                       menuType === 'led' ? `${hoveredLEDSubcategory}` :
+                       `Collection ${hoveredBrand}`}
                     </h4>
                     <p className="text-sm text-gray-600 mt-1">{products.length} produit{products.length > 1 ? 's' : ''} disponible{products.length > 1 ? 's' : ''}</p>
                   </div>
@@ -187,17 +565,24 @@ const DropdownMenu = ({
                             onClick={onClose}
                           >
                             <div className="flex items-start space-x-3">
-                              {product.images && product.images.length > 0 && (
-                                <div className="w-14 h-14 bg-white border border-gray-200 rounded-lg overflow-hidden flex-shrink-0 shadow-sm">
+                              <div className="w-14 h-14 bg-white border border-gray-200 rounded-lg overflow-hidden flex-shrink-0 shadow-sm">
+                                {product.images && product.images.length > 0 ? (
                                   <Image
                                     src={product.images[0]}
                                     alt={product.name}
                                     width={56}
                                     height={56}
                                     className="w-full h-full object-contain"
+                                    onError={(e) => {
+                                      e.currentTarget.src = '/placeholder-product.png';
+                                    }}
                                   />
-                                </div>
-                              )}
+                                ) : (
+                                  <div className="w-full h-full flex items-center justify-center bg-gray-100">
+                                    <Package className="w-6 h-6 text-gray-400" />
+                                  </div>
+                                )}
+                              </div>
                               <div className="flex-1 min-w-0">
                                 <p className="text-sm font-semibold text-gray-900 line-clamp-1">
                                   {product.name}
@@ -221,7 +606,7 @@ const DropdownMenu = ({
                         {products.length > 6 && (
                           <div className="px-4 py-3 border-t border-gray-100">
                             <Link
-                              href={`/nos-produits?category=${encodeURIComponent(hoveredCategory || '')}&brand=${encodeURIComponent(hoveredBrand || '')}`}
+                              href={`/nos-produits?category=${encodeURIComponent(hoveredCategory || '')}&subcategory=${encodeURIComponent(hoveredSubcategory || '')}&brand=${encodeURIComponent(hoveredBrand || '')}`}
                               className="flex items-center justify-center text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors"
                               onClick={onClose}
                             >
@@ -660,7 +1045,7 @@ export default function Header() {
                 </Link>
               ))}
               
-              {/* Menu déroulant Smartphones */}
+              {/* Menu déroulant Smartphones avec Marques */}
               <div 
                 className="relative group"
                 onMouseEnter={() => handleMouseEnter('smartphones')}
@@ -688,6 +1073,7 @@ export default function Header() {
                   categories={getMenuCategory('smartphones')}
                   isOpen={dropdownOpen === 'smartphones' || clickedMenu === 'smartphones'}
                   onClose={closeDropdown}
+                  menuType="smartphones"
                 />
               </div>
 
@@ -719,6 +1105,7 @@ export default function Header() {
                   categories={getMenuCategory('tablettes')}
                   isOpen={dropdownOpen === 'tablettes' || clickedMenu === 'tablettes'}
                   onClose={closeDropdown}
+                  menuType="tablettes"
                 />
               </div>
 
@@ -750,6 +1137,7 @@ export default function Header() {
                   categories={getMenuCategory('montres connectées')}
                   isOpen={dropdownOpen === 'montres' || clickedMenu === 'montres'}
                   onClose={closeDropdown}
+                  menuType="montres"
                 />
               </div>
 
@@ -785,6 +1173,7 @@ export default function Header() {
                   )}
                   isOpen={dropdownOpen === 'accessoires' || clickedMenu === 'accessoires'}
                   onClose={closeDropdown}
+                  menuType="accessoires"
                 />
               </div>
 
@@ -816,6 +1205,7 @@ export default function Header() {
                   categories={getMenuCategory('créativité & enfants')}
                   isOpen={dropdownOpen === 'led' || clickedMenu === 'led'}
                   onClose={closeDropdown}
+                  menuType="led"
                 />
               </div>
               
