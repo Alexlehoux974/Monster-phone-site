@@ -116,15 +116,20 @@ const DropdownMenu = ({
       }`}
       style={{ 
         boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
-        minWidth: menuType === 'accessoires' && hoveredBrand && hoveredAccessorySubcategory ? "1000px" :
-                  menuType === 'accessoires' && hoveredBrand ? "600px" :
+        minWidth: menuType === 'accessoires' && hoveredBrand && hoveredAccessorySubcategory ? "672px" : // 224px x 3 colonnes
+                  menuType === 'accessoires' && hoveredBrand ? "448px" : // 224px x 2 colonnes
+                  menuType === 'accessoires' && !hoveredBrand ? "224px" : // 224px x 1 colonne (juste les marques)
+                  menuType === 'smartphones' && !hoveredBrand ? "224px" :
+                  menuType === 'led' && !hoveredBrand ? "224px" :
+                  menuType === 'montres' && !hoveredBrand ? "224px" :
+                  menuType === 'tablettes' && !hoveredBrand ? "224px" :
                   hoveredBrand && hoveredSubcategory ? "1200px" : 
                   hoveredBrand ? "1000px" : 
                   hoveredSubcategory ? "800px" : 
                   hoveredCategory ? "600px" : "400px"
       }}
     >
-      <div className="flex min-h-[400px]">
+      <div className={`flex min-h-[400px] ${(menuType === 'smartphones' || menuType === 'led' || menuType === 'montres' || menuType === 'tablettes' || menuType === 'accessoires') && !hoveredBrand ? 'w-fit' : ''} ${menuType === 'accessoires' && hoveredBrand && !hoveredAccessorySubcategory ? 'w-fit' : ''}`}>
         {/* Colonne 1: Catégories */}
         <div className="w-56 bg-gradient-to-b from-gray-50 to-white border-r border-gray-200">
           <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-indigo-50">
