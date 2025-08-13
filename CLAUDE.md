@@ -8,7 +8,7 @@ Monster Phone Boutique - E-commerce Next.js 15 application for gaming phone acce
 
 **Tech Stack**:
 - Next.js 15.4.2 + React 19 + TypeScript (strict mode)
-- Tailwind CSS v4 + Radix UI + Framer Motion
+- Tailwind CSS v4 + Radix UI + Framer Motion  
 - No backend API - static data architecture
 - French language interface
 
@@ -51,22 +51,23 @@ rm -rf .next                   # Clear build cache for TypeScript errors
 ### Core Application Structure
 - **App Router**: Next.js 15 App Router with server components
 - **Context API**: Cart state management with localStorage persistence (`CartContext`)
-- **Static Data**: All product data hardcoded in `/src/data/products.ts`
-- **SEO Optimized**: Structured data, metadata per page, sitemap generation
-- **Responsive Design**: Mobile-first approach with Tailwind CSS
+- **Static Data**: All product data hardcoded in `/src/data/products.ts` - Product interface with 30+ fields
+- **SEO Optimized**: Structured data, metadata per page, sitemap generation at `/src/app/sitemap.ts`
+- **Responsive Design**: Mobile-first approach with Tailwind CSS v4
 
 ### Data Architecture
-- **Product Interface**: TypeScript interface with 30+ fields including variants, specifications, ratings
+- **Product Interface**: TypeScript interface with variants, specifications, ratings in `/src/data/products.ts`
 - **Menu Structure**: Complex hierarchical navigation (categories → subcategories → brands → products)
 - **Static Pattern**: No API calls, manual Airtable exports, 15 products total
-- **Cart Persistence**: LocalStorage with key `monsterphone-cart`
+- **Cart Persistence**: LocalStorage with key `monsterphone-cart`, managed by CartContext
 
 ### Critical Known Issues
 
 **1. Image Loading** ⚠️
-- GitHub CDN returns `text/plain` instead of images
+- GitHub CDN (`raw.githubusercontent.com`) returns `text/plain` instead of images
 - All product images fail to load with "not a valid image" error
 - **Solution**: `ImageWithFallback` component uses placeholder images from `/src/lib/image-utils.ts`
+- Placeholders mapped by category (Smartphones, Audio & Son, etc.)
 
 **2. ESLint During Builds**
 - `ignoreDuringBuilds: true` in next.config.ts bypasses type errors
@@ -74,14 +75,15 @@ rm -rf .next                   # Clear build cache for TypeScript errors
 
 **3. Port Configuration**
 - Development server binds to 0.0.0.0 (accessible externally)
-- Production deployment may require specific port configuration
+- Production typically runs on port 3000
 
 ### Navigation System
 **Header Component** (`/src/components/Header.tsx`):
 - Multi-level dropdown: Categories → Subcategories → Brands → Products
 - Complex hover state management with multiple useState hooks
 - URL pattern: `/nos-produits?category=...&brand=...`
-- Requires high z-index for proper dropdown layering
+- PromoBar component with animated gradient
+- Cart dropdown with live preview and quantity controls
 
 ### Component Architecture
 ```
@@ -96,7 +98,7 @@ src/
 │   ├── Header.tsx         # Complex navigation system
 │   ├── ImageWithFallback.tsx # Handles broken GitHub images
 │   ├── ProductCard.tsx    # Product display component
-│   └── ui/               # Radix UI primitives
+│   └── ui/               # Radix UI primitives (button, card, tabs, etc.)
 ├── contexts/
 │   ├── CartContext.tsx    # Shopping cart with localStorage
 │   └── AuthContext.tsx    # User authentication (mock)
@@ -114,21 +116,37 @@ src/
 - Test files in `src/__tests__/` and component-specific `__tests__` folders
 - Module path alias: `@/` → `src/`
 - Coverage excludes layout and page components
+- Setup file: `jest.setup.js` for test environment
 
 **Playwright Configuration** (`playwright.config.ts`):
-- E2E tests in `e2e/` directory
-- Tests against Chromium, Firefox, WebKit, and mobile viewports
+- E2E tests in `e2e/` directory (7 test files)
+- Tests against Chromium, Firefox, WebKit, Mobile Chrome, Mobile Safari
 - Base URL: http://localhost:3000
-- Auto-starts dev server before tests
+- Auto-starts dev server before tests with 120s timeout
+- HTML reporter, screenshots on failure
 
-## Utility Functions
+## Key Utilities
 
-Key utilities in `/src/lib/utils.ts`:
-- `cn()` - Tailwind CSS class merging with clsx
+**`/src/lib/utils.ts`**:
+- `cn()` - Tailwind CSS class merging with clsx and tailwind-merge
 - `formatPrice()` - Format numbers as EUR currency (French locale)
 - `parseGitHubImages()` - Extract image URLs from newline-separated strings
 - `generateSlug()` - Create URL-safe slugs from text
 - `truncateText()` - Text truncation with ellipsis
+
+**`/src/lib/image-utils.ts`**:
+- `getCategoryPlaceholder()` - Returns placeholder image by product category
+- `isProblematicGitHubUrl()` - Detects GitHub raw URLs
+- `getWorkingImageUrl()` - Transforms or replaces problematic image URLs
+- `generateProductPlaceholder()` - Dynamic placeholder generation
+
+## TypeScript Configuration
+
+- **Strict Mode**: Enabled in `tsconfig.json`
+- **Path Alias**: `@/*` maps to `./src/*`
+- **Target**: ES2017
+- **Module**: ESNext with bundler resolution
+- **JSX**: Preserve for Next.js processing
 
 ## Important Development Notes
 
@@ -137,5 +155,5 @@ Key utilities in `/src/lib/utils.ts`:
 - **Static Data**: Always import from `/src/data/products.ts`, no API calls
 - **Image Handling**: Use `ImageWithFallback` component for all product images
 - **Cart State**: Persists in localStorage, test mode support via `initialItems` prop
-- **TypeScript**: Strict mode enabled, use proper types from data interfaces
 - **Mobile First**: Test responsive design, especially complex navigation on mobile
+- **Next.js Config**: ESLint errors ignored during builds (`ignoreDuringBuilds: true`)

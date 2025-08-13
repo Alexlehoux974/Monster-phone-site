@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Search, ShoppingCart, User, Menu, X, ChevronDown, ChevronRight, ArrowRight, Shield, Truck, Flame, Smartphone, Watch, Headphones, Lightbulb, Package, Star, Trash2, CreditCard, Plus, Minus } from 'lucide-react';
@@ -9,6 +9,7 @@ import { menuStructure, type CategoryStructure, allProducts, getProductsByCatego
 import { useCart } from '@/contexts/CartContext';
 // import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
+import debounce from 'lodash.debounce';
 
 // Composant pour la barre d'urgence promotionnelle
 const PromoBar = () => (
@@ -844,6 +845,8 @@ const MobileMenu = ({
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [searchSuggestions, setSearchSuggestions] = useState<typeof allProducts>([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState<string | null>(null);
   const [clickedMenu, setClickedMenu] = useState<string | null>(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -853,6 +856,53 @@ export default function Header() {
   const router = useRouter();
   const cartRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
+  const searchRef = useRef<HTMLDivElement>(null);
+
+  // Fonction de recherche avec debounce
+  const debouncedSearch = useCallback(
+    debounce((query: string) => {
+      if (query.trim().length > 1) {
+        const suggestions = allProducts.filter(product => 
+          product.name.toLowerCase().includes(query.toLowerCase()) ||
+          product.brand.toLowerCase().includes(query.toLowerCase()) ||
+          product.category.toLowerCase().includes(query.toLowerCase())
+        ).slice(0, 5); // Limiter à 5 suggestions
+        setSearchSuggestions(suggestions);
+        setShowSuggestions(true);
+      } else {
+        setSearchSuggestions([]);
+        setShowSuggestions(false);
+      }
+    }, 300),
+    []
+  );
+
+  // Gérer le changement de recherche
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+    debouncedSearch(query);
+  };
+
+  // Soumettre la recherche
+  const handleSearchSubmit = (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    if (searchQuery.trim()) {
+      router.push(`/nos-produits?search=${encodeURIComponent(searchQuery.trim())}`);
+      setShowSuggestions(false);
+      setSearchQuery('');
+    }
+  };
+
+  // Sélectionner une suggestion
+  const handleSuggestionClick = (productId: string) => {
+    const product = allProducts.find(p => p.id === productId);
+    if (product) {
+      router.push(`/produit/${product.urlSlug || product.id}`);
+      setShowSuggestions(false);
+      setSearchQuery('');
+    }
+  };
   
   // Helper pour obtenir les catégories depuis menuStructure
   const getMenuCategory = (categoryName: string): CategoryStructure[] => {
@@ -874,22 +924,25 @@ export default function Header() {
 
   // Gestion du scroll - supprimé car non utilisé
 
-  // Fermer le panier quand on clique en dehors
+  // Fermer le panier et les suggestions quand on clique en dehors
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (cartRef.current && !cartRef.current.contains(event.target as Node)) {
         setIsCartOpen(false);
       }
+      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+        setShowSuggestions(false);
+      }
     };
 
-    if (isCartOpen) {
+    if (isCartOpen || showSuggestions) {
       document.addEventListener('mousedown', handleClickOutside);
     }
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [isCartOpen]);
+  }, [isCartOpen, showSuggestions]);
 
   // Fermer le menu dropdown quand on clique en dehors
   useEffect(() => {
@@ -1147,17 +1200,62 @@ export default function Header() {
             </nav>
             
             {/* Barre de recherche desktop */}
-            <div className="relative hidden xl:flex ml-auto mr-4">
-              <input
-                type="text"
-                placeholder="Rechercher..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-40 px-3 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-xs"
-              />
-              <button className="absolute right-1.5 top-1/2 -translate-y-1/2 p-0.5 text-gray-900 hover:text-blue-600 transition-colors">
-                <Search className="h-3 w-3" />
-              </button>
+            <div className="relative hidden xl:flex ml-auto mr-4" ref={searchRef}>
+              <form onSubmit={handleSearchSubmit} className="relative">
+                <input
+                  type="text"
+                  placeholder="Rechercher un produit..."
+                  value={searchQuery}
+                  onChange={handleSearchChange}
+                  onFocus={() => searchQuery.length > 1 && setShowSuggestions(true)}
+                  className="w-64 px-3 py-1.5 pr-8 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-sm"
+                />
+                <button 
+                  type="submit"
+                  className="absolute right-1.5 top-1/2 -translate-y-1/2 p-0.5 text-gray-900 hover:text-blue-600 transition-colors"
+                >
+                  <Search className="h-4 w-4" />
+                </button>
+              </form>
+              
+              {/* Suggestions de recherche */}
+              {showSuggestions && searchSuggestions.length > 0 && (
+                <div className="absolute top-full mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-80 overflow-y-auto">
+                  {searchSuggestions.map((product) => (
+                    <button
+                      key={product.id}
+                      onClick={() => handleSuggestionClick(product.id)}
+                      className="w-full px-4 py-3 hover:bg-gray-50 text-left border-b border-gray-100 last:border-b-0 transition-colors"
+                    >
+                      <div className="flex items-center gap-3">
+                        {product.images && product.images.length > 0 && (
+                          <div className="w-10 h-10 bg-gray-100 rounded overflow-hidden flex-shrink-0">
+                            <Image
+                              src={product.images[0]}
+                              alt={product.name}
+                              width={40}
+                              height={40}
+                              className="w-full h-full object-contain"
+                            />
+                          </div>
+                        )}
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-medium text-gray-900 truncate">{product.name}</p>
+                          <p className="text-xs text-gray-500">{product.brand} - {product.category}</p>
+                        </div>
+                        <p className="text-sm font-bold text-blue-600">{product.price}€</p>
+                      </div>
+                    </button>
+                  ))}
+                  <Link
+                    href={`/nos-produits?search=${encodeURIComponent(searchQuery)}`}
+                    onClick={() => setShowSuggestions(false)}
+                    className="block w-full px-4 py-3 bg-blue-50 hover:bg-blue-100 text-center text-sm font-medium text-blue-600 transition-colors"
+                  >
+                    Voir tous les résultats pour "{searchQuery}"
+                  </Link>
+                </div>
+              )}
             </div>
             
             {/* Navigation tablette (version simplifiée) */}
