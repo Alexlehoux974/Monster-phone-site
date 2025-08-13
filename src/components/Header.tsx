@@ -15,7 +15,7 @@ const PromoBar = () => (
   <div className="bg-gradient-to-r from-red-600 via-orange-600 to-red-600 text-white py-2 px-3 relative overflow-hidden">
     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer" />
     <div className="max-w-7xl mx-auto text-center relative z-10">
-      <div className="flex items-center justify-center gap-4 text-sm font-medium flex-wrap">
+      <div className="flex items-center justify-center gap-2 text-sm font-medium flex-wrap">
         <div className="flex items-center gap-1.5">
           <Truck className="w-4 h-4" />
           <span>LIVRAISON EXPRESS 24H/48H À LA RÉUNION</span>
@@ -115,29 +115,18 @@ const DropdownMenu = ({
         alignRight ? 'right-0' : 'left-0'
       }`}
       style={{ 
-        boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
-        minWidth: menuType === 'accessoires' && hoveredBrand && hoveredAccessorySubcategory ? "672px" : // 224px x 3 colonnes
-                  menuType === 'accessoires' && hoveredBrand ? "448px" : // 224px x 2 colonnes
-                  menuType === 'accessoires' && !hoveredBrand ? "224px" : // 224px x 1 colonne (juste les marques)
-                  menuType === 'smartphones' && !hoveredBrand ? "224px" :
-                  menuType === 'led' && !hoveredBrand ? "224px" :
-                  menuType === 'montres' && !hoveredBrand ? "224px" :
-                  menuType === 'tablettes' && !hoveredBrand ? "224px" :
-                  hoveredBrand && hoveredSubcategory ? "1200px" : 
-                  hoveredBrand ? "1000px" : 
-                  hoveredSubcategory ? "800px" : 
-                  hoveredCategory ? "600px" : "400px"
+        boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)"
       }}
     >
-      <div className={`flex min-h-[400px] ${(menuType === 'smartphones' || menuType === 'led' || menuType === 'montres' || menuType === 'tablettes' || menuType === 'accessoires') && !hoveredBrand ? 'w-fit' : ''} ${menuType === 'accessoires' && hoveredBrand && !hoveredAccessorySubcategory ? 'w-fit' : ''}`}>
+      <div className="flex min-h-[450px] w-fit">
         {/* Colonne 1: Catégories */}
-        <div className="w-56 bg-gradient-to-b from-gray-50 to-white border-r border-gray-200">
+        <div className="min-w-[240px] bg-gradient-to-b from-gray-50 to-white border-r border-gray-200">
           <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-indigo-50">
             <h3 className="font-bold text-gray-900 text-lg">
               {(menuType === 'smartphones' || menuType === 'led' || menuType === 'montres' || menuType === 'tablettes' || menuType === 'accessoires') ? 'Marques' : 'Nos Produits'}
             </h3>
           </div>
-          <div className="py-3">
+          <div className="py-4 px-4">
             {(menuType === 'smartphones' || menuType === 'led' || menuType === 'montres' || menuType === 'tablettes' || menuType === 'accessoires') ? (
               // Pour Smartphones, LED, Montres, Tablettes et Accessoires, afficher les marques directement
               (() => {
@@ -184,7 +173,7 @@ const DropdownMenu = ({
                     <div key={brand}>
                       <button
                         className={cn(
-                          "w-full text-left px-4 py-3 text-sm font-medium transition-all duration-200",
+                          "w-full text-left px-6 py-4 text-sm font-medium transition-all duration-200",
                           hoveredBrand === brand 
                             ? "bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 border-l-4 border-blue-600" 
                             : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
@@ -256,11 +245,11 @@ const DropdownMenu = ({
 
         {/* Colonne 2: Sous-catégories ou Marques ou Produits */}
         {menuType === 'accessoires' && hoveredBrand && (
-          <div className="w-56 bg-white border-r border-gray-200">
+          <div className="min-w-[200px] bg-white border-r border-gray-200">
             <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-green-50 to-emerald-50">
               <h4 className="font-bold text-gray-900 text-base">Sous-catégories</h4>
             </div>
-            <div className="py-3">
+            <div className="py-4 px-4">
               {(() => {
                 // Obtenir toutes les sous-catégories pour cette marque
                 const subcategoriesSet = new Set<string>();
@@ -314,7 +303,7 @@ const DropdownMenu = ({
           </div>
         )}
         {hoveredCategory && !((menuType === 'smartphones' || menuType === 'led' || menuType === 'montres' || menuType === 'tablettes' || menuType === 'accessoires')) && (
-          <div className="w-56 bg-white border-r border-gray-200">
+          <div className="min-w-[200px] bg-white border-r border-gray-200">
             {(() => {
               
               const currentCategory = getCurrentCategory();
@@ -326,7 +315,7 @@ const DropdownMenu = ({
                     <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-green-50 to-emerald-50">
                       <h4 className="font-bold text-gray-900 text-base">Sous-catégories</h4>
                     </div>
-                    <div className="py-3">
+                    <div className="py-4 px-5">
                       {currentCategory.subcategories.map((subcat) => {
                         // Compter les produits dans cette sous-catégorie
                         const subcatProducts = allProducts.filter(p => 
@@ -379,7 +368,7 @@ const DropdownMenu = ({
                   <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-purple-50 to-pink-50">
                     <h4 className="font-bold text-gray-900 text-base">Marques</h4>
                   </div>
-                  <div className="py-3">
+                  <div className="py-4 px-5">
                     {brands.map((brand) => {
                       const brandProducts = getProductsByBrand(brand).filter(p => p.category === hoveredCategory);
                       return (
@@ -418,7 +407,7 @@ const DropdownMenu = ({
 
         {/* Colonne 3: Marques (si sous-catégorie sélectionnée) */}
         {hoveredSubcategory && !((menuType === 'smartphones' || menuType === 'led' || menuType === 'montres' || menuType === 'tablettes')) && (
-          <div className="w-56 bg-white border-r border-gray-200">
+          <div className="min-w-[200px] bg-white border-r border-gray-200">
             {(() => {
               
               const brands = getBrandsForSelection();
@@ -430,7 +419,7 @@ const DropdownMenu = ({
                   <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-purple-50 to-pink-50">
                     <h4 className="font-bold text-gray-900 text-base">Marques</h4>
                   </div>
-                  <div className="py-3">
+                  <div className="py-4 px-5">
                     {brands.map((brand) => {
                       const brandProducts = allProducts.filter(p => 
                         p.category === hoveredCategory && 
@@ -475,7 +464,7 @@ const DropdownMenu = ({
         {((menuType === 'accessoires' && hoveredBrand && hoveredAccessorySubcategory) || 
           (menuType === 'led' && hoveredBrand) ||
           (menuType !== 'accessoires' && menuType !== 'led' && hoveredBrand)) && (
-          <div className="flex-1 bg-gradient-to-b from-gray-50 to-white">
+          <div className="min-w-[380px] bg-gradient-to-b from-gray-50 to-white">
             {(() => {
               const products = menuType === 'accessoires' 
                 ? allProducts.filter(p => 
@@ -493,21 +482,21 @@ const DropdownMenu = ({
 
               return (
                 <>
-                  <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-orange-50 to-red-50">
+                  <div className="p-5 border-b border-gray-200 bg-gradient-to-r from-orange-50 to-red-50">
                     <h4 className="font-bold text-gray-900 text-base">
                       {menuType === 'accessoires' ? `${hoveredAccessorySubcategory}` : 
                        `Collection ${hoveredBrand}`}
                     </h4>
-                    <p className="text-sm text-gray-600 mt-1">{products.length} produit{products.length > 1 ? 's' : ''} disponible{products.length > 1 ? 's' : ''}</p>
+                    <p className="text-sm text-gray-600 mt-0.5">{products.length} produit{products.length > 1 ? 's' : ''} disponible{products.length > 1 ? 's' : ''}</p>
                   </div>
-                  <div className="py-3 max-h-[400px] overflow-y-auto">
+                  <div className="py-4 px-5">
                     {products && products.length > 0 ? (
                       <>
                         {products.slice(0, 6).map((product) => (
                           <Link
                             key={product.id}
                             href={`/produit/${product.urlSlug || product.id}`}
-                            className="block px-4 py-3 hover:bg-gradient-to-r hover:from-orange-50 hover:to-transparent transition-all duration-200"
+                            className="block px-5 py-3 hover:bg-gradient-to-r hover:from-orange-50 hover:to-transparent transition-all duration-200"
                             onClick={onClose}
                           >
                             <div className="flex items-start space-x-3">
@@ -525,23 +514,23 @@ const DropdownMenu = ({
                                   />
                                 ) : (
                                   <div className="w-full h-full flex items-center justify-center bg-gray-100">
-                                    <Package className="w-6 h-6 text-gray-400" />
+                                    <Package className="w-5 h-5 text-gray-400" />
                                   </div>
                                 )}
                               </div>
-                              <div className="flex-1 min-w-0">
-                                <p className="text-sm font-semibold text-gray-900 line-clamp-1">
+                              <div className="flex-1">
+                                <p className="text-sm font-semibold text-gray-900 whitespace-normal">
                                   {product.name}
                                 </p>
                                 {product.price && (
-                                  <p className="text-base font-bold text-red-600 mt-1">
+                                  <p className="text-base font-bold text-red-600 mt-1 whitespace-nowrap">
                                     {typeof product.price === 'number' 
                                       ? `${product.price.toFixed(2)} €` 
                                       : product.price}
                                   </p>
                                 )}
                                 {product.shortDescription && (
-                                  <p className="text-xs text-gray-600 mt-1 line-clamp-2">
+                                  <p className="text-xs text-gray-600 mt-1 whitespace-normal">
                                     {product.shortDescription}
                                   </p>
                                 )}
@@ -632,7 +621,7 @@ const MobileMenu = ({
           <h2 className="text-lg font-bold text-gray-900">Menu</h2>
           <button
             onClick={onClose}
-            className="p-2 text-gray-500 hover:text-gray-700 rounded-lg hover:bg-gray-100"
+            className="p-3 text-gray-500 hover:text-gray-700 rounded-lg hover:bg-gray-100"
           >
             <X className="w-6 h-6" />
           </button>
@@ -640,7 +629,7 @@ const MobileMenu = ({
         
         {/* Fil d'ariane */}
         {(activeCategory || activeBrand) && (
-          <div className="px-4 pb-3 flex items-center gap-2 text-sm overflow-x-auto">
+          <div className="px-2 pb-1.5 flex items-center gap-2 text-sm overflow-x-auto">
             <button
               onClick={resetNavigation}
               className="text-blue-600 hover:text-blue-800 whitespace-nowrap"
@@ -684,7 +673,7 @@ const MobileMenu = ({
                   placeholder="Rechercher un produit..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-4 py-3 pl-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
               </div>
@@ -696,7 +685,7 @@ const MobileMenu = ({
               <button
                 key={category.name}
                 onClick={() => setActiveCategory(category.name)}
-                className="w-full flex items-center justify-between p-4 text-left bg-gray-50 active:bg-gray-200 rounded-lg transition-colors min-h-[56px]"
+                className="w-full flex items-center justify-between p-4 text-left bg-gray-50 active:bg-gray-200 rounded-lg transition-colors"
               >
                 <div className="flex items-center gap-3">
                   {getCategoryIcon(category.name)}
@@ -713,7 +702,7 @@ const MobileMenu = ({
               <Link
                 href="/promotions"
                 onClick={onClose}
-                className="block p-4 bg-red-50 active:bg-red-200 rounded-lg transition-colors min-h-[56px]"
+                className="block p-4 bg-red-50 active:bg-red-200 rounded-lg transition-colors"
               >
                 <div className="flex items-center gap-3">
                   <Flame className="w-5 h-5 text-red-600" />
@@ -744,7 +733,7 @@ const MobileMenu = ({
                   <Link
                     href={`/nos-produits?category=${encodeURIComponent(activeCategory)}`}
                     onClick={onClose}
-                    className="block p-4 bg-blue-50 active:bg-blue-200 rounded-lg transition-colors mb-4 min-h-[56px]"
+                    className="block p-4 bg-blue-50 active:bg-blue-200 rounded-lg transition-colors mb-4"
                   >
                     <div className="flex items-center justify-between">
                       <span className="font-medium text-blue-900">Voir tous les {activeCategory}</span>
@@ -759,7 +748,7 @@ const MobileMenu = ({
                       <button
                         key={brand}
                         onClick={() => setActiveBrand(brand)}
-                        className="w-full flex items-center justify-between p-4 text-left bg-gray-50 active:bg-gray-200 rounded-lg transition-colors min-h-[56px]"
+                        className="w-full flex items-center justify-between p-4 text-left bg-gray-50 active:bg-gray-200 rounded-lg transition-colors"
                       >
                         <div>
                           <span className="font-medium text-gray-900">{brand}</span>
@@ -789,7 +778,7 @@ const MobileMenu = ({
                   <Link
                     href={`/nos-produits?category=${encodeURIComponent(activeCategory)}&brand=${encodeURIComponent(activeBrand)}`}
                     onClick={onClose}
-                    className="block p-4 bg-green-50 active:bg-green-200 rounded-lg transition-colors mb-4 min-h-[56px]"
+                    className="block p-4 bg-green-50 active:bg-green-200 rounded-lg transition-colors mb-4"
                   >
                     <div className="flex items-center justify-between">
                       <span className="font-medium text-green-900">
@@ -805,9 +794,9 @@ const MobileMenu = ({
                       key={product.id}
                       href={`/produit/${product.urlSlug || product.id}`}
                       onClick={onClose}
-                      className="block p-4 bg-white border border-gray-200 active:border-blue-500 active:bg-gray-50 rounded-lg transition-all min-h-[72px]"
+                      className="block p-4 bg-white border border-gray-200 active:border-blue-500 active:bg-gray-50 rounded-lg transition-all"
                     >
-                      <div className="flex items-start gap-4">
+                      <div className="flex items-start gap-2">
                         {product.images && product.images.length > 0 && (
                           <div className="w-16 h-16 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
                             <Image
@@ -820,7 +809,7 @@ const MobileMenu = ({
                           </div>
                         )}
                         <div className="flex-1 min-w-0">
-                          <h4 className="font-medium text-gray-900 line-clamp-2">
+                          <h4 className="font-medium text-gray-900">
                             {product.name}
                           </h4>
                           {product.price && (
@@ -842,7 +831,7 @@ const MobileMenu = ({
       {/* CTA fixe en bas */}
       <div className="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4">
         <Link href="/nos-produits" onClick={onClose}>
-          <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-lg font-bold text-base shadow-lg hover:shadow-xl transition-all">
+          <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-1.5 rounded-lg font-bold text-base shadow-lg hover:shadow-xl transition-all">
             🎮 Découvrir tous nos produits
           </button>
         </Link>
@@ -963,9 +952,9 @@ export default function Header() {
       <header 
         className="bg-white backdrop-blur-md shadow-lg border-b border-gray-200 transition-all duration-300 overflow-visible"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-2 sm:px-3 lg:px-4">
           {/* Header principal */}
-          <div className="flex items-center gap-4 h-20 overflow-visible">
+          <div className="flex items-center gap-2 h-20 overflow-visible">
             {/* Logo */}
             <Link href="/" className="flex-shrink-0 hover:opacity-90 transition-opacity">
               <Image 
@@ -984,7 +973,7 @@ export default function Header() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="flex items-center gap-1 text-gray-900 hover:text-blue-600 px-2 py-1.5 text-xs font-medium transition-colors rounded-lg hover:bg-blue-50"
+                  className="flex items-center gap-1 text-gray-900 hover:text-blue-600 px-4 py-3 text-xs font-medium transition-colors rounded-lg hover:bg-blue-50"
                 >
                   {item.icon}
                   <span>{item.name}</span>
@@ -1253,7 +1242,7 @@ export default function Header() {
                       </div>
                     ) : (
                       <>
-                        <div className="max-h-80 overflow-y-auto">
+                        <div className="">
                           {items && items.length > 0 && items.map((item) => {
                             // Price is already a number in the Product interface
                             const price = item.product.price;
@@ -1278,8 +1267,8 @@ export default function Header() {
                                     )}
                                   </div>
                                   <div className="flex-1">
-                                    <h4 className="text-sm font-medium line-clamp-1">{item.product.name}</h4>
-                                    <p className="text-xs text-gray-600 mt-1">
+                                    <h4 className="text-sm font-medium">{item.product.name}</h4>
+                                    <p className="text-xs text-gray-600 mt-1 whitespace-normal">
                                       {item.quantity} × {price.toFixed(2)} €
                                     </p>
                                     <div className="flex items-center gap-2 mt-2">
@@ -1327,7 +1316,7 @@ export default function Header() {
                             <Link
                               href="/panier"
                               onClick={() => setIsCartOpen(false)}
-                              className="block w-full text-center bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-medium hover:bg-gray-200 transition-colors"
+                              className="block w-full text-center bg-gray-100 text-gray-700 px-2 py-1 rounded-lg font-medium hover:bg-gray-200 transition-colors"
                             >
                               Voir le panier
                             </Link>
@@ -1336,7 +1325,7 @@ export default function Header() {
                                 setIsCartOpen(false);
                                 router.push('/checkout');
                               }}
-                              className="w-full bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
+                              className="w-full bg-blue-600 text-white px-2 py-1 rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
                             >
                               <CreditCard className="w-4 h-4" />
                               Paiement rapide
