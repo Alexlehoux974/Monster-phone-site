@@ -841,7 +841,7 @@ export const allProducts: Product[] = [
     name: 'HIFUTURE COLORBUDS 2 True Wireless',
     brand: 'HiFuture',
     category: 'Audio',
-    subcategory: 'Écouteurs',
+    subcategory: 'ecouteurs',
     price: 49.99,
     originalPrice: 69.99,
     discount: 29,
@@ -1075,7 +1075,7 @@ export const allProducts: Product[] = [
     name: 'HIFUTURE FLYBUDS Ecouteurs sans fil',
     brand: 'HiFuture',
     category: 'Audio',
-    subcategory: 'Écouteurs',
+    subcategory: 'ecouteurs',
     price: 59.99,
     originalPrice: 79.99,
     discount: 25,
@@ -1817,8 +1817,8 @@ export const allProducts: Product[] = [
     sku: 'MON-ILL-BASIC-MULTI',
     name: 'MONSTER Illuminescence Basic Lightstrip Multicouleur',
     brand: 'MONSTER',
-    category: 'Accessoires',
-    subcategory: 'Éclairage LED',
+    category: 'LED',
+    subcategory: 'Bandeaux LED',
     price: 13.99,
     originalPrice: 19.99,
     discount: 30,
@@ -1875,8 +1875,8 @@ export const allProducts: Product[] = [
     sku: 'MON-ILL-COLOR-BLANC',
     name: 'MONSTER Illuminescence Light Strip Color/Blanc',
     brand: 'MONSTER',
-    category: 'Accessoires',
-    subcategory: 'Éclairage LED',
+    category: 'LED',
+    subcategory: 'Bandeaux LED',
     price: 17.99,
     originalPrice: 24.99,
     discount: 28,
@@ -1931,8 +1931,8 @@ export const allProducts: Product[] = [
     sku: 'MON-ILL-NEON',
     name: 'MONSTER Illuminescence Neon Light Strip',
     brand: 'MONSTER',
-    category: 'Accessoires',
-    subcategory: 'Éclairage LED',
+    category: 'LED',
+    subcategory: 'Néon LED',
     price: 26.99,
     originalPrice: 39.99,
     discount: 33,
@@ -1989,8 +1989,8 @@ export const allProducts: Product[] = [
     sku: 'MON-ILL-CHROMA-2X',
     name: 'MONSTER Illuminescence Smart Chroma Light 2X Bars',
     brand: 'MONSTER',
-    category: 'Accessoires',
-    subcategory: 'Éclairage LED',
+    category: 'LED',
+    subcategory: 'Barres LED',
     price: 49.99,
     originalPrice: 79.99,
     discount: 38,
@@ -2045,8 +2045,8 @@ export const allProducts: Product[] = [
     sku: 'MON-ILL-BASIC-30M',
     name: 'MONSTER Illuminescence Basic Light Strip 30M RGB',
     brand: 'MONSTER',
-    category: 'Accessoires',
-    subcategory: 'Éclairage LED',
+    category: 'LED',
+    subcategory: 'Bandeaux LED',
     price: 74.99,
     originalPrice: 119.99,
     discount: 38,
@@ -3797,7 +3797,7 @@ export const allProducts: Product[] = [
 
   // HONOR CHOICE WATCH
   {
-    id: 'honor-choice-watch',
+    id: 'honor-choice-watch-v2',
     airtableId: 'recYEgkxqGIvVGFFX',
     sku: 'HONOR-CHOICE-WATCH',
     name: 'HONOR CHOICE WATCH',
@@ -4581,6 +4581,1096 @@ export const allProducts: Product[] = [
     sku: 'MON-INFINITY-3D',
     urlSlug: 'monster-infinity-mirror-led-3d',
     badges: ['Premium', '3D Effect']
+  },
+
+  // === NOUVEAUX PRODUITS AJOUTÉS DEPUIS AIRTABLE (39 produits) ===
+  
+  // HIFUTURE Enceinte Altus
+  {
+    id: 'hifuture-altus',
+    airtableId: 'rec3',
+    sku: 'HIFUTURE-ALTUS',
+    name: 'HIFUTURE Enceinte Altus',
+    brand: 'HIFUTURE',
+    category: 'Audio',
+    subcategory: 'Enceintes Bluetooth',
+    price: 29.99,
+    description: "Enceinte Bluetooth portable HIFUTURE Altus avec son puissant et design robuste. Profitez d'une qualité audio exceptionnelle où que vous soyez.",
+    shortDescription: 'Enceinte Bluetooth portable avec son HD',
+    metaTitle: 'HIFUTURE Enceinte Altus - Bluetooth Portable | Monster Phone 974',
+    metaDescription: 'Enceinte Bluetooth HIFUTURE Altus. Son HD, autonomie longue durée, design robuste. 4 coloris disponibles. Livraison La Réunion.',
+    urlSlug: 'hifuture-enceinte-altus-bluetooth',
+    keywords: ['HIFUTURE', 'Altus', 'enceinte', 'bluetooth', 'portable'],
+    variants: [
+      { color: 'Camo Vert', colorCode: '#4A5F3A', ean: '', stock: 10, images: [] },
+      { color: 'Noir', colorCode: '#000000', ean: '', stock: 15, images: [] },
+      { color: 'Bleu', colorCode: '#0066CC', ean: '', stock: 8, images: [] },
+      { color: 'Rouge', colorCode: '#FF0000', ean: '', stock: 12, images: [] }
+    ],
+    specifications: [
+      { label: 'Connectivité', value: 'Bluetooth 5.0' },
+      { label: 'Autonomie', value: '12 heures' },
+      { label: 'Puissance', value: '10W' },
+      { label: 'Étanchéité', value: 'IPX5' }
+    ],
+    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/hifuture-altus.jpg'],
+    status: 'active' as const,
+    badges: ['Nouveau']
+  },
+
+  // HIFUTURE PartyBox Event Horizon
+  {
+    id: 'hifuture-event-horizon',
+    airtableId: 'rec4',
+    sku: 'HIF-EVENT-HORIZON',
+    name: 'HIFUTURE PartyBox Event Horizon',
+    brand: 'HIFUTURE',
+    category: 'Audio',
+    subcategory: 'Enceintes Party',
+    price: 199.99,
+    description: "Enceinte de soirée HIFUTURE PartyBox Event Horizon avec éclairage LED et son puissant pour animer vos événements. Transformez n'importe quel espace en piste de danse.",
+    shortDescription: 'Enceinte party avec LED et son puissant',
+    metaTitle: 'HIFUTURE PartyBox Event Horizon - Enceinte Soirée LED | Monster Phone 974',
+    metaDescription: 'HIFUTURE PartyBox Event Horizon. Son puissant, éclairage LED RGB, autonomie 8h. Parfait pour soirées. Livraison La Réunion.',
+    urlSlug: 'hifuture-partybox-event-horizon',
+    keywords: ['HIFUTURE', 'PartyBox', 'Event Horizon', 'enceinte', 'soirée', 'LED'],
+    variants: [
+      { color: 'Noir', colorCode: '#000000', ean: '', stock: 5, images: [] }
+    ],
+    specifications: [
+      { label: 'Puissance', value: '100W RMS' },
+      { label: 'Autonomie', value: '8 heures' },
+      { label: 'Éclairage', value: 'LED RGB' },
+      { label: 'Connectivité', value: 'Bluetooth, USB, AUX' }
+    ],
+    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/hifuture-event-horizon.jpg'],
+    status: 'active' as const,
+    badges: ['Party', 'LED']
+  },
+
+  // HIFUTURE Écouteur Olymbuds 3
+  {
+    id: 'hifuture-olymbuds-3',
+    airtableId: 'rec10',
+    sku: 'HIFUTURE-OLYMBUDS3',
+    name: 'HIFUTURE Écouteur Olymbuds 3',
+    brand: 'HIFUTURE',
+    category: 'Audio',
+    subcategory: 'ecouteurs',
+    price: 24.99,
+    description: "Écouteurs True Wireless HIFUTURE Olymbuds 3 avec réduction de bruit et autonomie étendue. La liberté du sans-fil à prix mini.",
+    shortDescription: 'Écouteurs TWS avec réduction de bruit',
+    metaTitle: 'HIFUTURE Olymbuds 3 - Écouteurs True Wireless | Monster Phone 974',
+    metaDescription: 'HIFUTURE Olymbuds 3. Réduction de bruit, autonomie 24h avec boîtier, Bluetooth 5.2. Disponible en blanc et noir.',
+    urlSlug: 'hifuture-olymbuds-3-ecouteurs-tws',
+    keywords: ['HIFUTURE', 'Olymbuds', 'écouteurs', 'TWS', 'true wireless'],
+    variants: [
+      { color: 'Blanc', colorCode: '#FFFFFF', ean: '', stock: 20, images: [] },
+      { color: 'Noir', colorCode: '#000000', ean: '', stock: 25, images: [] }
+    ],
+    specifications: [
+      { label: 'Bluetooth', value: '5.2' },
+      { label: 'Autonomie', value: '6h + 18h avec boîtier' },
+      { label: 'Réduction de bruit', value: 'Active' },
+      { label: 'Charge rapide', value: 'USB-C' }
+    ],
+    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/hifuture-olymbuds-3.jpg'],
+    status: 'active' as const,
+    badges: ['ANC']
+  },
+
+  // HIFUTURE TOUR X
+  {
+    id: 'hifuture-tour-x',
+    airtableId: 'rec12',
+    sku: 'HIF-TOUR-X',
+    name: 'HIFUTURE TOUR X',
+    brand: 'HIFUTURE',
+    category: 'Audio',
+    subcategory: 'ecouteurs',
+    price: 13.99,
+    description: "Écouteurs sport HIFUTURE TOUR X avec crochet d'oreille pour une tenue parfaite pendant l'exercice. Résistants à la sueur pour vos séances les plus intenses.",
+    shortDescription: 'Écouteurs sport avec crochets',
+    metaTitle: 'HIFUTURE TOUR X - Écouteurs Sport | Monster Phone 974',
+    metaDescription: 'HIFUTURE TOUR X. Écouteurs sport résistants à la sueur, crochets d\'oreille, son dynamique. Prix mini.',
+    urlSlug: 'hifuture-tour-x-ecouteurs-sport',
+    keywords: ['HIFUTURE', 'TOUR X', 'écouteurs', 'sport', 'fitness'],
+    variants: [
+      { color: 'Noir', colorCode: '#000000', ean: '', stock: 30, images: [] }
+    ],
+    specifications: [
+      { label: 'Résistance', value: 'IPX4' },
+      { label: 'Autonomie', value: '8 heures' },
+      { label: 'Type', value: 'Intra-auriculaire avec crochets' },
+      { label: 'Micro', value: 'Intégré' }
+    ],
+    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/hifuture-tour-x.jpg'],
+    status: 'active' as const,
+    badges: ['Sport']
+  },
+
+  // HIFUTURE Enceinte Ripple
+  {
+    id: 'hifuture-ripple',
+    airtableId: 'rec13',
+    sku: 'HIFUTURE-RIPPLE',
+    name: 'HIFUTURE Enceinte Ripple',
+    brand: 'HIFUTURE',
+    category: 'Audio',
+    subcategory: 'Enceintes Bluetooth',
+    price: 64.99,
+    description: "Enceinte Bluetooth HIFUTURE Ripple avec son 360° et design élégant pour une expérience audio immersive. Le son enveloppe l'espace pour une écoute parfaite.",
+    shortDescription: 'Enceinte 360° avec son immersif',
+    metaTitle: 'HIFUTURE Ripple - Enceinte Bluetooth 360° | Monster Phone 974',
+    metaDescription: 'HIFUTURE Ripple. Son 360°, Bluetooth 5.0, autonomie 15h. Design élégant en 3 coloris. Livraison La Réunion.',
+    urlSlug: 'hifuture-enceinte-ripple-360',
+    keywords: ['HIFUTURE', 'Ripple', 'enceinte', 'bluetooth', '360 degrés'],
+    variants: [
+      { color: 'Noir', colorCode: '#000000', ean: '', stock: 8, images: [] },
+      { color: 'Bleu', colorCode: '#0066CC', ean: '', stock: 6, images: [] },
+      { color: 'Rouge', colorCode: '#FF0000', ean: '', stock: 5, images: [] }
+    ],
+    specifications: [
+      { label: 'Son', value: '360°' },
+      { label: 'Puissance', value: '20W' },
+      { label: 'Autonomie', value: '15 heures' },
+      { label: 'Bluetooth', value: '5.0' }
+    ],
+    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/hifuture-ripple.jpg'],
+    status: 'active' as const,
+    badges: ['360°']
+  },
+
+  // MY WAY Câble Lumineux USB-C
+  {
+    id: 'myway-cable-lumineux-usbc',
+    airtableId: 'rec17',
+    sku: 'MYWCBL-LUM-USBC',
+    name: 'MY WAY Câble Lumineux USB-C',
+    brand: 'MY WAY',
+    category: 'Accessoires',
+    subcategory: 'Câbles',
+    price: 14.99,
+    description: "Câble lumineux MY WAY USB-C avec indicateur LED de charge pour une expérience visuelle unique. Suivez la charge en temps réel grâce à l'éclairage dynamique.",
+    shortDescription: 'Câble USB-C lumineux avec LED',
+    metaTitle: 'MY WAY Câble Lumineux USB-C - LED Charge Rapide | Monster Phone 974',
+    metaDescription: 'MY WAY Câble lumineux USB-C. LED de charge, charge rapide 3A, longueur 1m. USB-C vers USB-C ou Lightning.',
+    urlSlug: 'myway-cable-lumineux-usb-c',
+    keywords: ['MY WAY', 'câble', 'USB-C', 'lumineux', 'LED'],
+    variants: [
+      { color: 'USB-C vers USB-C', colorCode: '#333333', ean: '', stock: 25, images: [] },
+      { color: 'USB-C vers Lightning', colorCode: '#666666', ean: '', stock: 20, images: [] }
+    ],
+    specifications: [
+      { label: 'Longueur', value: '1 mètre' },
+      { label: 'Charge', value: '3A Max' },
+      { label: 'LED', value: 'Indicateur lumineux' },
+      { label: 'Matériau', value: 'Nylon tressé' }
+    ],
+    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/myway-cable-lumineux-usbc.jpg'],
+    status: 'active' as const,
+    badges: ['LED', 'Charge Rapide']
+  },
+
+  // MY WAY Câble Lumineux USB-A
+  {
+    id: 'myway-cable-lumineux-usba',
+    airtableId: 'rec18',
+    sku: 'MYWCBL-LUM-USBA',
+    name: 'MY WAY Câble Lumineux USB-A',
+    brand: 'MY WAY',
+    category: 'Accessoires',
+    subcategory: 'Câbles',
+    price: 12.99,
+    description: "Câble lumineux MY WAY USB-A avec indicateur LED pour visualiser la charge en temps réel. Compatible avec tous vos appareils.",
+    shortDescription: 'Câble USB-A lumineux avec LED',
+    metaTitle: 'MY WAY Câble Lumineux USB-A - LED Indicateur | Monster Phone 974',
+    metaDescription: 'MY WAY Câble lumineux USB-A. LED de charge, compatible Lightning et USB-C, longueur 1m. Prix mini.',
+    urlSlug: 'myway-cable-lumineux-usb-a',
+    keywords: ['MY WAY', 'câble', 'USB-A', 'lumineux', 'LED'],
+    variants: [
+      { color: 'USB-A vers Lightning', colorCode: '#333333', ean: '', stock: 30, images: [] },
+      { color: 'USB-A vers USB-C', colorCode: '#666666', ean: '', stock: 35, images: [] }
+    ],
+    specifications: [
+      { label: 'Longueur', value: '1 mètre' },
+      { label: 'Charge', value: '2.4A Max' },
+      { label: 'LED', value: 'Indicateur lumineux' },
+      { label: 'Compatibilité', value: 'Universal' }
+    ],
+    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/myway-cable-lumineux-usba.jpg'],
+    status: 'active' as const,
+    badges: ['LED']
+  },
+
+  // MONSTER Illuminescence Light Strip Pack 2X 5M RGB+W
+  {
+    id: 'monster-illuminescence-pack-2x5m',
+    airtableId: 'rec19',
+    sku: 'MON-ILL-PACK-2X5M',
+    name: 'MONSTER Illuminescence Light Strip Pack 2X 5M RGB+W',
+    brand: 'MONSTER',
+    category: 'LED',
+    subcategory: 'Bandeaux LED',
+    price: 55.99,
+    description: "Pack de 2 bandes LED MONSTER Illuminescence 5M RGB+W avec contrôle sonore pour une ambiance personnalisée. Synchronisez vos lumières avec votre musique.",
+    shortDescription: 'Pack 2x5M bandes LED RGB+W avec contrôle sonore',
+    metaTitle: 'MONSTER Illuminescence Pack 2x5M RGB+W - Bandes LED Sound Reactive | Monster Phone 974',
+    metaDescription: 'Pack MONSTER 2x5M bandes LED RGB+W. Contrôle sonore, 16 millions de couleurs, télécommande. Installation facile.',
+    urlSlug: 'monster-illuminescence-pack-2x5m-rgb-w',
+    keywords: ['MONSTER', 'Illuminescence', 'LED', 'RGB', 'sound reactive'],
+    variants: [
+      { color: 'Basic Sound Reactive', colorCode: '#FF00FF', ean: '', stock: 10, images: [] },
+      { color: 'Smart Sound Reactive', colorCode: '#00FFFF', ean: '', stock: 8, images: [] }
+    ],
+    specifications: [
+      { label: 'Longueur', value: '2 x 5 mètres' },
+      { label: 'LED', value: 'RGB + Blanc' },
+      { label: 'Contrôle', value: 'Sound Reactive' },
+      { label: 'Alimentation', value: '12V inclus' }
+    ],
+    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-illuminescence-pack-2x5m.jpg'],
+    status: 'active' as const,
+    badges: ['Pack', 'Sound Reactive']
+  },
+
+  // HIFUTURE PartyBox MusicBox
+  {
+    id: 'hifuture-musicbox',
+    airtableId: 'rec20',
+    sku: 'HIF-MUSICBOX',
+    name: 'HIFUTURE PartyBox MusicBox',
+    brand: 'HIFUTURE',
+    category: 'Audio',
+    subcategory: 'Enceintes Party',
+    price: 149.99,
+    description: "Enceinte party HIFUTURE MusicBox avec éclairage dynamique et puissance sonore exceptionnelle. Le micro inclus transforme vos soirées en sessions karaoké.",
+    shortDescription: 'Enceinte party puissante avec LED',
+    metaTitle: 'HIFUTURE PartyBox MusicBox - Enceinte Soirée Puissante | Monster Phone 974',
+    metaDescription: 'HIFUTURE MusicBox. 80W de puissance, LED synchronisées, micro inclus, autonomie 10h. Animation garantie.',
+    urlSlug: 'hifuture-partybox-musicbox',
+    keywords: ['HIFUTURE', 'PartyBox', 'MusicBox', 'enceinte', 'party'],
+    variants: [
+      { color: 'Noir', colorCode: '#000000', ean: '', stock: 4, images: [] }
+    ],
+    specifications: [
+      { label: 'Puissance', value: '80W' },
+      { label: 'Autonomie', value: '10 heures' },
+      { label: 'Micro', value: 'Inclus' },
+      { label: 'Éclairage', value: 'LED synchronisées' }
+    ],
+    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/hifuture-musicbox.jpg'],
+    status: 'active' as const,
+    badges: ['Party', 'Micro inclus']
+  },
+
+  // HIFUTURE Casque ANC Tour
+  {
+    id: 'hifuture-tour-anc',
+    airtableId: 'rec26',
+    sku: 'HIF-TOUR-ANC',
+    name: 'HIFUTURE Casque ANC Tour',
+    brand: 'HIFUTURE',
+    category: 'Audio',
+    subcategory: 'Casques',
+    price: 44.99,
+    description: "Casque HIFUTURE Tour avec réduction de bruit active pour une immersion totale dans votre musique. Confort longue durée et autonomie exceptionnelle.",
+    shortDescription: 'Casque avec réduction de bruit active',
+    metaTitle: 'HIFUTURE Casque ANC Tour - Réduction de Bruit Active | Monster Phone 974',
+    metaDescription: 'HIFUTURE Tour ANC. Réduction de bruit active, confort longue durée, autonomie 30h. Son haute définition.',
+    urlSlug: 'hifuture-casque-anc-tour',
+    keywords: ['HIFUTURE', 'Tour', 'casque', 'ANC', 'réduction bruit'],
+    variants: [
+      { color: 'Noir', colorCode: '#000000', ean: '', stock: 12, images: [] }
+    ],
+    specifications: [
+      { label: 'ANC', value: 'Réduction active -25dB' },
+      { label: 'Autonomie', value: '30 heures' },
+      { label: 'Charge rapide', value: 'USB-C' },
+      { label: 'Pliable', value: 'Oui' }
+    ],
+    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/hifuture-tour-anc.jpg'],
+    status: 'active' as const,
+    badges: ['ANC']
+  },
+
+  // HIFUTURE Écouteur Sonify
+  {
+    id: 'hifuture-sonify',
+    airtableId: 'rec28',
+    sku: 'HIFUTURE-SONIFY',
+    name: 'HIFUTURE Écouteur Sonify',
+    brand: 'HIFUTURE',
+    category: 'Audio',
+    subcategory: 'ecouteurs',
+    price: 44.99,
+    description: "Écouteurs True Wireless HIFUTURE Sonify avec qualité audio premium et design élégant. La charge sans fil ajoute une touche de praticité au quotidien.",
+    shortDescription: 'Écouteurs TWS premium',
+    metaTitle: 'HIFUTURE Sonify - Écouteurs True Wireless Premium | Monster Phone 974',
+    metaDescription: 'HIFUTURE Sonify. Son Hi-Fi, autonomie 28h totale, charge sans fil. Disponible en noir et champagne.',
+    urlSlug: 'hifuture-ecouteurs-sonify',
+    keywords: ['HIFUTURE', 'Sonify', 'écouteurs', 'TWS', 'premium'],
+    variants: [
+      { color: 'Noir', colorCode: '#000000', ean: '', stock: 15, images: [] },
+      { color: 'Champagne', colorCode: '#D4AF37', ean: '', stock: 10, images: [] }
+    ],
+    specifications: [
+      { label: 'Driver', value: '10mm dynamique' },
+      { label: 'Autonomie', value: '7h + 21h boîtier' },
+      { label: 'Charge sans fil', value: 'Oui' },
+      { label: 'Bluetooth', value: '5.3' }
+    ],
+    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/hifuture-sonify.jpg'],
+    status: 'active' as const,
+    badges: ['Hi-Fi', 'Charge sans fil']
+  },
+
+  // MONSTER Persona SE ANC
+  {
+    id: 'monster-persona-se-anc',
+    airtableId: 'rec29',
+    sku: 'MONSTER-PERSONA-SE-ANC',
+    name: 'MONSTER Persona SE ANC',
+    brand: 'MONSTER',
+    category: 'Audio',
+    subcategory: 'Casques',
+    price: 99.99,
+    description: "Casque MONSTER Persona SE avec réduction de bruit active avancée et qualité audio audiophile. Support des codecs haute résolution pour les mélomanes exigeants.",
+    shortDescription: 'Casque ANC audiophile',
+    metaTitle: 'MONSTER Persona SE ANC - Casque Audiophile Réduction de Bruit | Monster Phone 974',
+    metaDescription: 'MONSTER Persona SE ANC. Réduction de bruit avancée, son audiophile, confort premium. Noir ou gris.',
+    urlSlug: 'monster-persona-se-anc-casque',
+    keywords: ['MONSTER', 'Persona SE', 'ANC', 'casque', 'audiophile'],
+    variants: [
+      { color: 'Noir', colorCode: '#000000', ean: '', stock: 8, images: [] },
+      { color: 'Gris', colorCode: '#808080', ean: '', stock: 6, images: [] }
+    ],
+    specifications: [
+      { label: 'ANC', value: 'Hybride -35dB' },
+      { label: 'Driver', value: '40mm' },
+      { label: 'Autonomie', value: '40 heures' },
+      { label: 'Codec', value: 'aptX HD, LDAC' }
+    ],
+    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-persona-se-anc.jpg'],
+    status: 'active' as const,
+    badges: ['ANC Premium', 'Audiophile']
+  },
+
+  // HIFUTURE Écouteur Sonic Air
+  {
+    id: 'hifuture-sonic-air',
+    airtableId: 'rec30',
+    sku: 'HIFUTURE-SONIC-AIR',
+    name: 'HIFUTURE Écouteur Sonic Air',
+    brand: 'HIFUTURE',
+    category: 'Audio',
+    subcategory: 'ecouteurs',
+    price: 24.99,
+    description: "Écouteurs True Wireless HIFUTURE Sonic Air ultra-légers avec son cristallin. Seulement 4g par écouteur pour un confort absolu.",
+    shortDescription: 'Écouteurs TWS ultra-légers',
+    metaTitle: 'HIFUTURE Sonic Air - Écouteurs True Wireless Légers | Monster Phone 974',
+    metaDescription: 'HIFUTURE Sonic Air. Ultra-légers 4g, autonomie 20h totale, charge rapide. Blanc, noir ou champagne.',
+    urlSlug: 'hifuture-sonic-air-ecouteurs',
+    keywords: ['HIFUTURE', 'Sonic Air', 'écouteurs', 'TWS', 'léger'],
+    variants: [
+      { color: 'Blanc', colorCode: '#FFFFFF', ean: '', stock: 20, images: [] },
+      { color: 'Noir', colorCode: '#000000', ean: '', stock: 25, images: [] },
+      { color: 'Champagne', colorCode: '#D4AF37', ean: '', stock: 15, images: [] }
+    ],
+    specifications: [
+      { label: 'Poids', value: '4g par écouteur' },
+      { label: 'Autonomie', value: '5h + 15h boîtier' },
+      { label: 'Charge rapide', value: '15min = 2h' },
+      { label: 'IPX4', value: 'Résistant à la sueur' }
+    ],
+    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/hifuture-sonic-air.jpg'],
+    status: 'active' as const,
+    badges: ['Ultra-léger']
+  },
+
+  // HIFUTURE Écouteur Conduction Air Mate
+  {
+    id: 'hifuture-air-mate-conduction',
+    airtableId: 'rec31',
+    sku: 'HIF-MATE-CONDUCTION',
+    name: 'HIFUTURE Écouteur Conduction Air Mate',
+    brand: 'HIFUTURE',
+    category: 'Audio',
+    subcategory: 'ecouteurs',
+    price: 34.99,
+    description: "Écouteurs à conduction osseuse HIFUTURE Air Mate pour le sport avec oreilles libres. Restez conscient de votre environnement tout en profitant de votre musique.",
+    shortDescription: 'Écouteurs conduction osseuse sport',
+    metaTitle: 'HIFUTURE Air Mate Conduction - Écouteurs Sport Conduction Osseuse | Monster Phone 974',
+    metaDescription: 'HIFUTURE Air Mate. Conduction osseuse, oreilles libres, IPX5, autonomie 8h. Parfait pour le sport.',
+    urlSlug: 'hifuture-air-mate-conduction-osseuse',
+    keywords: ['HIFUTURE', 'Air Mate', 'conduction osseuse', 'sport', 'écouteurs'],
+    variants: [
+      { color: 'Noir', colorCode: '#000000', ean: '', stock: 10, images: [] },
+      { color: 'Gris', colorCode: '#808080', ean: '', stock: 8, images: [] }
+    ],
+    specifications: [
+      { label: 'Type', value: 'Conduction osseuse' },
+      { label: 'Autonomie', value: '8 heures' },
+      { label: 'Étanchéité', value: 'IPX5' },
+      { label: 'Poids', value: '29g' }
+    ],
+    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/hifuture-air-mate.jpg'],
+    status: 'active' as const,
+    badges: ['Conduction osseuse', 'Sport']
+  },
+
+  // MONSTER Illuminescence LED Touch Light X3 RGB
+  {
+    id: 'monster-touch-light-x3',
+    airtableId: 'rec34',
+    sku: 'MON-ILL-TOUCH-X3',
+    name: 'MONSTER Illuminescence LED Touch Light X3 RGB',
+    brand: 'MONSTER',
+    category: 'LED',
+    subcategory: 'Lampes LED',
+    price: 26.99,
+    description: "Pack de 3 lampes LED tactiles MONSTER Illuminescence RGB pour créer une ambiance personnalisée. Installation adhésive sans fil pour une flexibilité maximale.",
+    shortDescription: 'Pack 3 lampes LED tactiles RGB',
+    metaTitle: 'MONSTER LED Touch Light X3 RGB - Pack Lampes Tactiles | Monster Phone 974',
+    metaDescription: 'Pack 3 lampes LED tactiles MONSTER RGB. Contrôle tactile, 16 couleurs, télécommande. Installation adhésive.',
+    urlSlug: 'monster-led-touch-light-x3-rgb',
+    keywords: ['MONSTER', 'touch light', 'LED', 'RGB', 'tactile'],
+    variants: [
+      { color: 'Pack de 3', colorCode: '#FFFFFF', ean: '', stock: 15, images: [] }
+    ],
+    specifications: [
+      { label: 'Quantité', value: '3 lampes' },
+      { label: 'Contrôle', value: 'Tactile + télécommande' },
+      { label: 'Couleurs', value: '16 RGB' },
+      { label: 'Alimentation', value: 'Piles AAA' }
+    ],
+    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-touch-light-x3.jpg'],
+    status: 'active' as const,
+    badges: ['Pack', 'Tactile']
+  },
+
+  // MONSTER Illuminescence Light Strip 5M Multicolor IPX6
+  {
+    id: 'monster-light-strip-5m-ipx6',
+    airtableId: 'rec35',
+    sku: 'MON-ILL-5M-IPX6',
+    name: 'MONSTER Illuminescence Light Strip 5M Multicolor IPX6',
+    brand: 'MONSTER',
+    category: 'LED',
+    subcategory: 'Bandeaux LED',
+    price: 39.99,
+    description: "Bande LED MONSTER Illuminescence 5M étanche IPX6 pour intérieur et extérieur. Résiste aux intempéries pour illuminer terrasse, jardin ou piscine.",
+    shortDescription: 'Bande LED 5M étanche IPX6',
+    metaTitle: 'MONSTER Light Strip 5M IPX6 - Bande LED Étanche Multicolor | Monster Phone 974',
+    metaDescription: 'MONSTER bande LED 5M IPX6. Étanche intérieur/extérieur, multicolore, télécommande. Installation facile.',
+    urlSlug: 'monster-light-strip-5m-ipx6',
+    keywords: ['MONSTER', 'LED', 'IPX6', 'étanche', 'multicolor'],
+    variants: [
+      { color: '5m Intérieur/Extérieur', colorCode: '#00FF00', ean: '', stock: 12, images: [] }
+    ],
+    specifications: [
+      { label: 'Longueur', value: '5 mètres' },
+      { label: 'Étanchéité', value: 'IPX6' },
+      { label: 'LED', value: 'Multicolore RGB' },
+      { label: 'Usage', value: 'Intérieur/Extérieur' }
+    ],
+    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-light-strip-ipx6.jpg'],
+    status: 'active' as const,
+    badges: ['IPX6', 'Extérieur']
+  },
+
+  // MUVIT KidPic Appareil Photo Enfant
+  {
+    id: 'muvit-kidpic-appareil-photo',
+    airtableId: 'rec36',
+    sku: 'MUAPN000',
+    name: 'MUVIT KidPic Appareil Photo Enfant',
+    brand: 'MUVIT',
+    category: 'High-Tech',
+    subcategory: 'Appareils Photo',
+    price: 59.99,
+    description: "Appareil photo numérique MUVIT KidPic conçu spécialement pour les enfants avec interface simple. Écran 2 pouces, vidéo HD et jeux intégrés pour des heures de divertissement.",
+    shortDescription: 'Appareil photo numérique pour enfants',
+    metaTitle: 'MUVIT KidPic - Appareil Photo Numérique Enfant | Monster Phone 974',
+    metaDescription: 'MUVIT KidPic appareil photo enfant. Écran 2", vidéo HD, jeux intégrés. Disponible en bleu et rose.',
+    urlSlug: 'muvit-kidpic-appareil-photo-enfant',
+    keywords: ['MUVIT', 'KidPic', 'appareil photo', 'enfant', 'numérique'],
+    variants: [
+      { color: 'Bleu', colorCode: '#0066CC', ean: '', stock: 8, images: [] },
+      { color: 'Rose', colorCode: '#FF69B4', ean: '', stock: 10, images: [] }
+    ],
+    specifications: [
+      { label: 'Écran', value: '2 pouces' },
+      { label: 'Photo', value: '12MP' },
+      { label: 'Vidéo', value: 'HD 1080p' },
+      { label: 'Mémoire', value: 'Carte SD 32GB incluse' }
+    ],
+    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/muvit-kidpic.jpg'],
+    status: 'active' as const,
+    badges: ['Enfants', 'HD']
+  },
+
+  // CASQUE SANS FILS ENFANTS MUVIT
+  {
+    id: 'muvit-casque-enfant-sans-fil',
+    airtableId: 'rec37',
+    sku: 'MUV-CASQUE-SANS-FIL',
+    name: 'CASQUE SANS FILS ENFANTS MUVIT',
+    brand: 'MUVIT',
+    category: 'Audio',
+    subcategory: 'Casques Enfants',
+    price: 39.99,
+    description: "Casque sans fil MUVIT pour enfants avec limitation de volume et design fun. Protège l'audition des plus jeunes avec limiteur 85dB intégré.",
+    shortDescription: 'Casque Bluetooth enfant avec limiteur',
+    metaTitle: 'MUVIT Casque Sans Fil Enfant - Bluetooth Limiteur Volume | Monster Phone 974',
+    metaDescription: 'Casque Bluetooth MUVIT enfant. Limiteur 85dB, designs fun animaux, confortable. 5 modèles disponibles.',
+    urlSlug: 'muvit-casque-sans-fil-enfant',
+    keywords: ['MUVIT', 'casque', 'enfant', 'bluetooth', 'limiteur'],
+    variants: [
+      { color: 'CHAT', colorCode: '#FFA500', ean: '', stock: 6, images: [] },
+      { color: 'LAPIN', colorCode: '#FFB6C1', ean: '', stock: 8, images: [] },
+      { color: 'PIKA', colorCode: '#FFFF00', ean: '', stock: 5, images: [] },
+      { color: 'LICORNE', colorCode: '#FF69B4', ean: '', stock: 7, images: [] },
+      { color: 'DRAGON', colorCode: '#00FF00', ean: '', stock: 4, images: [] }
+    ],
+    specifications: [
+      { label: 'Limiteur', value: '85dB max' },
+      { label: 'Autonomie', value: '20 heures' },
+      { label: 'Bluetooth', value: '5.0' },
+      { label: 'Pliable', value: 'Oui' }
+    ],
+    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/muvit-casque-enfant.jpg'],
+    status: 'active' as const,
+    badges: ['Enfants', 'Limiteur 85dB']
+  },
+
+  // MUVIT Casque Sans Fil Enfant (version alternative)
+  {
+    id: 'muvit-casque-enfant-bt',
+    airtableId: 'rec38',
+    sku: 'MUHPH01',
+    name: 'MUVIT Casque Sans Fil Enfant',
+    brand: 'MUVIT',
+    category: 'Audio',
+    subcategory: 'Casques Enfants',
+    price: 39.99,
+    description: "Casque Bluetooth MUVIT pour enfants avec designs animaux et protection auditive. Confort optimal pour les longues sessions d'écoute.",
+    shortDescription: 'Casque Bluetooth enfant protection auditive',
+    metaTitle: 'MUVIT Casque Bluetooth Enfant - Protection Auditive | Monster Phone 974',
+    metaDescription: 'Casque MUVIT enfant Bluetooth. Protection 85dB, designs animaux fun, autonomie 20h. Confort garanti.',
+    urlSlug: 'muvit-casque-bluetooth-enfant',
+    keywords: ['MUVIT', 'casque', 'enfant', 'bluetooth', 'protection'],
+    variants: [
+      { color: 'Lapin', colorCode: '#FFB6C1', ean: '', stock: 10, images: [] },
+      { color: 'Chat', colorCode: '#FFA500', ean: '', stock: 8, images: [] },
+      { color: 'Licorne', colorCode: '#FF69B4', ean: '', stock: 9, images: [] },
+      { color: 'Dragon', colorCode: '#00FF00', ean: '', stock: 6, images: [] },
+      { color: 'Pika', colorCode: '#FFFF00', ean: '', stock: 7, images: [] }
+    ],
+    specifications: [
+      { label: 'Protection', value: '85dB' },
+      { label: 'Âge', value: '3-12 ans' },
+      { label: 'Bluetooth', value: '5.0' },
+      { label: 'Micro', value: 'Intégré' }
+    ],
+    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/muvit-casque-bt.jpg'],
+    status: 'active' as const,
+    badges: ['Enfants', '85dB']
+  },
+
+  // MONSTER Illuminescence Smart Light Strip RGB+W
+  {
+    id: 'monster-smart-light-strip-rgbw',
+    airtableId: 'rec39',
+    sku: 'MON-ILL-SMART-RGBW',
+    name: 'MONSTER Illuminescence Smart Light Strip RGB+W',
+    brand: 'MONSTER',
+    category: 'LED',
+    subcategory: 'Bandeaux LED',
+    price: 24.99,
+    description: "Bande LED intelligente MONSTER RGB+W avec contrôle app et compatibilité assistants vocaux. Contrôlez vos lumières à la voix avec Alexa ou Google Assistant.",
+    shortDescription: 'Bande LED smart RGB+W contrôle app',
+    metaTitle: 'MONSTER Smart Light Strip RGB+W - Bande LED Connectée | Monster Phone 974',
+    metaDescription: 'MONSTER bande LED smart RGB+W. Contrôle app, Alexa/Google, 16M couleurs. 2m, 5m ou sound reactive.',
+    urlSlug: 'monster-smart-light-strip-rgbw',
+    keywords: ['MONSTER', 'smart', 'LED', 'RGB', 'connectée'],
+    variants: [
+      { color: '2m', colorCode: '#FF0000', ean: '', stock: 20, images: [] },
+      { color: '5m', colorCode: '#00FF00', ean: '', stock: 15, images: [] },
+      { color: '5m Sound Reactive', colorCode: '#0000FF', ean: '', stock: 10, images: [] }
+    ],
+    specifications: [
+      { label: 'Contrôle', value: 'App + Voice' },
+      { label: 'Couleurs', value: '16 millions' },
+      { label: 'Compatible', value: 'Alexa, Google' },
+      { label: 'WiFi', value: '2.4GHz' }
+    ],
+    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-smart-light-strip.jpg'],
+    status: 'active' as const,
+    badges: ['Smart', 'Voice Control']
+  },
+
+  // MONSTER N-Lite 206
+  {
+    id: 'monster-n-lite-206',
+    airtableId: 'rec42',
+    sku: 'MNLT206',
+    name: 'MONSTER N-Lite 206',
+    brand: 'MONSTER',
+    category: 'Audio',
+    subcategory: 'ecouteurs',
+    price: 29.99,
+    description: "Écouteurs MONSTER N-Lite 206 avec son puissant et design élégant. Driver 10mm pour des basses profondes et des aigus cristallins.",
+    shortDescription: 'Écouteurs avec son puissant',
+    metaTitle: 'MONSTER N-Lite 206 - Écouteurs Premium | Monster Phone 974',
+    metaDescription: 'MONSTER N-Lite 206. Son puissant, confort optimal, micro intégré. Rose Gold ou Midnight.',
+    urlSlug: 'monster-n-lite-206-ecouteurs',
+    keywords: ['MONSTER', 'N-Lite', '206', 'écouteurs'],
+    variants: [
+      { color: 'Rose Gold', colorCode: '#B76E79', ean: '', stock: 12, images: [] },
+      { color: 'Midnight', colorCode: '#191970', ean: '', stock: 15, images: [] }
+    ],
+    specifications: [
+      { label: 'Driver', value: '10mm' },
+      { label: 'Impédance', value: '32Ω' },
+      { label: 'Câble', value: '1.2m' },
+      { label: 'Jack', value: '3.5mm' }
+    ],
+    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-n-lite-206.jpg'],
+    status: 'active' as const,
+    badges: ['Premium']
+  },
+
+  // HIFUTURE Enceinte Ascendo
+  {
+    id: 'hifuture-ascendo',
+    airtableId: 'rec43',
+    sku: 'HIF-ASCENDO',
+    name: 'HIFUTURE Enceinte Ascendo',
+    brand: 'HIFUTURE',
+    category: 'Audio',
+    subcategory: 'Enceintes Bluetooth',
+    price: 34.99,
+    description: "Enceinte Bluetooth HIFUTURE Ascendo avec basses profondes et design compact. IPX5 pour résister aux éclaboussures lors de vos activités outdoor.",
+    shortDescription: 'Enceinte Bluetooth basses profondes',
+    metaTitle: 'HIFUTURE Ascendo - Enceinte Bluetooth Compacte | Monster Phone 974',
+    metaDescription: 'HIFUTURE Ascendo. Basses profondes, 12h autonomie, IPX5. Disponible en 3 couleurs.',
+    urlSlug: 'hifuture-enceinte-ascendo',
+    keywords: ['HIFUTURE', 'Ascendo', 'enceinte', 'bluetooth', 'basses'],
+    variants: [
+      { color: 'Bleu', colorCode: '#0066CC', ean: '', stock: 10, images: [] },
+      { color: 'Noir', colorCode: '#000000', ean: '', stock: 12, images: [] },
+      { color: 'Rouge', colorCode: '#FF0000', ean: '', stock: 8, images: [] }
+    ],
+    specifications: [
+      { label: 'Puissance', value: '15W' },
+      { label: 'Autonomie', value: '12 heures' },
+      { label: 'Étanchéité', value: 'IPX5' },
+      { label: 'Bluetooth', value: '5.0' }
+    ],
+    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/hifuture-ascendo.jpg'],
+    status: 'active' as const,
+    badges: ['Basses+', 'IPX5']
+  },
+
+  // MONSTER Mission 100
+  {
+    id: 'monster-mission-100',
+    airtableId: 'rec44',
+    sku: 'MONSTER-MISSION-100',
+    name: 'MONSTER Mission 100',
+    brand: 'MONSTER',
+    category: 'Audio',
+    subcategory: 'Casques',
+    price: 99.99,
+    description: "Casque gaming MONSTER Mission 100 avec son surround virtuel et micro détachable. Éclairage RGB personnalisable pour un setup gaming parfait.",
+    shortDescription: 'Casque gaming surround avec micro',
+    metaTitle: 'MONSTER Mission 100 - Casque Gaming Surround | Monster Phone 974',
+    metaDescription: 'MONSTER Mission 100. Son surround 7.1, micro détachable, RGB. Storm Gray, Noir ou Crème.',
+    urlSlug: 'monster-mission-100-casque-gaming',
+    keywords: ['MONSTER', 'Mission 100', 'gaming', 'casque', 'surround'],
+    variants: [
+      { color: 'Storm Gray', colorCode: '#708090', ean: '', stock: 6, images: [] },
+      { color: 'Noir', colorCode: '#000000', ean: '', stock: 8, images: [] },
+      { color: 'Crème', colorCode: '#FFFDD0', ean: '', stock: 4, images: [] }
+    ],
+    specifications: [
+      { label: 'Son', value: 'Surround 7.1' },
+      { label: 'Driver', value: '50mm' },
+      { label: 'Micro', value: 'Détachable' },
+      { label: 'RGB', value: 'Oui' }
+    ],
+    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-mission-100.jpg'],
+    status: 'active' as const,
+    badges: ['Gaming', '7.1 Surround']
+  },
+
+  // MY WAY Powerbank
+  {
+    id: 'myway-powerbank',
+    airtableId: 'rec46',
+    sku: 'MYWPB',
+    name: 'MY WAY Powerbank',
+    brand: 'MY WAY',
+    category: 'Accessoires',
+    subcategory: 'Batteries Externes',
+    price: 32.99,
+    description: "Batterie externe MY WAY haute capacité avec charge rapide et multiple ports. Jusqu'à 30000mAh pour ne jamais tomber en panne de batterie.",
+    shortDescription: 'Powerbank haute capacité charge rapide',
+    metaTitle: 'MY WAY Powerbank - Batterie Externe Haute Capacité | Monster Phone 974',
+    metaDescription: 'MY WAY Powerbank. 10000, 20000 ou 30000mAh. Charge rapide, multi-ports, LED indicateur.',
+    urlSlug: 'myway-powerbank-batterie-externe',
+    keywords: ['MY WAY', 'powerbank', 'batterie externe', 'charge rapide'],
+    variants: [
+      { color: '10000mAh', colorCode: '#333333', ean: '', stock: 20, images: [] },
+      { color: '20000mAh', colorCode: '#666666', ean: '', stock: 15, images: [] },
+      { color: '30000mAh', colorCode: '#999999', ean: '', stock: 10, images: [] }
+    ],
+    specifications: [
+      { label: 'Ports', value: '2 USB-A + 1 USB-C' },
+      { label: 'Charge rapide', value: '18W PD' },
+      { label: 'LED', value: 'Indicateur 4 niveaux' },
+      { label: 'Protection', value: 'Multi-protection' }
+    ],
+    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/myway-powerbank.jpg'],
+    status: 'active' as const,
+    badges: ['Charge Rapide', 'Multi-ports']
+  },
+
+  // MONSTER Illuminescence DUO Monitor Light
+  {
+    id: 'monster-duo-monitor-light',
+    airtableId: 'rec47',
+    sku: 'MON-ILL-DUO-MONITOR',
+    name: 'MONSTER Illuminescence DUO Monitor Light',
+    brand: 'MONSTER',
+    category: 'LED',
+    subcategory: 'Lampes Écran',
+    price: 49.99,
+    description: "Lampe d'écran MONSTER DUO pour double moniteur avec éclairage RGB personnalisable. Réduit la fatigue oculaire lors de longues sessions gaming.",
+    shortDescription: 'Lampe double écran RGB',
+    metaTitle: 'MONSTER DUO Monitor Light - Lampe Double Écran RGB | Monster Phone 974',
+    metaDescription: 'MONSTER DUO Monitor Light. Éclairage RGB double écran, réglable, USB. Parfait pour setup gaming.',
+    urlSlug: 'monster-duo-monitor-light-rgb',
+    keywords: ['MONSTER', 'monitor light', 'RGB', 'double écran', 'gaming'],
+    variants: [
+      { color: 'Dual Monitor RGB', colorCode: '#FF00FF', ean: '', stock: 8, images: [] }
+    ],
+    specifications: [
+      { label: 'Compatibilité', value: 'Double écran' },
+      { label: 'Éclairage', value: 'RGB personnalisable' },
+      { label: 'Alimentation', value: 'USB' },
+      { label: 'Réglable', value: 'Angle et intensité' }
+    ],
+    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-duo-monitor-light.jpg'],
+    status: 'active' as const,
+    badges: ['Double Écran', 'RGB']
+  },
+
+  // MONSTER Element Air
+  {
+    id: 'monster-element-air',
+    airtableId: 'rec48',
+    sku: 'MONSTER-ELEMENT-AIR',
+    name: 'MONSTER Element Air',
+    brand: 'MONSTER',
+    category: 'Audio',
+    subcategory: 'ecouteurs',
+    price: 39.99,
+    description: "Écouteurs True Wireless MONSTER Element Air avec design ergonomique et son équilibré. IPX4 pour résister à la sueur et aux éclaboussures.",
+    shortDescription: 'Écouteurs TWS ergonomiques',
+    metaTitle: 'MONSTER Element Air - Écouteurs True Wireless | Monster Phone 974',
+    metaDescription: 'MONSTER Element Air. Design ergonomique, son équilibré, autonomie 24h. Noir ou bleu.',
+    urlSlug: 'monster-element-air-tws',
+    keywords: ['MONSTER', 'Element Air', 'TWS', 'écouteurs', 'true wireless'],
+    variants: [
+      { color: 'Noir', colorCode: '#000000', ean: '', stock: 18, images: [] },
+      { color: 'Bleu', colorCode: '#0066CC', ean: '', stock: 14, images: [] }
+    ],
+    specifications: [
+      { label: 'Autonomie', value: '6h + 18h boîtier' },
+      { label: 'Bluetooth', value: '5.2' },
+      { label: 'Charge', value: 'USB-C rapide' },
+      { label: 'IPX4', value: 'Résistant à l\'eau' }
+    ],
+    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-element-air.jpg'],
+    status: 'active' as const,
+    badges: ['TWS', 'IPX4']
+  },
+
+  // MONSTER ENCEINTE PARTY
+  {
+    id: 'monster-enceinte-party',
+    airtableId: 'rec49',
+    sku: 'MONSTER-ENCEINTE-PARTY',
+    name: 'MONSTER ENCEINTE PARTY',
+    brand: 'MONSTER',
+    category: 'Audio',
+    subcategory: 'Enceintes Party',
+    price: 99.99,
+    description: "Enceinte party MONSTER avec puissance élevée et effets lumineux pour animer vos soirées. Micro karaoké inclus pour des sessions endiablées.",
+    shortDescription: 'Enceinte party puissante avec LED',
+    metaTitle: 'MONSTER Enceinte Party - Son Puissant LED | Monster Phone 974',
+    metaDescription: 'MONSTER Enceinte Party. 60W, LED synchronisées, autonomie 8h, micro karaoké. Animation garantie.',
+    urlSlug: 'monster-enceinte-party',
+    keywords: ['MONSTER', 'enceinte', 'party', 'soirée', 'LED'],
+    variants: [
+      { color: 'Noir', colorCode: '#000000', ean: '', stock: 5, images: [] }
+    ],
+    specifications: [
+      { label: 'Puissance', value: '60W' },
+      { label: 'Autonomie', value: '8 heures' },
+      { label: 'LED', value: 'Synchronisées musique' },
+      { label: 'Extras', value: 'Micro karaoké inclus' }
+    ],
+    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-enceinte-party.jpg'],
+    status: 'active' as const,
+    badges: ['Party', 'Karaoké']
+  },
+
+  // HIFUTURE Écouteur Yacht
+  {
+    id: 'hifuture-yacht',
+    airtableId: 'rec50',
+    sku: 'HIFUTURE-YACHT',
+    name: 'HIFUTURE Écouteur Yacht',
+    brand: 'HIFUTURE',
+    category: 'Audio',
+    subcategory: 'ecouteurs',
+    price: 54.99,
+    description: "Écouteurs True Wireless HIFUTURE Yacht premium avec finition luxueuse et son haute fidélité. ANC -30dB pour une isolation parfaite.",
+    shortDescription: 'Écouteurs TWS premium luxe',
+    metaTitle: 'HIFUTURE Yacht - Écouteurs True Wireless Premium | Monster Phone 974',
+    metaDescription: 'HIFUTURE Yacht. Design luxe, son Hi-Fi, ANC, autonomie 30h. Noir ou blanc. Premium quality.',
+    urlSlug: 'hifuture-yacht-ecouteurs-premium',
+    keywords: ['HIFUTURE', 'Yacht', 'premium', 'TWS', 'luxe'],
+    variants: [
+      { color: 'Noir', colorCode: '#000000', ean: '', stock: 6, images: [] },
+      { color: 'Blanc', colorCode: '#FFFFFF', ean: '', stock: 5, images: [] }
+    ],
+    specifications: [
+      { label: 'ANC', value: 'Actif -30dB' },
+      { label: 'Driver', value: '12mm graphène' },
+      { label: 'Autonomie', value: '8h + 22h boîtier' },
+      { label: 'Codec', value: 'aptX, AAC' }
+    ],
+    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/hifuture-yacht.jpg'],
+    status: 'active' as const,
+    badges: ['Premium', 'ANC', 'Hi-Fi']
+  },
+
+  // MONSTER Illuminescence Smart Prism II RGB+IC
+  {
+    id: 'monster-smart-prism-ii',
+    airtableId: 'rec52',
+    sku: 'MON-ILL-PRISM',
+    name: 'MONSTER Illuminescence Smart Prism II RGB+IC',
+    brand: 'MONSTER',
+    category: 'LED',
+    subcategory: 'Panneaux LED',
+    price: 64.99,
+    description: "Pack 6 panneaux LED MONSTER Smart Prism II RGB+IC avec effets flow et contrôle app. Créez des motifs lumineux uniques et personnalisés.",
+    shortDescription: 'Pack 6 panneaux LED RGB+IC flow',
+    metaTitle: 'MONSTER Smart Prism II RGB+IC - Pack 6 Panneaux LED | Monster Phone 974',
+    metaDescription: 'MONSTER Smart Prism II. Pack 6 panneaux LED RGB+IC, effets flow, contrôle app, modulaire.',
+    urlSlug: 'monster-smart-prism-ii-rgb-ic',
+    keywords: ['MONSTER', 'prism', 'LED', 'RGB', 'IC', 'flow'],
+    variants: [
+      { color: 'Pack X6 RGB+IC Flow', colorCode: '#FF00FF', ean: '', stock: 6, images: [] }
+    ],
+    specifications: [
+      { label: 'Quantité', value: '6 panneaux' },
+      { label: 'Type', value: 'RGB+IC' },
+      { label: 'Effets', value: 'Flow dynamique' },
+      { label: 'Contrôle', value: 'App + Voice' }
+    ],
+    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-smart-prism-ii.jpg'],
+    status: 'active' as const,
+    badges: ['Modulaire', 'IC Flow']
+  },
+
+  // HIFUTURE PartyBox Vocalist 300
+  {
+    id: 'hifuture-vocalist-300',
+    airtableId: 'rec57',
+    sku: 'HIF-VOCALIST-300',
+    name: 'HIFUTURE PartyBox Vocalist 300',
+    brand: 'HIFUTURE',
+    category: 'Audio',
+    subcategory: 'Enceintes Party',
+    price: 169.99,
+    description: "Enceinte karaoké HIFUTURE Vocalist 300 avec double micro sans fil et effets vocaux. 150W de puissance pour animer les plus grandes soirées.",
+    shortDescription: 'Enceinte karaoké 2 micros sans fil',
+    metaTitle: 'HIFUTURE Vocalist 300 - Enceinte Karaoké Pro | Monster Phone 974',
+    metaDescription: 'HIFUTURE Vocalist 300. 150W, 2 micros sans fil, effets vocaux, LED. Karaoké professionnel.',
+    urlSlug: 'hifuture-vocalist-300-karaoke',
+    keywords: ['HIFUTURE', 'Vocalist', 'karaoké', 'micro', 'party'],
+    variants: [
+      { color: 'Noir', colorCode: '#000000', ean: '', stock: 3, images: [] }
+    ],
+    specifications: [
+      { label: 'Puissance', value: '150W' },
+      { label: 'Micros', value: '2 sans fil inclus' },
+      { label: 'Effets', value: 'Echo, reverb, pitch' },
+      { label: 'Autonomie', value: '6 heures' }
+    ],
+    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/hifuture-vocalist-300.jpg'],
+    status: 'active' as const,
+    badges: ['Karaoké Pro', '2 Micros']
+  },
+
+  // MONSTER Illuminescence Basic Ampoule A19
+  {
+    id: 'monster-ampoule-a19',
+    airtableId: 'rec59',
+    sku: 'MON-ILL-AMPOULE-A19',
+    name: 'MONSTER Illuminescence Basic Ampoule A19',
+    brand: 'MONSTER',
+    category: 'LED',
+    subcategory: 'Ampoules Smart',
+    price: 12.99,
+    description: "Ampoule LED MONSTER A19 avec température de couleur réglable pour éclairage optimal. 25000 heures de durée de vie pour des économies durables.",
+    shortDescription: 'Ampoule LED A19 température réglable',
+    metaTitle: 'MONSTER Ampoule A19 - LED Température Réglable | Monster Phone 974',
+    metaDescription: 'MONSTER Ampoule LED A19. 3 températures couleur, 800 lumens, économie énergie. E27 standard.',
+    urlSlug: 'monster-ampoule-led-a19',
+    keywords: ['MONSTER', 'ampoule', 'LED', 'A19', 'température couleur'],
+    variants: [
+      { color: 'Warm White 3000K', colorCode: '#FFE4B5', ean: '', stock: 25, images: [] },
+      { color: 'Cool White 5000K', colorCode: '#F0F8FF', ean: '', stock: 20, images: [] },
+      { color: 'Daylight 6500K', colorCode: '#FFFFFF', ean: '', stock: 22, images: [] }
+    ],
+    specifications: [
+      { label: 'Puissance', value: '9W (60W équiv)' },
+      { label: 'Lumens', value: '800lm' },
+      { label: 'Culot', value: 'E27' },
+      { label: 'Durée vie', value: '25000h' }
+    ],
+    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-ampoule-a19.jpg'],
+    status: 'active' as const,
+    badges: ['Économie', 'Longue durée']
+  },
+
+  // HIFUTURE Écouteur Flybuds 4 ANC
+  {
+    id: 'hifuture-flybuds-4-anc',
+    airtableId: 'rec62',
+    sku: 'HIF-FLYBUDS-4-ANC',
+    name: 'HIFUTURE Écouteur Flybuds 4 ANC',
+    brand: 'HIFUTURE',
+    category: 'Audio',
+    subcategory: 'ecouteurs',
+    price: 79.99,
+    description: "Écouteurs True Wireless HIFUTURE Flybuds 4 avec réduction de bruit active avancée -35dB. Charge sans fil Qi pour une praticité maximale.",
+    shortDescription: 'Écouteurs TWS ANC avancé',
+    metaTitle: 'HIFUTURE Flybuds 4 ANC - Écouteurs Réduction Bruit | Monster Phone 974',
+    metaDescription: 'HIFUTURE Flybuds 4 ANC. Réduction bruit -35dB, autonomie 32h, charge sans fil. Premium TWS.',
+    urlSlug: 'hifuture-flybuds-4-anc',
+    keywords: ['HIFUTURE', 'Flybuds', 'ANC', 'TWS', 'réduction bruit'],
+    variants: [
+      { color: 'Noir', colorCode: '#000000', ean: '', stock: 10, images: [] },
+      { color: 'Blanc', colorCode: '#FFFFFF', ean: '', stock: 8, images: [] }
+    ],
+    specifications: [
+      { label: 'ANC', value: '-35dB' },
+      { label: 'Autonomie', value: '8h + 24h boîtier' },
+      { label: 'Charge sans fil', value: 'Qi compatible' },
+      { label: 'Bluetooth', value: '5.3' }
+    ],
+    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/hifuture-flybuds-4-anc.jpg'],
+    status: 'active' as const,
+    badges: ['ANC Pro', 'Charge sans fil']
+  },
+
+  // HIFUTURE Écouteur Filaire Hi5
+  {
+    id: 'hifuture-hi5-filaire',
+    airtableId: 'rec63',
+    sku: 'HIFUTURE-HI5-FILAIRE',
+    name: 'HIFUTURE Écouteur Filaire Hi5',
+    brand: 'HIFUTURE',
+    category: 'Audio',
+    subcategory: 'ecouteurs',
+    price: 19.99,
+    description: "Écouteurs filaires HIFUTURE Hi5 avec qualité audio supérieure et micro intégré. Câble anti-nœud pour une utilisation sans souci.",
+    shortDescription: 'Écouteurs filaires haute qualité',
+    metaTitle: 'HIFUTURE Hi5 Filaire - Écouteurs Jack 3.5mm | Monster Phone 974',
+    metaDescription: 'HIFUTURE Hi5 filaire. Son HD, micro intégré, confort optimal. Compatible tous appareils 3.5mm.',
+    urlSlug: 'hifuture-hi5-ecouteurs-filaires',
+    keywords: ['HIFUTURE', 'Hi5', 'filaire', 'écouteurs', 'jack'],
+    variants: [
+      { color: 'Noir', colorCode: '#000000', ean: '', stock: 30, images: [] },
+      { color: 'Blanc', colorCode: '#FFFFFF', ean: '', stock: 25, images: [] }
+    ],
+    specifications: [
+      { label: 'Driver', value: '10mm' },
+      { label: 'Jack', value: '3.5mm' },
+      { label: 'Câble', value: '1.2m anti-nœud' },
+      { label: 'Micro', value: 'Intégré avec bouton' }
+    ],
+    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/hifuture-hi5-filaire.jpg'],
+    status: 'active' as const,
+    badges: ['Hi-Fi', 'Micro']
+  },
+
+  // MUVIT KidPic Rouleaux Papier Photo
+  {
+    id: 'muvit-kidpic-rouleaux',
+    airtableId: 'rec64',
+    sku: 'MUAPN001',
+    name: 'MUVIT KidPic Rouleaux Papier Photo',
+    brand: 'MUVIT',
+    category: 'Accessoires',
+    subcategory: 'Consommables',
+    price: 19.99,
+    description: "Pack de 3 rouleaux de papier photo pour appareil MUVIT KidPic. 150 photos au total pour immortaliser tous les souvenirs.",
+    shortDescription: 'Pack 3 rouleaux papier photo KidPic',
+    metaTitle: 'MUVIT KidPic Rouleaux - Papier Photo Recharge | Monster Phone 974',
+    metaDescription: 'MUVIT KidPic rouleaux papier photo. Pack 3 rouleaux, impression instantanée. Compatible KidPic.',
+    urlSlug: 'muvit-kidpic-rouleaux-papier',
+    keywords: ['MUVIT', 'KidPic', 'papier photo', 'rouleaux', 'recharge'],
+    variants: [
+      { color: 'Pack de 3 rouleaux', colorCode: '#FFFFFF', ean: '', stock: 20, images: [] }
+    ],
+    specifications: [
+      { label: 'Quantité', value: '3 rouleaux' },
+      { label: 'Photos/rouleau', value: '50 photos' },
+      { label: 'Format', value: '5x7.5cm' },
+      { label: 'Compatible', value: 'MUVIT KidPic' }
+    ],
+    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/muvit-kidpic-rouleaux.jpg'],
+    status: 'active' as const,
+    badges: ['Recharge', 'Pack Éco']
+  },
+
+  // MONSTER Illuminescence Smart Beam + 2X Bars Kit
+  {
+    id: 'monster-smart-beam-bars-kit',
+    airtableId: 'rec65',
+    sku: 'MON-ILL-BEAM-BARS',
+    name: 'MONSTER Illuminescence Smart Beam + 2X Bars Kit',
+    brand: 'MONSTER',
+    category: 'LED',
+    subcategory: 'Kits Éclairage',
+    price: 79.99,
+    description: "Kit complet MONSTER Smart Beam avec 2 barres LED pour éclairage gaming immersif. Synchronisation avec musique et jeux pour une expérience totale.",
+    shortDescription: 'Kit éclairage gaming beam + 2 barres',
+    metaTitle: 'MONSTER Smart Beam + Bars Kit - Éclairage Gaming RGB | Monster Phone 974',
+    metaDescription: 'MONSTER Smart Beam kit. Beam central + 2 barres LED, RGB sync, contrôle app. Setup gaming ultime.',
+    urlSlug: 'monster-smart-beam-bars-kit',
+    keywords: ['MONSTER', 'smart beam', 'bars', 'kit', 'gaming', 'RGB'],
+    variants: [
+      { color: 'RGB Kit Complet', colorCode: '#FF00FF', ean: '', stock: 5, images: [] }
+    ],
+    specifications: [
+      { label: 'Contenu', value: '1 beam + 2 barres' },
+      { label: 'RGB', value: '16M couleurs' },
+      { label: 'Sync', value: 'Musique et jeux' },
+      { label: 'Contrôle', value: 'App + PC software' }
+    ],
+    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-smart-beam-bars-kit.jpg'],
+    status: 'active' as const,
+    badges: ['Kit Gaming', 'RGB Sync']
   }
 ];
 
@@ -4640,32 +5730,32 @@ export const menuStructure: CategoryStructure[] = [
       {
         name: 'Écouteurs',
         slug: 'ecouteurs',
-        brands: ['HiFuture']
+        brands: ['HIFUTURE', 'HiFuture', 'MONSTER']
       },
       {
         name: 'Enceintes',
         slug: 'enceintes',
-        brands: ['HiFuture']
+        brands: ['HIFUTURE', 'HiFuture', 'MONSTER']
       },
       {
         name: 'Enceintes haut de gamme',
         slug: 'enceintes-haut-de-gamme',
-        brands: ['MONSTER']
+        brands: ['MONSTER', 'HIFUTURE']
       },
       {
         name: 'Casques gaming',
         slug: 'casques-gaming',
-        brands: ['MONSTER']
+        brands: ['MONSTER', 'HIFUTURE']
       },
       {
         name: 'Casques sport',
         slug: 'casques-sport',
-        brands: ['MONSTER']
+        brands: ['MONSTER', 'HIFUTURE']
       },
       {
         name: 'Microphones',
         slug: 'microphones',
-        brands: ['HiFuture']
+        brands: ['HiFuture', 'HIFUTURE']
       }
     ]
   },
@@ -4676,7 +5766,7 @@ export const menuStructure: CategoryStructure[] = [
       {
         name: 'Câbles et connecteurs',
         slug: 'cables-et-connecteurs',
-        brands: ['MONSTER']
+        brands: ['MONSTER', 'MY WAY']
       },
       {
         name: 'Éclairage LED',
@@ -4686,7 +5776,7 @@ export const menuStructure: CategoryStructure[] = [
       {
         name: 'Chargeurs',
         slug: 'chargeurs',
-        brands: ['MONSTER']
+        brands: ['MONSTER', 'MY WAY']
       },
       {
         name: 'Supports gaming',
@@ -4696,7 +5786,12 @@ export const menuStructure: CategoryStructure[] = [
       {
         name: 'Batteries externes',
         slug: 'batteries-externes',
-        brands: ['MONSTER']
+        brands: ['MONSTER', 'MY WAY']
+      },
+      {
+        name: 'Appareils photo',
+        slug: 'appareils-photo',
+        brands: ['MUVIT']
       }
     ]
   }
@@ -4794,11 +5889,11 @@ export const brandMenuStructure: BrandMenuStructure[] = [
     brands: getBrandsByCategory('Lumière LED')
   },
   {
-    category: 'Audio & Son', 
+    category: 'Audio', 
     brands: getBrandsByCategory('Audio & Son')
   },
   {
-    category: 'Chargement & Énergie',
+    category: 'Accessoires',
     brands: getBrandsByCategory('Chargement & Énergie')
   }
 ];
