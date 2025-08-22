@@ -24,7 +24,7 @@ export function getCategoryPlaceholder(category: string): string {
  * Check if URL is a GitHub raw URL that might have issues
  */
 export function isProblematicGitHubUrl(url: string): boolean {
-  return url.includes('raw.githubusercontent.com');
+  return url ? url.includes('raw.githubusercontent.com') : false;
 }
 
 /**
@@ -32,6 +32,11 @@ export function isProblematicGitHubUrl(url: string): boolean {
  * For now, this returns the placeholder based on category
  */
 export function getWorkingImageUrl(originalUrl: string, productCategory?: string): string {
+  // If no URL provided, return placeholder
+  if (!originalUrl) {
+    return getCategoryPlaceholder(productCategory || 'default');
+  }
+  
   // If it's a GitHub URL that's known to have issues, use placeholder
   if (isProblematicGitHubUrl(originalUrl)) {
     return getCategoryPlaceholder(productCategory || 'default');
