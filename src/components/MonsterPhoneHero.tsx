@@ -330,14 +330,16 @@ const MonsterPhoneHero = () => {
         className="relative min-h-screen flex items-center justify-center overflow-hidden"
       >
         {/* Sparkles Background */}
-        <SparklesCore
+        {/* <SparklesCore
           className="absolute inset-0"
           particleDensity={150}
           speed={0.5}
-        />
+        /> */}
 
-        {/* Floating Elements */}
-        <ClientParticles />
+        {/* Floating Elements - avec pointer-events-none pour éviter de bloquer les clics */}
+        <div className="absolute inset-0 pointer-events-none">
+          <ClientParticles />
+        </div>
 
         {/* Main Content */}
         <div className="relative z-10 text-center px-4 max-w-6xl mx-auto">

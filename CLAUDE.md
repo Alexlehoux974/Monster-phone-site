@@ -157,3 +157,4 @@ src/
 - **Cart State**: Persists in localStorage, test mode support via `initialItems` prop
 - **Mobile First**: Test responsive design, especially complex navigation on mobile
 - **Next.js Config**: ESLint errors ignored during builds (`ignoreDuringBuilds: true`)
+- Pour ce projet du dispose d'une base airtable  qui s'appelle E-commerce tu peux y accéder grâce au mcp airtable, il y a trois table dedans tu peux utiliser l'une qui s'appelle "Catalogue Produits Description" qui sert à connaitre le nom,marque,SKU,catégorie,variant,prix et les infos du produits. Une autre table "Catalogue Produits SEO" qui sert à stocker les description SEO,Meta title, Meat description,Url slug,mots clés SEO,Code EAN par produit individuel, des produits. et une dernière table qui se nomme "Catalogue Produits Media" qui sert à stocker les images ou vidéos des produits.

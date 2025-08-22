@@ -10,6 +10,7 @@ import { useCart } from '@/contexts/CartContext';
 // import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
 import debounce from 'lodash.debounce';
+import ImageWithFallback from '@/components/ImageWithFallback';
 
 // Composant pour la barre d'urgence promotionnelle
 const PromoBar = () => (
@@ -503,15 +504,13 @@ const DropdownMenu = ({
                             <div className="flex items-start space-x-3">
                               <div className="w-14 h-14 bg-white border border-gray-200 rounded-lg overflow-hidden flex-shrink-0 shadow-sm">
                                 {product.images && product.images.length > 0 ? (
-                                  <Image
+                                  <ImageWithFallback
                                     src={product.images[0]}
                                     alt={product.name}
                                     width={56}
                                     height={56}
                                     className="w-full h-full object-contain"
-                                    onError={(e) => {
-                                      e.currentTarget.src = '/placeholder-product.png';
-                                    }}
+                                    productCategory={product.category}
                                   />
                                 ) : (
                                   <div className="w-full h-full flex items-center justify-center bg-gray-100">
