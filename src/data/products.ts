@@ -724,7 +724,7 @@ export const allProducts: Product[] = [
     airtableId: 'rec3S3fGlA6xxWkkA',
     sku: 'HIFUTURE-HAPPYROCK-BT53',
     name: 'HIFUTURE HAPPYROCK Enceinte Bluetooth 5.3',
-    brand: 'HiFuture',
+    brand: 'HIFUTURE',
     category: 'Audio',
     subcategory: 'Enceintes portables',
     price: 39.99,
@@ -782,7 +782,7 @@ export const allProducts: Product[] = [
     airtableId: 'rec4E9K38xRxL31b9',
     sku: 'HIFUTURE-ALTUS-ANC',
     name: 'HIFUTURE ALTUS Casque sans fil ANC',
-    brand: 'HiFuture',
+    brand: 'HIFUTURE',
     category: 'Audio',
     subcategory: 'Casques',
     price: 79.99,
@@ -839,7 +839,7 @@ export const allProducts: Product[] = [
     airtableId: 'rec67QqLdQdJ1VZeL',
     sku: 'HIFUTURE-COLORBUDS2-TWS',
     name: 'HIFUTURE COLORBUDS 2 True Wireless',
-    brand: 'HiFuture',
+    brand: 'HIFUTURE',
     category: 'Audio',
     subcategory: 'ecouteurs',
     price: 49.99,
@@ -900,7 +900,7 @@ export const allProducts: Product[] = [
     airtableId: 'rec8lCbDJQwcYupxb',
     sku: 'HIFUTURE-FUTUREMATE-SWATCH',
     name: 'HIFUTURE FUTUREMATE',
-    brand: 'HiFuture',
+    brand: 'HIFUTURE',
     category: 'Montres connectées',
     subcategory: 'Sport',
     price: 89.99,
@@ -958,7 +958,7 @@ export const allProducts: Product[] = [
     airtableId: 'rec9MNXwqQT23kLRx',
     sku: 'HIFUTURE-ZONE2-SW',
     name: 'HIFUTURE ZONE 2',
-    brand: 'HiFuture',
+    brand: 'HIFUTURE',
     category: 'Montres connectées',
     subcategory: 'Sport',
     price: 69.99,
@@ -1016,7 +1016,7 @@ export const allProducts: Product[] = [
     airtableId: 'recBbzRiXLo5W4YOP',
     sku: 'HIFUTURE-ULTRAFIT',
     name: 'HIFUTURE ULTRAFIT',
-    brand: 'HiFuture',
+    brand: 'HIFUTURE',
     category: 'Montres connectées',
     subcategory: 'Sport',
     price: 99.99,
@@ -1073,7 +1073,7 @@ export const allProducts: Product[] = [
     airtableId: 'recDqA9HaRsNJWN5U',
     sku: 'HIFUTURE-FLYBUDS-TWS',
     name: 'HIFUTURE FLYBUDS Ecouteurs sans fil',
-    brand: 'HiFuture',
+    brand: 'HIFUTURE',
     category: 'Audio',
     subcategory: 'ecouteurs',
     price: 59.99,
@@ -1130,7 +1130,7 @@ export const allProducts: Product[] = [
     airtableId: 'recE79Vv4LKOcn8P2',
     sku: 'HIFUTURE-GRAVITY-360',
     name: 'HIFUTURE GRAVITY Enceinte Bluetooth',
-    brand: 'HiFuture',
+    brand: 'HIFUTURE',
     category: 'Audio',
     subcategory: 'Enceintes portables',
     price: 89.99,
@@ -1187,7 +1187,7 @@ export const allProducts: Product[] = [
     airtableId: 'recGcKLvJNRXfT1Wx',
     sku: 'HIFUTURE-FITMAX-TRACKER',
     name: 'HIFUTURE FITMAX',
-    brand: 'HiFuture',
+    brand: 'HIFUTURE',
     category: 'Montres connectées',
     subcategory: 'Sport',
     price: 49.99,
@@ -1246,7 +1246,7 @@ export const allProducts: Product[] = [
     airtableId: 'recJKq3o5Pb7wxYeL',
     sku: 'HIFUTURE-VOCALIST100',
     name: 'HIFUTURE VOCALIST 100 Micro Karaoké',
-    brand: 'HiFuture',
+    brand: 'HIFUTURE',
     category: 'Audio',
     subcategory: 'Microphones',
     price: 34.99,
@@ -1304,7 +1304,7 @@ export const allProducts: Product[] = [
     airtableId: 'recQnX8oW2kYbRvNZ',
     sku: 'HIFUTURE-TOURPRO-ANC',
     name: 'HIFUTURE TOUR PRO',
-    brand: 'HiFuture',
+    brand: 'HIFUTURE',
     category: 'Audio',
     subcategory: 'Casques',
     price: 119.99,
@@ -1360,7 +1360,7 @@ export const allProducts: Product[] = [
     airtableId: 'recRhQM7ksbT5FV3P',
     sku: 'HIFUTURE-PULSEX-SMART',
     name: 'HIFUTURE PULSE X',
-    brand: 'HiFuture',
+    brand: 'HIFUTURE',
     category: 'Montres connectées',
     subcategory: 'Sport',
     price: 119.99,
@@ -1417,7 +1417,7 @@ export const allProducts: Product[] = [
     airtableId: 'recTu9Z2QKLxY7oNX',
     sku: 'HIFUTURE-KIDDO-KIDS',
     name: 'HIFUTURE KIDDO',
-    brand: 'HiFuture',
+    brand: 'HIFUTURE',
     category: 'Montres connectées',
     subcategory: 'Sport',
     price: 59.99,
@@ -1475,7 +1475,7 @@ export const allProducts: Product[] = [
     airtableId: 'recXOdBNKL9GfWxRZ',
     sku: 'HIFUTURE-FOCUS-PRO',
     name: 'HIFUTURE FOCUS',
-    brand: 'HiFuture',
+    brand: 'HIFUTURE',
     category: 'Montres connectées',
     subcategory: 'Sport',
     price: 79.99,
@@ -3795,51 +3795,51 @@ export const allProducts: Product[] = [
     badges: ['ECG Certifié', 'Nouveau']
   },
 
-  // HONOR CHOICE WATCH
-  {
-    id: 'honor-choice-watch-v2',
-    airtableId: 'recYEgkxqGIvVGFFX',
-    sku: 'HONOR-CHOICE-WATCH',
-    name: 'HONOR CHOICE WATCH',
-    brand: 'HONOR',
-    category: 'Montres',
-    subcategory: 'Montres premium',
-    price: 149.99,
-    description: "La HONOR CHOICE WATCH redéfinit l'excellence des montres connectées premium. Son écran AMOLED haute résolution de 1.43 pouces offre une luminosité exceptionnelle. Les technologies exclusives IC et ANC révolutionnent votre expérience.",
-    shortDescription: "Montre connectée premium avec technologies IC/ANC et écran AMOLED",
-    metaTitle: 'HONOR CHOICE WATCH IC/ANC - Montre Connectée Premium AMOLED | Monster Phone 974',
-    metaDescription: 'HONOR CHOICE WATCH : AMOLED, IC/ANC, GPS, 5ATM, 14 jours autonomie, 100+ sports. 3 coloris premium.',
-    urlSlug: 'honor-choice-watch-connectee-premium',
-    keywords: ['HONOR CHOICE WATCH', 'montre connectée', 'IC ANC', 'premium', 'AMOLED'],
-    variants: [
-      { color: 'Noir', colorCode: '#000000', ean: '6971664934366', stock: 10, images: [] },
-      { color: 'Blanc', colorCode: '#FFFFFF', ean: '6971664934366', stock: 8, images: [] },
-      { color: 'Or', colorCode: '#FFD700', ean: '6971664934366', stock: 6, images: [] }
-    ],
-    defaultVariant: 'Noir',
-    specifications: [
-      { label: 'Type Écran', value: 'AMOLED 1.43"', icon: 'display' },
-      { label: 'Technologies', value: 'IC & ANC', icon: 'cpu' },
-      { label: 'Résistance', value: '5ATM', icon: 'shield' },
-      { label: 'Autonomie', value: '14 jours', icon: 'battery' }
-    ],
-    highlights: [
-      'Technologies IC & ANC exclusives',
-      'Écran AMOLED 466x466 pixels',
-      '100+ modes sportifs',
-      'Résistance 5ATM',
-      'Autonomie record 14 jours'
-    ],
-    images: [],
-    rating: {
-      average: 4.8,
-      count: 234,
-      distribution: { 5: 180, 4: 40, 3: 10, 2: 3, 1: 1 }
-    },
-    warranty: '2 ans constructeur',
-    deliveryTime: '24-48h à La Réunion',
-    badges: ['Premium', 'HONOR']
-  },
+  // [DOUBLON SUPPRIMÉ - HONOR CHOICE WATCH]
+  // {
+  //   id: 'honor-choice-watch-v2',
+  //   airtableId: 'recYEgkxqGIvVGFFX',
+  //   sku: 'HONOR-CHOICE-WATCH',
+  //   name: 'HONOR CHOICE WATCH',
+  //   brand: 'HONOR',
+  //   category: 'Montres',
+  //   subcategory: 'Montres premium',
+  //   price: 149.99,
+  //   description: "La HONOR CHOICE WATCH redéfinit l'excellence des montres connectées premium. Son écran AMOLED haute résolution de 1.43 pouces offre une luminosité exceptionnelle. Les technologies exclusives IC et ANC révolutionnent votre expérience.",
+  //   shortDescription: "Montre connectée premium avec technologies IC/ANC et écran AMOLED",
+  //   metaTitle: 'HONOR CHOICE WATCH IC/ANC - Montre Connectée Premium AMOLED | Monster Phone 974',
+  //   metaDescription: 'HONOR CHOICE WATCH : AMOLED, IC/ANC, GPS, 5ATM, 14 jours autonomie, 100+ sports. 3 coloris premium.',
+  //   urlSlug: 'honor-choice-watch-connectee-premium',
+  //   keywords: ['HONOR CHOICE WATCH', 'montre connectée', 'IC ANC', 'premium', 'AMOLED'],
+  //   variants: [
+  //     { color: 'Noir', colorCode: '#000000', ean: '6971664934366', stock: 10, images: [] },
+  //     { color: 'Blanc', colorCode: '#FFFFFF', ean: '6971664934366', stock: 8, images: [] },
+  //     { color: 'Or', colorCode: '#FFD700', ean: '6971664934366', stock: 6, images: [] }
+  //   ],
+  //   defaultVariant: 'Noir',
+  //   specifications: [
+  //     { label: 'Type Écran', value: 'AMOLED 1.43"', icon: 'display' },
+  //     { label: 'Technologies', value: 'IC & ANC', icon: 'cpu' },
+  //     { label: 'Résistance', value: '5ATM', icon: 'shield' },
+  //     { label: 'Autonomie', value: '14 jours', icon: 'battery' }
+  //   ],
+  //   highlights: [
+  //     'Technologies IC & ANC exclusives',
+  //     'Écran AMOLED 466x466 pixels',
+  //     '100+ modes sportifs',
+  //     'Résistance 5ATM',
+  //     'Autonomie record 14 jours'
+  //   ],
+  //   images: [],
+  //   rating: {
+  //     average: 4.8,
+  //     count: 234,
+  //     distribution: { 5: 180, 4: 40, 3: 10, 2: 3, 1: 1 }
+  //   },
+  //   warranty: '2 ans constructeur',
+  //   deliveryTime: '24-48h à La Réunion',
+  //   badges: ['Premium', 'HONOR']
+  // },
 
   // HIFUTURE Ultra2
   {
@@ -4071,154 +4071,10 @@ export const allProducts: Product[] = [
   },
 
   // Produits LED
-  {
-    id: 'led-001',
-    name: 'MONSTER Illuminescence Light Strip Color/Blanc',
-    brand: 'MONSTER',
-    category: 'LED',
-    subcategory: 'Bandeaux LED',
-    price: 17.99,
-    originalPrice: 24.99,
-    discount: 28,
-    rating: 4.7,
-    reviews: 89,
-    images: ['/placeholder-product.png'],
-    description: 'Transformez radicalement votre espace de vie avec le bandeau LED MONSTER Illuminescence Light Strip Color/Blanc, une solution d\'éclairage polyvalente qui révolutionne l\'ambiance de votre intérieur.',
-    shortDescription: 'Bandeau LED double mode RGB multicouleur et blanc chaud, 2m',
-    specifications: {
-      'Type': 'LED Strip',
-      'Connectivité': 'Basic (USB)',
-      'Longueur': '2m',
-      'Usage': 'Intérieur',
-      'Modes': 'RGB + Blanc chaud',
-      'Utilisation': 'Gaming et travail'
-    },
-    features: [
-      'Double technologie RGB + Blanc chaud',
-      'Installation adhésive simple 3M',
-      'Alimentation USB universelle',
-      'Contrôle intuitif des modes'
-    ],
-    inStock: true,
-    stockQuantity: 25,
-    sku: 'MON-ILL-COLOR-BLANC',
-    urlSlug: 'monster-illuminescence-color-blanc-polyvalent',
-    badges: ['Polyvalent', 'Gaming']
-  },
-  {
-    id: 'led-002',
-    name: 'MONSTER Illuminescence Basic Lightstrip Multicouleur',
-    brand: 'MONSTER',
-    category: 'LED',
-    subcategory: 'Bandeaux LED',
-    price: 13.99,
-    originalPrice: 19.99,
-    discount: 30,
-    rating: 4.6,
-    reviews: 156,
-    images: ['/placeholder-product.png'],
-    description: 'Illuminez et personnalisez votre espace de vie avec le bandeau LED MONSTER Illuminescence Basic Lightstrip Multicouleur, une solution d\'éclairage versatile qui transforme instantanément l\'atmosphère de n\'importe quelle pièce.',
-    shortDescription: 'Bandeau LED RGB multicouleur, disponible en 2m, 4m et 5m',
-    specifications: {
-      'Type': 'LED Strip',
-      'Connectivité': 'Basic (USB)',
-      'Usage': 'Intérieur',
-      'Couleurs': 'RGB multicouleur',
-      'Longueurs': '2m, 4m, 5m',
-      'Installation': 'Adhésif 3M'
-    },
-    features: [
-      'Technologie RGB - millions de couleurs',
-      'Trois longueurs disponibles',
-      'Installation adhésive facile',
-      'Alimentation USB pratique',
-      'Consommation énergétique minimale'
-    ],
-    variants: [
-      { name: '2m', price: 13.99 },
-      { name: '4m', price: 26.99 },
-      { name: '5m', price: 39.99 }
-    ],
-    inStock: true,
-    stockQuantity: 45,
-    sku: 'MON-ILL-BASIC-MULTI',
-    urlSlug: 'monster-illuminescence-basic-lightstrip-multicouleur',
-    badges: ['Best-seller', 'Gaming']
-  },
-  {
-    id: 'led-003',
-    name: 'MONSTER Illuminescence Smart Chroma Light 2X Bars',
-    brand: 'MONSTER',
-    category: 'LED',
-    subcategory: 'Barres LED',
-    price: 49.99,
-    originalPrice: 69.99,
-    discount: 29,
-    rating: 4.8,
-    reviews: 67,
-    images: ['/placeholder-product.png'],
-    description: 'Transformez votre environnement en spectacle lumineux époustouflant avec le pack MONSTER Illuminescence Smart Chroma Light 2X Bars, une solution d\'éclairage intelligent qui révolutionne l\'art de l\'ambiance lumineuse.',
-    shortDescription: 'Pack 2 barres LED RGB IC avec contrôle WiFi et synchronisation musicale',
-    specifications: {
-      'Type': 'Light Bar',
-      'Connectivité': 'Smart (WiFi)',
-      'Technologie': 'RGB IC',
-      'Contenu': '2 barres',
-      'Effet': 'Chroma immersif',
-      'Installation': 'Modulaire'
-    },
-    features: [
-      'Technologie RGB IC - contrôle pixel par pixel',
-      'Contrôle WiFi via smartphone',
-      'Synchronisation musicale en temps réel',
-      'Compatible Alexa et Google Assistant',
-      'Installation modulaire flexible'
-    ],
-    inStock: true,
-    stockQuantity: 18,
-    sku: 'MON-ILL-CHROMA-2X',
-    urlSlug: 'monster-illuminescence-chroma-2x-bars',
-    badges: ['Premium', 'Smart Home']
-  },
-  {
-    id: 'led-004',
-    name: 'MONSTER Illuminescence Neon Light Strip',
-    brand: 'MONSTER',
-    category: 'LED',
-    subcategory: 'Néon LED',
-    price: 26.99,
-    originalPrice: 39.99,
-    discount: 33,
-    rating: 4.7,
-    reviews: 92,
-    images: ['/placeholder-product.png'],
-    description: 'Découvrez l\'esthétique futuriste de l\'éclairage avec le bandeau MONSTER Illuminescence Neon Light Strip, une innovation lumineuse qui reproduit l\'effet néon emblématique avec la technologie LED moderne.',
-    shortDescription: 'Bandeau LED effet néon continu, design cyberpunk',
-    specifications: {
-      'Type': 'Neon Strip',
-      'Effet': 'Néon continu',
-      'Usage': 'Intérieur/Extérieur',
-      'Versions': '2m Basic, 5m Smart',
-      'Design': 'Cyberpunk/Rétro-wave'
-    },
-    features: [
-      'Effet néon continu sans points visibles',
-      'Design futuriste cyberpunk',
-      'Usage intérieur et extérieur',
-      'Version Basic avec réactivité sonore',
-      'Version Smart avec contrôle WiFi'
-    ],
-    variants: [
-      { name: '2m Basic Sound', price: 26.99 },
-      { name: '5m Smart', price: 56.99 },
-      { name: '5m Smart Flow', price: 99.99 }
-    ],
-    inStock: true,
-    stockQuantity: 22,
-    sku: 'MON-ILL-NEON',
-    urlSlug: 'monster-illuminescence-neon-light-strip',
-    badges: ['Futuriste', 'Design']
-  },
+  // [DOUBLON SUPPRIMÉ - MONSTER Illuminescence Light Strip Color/Blanc - existe déjà ligne 1876]
+  // [DOUBLON SUPPRIMÉ - MONSTER Illuminescence Basic Lightstrip Multicouleur - existe déjà ligne 1818]
+  // [DOUBLON SUPPRIMÉ - MONSTER Illuminescence Smart Chroma Light 2X Bars - existe déjà ligne 1990]
+  // [DOUBLON SUPPRIMÉ - MONSTER Illuminescence Neon Light Strip - existe déjà ligne 1932]
   {
     id: 'led-005',
     name: 'MONSTER RGB Gaming Light Bars Pro',
