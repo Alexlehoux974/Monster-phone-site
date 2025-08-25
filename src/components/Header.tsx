@@ -254,19 +254,21 @@ const DropdownMenu = ({
             <div className="flex-1 overflow-y-auto">
               <div className="py-4 px-4">
               {(() => {
-                // Obtenir toutes les sous-catégories pour cette marque
-                const subcategoriesSet = new Set<string>();
-                allProducts.forEach(p => {
-                  if (p.brand === hoveredBrand && 
-                      (p.category === 'Audio' || p.category === 'Chargement' || 
-                       p.category === 'Créativité' || p.category === 'Accessoires') && 
-                      p.subcategory) {
-                    subcategoriesSet.add(p.subcategory);
-                  }
-                });
-                const subcategories = Array.from(subcategoriesSet).sort();
+                // Utiliser les sous-catégories définies dans menuStructure
+                const accessoiresCategory = menuStructure.find(cat => cat.name === 'Accessoires');
+                const subcategories = accessoiresCategory?.subcategories?.map(sub => sub.name) || [];
                 
-                return subcategories.map((subcat) => {
+                // Filtrer les sous-catégories qui ont des produits pour cette marque
+                const validSubcategories = subcategories.filter(subcat => {
+                  return allProducts.some(p => 
+                    p.brand === hoveredBrand && 
+                    p.subcategory === subcat &&
+                    (p.category === 'Audio' || p.category === 'Chargement' || 
+                     p.category === 'Créativité' || p.category === 'Accessoires')
+                  );
+                });
+                
+                return validSubcategories.map((subcat) => {
                   const subcatProducts = allProducts.filter(p => 
                     p.brand === hoveredBrand && 
                     p.subcategory === subcat &&

@@ -98,7 +98,7 @@ export default function SmartphonesPage() {
       
       // Stock
       const matchesStock = !filters.inStock || 
-                          (product.stock && product.stock > 0);
+                          (product.status !== 'out-of-stock');
       
       // Marques
       const matchesBrand = filters.brands.length === 0 || 
@@ -267,7 +267,7 @@ export default function SmartphonesPage() {
                               -{product.discount}%
                             </div>
                           )}
-                          {product.stock === 0 && (
+                          {product.status === 'out-of-stock' && (
                             <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
                               <span className="bg-white text-gray-900 px-3 py-1 rounded-md font-semibold">
                                 Rupture de stock
