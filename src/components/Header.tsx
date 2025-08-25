@@ -247,11 +247,12 @@ const DropdownMenu = ({
 
         {/* Colonne 2: Sous-catégories ou Marques ou Produits */}
         {menuType === 'accessoires' && hoveredBrand && (
-          <div className="min-w-[200px] bg-white border-r border-gray-200">
-            <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-green-50 to-emerald-50">
+          <div className="min-w-[200px] bg-white border-r border-gray-200 max-h-[600px] flex flex-col">
+            <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-green-50 to-emerald-50 flex-shrink-0">
               <h4 className="font-bold text-gray-900 text-base">Sous-catégories</h4>
             </div>
-            <div className="py-4 px-4">
+            <div className="flex-1 overflow-y-auto">
+              <div className="py-4 px-4">
               {(() => {
                 // Obtenir toutes les sous-catégories pour cette marque
                 const subcategoriesSet = new Set<string>();
@@ -301,11 +302,12 @@ const DropdownMenu = ({
                   );
                 });
               })()}
+              </div>
             </div>
           </div>
         )}
         {hoveredCategory && !((menuType === 'smartphones' || menuType === 'led' || menuType === 'montres' || menuType === 'tablettes' || menuType === 'accessoires')) && (
-          <div className="min-w-[200px] bg-white border-r border-gray-200">
+          <div className="min-w-[200px] bg-white border-r border-gray-200 max-h-[600px] flex flex-col">
             {(() => {
               
               const currentCategory = getCurrentCategory();
@@ -314,10 +316,11 @@ const DropdownMenu = ({
               if (currentCategory?.subcategories && currentCategory.subcategories.length > 0) {
                 return (
                   <>
-                    <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-green-50 to-emerald-50">
+                    <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-green-50 to-emerald-50 flex-shrink-0">
                       <h4 className="font-bold text-gray-900 text-base">Sous-catégories</h4>
                     </div>
-                    <div className="py-4 px-5">
+                    <div className="flex-1 overflow-y-auto">
+                      <div className="py-4 px-5">
                       {currentCategory.subcategories.map((subcat) => {
                         // Compter les produits dans cette sous-catégorie
                         const subcatProducts = allProducts.filter(p => 
@@ -355,6 +358,7 @@ const DropdownMenu = ({
                           </div>
                         );
                       })}
+                      </div>
                     </div>
                   </>
                 );
@@ -409,7 +413,7 @@ const DropdownMenu = ({
 
         {/* Colonne 3: Marques (si sous-catégorie sélectionnée) */}
         {hoveredSubcategory && !((menuType === 'smartphones' || menuType === 'led' || menuType === 'montres' || menuType === 'tablettes')) && (
-          <div className="min-w-[200px] bg-white border-r border-gray-200">
+          <div className="min-w-[200px] bg-white border-r border-gray-200 max-h-[600px] flex flex-col">
             {(() => {
               
               const brands = getBrandsForSelection();
@@ -418,16 +422,17 @@ const DropdownMenu = ({
 
               return (
                 <>
-                  <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-purple-50 to-pink-50">
+                  <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-purple-50 to-pink-50 flex-shrink-0">
                     <h4 className="font-bold text-gray-900 text-base">Marques</h4>
                   </div>
-                  <div className="py-4 px-5">
-                    {brands.map((brand) => {
-                      const brandProducts = allProducts.filter(p => 
-                        p.category === hoveredCategory && 
-                        p.subcategory === hoveredSubcategory && 
-                        p.brand === brand
-                      );
+                  <div className="flex-1 overflow-y-auto">
+                    <div className="py-4 px-5">
+                      {brands.map((brand) => {
+                        const brandProducts = allProducts.filter(p => 
+                          p.category === hoveredCategory && 
+                          p.subcategory === hoveredSubcategory && 
+                          p.brand === brand
+                        );
                       return (
                         <div key={brand}>
                           <button
@@ -454,7 +459,8 @@ const DropdownMenu = ({
                           </button>
                         </div>
                       );
-                    })}
+                      })}
+                    </div>
                   </div>
                 </>
               );
@@ -466,7 +472,7 @@ const DropdownMenu = ({
         {((menuType === 'accessoires' && hoveredBrand && hoveredAccessorySubcategory) || 
           (menuType === 'led' && hoveredBrand) ||
           (menuType !== 'accessoires' && menuType !== 'led' && hoveredBrand)) && (
-          <div className="min-w-[380px] bg-gradient-to-b from-gray-50 to-white">
+          <div className="min-w-[380px] bg-gradient-to-b from-gray-50 to-white max-h-[600px] flex flex-col">
             {(() => {
               const products = menuType === 'accessoires' 
                 ? allProducts.filter(p => 
@@ -484,80 +490,82 @@ const DropdownMenu = ({
 
               return (
                 <>
-                  <div className="p-5 border-b border-gray-200 bg-gradient-to-r from-orange-50 to-red-50">
+                  <div className="p-5 border-b border-gray-200 bg-gradient-to-r from-orange-50 to-red-50 flex-shrink-0">
                     <h4 className="font-bold text-gray-900 text-base">
                       {menuType === 'accessoires' ? `${hoveredAccessorySubcategory}` : 
                        `Collection ${hoveredBrand}`}
                     </h4>
                     <p className="text-sm text-gray-600 mt-0.5">{products.length} produit{products.length > 1 ? 's' : ''} disponible{products.length > 1 ? 's' : ''}</p>
                   </div>
-                  <div className="py-4 px-5">
-                    {products && products.length > 0 ? (
-                      <>
-                        {products.slice(0, 6).map((product) => (
-                          <Link
-                            key={product.id}
-                            href={`/produit/${product.urlSlug || product.id}`}
-                            className="block px-5 py-3 hover:bg-gradient-to-r hover:from-orange-50 hover:to-transparent transition-all duration-200"
-                            onClick={onClose}
-                          >
-                            <div className="flex items-start space-x-3">
-                              <div className="w-14 h-14 bg-white border border-gray-200 rounded-lg overflow-hidden flex-shrink-0 shadow-sm">
-                                {product.images && product.images.length > 0 ? (
-                                  <ImageWithFallback
-                                    src={product.images[0]}
-                                    alt={product.name}
-                                    width={56}
-                                    height={56}
-                                    className="w-full h-full object-contain"
-                                    productCategory={product.category}
-                                  />
-                                ) : (
-                                  <div className="w-full h-full flex items-center justify-center bg-gray-100">
-                                    <Package className="w-5 h-5 text-gray-400" />
-                                  </div>
-                                )}
-                              </div>
-                              <div className="flex-1">
-                                <p className="text-sm font-semibold text-gray-900 whitespace-normal">
-                                  {product.name}
-                                </p>
-                                {product.price && (
-                                  <p className="text-base font-bold text-red-600 mt-1 whitespace-nowrap">
-                                    {typeof product.price === 'number' 
-                                      ? `${product.price.toFixed(2)} €` 
-                                      : product.price}
-                                  </p>
-                                )}
-                                {product.shortDescription && (
-                                  <p className="text-xs text-gray-600 mt-1 whitespace-normal">
-                                    {product.shortDescription}
-                                  </p>
-                                )}
-                              </div>
-                            </div>
-                          </Link>
-                        ))}
-                        {products.length > 6 && (
-                          <div className="px-4 py-3 border-t border-gray-100">
+                  <div className="flex-1 overflow-y-auto">
+                    <div className="py-4 px-5">
+                      {products && products.length > 0 ? (
+                        <>
+                          {products.map((product) => (
                             <Link
-                              href={`/nos-produits?category=${encodeURIComponent(hoveredCategory || '')}&subcategory=${encodeURIComponent(hoveredSubcategory || '')}&brand=${encodeURIComponent(hoveredBrand || '')}`}
-                              className="flex items-center justify-center text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors"
+                              key={product.id}
+                              href={`/produit/${product.urlSlug || product.id}`}
+                              className="block px-5 py-3 hover:bg-gradient-to-r hover:from-orange-50 hover:to-transparent transition-all duration-200"
                               onClick={onClose}
                             >
-                              Voir tous les {products.length} produits
-                              <ArrowRight className="w-4 h-4 ml-1" />
+                              <div className="flex items-start space-x-3">
+                                <div className="w-14 h-14 bg-white border border-gray-200 rounded-lg overflow-hidden flex-shrink-0 shadow-sm">
+                                  {product.images && product.images.length > 0 ? (
+                                    <ImageWithFallback
+                                      src={product.images[0]}
+                                      alt={product.name}
+                                      width={56}
+                                      height={56}
+                                      className="w-full h-full object-contain"
+                                      productCategory={product.category}
+                                    />
+                                  ) : (
+                                    <div className="w-full h-full flex items-center justify-center bg-gray-100">
+                                      <Package className="w-5 h-5 text-gray-400" />
+                                    </div>
+                                  )}
+                                </div>
+                                <div className="flex-1">
+                                  <p className="text-sm font-semibold text-gray-900 whitespace-normal">
+                                    {product.name}
+                                  </p>
+                                  {product.price && (
+                                    <p className="text-base font-bold text-red-600 mt-1 whitespace-nowrap">
+                                      {typeof product.price === 'number' 
+                                        ? `${product.price.toFixed(2)} €` 
+                                        : product.price}
+                                    </p>
+                                  )}
+                                  {product.shortDescription && (
+                                    <p className="text-xs text-gray-600 mt-1 whitespace-normal">
+                                      {product.shortDescription}
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
                             </Link>
-                          </div>
-                        )}
-                      </>
-                    ) : (
-                      <div className="p-8 text-center text-gray-500">
-                        <Package className="w-12 h-12 mx-auto mb-3 text-gray-300" />
-                        <p className="text-sm">Aucun produit disponible</p>
-                      </div>
-                    )}
+                          ))}
+                        </>
+                      ) : (
+                        <div className="p-8 text-center text-gray-500">
+                          <Package className="w-12 h-12 mx-auto mb-3 text-gray-300" />
+                          <p className="text-sm">Aucun produit disponible</p>
+                        </div>
+                      )}
+                    </div>
                   </div>
+                  {products.length > 0 && (
+                    <div className="px-4 py-3 border-t border-gray-100 bg-white flex-shrink-0">
+                      <Link
+                        href={`/nos-produits?category=${encodeURIComponent(hoveredCategory || '')}&subcategory=${encodeURIComponent(hoveredSubcategory || '')}&brand=${encodeURIComponent(hoveredBrand || '')}`}
+                        className="flex items-center justify-center text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors"
+                        onClick={onClose}
+                      >
+                        Voir tous les {products.length} produits
+                        <ArrowRight className="w-4 h-4 ml-1" />
+                      </Link>
+                    </div>
+                  )}
                 </>
               );
             })()}
