@@ -1697,62 +1697,6 @@ export const allProducts: Product[] = [
     badges: ['Innovation', 'Haptique', 'Immersion Totale']
   },
 
-  // MONSTER DNA FIT Casque Sport Premium
-  {
-    id: 'monster-dna-fit',
-    airtableId: 'rec8OTzIaj5Se2xDK',
-    sku: 'MONSTER-DNA-FIT',
-    name: 'MONSTER DNA FIT Casque Sport Premium',
-    brand: 'MONSTER',
-    category: 'Audio',
-    subcategory: 'Casques sport',
-    price: 189.99,
-    originalPrice: 249.99,
-    discount: 24,
-    promo: 'FITNESS PRO',
-    description: "Le casque sport MONSTER DNA FIT représente l'excellence absolue pour athlètes exigeants. Conçu spécifiquement pour résister aux entraînements les plus intenses tout en délivrant performance audio exceptionnelle qui booste vos performances. La certification IPX7 garantit résistance totale à transpiration et pluie. Construction militaire résiste chocs, vibrations et conditions extrêmes. Les coussinets antibactériens éliminent 99% des bactéries et odeurs. Le traitement antimicrobien maintient hygiène parfaite même après usage intensif. Le système de maintien breveté assure stabilité parfaite pendant mouvements dynamiques. Les crochets d'oreille flexibles s'adaptent morphologie individuelle. L'audio haute définition avec signature DNA délivre basses puissantes motivantes. L'égalisation sport optimisée amplifie rythmes énergisants. Les médiums clairs préservent voix coach et instructions. Les aigus cristallins maintiennent clarté même à volume élevé. L'autonomie 15 heures accompagne marathons d'entraînement. La charge rapide restaure 3 heures en 10 minutes. Le microphone intégré permet appels mains libres pendant exercice. Les commandes tactiles permettent contrôle sans interrompre effort. Le design noir/rouge dynamique reflète esprit sportif. Parfait pour sportifs passionnés de La Réunion cherchant excellence.",
-    shortDescription: 'Casque sport IPX7 avec coussinets antibactériens et audio HD motivant pour athlètes',
-    metaTitle: 'MONSTER DNA FIT - Casque Sport Premium IPX7 | Monster Phone 974',
-    metaDescription: 'Casque sport MONSTER DNA FIT résistant IPX7, coussinets antibactériens, audio HD énergisant. Maintien parfait, 15h autonomie. Pour athlètes exigeants La Réunion 974.',
-    urlSlug: 'monster-dna-fit-casque-sport',
-    keywords: ['MONSTER DNA FIT', 'casque sport', 'IPX7', 'antibactérien', 'fitness', 'audio HD', 'La Réunion'],
-    variants: [
-      { color: 'Noir/Rouge', colorCode: '#FF0000', ean: '0810079000001', stock: 18, images: [] }
-    ],
-    defaultVariant: 'Noir/Rouge',
-    specifications: [
-      { label: 'Résistance', value: 'IPX7', icon: 'water' },
-      { label: 'Drivers', value: '45mm HD', icon: 'speaker' },
-      { label: 'Autonomie', value: '15 heures', icon: 'battery' },
-      { label: 'Charge rapide', value: '10min = 3h', icon: 'charging' },
-      { label: 'Bluetooth', value: '5.1 aptX', icon: 'bluetooth' },
-      { label: 'Coussinets', value: 'Antibactériens', icon: 'shield' },
-      { label: 'Portée', value: '20 mètres', icon: 'signal' },
-      { label: 'Poids', value: '220g', icon: 'weight' }
-    ],
-    highlights: [
-      'Certification IPX7 totale',
-      'Coussinets antibactériens 99%',
-      'Maintien sport breveté',
-      'Audio HD signature DNA',
-      '15 heures d\'autonomie'
-    ],
-    images: [
-      '/placeholder-monster-dna-1.jpg',
-      '/placeholder-monster-dna-2.jpg',
-      '/placeholder-monster-dna-3.jpg'
-    ],
-    status: 'active',
-    rating: {
-      average: 4.8,
-      count: 567,
-      distribution: { 5: 420, 4: 100, 3: 35, 2: 10, 1: 2 }
-    },
-    warranty: '3 ans constructeur',
-    deliveryTime: '24-48h à La Réunion',
-    badges: ['Sport Pro', 'IPX7', 'Antibactérien']
-  },
-
   // MONSTER N-Lite 203 Batterie Portable Premium
   {
     id: 'monster-n-lite-203',
@@ -2976,57 +2920,6 @@ export const allProducts: Product[] = [
     badges: ['45W', 'Dual USB-C', 'Auto']
   },
 
-  // Monster Station Charge Sans Fil 15W
-  {
-    id: 'monster-chargeur-sans-fil',
-    airtableId: 'recMONSTERWIRELESS001',
-    sku: 'MONSTER-WIRELESS-15W',
-    name: 'MONSTER Station Charge Sans Fil 15W Qi',
-    brand: 'MONSTER',
-    category: 'Accessoires',
-    subcategory: 'Chargeurs',
-    price: 29.99,
-    originalPrice: 39.99,
-    discount: 25,
-    promo: 'SANS FIL',
-    description: "La station de charge sans fil Monster 15W offre la liberté de charge par induction magnétique Qi. Compatible avec tous smartphones Qi incluant iPhone 12+ MagSafe et Samsung Galaxy. Puissance adaptative : 15W Android, 7.5W iPhone, 5W écouteurs. Bobines doubles élargies permettent charge dans toute position portrait ou paysage. Surface antidérapante silicone protège téléphone des rayures et maintient position stable. Détection corps étrangers stoppe charge si objet métallique détecté pour sécurité. Ventilateur silencieux intégré dissipe chaleur pour charge optimale continue. LED indicateur multicolore : bleu charge, vert complet, rouge erreur. Design ultra-fin 8mm s'intègre discrètement bureau ou table chevet. Compatible charge avec coques jusqu'à 5mm épaisseur (sans métal). Mode nuit désactive LED automatiquement après 10 secondes. Protection FOD (Foreign Object Detection) et contrôle température intelligent. Câble USB-C 1.5m et adaptateur 18W QC 3.0 inclus. Certification Qi et tests sécurité garantissent charge fiable quotidienne à La Réunion.",
-    shortDescription: 'Chargeur sans fil Qi 15W avec charge rapide adaptative',
-    metaTitle: 'MONSTER Chargeur Sans Fil 15W Qi - iPhone Samsung | Monster Phone 974',
-    metaDescription: 'Station charge sans fil Monster 15W Qi. Compatible iPhone MagSafe, Samsung. Charge rapide, ultra-fin, ventilateur silencieux. La Réunion 974.',
-    urlSlug: 'monster-station-charge-sans-fil-15w',
-    keywords: ['chargeur sans fil', 'Qi', '15W', 'Monster', 'wireless', 'MagSafe', 'La Réunion'],
-    variants: [
-      { color: 'Noir', colorCode: '#000000', ean: '3402000QI001', stock: 48, images: [] },
-      { color: 'Blanc', colorCode: '#FFFFFF', ean: '3402000QI002', stock: 35, images: [] }
-    ],
-    defaultVariant: 'Noir',
-    specifications: [
-      { label: 'Puissance', value: '15W max adaptive', icon: 'power' },
-      { label: 'Standard', value: 'Qi certified', icon: 'certificate' },
-      { label: 'Compatibilité', value: 'iPhone/Android', icon: 'phone' },
-      { label: 'Bobines', value: 'Double coil', icon: 'coil' },
-      { label: 'Épaisseur', value: '8mm ultra-fin', icon: 'size' },
-      { label: 'Coque', value: 'Jusqu\'à 5mm', icon: 'case' },
-      { label: 'Protection', value: 'FOD + température', icon: 'shield' },
-      { label: 'Ventilateur', value: 'Silencieux intégré', icon: 'fan' }
-    ],
-    highlights: [
-      'Charge 15W ultra-rapide',
-      'Compatible tous Qi',
-      'Ultra-fin 8mm',
-      'Ventilateur silencieux',
-      'Détection objets étrangers'
-    ],
-    images: [],
-    rating: {
-      average: 4.5,
-      count: 224,
-      distribution: { 5: 145, 4: 58, 3: 15, 2: 5, 1: 1 }
-    },
-    warranty: '2 ans constructeur',
-    deliveryTime: '24-48h à La Réunion',
-    badges: ['Wireless', '15W', 'Qi']
-  },
 
   // Monster Chargeur Multiple 6 Ports
   {
@@ -3081,107 +2974,7 @@ export const allProducts: Product[] = [
 
   // ========== SUPPORTS GAMING (5 produits) ==========
 
-  // Monster Support Manette RGB
-  {
-    id: 'monster-support-manette-rgb',
-    airtableId: 'recMONSTERCONTROL001',
-    sku: 'MONSTER-CONTROLLER-STAND',
-    name: 'MONSTER Support Manette Gaming RGB Premium',
-    brand: 'MONSTER',
-    category: 'Accessoires',
-    subcategory: 'Supports gaming',
-    price: 34.99,
-    originalPrice: 44.99,
-    discount: 22,
-    promo: 'GAMING SETUP',
-    description: "Le support manette Monster RGB transforme vos contrôleurs en véritables œuvres d'art lumineuses. Compatible universellement avec PS5, PS4, Xbox Series, Switch Pro et manettes PC. Base lestée anti-basculement avec surface soft-touch protège manettes des rayures. Éclairage RGB personnalisable 16 millions couleurs avec 12 modes dynamiques. Bras ajustables accueillent 2 manettes simultanément angle exposition optimal. Système charge intégré via USB-C maintient manettes toujours prêtes (câbles inclus). Hub USB 2 ports supplémentaires pour périphériques gaming. Construction aluminium brossé et ABS renforcé garantit durabilité extrême. Gestion câbles intégrée maintient setup propre et organisé. Patins antidérapants silicone stabilité parfaite sur toute surface. Contrôle tactile LED permet changement rapide modes éclairage. Compatible montage mural avec kit fixation inclus. Dimensions compactes 15x20x10cm optimisent espace bureau gaming. Alimentation USB simple depuis PC, console ou adaptateur. Complément idéal pour setup gaming professionnel à La Réunion.",
-    shortDescription: 'Support 2 manettes avec RGB personnalisable et charge USB',
-    metaTitle: 'MONSTER Support Manette RGB - PS5 Xbox Switch | Monster Phone 974',
-    metaDescription: 'Support manette gaming Monster RGB premium. Compatible PS5, Xbox, Switch. Éclairage 16M couleurs, charge USB, aluminium. Setup gaming La Réunion.',
-    urlSlug: 'monster-support-manette-gaming-rgb',
-    keywords: ['support manette', 'RGB', 'gaming', 'PS5', 'Xbox', 'Monster', 'La Réunion'],
-    variants: [
-      { color: 'Noir', colorCode: '#000000', ean: '3402000CTRL001', stock: 38, images: [] }
-    ],
-    defaultVariant: 'Noir',
-    specifications: [
-      { label: 'Compatibilité', value: 'PS5/PS4/Xbox/Switch', icon: 'gamepad' },
-      { label: 'Capacité', value: '2 manettes', icon: 'number' },
-      { label: 'RGB', value: '16M couleurs', icon: 'palette' },
-      { label: 'Modes', value: '12 effets', icon: 'effects' },
-      { label: 'Charge', value: 'USB-C intégrée', icon: 'battery' },
-      { label: 'Hub', value: '2 ports USB', icon: 'ports' },
-      { label: 'Matériau', value: 'Aluminium + ABS', icon: 'material' },
-      { label: 'Dimensions', value: '15x20x10cm', icon: 'size' }
-    ],
-    highlights: [
-      'RGB 16 millions couleurs',
-      'Charge 2 manettes',
-      'Compatible toutes consoles',
-      'Hub USB intégré',
-      'Aluminium premium'
-    ],
-    images: [],
-    rating: {
-      average: 4.7,
-      count: 156,
-      distribution: { 5: 115, 4: 32, 3: 7, 2: 2, 1: 0 }
-    },
-    warranty: '2 ans constructeur',
-    deliveryTime: '24-48h à La Réunion',
-    badges: ['RGB', 'Gaming', 'Premium']
-  },
 
-  // Monster Support Casque Gaming LED
-  {
-    id: 'monster-support-casque-led',
-    airtableId: 'recMONSTERHEADSET001',
-    sku: 'MONSTER-HEADSET-STAND',
-    name: 'MONSTER Support Casque Gaming LED Pro',
-    brand: 'MONSTER',
-    category: 'Accessoires',
-    subcategory: 'Supports gaming',
-    price: 29.99,
-    originalPrice: 39.99,
-    discount: 25,
-    promo: 'SETUP PRO',
-    description: "Le support casque Monster LED Pro combine esthétique gaming et fonctionnalité avancée. Structure aluminium anodisé noir mat avec finitions premium résiste au poids des casques les plus lourds. Base LED circulaire diffuse éclairage ambiant personnalisable 7 couleurs + mode respiration. Hub USB 3.0 intégré 3 ports facilite connexion périphériques gaming : souris, clavier, clé USB. Port audio 3.5mm frontal permet branchement rapide casque sans chercher port PC. Surface caoutchoutée arceau protège bandeau casque de l'usure et déformation. Base lestée 500g avec patins antidérapants garantit stabilité absolue. Hauteur 28cm accommode tous types casques : gaming, studio, VR. Système gestion câbles arrière maintient fils organisés proprement. Alimentation USB unique simplifie installation (câble 1.5m inclus). Indicateurs LED ports USB montrent activité transfert données. Construction modulaire permet démontage facile pour transport LAN party. Compatible tous casques marché incluant modèles sans fil station charge. Accessoire indispensable pour setup gaming organisé et professionnel à La Réunion.",
-    shortDescription: 'Support casque avec hub USB 3.0 et LED ambiance 7 couleurs',
-    metaTitle: 'MONSTER Support Casque Gaming LED - Hub USB Setup | Monster Phone 974',
-    metaDescription: 'Support casque gaming Monster LED Pro. Hub USB 3.0, LED 7 couleurs, aluminium premium, port audio. Setup gaming parfait La Réunion.',
-    urlSlug: 'monster-support-casque-gaming-led',
-    keywords: ['support casque', 'gaming', 'LED', 'Monster', 'hub USB', 'setup', 'La Réunion'],
-    variants: [
-      { color: 'Noir Mat', colorCode: '#1A1A1A', ean: '3402000HEAD001', stock: 42, images: [] }
-    ],
-    defaultVariant: 'Noir Mat',
-    specifications: [
-      { label: 'Matériau', value: 'Aluminium anodisé', icon: 'material' },
-      { label: 'Hub USB', value: '3 ports USB 3.0', icon: 'ports' },
-      { label: 'LED', value: '7 couleurs + modes', icon: 'light' },
-      { label: 'Audio', value: 'Port 3.5mm frontal', icon: 'audio' },
-      { label: 'Hauteur', value: '28cm', icon: 'height' },
-      { label: 'Base', value: '500g lestée', icon: 'weight' },
-      { label: 'Alimentation', value: 'USB 5V', icon: 'power' },
-      { label: 'Compatibilité', value: 'Tous casques', icon: 'headset' }
-    ],
-    highlights: [
-      'Hub USB 3.0 intégré',
-      'LED 7 couleurs',
-      'Aluminium premium',
-      'Port audio frontal',
-      'Base ultra-stable'
-    ],
-    images: [],
-    rating: {
-      average: 4.6,
-      count: 198,
-      distribution: { 5: 138, 4: 45, 3: 12, 2: 3, 1: 0 }
-    },
-    warranty: '2 ans constructeur',
-    deliveryTime: '24-48h à La Réunion',
-    badges: ['LED', 'USB 3.0', 'Pro']
-  },
 
   // Monster Tapis Souris Gaming XXL RGB
   {
@@ -3234,107 +3027,7 @@ export const allProducts: Product[] = [
     badges: ['XXL', 'RGB', 'Pro Gaming']
   },
 
-  // Monster Bungee Souris Gaming
-  {
-    id: 'monster-bungee-souris',
-    airtableId: 'recMONSTERBUNGEE001',
-    sku: 'MONSTER-BUNGEE',
-    name: 'MONSTER Bungee Souris Gaming Anti-Friction',
-    brand: 'MONSTER',
-    category: 'Accessoires',
-    subcategory: 'Supports gaming',
-    price: 19.99,
-    originalPrice: 24.99,
-    discount: 20,
-    promo: 'PRO GAMER',
-    description: "Le bungee souris Monster élimine définitivement friction et accrochage câble pendant sessions gaming intenses. Bras flexible silicone medical-grade maintient câble hauteur optimale sans résistance. Compatible tous diamètres câbles souris 1.5mm à 4mm marché. Base lestée 280g avec 6 patins antidérapants garantit stabilité absolue même mouvements rapides. Hub USB 2.0 intégré 4 ports augmente connectivité setup gaming. LED RGB personnalisable base ajoute touche esthétique setup coordonné. Système ressort tension ajustable adapte différentes longueurs préférences câble. Revêtement soft-touch empêche rayures câble maintient souplesse long terme. Hauteur réglable 13-20cm accommode différentes configurations bureau. Système clip rapide permet installation/retrait câble une main. Port charge USB-C additionnel pour souris sans fil gaming. Construction ABS renforcé fibre verre résiste années utilisation intensive. Design compact n'encombre pas espace jeu précieux. Amélioration immédiate précision et confort pour FPS et MOBA compétitifs. Accessoire essentiel joueurs sérieux recherchant avantage compétitif La Réunion.",
-    shortDescription: 'Bungee anti-friction avec hub USB et base lestée 280g',
-    metaTitle: 'MONSTER Bungee Souris Gaming - Anti-Friction Pro | Monster Phone 974',
-    metaDescription: 'Bungee souris gaming Monster anti-friction. Hub USB 4 ports, base 280g stable, LED RGB. Précision maximale gaming La Réunion.',
-    urlSlug: 'monster-bungee-souris-gaming',
-    keywords: ['bungee souris', 'gaming', 'Monster', 'anti-friction', 'hub USB', 'FPS', 'La Réunion'],
-    variants: [
-      { color: 'Noir', colorCode: '#000000', ean: '3402000BUNGEE001', stock: 52, images: [] }
-    ],
-    defaultVariant: 'Noir',
-    specifications: [
-      { label: 'Base', value: '280g lestée', icon: 'weight' },
-      { label: 'Hub USB', value: '4 ports 2.0', icon: 'ports' },
-      { label: 'Hauteur', value: '13-20cm réglable', icon: 'height' },
-      { label: 'Câbles', value: '1.5-4mm diamètre', icon: 'cable' },
-      { label: 'LED', value: 'RGB personnalisable', icon: 'light' },
-      { label: 'Patins', value: '6 antidérapants', icon: 'grip' },
-      { label: 'Matériau', value: 'ABS + silicone', icon: 'material' },
-      { label: 'USB-C', value: 'Port charge bonus', icon: 'charge' }
-    ],
-    highlights: [
-      'Élimine friction câble',
-      'Hub USB 4 ports',
-      'Base 280g ultra-stable',
-      'LED RGB gaming',
-      'Hauteur ajustable'
-    ],
-    images: [],
-    rating: {
-      average: 4.5,
-      count: 267,
-      distribution: { 5: 168, 4: 72, 3: 20, 2: 5, 1: 2 }
-    },
-    warranty: '2 ans constructeur',
-    deliveryTime: '24-48h à La Réunion',
-    badges: ['Anti-Friction', 'USB Hub', 'Pro']
-  },
 
-  // Monster Support Écran Gaming RGB
-  {
-    id: 'monster-support-ecran-rgb',
-    airtableId: 'recMONSTERMONITOR001',
-    sku: 'MONSTER-MONITOR-STAND',
-    name: 'MONSTER Support Écran Gaming RGB avec Tiroirs',
-    brand: 'MONSTER',
-    category: 'Accessoires',
-    subcategory: 'Supports gaming',
-    price: 54.99,
-    originalPrice: 69.99,
-    discount: 21,
-    promo: 'ERGONOMIE',
-    description: "Le support écran Monster RGB améliore ergonomie et esthétique setup gaming complet. Élévation écran 10cm réduit fatigue cervicale aligne vision angle optimal. Plateau supérieur supporte jusqu'à 30kg compatible tous moniteurs 32 pouces max. Bande LED RGB intégrée périmètre diffuse éclairage ambiant personnalisable. 2 tiroirs coulissants latéraux rangent accessoires gaming : manettes, câbles, disques. Surface supérieure 60x25cm accueille écran et périphériques additionnels. Hub USB 3.0 frontal 4 ports facilite connexion rapide appareils. Passe-câbles intégré maintient workspace organisé sans enchevêtrement. Construction MDF premium 18mm avec finition noir mat anti-rayures. Pieds aluminium réglables hauteur compensent irrégularités bureau. Système ventilation passif évite surchauffe équipements posés dessus. Compatible VESA permet installation bras moniteur additionnel si besoin. Espace stockage inférieur 8cm hauteur range clavier taille normale. Charge wireless Qi 10W intégrée coin droit pour smartphone. Installation sans outils montage rapide 5 minutes. Solution ergonomique complète pour sessions gaming prolongées confortables La Réunion.",
-    shortDescription: 'Support écran avec tiroirs, hub USB et RGB ambiance gaming',
-    metaTitle: 'MONSTER Support Écran Gaming RGB - Ergonomie Setup | Monster Phone 974',
-    metaDescription: 'Support écran gaming Monster RGB avec tiroirs rangement. Hub USB 3.0, charge Qi, élévation ergonomique. Setup gaming complet La Réunion.',
-    urlSlug: 'monster-support-ecran-gaming-rgb-tiroirs',
-    keywords: ['support écran', 'gaming', 'RGB', 'Monster', 'ergonomie', 'tiroirs', 'La Réunion'],
-    variants: [
-      { color: 'Noir Mat', colorCode: '#1A1A1A', ean: '3402000MONITOR001', stock: 28, images: [] }
-    ],
-    defaultVariant: 'Noir Mat',
-    specifications: [
-      { label: 'Dimensions', value: '60x25x10cm', icon: 'size' },
-      { label: 'Capacité', value: '30kg max', icon: 'weight' },
-      { label: 'Tiroirs', value: '2 coulissants', icon: 'drawer' },
-      { label: 'Hub USB', value: '4 ports 3.0', icon: 'ports' },
-      { label: 'RGB', value: 'LED périmètre', icon: 'light' },
-      { label: 'Charge Qi', value: '10W intégrée', icon: 'wireless' },
-      { label: 'Matériau', value: 'MDF 18mm premium', icon: 'material' },
-      { label: 'Écran max', value: '32 pouces', icon: 'monitor' }
-    ],
-    highlights: [
-      'Élévation ergonomique 10cm',
-      '2 tiroirs rangement',
-      'Hub USB 3.0 frontal',
-      'RGB gaming ambiance',
-      'Charge wireless Qi'
-    ],
-    images: [],
-    rating: {
-      average: 4.7,
-      count: 112,
-      distribution: { 5: 82, 4: 24, 3: 5, 2: 1, 1: 0 }
-    },
-    warranty: '2 ans constructeur',
-    deliveryTime: '24-48h à La Réunion',
-    badges: ['Ergonomie', 'RGB', 'Storage']
-  },
 
   // ========== MONTRES CONNECTÉES ==========
   
@@ -4950,10 +4643,10 @@ Contenu du coffret : Écouteurs Sonify, étui de charge premium, câble USB-C, 4
     category: 'Audio',
     subcategory: 'Casques',
     price: 99.99,
-    description: "Casque MONSTER Persona SE avec réduction de bruit active avancée et qualité audio audiophile. Support des codecs haute résolution pour les mélomanes exigeants.",
+    description: "Immergez-vous dans un cocon de silence avec le casque MONSTER Persona SE ANC, une solution audio premium qui combine réduction de bruit active professionnelle et confort exceptionnel pour créer l'expérience d'écoute idéale. Ce casque sophistiqué s'adresse aux professionnels et audiophiles qui recherchent l'isolation acoustique parfaite sans compromis sur la qualité sonore. La réduction de bruit active professionnelle exploite une technologie ANC multi-niveaux qui s'adapte intelligemment à votre environnement. Les microphones stratégiquement placés captent les bruits ambiants tandis que les processeurs génèrent des ondes inverses pour les annuler complètement. Cette technologie crée une bulle de tranquillité absolue, vous permettant de vous concentrer totalement sur votre musique ou votre travail. L'audio premium délivre une signature sonore équilibrée et naturelle qui respecte l'intention originale des artistes. Les transducteurs de 40mm spécialement accordés reproduisent fidèlement l'ensemble du spectre fréquentiel, des basses profondes et contrôlées aux aigus cristallins et détaillés. La scène sonore expansive crée une sensation d'espace tridimensionnel qui enrichit l'expérience d'écoute. Le confort exceptionnel résulte d'une étude ergonomique approfondie visant à éliminer toute fatigue lors d'utilisations prolongées. Les coussinets en mousse à mémoire de forme haute densité épousent parfaitement les contours de vos oreilles, créant un joint acoustique optimal tout en répartissant uniformément la pression. L'arceau auto-ajustable trouve naturellement la position idéale sans nécessiter de réglages constants. Deux coloris élégants reflètent différentes personnalités professionnelles. Le noir élégant incarne la sobriété et le professionnalisme avec une finition mate sophistiquée qui résiste aux traces de doigts. Le gris sophistiqué apporte une touche de modernité avec ses nuances subtiles qui s'accordent parfaitement aux environnements contemporains. Les matériaux premium garantissent une durabilité exceptionnelle. Le design moderne allie esthétique minimaliste et fonctionnalité optimale. Les lignes épurées et les finitions soignées créent un objet aussi beau que performant. Les commandes tactiles intégrées permettent de gérer intuitivement musique, appels et ANC sans sortir votre appareil. Les charnières robustes et le mécanisme de pliage facilitent le transport. L'audio cristallin se distingue particulièrement lors des appels téléphoniques et vidéoconférences. La technologie de réduction de bruit bidirectionnelle isole votre voix des bruits ambiants, garantissant une communication claire même dans les environnements bruyants. Les microphones beamforming focalisent sur votre voix tout en éliminant les sons parasites. Pour les professionnels et audiophiles de La Réunion qui exigent le meilleur en matière de réduction de bruit et de confort, le MONSTER Persona SE ANC représente l'outil parfait pour créer un espace de concentration absolue, que ce soit pour le travail intensif ou l'écoute musicale immersive.",
     shortDescription: 'Casque ANC audiophile',
-    metaTitle: 'MONSTER Persona SE ANC - Casque Audiophile Réduction de Bruit | Monster Phone 974',
-    metaDescription: 'MONSTER Persona SE ANC. Réduction de bruit avancée, son audiophile, confort premium. Noir ou gris.',
+    metaTitle: 'MONSTER Persona SE ANC - Casque Réduction Bruit',
+    metaDescription: 'Casque MONSTER Persona SE avec ANC professionnel et confort premium. Audio cristallin, coussinets mémoire de forme, design moderne. Noir ou gris pour professionnels exigeants à La Réunion.',
     urlSlug: 'monster-persona-se-anc-casque',
     keywords: ['MONSTER', 'Persona SE', 'ANC', 'casque', 'audiophile'],
     variants: [
@@ -5300,16 +4993,16 @@ Contenu du coffret : Écouteurs Air Mate, câble de charge magnétique, bouchons
     brand: 'MONSTER',
     category: 'Audio',
     subcategory: 'ecouteurs',
-    price: 29.99,
-    description: "Écouteurs MONSTER N-Lite 206 avec son puissant et design élégant. Driver 10mm pour des basses profondes et des aigus cristallins.",
+    price: 19.99,
+    description: "Les écouteurs intra-auriculaires MONSTER N-Lite 206 représentent l'excellence audio accessible, offrant une expérience sonore premium dans un format compact et élégant. Conçus pour les audiophiles exigeants et les utilisateurs quotidiens, ces écouteurs filaires garantissent une qualité sonore constante et fiable sans les contraintes de batterie ou de connexion Bluetooth. La technologie acoustique avancée utilise des drivers dynamiques de 10mm spécialement calibrés pour délivrer un spectre sonore complet et équilibré. Les basses profondes et contrôlées apportent puissance et émotion à votre musique sans masquer les détails. Les médiums naturels préservent la chaleur des voix et l'authenticité des instruments acoustiques. Les aigus cristallins révèlent chaque nuance et texture sonore, des cymbales délicates aux harmoniques subtiles. Le design ergonomique étudié assure un confort optimal même après des heures d'écoute continue. Les embouts en silicone souple de qualité médicale s'adaptent parfaitement au canal auditif, créant un joint acoustique qui isole efficacement du bruit ambiant tout en garantissant un maintien sécurisé. Trois tailles d'embouts incluses permettent une personnalisation parfaite selon votre morphologie. La construction robuste utilise des matériaux premium sélectionnés pour leur durabilité. Le câble renforcé résiste aux enchevêtrements et aux tensions répétées, prolongeant significativement la durée de vie. Les connecteurs plaqués or garantissent une transmission du signal optimale et résistent à la corrosion, même dans l'environnement salin de La Réunion. Disponibles en deux coloris intemporels - Noir classique pour la discrétion professionnelle et Blanc élégant pour un style moderne - ces écouteurs s'adaptent à toutes les occasions. La finition mate anti-traces préserve l'aspect neuf même après usage intensif. La compatibilité universelle via jack 3.5mm assure une connexion immédiate avec smartphones, tablettes, ordinateurs portables, consoles de jeux et systèmes audio. Aucune configuration nécessaire, branchez et profitez instantanément de votre musique. Le microphone intégré avec bouton de contrôle permet de gérer appels et lecture musicale sans sortir votre appareil. Idéaux pour les mélomanes réunionnais recherchant qualité audio supérieure et fiabilité à prix accessible, les MONSTER N-Lite 206 offrent l'héritage sonore MONSTER dans un format pratique pour la vie quotidienne.",
     shortDescription: 'Écouteurs avec son puissant',
-    metaTitle: 'MONSTER N-Lite 206 - Écouteurs Premium | Monster Phone 974',
-    metaDescription: 'MONSTER N-Lite 206. Son puissant, confort optimal, micro intégré. Rose Gold ou Midnight.',
+    metaTitle: 'MONSTER N-Lite 206 - Écouteurs Intra-Auriculaires',
+    metaDescription: 'Écouteurs MONSTER N-Lite 206 intra-auriculaires avec drivers 10mm et isolation passive. Design ergonomique, câble renforcé, compatibilité universelle. Noir ou blanc disponibles La Réunion 974.',
     urlSlug: 'monster-n-lite-206-ecouteurs',
     keywords: ['MONSTER', 'N-Lite', '206', 'écouteurs'],
     variants: [
-      { color: 'Rose Gold', colorCode: '#B76E79', ean: '', stock: 12, images: [] },
-      { color: 'Midnight', colorCode: '#191970', ean: '', stock: 15, images: [] }
+      { color: 'Noir', colorCode: '#000000', ean: '5010016634871', stock: 12, images: [] },
+      { color: 'Blanc', colorCode: '#FFFFFF', ean: '5010016634888', stock: 15, images: [] }
     ],
     specifications: [
       { label: 'Driver', value: '10mm' },
@@ -5331,8 +5024,8 @@ Contenu du coffret : Écouteurs Air Mate, câble de charge magnétique, bouchons
     brand: 'HIFUTURE',
     category: 'Audio',
     subcategory: 'Enceintes Bluetooth',
-    price: 34.99,
-    description: "Enceinte Bluetooth HIFUTURE Ascendo avec basses profondes et design compact. IPX5 pour résister aux éclaboussures lors de vos activités outdoor.",
+    price: 54.99,
+    description: "Enceinte HIFUTURE Ascendo Rose alliant élégance féminine et performance audio. Design rose sophistiqué qui embellit votre intérieur moderne. Son premium avec technologie acoustique optimisée pour clarté exceptionnelle. Autonomie longue durée pour profiter de votre musique sans interruption. Connectivité Bluetooth stable pour streaming sans fil depuis tous vos appareils. Construction robuste avec finition soignée dans les moindres détails. Idéale pour créer une ambiance musicale raffinée. L'enceinte design parfaite pour intérieurs élégants à La Réunion.",
     shortDescription: 'Enceinte Bluetooth basses profondes',
     metaTitle: 'HIFUTURE Ascendo - Enceinte Bluetooth Compacte | Monster Phone 974',
     metaDescription: 'HIFUTURE Ascendo. Basses profondes, 12h autonomie, IPX5. Disponible en 3 couleurs.',
@@ -5363,11 +5056,11 @@ Contenu du coffret : Écouteurs Air Mate, câble de charge magnétique, bouchons
     brand: 'MONSTER',
     category: 'Audio',
     subcategory: 'Casques',
-    price: 99.99,
-    description: "Casque gaming MONSTER Mission 100 avec son surround virtuel et micro détachable. Éclairage RGB personnalisable pour un setup gaming parfait.",
+    price: 59.99,
+    description: "Le casque MONSTER Mission 100 incarne la nouvelle génération d'accessoires audio conçus pour les passionnés exigeants. Cette référence accessible de la gamme MONSTER combine ingénierie acoustique avancée et design contemporain pour offrir une expérience sonore immersive adaptée à tous les usages : musique, films, jeux vidéo et communication. La signature sonore MONSTER se caractérise par une restitution audio précise et dynamique. Les drivers de 40mm haute performance délivrent une réponse en fréquence étendue de 20Hz à 20kHz, couvrant l'intégralité du spectre audible humain. Les basses puissantes et contrôlées créent une fondation solide sans empiéter sur les autres fréquences. Les médiums détaillés préservent la clarté des dialogues et l'authenticité des instruments. Les aigus nets révèlent les subtilités sonores souvent perdues avec des casques standards. Le confort étudié permet des sessions prolongées sans fatigue. Les coussinets circumauraux en mousse à mémoire de forme enveloppent délicatement les oreilles, distribuant uniformément la pression et créant une isolation acoustique passive efficace. Le bandeau rembourré ajustable s'adapte à toutes les morphologies, tandis que l'arceau flexible mais résistant garantit durabilité sans compression excessive. L'architecture acoustique semi-ouverte offre le meilleur des deux mondes : l'isolation nécessaire pour une écoute concentrée et la spatialisation naturelle pour une scène sonore élargie. Cette conception optimise particulièrement l'expérience multimédia, permettant de localiser précisément les sources sonores dans l'espace virtuel. Deux finitions élégantes répondent à tous les styles : le Blanc immaculé apporte une touche de modernité lumineuse, parfait pour les setups épurés, tandis que le Noir mat intemporel s'intègre discrètement dans tout environnement. La qualité de finition et les détails soignés reflètent l'attention portée à chaque aspect du produit. La connectivité jack 3.5mm universelle garantit compatibilité maximale avec tous vos appareils : smartphones, tablettes, consoles de jeux, ordinateurs et interfaces audio. Le câble détachable de 1,5 mètre offre liberté de mouvement tout en permettant un remplacement facile en cas d'usure. L'adaptateur 6.35mm inclus étend la compatibilité aux équipements audio professionnels. Parfait pour les utilisateurs réunionnais recherchant un casque polyvalent offrant qualité audio supérieure et confort longue durée à prix accessible, le MONSTER Mission 100 représente l'entrée idéale dans l'univers audio MONSTER.",
     shortDescription: 'Casque gaming surround avec micro',
-    metaTitle: 'MONSTER Mission 100 - Casque Gaming Surround | Monster Phone 974',
-    metaDescription: 'MONSTER Mission 100. Son surround 7.1, micro détachable, RGB. Storm Gray, Noir ou Crème.',
+    metaTitle: 'MONSTER Mission 100 - Casque Gaming Abordable',
+    metaDescription: 'Casque MONSTER Mission 100 avec drivers 40mm et confort optimisé. Design élégant, compatible tous appareils, isolation passive. Blanc ou noir disponibles La Réunion 974.',
     urlSlug: 'monster-mission-100-casque-gaming',
     keywords: ['MONSTER', 'Mission 100', 'gaming', 'casque', 'surround'],
     variants: [
@@ -5457,12 +5150,12 @@ Contenu du coffret : Écouteurs Air Mate, câble de charge magnétique, bouchons
     brand: 'MONSTER',
     category: 'Audio',
     subcategory: 'ecouteurs',
-    price: 39.99,
-    description: "Écouteurs True Wireless MONSTER Element Air avec design ergonomique et son équilibré. IPX4 pour résister à la sueur et aux éclaboussures.",
-    shortDescription: 'Écouteurs TWS ergonomiques',
-    metaTitle: 'MONSTER Element Air - Écouteurs True Wireless | Monster Phone 974',
-    metaDescription: 'MONSTER Element Air. Design ergonomique, son équilibré, autonomie 24h. Noir ou bleu.',
-    urlSlug: 'monster-element-air-tws',
+    price: 199.99,
+    description: "Casque MONSTER Element Air haut de gamme avec technologie sans fil avancée. Audio haute résolution pour qualité sonore exceptionnelle. Design ultra-léger pour confort maximal durant longues sessions. Autonomie exceptionnelle permettant usage intensif sans contrainte. Le casque sans fil premium pour mélomanes exigeants à La Réunion.",
+    shortDescription: 'Casque sans fil haut de gamme',
+    metaTitle: 'MONSTER Element Air - Casque Sans Fil Haut de Gamme',
+    metaDescription: 'Casque MONSTER Element Air avec technologie sans fil premium. Audio haute résolution, léger, autonomie longue durée.',
+    urlSlug: 'monster-element-air-casque-sans-fil',
     keywords: ['MONSTER', 'Element Air', 'TWS', 'écouteurs', 'true wireless'],
     variants: [
       { color: 'Noir', colorCode: '#000000', ean: '', stock: 18, images: [] },
@@ -5488,12 +5181,12 @@ Contenu du coffret : Écouteurs Air Mate, câble de charge magnétique, bouchons
     brand: 'MONSTER',
     category: 'Audio',
     subcategory: 'Enceintes Party',
-    price: 99.99,
-    description: "Enceinte party MONSTER avec puissance élevée et effets lumineux pour animer vos soirées. Micro karaoké inclus pour des sessions endiablées.",
+    price: 179.99,
+    description: "Enceinte de fête MONSTER PARTY avec système audio ultra-puissant pour événements. Éclairage LED multicolore intégré pour ambiance festive garantie. Performance sonore exceptionnelle pour animer grandes réceptions. Construction robuste conçue pour usage intensif et transport fréquent. Disponible en version standard et améliorée selon vos besoins. L'enceinte parfaite pour DJs et animateurs à La Réunion.",
     shortDescription: 'Enceinte party puissante avec LED',
-    metaTitle: 'MONSTER Enceinte Party - Son Puissant LED | Monster Phone 974',
-    metaDescription: 'MONSTER Enceinte Party. 60W, LED synchronisées, autonomie 8h, micro karaoké. Animation garantie.',
-    urlSlug: 'monster-enceinte-party',
+    metaTitle: 'MONSTER ENCEINTE PARTY - Système Audio Fête | Monster Phone 974',
+    metaDescription: 'Enceinte MONSTER PARTY avec éclairage LED. 2 versions disponibles. Monster Phone 974.',
+    urlSlug: 'monster-enceinte-party-systeme-audio',
     keywords: ['MONSTER', 'enceinte', 'party', 'soirée', 'LED'],
     variants: [
       { color: 'Noir', colorCode: '#000000', ean: '', stock: 5, images: [] }
@@ -5518,8 +5211,8 @@ Contenu du coffret : Écouteurs Air Mate, câble de charge magnétique, bouchons
     brand: 'HIFUTURE',
     category: 'Audio',
     subcategory: 'ecouteurs',
-    price: 54.99,
-    description: "Écouteurs True Wireless HIFUTURE Yacht premium avec finition luxueuse et son haute fidélité. ANC -30dB pour une isolation parfaite.",
+    price: 59.99,
+    description: "Écouteurs HIFUTURE Yacht incarnant le luxe audio moderne. Design sophistiqué avec finitions premium exceptionnelles. Disponible en black classique, rose féminin ou black gold exclusif. Performance audio exceptionnelle avec technologie acoustique avancée. Bluetooth 5.3 et résistance IPX5 pour usage sans contrainte. Confort suprême avec matériaux nobles et ergonomie étudiée. Boîtier de charge élégant complétant l'expérience luxueuse. Les écouteurs premium pour mélomanes exigeants de La Réunion.",
     shortDescription: 'Écouteurs TWS premium luxe',
     metaTitle: 'HIFUTURE Yacht - Écouteurs True Wireless Premium | Monster Phone 974',
     metaDescription: 'HIFUTURE Yacht. Design luxe, son Hi-Fi, ANC, autonomie 30h. Noir ou blanc. Premium quality.',
@@ -5579,11 +5272,11 @@ Contenu du coffret : Écouteurs Air Mate, câble de charge magnétique, bouchons
     brand: 'HIFUTURE',
     category: 'Audio',
     subcategory: 'Enceintes Party',
-    price: 169.99,
-    description: "Enceinte karaoké HIFUTURE Vocalist 300 avec double micro sans fil et effets vocaux. 150W de puissance pour animer les plus grandes soirées.",
+    price: 269.99,
+    description: "HIFUTURE PartyBox Vocalist 300 système audio professionnel avec fonction karaoké intégrée. Puissance impressionnante de 300W pour performances vocales exceptionnelles. Microphones professionnels inclus pour karaoké et animations. Effets vocaux et mixage pour expérience complète. Idéale pour karaokés, événements et établissements à La Réunion.",
     shortDescription: 'Enceinte karaoké 2 micros sans fil',
-    metaTitle: 'HIFUTURE Vocalist 300 - Enceinte Karaoké Pro | Monster Phone 974',
-    metaDescription: 'HIFUTURE Vocalist 300. 150W, 2 micros sans fil, effets vocaux, LED. Karaoké professionnel.',
+    metaTitle: 'HIFUTURE Vocalist 300 - Système Audio Karaoké Pro | Monster Phone 974',
+    metaDescription: 'PartyBox HIFUTURE Vocalist 300 avec karaoké professionnel. 300W, microphones inclus. 269,99€.',
     urlSlug: 'hifuture-vocalist-300-karaoke',
     keywords: ['HIFUTURE', 'Vocalist', 'karaoké', 'micro', 'party'],
     variants: [
@@ -5641,8 +5334,8 @@ Contenu du coffret : Écouteurs Air Mate, câble de charge magnétique, bouchons
     brand: 'HIFUTURE',
     category: 'Audio',
     subcategory: 'ecouteurs',
-    price: 79.99,
-    description: "Écouteurs True Wireless HIFUTURE Flybuds 4 avec réduction de bruit active avancée -35dB. Charge sans fil Qi pour une praticité maximale.",
+    price: 44.99,
+    description: "Expérience audio premium avec les écouteurs HIFUTURE Flybuds 4 ANC. Réduction active du bruit avancée pour immersion totale dans votre musique. Bluetooth 5.3 dernière génération pour connexion ultra-stable et économie d'énergie. Design premium disponible en noir classique, rose chaud féminin ou beige élégant. Résistance IPX4 pour usage quotidien sans souci même sous la pluie. Commandes tactiles intuitives pour contrôle facile sans sortir le téléphone. Boîtier de charge compact offrant plusieurs recharges complètes. Les écouteurs ANC accessibles aux mélomanes exigeants de La Réunion.",
     shortDescription: 'Écouteurs TWS ANC avancé',
     metaTitle: 'HIFUTURE Flybuds 4 ANC - Écouteurs Réduction Bruit | Monster Phone 974',
     metaDescription: 'HIFUTURE Flybuds 4 ANC. Réduction bruit -35dB, autonomie 32h, charge sans fil. Premium TWS.',
@@ -5786,6 +5479,99 @@ Contenu du coffret : Écouteurs Hi5, 3 paires d'embouts (S/M/L), clip de câble,
     images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-smart-beam-bars-kit.jpg'],
     status: 'active' as const,
     badges: ['Kit Gaming', 'RGB Sync']
+  },
+  {
+    id: 'monster-hdmi-essential-4k',
+    airtableId: 'recpoVzuFWFjjsDOD',
+    sku: 'MCB-HDMI-PHS',
+    name: 'MONSTER CABLE HDMI ESSENTIAL 4K',
+    brand: 'MONSTER',
+    category: 'Accessoires',
+    subcategory: 'Câbles',
+    price: 24.99,
+    originalPrice: 34.99,
+    discount: 29,
+    promo: 'PROMO',
+    description: "Le câble MONSTER HDMI Essential 4K représente la référence absolue pour votre installation home cinéma et gaming. Certifié Premium High Speed, ce câble délivre une performance exceptionnelle avec prise en charge native de la résolution 4K à 60Hz, garantissant une fluidité parfaite pour films et jeux vidéo.\n\nLa technologie HDR (High Dynamic Range) compatible offre une palette de couleurs étendue et des contrastes saisissants, transformant votre expérience visuelle. Avec une bande passante impressionnante de 18 Gbps, ce câble transmet sans compression les flux vidéo les plus exigeants, incluant Dolby Vision et HDR10+.\n\nL'Ethernet intégré permet le partage de connexion internet entre appareils compatibles, éliminant le besoin de câbles réseau supplémentaires. Cette fonctionnalité est particulièrement appréciée pour les Smart TV et consoles de jeux nécessitant une connexion stable.\n\nDisponible en deux longueurs optimisées (1m80 et 3m60), ce câble s'adapte parfaitement à toutes les configurations d'installation. Les connecteurs plaqués or 24 carats garantissent une transmission sans perte et une résistance exceptionnelle à la corrosion, même dans le climat tropical de La Réunion.\n\nLa construction robuste avec blindage triple couche élimine les interférences électromagnétiques, assurant un signal pur et stable. Compatible avec tous les appareils HDMI : TV 4K/8K, consoles PlayStation et Xbox, lecteurs Blu-ray, box TV, projecteurs et systèmes audio home cinéma.\n\nBénéficiez de la garantie MONSTER de 3 ans, témoignage de la qualité et durabilité exceptionnelles de ce câble premium. Support technique local disponible à La Réunion pour accompagner votre installation.",
+    shortDescription: 'Câble HDMI Premium High Speed 4K@60Hz avec HDR et Ethernet intégré',
+    metaTitle: 'MONSTER CABLE HDMI ESSENTIAL 4K - Premium High Speed | Monster Phone 974',
+    metaDescription: 'Câble MONSTER HDMI Essential 4K Premium High Speed, résolution 4K@60Hz, HDR compatible, Ethernet intégré, 18 Gbps. Disponible 1m80 et 3m60. Livraison La Réunion 974.',
+    urlSlug: 'monster-cable-hdmi-essential-4k',
+    keywords: ['MONSTER HDMI', 'câble 4K', 'Premium High Speed', 'HDR', 'Ethernet', 'home cinéma', 'gaming'],
+    ean: '',
+    stock: 25,
+    stockStatus: 'in_stock' as const,
+    isNew: true,
+    isFeatured: false,
+    rating: 4.8,
+    reviews: 142,
+    specifications: [
+      { label: 'Type', value: 'HDMI Premium High Speed' },
+      { label: 'Résolution', value: '4K@60Hz' },
+      { label: 'HDR', value: 'Compatible (HDR10, Dolby Vision)' },
+      { label: 'Ethernet', value: 'Intégré' },
+      { label: 'Bande passante', value: '18 Gbps' },
+      { label: 'Connecteurs', value: 'HDMI Type A mâle/mâle' },
+      { label: 'Plaquage', value: 'Or 24 carats' },
+      { label: 'Audio', value: 'Jusqu\'à 32 canaux' },
+      { label: 'CEC', value: 'Compatible' },
+      { label: 'ARC/eARC', value: 'Supporté' },
+      { label: 'Blindage', value: 'Triple couche' },
+      { label: 'Certification', value: 'Premium High Speed' }
+    ],
+    variants: [
+      { id: 'hdmi-essential-180', name: '1m80', color: '1m80', price: 24.99, stock: 15, sku: 'MCB-HDMI-PHS-180' },
+      { id: 'hdmi-essential-360', name: '3m60', color: '3m60', price: 34.99, stock: 10, sku: 'MCB-HDMI-PHS-360' }
+    ],
+    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-hdmi-essential-4k.jpg'],
+    status: 'active' as const,
+    badges: ['4K HDR', 'Premium']
+  },
+  {
+    id: 'monster-hdmi-standard',
+    airtableId: 'recu7CfPNRVDn4nKe',
+    sku: 'MCB-HDMI-STD',
+    name: 'MONSTER Câble HDMI Standard',
+    brand: 'MONSTER',
+    category: 'Accessoires',
+    subcategory: 'Câbles',
+    price: 12.99,
+    originalPrice: 19.99,
+    discount: 35,
+    promo: 'PROMO',
+    description: "Le câble MONSTER HDMI Standard offre une solution fiable et abordable pour tous vos besoins de connexion multimédia. Conçu pour délivrer une qualité d'image Full HD 1080p cristalline, ce câble est l'accessoire indispensable pour profiter pleinement de vos contenus préférés.\n\nAvec ses connecteurs HDMI Type A universels, ce câble garantit une compatibilité totale avec l'ensemble de vos appareils : téléviseurs, consoles de jeux, lecteurs DVD/Blu-ray, décodeurs TV et ordinateurs. La transmission numérique pure préserve l'intégrité du signal pour une image nette et un son parfait.\n\nDisponible en quatre longueurs pratiques (1.5m, 2m, 3m et 5m), ce câble s'adapte à toutes les configurations d'installation. Que vous connectiez votre console de jeu proche de la TV ou un projecteur au plafond, nous avons la longueur idéale pour votre setup.\n\nLa construction robuste MONSTER assure une durabilité exceptionnelle. Les connecteurs renforcés résistent aux manipulations fréquentes, tandis que le câble flexible facilite l'installation même dans les espaces restreints. Le blindage efficace protège contre les interférences pour un signal stable.\n\nCe câble supporte l'audio multicanal pour une expérience sonore immersive, transmettant jusqu'à 8 canaux audio non compressés. Compatible avec les formats Dolby Digital et DTS, il transforme votre salon en véritable salle de cinéma.\n\nBénéficiez de la garantie MONSTER de 2 ans et du support technique local à La Réunion. Un excellent rapport qualité-prix pour équiper tous vos appareils avec la fiabilité légendaire MONSTER. Disponible immédiatement dans nos boutiques réunionnaises.",
+    shortDescription: 'Câble HDMI Standard 1080p Full HD disponible en 4 longueurs',
+    metaTitle: 'MONSTER Câble HDMI Standard - Full HD 1080p | Monster Phone 974',
+    metaDescription: 'Câble MONSTER HDMI Standard, résolution 1080p Full HD, connecteurs Type A universels. Disponible en 1.5m, 2m, 3m et 5m. Garantie 2 ans. Livraison La Réunion 974.',
+    urlSlug: 'monster-cable-hdmi-standard',
+    keywords: ['MONSTER HDMI', 'câble 1080p', 'Full HD', 'HDMI Standard', 'multimédia', 'connexion TV'],
+    ean: '',
+    stock: 45,
+    stockStatus: 'in_stock' as const,
+    isNew: false,
+    isFeatured: false,
+    rating: 4.5,
+    reviews: 89,
+    specifications: [
+      { label: 'Type', value: 'HDMI Standard' },
+      { label: 'Résolution', value: '1080p Full HD' },
+      { label: 'Connecteurs', value: 'HDMI Type A' },
+      { label: 'Audio', value: 'Jusqu\'à 8 canaux' },
+      { label: 'Certification', value: 'HDMI Standard' },
+      { label: 'Débit', value: '4.95 Gbps' },
+      { label: 'Fréquence', value: '165 MHz' },
+      { label: 'Blindage', value: 'Double couche' },
+      { label: 'Conducteurs', value: 'Cuivre haute pureté' }
+    ],
+    variants: [
+      { id: 'hdmi-std-150', name: '1.5m', color: '1.5m', price: 12.99, stock: 15, sku: 'MCB-HDMI-STD-150' },
+      { id: 'hdmi-std-200', name: '2m', color: '2m', price: 14.99, stock: 12, sku: 'MCB-HDMI-STD-200' },
+      { id: 'hdmi-std-300', name: '3m', color: '3m', price: 17.99, stock: 10, sku: 'MCB-HDMI-STD-300' },
+      { id: 'hdmi-std-500', name: '5m', color: '5m', price: 22.99, stock: 8, sku: 'MCB-HDMI-STD-500' }
+    ],
+    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-hdmi-standard.jpg'],
+    status: 'active' as const,
+    badges: ['Full HD', 'Garantie 2 ans']
   }
 ];
 

@@ -397,10 +397,11 @@ export default function ProductDetail({ product }: ProductDetailProps) {
               {/* Description structurée en paragraphes courts */}
               <div className="space-y-4 text-gray-700 leading-relaxed">
                 {product.description && product.description.split('. ').map((sentence, index) => {
-                  if (sentence.length > 100) {
+                  // Afficher toutes les phrases, même courtes
+                  if (sentence.trim()) {
                     return (
                       <p key={index} className="text-base">
-                        {sentence}{!sentence.endsWith('.') && '.'}
+                        {sentence.trim()}{!sentence.endsWith('.') && '.'}
                       </p>
                     );
                   }
