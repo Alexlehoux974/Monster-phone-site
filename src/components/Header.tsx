@@ -136,7 +136,7 @@ const DropdownMenu = ({
                                    menuType === 'montres' ? 'Montres' :
                                    menuType === 'tablettes' ? 'Tablettes' : 
                                    menuType === 'accessoires' ? ['Audio', 'Chargement', 'Créativité', 'Accessoires'] :
-                                   menuType === 'led' ? 'LED' : 'Accessoires';
+                                   menuType === 'led' ? 'Éclairage LED' : 'Accessoires';
                 
                 // Pour accessoires et LED, on récupère les marques de toutes les catégories concernées
                 const brands = menuType === 'accessoires' 
@@ -154,7 +154,7 @@ const DropdownMenu = ({
                   ? (() => {
                       const brandsSet = new Set<string>();
                       allProducts.forEach(p => {
-                        if (p.category === 'LED' && p.brand) {
+                        if (p.category === 'Éclairage LED' && p.brand) {
                           brandsSet.add(p.brand);
                         }
                       });
@@ -169,7 +169,7 @@ const DropdownMenu = ({
                          p.category === 'Créativité' || p.category === 'Accessoires')
                       )
                     : menuType === 'led'
-                    ? allProducts.filter(p => p.brand === brand && p.category === 'LED')
+                    ? allProducts.filter(p => p.brand === brand && p.category === 'Éclairage LED')
                     : getProductsByBrandAndCategory(brand, categoryName as string);
                   return (
                     <div key={brand}>
@@ -185,7 +185,7 @@ const DropdownMenu = ({
                             setHoveredCategory('Accessoires');
                             setHoveredAccessorySubcategory(null);
                           } else if (menuType === 'led') {
-                            setHoveredCategory('LED');
+                            setHoveredCategory('Éclairage LED');
                           } else {
                             setHoveredCategory(categoryName as string);
                           }
@@ -486,7 +486,7 @@ const DropdownMenu = ({
                 : menuType === 'led'
                 ? allProducts.filter(p => 
                     p.brand === hoveredBrand && 
-                    p.category === 'LED'
+                    p.category === 'Éclairage LED'
                   )
                 : getProductsForDisplay() || [];
 
