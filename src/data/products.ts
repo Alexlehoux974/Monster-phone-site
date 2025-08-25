@@ -5572,6 +5572,331 @@ Contenu du coffret : Écouteurs Hi5, 3 paires d'embouts (S/M/L), clip de câble,
     images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-hdmi-standard.jpg'],
     status: 'active' as const,
     badges: ['Full HD', 'Garantie 2 ans']
+  },
+
+  // HIFUTURE TOUR X ANC Casque
+  {
+    id: 'hifuture-tour-x-anc-casque',
+    airtableId: 'recD8f1N0Qr8gA7vW',
+    sku: 'HIFUTURE-TOUR -X-ANC-CASQUE',
+    name: 'HIFUTURE TOUR X ANC Casque',
+    brand: 'HIFUTURE',
+    category: 'Audio & Son',
+    subcategory: 'Casques',
+    price: 69.99,
+    description: "Le casque HIFUTURE TOUR ANC révolutionne votre expérience audio avec sa technologie de réduction active du bruit de pointe. Conçu pour créer une bulle sonore parfaite, ce casque élimine jusqu'à 35 décibels de bruit ambiant, transformant les environnements les plus bruyants en espaces de concentration absolue. La réduction active du bruit utilise des microphones de détection avancés qui analysent et neutralisent les fréquences indésirables en temps réel. Idéal pour le télétravail, les transports ou simplement pour s'isoler, l'ANC s'adapte automatiquement à votre environnement. Le mode transparence permet de rester connecté au monde extérieur d'une simple pression. Les drivers dynamiques de 40mm délivrent un son haute résolution avec une réponse en fréquence étendue de 20Hz à 20kHz. Les basses profondes sans distorsion, les médiums naturels et les aigus détaillés recréent fidèlement chaque nuance de votre musique. Le codec audio HD garantit une transmission sans perte via Bluetooth. Le confort supreme est assuré par les coussinets en mousse à mémoire de forme qui épousent parfaitement la forme de vos oreilles. Le bandeau rembourré répartit uniformément le poids plume de 250 grammes, permettant des sessions d'écoute prolongées sans fatigue. La conception circum-auriculaire offre isolation passive supplémentaire. L'autonomie marathon de 30 heures avec ANC activé accompagne vos plus longues journées. La charge rapide USB-C restaure 5 heures d'écoute en 10 minutes. Le mode filaire permet utilisation illimitée via câble jack 3.5mm inclus. Le design pliable compact facilite transport dans l'étui rigide fourni. Les commandes tactiles intuitives sur l'oreillette droite gèrent musique, appels et modes ANC. Compatible avec assistants vocaux pour contrôle mains-libres. Idéal pour professionnels et voyageurs réunionnais recherchant isolation sonore et qualité audio accessibles.",
+    shortDescription: 'Casque avec réduction active du bruit -35dB, drivers 40mm HD et autonomie 30h',
+    metaTitle: 'CASQUE ANC HIFUTURE TOUR - Réduction de Bruit Active | Monster Phone 974',
+    metaDescription: 'Casque HIFUTURE TOUR ANC avec réduction active -35dB et drivers 40mm HD. Mode transparence, confort mousse mémoire, autonomie 30h. 2 coloris disponibles La Réunion 974.',
+    urlSlug: 'casque-anc-hifuture-tour',
+    keywords: ['HIFUTURE TOUR', 'casque ANC', 'réduction bruit active', 'casque audio', 'casque sans fil'],
+    variants: [
+      {
+        color: 'Champagne',
+        colorCode: '#D4AF37',
+        ean: '34030003200025',
+        stock: 15,
+        images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/hifuture-tour-x-anc-champagne.jpg']
+      },
+      {
+        color: 'Noir',
+        colorCode: '#000000',
+        ean: '34030003200035',
+        stock: 20,
+        images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/hifuture-tour-x-anc-noir.jpg']
+      }
+    ],
+    defaultVariant: 'Noir',
+    specifications: [
+      { label: 'Type', value: 'Circum-auriculaire avec ANC' },
+      { label: 'Réduction de bruit', value: 'Active -35dB' },
+      { label: 'Drivers', value: '40mm dynamiques HD' },
+      { label: 'Réponse en fréquence', value: '20Hz - 20kHz' },
+      { label: 'Autonomie', value: '30h avec ANC' },
+      { label: 'Charge rapide', value: 'USB-C (10min = 5h)' },
+      { label: 'Poids', value: '250g' },
+      { label: 'Bluetooth', value: '5.0 avec codec HD' },
+      { label: 'Mode filaire', value: 'Jack 3.5mm inclus' },
+      { label: 'Pliable', value: 'Oui, avec étui rigide' }
+    ],
+    highlights: [
+      'Réduction active du bruit -35dB',
+      'Drivers 40mm haute résolution',
+      'Autonomie 30 heures avec ANC',
+      'Confort mousse à mémoire de forme',
+      'Mode transparence adaptatif',
+      'Charge rapide USB-C',
+      'Design pliable avec étui'
+    ],
+    images: [
+      'https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/hifuture-tour-x-anc-1.jpg',
+      'https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/hifuture-tour-x-anc-2.jpg'
+    ],
+    status: 'active' as const,
+    rating: {
+      average: 4.6,
+      count: 28,
+      distribution: { 5: 18, 4: 7, 3: 2, 2: 1, 1: 0 }
+    },
+    warranty: '2 ans',
+    deliveryTime: '2-3 jours',
+    badges: ['ANC -35dB', 'Autonomie 30h', 'Premium Audio']
+  },
+
+  // Monster Illuminessence LED Strip Smart 5M IC
+  {
+    id: 'mon-ill-smart-5m-ic',
+    airtableId: 'recKOzXmP6A55Hfdj',
+    sku: 'MON-ILL-SMART-5M-IC',
+    name: 'Monster Illuminessence LED Strip Smart 5M IC',
+    brand: 'MONSTER',
+    category: 'Éclairage LED',
+    subcategory: 'Rubans LED',
+    price: 54.99,
+    description: "Le ruban LED Monster Illuminessence Smart 5M IC révolutionne l'éclairage d'ambiance avec sa technologie RGB+IC avancée. Chaque LED est contrôlable individuellement grâce aux circuits intégrés (IC), permettant des effets lumineux dynamiques impossibles avec des rubans LED classiques. Créez des animations fluides, des dégradés de couleurs progressifs et des effets de vague spectaculaires. L'application smartphone dédiée offre un contrôle total avec plus de 100 modes préprogrammés : arc-en-ciel fluide, effet néon, simulation feu, ambiance océan, et bien plus. La synchronisation musicale analyse en temps réel les fréquences audio pour créer un spectacle lumineux parfaitement rythmé. Idéal pour transformer votre espace gaming, home cinéma ou soirées. La technologie Flow permet des transitions de couleurs ultra-douces entre les 16 millions de nuances disponibles. Chaque segment de 5cm peut afficher une couleur différente, créant des motifs complexes et personnalisables. L'adhésif 3M premium garantit une fixation durable sur toutes surfaces. Installation simplifiée avec marquages de découpe tous les 5cm et connecteurs sans soudure inclus. Contrôle vocal via Alexa et Google Assistant pour une domotique intelligente. Programmation horaire, simulation de présence et scénarios personnalisés via l'app. Le mode économie d'énergie ajuste automatiquement la luminosité selon l'heure. Consommation optimisée de seulement 24W pour 5 mètres à pleine puissance. Durée de vie exceptionnelle de 50000 heures. Parfait pour les créateurs de contenu et gamers réunionnais cherchant un éclairage RGB personnalisable et spectaculaire.",
+    shortDescription: 'Ruban LED Smart 5M avec technologie RGB+IC pour effets dynamiques',
+    metaTitle: 'Monster Illuminessence LED Strip Smart 5M IC - RGB Contrôlable | Monster Phone 974',
+    metaDescription: 'Ruban LED Monster Smart 5M avec technologie IC pour contrôle individuel des LEDs. 100+ effets, sync musicale, app smartphone. Livraison La Réunion 974.',
+    urlSlug: 'monster-illuminessence-led-strip-smart-5m-ic',
+    keywords: ['LED strip', 'ruban LED', 'RGB IC', 'éclairage intelligent', 'Monster Illuminessence', 'LED gaming'],
+    variants: [
+      {
+        color: '5m Flow',
+        colorCode: '#FF00FF',
+        ean: '34040004200010',
+        stock: 25,
+        images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-led-smart-5m-ic.jpg']
+      }
+    ],
+    specifications: [
+      { label: 'Longueur', value: '5 mètres' },
+      { label: 'Technologie', value: 'RGB+IC (contrôle individuel)' },
+      { label: 'LEDs', value: '150 LEDs (30/mètre)' },
+      { label: 'Couleurs', value: '16 millions de nuances' },
+      { label: 'Modes', value: '100+ effets préprogrammés' },
+      { label: 'Contrôle', value: 'App smartphone + télécommande' },
+      { label: 'Sync musicale', value: 'Microphone intégré' },
+      { label: 'Découpe', value: 'Tous les 5cm' },
+      { label: 'Alimentation', value: '24W (12V/2A)' },
+      { label: 'Durée de vie', value: '50000 heures' },
+      { label: 'Étanchéité', value: 'IP20 (intérieur)' },
+      { label: 'Compatible', value: 'Alexa, Google Assistant' }
+    ],
+    highlights: [
+      'Technologie RGB+IC pour contrôle individuel',
+      '100+ modes d\'effets dynamiques',
+      'Synchronisation musicale en temps réel',
+      'Application smartphone complète',
+      'Compatible assistants vocaux',
+      'Installation facile avec adhésif 3M',
+      'Économie d\'énergie intelligente'
+    ],
+    images: [
+      'https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-led-smart-5m-ic-1.jpg',
+      'https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-led-smart-5m-ic-2.jpg'
+    ],
+    status: 'active' as const,
+    rating: {
+      average: 4.7,
+      count: 42,
+      distribution: { 5: 30, 4: 8, 3: 3, 2: 1, 1: 0 }
+    },
+    warranty: '2 ans',
+    deliveryTime: '2-3 jours',
+    badges: ['RGB+IC', 'Sync Musicale', 'Smart Control']
+  },
+
+  // Monster Illuminessence LED Strip Smart Flow
+  {
+    id: 'mon-ill-smart-flow',
+    airtableId: 'recUWnBN9UVK7VQ2g',
+    sku: 'MON-ILL-SMART-FLOW',
+    name: 'Monster Illuminessence LED Strip Smart Multicolor Flow',
+    brand: 'MONSTER',
+    category: 'Éclairage LED',
+    subcategory: 'Rubans LED',
+    price: 27.99,
+    description: "Le ruban LED Monster Illuminessence Smart Flow transforme instantanément votre espace avec ses effets multicolores fluides et hypnotiques. Disponible en versions 2m et 4m pour s'adapter à tous les projets d'éclairage. La technologie Flow exclusive crée des transitions de couleurs progressives et naturelles, idéales pour une ambiance relaxante ou dynamique selon vos envies. L'installation plug & play ne nécessite aucune compétence technique : déroulez, collez, branchez et illuminez. L'adhésif double face haute performance adhère sur toutes surfaces propres. Les marquages de découpe permettent d'ajuster parfaitement la longueur. Le contrôleur intelligent intégré propose 20 modes d'effets préprogrammés : respiration douce, vague arc-en-ciel, stroboscope party, ambiance coucher de soleil, et plus. La télécommande RF portée 10m permet de contrôler l'éclairage depuis votre canapé. Ajustez luminosité, vitesse des effets et couleurs en temps réel. Parfait pour décorer chambre, salon, cuisine ou espace gaming. La consommation optimisée et la technologie LED basse température garantissent sécurité et économies d'énergie. Créez des ambiances uniques pour chaque moment : détente, soirée, concentration ou sommeil. Le mode mémoire conserve vos réglages préférés. Idéal pour les foyers réunionnais cherchant une solution d'éclairage décoratif simple et efficace.",
+    shortDescription: 'Ruban LED Smart avec effets Flow multicolores, disponible en 2m et 4m',
+    metaTitle: 'Monster Illuminessence LED Strip Smart Flow - Multicolor | Monster Phone 974',
+    metaDescription: 'Ruban LED Monster Smart Flow avec transitions multicolores fluides. 20 modes, télécommande, installation facile. 2m ou 4m disponibles La Réunion 974.',
+    urlSlug: 'monster-illuminessence-led-strip-smart-flow',
+    keywords: ['LED strip', 'ruban LED', 'multicolor', 'éclairage décoratif', 'Monster Flow', 'LED ambiance'],
+    variants: [
+      {
+        color: '2m',
+        colorCode: '#00FF00',
+        ean: '34040004200020',
+        stock: 30,
+        images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-led-smart-flow-2m.jpg']
+      },
+      {
+        color: '4m',
+        colorCode: '#0000FF',
+        ean: '34040004200021',
+        stock: 20,
+        images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-led-smart-flow-4m.jpg']
+      }
+    ],
+    defaultVariant: '2m',
+    specifications: [
+      { label: 'Longueurs disponibles', value: '2m ou 4m' },
+      { label: 'Technologie', value: 'RGB Flow multicolor' },
+      { label: 'LEDs', value: '60 LEDs/mètre' },
+      { label: 'Modes', value: '20 effets préprogrammés' },
+      { label: 'Contrôle', value: 'Télécommande RF 10m' },
+      { label: 'Découpe', value: 'Tous les 10cm' },
+      { label: 'Alimentation', value: '12W (2m) / 24W (4m)' },
+      { label: 'Installation', value: 'Adhésif 3M inclus' },
+      { label: 'Angle éclairage', value: '120°' },
+      { label: 'Température couleur', value: '2700K-6500K + RGB' }
+    ],
+    highlights: [
+      'Effets Flow multicolores fluides',
+      '20 modes d\'ambiance préprogrammés',
+      'Installation plug & play simple',
+      'Télécommande RF longue portée',
+      'Disponible en 2m et 4m',
+      'Économe en énergie',
+      'Mémoire des réglages'
+    ],
+    images: [
+      'https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-led-smart-flow-1.jpg',
+      'https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-led-smart-flow-2.jpg'
+    ],
+    status: 'active' as const,
+    rating: {
+      average: 4.5,
+      count: 35,
+      distribution: { 5: 22, 4: 9, 3: 3, 2: 1, 1: 0 }
+    },
+    warranty: '2 ans',
+    deliveryTime: '2-3 jours',
+    badges: ['Flow Effect', 'Plug & Play', 'Energy Saver']
+  },
+
+  // Monster Illuminessence LED Beam Kit
+  {
+    id: 'mon-ill-beam-kit',
+    airtableId: 'reczZNn9ztInmt6ts',
+    sku: 'MON-ILL-BEAM-KIT',
+    name: 'Monster Illuminessence LED Beam Kit',
+    brand: 'MONSTER',
+    category: 'Éclairage LED',
+    subcategory: 'Kits LED',
+    price: 149.99,
+    description: "Le kit Monster Illuminessence Beam révolutionne l'éclairage architectural avec son système modulaire complet. Ce kit premium comprend une barre centrale Beam et 2 barres latérales pour créer des installations lumineuses spectaculaires. Chaque élément intègre la technologie LED haute densité avec diffuseur opalin pour un éclairage homogène sans points chauds visibles. Le système de montage magnétique breveté permet une installation et reconfiguration instantanées sans outils. Créez des motifs géométriques, des cadres lumineux ou des installations artistiques en quelques secondes. La connectivité sans fil entre modules élimine les câbles disgracieux. Le contrôleur central intelligent synchronise parfaitement les 3 éléments pour des effets coordonnés époustouflants. Plus de 50 scénarios d'éclairage préprogrammés transforment votre espace : aurore boréale, feu de cheminée, océan calme, néon urbain. L'application dédiée offre un contrôle précis de chaque barre individuellement ou en groupe. Programmez des ambiances pour chaque moment de la journée avec transitions douces automatiques. La technologie de gradation sans scintillement protège vos yeux lors des longues sessions. Compatible avec les écosystèmes domotiques majeurs pour une intégration smart home complète. Construction aluminium premium avec dissipation thermique optimale pour durabilité maximale. Parfait pour créer un mur d'accent, encadrer un téléviseur ou illuminer une tête de lit. Les créateurs de contenu et architectes d'intérieur réunionnais apprécient sa polyvalence et qualité professionnelle.",
+    shortDescription: 'Kit complet LED Beam avec barre centrale + 2 barres latérales modulaires',
+    metaTitle: 'Monster Illuminessence LED Beam Kit - Éclairage Architectural | Monster Phone 974',
+    metaDescription: 'Kit LED Monster Beam complet avec système modulaire magnétique. 50+ scénarios, contrôle app, installation sans outils. Premium lighting La Réunion 974.',
+    urlSlug: 'monster-illuminessence-led-beam-kit',
+    keywords: ['LED beam', 'kit éclairage', 'LED architectural', 'Monster Beam', 'éclairage modulaire', 'smart lighting'],
+    variants: [
+      {
+        color: 'Kit Complet',
+        colorCode: '#FFFFFF',
+        ean: '34040004200030',
+        stock: 10,
+        images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-led-beam-kit.jpg']
+      }
+    ],
+    specifications: [
+      { label: 'Contenu', value: '1x Beam central + 2x Bars latérales' },
+      { label: 'Longueur Beam', value: '120cm' },
+      { label: 'Longueur Bars', value: '60cm chacune' },
+      { label: 'Puissance totale', value: '45W' },
+      { label: 'Lumens', value: '4500lm total' },
+      { label: 'Installation', value: 'Magnétique sans outils' },
+      { label: 'Connectivité', value: 'Sans fil entre modules' },
+      { label: 'Contrôle', value: 'App + télécommande + vocal' },
+      { label: 'Scénarios', value: '50+ modes préprogrammés' },
+      { label: 'Matériau', value: 'Aluminium premium' },
+      { label: 'Gradation', value: '0-100% sans scintillement' },
+      { label: 'Compatible', value: 'Alexa, Google, HomeKit' }
+    ],
+    highlights: [
+      'Kit complet Beam + 2 Bars',
+      'Installation magnétique modulaire',
+      'Connexion sans fil entre éléments',
+      '50+ scénarios d\'éclairage',
+      'Contrôle app intelligent',
+      'Compatible domotique',
+      'Construction aluminium premium'
+    ],
+    images: [
+      'https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-led-beam-kit-1.jpg',
+      'https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-led-beam-kit-2.jpg'
+    ],
+    status: 'active' as const,
+    rating: {
+      average: 4.8,
+      count: 15,
+      distribution: { 5: 12, 4: 2, 3: 1, 2: 0, 1: 0 }
+    },
+    warranty: '3 ans',
+    deliveryTime: '3-5 jours',
+    badges: ['Kit Premium', 'Magnétique', 'Pro Lighting']
+  },
+
+  // MUVIT Rouleaux de papier photo
+  {
+    id: 'muapn-roll',
+    airtableId: 'recyrOXiEI3UsXLz0',
+    sku: 'MUAPN-ROLL',
+    name: 'MUVIT KidPic Rouleaux Papier Photo',
+    brand: 'MUVIT',
+    category: 'Accessoires',
+    subcategory: 'Accessoires Photo',
+    price: 7.99,
+    description: "Les rouleaux de papier photo MUVIT KidPic constituent l'accessoire indispensable pour prolonger l'aventure photographique des jeunes créateurs. Ce pack économique de 5 rouleaux garantit des heures d'impression instantanée, permettant aux enfants de capturer et matérialiser leurs découvertes visuelles sans interruption. Chaque rouleau contient suffisamment de papier pour imprimer jusqu'à 30 photos, offrant un total de 150 impressions par pack. Le papier thermique spécial développe instantanément les images sans encre ni cartouche, utilisant une technologie écologique et sécuritaire pour les enfants. La qualité d'impression optimisée produit des photos nettes et contrastées qui résistent au temps. Les images conservent leur éclat pendant des années, créant des souvenirs durables que les enfants peuvent collectionner, partager ou offrir. Le format compact des photos permet de créer albums, collages et projets créatifs. L'installation simplifiée permet aux enfants de changer eux-mêmes les rouleaux, développant autonomie et responsabilité. Le système de chargement intuitif évite les erreurs et garantit un alignement parfait pour des impressions réussies à chaque fois. Le papier autocollant au dos transforme chaque photo en sticker repositionnable, multipliant les possibilités créatives. Les enfants peuvent décorer cahiers, chambres et créations artistiques avec leurs propres photos, personnalisant leur univers avec leurs souvenirs préférés. Le conditionnement protégé préserve la qualité du papier contre humidité et poussière, garantissant des impressions parfaites même après stockage prolongé. Idéal pour le climat tropical de La Réunion, le papier résiste aux variations de température et d'humidité. Compatible exclusivement avec les appareils MUVIT KidPic, ce papier certifié garantit performances optimales et sécurité d'utilisation.",
+    shortDescription: 'Pack de 5 rouleaux de papier photo pour appareil MUVIT KidPic - 150 impressions',
+    metaTitle: 'Rouleaux Papier Photo MUVIT KidPic - Pack de 5 | Monster Phone 974',
+    metaDescription: 'Rouleaux papier photo MUVIT KidPic, pack 5 rouleaux pour 150 impressions instantanées. Papier autocollant écologique, installation facile. Stock La Réunion 974.',
+    urlSlug: 'muvit-kidpic-rouleaux-papier-photo',
+    keywords: ['rouleaux papier photo', 'MUVIT KidPic', 'recharge appareil photo', 'papier impression instantanée', 'accessoire KidPic'],
+    variants: [
+      {
+        color: 'Pack x5',
+        colorCode: '#FFFFFF',
+        ean: '34040004100030',
+        stock: 50,
+        images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/muvit-rouleaux-papier.jpg']
+      }
+    ],
+    specifications: [
+      { label: 'Contenu', value: 'Pack de 5 rouleaux' },
+      { label: 'Photos par rouleau', value: '30 photos' },
+      { label: 'Total impressions', value: '150 photos' },
+      { label: 'Type papier', value: 'Thermique sans encre' },
+      { label: 'Format photo', value: 'Format carte' },
+      { label: 'Dos autocollant', value: 'Oui, repositionnable' },
+      { label: 'Conservation', value: 'Plusieurs années' },
+      { label: 'Installation', value: 'Système easy-load' },
+      { label: 'Écologique', value: 'Sans encre ni cartouche' },
+      { label: 'Compatible', value: 'MUVIT KidPic uniquement' }
+    ],
+    highlights: [
+      'Pack économique 5 rouleaux',
+      '150 impressions totales',
+      'Papier thermique écologique',
+      'Dos autocollant créatif',
+      'Installation facile par enfant',
+      'Qualité d\'impression durable',
+      'Résistant climat tropical'
+    ],
+    images: [
+      'https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/muvit-rouleaux-papier-1.jpg',
+      'https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/muvit-rouleaux-papier-2.jpg'
+    ],
+    status: 'active' as const,
+    rating: {
+      average: 4.9,
+      count: 72,
+      distribution: { 5: 65, 4: 5, 3: 2, 2: 0, 1: 0 }
+    },
+    warranty: '6 mois',
+    deliveryTime: '1-2 jours',
+    badges: ['Pack Éco', 'Sans Encre', 'Autocollant']
   }
 ];
 

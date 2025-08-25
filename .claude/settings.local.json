@@ -52,8 +52,20 @@
       "Bash(convert:*)",
       "Bash(wget:*)",
       "mcp__playwright__browser_snapshot",
-      "Bash(git restore:*)"
+      "Bash(git restore:*)",
+      "Bash(cat:*)",
+      "Bash(python3:*)",
+      "Read(//root/Monster-Phone-Images/Captures d'écran/**)",
+      "Read(//root/Monster-Phone-Images/**)",
+      "Read(//root/Monster-Phone-Images/**)",
+      "mcp__airtable__get_record",
+      "Bash(for slug in \"casque-anc-hifuture-tour\" \"monster-illuminessence-led-strip-smart-5m-ic\" \"monster-illuminessence-led-strip-smart-flow\" \"monster-illuminessence-led-beam-kit\" \"muvit-kidpic-rouleaux-papier-photo\")",
+      "Bash(do echo \"Checking $slug:\")",
+      "Bash(done)"
     ],
-    "deny": []
+    "deny": [],
+    "additionalDirectories": [
+      "/root/Monster-Phone-Images/Captures d''''écran"
+    ]
   }
 }
