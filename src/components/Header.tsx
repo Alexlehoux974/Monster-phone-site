@@ -1,13 +1,12 @@
 'use client';
 
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Search, ShoppingCart, User, Menu, X, ChevronDown, ChevronRight, ArrowRight, Shield, Truck, Flame, Smartphone, Watch, Headphones, Lightbulb, Package, Star, Trash2, CreditCard, Plus, Minus } from 'lucide-react';
+import { Search, ShoppingCart, User, Menu, X, ChevronDown, ChevronRight, ArrowRight, Shield, Truck, Flame, Star, Trash2, CreditCard, Plus, Minus, Package, Smartphone, Watch, Headphones, Lightbulb } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { menuStructure, type CategoryStructure, allProducts, getProductsByCategory, getProductsByBrand, brandMenuStructure, getBrandsByCategory, getProductsByBrandAndCategory } from '@/data/products';
+import { menuStructure, type CategoryStructure, allProducts, getProductsByCategory, getProductsByBrand, getProductsByBrandAndCategory } from '@/data/products';
 import { useCart } from '@/contexts/CartContext';
-// import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
 import debounce from 'lodash.debounce';
 import ImageWithFallback from '@/components/ImageWithFallback';
@@ -803,8 +802,7 @@ export default function Header() {
   const searchRef = useRef<HTMLDivElement>(null);
 
   // Fonction de recherche avec debounce
-  const debouncedSearch = useCallback(
-    debounce((query: string) => {
+  const debouncedSearch = debounce((query: string) => {
       if (query.trim().length > 1) {
         const suggestions = allProducts.filter(product => 
           product.name.toLowerCase().includes(query.toLowerCase()) ||
@@ -817,9 +815,7 @@ export default function Header() {
         setSearchSuggestions([]);
         setShowSuggestions(false);
       }
-    }, 300),
-    []
-  );
+    }, 300);
 
   // Gérer le changement de recherche
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -97,8 +97,10 @@ export function CartProvider({ children, initialItems }: { children: ReactNode; 
 
   const getCartTotal = () => {
     return items.reduce((total, item) => {
-      // Le prix est maintenant un nombre dans l'interface Product
-      const price = item.product.price;
+      // Assurer la conversion en nombre pour éviter NaN
+      const price = typeof item.product.price === 'string' 
+        ? parseFloat(item.product.price) 
+        : item.product.price;
       return total + (price * item.quantity);
     }, 0);
   };

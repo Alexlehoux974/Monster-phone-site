@@ -800,8 +800,10 @@ export default function CheckoutPage() {
                   {/* Articles */}
                   <div className="space-y-3 mb-4 max-h-64 overflow-y-auto">
                     {items.map((item) => {
-                      // Price is already a number in the Product interface
-                      const price = item.product.price;
+                      // Assurer la conversion en nombre pour éviter NaN
+                      const price = typeof item.product.price === 'string' 
+                        ? parseFloat(item.product.price) 
+                        : item.product.price;
                       return (
                         <div key={`${item.product.id}-${item.variant}`} className="flex items-center space-x-3">
                           <div className="relative w-16 h-16 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">

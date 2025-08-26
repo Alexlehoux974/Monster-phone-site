@@ -101,8 +101,10 @@ export default function PanierPage() {
                 {/* Produits */}
                 <div className="divide-y divide-gray-200">
                   {items.map((item) => {
-                    // Price is already a number in the Product interface
-                    const price = item.product.price;
+                    // Assurer la conversion en nombre pour éviter NaN
+                    const price = typeof item.product.price === 'string' 
+                      ? parseFloat(item.product.price) 
+                      : item.product.price;
                     const itemTotal = price * item.quantity;
                     
                     return (
