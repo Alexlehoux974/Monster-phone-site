@@ -61,7 +61,17 @@
       "mcp__airtable__get_record",
       "Bash(for slug in \"casque-anc-hifuture-tour\" \"monster-illuminessence-led-strip-smart-5m-ic\" \"monster-illuminessence-led-strip-smart-flow\" \"monster-illuminessence-led-beam-kit\" \"muvit-kidpic-rouleaux-papier-photo\")",
       "Bash(do echo \"Checking $slug:\")",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(sed:*)",
+      "mcp__playwright__browser_tabs",
+      "Bash(comm:*)",
+      "Read(///**)",
+      "Bash(npx tsc:*)",
+      "Bash(awk:*)",
+      "Bash(/dev/null)",
+      "Bash(git checkout:*)",
+      "Bash(for line in 5656 5609 5561 5530 5499 5433 5401 5368 5337 5306 5274 5243 5211 5180 5147 5114 5081 5049 5016 4981 4946 4914 4883 4852 4787 4721 4689 4625 4567 4508 4476 4444 4412 4354 4298 4244 4213)",
+      "Bash(do)"
     ],
     "deny": [],
     "additionalDirectories": [

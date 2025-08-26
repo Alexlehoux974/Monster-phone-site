@@ -724,9 +724,9 @@ export const allProducts: Product[] = [
     airtableId: 'rec3S3fGlA6xxWkkA',
     sku: 'HIFUTURE-HAPPYROCK-BT53',
     name: 'HIFUTURE HAPPYROCK Enceinte Bluetooth 5.3',
-    brand: 'HIFUTURE',
+    brand: 'HiFuture',
     category: 'Audio',
-    subcategory: 'Enceintes',
+    subcategory: 'Enceintes portables',
     price: 39.99,
     originalPrice: 49.99,
     discount: 20,
@@ -782,9 +782,9 @@ export const allProducts: Product[] = [
     airtableId: 'rec4E9K38xRxL31b9',
     sku: 'HIFUTURE-ALTUS-ANC',
     name: 'HIFUTURE ALTUS Casque sans fil ANC',
-    brand: 'HIFUTURE',
+    brand: 'HiFuture',
     category: 'Audio',
-    subcategory: 'Casques & Écouteurs',
+    subcategory: 'Casques',
     price: 79.99,
     originalPrice: 99.99,
     discount: 20,
@@ -839,9 +839,9 @@ export const allProducts: Product[] = [
     airtableId: 'rec67QqLdQdJ1VZeL',
     sku: 'HIFUTURE-COLORBUDS2-TWS',
     name: 'HIFUTURE COLORBUDS 2 True Wireless',
-    brand: 'HIFUTURE',
+    brand: 'HiFuture',
     category: 'Audio',
-    subcategory: 'Casques & Écouteurs',
+    subcategory: 'ecouteurs',
     price: 49.99,
     originalPrice: 69.99,
     discount: 29,
@@ -900,7 +900,7 @@ export const allProducts: Product[] = [
     airtableId: 'rec8lCbDJQwcYupxb',
     sku: 'HIFUTURE-FUTUREMATE-SWATCH',
     name: 'HIFUTURE FUTUREMATE',
-    brand: 'HIFUTURE',
+    brand: 'HiFuture',
     category: 'Montres connectées',
     subcategory: 'Sport',
     price: 89.99,
@@ -958,7 +958,7 @@ export const allProducts: Product[] = [
     airtableId: 'rec9MNXwqQT23kLRx',
     sku: 'HIFUTURE-ZONE2-SW',
     name: 'HIFUTURE ZONE 2',
-    brand: 'HIFUTURE',
+    brand: 'HiFuture',
     category: 'Montres connectées',
     subcategory: 'Sport',
     price: 69.99,
@@ -1016,7 +1016,7 @@ export const allProducts: Product[] = [
     airtableId: 'recBbzRiXLo5W4YOP',
     sku: 'HIFUTURE-ULTRAFIT',
     name: 'HIFUTURE ULTRAFIT',
-    brand: 'HIFUTURE',
+    brand: 'HiFuture',
     category: 'Montres connectées',
     subcategory: 'Sport',
     price: 99.99,
@@ -1073,9 +1073,9 @@ export const allProducts: Product[] = [
     airtableId: 'recDqA9HaRsNJWN5U',
     sku: 'HIFUTURE-FLYBUDS-TWS',
     name: 'HIFUTURE FLYBUDS Ecouteurs sans fil',
-    brand: 'HIFUTURE',
+    brand: 'HiFuture',
     category: 'Audio',
-    subcategory: 'Casques & Écouteurs',
+    subcategory: 'ecouteurs',
     price: 59.99,
     originalPrice: 79.99,
     discount: 25,
@@ -1130,9 +1130,9 @@ export const allProducts: Product[] = [
     airtableId: 'recE79Vv4LKOcn8P2',
     sku: 'HIFUTURE-GRAVITY-360',
     name: 'HIFUTURE GRAVITY Enceinte Bluetooth',
-    brand: 'HIFUTURE',
+    brand: 'HiFuture',
     category: 'Audio',
-    subcategory: 'Enceintes',
+    subcategory: 'Enceintes portables',
     price: 89.99,
     originalPrice: 119.99,
     discount: 25,
@@ -1187,7 +1187,7 @@ export const allProducts: Product[] = [
     airtableId: 'recGcKLvJNRXfT1Wx',
     sku: 'HIFUTURE-FITMAX-TRACKER',
     name: 'HIFUTURE FITMAX',
-    brand: 'HIFUTURE',
+    brand: 'HiFuture',
     category: 'Montres connectées',
     subcategory: 'Sport',
     price: 49.99,
@@ -1246,9 +1246,9 @@ export const allProducts: Product[] = [
     airtableId: 'recJKq3o5Pb7wxYeL',
     sku: 'HIFUTURE-VOCALIST100',
     name: 'HIFUTURE VOCALIST 100 Micro Karaoké',
-    brand: 'HIFUTURE',
+    brand: 'HiFuture',
     category: 'Audio',
-    subcategory: 'Casques & Écouteurs',
+    subcategory: 'Microphones',
     price: 34.99,
     originalPrice: 49.99,
     discount: 30,
@@ -1304,9 +1304,9 @@ export const allProducts: Product[] = [
     airtableId: 'recQnX8oW2kYbRvNZ',
     sku: 'HIFUTURE-TOURPRO-ANC',
     name: 'HIFUTURE TOUR PRO',
-    brand: 'HIFUTURE',
+    brand: 'HiFuture',
     category: 'Audio',
-    subcategory: 'Casques & Écouteurs',
+    subcategory: 'Casques',
     price: 119.99,
     originalPrice: 159.99,
     discount: 25,
@@ -1360,7 +1360,7 @@ export const allProducts: Product[] = [
     airtableId: 'recRhQM7ksbT5FV3P',
     sku: 'HIFUTURE-PULSEX-SMART',
     name: 'HIFUTURE PULSE X',
-    brand: 'HIFUTURE',
+    brand: 'HiFuture',
     category: 'Montres connectées',
     subcategory: 'Sport',
     price: 119.99,
@@ -1417,7 +1417,7 @@ export const allProducts: Product[] = [
     airtableId: 'recTu9Z2QKLxY7oNX',
     sku: 'HIFUTURE-KIDDO-KIDS',
     name: 'HIFUTURE KIDDO',
-    brand: 'HIFUTURE',
+    brand: 'HiFuture',
     category: 'Montres connectées',
     subcategory: 'Sport',
     price: 59.99,
@@ -1475,7 +1475,7 @@ export const allProducts: Product[] = [
     airtableId: 'recXOdBNKL9GfWxRZ',
     sku: 'HIFUTURE-FOCUS-PRO',
     name: 'HIFUTURE FOCUS',
-    brand: 'HIFUTURE',
+    brand: 'HiFuture',
     category: 'Montres connectées',
     subcategory: 'Sport',
     price: 79.99,
@@ -1536,7 +1536,7 @@ export const allProducts: Product[] = [
     name: 'MONSTER S150 Enceinte Haute Qualité',
     brand: 'MONSTER',
     category: 'Audio',
-    subcategory: 'Enceintes',
+    subcategory: 'Enceintes haut de gamme',
     price: 69.99,
     originalPrice: 89.99,
     discount: 22,
@@ -1592,7 +1592,7 @@ export const allProducts: Product[] = [
     name: 'MONSTER Champion Airlinks Casque Gaming Sans Fil',
     brand: 'MONSTER',
     category: 'Audio',
-    subcategory: 'Casques & Écouteurs',
+    subcategory: 'Casques gaming',
     price: 139.99,
     originalPrice: 179.99,
     discount: 22,
@@ -1648,7 +1648,7 @@ export const allProducts: Product[] = [
     name: 'MONSTER TH300 Tactile Casque Gaming Haptique',
     brand: 'MONSTER',
     category: 'Audio',
-    subcategory: 'Casques & Écouteurs',
+    subcategory: 'Casques gaming',
     price: 69.99,
     originalPrice: 89.99,
     discount: 22,
@@ -1697,6 +1697,62 @@ export const allProducts: Product[] = [
     badges: ['Innovation', 'Haptique', 'Immersion Totale']
   },
 
+  // MONSTER DNA FIT Casque Sport Premium
+  {
+    id: 'monster-dna-fit',
+    airtableId: 'rec8OTzIaj5Se2xDK',
+    sku: 'MONSTER-DNA-FIT',
+    name: 'MONSTER DNA FIT Casque Sport Premium',
+    brand: 'MONSTER',
+    category: 'Audio',
+    subcategory: 'Casques sport',
+    price: 189.99,
+    originalPrice: 249.99,
+    discount: 24,
+    promo: 'FITNESS PRO',
+    description: "Le casque sport MONSTER DNA FIT représente l'excellence absolue pour athlètes exigeants. Conçu spécifiquement pour résister aux entraînements les plus intenses tout en délivrant performance audio exceptionnelle qui booste vos performances. La certification IPX7 garantit résistance totale à transpiration et pluie. Construction militaire résiste chocs, vibrations et conditions extrêmes. Les coussinets antibactériens éliminent 99% des bactéries et odeurs. Le traitement antimicrobien maintient hygiène parfaite même après usage intensif. Le système de maintien breveté assure stabilité parfaite pendant mouvements dynamiques. Les crochets d'oreille flexibles s'adaptent morphologie individuelle. L'audio haute définition avec signature DNA délivre basses puissantes motivantes. L'égalisation sport optimisée amplifie rythmes énergisants. Les médiums clairs préservent voix coach et instructions. Les aigus cristallins maintiennent clarté même à volume élevé. L'autonomie 15 heures accompagne marathons d'entraînement. La charge rapide restaure 3 heures en 10 minutes. Le microphone intégré permet appels mains libres pendant exercice. Les commandes tactiles permettent contrôle sans interrompre effort. Le design noir/rouge dynamique reflète esprit sportif. Parfait pour sportifs passionnés de La Réunion cherchant excellence.",
+    shortDescription: 'Casque sport IPX7 avec coussinets antibactériens et audio HD motivant pour athlètes',
+    metaTitle: 'MONSTER DNA FIT - Casque Sport Premium IPX7 | Monster Phone 974',
+    metaDescription: 'Casque sport MONSTER DNA FIT résistant IPX7, coussinets antibactériens, audio HD énergisant. Maintien parfait, 15h autonomie. Pour athlètes exigeants La Réunion 974.',
+    urlSlug: 'monster-dna-fit-casque-sport',
+    keywords: ['MONSTER DNA FIT', 'casque sport', 'IPX7', 'antibactérien', 'fitness', 'audio HD', 'La Réunion'],
+    variants: [
+      { color: 'Noir/Rouge', colorCode: '#FF0000', ean: '0810079000001', stock: 18, images: [] }
+    ],
+    defaultVariant: 'Noir/Rouge',
+    specifications: [
+      { label: 'Résistance', value: 'IPX7', icon: 'water' },
+      { label: 'Drivers', value: '45mm HD', icon: 'speaker' },
+      { label: 'Autonomie', value: '15 heures', icon: 'battery' },
+      { label: 'Charge rapide', value: '10min = 3h', icon: 'charging' },
+      { label: 'Bluetooth', value: '5.1 aptX', icon: 'bluetooth' },
+      { label: 'Coussinets', value: 'Antibactériens', icon: 'shield' },
+      { label: 'Portée', value: '20 mètres', icon: 'signal' },
+      { label: 'Poids', value: '220g', icon: 'weight' }
+    ],
+    highlights: [
+      'Certification IPX7 totale',
+      'Coussinets antibactériens 99%',
+      'Maintien sport breveté',
+      'Audio HD signature DNA',
+      '15 heures d\'autonomie'
+    ],
+    images: [
+      '/placeholder-monster-dna-1.jpg',
+      '/placeholder-monster-dna-2.jpg',
+      '/placeholder-monster-dna-3.jpg'
+    ],
+    status: 'active',
+    rating: {
+      average: 4.8,
+      count: 567,
+      distribution: { 5: 420, 4: 100, 3: 35, 2: 10, 1: 2 }
+    },
+    warranty: '3 ans constructeur',
+    deliveryTime: '24-48h à La Réunion',
+    badges: ['Sport Pro', 'IPX7', 'Antibactérien']
+  },
+
   // MONSTER N-Lite 203 Batterie Portable Premium
   {
     id: 'monster-n-lite-203',
@@ -1705,7 +1761,7 @@ export const allProducts: Product[] = [
     name: 'MONSTER N-Lite 203 Batterie Portable Premium 20000mAh',
     brand: 'MONSTER',
     category: 'Accessoires',
-    subcategory: 'Chargeur & Batteries',
+    subcategory: 'Batteries externes',
     price: 49.99,
     originalPrice: 69.99,
     discount: 29,
@@ -1761,7 +1817,7 @@ export const allProducts: Product[] = [
     sku: 'MON-ILL-BASIC-MULTI',
     name: 'MONSTER Illuminescence Basic Lightstrip Multicouleur',
     brand: 'MONSTER',
-    category: 'Éclairage LED',
+    category: 'LED',
     subcategory: 'Bandeaux LED',
     price: 13.99,
     originalPrice: 19.99,
@@ -1819,7 +1875,7 @@ export const allProducts: Product[] = [
     sku: 'MON-ILL-COLOR-BLANC',
     name: 'MONSTER Illuminescence Light Strip Color/Blanc',
     brand: 'MONSTER',
-    category: 'Éclairage LED',
+    category: 'LED',
     subcategory: 'Bandeaux LED',
     price: 17.99,
     originalPrice: 24.99,
@@ -1875,7 +1931,7 @@ export const allProducts: Product[] = [
     sku: 'MON-ILL-NEON',
     name: 'MONSTER Illuminescence Neon Light Strip',
     brand: 'MONSTER',
-    category: 'Éclairage LED',
+    category: 'LED',
     subcategory: 'Néon LED',
     price: 26.99,
     originalPrice: 39.99,
@@ -1933,8 +1989,8 @@ export const allProducts: Product[] = [
     sku: 'MON-ILL-CHROMA-2X',
     name: 'MONSTER Illuminescence Smart Chroma Light 2X Bars',
     brand: 'MONSTER',
-    category: 'Éclairage LED',
-    subcategory: 'Accessoires LED',
+    category: 'LED',
+    subcategory: 'Barres LED',
     price: 49.99,
     originalPrice: 79.99,
     discount: 38,
@@ -1989,7 +2045,7 @@ export const allProducts: Product[] = [
     sku: 'MON-ILL-BASIC-30M',
     name: 'MONSTER Illuminescence Basic Light Strip 30M RGB',
     brand: 'MONSTER',
-    category: 'Éclairage LED',
+    category: 'LED',
     subcategory: 'Bandeaux LED',
     price: 74.99,
     originalPrice: 119.99,
@@ -2050,7 +2106,7 @@ export const allProducts: Product[] = [
     name: 'MONSTER Câble HDMI Ultra HD 4K 2M',
     brand: 'MONSTER',
     category: 'Accessoires',
-    subcategory: 'Câbles & Connecteurs',
+    subcategory: 'Câbles et connecteurs',
     price: 29.99,
     originalPrice: 39.99,
     discount: 25,
@@ -2090,6 +2146,7 @@ export const allProducts: Product[] = [
     },
     warranty: '5 ans constructeur',
     deliveryTime: '24-48h à La Réunion',
+    status: "active",
     badges: ['Premium', 'Gaming', '8K Ready']
   },
 
@@ -2101,7 +2158,7 @@ export const allProducts: Product[] = [
     name: 'MONSTER Câble USB-C Charge Rapide 100W',
     brand: 'MONSTER',
     category: 'Accessoires',
-    subcategory: 'Câbles & Connecteurs',
+    subcategory: 'Câbles et connecteurs',
     price: 24.99,
     originalPrice: 34.99,
     discount: 29,
@@ -2142,6 +2199,7 @@ export const allProducts: Product[] = [
     },
     warranty: '3 ans constructeur',
     deliveryTime: '24-48h à La Réunion',
+    status: "active",
     badges: ['100W', 'Pro', 'Durable']
   },
 
@@ -2153,7 +2211,7 @@ export const allProducts: Product[] = [
     name: 'MONSTER Câble Lightning Pro MFi Certifié',
     brand: 'MONSTER',
     category: 'Accessoires',
-    subcategory: 'Câbles & Connecteurs',
+    subcategory: 'Câbles et connecteurs',
     price: 19.99,
     originalPrice: 29.99,
     discount: 33,
@@ -2194,6 +2252,7 @@ export const allProducts: Product[] = [
     },
     warranty: 'Garantie à vie',
     deliveryTime: '24-48h à La Réunion',
+    status: "active",
     badges: ['MFi', 'Apple', 'Garantie à vie']
   },
 
@@ -2205,7 +2264,7 @@ export const allProducts: Product[] = [
     name: 'MONSTER Câble AUX 3.5mm Gold Plated Pro',
     brand: 'MONSTER',
     category: 'Accessoires',
-    subcategory: 'Câbles & Connecteurs',
+    subcategory: 'Câbles et connecteurs',
     price: 14.99,
     originalPrice: 19.99,
     discount: 25,
@@ -2245,6 +2304,7 @@ export const allProducts: Product[] = [
     },
     warranty: '2 ans constructeur',
     deliveryTime: '24-48h à La Réunion',
+    status: "active",
     badges: ['Audiophile', 'Gold', 'Pro']
   },
 
@@ -2256,7 +2316,7 @@ export const allProducts: Product[] = [
     name: 'MONSTER Câble Micro USB Renforcé Military Grade',
     brand: 'MONSTER',
     category: 'Accessoires',
-    subcategory: 'Câbles & Connecteurs',
+    subcategory: 'Câbles et connecteurs',
     price: 12.99,
     originalPrice: 17.99,
     discount: 28,
@@ -2297,6 +2357,7 @@ export const allProducts: Product[] = [
     },
     warranty: '2 ans constructeur',
     deliveryTime: '24-48h à La Réunion',
+    status: "active",
     badges: ['Military', 'Durable', 'Resistant']
   },
 
@@ -2308,7 +2369,7 @@ export const allProducts: Product[] = [
     name: 'MONSTER Câble Multi 3-en-1 Universal',
     brand: 'MONSTER',
     category: 'Accessoires',
-    subcategory: 'Câbles & Connecteurs',
+    subcategory: 'Câbles et connecteurs',
     price: 27.99,
     originalPrice: 37.99,
     discount: 26,
@@ -2348,6 +2409,7 @@ export const allProducts: Product[] = [
     },
     warranty: '2 ans constructeur',
     deliveryTime: '24-48h à La Réunion',
+    status: "active",
     badges: ['3-en-1', 'Universal', 'Magnetic']
   },
 
@@ -2360,8 +2422,8 @@ export const allProducts: Product[] = [
     sku: 'MONSTER-LED-STRIP-5M',
     name: 'MONSTER LED Strip RGB Gaming 5M Sync Music',
     brand: 'MONSTER',
-    category: 'Éclairage LED',
-    subcategory: 'Bandeaux LED',
+    category: 'Accessoires',
+    subcategory: 'Éclairage LED',
     price: 39.99,
     originalPrice: 59.99,
     discount: 33,
@@ -2401,6 +2463,7 @@ export const allProducts: Product[] = [
     },
     warranty: '2 ans constructeur',
     deliveryTime: '24-48h à La Réunion',
+    status: "active",
     badges: ['Gaming', 'RGB', 'Music Sync']
   },
 
@@ -2411,8 +2474,8 @@ export const allProducts: Product[] = [
     sku: 'MONSTER-RING-LIGHT',
     name: 'MONSTER Ring Light Pro 18" Streaming',
     brand: 'MONSTER',
-    category: 'Éclairage LED',
-    subcategory: 'Accessoires LED',
+    category: 'Accessoires',
+    subcategory: 'Éclairage LED',
     price: 49.99,
     originalPrice: 69.99,
     discount: 29,
@@ -2452,6 +2515,7 @@ export const allProducts: Product[] = [
     },
     warranty: '2 ans constructeur',
     deliveryTime: '24-48h à La Réunion',
+    status: "active",
     badges: ['Pro', 'Streaming', '18"']
   },
 
@@ -2462,8 +2526,8 @@ export const allProducts: Product[] = [
     sku: 'MONSTER-DESK-LAMP',
     name: 'MONSTER Lampe Bureau LED Tactile',
     brand: 'MONSTER',
-    category: 'Éclairage LED',
-    subcategory: 'Accessoires LED',
+    category: 'Accessoires',
+    subcategory: 'Éclairage LED',
     price: 34.99,
     originalPrice: 44.99,
     discount: 22,
@@ -2504,6 +2568,7 @@ export const allProducts: Product[] = [
     },
     warranty: '2 ans constructeur',
     deliveryTime: '24-48h à La Réunion',
+    status: "active",
     badges: ['Smart', 'USB', 'Eco']
   },
 
@@ -2514,8 +2579,8 @@ export const allProducts: Product[] = [
     sku: 'MONSTER-HEXAGON-6',
     name: 'MONSTER Panneaux LED Hexagonaux x6',
     brand: 'MONSTER',
-    category: 'Éclairage LED',
-    subcategory: 'Déco LED',
+    category: 'Accessoires',
+    subcategory: 'Éclairage LED',
     price: 89.99,
     originalPrice: 119.99,
     discount: 25,
@@ -2555,6 +2620,7 @@ export const allProducts: Product[] = [
     },
     warranty: '2 ans constructeur',
     deliveryTime: '24-48h à La Réunion',
+    status: "active",
     badges: ['Modular', 'WiFi', 'Touch']
   },
 
@@ -2565,8 +2631,8 @@ export const allProducts: Product[] = [
     sku: 'MONSTER-NEON-GAMER',
     name: 'MONSTER Néon LED Gaming "GAME ON"',
     brand: 'MONSTER',
-    category: 'Éclairage LED',
-    subcategory: 'Néons LED',
+    category: 'Accessoires',
+    subcategory: 'Éclairage LED',
     price: 44.99,
     originalPrice: 59.99,
     discount: 25,
@@ -2606,6 +2672,7 @@ export const allProducts: Product[] = [
     },
     warranty: '2 ans constructeur',
     deliveryTime: '24-48h à La Réunion',
+    status: "active",
     badges: ['Gaming', 'Neon', 'USB']
   },
 
@@ -2616,8 +2683,8 @@ export const allProducts: Product[] = [
     sku: 'MONSTER-STAR-PROJ',
     name: 'MONSTER Projecteur LED Galaxie Bluetooth',
     brand: 'MONSTER',
-    category: 'Éclairage LED',
-    subcategory: 'Projecteurs LED',
+    category: 'Accessoires',
+    subcategory: 'Éclairage LED',
     price: 54.99,
     originalPrice: 74.99,
     discount: 27,
@@ -2657,6 +2724,7 @@ export const allProducts: Product[] = [
     },
     warranty: '2 ans constructeur',
     deliveryTime: '24-48h à La Réunion',
+    status: "active",
     badges: ['Galaxy', 'Bluetooth', 'Music']
   },
 
@@ -2667,8 +2735,8 @@ export const allProducts: Product[] = [
     sku: 'MONSTER-MONITOR-BAR',
     name: 'MONSTER Barre LED Écran Eye-Care',
     brand: 'MONSTER',
-    category: 'Éclairage LED',
-    subcategory: 'Accessoires LED',
+    category: 'Accessoires',
+    subcategory: 'Éclairage LED',
     price: 37.99,
     originalPrice: 49.99,
     discount: 24,
@@ -2708,6 +2776,7 @@ export const allProducts: Product[] = [
     },
     warranty: '2 ans constructeur',
     deliveryTime: '24-48h à La Réunion',
+    status: "active",
     badges: ['Eye-Care', 'Auto', 'Pro']
   },
 
@@ -2718,8 +2787,8 @@ export const allProducts: Product[] = [
     sku: 'MONSTER-CUBE-RGB',
     name: 'MONSTER Cube LED RGB Intelligent WiFi',
     brand: 'MONSTER',
-    category: 'Éclairage LED',
-    subcategory: 'Déco LED',
+    category: 'Accessoires',
+    subcategory: 'Éclairage LED',
     price: 29.99,
     originalPrice: 39.99,
     discount: 25,
@@ -2759,6 +2828,7 @@ export const allProducts: Product[] = [
     },
     warranty: '2 ans constructeur',
     deliveryTime: '24-48h à La Réunion',
+    status: "active",
     badges: ['Smart', 'WiFi', 'Portable']
   },
 
@@ -2772,7 +2842,7 @@ export const allProducts: Product[] = [
     name: 'MONSTER Chargeur Mural GaN 65W 3 Ports',
     brand: 'MONSTER',
     category: 'Accessoires',
-    subcategory: 'Chargeur & Batteries',
+    subcategory: 'Chargeurs',
     price: 44.99,
     originalPrice: 59.99,
     discount: 25,
@@ -2813,6 +2883,7 @@ export const allProducts: Product[] = [
     },
     warranty: '2 ans constructeur',
     deliveryTime: '24-48h à La Réunion',
+    status: "active",
     badges: ['GaN', '65W', 'Compact']
   },
 
@@ -2824,7 +2895,7 @@ export const allProducts: Product[] = [
     name: 'MONSTER Batterie Externe 20000mAh PD 22.5W',
     brand: 'MONSTER',
     category: 'Accessoires',
-    subcategory: 'Chargeur & Batteries',
+    subcategory: 'Chargeurs',
     price: 39.99,
     originalPrice: 54.99,
     discount: 27,
@@ -2865,6 +2936,7 @@ export const allProducts: Product[] = [
     },
     warranty: '18 mois constructeur',
     deliveryTime: '24-48h à La Réunion',
+    status: "active",
     badges: ['20000mAh', 'PD', 'Digital']
   },
 
@@ -2876,7 +2948,7 @@ export const allProducts: Product[] = [
     name: 'MONSTER Chargeur Voiture 45W Dual USB-C',
     brand: 'MONSTER',
     category: 'Accessoires',
-    subcategory: 'Chargeur & Batteries',
+    subcategory: 'Chargeurs',
     price: 24.99,
     originalPrice: 34.99,
     discount: 29,
@@ -2917,9 +2989,62 @@ export const allProducts: Product[] = [
     },
     warranty: '2 ans constructeur',
     deliveryTime: '24-48h à La Réunion',
+    status: "active",
     badges: ['45W', 'Dual USB-C', 'Auto']
   },
 
+  // Monster Station Charge Sans Fil 15W
+  {
+    id: 'monster-chargeur-sans-fil',
+    airtableId: 'recMONSTERWIRELESS001',
+    sku: 'MONSTER-WIRELESS-15W',
+    name: 'MONSTER Station Charge Sans Fil 15W Qi',
+    brand: 'MONSTER',
+    category: 'Accessoires',
+    subcategory: 'Chargeurs',
+    price: 29.99,
+    originalPrice: 39.99,
+    discount: 25,
+    promo: 'SANS FIL',
+    description: "La station de charge sans fil Monster 15W offre la liberté de charge par induction magnétique Qi. Compatible avec tous smartphones Qi incluant iPhone 12+ MagSafe et Samsung Galaxy. Puissance adaptative : 15W Android, 7.5W iPhone, 5W écouteurs. Bobines doubles élargies permettent charge dans toute position portrait ou paysage. Surface antidérapante silicone protège téléphone des rayures et maintient position stable. Détection corps étrangers stoppe charge si objet métallique détecté pour sécurité. Ventilateur silencieux intégré dissipe chaleur pour charge optimale continue. LED indicateur multicolore : bleu charge, vert complet, rouge erreur. Design ultra-fin 8mm s'intègre discrètement bureau ou table chevet. Compatible charge avec coques jusqu'à 5mm épaisseur (sans métal). Mode nuit désactive LED automatiquement après 10 secondes. Protection FOD (Foreign Object Detection) et contrôle température intelligent. Câble USB-C 1.5m et adaptateur 18W QC 3.0 inclus. Certification Qi et tests sécurité garantissent charge fiable quotidienne à La Réunion.",
+    shortDescription: 'Chargeur sans fil Qi 15W avec charge rapide adaptative',
+    metaTitle: 'MONSTER Chargeur Sans Fil 15W Qi - iPhone Samsung | Monster Phone 974',
+    metaDescription: 'Station charge sans fil Monster 15W Qi. Compatible iPhone MagSafe, Samsung. Charge rapide, ultra-fin, ventilateur silencieux. La Réunion 974.',
+    urlSlug: 'monster-station-charge-sans-fil-15w',
+    keywords: ['chargeur sans fil', 'Qi', '15W', 'Monster', 'wireless', 'MagSafe', 'La Réunion'],
+    variants: [
+      { color: 'Noir', colorCode: '#000000', ean: '3402000QI001', stock: 48, images: [] },
+      { color: 'Blanc', colorCode: '#FFFFFF', ean: '3402000QI002', stock: 35, images: [] }
+    ],
+    defaultVariant: 'Noir',
+    specifications: [
+      { label: 'Puissance', value: '15W max adaptive', icon: 'power' },
+      { label: 'Standard', value: 'Qi certified', icon: 'certificate' },
+      { label: 'Compatibilité', value: 'iPhone/Android', icon: 'phone' },
+      { label: 'Bobines', value: 'Double coil', icon: 'coil' },
+      { label: 'Épaisseur', value: '8mm ultra-fin', icon: 'size' },
+      { label: 'Coque', value: 'Jusqu\'à 5mm', icon: 'case' },
+      { label: 'Protection', value: 'FOD + température', icon: 'shield' },
+      { label: 'Ventilateur', value: 'Silencieux intégré', icon: 'fan' }
+    ],
+    highlights: [
+      'Charge 15W ultra-rapide',
+      'Compatible tous Qi',
+      'Ultra-fin 8mm',
+      'Ventilateur silencieux',
+      'Détection objets étrangers'
+    ],
+    images: [],
+    rating: {
+      average: 4.5,
+      count: 224,
+      distribution: { 5: 145, 4: 58, 3: 15, 2: 5, 1: 1 }
+    },
+    warranty: '2 ans constructeur',
+    deliveryTime: '24-48h à La Réunion',
+    status: "active",
+    badges: ['Wireless', '15W', 'Qi']
+  },
 
   // Monster Chargeur Multiple 6 Ports
   {
@@ -2929,7 +3054,7 @@ export const allProducts: Product[] = [
     name: 'MONSTER Station Charge 6 Ports 120W Desktop',
     brand: 'MONSTER',
     category: 'Accessoires',
-    subcategory: 'Chargeur & Batteries',
+    subcategory: 'Chargeurs',
     price: 59.99,
     originalPrice: 79.99,
     discount: 25,
@@ -2969,12 +3094,115 @@ export const allProducts: Product[] = [
     },
     warranty: '3 ans constructeur',
     deliveryTime: '24-48h à La Réunion',
+    status: "active",
     badges: ['120W', '6 Ports', 'Pro']
   },
 
   // ========== SUPPORTS GAMING (5 produits) ==========
 
+  // Monster Support Manette RGB
+  {
+    id: 'monster-support-manette-rgb',
+    airtableId: 'recMONSTERCONTROL001',
+    sku: 'MONSTER-CONTROLLER-STAND',
+    name: 'MONSTER Support Manette Gaming RGB Premium',
+    brand: 'MONSTER',
+    category: 'Accessoires',
+    subcategory: 'Supports gaming',
+    price: 34.99,
+    originalPrice: 44.99,
+    discount: 22,
+    promo: 'GAMING SETUP',
+    description: "Le support manette Monster RGB transforme vos contrôleurs en véritables œuvres d'art lumineuses. Compatible universellement avec PS5, PS4, Xbox Series, Switch Pro et manettes PC. Base lestée anti-basculement avec surface soft-touch protège manettes des rayures. Éclairage RGB personnalisable 16 millions couleurs avec 12 modes dynamiques. Bras ajustables accueillent 2 manettes simultanément angle exposition optimal. Système charge intégré via USB-C maintient manettes toujours prêtes (câbles inclus). Hub USB 2 ports supplémentaires pour périphériques gaming. Construction aluminium brossé et ABS renforcé garantit durabilité extrême. Gestion câbles intégrée maintient setup propre et organisé. Patins antidérapants silicone stabilité parfaite sur toute surface. Contrôle tactile LED permet changement rapide modes éclairage. Compatible montage mural avec kit fixation inclus. Dimensions compactes 15x20x10cm optimisent espace bureau gaming. Alimentation USB simple depuis PC, console ou adaptateur. Complément idéal pour setup gaming professionnel à La Réunion.",
+    shortDescription: 'Support 2 manettes avec RGB personnalisable et charge USB',
+    metaTitle: 'MONSTER Support Manette RGB - PS5 Xbox Switch | Monster Phone 974',
+    metaDescription: 'Support manette gaming Monster RGB premium. Compatible PS5, Xbox, Switch. Éclairage 16M couleurs, charge USB, aluminium. Setup gaming La Réunion.',
+    urlSlug: 'monster-support-manette-gaming-rgb',
+    keywords: ['support manette', 'RGB', 'gaming', 'PS5', 'Xbox', 'Monster', 'La Réunion'],
+    variants: [
+      { color: 'Noir', colorCode: '#000000', ean: '3402000CTRL001', stock: 38, images: [] }
+    ],
+    defaultVariant: 'Noir',
+    specifications: [
+      { label: 'Compatibilité', value: 'PS5/PS4/Xbox/Switch', icon: 'gamepad' },
+      { label: 'Capacité', value: '2 manettes', icon: 'number' },
+      { label: 'RGB', value: '16M couleurs', icon: 'palette' },
+      { label: 'Modes', value: '12 effets', icon: 'effects' },
+      { label: 'Charge', value: 'USB-C intégrée', icon: 'battery' },
+      { label: 'Hub', value: '2 ports USB', icon: 'ports' },
+      { label: 'Matériau', value: 'Aluminium + ABS', icon: 'material' },
+      { label: 'Dimensions', value: '15x20x10cm', icon: 'size' }
+    ],
+    highlights: [
+      'RGB 16 millions couleurs',
+      'Charge 2 manettes',
+      'Compatible toutes consoles',
+      'Hub USB intégré',
+      'Aluminium premium'
+    ],
+    images: [],
+    rating: {
+      average: 4.7,
+      count: 156,
+      distribution: { 5: 115, 4: 32, 3: 7, 2: 2, 1: 0 }
+    },
+    warranty: '2 ans constructeur',
+    deliveryTime: '24-48h à La Réunion',
+    status: "active",
+    badges: ['RGB', 'Gaming', 'Premium']
+  },
 
+  // Monster Support Casque Gaming LED
+  {
+    id: 'monster-support-casque-led',
+    airtableId: 'recMONSTERHEADSET001',
+    sku: 'MONSTER-HEADSET-STAND',
+    name: 'MONSTER Support Casque Gaming LED Pro',
+    brand: 'MONSTER',
+    category: 'Accessoires',
+    subcategory: 'Supports gaming',
+    price: 29.99,
+    originalPrice: 39.99,
+    discount: 25,
+    promo: 'SETUP PRO',
+    description: "Le support casque Monster LED Pro combine esthétique gaming et fonctionnalité avancée. Structure aluminium anodisé noir mat avec finitions premium résiste au poids des casques les plus lourds. Base LED circulaire diffuse éclairage ambiant personnalisable 7 couleurs + mode respiration. Hub USB 3.0 intégré 3 ports facilite connexion périphériques gaming : souris, clavier, clé USB. Port audio 3.5mm frontal permet branchement rapide casque sans chercher port PC. Surface caoutchoutée arceau protège bandeau casque de l'usure et déformation. Base lestée 500g avec patins antidérapants garantit stabilité absolue. Hauteur 28cm accommode tous types casques : gaming, studio, VR. Système gestion câbles arrière maintient fils organisés proprement. Alimentation USB unique simplifie installation (câble 1.5m inclus). Indicateurs LED ports USB montrent activité transfert données. Construction modulaire permet démontage facile pour transport LAN party. Compatible tous casques marché incluant modèles sans fil station charge. Accessoire indispensable pour setup gaming organisé et professionnel à La Réunion.",
+    shortDescription: 'Support casque avec hub USB 3.0 et LED ambiance 7 couleurs',
+    metaTitle: 'MONSTER Support Casque Gaming LED - Hub USB Setup | Monster Phone 974',
+    metaDescription: 'Support casque gaming Monster LED Pro. Hub USB 3.0, LED 7 couleurs, aluminium premium, port audio. Setup gaming parfait La Réunion.',
+    urlSlug: 'monster-support-casque-gaming-led',
+    keywords: ['support casque', 'gaming', 'LED', 'Monster', 'hub USB', 'setup', 'La Réunion'],
+    variants: [
+      { color: 'Noir Mat', colorCode: '#1A1A1A', ean: '3402000HEAD001', stock: 42, images: [] }
+    ],
+    defaultVariant: 'Noir Mat',
+    specifications: [
+      { label: 'Matériau', value: 'Aluminium anodisé', icon: 'material' },
+      { label: 'Hub USB', value: '3 ports USB 3.0', icon: 'ports' },
+      { label: 'LED', value: '7 couleurs + modes', icon: 'light' },
+      { label: 'Audio', value: 'Port 3.5mm frontal', icon: 'audio' },
+      { label: 'Hauteur', value: '28cm', icon: 'height' },
+      { label: 'Base', value: '500g lestée', icon: 'weight' },
+      { label: 'Alimentation', value: 'USB 5V', icon: 'power' },
+      { label: 'Compatibilité', value: 'Tous casques', icon: 'headset' }
+    ],
+    highlights: [
+      'Hub USB 3.0 intégré',
+      'LED 7 couleurs',
+      'Aluminium premium',
+      'Port audio frontal',
+      'Base ultra-stable'
+    ],
+    images: [],
+    rating: {
+      average: 4.6,
+      count: 198,
+      distribution: { 5: 138, 4: 45, 3: 12, 2: 3, 1: 0 }
+    },
+    warranty: '2 ans constructeur',
+    deliveryTime: '24-48h à La Réunion',
+    status: "active",
+    badges: ['LED', 'USB 3.0', 'Pro']
+  },
 
   // Monster Tapis Souris Gaming XXL RGB
   {
@@ -2984,7 +3212,7 @@ export const allProducts: Product[] = [
     name: 'MONSTER Tapis Souris Gaming XXL RGB 900x400mm',
     brand: 'MONSTER',
     category: 'Accessoires',
-    subcategory: 'Support',
+    subcategory: 'Supports gaming',
     price: 44.99,
     originalPrice: 59.99,
     discount: 25,
@@ -3024,10 +3252,113 @@ export const allProducts: Product[] = [
     },
     warranty: '2 ans constructeur',
     deliveryTime: '24-48h à La Réunion',
+    status: "active",
     badges: ['XXL', 'RGB', 'Pro Gaming']
   },
 
+  // Monster Bungee Souris Gaming
+  {
+    id: 'monster-bungee-souris',
+    airtableId: 'recMONSTERBUNGEE001',
+    sku: 'MONSTER-BUNGEE',
+    name: 'MONSTER Bungee Souris Gaming Anti-Friction',
+    brand: 'MONSTER',
+    category: 'Accessoires',
+    subcategory: 'Supports gaming',
+    price: 19.99,
+    originalPrice: 24.99,
+    discount: 20,
+    promo: 'PRO GAMER',
+    description: "Le bungee souris Monster élimine définitivement friction et accrochage câble pendant sessions gaming intenses. Bras flexible silicone medical-grade maintient câble hauteur optimale sans résistance. Compatible tous diamètres câbles souris 1.5mm à 4mm marché. Base lestée 280g avec 6 patins antidérapants garantit stabilité absolue même mouvements rapides. Hub USB 2.0 intégré 4 ports augmente connectivité setup gaming. LED RGB personnalisable base ajoute touche esthétique setup coordonné. Système ressort tension ajustable adapte différentes longueurs préférences câble. Revêtement soft-touch empêche rayures câble maintient souplesse long terme. Hauteur réglable 13-20cm accommode différentes configurations bureau. Système clip rapide permet installation/retrait câble une main. Port charge USB-C additionnel pour souris sans fil gaming. Construction ABS renforcé fibre verre résiste années utilisation intensive. Design compact n'encombre pas espace jeu précieux. Amélioration immédiate précision et confort pour FPS et MOBA compétitifs. Accessoire essentiel joueurs sérieux recherchant avantage compétitif La Réunion.",
+    shortDescription: 'Bungee anti-friction avec hub USB et base lestée 280g',
+    metaTitle: 'MONSTER Bungee Souris Gaming - Anti-Friction Pro | Monster Phone 974',
+    metaDescription: 'Bungee souris gaming Monster anti-friction. Hub USB 4 ports, base 280g stable, LED RGB. Précision maximale gaming La Réunion.',
+    urlSlug: 'monster-bungee-souris-gaming',
+    keywords: ['bungee souris', 'gaming', 'Monster', 'anti-friction', 'hub USB', 'FPS', 'La Réunion'],
+    variants: [
+      { color: 'Noir', colorCode: '#000000', ean: '3402000BUNGEE001', stock: 52, images: [] }
+    ],
+    defaultVariant: 'Noir',
+    specifications: [
+      { label: 'Base', value: '280g lestée', icon: 'weight' },
+      { label: 'Hub USB', value: '4 ports 2.0', icon: 'ports' },
+      { label: 'Hauteur', value: '13-20cm réglable', icon: 'height' },
+      { label: 'Câbles', value: '1.5-4mm diamètre', icon: 'cable' },
+      { label: 'LED', value: 'RGB personnalisable', icon: 'light' },
+      { label: 'Patins', value: '6 antidérapants', icon: 'grip' },
+      { label: 'Matériau', value: 'ABS + silicone', icon: 'material' },
+      { label: 'USB-C', value: 'Port charge bonus', icon: 'charge' }
+    ],
+    highlights: [
+      'Élimine friction câble',
+      'Hub USB 4 ports',
+      'Base 280g ultra-stable',
+      'LED RGB gaming',
+      'Hauteur ajustable'
+    ],
+    images: [],
+    rating: {
+      average: 4.5,
+      count: 267,
+      distribution: { 5: 168, 4: 72, 3: 20, 2: 5, 1: 2 }
+    },
+    warranty: '2 ans constructeur',
+    deliveryTime: '24-48h à La Réunion',
+    status: "active",
+    badges: ['Anti-Friction', 'USB Hub', 'Pro']
+  },
 
+  // Monster Support Écran Gaming RGB
+  {
+    id: 'monster-support-ecran-rgb',
+    airtableId: 'recMONSTERMONITOR001',
+    sku: 'MONSTER-MONITOR-STAND',
+    name: 'MONSTER Support Écran Gaming RGB avec Tiroirs',
+    brand: 'MONSTER',
+    category: 'Accessoires',
+    subcategory: 'Supports gaming',
+    price: 54.99,
+    originalPrice: 69.99,
+    discount: 21,
+    promo: 'ERGONOMIE',
+    description: "Le support écran Monster RGB améliore ergonomie et esthétique setup gaming complet. Élévation écran 10cm réduit fatigue cervicale aligne vision angle optimal. Plateau supérieur supporte jusqu'à 30kg compatible tous moniteurs 32 pouces max. Bande LED RGB intégrée périmètre diffuse éclairage ambiant personnalisable. 2 tiroirs coulissants latéraux rangent accessoires gaming : manettes, câbles, disques. Surface supérieure 60x25cm accueille écran et périphériques additionnels. Hub USB 3.0 frontal 4 ports facilite connexion rapide appareils. Passe-câbles intégré maintient workspace organisé sans enchevêtrement. Construction MDF premium 18mm avec finition noir mat anti-rayures. Pieds aluminium réglables hauteur compensent irrégularités bureau. Système ventilation passif évite surchauffe équipements posés dessus. Compatible VESA permet installation bras moniteur additionnel si besoin. Espace stockage inférieur 8cm hauteur range clavier taille normale. Charge wireless Qi 10W intégrée coin droit pour smartphone. Installation sans outils montage rapide 5 minutes. Solution ergonomique complète pour sessions gaming prolongées confortables La Réunion.",
+    shortDescription: 'Support écran avec tiroirs, hub USB et RGB ambiance gaming',
+    metaTitle: 'MONSTER Support Écran Gaming RGB - Ergonomie Setup | Monster Phone 974',
+    metaDescription: 'Support écran gaming Monster RGB avec tiroirs rangement. Hub USB 3.0, charge Qi, élévation ergonomique. Setup gaming complet La Réunion.',
+    urlSlug: 'monster-support-ecran-gaming-rgb-tiroirs',
+    keywords: ['support écran', 'gaming', 'RGB', 'Monster', 'ergonomie', 'tiroirs', 'La Réunion'],
+    variants: [
+      { color: 'Noir Mat', colorCode: '#1A1A1A', ean: '3402000MONITOR001', stock: 28, images: [] }
+    ],
+    defaultVariant: 'Noir Mat',
+    specifications: [
+      { label: 'Dimensions', value: '60x25x10cm', icon: 'size' },
+      { label: 'Capacité', value: '30kg max', icon: 'weight' },
+      { label: 'Tiroirs', value: '2 coulissants', icon: 'drawer' },
+      { label: 'Hub USB', value: '4 ports 3.0', icon: 'ports' },
+      { label: 'RGB', value: 'LED périmètre', icon: 'light' },
+      { label: 'Charge Qi', value: '10W intégrée', icon: 'wireless' },
+      { label: 'Matériau', value: 'MDF 18mm premium', icon: 'material' },
+      { label: 'Écran max', value: '32 pouces', icon: 'monitor' }
+    ],
+    highlights: [
+      'Élévation ergonomique 10cm',
+      '2 tiroirs rangement',
+      'Hub USB 3.0 frontal',
+      'RGB gaming ambiance',
+      'Charge wireless Qi'
+    ],
+    images: [],
+    rating: {
+      average: 4.7,
+      count: 112,
+      distribution: { 5: 82, 4: 24, 3: 5, 2: 1, 1: 0 }
+    },
+    warranty: '2 ans constructeur',
+    deliveryTime: '24-48h à La Réunion',
+    status: "active",
+    badges: ['Ergonomie', 'RGB', 'Storage']
+  },
 
   // ========== MONTRES CONNECTÉES ==========
   
@@ -3073,6 +3404,7 @@ export const allProducts: Product[] = [
     },
     warranty: '2 ans constructeur',
     deliveryTime: '24-48h à La Réunion',
+    status: "active",
     badges: ['Performance', 'GPS']
   },
 
@@ -3086,7 +3418,7 @@ export const allProducts: Product[] = [
     category: 'Montres',
     subcategory: 'Montres connectées',
     price: 34.99,
-    description: "La montre connectée HIFUTURE EVO 2 démocratise l'accès aux technologies de santé connectée avec un rapport qualité-prix exceptionnel. Conçue pour s'adapter à tous les styles de vie, cette montre intelligente combine fonctionnalités essentielles et design raffiné dans un package accessible à tous. L'écran LCD couleur lumineux affiche clairement toutes vos données vitales et notifications. La technologie rétro-éclairage adaptée garantit une lisibilité optimale en toutes conditions, du bureau climatisé aux plages ensoleillées de La Réunion. L'interface intuitive permet une navigation fluide entre les différentes fonctions. Le moniteur cardiaque optique surveille votre rythme en continu, détectant anomalies et tendances pour une prévention active. Le podomètre précis compte chaque pas, encourageant l'atteinte de vos objectifs quotidiens de 10 000 pas. L'analyse du sommeil identifie vos phases de repos pour optimiser votre récupération. Trois finitions élégantes répondent à toutes les préférences : le Beige chic apporte une touche de douceur féminine, le Noir intemporel s'adapte à toutes les tenues, tandis que le Rose Gold tendance ajoute une note de luxe accessible. Les bracelets en silicone doux hypoallergénique garantissent confort toute la journée. La résistance IP68 permet immersion jusqu'à 1,5 mètre pendant 30 minutes, idéale pour natation légère et protection contre la pluie. Cette certification militaire assure également résistance aux chocs, vibrations et températures extrêmes du climat tropical. L'autonomie de 5 à 7 jours libère des contraintes de charge fréquente. La batterie optimisée maintient performances constantes même après des centaines de cycles. La charge magnétique sans effort se complète en moins de 2 heures. Les fonctions intelligentes incluent notifications d'appels et messages, contrôle caméra à distance, rappels de sédentarité et alarmes personnalisables. Le suivi du cycle féminin intégré (versions Beige et Rose Gold) offre prédictions et rappels discrets. Accessible à tous les budgets, l'EVO 2 démontre que la technologie de santé connectée peut être abordable sans compromis sur la qualité.",
+    description: "La montre connectée HIFUTURE EVO 2 démocratise l'accès aux technologies de santé connectée avec un rapport qualité-prix exceptionnel. L'écran LCD couleur lumineux affiche clairement toutes vos données vitales et notifications. Le moniteur cardiaque optique surveille votre rythme en continu, détectant anomalies et tendances pour une prévention active.",
     shortDescription: "Montre connectée abordable avec suivi santé complet",
     metaTitle: 'HIFUTURE EVO 2 - Montre Connectée Abordable | Monster Phone 974',
     metaDescription: 'Montre HIFUTURE EVO 2 au rapport qualité-prix imbattable. Écran couleur, suivi santé complet, IP68.',
@@ -3119,6 +3451,7 @@ export const allProducts: Product[] = [
     },
     warranty: '2 ans constructeur',
     deliveryTime: '24-48h à La Réunion',
+    status: "active",
     badges: ['Meilleur prix', 'Populaire']
   },
 
@@ -3132,7 +3465,7 @@ export const allProducts: Product[] = [
     category: 'Montres',
     subcategory: 'Montres connectées',
     price: 49.99,
-    description: "La montre connectée HIFUTURE Zone 2 incarne la polyvalence absolue pour les utilisateurs actifs recherchant un compagnon technologique adapté à tous les défis sportifs et quotidiens. Cette montre intelligente révolutionne le suivi d'activité avec une précision remarquable et des fonctionnalités avancées accessibles à tous.\n\nL'écran AMOLED lumineux offre une visibilité cristalline exceptionnelle, même sous le soleil éclatant de La Réunion. La technologie d'affichage adaptatif ajuste automatiquement la luminosité selon l'environnement, garantissant une lisibilité parfaite en toutes circonstances. Les couleurs vibrantes et les contrastes profonds subliment chaque notification et donnée affichée.\n\nLe suivi multi-sport révolutionnaire propose plus de 20 modes d'entraînement spécialisés, du running au cyclisme en passant par la natation et les sports nautiques. Chaque mode intègre des métriques spécifiques optimisées pour maximiser vos performances. L'algorithme intelligent apprend de vos habitudes pour personnaliser les recommandations d'entraînement.\n\nLe GPS intégré haute sensibilité cartographie précisément vos parcours avec une consommation énergétique optimisée. La technologie de positionnement rapide acquiert le signal satellite en quelques secondes, idéal pour les départs spontanés. Les données de distance, vitesse et altitude s'enregistrent avec une précision professionnelle.\n\nLes capteurs de santé avancés surveillent en continu votre fréquence cardiaque, votre niveau d'oxygène sanguin et analysent la qualité de votre sommeil. Les alertes personnalisables vous informent des anomalies détectées. Le suivi du stress et les exercices de respiration guidée favorisent votre bien-être quotidien.\n\nLa certification IP67 garantit une résistance totale à la poussière et une étanchéité jusqu'à 1 mètre de profondeur. Cette protection robuste permet une utilisation sans crainte sous la pluie tropicale ou pendant vos séances de natation. La construction durable résiste aux chocs et vibrations des activités sportives intenses.\n\nL'autonomie de 7 à 10 jours en utilisation normale libère des contraintes de recharge quotidienne. Le mode économie d'énergie intelligent prolonge l'autonomie jusqu'à 15 jours. La charge rapide magnétique restaure 80% de la batterie en seulement 45 minutes.\n\nTrois coloris élégants s'adaptent à tous les styles : le Gris sophistiqué convient parfaitement au cadre professionnel, le Rose délicat apporte une touche de féminité moderne, tandis que le Noir classique offre une polyvalence intemporelle. Les bracelets interchangeables permettent de personnaliser votre look selon les occasions.\n\nLa connectivité Bluetooth 5.0 assure une synchronisation stable avec votre smartphone iOS ou Android. Les notifications intelligentes filtrent les alertes importantes sans vous submerger. Le contrôle de la musique et de l'appareil photo à distance simplifie votre quotidien connecté.\n\nMontre connectée polyvalente idéale pour les sportifs réunionnais recherchant performance et style au quotidien.",
+    description: "La montre connectée HIFUTURE Zone 2 incarne la polyvalence absolue pour les utilisateurs actifs. Son écran AMOLED lumineux garantit une visibilité cristalline même sous le soleil éclatant de La Réunion. Le suivi multi-sport révolutionnaire propose plus de 20 modes d'entraînement spécialisés.",
     shortDescription: "Montre connectée polyvalente avec écran AMOLED et 20+ modes sport",
     metaTitle: 'HIFUTURE Zone 2 - Montre Connectée Polyvalente | Monster Phone 974',
     metaDescription: 'Montre HIFUTURE Zone 2 avec écran AMOLED et 20+ modes sport. GPS intégré, capteurs avancés, IP67.',
@@ -3165,6 +3498,7 @@ export const allProducts: Product[] = [
     },
     warranty: '2 ans constructeur',
     deliveryTime: '24-48h à La Réunion',
+    status: "active",
     badges: ['Multi-sport', 'Unisexe']
   },
 
@@ -3178,7 +3512,7 @@ export const allProducts: Product[] = [
     category: 'Montres',
     subcategory: 'Montres sport',
     price: 99.99,
-    description: "La gamme HIFUTURE GO PRO établit de nouveaux standards pour les montres connectées dédiées aux athlètes exigeants et aux professionnels du sport. Cette montre représente l'aboutissement technologique pour ceux qui repoussent constamment leurs limites et recherchent la performance absolue.\n\nLe GPS haute précision multi-constellation (GPS, GLONASS, Galileo) garantit un tracking optimal avec une précision métrique même dans les environnements les plus difficiles. La technologie de positionnement avancée maintient le signal sous la canopée dense des forêts réunionnaises et dans les cirques montagneux. L'acquisition satellite ultra-rapide permet un démarrage immédiat de vos séances.\n\nL'analyse VO2 Max évalue scientifiquement votre capacité aérobie maximale, fournissant des données professionnelles sur votre condition physique. L'algorithme adaptatif calcule votre progression et prédit vos performances futures. Les recommandations d'entraînement personnalisées optimisent votre préparation physique selon vos objectifs.\n\nLe capteur de fréquence cardiaque optique de dernière génération mesure avec précision médicale votre rythme cardiaque même pendant les efforts intenses. Les zones de fréquence cardiaque personnalisables optimisent chaque séance d'entraînement. L'alerte de fréquence anormale protège votre santé pendant l'effort.\n\nLe baromètre altimétrique intégré mesure précisément les dénivelés et prévoit les changements météorologiques. Parfait pour les trails dans les hauteurs de l'île, il enregistre vos ascensions cumulées et analyse vos performances en montée. Les alertes météo anticipent les conditions dangereuses.\n\nL'écran transflectif haute définition reste parfaitement lisible en plein soleil sans consommer d'énergie supplémentaire. La technologie MIP (Memory In Pixel) offre un contraste exceptionnel et une visibilité optimale sous tous les angles. Le rétroéclairage adaptatif s'active automatiquement dans l'obscurité.\n\nLa certification 5ATM permet une immersion jusqu'à 50 mètres, idéale pour la natation en piscine et en eau libre. Les algorithmes spécialisés détectent automatiquement votre style de nage et comptent vos longueurs. L'analyse SWOLF évalue votre efficacité de nage pour améliorer votre technique.\n\nL'autonomie exceptionnelle de 14 jours en mode smartwatch et 35 heures en GPS continu accompagne vos ultra-trails les plus ambitieux. Le mode UltraTrac économise la batterie lors des sorties longues en maintenant un tracking précis. La gestion intelligente de l'énergie prolonge l'autonomie selon vos besoins.\n\nLes profils d'activité spécialisés couvrent plus de 100 sports différents, du trail running au kitesurf en passant par l'escalade. Chaque profil intègre des métriques spécifiques et des écrans de données personnalisables. Les entraînements structurés guident votre progression avec des objectifs précis.\n\nLa plateforme d'analyse avancée synchronise automatiquement vos données pour un suivi détaillé de vos performances. Les graphiques interactifs visualisent votre progression sur le long terme. Le partage social motive avec les défis communautaires et les segments Strava.\n\nDeux coloris sportifs subliment cette technologie de pointe : le Noir Carbon avec finition mate anti-reflets pour une discrétion absolue, et l'Orange Fluo haute visibilité pour la sécurité lors des entraînements nocturnes. Le bracelet en silicone premium résiste à la transpiration et aux UV tropicaux.\n\nMontre connectée professionnelle conçue pour les athlètes réunionnais visant l'excellence sportive et la performance mesurable.",
+    description: "La gamme HIFUTURE GO PRO établit de nouveaux standards pour les montres connectées dédiées aux athlètes. Le GPS haute précision multi-constellation (GPS, GLONASS, Galileo) garantit un tracking optimal. L'analyse VO2 Max évalue scientifiquement votre capacité aérobie maximale.",
     shortDescription: "Montre connectée sport pro avec GPS multi-constellation et analyse VO2 Max",
     metaTitle: 'HIFUTURE GO PRO - Montre Connectée Sport Pro | Monster Phone 974',
     metaDescription: 'Montres HIFUTURE GO PRO avec GPS multi-constellation et analyse VO2 Max. Écran AMOLED, ATM5, autonomie 12 jours.',
@@ -3211,6 +3545,7 @@ export const allProducts: Product[] = [
     },
     warranty: '2 ans constructeur',
     deliveryTime: '24-48h à La Réunion',
+    status: "active",
     badges: ['Sport Pro', 'Performance']
   },
 
@@ -3224,7 +3559,7 @@ export const allProducts: Product[] = [
     category: 'Montres',
     subcategory: 'Montres premium',
     price: 169.99,
-    description: "La montre connectée HIFUTURE Active incarne l'excellence premium avec son boîtier métallique raffiné qui allie robustesse et élégance. Cette montre haut de gamme fusionne matériaux nobles, technologies avancées et design sophistiqué pour répondre aux exigences des professionnels actifs les plus discriminants. Deux designs exclusifs expriment des personnalités distinctes : le Silver métallique classique apporte une touche d'intemporalité luxueuse parfaite pour l'environnement professionnel, tandis que le Black + Red racing sportif unique capture l'esprit de compétition avec ses accents rouges dynamiques sur fond noir profond. L'écran AMOLED haute définition offre une luminosité exceptionnelle de 1000 nits, garantissant une lisibilité parfaite même sous le soleil éclatant de La Réunion. La résolution supérieure affiche graphiques et données avec une netteté cristalline. Le verre saphir anti-rayures préserve l'intégrité de l'écran dans toutes les conditions. Les fonctions sport professionnelles avancées transforment chaque entraînement en session d'optimisation. Plus de 100 modes sportifs couvrent toutes les disciplines imaginables. L'analyse biométrique en temps réel évalue performance, fatigue et récupération. Les plans d'entraînement adaptatifs s'ajustent à votre progression. La certification ATM5 autorise plongée jusqu'à 50 mètres et natation en eau libre sans restriction. La construction ultra-robuste résiste aux chocs extrêmes, variations thermiques et conditions les plus hostiles. Le boîtier en acier inoxydable 316L de qualité marine garantit durabilité éternelle. L'autonomie exceptionnelle de 12 à 16 jours libère totalement des contraintes de charge. La gestion énergétique intelligente optimise consommation selon usage. Le mode ultra-économie prolonge l'autonomie jusqu'à 30 jours pour les situations critiques. Le GPS haute précision multi-constellation et les capteurs professionnels intégrés offrent mesures d'une précision inégalée. Accéléromètre, gyroscope, magnétomètre, baromètre et capteur de lumière ambiante créent un écosystème de données complet. La montre métallique premium définitive pour professionnels actifs exigeants de La Réunion.",
+    description: "La montre connectée HIFUTURE Active incarne l'excellence premium avec son boîtier métallique raffiné. L'écran AMOLED haute définition offre une luminosité exceptionnelle de 1000 nits. Plus de 100 modes sportifs couvrent toutes les disciplines imaginables.",
     shortDescription: "Montre connectée premium avec boîtier métallique et écran AMOLED 1000 nits",
     metaTitle: 'HIFUTURE Active - Montre Connectée Premium Métallique | Monster Phone 974',
     metaDescription: 'Montre HIFUTURE Active avec boîtier métallique premium et écran AMOLED 1000 nits. ATM5, 100+ modes sport, autonomie 16 jours.',
@@ -3256,6 +3591,7 @@ export const allProducts: Product[] = [
     },
     warranty: '2 ans constructeur',
     deliveryTime: '24-48h à La Réunion',
+    status: "active",
     badges: ['Premium', 'Luxe']
   },
 
@@ -3269,7 +3605,7 @@ export const allProducts: Product[] = [
     category: 'Montres',
     subcategory: 'Montres connectées',
     price: 69.99,
-    description: "La montre connectée HIFUTURE Ultra2 Pro représente le summum de la technologie portable avec ses fonctionnalités premium destinées aux utilisateurs exigeants. Cette montre incarne l'excellence technologique avec un équilibre parfait entre sophistication et performance sportive avancée.\n\nL'écran AMOLED HD délivre des couleurs éclatantes et des noirs profonds avec un contraste infini pour une expérience visuelle immersive. La résolution haute définition sublime chaque détail, des graphiques d'entraînement aux photos de contacts. La technologie Always-On Display affiche en permanence l'heure et les informations essentielles sans compromettre l'autonomie.\n\nLe système de santé complet intègre les capteurs les plus avancés pour un monitoring précis 24h/24. Le capteur PPG de dernière génération mesure la fréquence cardiaque avec une précision médicale, détectant même les variations subtiles. L'oxymètre de pouls surveille votre saturation en oxygène, crucial pour l'acclimatation en altitude et la récupération.\n\nL'intelligence artificielle embarquée analyse vos habitudes pour proposer des recommandations personnalisées. L'algorithme adaptatif apprend de vos routines quotidiennes pour optimiser les notifications et suggestions. Le coach virtuel intelligent guide vos entraînements avec des conseils en temps réel basés sur vos performances.\n\nLe GPS intégré haute sensibilité utilise plusieurs constellations satellites pour une localisation précise même dans les environnements difficiles. Le tracking en temps réel cartographie vos parcours avec une précision métrique. La boussole électronique et l'altimètre barométrique complètent la navigation pour les aventures outdoor.\n\nLa résistance ATM5 certifie l'étanchéité jusqu'à 50 mètres de profondeur, parfaite pour la natation et les sports aquatiques. Les matériaux premium résistent aux chocs, rayures et conditions extrêmes. Le verre saphir protège l'écran contre les impacts tout en maintenant une transparence cristalline.\n\nLes modes sport professionnels couvrent plus de 50 activités différentes avec des métriques spécialisées. L'analyse biomécanique évalue votre technique de course, détectant asymétries et inefficacités. Les plans d'entraînement adaptatifs évoluent selon vos progrès pour maximiser les résultats.\n\nL'autonomie de 10 à 12 jours en utilisation normale élimine l'anxiété de la batterie au quotidien. Le mode économie d'énergie intelligent prolonge l'autonomie jusqu'à 20 jours en maintenant les fonctions essentielles. La charge rapide magnétique restaure 50% de batterie en seulement 30 minutes.\n\nTrois coloris sophistiqués répondent à tous les styles : le Black profond avec finition mate anti-traces pour une élégance absolue, le Gris métallisé qui allie modernité et discrétion, et le Rose doré qui apporte une touche de féminité luxueuse. Les bracelets Quick Release permettent de changer de style en quelques secondes.\n\nLa connectivité avancée synchronise parfaitement avec iOS et Android pour une intégration transparente. Les appels Bluetooth permettent de répondre directement depuis votre poignet. Le stockage de musique intégré libère de la dépendance au smartphone pendant les entraînements.\n\nLe système de paiement NFC compatible avec les principales plateformes facilite les achats sans contact. La sécurité biométrique protège vos données sensibles. L'écosystème d'applications tierces étend les fonctionnalités selon vos besoins spécifiques.\n\nMontre connectée premium parfaite pour les professionnels et sportifs réunionnais recherchant l'excellence technologique.",
+    description: "La montre connectée HIFUTURE Ultra2 Pro représente le summum de la technologie portable avec ses fonctionnalités premium. L'écran AMOLED HD délivre des couleurs éclatantes et des noirs profonds avec un contraste infini.",
     shortDescription: "Montre connectée premium avec écran AMOLED HD et fonctions sport pro",
     metaTitle: 'HIFUTURE Ultra2 Pro - Montre Connectée Premium | Monster Phone 974',
     metaDescription: 'Montre HIFUTURE Ultra2 Pro avec écran AMOLED HD et fonctions sport pro. GPS intégré, ATM5, autonomie 12 jours.',
@@ -3302,6 +3638,7 @@ export const allProducts: Product[] = [
     },
     warranty: '2 ans constructeur',
     deliveryTime: '24-48h à La Réunion',
+    status: "active",
     badges: ['Premium', 'Populaire']
   },
 
@@ -3315,7 +3652,7 @@ export const allProducts: Product[] = [
     category: 'Montres',
     subcategory: 'Montres business',
     price: 89.99,
-    description: "La montre connectée HIFUTURE Aurora harmonise parfaitement élégance professionnelle et performance technologique. Son boîtier métallique premium témoigne d'un savoir-faire horloger traditionnel enrichi des innovations les plus modernes, créant un accessoire business qui transcende la simple fonctionnalité. L'écran AMOLED brillant illumine chaque détail avec des couleurs vibrantes et des contrastes saisissants. La résolution supérieure affiche informations et graphiques avec une clarté exceptionnelle. L'interface élégante propose multiples cadrans personnalisables pour s'adapter à chaque occasion professionnelle ou personnelle. Les fonctions wellness complètes équilibrent vie professionnelle intensive et bien-être personnel. Le monitoring du stress analyse variabilité cardiaque pour détecter tensions et recommander exercices de respiration. Le coach sommeil optimise vos cycles de repos. Les rappels d'hydratation et de mouvement maintiennent votre vitalité. Trois finitions métalliques prestigieuses expriment différentes facettes du succès : le Silver classique incarne l'élégance intemporelle du monde des affaires, le Bleu dynamique apporte une touche de modernité sportive, tandis que le Brown élégant évoque le luxe discret des grandes maisons horlogères. Le GPS intégré accompagne vos déplacements professionnels et activités sportives avec précision absolue. La fonction Find My Phone retrouve votre smartphone égaré. Le contrôle caméra à distance facilite selfies et photos de groupe lors d'événements. La certification ATM5 garantit résistance à l'eau jusqu'à 50 mètres, permettant natation et sports aquatiques sans inquiétude. La construction robuste supporte les exigences d'un lifestyle actif entre réunions, voyages d'affaires et activités sportives. L'autonomie de 10 à 12 jours libère des contraintes de charge quotidienne. La batterie optimisée maintient performances constantes tout au long du cycle. La charge sans fil Qi ajoute une dimension pratique supplémentaire pour les déplacements. Les notifications intelligentes filtrent communications importantes, affichant emails professionnels, messages et rappels calendrier. L'intégration avec assistants vocaux permet gestion mains-libres de votre agenda. L'accessoire business parfait pour professionnels réunionnais alliant style et performance.",
+    description: "La montre connectée HIFUTURE Aurora harmonise parfaitement élégance professionnelle et performance technologique. Son boîtier métallique premium témoigne d'un savoir-faire horloger traditionnel enrichi des innovations les plus modernes.",
     shortDescription: "Montre connectée business avec boîtier métallique premium et écran AMOLED",
     metaTitle: 'HIFUTURE Aurora - Montre Connectée Business Métallique | Monster Phone 974',
     metaDescription: 'Montre HIFUTURE Aurora business avec boîtier métallique premium et écran AMOLED. Fonctions wellness, GPS, ATM5.',
@@ -3348,6 +3685,7 @@ export const allProducts: Product[] = [
     },
     warranty: '2 ans constructeur',
     deliveryTime: '24-48h à La Réunion',
+    status: "active",
     badges: ['Business', 'Élégant']
   },
 
@@ -3361,7 +3699,7 @@ export const allProducts: Product[] = [
     category: 'Montres',
     subcategory: 'Montres premium',
     price: 129.99,
-    description: "La montre connectée HIFUTURE Vela incarne l'excellence absolue avec ses technologies de pointe et son design haut de gamme. Cette pièce maîtresse de la collection HIFUTURE fusionne innovation technologique, matériaux nobles et esthétique raffinée pour créer une expérience utilisateur exceptionnelle. L'écran Always-On AMOLED révolutionnaire permet consultation permanente sans mouvement du poignet. Cette technologie premium affiche heure, notifications et métriques essentielles en permanence avec une consommation énergétique optimisée. La luminosité adaptative garantit lisibilité parfaite en toutes conditions. Les fonctions sport professionnelles transforment la Vela en véritable coach personnel. Plus de 120 modes sportifs couvrent toutes les disciplines, du yoga au trail en passant par le kitesurf. L'analyse biomécanique avancée évalue technique, efficacité et progression. Les programmes d'entraînement adaptatifs évoluent avec vos performances. Les fonctions wellness complètes surveillent votre santé 24/7 avec précision médicale. Le monitoring cardiaque continu détecte anomalies et tendances. L'analyse du stress propose exercices de cohérence cardiaque. Le score de vitalité quotidien synthétise votre état global. Deux designs sophistiqués répondent aux goûts les plus exigeants : le Noir profond incarne l'élégance masculine avec sa finition mate anti-traces, tandis que le Beige féminin apporte douceur et raffinement avec ses reflets nacrés subtils. La version Beige intègre suivi du cycle féminin avancé. La résistance ATM5 autorise tous les sports aquatiques incluant plongée jusqu'à 50 mètres. La certification militaire garantit résistance aux conditions extrêmes. Le boîtier en céramique haute technologie allie légèreté, résistance et confort thermique optimal. Le GPS intégré double fréquence offre précision centimétrique même en environnement difficile. La cartographie offline permet navigation sans connexion. Le baromètre altimétrique mesure dénivelés avec précision pour les activités montagne. L'autonomie remarquable de 10 à 14 jours maintient toutes fonctions actives sans compromis. La charge rapide sans fil restaure une journée complète en 15 minutes. Le mode ultra-endurance prolonge l'autonomie jusqu'à 45 jours. La montre premium wellness définitive pour utilisateurs exigeants de La Réunion recherchant excellence absolue.",
+    description: "La montre connectée HIFUTURE Vela incarne l'excellence absolue avec ses technologies de pointe. L'écran Always-On AMOLED révolutionnaire permet consultation permanente sans mouvement du poignet. Plus de 120 modes sportifs couvrent toutes les disciplines.",
     shortDescription: "Montre connectée haut de gamme avec écran Always-On AMOLED et 120+ modes sport",
     metaTitle: 'HIFUTURE Vela - Montre Connectée Haut de Gamme | Monster Phone 974',
     metaDescription: 'Montre HIFUTURE Vela haut de gamme avec écran Always-On AMOLED et 120+ modes sport. Wellness complet, GPS double fréquence, ATM5.',
@@ -3393,6 +3731,7 @@ export const allProducts: Product[] = [
     },
     warranty: '2 ans constructeur',
     deliveryTime: '24-48h à La Réunion',
+    status: "active",
     badges: ['Premium', 'Always-On']
   },
 
@@ -3406,7 +3745,7 @@ export const allProducts: Product[] = [
     category: 'Montres',
     subcategory: 'Montres santé',
     price: 99.99,
-    description: "La montre connectée HIFUTURE Aura synthétise l'excellence technologique avec ses fonctions santé avancées conçues pour le bien-être complet. Cette montre médicale grand public révolutionne le monitoring personnel avec des capteurs de niveau hospitalier accessibles au quotidien.\n\nL'écran Always-On révolutionnaire affiche en permanence informations essentielles sans jamais s'éteindre, garantissant consultation instantanée de l'heure et des métriques vitales. La technologie d'affichage basse consommation maintient la visibilité 24h/24 tout en préservant une autonomie exceptionnelle. Les cadrans personnalisables always-on s'adaptent à votre style et vos priorités de santé.\n\nLes fonctions santé complètes incluent ECG médical certifié pour détecter fibrillation auriculaire et autres arythmies potentiellement dangereuses. L'électrocardiogramme en 30 secondes analyse le rythme cardiaque avec précision médicale. Les alertes automatiques signalent toute anomalie détectée pour consultation médicale précoce.\n\nLe capteur PPG de dernière génération mesure en continu la fréquence cardiaque, la variabilité cardiaque (HRV) et le niveau d'oxygène sanguin (SpO2). Ces mesures vitales fournissent un tableau complet de votre santé cardiovasculaire et respiratoire. L'analyse des tendances sur le long terme révèle l'évolution de votre condition physique.\n\nLe monitoring du sommeil avancé distingue les phases légères, profondes et REM pour optimiser votre récupération. L'analyse de la respiration nocturne détecte les apnées et troubles respiratoires. Le score de sommeil quotidien guide l'amélioration de vos habitudes de repos.\n\nLa gestion du stress utilise la variabilité cardiaque pour évaluer votre niveau de tension nerveuse en temps réel. Les exercices de respiration guidée proposent des sessions de relaxation personnalisées. Les rappels de pause encouragent la déconnexion régulière pour préserver votre équilibre mental.\n\nLa résistance ATM5 certifie l'étanchéité jusqu'à 50 mètres, permettant natation et sports aquatiques sans restriction. Les matériaux biocompatibles évitent toute irritation cutanée même en climat tropical humide. La construction robuste résiste aux chocs quotidiens et activités sportives intenses.\n\nL'autonomie de 12 à 15 jours avec toutes les fonctions actives élimine la contrainte de recharge fréquente. Le mode économie d'énergie intelligent prolonge l'utilisation jusqu'à 30 jours. La charge rapide sans fil restaure une semaine d'autonomie en seulement 45 minutes.\n\nTrois coloris élégants répondent à tous les goûts : le Noir professionnel pour une discrétion absolue, le Gris métallique pour une modernité affirmée, et le Rose poudré pour une féminité délicate. Chaque version bénéficie d'un bracelet en silicone médical confortable et hypoallergénique.\n\nLa connectivité Bluetooth 5.0 assure une synchronisation stable avec votre smartphone pour l'analyse détaillée des données. L'application compagnon génère des rapports de santé partageables avec votre médecin. Les notifications intelligentes maintiennent le contact sans surcharge d'informations.\n\nLes algorithmes d'intelligence artificielle apprennent de vos habitudes pour fournir des insights personnalisés sur votre santé. Les recommandations évolutives s'adaptent à votre progression et vos objectifs. Le coach santé virtuel guide votre parcours vers un mode de vie plus sain.\n\nMontre médicale connectée idéale pour les Réunionnais privilégiant un suivi santé professionnel au quotidien.",
+    description: "La montre connectée HIFUTURE Aura synthétise l'excellence technologique avec ses fonctions santé avancées. L'écran Always-On révolutionnaire affiche en permanence informations essentielles. Les fonctions santé complètes incluent ECG médical pour détecter fibrillation auriculaire.",
     shortDescription: "Montre connectée premium avec ECG médical et écran Always-On",
     metaTitle: 'HIFUTURE Aura - Montre Connectée Premium Always-On | Monster Phone 974',
     metaDescription: 'Montre HIFUTURE Aura avec ECG médical et écran Always-On. Capteurs avancés PPG, autonomie 15 jours, ATM5.',
@@ -3439,6 +3778,7 @@ export const allProducts: Product[] = [
     },
     warranty: '2 ans constructeur',
     deliveryTime: '24-48h à La Réunion',
+    status: "active",
     badges: ['ECG', 'Santé']
   },
 
@@ -3452,7 +3792,7 @@ export const allProducts: Product[] = [
     category: 'Montres',
     subcategory: 'Montres santé',
     price: 89.99,
-    description: "La montre connectée HIFUTURE Aura 2 perfectionne la formule gagnante de sa prédécesseure avec améliorations significatives et nouvelles fonctionnalités. Cette évolution réussie combine technologies de santé avancées, design premium et accessibilité tarifaire pour démocratiser l'excellence connectée. L'écran Always-On lumineux nouvelle génération offre visibilité permanente améliorée avec consommation réduite de 30%. Cette technologie AMOLED optimisée affiche informations essentielles 24/7 : heure, notifications, métriques santé. Les multiples cadrans always-on personnalisables s'adaptent à votre style et besoins. La suite santé avancée intègre ECG médical certifié pour détection précoce d'anomalies cardiaques. Le monitoring cardiaque continu analyse rythme avec précision ±0.5 bpm. L'analyse du sommeil paradoxal REM optimise récupération cognitive. Le score de stress quotidien recommande exercices respiratoires personnalisés. Trois finitions luxueuses expriment différentes facettes du raffinement : le Noir intemporel pour l'élégance absolue, le Gris moderne pour le style technologique, et le Rose Gold féminin pour la sophistication douce. Chaque version bénéficie de finitions métalliques premium et verre courbé 2.5D. La résistance ATM5 libère totalement pour sports aquatiques incluant natation en mer et plongée jusqu'à 50 mètres. La certification militaire MIL-STD-810H garantit résistance aux chocs, vibrations, températures extrêmes et humidité tropicale. Construction durable pour années d'utilisation intensive. Le GPS haute précision amélioré utilise triple constellation (GPS, GLONASS, BeiDou) pour localisation rapide et précise. La puce GPS basse consommation maintient tracking 30 heures. Cartographie offline intégrée pour navigation sans connexion dans zones reculées. L'autonomie remarquable atteint 15 jours utilisation normale avec toutes fonctions actives. L'optimisation intelligente adapte consommation selon usage. Mode ultra-endurance prolonge autonomie jusqu'à 60 jours. Charge rapide 50% en 30 minutes via station magnétique. Les matériaux premium incluent boîtier alliage aluminium aérospatial, bracelet silicone médical hypoallergénique et boucle acier inoxydable. Confort optimal garanti même port prolongé. La montre haut de gamme accessible offrant technologies médicales avancées aux passionnés réunionnais.",
+    description: "La montre connectée HIFUTURE Aura 2 perfectionne la formule gagnante avec améliorations significatives. L'écran Always-On lumineux nouvelle génération offre visibilité permanente améliorée avec consommation réduite de 30%.",
     shortDescription: "Montre connectée haut de gamme avec ECG certifié et écran Always-On amélioré",
     metaTitle: 'HIFUTURE Aura 2 - Montre Connectée Haut de Gamme | Monster Phone 974',
     metaDescription: 'Montre HIFUTURE Aura 2 avec ECG certifié et écran Always-On amélioré. GPS triple, ATM5, autonomie 15 jours.',
@@ -3485,54 +3825,56 @@ export const allProducts: Product[] = [
     },
     warranty: '2 ans constructeur',
     deliveryTime: '24-48h à La Réunion',
+    status: "active",
     badges: ['ECG Certifié', 'Nouveau']
   },
 
-  // [DOUBLON SUPPRIMÉ - HONOR CHOICE WATCH]
-  // {
-  //   id: 'honor-choice-watch-v2',
-  //   airtableId: 'recYEgkxqGIvVGFFX',
-  //   sku: 'HONOR-CHOICE-WATCH',
-  //   name: 'HONOR CHOICE WATCH',
-  //   brand: 'HONOR',
-  //   category: 'Montres',
-  //   subcategory: 'Montres premium',
-  //   price: 149.99,
-  //   description: "La HONOR CHOICE WATCH redéfinit l'excellence des montres connectées premium. Son écran AMOLED haute résolution de 1.43 pouces offre une luminosité exceptionnelle. Les technologies exclusives IC et ANC révolutionnent votre expérience.",
-  //   shortDescription: "Montre connectée premium avec technologies IC/ANC et écran AMOLED",
-  //   metaTitle: 'HONOR CHOICE WATCH IC/ANC - Montre Connectée Premium AMOLED | Monster Phone 974',
-  //   metaDescription: 'HONOR CHOICE WATCH : AMOLED, IC/ANC, GPS, 5ATM, 14 jours autonomie, 100+ sports. 3 coloris premium.',
-  //   urlSlug: 'honor-choice-watch-connectee-premium',
-  //   keywords: ['HONOR CHOICE WATCH', 'montre connectée', 'IC ANC', 'premium', 'AMOLED'],
-  //   variants: [
-  //     { color: 'Noir', colorCode: '#000000', ean: '6971664934366', stock: 10, images: [] },
-  //     { color: 'Blanc', colorCode: '#FFFFFF', ean: '6971664934366', stock: 8, images: [] },
-  //     { color: 'Or', colorCode: '#FFD700', ean: '6971664934366', stock: 6, images: [] }
-  //   ],
-  //   defaultVariant: 'Noir',
-  //   specifications: [
-  //     { label: 'Type Écran', value: 'AMOLED 1.43"', icon: 'display' },
-  //     { label: 'Technologies', value: 'IC & ANC', icon: 'cpu' },
-  //     { label: 'Résistance', value: '5ATM', icon: 'shield' },
-  //     { label: 'Autonomie', value: '14 jours', icon: 'battery' }
-  //   ],
-  //   highlights: [
-  //     'Technologies IC & ANC exclusives',
-  //     'Écran AMOLED 466x466 pixels',
-  //     '100+ modes sportifs',
-  //     'Résistance 5ATM',
-  //     'Autonomie record 14 jours'
-  //   ],
-  //   images: [],
-  //   rating: {
-  //     average: 4.8,
-  //     count: 234,
-  //     distribution: { 5: 180, 4: 40, 3: 10, 2: 3, 1: 1 }
-  //   },
-  //   warranty: '2 ans constructeur',
-  //   deliveryTime: '24-48h à La Réunion',
-  //   badges: ['Premium', 'HONOR']
-  // },
+  // HONOR CHOICE WATCH
+  {
+    id: 'honor-choice-watch-v2',
+    airtableId: 'recYEgkxqGIvVGFFX',
+    sku: 'HONOR-CHOICE-WATCH',
+    name: 'HONOR CHOICE WATCH',
+    brand: 'HONOR',
+    category: 'Montres',
+    subcategory: 'Montres premium',
+    price: 149.99,
+    description: "La HONOR CHOICE WATCH redéfinit l'excellence des montres connectées premium. Son écran AMOLED haute résolution de 1.43 pouces offre une luminosité exceptionnelle. Les technologies exclusives IC et ANC révolutionnent votre expérience.",
+    shortDescription: "Montre connectée premium avec technologies IC/ANC et écran AMOLED",
+    metaTitle: 'HONOR CHOICE WATCH IC/ANC - Montre Connectée Premium AMOLED | Monster Phone 974',
+    metaDescription: 'HONOR CHOICE WATCH : AMOLED, IC/ANC, GPS, 5ATM, 14 jours autonomie, 100+ sports. 3 coloris premium.',
+    urlSlug: 'honor-choice-watch-connectee-premium',
+    keywords: ['HONOR CHOICE WATCH', 'montre connectée', 'IC ANC', 'premium', 'AMOLED'],
+    variants: [
+      { color: 'Noir', colorCode: '#000000', ean: '6971664934366', stock: 10, images: [] },
+      { color: 'Blanc', colorCode: '#FFFFFF', ean: '6971664934366', stock: 8, images: [] },
+      { color: 'Or', colorCode: '#FFD700', ean: '6971664934366', stock: 6, images: [] }
+    ],
+    defaultVariant: 'Noir',
+    specifications: [
+      { label: 'Type Écran', value: 'AMOLED 1.43"', icon: 'display' },
+      { label: 'Technologies', value: 'IC & ANC', icon: 'cpu' },
+      { label: 'Résistance', value: '5ATM', icon: 'shield' },
+      { label: 'Autonomie', value: '14 jours', icon: 'battery' }
+    ],
+    highlights: [
+      'Technologies IC & ANC exclusives',
+      'Écran AMOLED 466x466 pixels',
+      '100+ modes sportifs',
+      'Résistance 5ATM',
+      'Autonomie record 14 jours'
+    ],
+    images: [],
+    rating: {
+      average: 4.8,
+      count: 234,
+      distribution: { 5: 180, 4: 40, 3: 10, 2: 3, 1: 1 }
+    },
+    warranty: '2 ans constructeur',
+    deliveryTime: '24-48h à La Réunion',
+    status: "active",
+    badges: ['Premium', 'HONOR']
+  },
 
   // HIFUTURE Ultra2
   {
@@ -3544,7 +3886,7 @@ export const allProducts: Product[] = [
     category: 'Montres',
     subcategory: 'Montres connectées',
     price: 69.99,
-    description: "La montre connectée HIFUTURE Ultra2 représente le summum de la technologie portable avec son écran géant et ses fonctionnalités révolutionnaires. Cette montre ultra-performante redéfinit les limites de ce qu'une smartwatch peut accomplir, offrant une expérience utilisateur sans précédent.\n\nL'écran AMOLED massif de 2.0 pouces offre une surface d'affichage généreuse qui transforme l'interaction avec votre montre. Cette dalle exceptionnelle affiche plus d'informations simultanément, facilitant la lecture des messages, la navigation dans les menus et la consultation des données d'entraînement. La résolution ultra-haute définition sublime chaque pixel avec des couleurs éclatantes et des contrastes profonds.\n\nLa fonction appels Bluetooth transforme votre montre en véritable extension de votre smartphone, libérant vos mains pour une communication pratique. Le microphone haute sensibilité capte votre voix clairement même en environnement bruyant. Le haut-parleur intégré délivre un son cristallin pour des conversations fluides directement depuis votre poignet.\n\nLe GPS multi-satellite révolutionnaire combine GPS, GLONASS, Galileo et BeiDou pour une précision de localisation inégalée. Cette technologie quadruple constellation acquiert le signal en quelques secondes et maintient la précision même sous couverture végétale dense. Le tracking en temps réel enregistre chaque détail de vos parcours avec une précision métrique.\n\nLe système de santé complet intègre tous les capteurs essentiels pour un monitoring 24h/24. La fréquence cardiaque optique mesure en continu avec précision médicale. L'oxymètre de pouls surveille la saturation en oxygène, crucial pour l'adaptation à l'effort. Le moniteur de stress analyse la variabilité cardiaque pour détecter les périodes de tension.\n\nL'analyse du sommeil avancée distingue les phases légères, profondes et paradoxales pour optimiser votre récupération. L'algorithme intelligent évalue la qualité de votre repos et propose des recommandations personnalisées. Le réveil intelligent vous réveille au moment optimal de votre cycle de sommeil pour un réveil naturel.\n\nLa résistance IP68 certifie une protection totale contre la poussière et l'immersion jusqu'à 1,5 mètre pendant 30 minutes. Cette certification militaire permet une utilisation sans crainte sous la pluie tropicale, pendant la natation ou les sports nautiques. La construction robuste résiste aux chocs, vibrations et températures extrêmes.\n\nL'autonomie exceptionnelle de 12 jours en utilisation normale défie toute concurrence dans cette catégorie. Le processeur basse consommation optimise chaque milliampère pour maximiser l'endurance. Le mode économie d'énergie intelligent prolonge l'autonomie jusqu'à 30 jours en maintenant les fonctions essentielles.\n\nLes modes sport spécialisés couvrent plus de 60 activités différentes avec des métriques adaptées. Du running au cyclisme, de la natation au yoga, chaque mode analyse vos performances avec précision. Les plans d'entraînement intégrés guident votre progression vers vos objectifs personnels.\n\nDeux coloris sophistiqués subliment cette technologie de pointe : le Gris métallique apporte une touche moderne et masculine, tandis que le Rose poudré offre une élégance féminine délicate. Les bracelets en silicone premium sont confortables, durables et résistants à la transpiration.\n\nLa connectivité complète synchronise parfaitement avec iOS et Android pour une intégration transparente. Le stockage de musique intégré permet d'écouter vos playlists favorites sans smartphone. Le contrôle de la caméra à distance facilite les selfies et photos de groupe.\n\nLes notifications intelligentes filtrent les alertes importantes pour rester connecté sans être submergé. La réponse rapide aux messages avec modèles prédéfinis ou dictée vocale simplifie la communication. L'assistant vocal intégré permet de contrôler votre montre et smartphone par la voix.\n\nMontre connectée ultra-complète parfaite pour les technophiles réunionnais recherchant grand écran et fonctionnalités avancées.",
+    description: "La montre connectée HIFUTURE Ultra2 représente le summum de la technologie portable. L'écran AMOLED massif de 2.0 pouces offre une surface d'affichage généreuse. La fonction appels Bluetooth transforme votre montre en véritable extension de votre smartphone.",
     shortDescription: "Montre connectée ultra performance avec écran AMOLED 2.0\" et appels Bluetooth",
     metaTitle: 'HIFUTURE Ultra2 - Montre Connectée Ultra Performance | Monster Phone 974',
     metaDescription: 'Montre HIFUTURE Ultra2 avec écran AMOLED 2.0", GPS multi-satellite, appels Bluetooth. Autonomie 12 jours, IP68.',
@@ -3576,6 +3918,7 @@ export const allProducts: Product[] = [
     },
     warranty: '2 ans constructeur',
     deliveryTime: '24-48h à La Réunion',
+    status: "active",
     badges: ['Grand écran', 'Appels']
   },
 
@@ -3589,7 +3932,7 @@ export const allProducts: Product[] = [
     category: 'Montres',
     subcategory: 'Montres lifestyle',
     price: 54.99,
-    description: "Montre connectée HIFUTURE Lume avec éclairage LED unique pour style futuriste incomparable. Cette montre innovante combine technologie avant-gardiste et design urbain pour créer un accessoire qui redéfinit les codes de la montre connectée moderne. Écran AMOLED lumineux parfait pour lifestyle urbain branché. La technologie d'affichage haute résolution garantit lisibilité exceptionnelle même en plein soleil. Les cadrans personnalisables permettent d'exprimer votre personnalité unique. Éclairage LED intégré idéal pour activités nocturnes et sport soir. Le système d'illumination périphérique crée un halo lumineux distinctif qui vous rend visible et stylé. Plusieurs modes d'éclairage : pulsation rythmée, éclairage constant ou synchronisation avec notifications. Quatre coloris tendance : noir discret pour l'élégance urbaine, gris moderne pour le style technologique, vert dynamique pour l'énergie sportive ou champagne élégant pour le luxe accessible. Chaque finition bénéficie d'un traitement anti-traces premium. Suivi santé complet avec capteur de température corporelle exclusif permettant détection précoce de variations physiologiques. Monitoring cardiaque 24/7, analyse du sommeil, compteur de pas et calories brûlées. GPS intégré et résistance IP67 pour toutes vos aventures urbaines et sportives. Navigation précise pour running, vélo ou exploration urbaine. Protection contre eau et poussière pour usage sans contrainte. Autonomie 6-8 jours optimisée malgré l'éclairage LED grâce à la gestion énergétique intelligente. Charge rapide magnétique en moins de 2 heures. Mode économie d'énergie prolonge autonomie jusqu'à 15 jours. La montre connectée futuriste pour les urbains branchés de La Réunion recherchant originalité et performance.",
+    description: "Montre connectée HIFUTURE Lume avec éclairage LED unique pour style futuriste. Écran AMOLED lumineux parfait pour lifestyle urbain branché. Éclairage LED intégré idéal pour activités nocturnes et sport soir.",
     shortDescription: "Montre connectée LED urbaine avec design futuriste",
     metaTitle: 'HIFUTURE Lume - Montre Connectée LED Urbaine | Monster Phone 974',
     metaDescription: 'Montre HIFUTURE Lume avec éclairage LED et design urbain. Écran AMOLED, lifestyle moderne, autonomie optimisée. 54,99€.',
@@ -3623,6 +3966,7 @@ export const allProducts: Product[] = [
     },
     warranty: '2 ans constructeur',
     deliveryTime: '24-48h à La Réunion',
+    status: "active",
     badges: ['LED', 'Gaming']
   },
 
@@ -3636,7 +3980,7 @@ export const allProducts: Product[] = [
     category: 'Montres',
     subcategory: 'Montres business',
     price: 119.99,
-    description: "Découvrez l'élégance professionnelle avec la montre connectée HIFUTURE AIX, conçue pour les leaders qui exigent excellence et sophistication. Cette montre business premium fusionne matériaux nobles, technologie avancée et design intemporel pour créer l'accessoire professionnel ultime. Boîtier en acier inoxydable premium pour durabilité et style incomparables. L'alliage 316L de qualité marine résiste à la corrosion et conserve son éclat année après année. Le polissage minutieux et les finitions brossées créent un jeu de lumière sophistiqué. Écran en verre saphir ultra-résistant aux rayures préservant clarté cristalline même après années d'utilisation intensive. L'affichage AMOLED haute résolution offre contraste infini et couleurs éclatantes. Interface professionnelle avec widgets business dédiés : marchés financiers, fuseaux horaires, agenda. Fonctions business avancées incluant notifications intelligentes filtrées par priorité, mode réunion silencieux automatique et intégration calendrier professionnel. Synchronisation email avec aperçu rapide des messages importants. Contrôle présentation à distance pour meetings. GPS haute précision accompagne déplacements professionnels avec tracking précis et navigation intégrée. Fonction Find My Phone particulièrement utile lors de déplacements d'affaires. Mode avion automatique pour voyages. Autonomie exceptionnelle 12-15 jours pour accompagner voyages d'affaires prolongés sans souci de charge. Charge rapide sans fil Qi compatible avec stations de charge premium. Mode veille intelligent préserve batterie. Résistance ATM5 permet usage sans restriction incluant natation et sports aquatiques. Construction robuste résiste aux exigences du lifestyle professionnel actif. Protection militaire contre chocs et variations thermiques. Bracelet en cuir véritable italien disponible en option pour occasions formelles. Système de changement rapide permet adaptation selon contexte professionnel ou personnel. Collection de bracelets premium disponible. La montre business définitive pour professionnels exigeants de La Réunion alliant prestige et technologie.",
+    description: "Découvrez l'élégance professionnelle avec la montre connectée HIFUTURE AIX. Boîtier en acier inoxydable premium pour durabilité et style incomparables. Écran en verre saphir ultra-résistant aux rayures.",
     shortDescription: "Montre connectée business premium avec boîtier acier inoxydable",
     metaTitle: 'HIFUTURE AIX - Montre Connectée Business Premium',
     metaDescription: 'Montre connectée HIFUTURE AIX avec boîtier acier premium et fonctions business. Disponible en gris et noir acier.',
@@ -3668,6 +4012,7 @@ export const allProducts: Product[] = [
     },
     warranty: '2 ans constructeur',
     deliveryTime: '24-48h à La Réunion',
+    status: "active",
     badges: ['Business', 'Saphir']
   },
 
@@ -3681,7 +4026,7 @@ export const allProducts: Product[] = [
     category: 'Montres',
     subcategory: 'Montres lifestyle',
     price: 69.99,
-    description: "Montre HIFUTURE Lume Pro avec éclairage LED avancé et fonctions sport professionnelles pour athlètes urbains exigeants. Cette évolution premium de la Lume originale pousse l'innovation encore plus loin avec technologies exclusives et matériaux haut de gamme. Design sophistiqué disponible en noir professionnel, vert dynamique, pink audacieux ou titanium premium. La version titanium utilise alliage aérospatial pour légèreté et résistance exceptionnelles. Finitions métalliques brossées et polies créent contraste visuel saisissant. Éclairage LED amélioré pour visibilité et style uniques. Système multi-zones avec LEDs RGB programmables créant effets lumineux spectaculaires. Synchronisation musique, notifications personnalisées ou mode stroboscopique pour sécurité nocturne. Intensité adaptative selon luminosité ambiante. Écran AMOLED haute définition pour affichage cristallin même en plein soleil. Luminosité 1000 nits garantit lisibilité parfaite. Always-On Display optionnel avec consommation optimisée. Protection Gorilla Glass contre rayures et impacts. Fonctions sport pro incluant VO2 Max et temps de récupération. Analyse biomécanique avancée évalue efficacité de course et risque de blessure. Plans d'entraînement adaptatifs avec coaching vocal. Segments Strava automatiques pour compétition virtuelle. Version titanium avec boîtier ultra-résistant et léger (45g seulement). Résistance exceptionnelle aux chocs et températures extrêmes. Traitement DLC (Diamond-Like Carbon) pour protection ultime contre rayures. Résistance ATM5 pour natation et sports aquatiques sans restriction. Certification IP68 contre poussière et immersion prolongée. Mode triathlon avec transition automatique entre disciplines. Autonomie 8-10 jours malgré fonctionnalités avancées grâce à processeur basse consommation nouvelle génération. Charge sans fil rapide 0-100% en 90 minutes. PowerBank reverse charging pour urgences. La montre LED premium pour sportifs exigeants de La Réunion alliant innovation lumineuse et performance athlétique.",
+    description: "Montre HIFUTURE Lume Pro avec éclairage LED avancé et fonctions sport professionnelles. Design sophistiqué disponible en noir, vert, pink ou titanium premium.",
     shortDescription: "Montre connectée LED premium avec fonctions sport pro",
     metaTitle: 'HIFUTURE Lume Pro - Montre Connectée LED Premium | Monster Phone 974',
     metaDescription: 'Montre HIFUTURE Lume Pro avec éclairage LED avancé et fonctions sport pro. Design sophistiqué, performance premium. 69,99€.',
@@ -3715,6 +4060,7 @@ export const allProducts: Product[] = [
     },
     warranty: '2 ans constructeur',
     deliveryTime: '24-48h à La Réunion',
+    status: "active",
     badges: ['LED Pro', 'Gaming']
   },
 
@@ -3728,7 +4074,7 @@ export const allProducts: Product[] = [
     category: 'Montres',
     subcategory: 'Montres innovation',
     price: 99.99,
-    description: "Innovation technologique avec la montre HIFUTURE MIXX 3 à triple affichage révolutionnaire. Cette montre futuriste repousse les limites du possible avec son système multi-écran unique permettant gestion simultanée d'informations complexes pour utilisateurs ultra-connectés. Multi-interface révolutionnaire pour personnalisation maximale. Trois zones d'affichage indépendantes : écran principal AMOLED pour navigation, écran secondaire pour métriques temps réel, écran tertiaire pour notifications. Chaque zone personnalisable avec widgets dédiés. Mode multitâche permettant suivi simultané de plusieurs activités. Design avancé disponible en noir professionnel ou jaune fluo haute visibilité. Le jaune fluo phosphorescent assure visibilité maximale pour sécurité nocturne. Revêtement anti-choc renforcé pour résistance extrême. Architecture modulaire permettant personnalisation poussée. Triple affichage permettant gestion simultanée de multiples informations : fitness sur écran 1, navigation GPS sur écran 2, notifications sur écran 3. Idéal pour professionnels multitâches, traders suivant plusieurs marchés ou athlètes analysant données complexes. Interface optimisée pour usage intensif et multitâche avec processeur quad-core haute performance. RAM 2GB pour fluidité absolue. Stockage 16GB pour musique et applications. Système d'exploitation propriétaire avec App Store dédié. Visibilité nocturne améliorée avec version jaune fluo intégrant particules photoluminescentes. Éclairage de secours automatique en cas de faible luminosité. Mode urgence avec signal SOS lumineux. GPS intégré et suivi sport complet pour performances optimales. Triple GPS/GLONASS/Galileo pour précision maximale. Capteurs pro : accéléromètre, gyroscope, magnétomètre, baromètre. Analyse biomécanique temps réel sur écran dédié. Autonomie 7-10 jours malgré triple écran AMOLED grâce à gestion énergétique révolutionnaire. Chaque écran s'active indépendamment selon besoins. Mode économie désactive écrans secondaires. Charge ultra-rapide 30 minutes pour journée complète. La montre multi-affichage idéale pour technophiles de La Réunion recherchant innovation absolue et productivité maximale.",
+    description: "Innovation technologique avec la montre HIFUTURE MIXX 3 à triple affichage. Multi-interface révolutionnaire pour personnalisation maximale. Design avancé disponible en noir professionnel ou jaune fluo haute visibilité.",
     shortDescription: "Montre connectée triple affichage avec design gaming avancé",
     metaTitle: 'HIFUTURE MIXX 3 - Montre Connectée Triple Affichage | Monster Phone 974',
     metaDescription: 'Montre connectée HIFUTURE MIXX 3 avec triple affichage innovant et design gaming avancé. 99,99€.',
@@ -3760,376 +4106,749 @@ export const allProducts: Product[] = [
     },
     warranty: '2 ans constructeur',
     deliveryTime: '24-48h à La Réunion',
+    status: "active",
     badges: ['Innovation', 'Gaming']
   },
 
   // Produits LED
-  // [DOUBLON SUPPRIMÉ - MONSTER Illuminescence Light Strip Color/Blanc - existe déjà ligne 1876]
-  // [DOUBLON SUPPRIMÉ - MONSTER Illuminescence Basic Lightstrip Multicouleur - existe déjà ligne 1818]
-  // [DOUBLON SUPPRIMÉ - MONSTER Illuminescence Smart Chroma Light 2X Bars - existe déjà ligne 1990]
-  // [DOUBLON SUPPRIMÉ - MONSTER Illuminescence Neon Light Strip - existe déjà ligne 1932]
+  {
+    id: 'led-001',
+    name: 'MONSTER Illuminescence Light Strip Color/Blanc',
+    brand: 'MONSTER',
+    category: 'LED',
+    subcategory: 'Bandeaux LED',
+    price: 17.99,
+    originalPrice: 24.99,
+    discount: 28,
+    rating: {
+      average: 4.7,
+      count: 0,
+      distribution: {
+        5: 0,
+        4: 0,
+        3: 0,
+        2: 0,
+        1: 0
+      }
+    },
+    images: ['/placeholder-product.png'],
+    description: 'Transformez radicalement votre espace de vie avec le bandeau LED MONSTER Illuminescence Light Strip Color/Blanc, une solution d\'éclairage polyvalente qui révolutionne l\'ambiance de votre intérieur.',
+    shortDescription: 'Bandeau LED double mode RGB multicouleur et blanc chaud, 2m',
+    specifications: [
+      { label: 'Type', value: 'LED Strip' },
+      { label: 'Connectivité', value: 'Basic (USB)' },
+      { label: 'Longueur', value: '2m' },
+      { label: 'Usage', value: 'Intérieur' },
+      { label: 'Modes', value: 'RGB + Blanc chaud' },
+      { label: 'Utilisation', value: 'Gaming et travail' },
+    ],
+    highlights: [
+      'Double technologie RGB + Blanc chaud',
+      'Installation adhésive simple 3M',
+      'Alimentation USB universelle',
+      'Contrôle intuitif des modes'
+    ],
+    sku: 'MON-ILL-COLOR-BLANC',
+    urlSlug: 'monster-illuminescence-color-blanc-polyvalent',
+    badges: ['Polyvalent', 'Gaming'],
+    airtableId: 'recLED004153',
+    metaTitle: 'Gaming LED Pro | Monster Phone Boutique',
+    metaDescription: 'Éclairage LED gaming professionnel avec sync écran',
+    keywords: ['led', 'gaming', 'rgb', 'éclairage', 'monster'],
+    variants: [],
+    warranty: '1 an',
+    deliveryTime: '24-48h',
+    status: 'active',
+  },
+  {
+    id: 'led-002',
+    name: 'MONSTER Illuminescence Basic Lightstrip Multicouleur',
+    brand: 'MONSTER',
+    category: 'LED',
+    subcategory: 'Bandeaux LED',
+    price: 13.99,
+    originalPrice: 19.99,
+    discount: 30,
+    rating: {
+      average: 4.6,
+      count: 0,
+      distribution: {
+        5: 0,
+        4: 0,
+        3: 0,
+        2: 0,
+        1: 0
+      }
+    },
+    images: ['/placeholder-product.png'],
+    description: 'Illuminez et personnalisez votre espace de vie avec le bandeau LED MONSTER Illuminescence Basic Lightstrip Multicouleur, une solution d\'éclairage versatile qui transforme instantanément l\'atmosphère de n\'importe quelle pièce.',
+    shortDescription: 'Bandeau LED RGB multicouleur, disponible en 2m, 4m et 5m',
+    specifications: [
+      { label: 'Type', value: 'LED Strip' },
+      { label: 'Connectivité', value: 'Basic (USB)' },
+      { label: 'Usage', value: 'Intérieur' },
+      { label: 'Couleurs', value: 'RGB multicouleur' },
+      { label: 'Longueurs', value: '2m, 4m, 5m' },
+      { label: 'Installation', value: 'Adhésif 3M' },
+    ],
+    highlights: [
+      'Technologie RGB - millions de couleurs',
+      'Trois longueurs disponibles',
+      'Installation adhésive facile',
+      'Alimentation USB pratique',
+      'Consommation énergétique minimale'
+    ],
+    variants: [
+      { color: '2m', colorCode: '#000000', ean: '1234567890001', stock: 10 },
+      { color: '4m', colorCode: '#000000', ean: '1234567890002', stock: 10 },
+      { color: '5m', colorCode: '#000000', ean: '1234567890003', stock: 10 },
+    ],
+    sku: 'MON-ILL-BASIC-MULTI',
+    urlSlug: 'monster-illuminescence-basic-lightstrip-multicouleur',
+    badges: ['Best-seller', 'Gaming'],
+    airtableId: 'recLED004208',
+    metaTitle: 'Gaming LED Pro | Monster Phone Boutique',
+    metaDescription: 'Éclairage LED gaming professionnel avec sync écran',
+    keywords: ['led', 'gaming', 'rgb', 'éclairage', 'monster'],
+    warranty: '1 an',
+    deliveryTime: '24-48h',
+    status: 'active',
+  },
+  {
+    id: 'led-003',
+    name: 'MONSTER Illuminescence Smart Chroma Light 2X Bars',
+    brand: 'MONSTER',
+    category: 'LED',
+    subcategory: 'Barres LED',
+    price: 49.99,
+    originalPrice: 69.99,
+    discount: 29,
+    rating: {
+      average: 4.8,
+      count: 0,
+      distribution: {
+        5: 0,
+        4: 0,
+        3: 0,
+        2: 0,
+        1: 0
+      }
+    },
+    images: ['/placeholder-product.png'],
+    description: 'Transformez votre environnement en spectacle lumineux époustouflant avec le pack MONSTER Illuminescence Smart Chroma Light 2X Bars, une solution d\'éclairage intelligent qui révolutionne l\'art de l\'ambiance lumineuse.',
+    shortDescription: 'Pack 2 barres LED RGB IC avec contrôle WiFi et synchronisation musicale',
+    specifications: [
+      { label: 'Type', value: 'Light Bar' },
+      { label: 'Connectivité', value: 'Smart (WiFi)' },
+      { label: 'Technologie', value: 'RGB IC' },
+      { label: 'Contenu', value: '2 barres' },
+      { label: 'Effet', value: 'Chroma immersif' },
+      { label: 'Installation', value: 'Modulaire' },
+    ],
+    highlights: [
+      'Technologie RGB IC - contrôle pixel par pixel',
+      'Contrôle WiFi via smartphone',
+      'Synchronisation musicale en temps réel',
+      'Compatible Alexa et Google Assistant',
+      'Installation modulaire flexible'
+    ],
+    sku: 'MON-ILL-CHROMA-2X',
+    urlSlug: 'monster-illuminescence-chroma-2x-bars',
+    badges: ['Premium', 'Smart Home'],
+    airtableId: 'recLED004257',
+    metaTitle: 'Gaming LED Pro | Monster Phone Boutique',
+    metaDescription: 'Éclairage LED gaming professionnel avec sync écran',
+    keywords: ['led', 'gaming', 'rgb', 'éclairage', 'monster'],
+    variants: [],
+    warranty: '1 an',
+    deliveryTime: '24-48h',
+    status: 'active',
+  },
+  {
+    id: 'led-004',
+    name: 'MONSTER Illuminescence Neon Light Strip',
+    brand: 'MONSTER',
+    category: 'LED',
+    subcategory: 'Néon LED',
+    price: 26.99,
+    originalPrice: 39.99,
+    discount: 33,
+    rating: {
+      average: 4.7,
+      count: 0,
+      distribution: {
+        5: 0,
+        4: 0,
+        3: 0,
+        2: 0,
+        1: 0
+      }
+    },
+    images: ['/placeholder-product.png'],
+    description: 'Découvrez l\'esthétique futuriste de l\'éclairage avec le bandeau MONSTER Illuminescence Neon Light Strip, une innovation lumineuse qui reproduit l\'effet néon emblématique avec la technologie LED moderne.',
+    shortDescription: 'Bandeau LED effet néon continu, design cyberpunk',
+    specifications: [
+      { label: 'Type', value: 'Neon Strip' },
+      { label: 'Effet', value: 'Néon continu' },
+      { label: 'Usage', value: 'Intérieur/Extérieur' },
+      { label: 'Versions', value: '2m Basic, 5m Smart' },
+      { label: 'Design', value: 'Cyberpunk/Rétro-wave' },
+    ],
+    highlights: [
+      'Effet néon continu sans points visibles',
+      'Design futuriste cyberpunk',
+      'Usage intérieur et extérieur',
+      'Version Basic avec réactivité sonore',
+      'Version Smart avec contrôle WiFi'
+    ],
+    variants: [
+      { color: '2m Basic Sound', colorCode: '#000000', ean: '1234567890004', stock: 10 },
+      { color: '5m Smart', colorCode: '#000000', ean: '1234567890005', stock: 10 },
+      { color: '5m Smart Flow', colorCode: '#000000', ean: '1234567890006', stock: 10 },
+    ],
+    sku: 'MON-ILL-NEON',
+    urlSlug: 'monster-illuminescence-neon-light-strip',
+    badges: ['Futuriste', 'Design'],
+    airtableId: 'recLED004311',
+    metaTitle: 'Gaming LED Pro | Monster Phone Boutique',
+    metaDescription: 'Éclairage LED gaming professionnel avec sync écran',
+    keywords: ['led', 'gaming', 'rgb', 'éclairage', 'monster'],
+    warranty: '1 an',
+    deliveryTime: '24-48h',
+    status: 'active',
+  },
   {
     id: 'led-005',
     name: 'MONSTER RGB Gaming Light Bars Pro',
     brand: 'MONSTER',
-    category: 'Éclairage LED',
-    subcategory: 'Accessoires LED',
+    category: 'LED',
+    subcategory: 'Barres LED',
     price: 39.99,
     originalPrice: 54.99,
     discount: 27,
-    rating: 4.6,
-    reviews: 78,
+    rating: {
+      average: 4.6,
+      count: 0,
+      distribution: {
+        5: 0,
+        4: 0,
+        3: 0,
+        2: 0,
+        1: 0
+      }
+    },
     images: ['/placeholder-product.png'],
     description: 'Barres LED gaming professionnelles avec synchronisation écran et effets dynamiques pour une immersion totale.',
     shortDescription: 'Barres LED gaming avec sync écran',
-    specifications: {
-      'Type': 'Gaming Light Bar',
-      'Technologie': 'RGB',
-      'Synchronisation': 'Écran + Audio',
-      'Nombre': '2 barres',
-      'Modes': '15 effets prédéfinis'
-    },
-    features: [
+    specifications: [
+      { label: 'Type', value: 'Gaming Light Bar' },
+      { label: 'Technologie', value: 'RGB' },
+      { label: 'Synchronisation', value: 'Écran + Audio' },
+      { label: 'Nombre', value: '2 barres' },
+      { label: 'Modes', value: '15 effets prédéfinis' },
+    ],
+    highlights: [
       'Synchronisation avec l\'écran',
       'Effets dynamiques gaming',
       '15 modes prédéfinis',
       'Installation magnétique'
     ],
-    inStock: true,
-    stockQuantity: 30,
     sku: 'GT-RGB-BARS-PRO',
     urlSlug: 'rgb-gaming-light-bars-pro',
-    badges: ['Gaming', 'Pro']
+    badges: ['Gaming', 'Pro'],
+    airtableId: 'recLED004358',
+    metaTitle: 'Gaming LED Pro | Monster Phone Boutique',
+    metaDescription: 'Éclairage LED gaming professionnel avec sync écran',
+    keywords: ['led', 'gaming', 'rgb', 'éclairage', 'monster'],
+    variants: [],
+    warranty: '1 an',
+    deliveryTime: '24-48h',
+    status: 'active',
   },
   {
     id: 'led-006',
     name: 'MONSTER Smart LED Panel Hexagonal Kit',
     brand: 'MONSTER',
-    category: 'Éclairage LED',
-    subcategory: 'Projecteurs',
+    category: 'LED',
+    subcategory: 'Panneaux LED',
     price: 89.99,
     originalPrice: 119.99,
     discount: 25,
-    rating: 4.9,
-    reviews: 45,
+    rating: {
+      average: 4.9,
+      count: 0,
+      distribution: {
+        5: 0,
+        4: 0,
+        3: 0,
+        2: 0,
+        1: 0
+      }
+    },
     images: ['/placeholder-product.png'],
     description: 'Kit de panneaux LED hexagonaux modulaires avec contrôle intelligent pour créer des designs muraux uniques.',
     shortDescription: 'Kit 9 panneaux LED hexagonaux connectés',
-    specifications: {
-      'Type': 'LED Panels',
-      'Forme': 'Hexagonale',
-      'Quantité': '9 panneaux',
-      'Connectivité': 'WiFi + Bluetooth',
-      'Contrôle': 'App + Tactile'
-    },
-    features: [
+    specifications: [
+      { label: 'Type', value: 'LED Panels' },
+      { label: 'Forme', value: 'Hexagonale' },
+      { label: 'Quantité', value: '9 panneaux' },
+      { label: 'Connectivité', value: 'WiFi + Bluetooth' },
+      { label: 'Contrôle', value: 'App + Tactile' },
+    ],
+    highlights: [
       'Design modulaire extensible',
       'Contrôle tactile sur panneaux',
       'Application smartphone dédiée',
       'Compatible assistants vocaux',
       'Installation murale facile'
     ],
-    inStock: true,
-    stockQuantity: 12,
     sku: 'TL-HEX-KIT-9',
     urlSlug: 'smart-led-panel-hexagonal-kit',
-    badges: ['Innovation', 'Design']
+    badges: ['Innovation', 'Design'],
+    airtableId: 'recLED004407',
+    metaTitle: 'Gaming LED Pro | Monster Phone Boutique',
+    metaDescription: 'Éclairage LED gaming professionnel avec sync écran',
+    keywords: ['led', 'gaming', 'rgb', 'éclairage', 'monster'],
+    variants: [],
+    warranty: '1 an',
+    deliveryTime: '24-48h',
+    status: 'active',
   },
   {
     id: 'led-007',
     name: 'MONSTER Ambient TV LED Backlight 4K',
     brand: 'MONSTER',
-    category: 'Éclairage LED',
+    category: 'LED',
     subcategory: 'Rétroéclairage TV',
     price: 34.99,
     originalPrice: 49.99,
     discount: 30,
-    rating: 4.5,
-    reviews: 134,
+    rating: {
+      average: 4.5,
+      count: 0,
+      distribution: {
+        5: 0,
+        4: 0,
+        3: 0,
+        2: 0,
+        1: 0
+      }
+    },
     images: ['/placeholder-product.png'],
     description: 'Système de rétroéclairage LED pour TV avec synchronisation des couleurs pour une expérience visuelle immersive.',
     shortDescription: 'Rétroéclairage TV avec sync couleurs, compatible 55-75"',
-    specifications: {
-      'Type': 'TV Backlight',
-      'Compatibilité': '55" à 75"',
-      'Technologie': 'Ambilight',
-      'Modes': 'Sync + Manuel',
-      'Installation': 'Adhésive'
-    },
-    features: [
+    specifications: [
+      { label: 'Type', value: 'TV Backlight' },
+      { label: 'Compatibilité', value: '55" à 75"' },
+      { label: 'Technologie', value: 'Ambilight' },
+      { label: 'Modes', value: 'Sync + Manuel' },
+      { label: 'Installation', value: 'Adhésive' },
+    ],
+    highlights: [
       'Synchronisation couleurs écran',
       'Réduit fatigue oculaire',
       'Installation universelle',
       'Contrôle via télécommande',
       'Mode cinéma optimisé'
     ],
-    inStock: true,
-    stockQuantity: 28,
     sku: 'VL-TV-BL-4K',
     urlSlug: 'ambient-tv-led-backlight-4k',
-    badges: ['4K', 'Cinéma']
+    badges: ['4K', 'Cinéma'],
+    airtableId: 'recLED004456',
+    metaTitle: 'Gaming LED Pro | Monster Phone Boutique',
+    metaDescription: 'Éclairage LED gaming professionnel avec sync écran',
+    keywords: ['led', 'gaming', 'rgb', 'éclairage', 'monster'],
+    variants: [],
+    warranty: '1 an',
+    deliveryTime: '24-48h',
+    status: 'active',
   },
   {
     id: 'led-008',
     name: 'MONSTER Projecteur LED Galaxy Starlight',
     brand: 'MONSTER',
-    category: 'Éclairage LED',
+    category: 'LED',
     subcategory: 'Projecteurs',
     price: 44.99,
     originalPrice: 59.99,
     discount: 25,
-    rating: 4.8,
-    reviews: 203,
+    rating: {
+      average: 4.8,
+      count: 0,
+      distribution: {
+        5: 0,
+        4: 0,
+        3: 0,
+        2: 0,
+        1: 0
+      }
+    },
     images: ['/placeholder-product.png'],
     description: 'Projecteur LED créant un ciel étoilé avec nébuleuses colorées pour transformer votre chambre en galaxie.',
     shortDescription: 'Projecteur galaxie avec télécommande et timer',
-    specifications: {
-      'Type': 'Projecteur LED',
-      'Effets': 'Étoiles + Nébuleuses',
-      'Contrôle': 'Télécommande + App',
-      'Timer': 'Auto-off 1/2/4h',
-      'Couverture': '15-30m²'
-    },
-    features: [
+    specifications: [
+      { label: 'Type', value: 'Projecteur LED' },
+      { label: 'Effets', value: 'Étoiles + Nébuleuses' },
+      { label: 'Contrôle', value: 'Télécommande + App' },
+      { label: 'Timer', value: 'Auto-off 1/2/4h' },
+      { label: 'Couverture', value: '15-30m²' },
+    ],
+    highlights: [
       'Effets galaxie réalistes',
       'Nébuleuses multicolores',
       'Mode musique réactif',
       'Timer programmable',
       'Télécommande incluse'
     ],
-    inStock: true,
-    stockQuantity: 35,
     sku: 'CL-GALAXY-PRO',
     urlSlug: 'projecteur-led-galaxy-starlight',
-    badges: ['Best-seller', 'Ambiance']
+    badges: ['Best-seller', 'Ambiance'],
+    airtableId: 'recLED004505',
+    metaTitle: 'Gaming LED Pro | Monster Phone Boutique',
+    metaDescription: 'Éclairage LED gaming professionnel avec sync écran',
+    keywords: ['led', 'gaming', 'rgb', 'éclairage', 'monster'],
+    variants: [],
+    warranty: '1 an',
+    deliveryTime: '24-48h',
+    status: 'active',
   },
   {
     id: 'led-009',
     name: 'MONSTER LED Ring Light Studio Pro 18"',
     brand: 'MONSTER',
-    category: 'Éclairage LED',
+    category: 'LED',
     subcategory: 'Éclairage Studio',
     price: 79.99,
     originalPrice: 99.99,
     discount: 20,
-    rating: 4.7,
-    reviews: 67,
+    rating: {
+      average: 4.7,
+      count: 0,
+      distribution: {
+        5: 0,
+        4: 0,
+        3: 0,
+        2: 0,
+        1: 0
+      }
+    },
     images: ['/placeholder-product.png'],
     description: 'Ring light professionnel 18 pouces pour streaming, photographie et maquillage avec température de couleur réglable.',
     shortDescription: 'Ring light 18" avec trépied et support smartphone',
-    specifications: {
-      'Type': 'Ring Light',
-      'Diamètre': '18 pouces',
-      'Température': '3200K-5600K',
-      'Intensité': 'Variable 1-100%',
-      'Hauteur': 'Jusqu\'à 2m'
-    },
-    features: [
+    specifications: [
+      { label: 'Type', value: 'Ring Light' },
+      { label: 'Diamètre', value: '18 pouces' },
+      { label: 'Température', value: '3200K-5600K' },
+      { label: 'Intensité', value: 'Variable 1-100%' },
+      { label: 'Hauteur', value: 'Jusqu\'à 2m' }
+    ],
+    highlights: [
       'Éclairage uniforme sans ombre',
       'Température couleur réglable',
       'Trépied ajustable 2m',
       'Support smartphone/caméra',
       'Télécommande Bluetooth'
     ],
-    inStock: true,
-    stockQuantity: 20,
     sku: 'PL-RING-18-PRO',
     urlSlug: 'led-ring-light-studio-pro-18',
-    badges: ['Pro', 'Streaming']
+    badges: ['Pro', 'Streaming'],
+    airtableId: 'recLED004554',
+    metaTitle: 'Gaming LED Pro | Monster Phone Boutique',
+    metaDescription: 'Éclairage LED gaming professionnel avec sync écran',
+    keywords: ['led', 'gaming', 'rgb', 'éclairage', 'monster'],
+    variants: [],
+    warranty: '1 an',
+    deliveryTime: '24-48h',
+    status: 'active',
   },
   {
     id: 'led-010',
     name: 'MONSTER Smart Bulb RGB WiFi Pack x4',
     brand: 'MONSTER',
-    category: 'Éclairage LED',
-    subcategory: 'Ampoules connectées',
+    category: 'LED',
+    subcategory: 'Ampoules Smart',
     price: 54.99,
     originalPrice: 74.99,
     discount: 27,
-    rating: 4.6,
-    reviews: 189,
+    rating: {
+      average: 4.6,
+      count: 0,
+      distribution: {
+        5: 0,
+        4: 0,
+        3: 0,
+        2: 0,
+        1: 0
+      }
+    },
     images: ['/placeholder-product.png'],
     description: 'Pack de 4 ampoules LED intelligentes RGB avec contrôle WiFi pour automatiser l\'éclairage de votre maison.',
     shortDescription: 'Pack 4 ampoules smart RGB E27, compatible Alexa/Google',
-    specifications: {
-      'Type': 'Ampoule Smart',
-      'Culot': 'E27',
-      'Puissance': '9W = 60W',
-      'Couleurs': '16 millions',
-      'Connectivité': 'WiFi 2.4GHz'
-    },
-    features: [
+    specifications: [
+      { label: 'Type', value: 'Ampoule Smart' },
+      { label: 'Culot', value: 'E27' },
+      { label: 'Puissance', value: '9W = 60W' },
+      { label: 'Couleurs', value: '16 millions' },
+      { label: 'Connectivité', value: 'WiFi 2.4GHz' },
+    ],
+    highlights: [
       'Contrôle vocal Alexa/Google',
       '16 millions de couleurs',
       'Programmation horaire',
       'Scénarios personnalisés',
       'Économie énergie 85%'
     ],
-    inStock: true,
-    stockQuantity: 40,
     sku: 'HL-BULB-RGB-4',
     urlSlug: 'smart-bulb-rgb-wifi-pack-4',
-    badges: ['Smart Home', 'Économique']
+    badges: ['Smart Home', 'Économique'],
+    airtableId: 'recLED004603',
+    metaTitle: 'Gaming LED Pro | Monster Phone Boutique',
+    metaDescription: 'Éclairage LED gaming professionnel avec sync écran',
+    keywords: ['led', 'gaming', 'rgb', 'éclairage', 'monster'],
+    variants: [],
+    warranty: '1 an',
+    deliveryTime: '24-48h',
+    status: 'active',
   },
   {
     id: 'led-011',
     name: 'MONSTER LED Strip Gaming Setup 5M',
     brand: 'MONSTER',
-    category: 'Éclairage LED',
+    category: 'LED',
     subcategory: 'Bandeaux LED',
     price: 29.99,
     originalPrice: 39.99,
     discount: 25,
-    rating: 4.6,
-    reviews: 85,
+    rating: {
+      average: 4.6,
+      count: 0,
+      distribution: {
+        5: 0,
+        4: 0,
+        3: 0,
+        2: 0,
+        1: 0
+      }
+    },
     images: ['/placeholder-product.png'],
     description: 'Bandeau LED spécialement conçu pour les setups gaming avec synchronisation musique et effets dynamiques.',
     shortDescription: 'Bandeau LED 5M gaming avec sync musique',
-    specifications: {
-      'Longueur': '5 mètres',
-      'LEDs': '150 LEDs',
-      'Couleurs': 'RGB + Blanc',
-      'Modes': '20 modes',
-      'Contrôle': 'App + Télécommande'
-    },
-    features: [
+    specifications: [
+      { label: 'Longueur', value: '5 mètres' },
+      { label: 'LEDs', value: '150 LEDs' },
+      { label: 'Couleurs', value: 'RGB + Blanc' },
+      { label: 'Modes', value: '20 modes' },
+      { label: 'Contrôle', value: 'App + Télécommande' },
+    ],
+    highlights: [
       'Synchronisation musique',
       'Effets gaming dynamiques',
       'Application mobile dédiée',
       'Installation facile'
     ],
-    stockQuantity: 25,
     sku: 'MON-LED-GAME5M',
     urlSlug: 'monster-led-strip-gaming-setup-5m',
-    badges: ['Gaming', 'Sync musique']
+    badges: ['Gaming', 'Sync musique'],
+    airtableId: 'recLED004651',
+    metaTitle: 'Gaming LED Pro | Monster Phone Boutique',
+    metaDescription: 'Éclairage LED gaming professionnel avec sync écran',
+    keywords: ['led', 'gaming', 'rgb', 'éclairage', 'monster'],
+    variants: [],
+    warranty: '1 an',
+    deliveryTime: '24-48h',
+    status: 'active',
   },
   {
     id: 'led-012',
     name: 'MONSTER Cube LED Modulaire Smart',
     brand: 'MONSTER',
-    category: 'Éclairage LED',
-    subcategory: 'Projecteurs',
+    category: 'LED',
+    subcategory: 'Panneaux LED',
     price: 49.99,
     originalPrice: 69.99,
     discount: 29,
-    rating: 4.7,
-    reviews: 62,
+    rating: {
+      average: 4.7,
+      count: 0,
+      distribution: {
+        5: 0,
+        4: 0,
+        3: 0,
+        2: 0,
+        1: 0
+      }
+    },
     images: ['/placeholder-product.png'],
     description: 'Cubes LED modulaires connectables pour créer des designs lumineux personnalisés.',
     shortDescription: '6 cubes LED modulaires WiFi',
-    specifications: {
-      'Dimensions': '10x10x10 cm par cube',
-      'Quantité': '6 cubes',
-      'Couleurs': '16 millions',
-      'Contrôle': 'WiFi + Bluetooth',
-      'Compatibilité': 'Alexa, Google Home'
-    },
-    features: [
+    specifications: [
+      { label: 'Dimensions', value: '10x10x10 cm par cube' },
+      { label: 'Quantité', value: '6 cubes' },
+      { label: 'Couleurs', value: '16 millions' },
+      { label: 'Contrôle', value: 'WiFi + Bluetooth' },
+      { label: 'Compatibilité', value: 'Alexa, Google Home' },
+    ],
+    highlights: [
       'Design modulaire',
       'Connexion magnétique',
       'Contrôle vocal',
       'Effets personnalisables'
     ],
-    stockQuantity: 18,
     sku: 'MON-CUBE-LED',
     urlSlug: 'monster-cube-led-modulaire-smart',
-    badges: ['Modulaire', 'Smart']
+    badges: ['Modulaire', 'Smart'],
+    airtableId: 'recLED004699',
+    metaTitle: 'Gaming LED Pro | Monster Phone Boutique',
+    metaDescription: 'Éclairage LED gaming professionnel avec sync écran',
+    keywords: ['led', 'gaming', 'rgb', 'éclairage', 'monster'],
+    variants: [],
+    warranty: '1 an',
+    deliveryTime: '24-48h',
+    status: 'active',
   },
   {
     id: 'led-013',
     name: 'MONSTER Lightning Pro Corner RGB',
     brand: 'MONSTER',
-    category: 'Éclairage LED',
-    subcategory: 'Accessoires LED',
+    category: 'LED',
+    subcategory: 'Barres LED',
     price: 44.99,
     originalPrice: 59.99,
     discount: 25,
-    rating: 4.5,
-    reviews: 93,
+    rating: {
+      average: 4.5,
+      count: 0,
+      distribution: {
+        5: 0,
+        4: 0,
+        3: 0,
+        2: 0,
+        1: 0
+      }
+    },
     images: ['/placeholder-product.png'],
     description: 'Barres LED d\'angle pour un éclairage immersif des coins de pièce.',
     shortDescription: '2 barres LED d\'angle RGB 1m',
-    specifications: {
-      'Longueur': '1 mètre par barre',
-      'Quantité': '2 barres',
-      'Angle': '90 degrés',
-      'Couleurs': 'RGB + Blanc',
-      'Installation': 'Adhésif 3M'
-    },
-    features: [
+    specifications: [
+      { label: 'Longueur', value: '1 mètre par barre' },
+      { label: 'Quantité', value: '2 barres' },
+      { label: 'Angle', value: '90 degrés' },
+      { label: 'Couleurs', value: 'RGB + Blanc' },
+      { label: 'Installation', value: 'Adhésif 3M' },
+    ],
+    highlights: [
       'Design pour angles',
       'Éclairage immersif',
       'Télécommande RF',
       'Installation simple'
     ],
-    stockQuantity: 30,
     sku: 'MON-CORNER-RGB',
     urlSlug: 'monster-lightning-pro-corner-rgb',
-    badges: ['Design', 'Corner']
+    badges: ['Design', 'Corner'],
+    airtableId: 'recLED004747',
+    metaTitle: 'Gaming LED Pro | Monster Phone Boutique',
+    metaDescription: 'Éclairage LED gaming professionnel avec sync écran',
+    keywords: ['led', 'gaming', 'rgb', 'éclairage', 'monster'],
+    variants: [],
+    warranty: '1 an',
+    deliveryTime: '24-48h',
+    status: 'active',
   },
   {
     id: 'led-014',
     name: 'MONSTER Flood Light Extérieur 50W',
     brand: 'MONSTER',
-    category: 'Éclairage LED',
+    category: 'LED',
     subcategory: 'Projecteurs',
     price: 59.99,
     originalPrice: 79.99,
     discount: 25,
-    rating: 4.8,
-    reviews: 107,
+    rating: {
+      average: 4.8,
+      count: 0,
+      distribution: {
+        5: 0,
+        4: 0,
+        3: 0,
+        2: 0,
+        1: 0
+      }
+    },
     images: ['/placeholder-product.png'],
     description: 'Projecteur LED extérieur puissant avec détection de mouvement et résistance IP65.',
     shortDescription: 'Projecteur LED 50W IP65 avec détecteur',
-    specifications: {
-      'Puissance': '50W',
-      'Luminosité': '5000 lumens',
-      'Température': '6500K',
-      'Détection': 'Capteur PIR 10m',
-      'Résistance': 'IP65'
-    },
-    features: [
+    specifications: [
+      { label: 'Puissance', value: '50W' },
+      { label: 'Luminosité', value: '5000 lumens' },
+      { label: 'Température', value: '6500K' },
+      { label: 'Détection', value: 'Capteur PIR 10m' },
+      { label: 'Résistance', value: 'IP65' },
+    ],
+    highlights: [
       'Détection de mouvement',
       'Résistant aux intempéries',
       'Économe en énergie',
       'Longue durée de vie'
     ],
-    stockQuantity: 15,
     sku: 'MON-FLOOD-50W',
     urlSlug: 'monster-flood-light-exterieur-50w',
-    badges: ['Extérieur', 'IP65']
+    badges: ['Extérieur', 'IP65'],
+    airtableId: 'recLED004795',
+    metaTitle: 'Gaming LED Pro | Monster Phone Boutique',
+    metaDescription: 'Éclairage LED gaming professionnel avec sync écran',
+    keywords: ['led', 'gaming', 'rgb', 'éclairage', 'monster'],
+    variants: [],
+    warranty: '1 an',
+    deliveryTime: '24-48h',
+    status: 'active',
   },
   {
     id: 'led-015',
     name: 'MONSTER Infinity Mirror LED 3D',
     brand: 'MONSTER',
-    category: 'Éclairage LED',
+    category: 'LED',
     subcategory: 'Déco LED',
     price: 89.99,
     originalPrice: 119.99,
     discount: 25,
-    rating: 4.9,
-    reviews: 76,
+    rating: {
+      average: 4.9,
+      count: 0,
+      distribution: {
+        5: 0,
+        4: 0,
+        3: 0,
+        2: 0,
+        1: 0
+      }
+    },
     images: ['/placeholder-product.png'],
     description: 'Miroir infini LED 3D pour une décoration futuriste avec effets de profondeur illimités.',
     shortDescription: 'Miroir infini LED 40x40cm avec effets 3D',
-    specifications: {
-      'Dimensions': '40x40 cm',
-      'Profondeur': 'Effet infini',
-      'Couleurs': 'RGB programmable',
-      'Modes': '25 animations',
-      'Contrôle': 'App + Commande vocale'
-    },
-    features: [
+    specifications: [
+      { label: 'Dimensions', value: '40x40 cm' },
+      { label: 'Profondeur', value: 'Effet infini' },
+      { label: 'Couleurs', value: 'RGB programmable' },
+      { label: 'Modes', value: '25 animations' },
+      { label: 'Contrôle', value: 'App + Commande vocale' },
+    ],
+    highlights: [
       'Effet 3D infini',
       'Contrôle vocal',
       '25 animations',
       'Cadre aluminium premium'
     ],
-    stockQuantity: 12,
     sku: 'MON-INFINITY-3D',
     urlSlug: 'monster-infinity-mirror-led-3d',
-    badges: ['Premium', '3D Effect']
+    badges: ['Premium', '3D Effect'],
+    airtableId: 'recLED004843',
+    metaTitle: 'Gaming LED Pro | Monster Phone Boutique',
+    metaDescription: 'Éclairage LED gaming professionnel avec sync écran',
+    keywords: ['led', 'gaming', 'rgb', 'éclairage', 'monster'],
+    variants: [],
+    warranty: '1 an',
+    deliveryTime: '24-48h',
+    status: 'active',
   },
 
   // === NOUVEAUX PRODUITS AJOUTÉS DEPUIS AIRTABLE (39 produits) ===
@@ -4142,9 +4861,9 @@ export const allProducts: Product[] = [
     name: 'HIFUTURE Enceinte Altus',
     brand: 'HIFUTURE',
     category: 'Audio',
-    subcategory: 'Enceintes',
+    subcategory: 'Enceintes Bluetooth',
     price: 29.99,
-    description: "L'enceinte portable HIFUTURE Altus incarne la fusion parfaite entre puissance sonore et mobilité absolue. Conçue pour accompagner toutes vos aventures, cette enceinte compacte délivre une puissance impressionnante de 10W, transformant n'importe quel environnement en espace musical immersif.\n\nLa certification IPX6 garantit une résistance totale aux éclaboussures et projections d'eau, permettant une utilisation sans crainte à la plage, au bord de la piscine ou sous la pluie tropicale réunionnaise. Cette protection robuste fait de l'Altus le compagnon idéal pour toutes vos activités outdoor, des randonnées aux pique-niques en passant par les séances de sport.\n\nQuatre coloris tendance s'offrent à vous pour exprimer votre personnalité : le Camo Vert pour les aventuriers, le Noir élégant pour les puristes, le Bleu dynamique pour les sportifs et le Rouge passionné pour les audacieux. Chaque finition est soigneusement traitée pour résister aux chocs et aux rayures du quotidien.\n\nLa technologie Bluetooth 5.0 assure une connexion instantanée et stable jusqu'à 10 mètres, éliminant les coupures et optimisant la consommation énergétique. L'appairage simplifié permet de connecter votre smartphone en quelques secondes, tandis que la mémoire de connexion reconnecte automatiquement vos appareils préférés.\n\nL'autonomie de 8 à 10 heures vous accompagne tout au long de la journée, des sessions matinales de yoga aux soirées entre amis. La charge rapide via USB-C restaure l'énergie en seulement 2 heures, garantissant une disponibilité maximale.\n\nLe son équilibré offre des basses profondes sans saturation, des médiums clairs et des aigus cristallins, parfait pour tous les styles musicaux. Les radiateurs passifs intégrés amplifient les basses fréquences pour une expérience sonore riche et enveloppante.\n\nIdéale pour les habitants actifs de La Réunion, l'enceinte HIFUTURE Altus résiste parfaitement au climat tropical tout en offrant une qualité audio exceptionnelle pour un prix accessible.",
+    description: "Enceinte Bluetooth portable HIFUTURE Altus avec son puissant et design robuste. Profitez d'une qualité audio exceptionnelle où que vous soyez.",
     shortDescription: 'Enceinte Bluetooth portable avec son HD',
     metaTitle: 'HIFUTURE Enceinte Altus - Bluetooth Portable | Monster Phone 974',
     metaDescription: 'Enceinte Bluetooth HIFUTURE Altus. Son HD, autonomie longue durée, design robuste. 4 coloris disponibles. Livraison La Réunion.',
@@ -4175,9 +4894,9 @@ export const allProducts: Product[] = [
     name: 'HIFUTURE PartyBox Event Horizon',
     brand: 'HIFUTURE',
     category: 'Audio',
-    subcategory: 'Enceintes',
+    subcategory: 'Enceintes Party',
     price: 199.99,
-    description: "La HIFUTURE PartyBox Event Horizon transcende les limites de l'audio portable pour créer une expérience festive totalement immersive. Ce système audio professionnel combine puissance sonore exceptionnelle et spectacle lumineux LED spectaculaire, transformant instantanément n'importe quel espace en véritable salle de concert.\n\nConçue pour animer des événements jusqu'à 100 invités, l'Event Horizon délivre une puissance acoustique professionnelle capable de remplir grands espaces intérieurs et extérieurs. Les drivers haute performance et les amplificateurs de classe D garantissent une restitution sonore d'une clarté exceptionnelle, même à volume élevé.\n\nLe show lumineux LED synchronisé transforme chaque morceau en spectacle visuel captivant. Les effets lumineux réagissent dynamiquement au rythme de la musique, créant une atmosphère festive unique. Plusieurs modes d'éclairage permettent d'adapter l'ambiance : disco dynamique, ambiance lounge ou éclairage statique élégant.\n\nLa technologie acoustique premium intègre égalisation DSP avancée, optimisant automatiquement le son selon l'environnement. Le mode karaoké avec double entrée microphone transforme vos soirées en véritables performances scéniques. L'effet écho réglable et la suppression vocale permettent des prestations dignes des professionnels.\n\nLa connectivité complète inclut Bluetooth 5.0 longue portée, entrées auxiliaires, ports USB pour lecture directe et connexion guitare. Le mode TWS permet de coupler deux Event Horizon pour une expérience stéréo monumentale. L'application dédiée offre contrôle total des paramètres audio et lumineux.\n\nLa batterie haute capacité garantit jusqu'à 8 heures d'autonomie à volume modéré, suffisant pour animer une soirée complète. Les roulettes intégrées et la poignée télescopique facilitent le transport malgré la puissance embarquée.\n\nParfaite pour mariages, anniversaires et événements corporate à La Réunion, l'Event Horizon transforme chaque célébration en moment inoubliable. La qualité professionnelle accessible aux particuliers exigeants.",
+    description: "Enceinte de soirée HIFUTURE PartyBox Event Horizon avec éclairage LED et son puissant pour animer vos événements. Transformez n'importe quel espace en piste de danse.",
     shortDescription: 'Enceinte party avec LED et son puissant',
     metaTitle: 'HIFUTURE PartyBox Event Horizon - Enceinte Soirée LED | Monster Phone 974',
     metaDescription: 'HIFUTURE PartyBox Event Horizon. Son puissant, éclairage LED RGB, autonomie 8h. Parfait pour soirées. Livraison La Réunion.',
@@ -4205,31 +4924,9 @@ export const allProducts: Product[] = [
     name: 'HIFUTURE Écouteur Olymbuds 3',
     brand: 'HIFUTURE',
     category: 'Audio',
-    subcategory: 'Casques & Écouteurs',
+    subcategory: 'ecouteurs',
     price: 24.99,
-    description: `Les HIFUTURE Olymbuds 3 sont des écouteurs Bluetooth de dernière génération avec réduction de bruit active (ANC), offrant une expérience audio immersive et cristalline. Dotés de la certification IPX5, ils résistent à l'eau et à la transpiration, parfaits pour le sport et les activités extérieures.
-
-Caractéristiques principales :
-• Réduction de bruit active (ANC) jusqu'à -30dB
-• Bluetooth 5.2 pour une connexion stable et rapide
-• Certification IPX5 - Résistance à l'eau et à la transpiration
-• Autonomie jusqu'à 7h par charge + 28h avec l'étui
-• Charge rapide : 10 min = 1h d'écoute
-• Drivers de 10mm pour des basses profondes
-• Mode transparence pour rester conscient de l'environnement
-• Commandes tactiles intuitives sur chaque écouteur
-• Appairage automatique et connexion instantanée
-• Compatible avec assistants vocaux (Siri, Google Assistant)
-
-L'étui de charge compact avec indicateur LED permet de recharger les écouteurs plusieurs fois en déplacement. Le design ergonomique assure un maintien parfait et un confort optimal même lors d'une utilisation prolongée.
-
-Idéal pour :
-- Les sportifs grâce à la certification IPX5
-- Les voyageurs avec la réduction de bruit active
-- Le télétravail avec le micro antibruit
-- Les audiophiles recherchant une qualité sonore premium
-
-Contenu du coffret : Écouteurs, étui de charge, câble USB-C, 3 paires d'embouts silicone (S/M/L), guide d'utilisation.`,
+    description: "Écouteurs True Wireless HIFUTURE Olymbuds 3 avec réduction de bruit et autonomie étendue. La liberté du sans-fil à prix mini.",
     shortDescription: 'Écouteurs TWS avec réduction de bruit',
     metaTitle: 'HIFUTURE Olymbuds 3 - Écouteurs True Wireless | Monster Phone 974',
     metaDescription: 'HIFUTURE Olymbuds 3. Réduction de bruit, autonomie 24h avec boîtier, Bluetooth 5.2. Disponible en blanc et noir.',
@@ -4258,34 +4955,9 @@ Contenu du coffret : Écouteurs, étui de charge, câble USB-C, 3 paires d'embou
     name: 'HIFUTURE TOUR X',
     brand: 'HIFUTURE',
     category: 'Audio',
-    subcategory: 'Casques & Écouteurs',
+    subcategory: 'ecouteurs',
     price: 13.99,
-    description: `Les HIFUTURE TOUR X sont des écouteurs sport spécialement conçus pour les athlètes et sportifs exigeants. Dotés de crochets d'oreille ergonomiques et d'une certification IPX4, ils offrent une tenue parfaite et une résistance optimale à la transpiration pendant vos séances les plus intenses.
-
-Caractéristiques principales :
-• Crochets d'oreille flexibles pour un maintien parfait
-• Certification IPX4 - Protection contre la sueur et les éclaboussures
-• Drivers dynamiques de 10mm pour un son puissant et équilibré
-• Autonomie de 8 heures en lecture continue
-• Microphone intégré avec réduction de bruit ambiant
-• Câble renforcé anti-enchevêtrement
-• Commandes intégrées pour musique et appels
-• Embouts ergonomiques en silicone pour un confort optimal
-• Compatible avec tous les appareils Bluetooth
-• Pochette de transport incluse
-
-La conception sport des TOUR X assure une stabilité exceptionnelle même lors des mouvements les plus intenses. Les crochets d'oreille souples s'adaptent à toutes les morphologies tout en garantissant un confort prolongé.
-
-Idéal pour :
-- Course à pied et jogging
-- Salle de sport et fitness
-- Sports d'équipe
-- Cyclisme et VTT
-- Toutes activités sportives intensives
-
-La qualité audio premium avec basses profondes et aigus cristallins transforme chaque séance d'entraînement en expérience motivante.
-
-Contenu du coffret : Écouteurs TOUR X, pochette de transport, 3 paires d'embouts (S/M/L), guide d'utilisation.`,
+    description: "Écouteurs sport HIFUTURE TOUR X avec crochet d'oreille pour une tenue parfaite pendant l'exercice. Résistants à la sueur pour vos séances les plus intenses.",
     shortDescription: 'Écouteurs sport avec crochets',
     metaTitle: 'HIFUTURE TOUR X - Écouteurs Sport | Monster Phone 974',
     metaDescription: 'HIFUTURE TOUR X. Écouteurs sport résistants à la sueur, crochets d\'oreille, son dynamique. Prix mini.',
@@ -4313,34 +4985,9 @@ Contenu du coffret : Écouteurs TOUR X, pochette de transport, 3 paires d'embout
     name: 'HIFUTURE Enceinte Ripple',
     brand: 'HIFUTURE',
     category: 'Audio',
-    subcategory: 'Enceintes',
+    subcategory: 'Enceintes Bluetooth',
     price: 64.99,
-    description: `La HIFUTURE Ripple est une enceinte Bluetooth révolutionnaire avec diffusion sonore à 360°, créant une bulle sonore immersive qui transforme n'importe quel espace en salle de concert. Son design élégant avec finition premium s'intègre parfaitement dans tous les intérieurs modernes.
-
-Caractéristiques principales :
-• Son omnidirectionnel 360° pour une couverture sonore totale
-• Puissance de 20W RMS avec double radiateur passif
-• Bluetooth 5.0 pour une connexion stable jusqu'à 20m
-• Autonomie exceptionnelle jusqu'à 15 heures
-• Fonction TWS - Couplez 2 enceintes pour un son stéréo
-• Certification IPX5 - Résistance aux éclaboussures
-• Microphone intégré pour appels mains libres
-• Éclairage LED ambiant multicolore personnalisable
-• Commandes tactiles intuitives sur le dessus
-• Port USB pour recharge d'appareils mobiles (powerbank)
-
-La technologie de diffusion 360° garantit une qualité sonore identique peu importe votre position dans la pièce. Les basses profondes et les aigus cristallins créent une expérience d'écoute riche et équilibrée.
-
-Idéal pour :
-- Soirées et réceptions
-- Ambiance musicale à la maison
-- Terrasse et jardin (IPX5)
-- Bureau et espaces de travail
-- Camping et activités extérieures
-
-Le design cylindrique avec grille métallique et base antidérapante assure stabilité et élégance. L'éclairage LED synchronisé avec la musique crée une ambiance unique.
-
-Contenu du coffret : Enceinte Ripple, câble USB-C, câble audio 3.5mm, guide d'utilisation, sac de transport.`,
+    description: "Enceinte Bluetooth HIFUTURE Ripple avec son 360° et design élégant pour une expérience audio immersive. Le son enveloppe l'espace pour une écoute parfaite.",
     shortDescription: 'Enceinte 360° avec son immersif',
     metaTitle: 'HIFUTURE Ripple - Enceinte Bluetooth 360° | Monster Phone 974',
     metaDescription: 'HIFUTURE Ripple. Son 360°, Bluetooth 5.0, autonomie 15h. Design élégant en 3 coloris. Livraison La Réunion.',
@@ -4370,9 +5017,9 @@ Contenu du coffret : Enceinte Ripple, câble USB-C, câble audio 3.5mm, guide d'
     name: 'MY WAY Câble Lumineux USB-C',
     brand: 'MY WAY',
     category: 'Accessoires',
-    subcategory: 'Câbles & Connecteurs',
+    subcategory: 'Câbles',
     price: 14.99,
-    description: "Découvrez le câble MY WAY Lumineux USB-C, une révolution dans l'univers des accessoires de charge. Ce câble unique combine fonctionnalité et esthétique avec son effet LED dynamique qui transforme chaque charge en expérience visuelle captivante.\n\nCe câble innovant propose deux configurations essentielles : USB-C vers USB-C pour les appareils modernes et USB-C vers Lightning pour l'écosystème Apple. L'effet lumineux LED intégré ne se contente pas d'être décoratif - il indique visuellement le flux d'énergie pendant la charge, créant une animation fluide qui suit le courant électrique.\n\nConçu avec un TPE renforcé de haute qualité, ce câble résiste aux torsions et aux pliages répétés. La technologie de charge rapide 3A garantit une alimentation optimale de vos appareils, réduisant considérablement les temps d'attente. La longueur d'un mètre offre la flexibilité parfaite entre mobilité et confort d'utilisation.\n\nL'effet LED consomme une énergie négligeable et s'active automatiquement lors de la connexion. Cette fonctionnalité permet non seulement d'identifier facilement votre câble dans l'obscurité, mais aussi de vérifier instantanément que la charge est active.\n\nParfait pour les professionnels à La Réunion qui valorisent l'innovation et le style, ce câble MY WAY transforme un accessoire utilitaire en objet design. Compatible avec smartphones, tablettes, écouteurs et tous appareils USB-C ou Lightning, il s'adapte à tous vos besoins de charge et synchronisation.\n\nLa certification de sécurité garantit une protection contre les surtensions et les courts-circuits, préservant la longévité de vos appareils. Disponible immédiatement dans nos boutiques réunionnaises avec garantie constructeur d'un an.",
+    description: "Câble lumineux MY WAY USB-C avec indicateur LED de charge pour une expérience visuelle unique. Suivez la charge en temps réel grâce à l'éclairage dynamique.",
     shortDescription: 'Câble USB-C lumineux avec LED',
     metaTitle: 'MY WAY Câble Lumineux USB-C - LED Charge Rapide | Monster Phone 974',
     metaDescription: 'MY WAY Câble lumineux USB-C. LED de charge, charge rapide 3A, longueur 1m. USB-C vers USB-C ou Lightning.',
@@ -4401,9 +5048,9 @@ Contenu du coffret : Enceinte Ripple, câble USB-C, câble audio 3.5mm, guide d'
     name: 'MY WAY Câble Lumineux USB-A',
     brand: 'MY WAY',
     category: 'Accessoires',
-    subcategory: 'Câbles & Connecteurs',
+    subcategory: 'Câbles',
     price: 12.99,
-    description: "Le câble lumineux MY WAY USB-A vers USB-C représente la fusion parfaite entre technologie traditionnelle et innovation moderne. Conçu pour connecter vos appareils USB-C aux ports USB-A standard, ce câble révolutionne l'expérience de charge avec son effet LED dynamique unique.\n\nL'animation lumineuse LED intégrée crée un spectacle visuel fascinant pendant la charge. Cette technologie brevetée MY WAY permet de visualiser instantanément le transfert d'énergie, transformant un simple câble en accessoire high-tech design. L'effet lumineux s'adapte automatiquement à l'intensité de charge, offrant un feedback visuel intuitif.\n\nAvec sa capacité de charge 2.4A, ce câble assure une alimentation rapide et stable pour smartphones, tablettes, écouteurs et autres périphériques USB-C. La compatibilité universelle USB-A garantit son utilisation avec ordinateurs, chargeurs muraux, powerbanks et adaptateurs allume-cigare existants.\n\nLa construction robuste utilise des matériaux premium : connecteurs renforcés en alliage d'aluminium, gaine TPE flexible résistante aux torsions, et fils de cuivre haute conductivité. Cette qualité de fabrication garantit des milliers de cycles de connexion sans dégradation des performances.\n\nLe design noir élégant s'intègre parfaitement dans tout environnement, professionnel ou personnel. La longueur d'un mètre offre le compromis idéal entre portabilité et liberté de mouvement pendant l'utilisation.\n\nIdéal pour les utilisateurs réunionnais recherchant un accessoire distinctif et performant, ce câble MY WAY combine praticité quotidienne et innovation visuelle. La technologie LED basse consommation n'impacte pas les performances de charge tout en offrant une expérience utilisateur unique.\n\nCertifié pour la sécurité avec protections multiples intégrées, disponible immédiatement dans notre réseau de distribution local avec support technique et garantie constructeur complète.",
+    description: "Câble lumineux MY WAY USB-A avec indicateur LED pour visualiser la charge en temps réel. Compatible avec tous vos appareils.",
     shortDescription: 'Câble USB-A lumineux avec LED',
     metaTitle: 'MY WAY Câble Lumineux USB-A - LED Indicateur | Monster Phone 974',
     metaDescription: 'MY WAY Câble lumineux USB-A. LED de charge, compatible Lightning et USB-C, longueur 1m. Prix mini.',
@@ -4431,7 +5078,7 @@ Contenu du coffret : Enceinte Ripple, câble USB-C, câble audio 3.5mm, guide d'
     sku: 'MON-ILL-PACK-2X5M',
     name: 'MONSTER Illuminescence Light Strip Pack 2X 5M RGB+W',
     brand: 'MONSTER',
-    category: 'Éclairage LED',
+    category: 'LED',
     subcategory: 'Bandeaux LED',
     price: 55.99,
     description: "Pack de 2 bandes LED MONSTER Illuminescence 5M RGB+W avec contrôle sonore pour une ambiance personnalisée. Synchronisez vos lumières avec votre musique.",
@@ -4463,37 +5110,9 @@ Contenu du coffret : Enceinte Ripple, câble USB-C, câble audio 3.5mm, guide d'
     name: 'HIFUTURE PartyBox MusicBox',
     brand: 'HIFUTURE',
     category: 'Audio',
-    subcategory: 'Enceintes',
+    subcategory: 'Enceintes Party',
     price: 149.99,
-    description: `La HIFUTURE MusicBox est l'enceinte party ultime avec 80W de puissance pure, un système d'éclairage LED synchronisé spectaculaire et un micro sans fil inclus pour transformer instantanément n'importe quel événement en soirée mémorable. Conçue pour les grandes réceptions et événements.
-
-Caractéristiques principales :
-• Puissance exceptionnelle de 80W RMS (160W peak)
-• Double woofer 6.5" + double tweeter pour un son puissant
-• Système LED RGB synchronisé avec effets lumineux dynamiques
-• Microphone sans fil professionnel inclus
-• Mode karaoké avec réglage écho et volume
-• Bluetooth 5.0 longue portée (jusqu'à 30m)
-• Autonomie jusqu'à 10 heures à volume moyen
-• Entrées multiples : Bluetooth, USB, SD, AUX, Micro
-• Égaliseur 5 bandes avec présets (Rock, Jazz, Pop, Classic)
-• Fonction TWS pour coupler 2 enceintes (160W total)
-• Poignée de transport et roulettes intégrées
-• Panneau de contrôle LED avec affichage numérique
-
-Le système d'éclairage professionnel avec LED RGB multicolores crée une ambiance de discothèque avec plusieurs modes : pulsation, stroboscope, dégradé, synchronisation musicale. Le microphone sans fil UHF garantit une qualité vocale cristalline.
-
-Idéal pour :
-- Soirées et événements privés
-- Karaoké entre amis
-- Animations DJ mobiles
-- Événements en extérieur
-- Mariages et anniversaires
-- Concerts et spectacles
-
-La construction robuste avec grille métallique et coins renforcés assure une durabilité maximale. Les roulettes et la poignée télescopique facilitent le transport.
-
-Contenu du coffret : Enceinte MusicBox, microphone sans fil UHF, télécommande, câble d'alimentation, câble AUX, guide d'utilisation.`,
+    description: "Enceinte party HIFUTURE MusicBox avec éclairage dynamique et puissance sonore exceptionnelle. Le micro inclus transforme vos soirées en sessions karaoké.",
     shortDescription: 'Enceinte party puissante avec LED',
     metaTitle: 'HIFUTURE PartyBox MusicBox - Enceinte Soirée Puissante | Monster Phone 974',
     metaDescription: 'HIFUTURE MusicBox. 80W de puissance, LED synchronisées, micro inclus, autonomie 10h. Animation garantie.',
@@ -4521,36 +5140,9 @@ Contenu du coffret : Enceinte MusicBox, microphone sans fil UHF, télécommande,
     name: 'HIFUTURE Casque ANC Tour',
     brand: 'HIFUTURE',
     category: 'Audio',
-    subcategory: 'Casques & Écouteurs',
+    subcategory: 'Casques',
     price: 44.99,
-    description: `Le casque HIFUTURE Tour représente le summum de la technologie audio avec sa réduction de bruit active (ANC) de pointe, offrant une expérience d'écoute pure et immersive. Conçu pour les audiophiles et les voyageurs exigeants, il combine confort exceptionnel et performances audio premium.
-
-Caractéristiques principales :
-• Réduction de bruit active (ANC) jusqu'à -35dB
-• Drivers de 40mm avec aimants néodyme haute performance
-• Bluetooth 5.2 avec codec aptX HD pour un son sans perte
-• Autonomie exceptionnelle jusqu'à 30 heures avec ANC
-• Charge rapide USB-C : 10 min = 3h d'écoute
-• Mode transparence pour rester conscient de l'environnement
-• Coussinets mémoire de forme ultra-confortables
-• Arceau ajustable rembourré en cuir synthétique premium
-• Pliable et compact avec étui de transport rigide
-• Microphones multiples pour appels cristallins
-• Commandes tactiles intuitives sur l'écouteur droit
-• Compatible assistants vocaux (Siri, Google Assistant)
-
-La technologie ANC hybride avec 4 microphones analyse et neutralise les bruits ambiants en temps réel, créant une bulle de silence parfaite pour votre musique. Le mode transparence permet d'entendre les annonces importantes sans retirer le casque.
-
-Idéal pour :
-- Voyages en avion et train (ANC optimisé)
-- Télétravail et visioconférences
-- Sessions d'écoute prolongées
-- Gaming avec latence réduite
-- Méditation et relaxation
-
-Le design ergonomique avec rotation 90° des écouteurs et arceau ajustable garantit un confort optimal même après plusieurs heures d'utilisation.
-
-Contenu du coffret : Casque Tour ANC, étui de transport rigide, câble USB-C, câble audio 3.5mm, adaptateur avion, guide d'utilisation.`,
+    description: "Casque HIFUTURE Tour avec réduction de bruit active pour une immersion totale dans votre musique. Confort longue durée et autonomie exceptionnelle.",
     shortDescription: 'Casque avec réduction de bruit active',
     metaTitle: 'HIFUTURE Casque ANC Tour - Réduction de Bruit Active | Monster Phone 974',
     metaDescription: 'HIFUTURE Tour ANC. Réduction de bruit active, confort longue durée, autonomie 30h. Son haute définition.',
@@ -4578,41 +5170,9 @@ Contenu du coffret : Casque Tour ANC, étui de transport rigide, câble USB-C, c
     name: 'HIFUTURE Écouteur Sonify',
     brand: 'HIFUTURE',
     category: 'Audio',
-    subcategory: 'Casques & Écouteurs',
+    subcategory: 'ecouteurs',
     price: 44.99,
-    description: `Les HIFUTURE Sonify représentent l'excellence en matière d'écouteurs True Wireless, combinant une qualité audio Hi-Fi exceptionnelle, un design luxueux et les dernières innovations technologiques. La charge sans fil Qi et l'étui premium en font le compagnon idéal des utilisateurs exigeants.
-
-Caractéristiques principales :
-• Drivers dynamiques 13mm avec diaphragme biocomposite
-• Qualité audio Hi-Fi avec certification Hi-Res Audio
-• Bluetooth 5.3 avec multipoint (2 appareils simultanés)
-• Charge sans fil Qi compatible tous chargeurs
-• Autonomie 7h par charge + 21h avec l'étui (28h total)
-• Charge rapide : 15 min = 2h d'écoute
-• Réduction de bruit active adaptative (ANC)
-• Mode transparence intelligent avec détection vocale
-• Certification IPX5 pour résistance à l'eau
-• Détection automatique du port (pause/lecture)
-• Égaliseur personnalisable via application
-• Localisation des écouteurs par GPS
-
-L'étui de charge premium avec finition métallisée supporte la charge sans fil Qi et la charge rapide USB-C. L'indicateur LED élégant affiche le niveau de batterie avec précision.
-
-Technologies audio avancées :
-- Codec LDAC pour audio haute résolution
-- Réduction de bruit ENC pour les appels
-- Spatialisation 360° pour une scène sonore immersive
-- Bass Boost adaptatif selon le genre musical
-
-Idéal pour :
-- Audiophiles recherchant la qualité Hi-Fi
-- Professionnels en déplacement
-- Utilisateurs d'écosystème sans fil (charge Qi)
-- Sport et activités avec IPX5
-
-Le design ergonomique avec embouts en mousse mémoire garantit un maintien parfait et une isolation passive optimale.
-
-Contenu du coffret : Écouteurs Sonify, étui de charge premium, câble USB-C, 4 paires d'embouts (XS/S/M/L), embouts mousse mémoire, guide d'utilisation.`,
+    description: "Écouteurs True Wireless HIFUTURE Sonify avec qualité audio premium et design élégant. La charge sans fil ajoute une touche de praticité au quotidien.",
     shortDescription: 'Écouteurs TWS premium',
     metaTitle: 'HIFUTURE Sonify - Écouteurs True Wireless Premium | Monster Phone 974',
     metaDescription: 'HIFUTURE Sonify. Son Hi-Fi, autonomie 28h totale, charge sans fil. Disponible en noir et champagne.',
@@ -4641,12 +5201,12 @@ Contenu du coffret : Écouteurs Sonify, étui de charge premium, câble USB-C, 4
     name: 'MONSTER Persona SE ANC',
     brand: 'MONSTER',
     category: 'Audio',
-    subcategory: 'Casques & Écouteurs',
+    subcategory: 'Casques',
     price: 99.99,
-    description: "Immergez-vous dans un cocon de silence avec le casque MONSTER Persona SE ANC, une solution audio premium qui combine réduction de bruit active professionnelle et confort exceptionnel pour créer l'expérience d'écoute idéale. Ce casque sophistiqué s'adresse aux professionnels et audiophiles qui recherchent l'isolation acoustique parfaite sans compromis sur la qualité sonore. La réduction de bruit active professionnelle exploite une technologie ANC multi-niveaux qui s'adapte intelligemment à votre environnement. Les microphones stratégiquement placés captent les bruits ambiants tandis que les processeurs génèrent des ondes inverses pour les annuler complètement. Cette technologie crée une bulle de tranquillité absolue, vous permettant de vous concentrer totalement sur votre musique ou votre travail. L'audio premium délivre une signature sonore équilibrée et naturelle qui respecte l'intention originale des artistes. Les transducteurs de 40mm spécialement accordés reproduisent fidèlement l'ensemble du spectre fréquentiel, des basses profondes et contrôlées aux aigus cristallins et détaillés. La scène sonore expansive crée une sensation d'espace tridimensionnel qui enrichit l'expérience d'écoute. Le confort exceptionnel résulte d'une étude ergonomique approfondie visant à éliminer toute fatigue lors d'utilisations prolongées. Les coussinets en mousse à mémoire de forme haute densité épousent parfaitement les contours de vos oreilles, créant un joint acoustique optimal tout en répartissant uniformément la pression. L'arceau auto-ajustable trouve naturellement la position idéale sans nécessiter de réglages constants. Deux coloris élégants reflètent différentes personnalités professionnelles. Le noir élégant incarne la sobriété et le professionnalisme avec une finition mate sophistiquée qui résiste aux traces de doigts. Le gris sophistiqué apporte une touche de modernité avec ses nuances subtiles qui s'accordent parfaitement aux environnements contemporains. Les matériaux premium garantissent une durabilité exceptionnelle. Le design moderne allie esthétique minimaliste et fonctionnalité optimale. Les lignes épurées et les finitions soignées créent un objet aussi beau que performant. Les commandes tactiles intégrées permettent de gérer intuitivement musique, appels et ANC sans sortir votre appareil. Les charnières robustes et le mécanisme de pliage facilitent le transport. L'audio cristallin se distingue particulièrement lors des appels téléphoniques et vidéoconférences. La technologie de réduction de bruit bidirectionnelle isole votre voix des bruits ambiants, garantissant une communication claire même dans les environnements bruyants. Les microphones beamforming focalisent sur votre voix tout en éliminant les sons parasites. Pour les professionnels et audiophiles de La Réunion qui exigent le meilleur en matière de réduction de bruit et de confort, le MONSTER Persona SE ANC représente l'outil parfait pour créer un espace de concentration absolue, que ce soit pour le travail intensif ou l'écoute musicale immersive.",
+    description: "Casque MONSTER Persona SE avec réduction de bruit active avancée et qualité audio audiophile. Support des codecs haute résolution pour les mélomanes exigeants.",
     shortDescription: 'Casque ANC audiophile',
-    metaTitle: 'MONSTER Persona SE ANC - Casque Réduction Bruit',
-    metaDescription: 'Casque MONSTER Persona SE avec ANC professionnel et confort premium. Audio cristallin, coussinets mémoire de forme, design moderne. Noir ou gris pour professionnels exigeants à La Réunion.',
+    metaTitle: 'MONSTER Persona SE ANC - Casque Audiophile Réduction de Bruit | Monster Phone 974',
+    metaDescription: 'MONSTER Persona SE ANC. Réduction de bruit avancée, son audiophile, confort premium. Noir ou gris.',
     urlSlug: 'monster-persona-se-anc-casque',
     keywords: ['MONSTER', 'Persona SE', 'ANC', 'casque', 'audiophile'],
     variants: [
@@ -4672,42 +5232,9 @@ Contenu du coffret : Écouteurs Sonify, étui de charge premium, câble USB-C, 4
     name: 'HIFUTURE Écouteur Sonic Air',
     brand: 'HIFUTURE',
     category: 'Audio',
-    subcategory: 'Casques & Écouteurs',
+    subcategory: 'ecouteurs',
     price: 24.99,
-    description: `Les HIFUTURE Sonic Air redéfinissent le confort avec leur poids plume de seulement 4g par écouteur, offrant une expérience d'écoute si légère que vous oublierez que vous les portez. Malgré leur taille compacte, ils délivrent un son cristallin et une autonomie impressionnante.
-
-Caractéristiques principales :
-• Ultra-légers : seulement 4g par écouteur
-• Design ergonomique invisible dans l'oreille
-• Drivers 6mm avec technologie acoustique avancée
-• Bluetooth 5.2 pour connexion stable et économe
-• Autonomie 5h par charge + 15h avec l'étui (20h total)
-• Charge rapide USB-C : 10 min = 1h d'écoute
-• Réduction de bruit passive optimisée
-• Microphones MEMS pour appels clairs
-• Commandes tactiles sensibles et précises
-• Certification IPX4 - Résistance à la transpiration
-• Appairage automatique instantané
-• Compatible assistants vocaux
-
-L'étui de charge ultra-compact (taille rouge à lèvres) se glisse facilement dans n'importe quelle poche. Le design minimaliste avec finition mate anti-traces garantit une élégance discrète.
-
-Technologies de confort :
-- Embouts en silicone hypoallergénique
-- Répartition optimale du poids
-- Ventilation acoustique pour éviter la fatigue
-- Forme anatomique adaptée à 95% des morphologies
-
-Idéal pour :
-- Port prolongé au quotidien
-- Sport léger et yoga
-- Appels téléphoniques fréquents
-- Voyage avec encombrement minimal
-- Personnes sensibles au poids des écouteurs
-
-La technologie de réduction de bruit passive associée aux embouts parfaitement ajustés offre une isolation efficace sans la lourdeur d'un système ANC.
-
-Contenu du coffret : Écouteurs Sonic Air, étui de charge compact, câble USB-C court, 3 paires d'embouts (S/M/L), guide rapide.`,
+    description: "Écouteurs True Wireless HIFUTURE Sonic Air ultra-légers avec son cristallin. Seulement 4g par écouteur pour un confort absolu.",
     shortDescription: 'Écouteurs TWS ultra-légers',
     metaTitle: 'HIFUTURE Sonic Air - Écouteurs True Wireless Légers | Monster Phone 974',
     metaDescription: 'HIFUTURE Sonic Air. Ultra-légers 4g, autonomie 20h totale, charge rapide. Blanc, noir ou champagne.',
@@ -4737,42 +5264,9 @@ Contenu du coffret : Écouteurs Sonic Air, étui de charge compact, câble USB-C
     name: 'HIFUTURE Écouteur Conduction Air Mate',
     brand: 'HIFUTURE',
     category: 'Audio',
-    subcategory: 'Casques & Écouteurs',
+    subcategory: 'ecouteurs',
     price: 34.99,
-    description: `Les HIFUTURE Air Mate révolutionnent l'écoute sportive avec leur technologie de conduction osseuse qui transmet le son par vibrations à travers les os du crâne, laissant vos oreilles complètement libres. Cette innovation garantit sécurité et confort optimal pendant toutes vos activités sportives.
-
-Caractéristiques principales :
-• Technologie de conduction osseuse avancée (7e génération)
-• Oreilles 100% libres pour conscience environnementale totale
-• Certification IPX5 - Protection contre sueur et pluie
-• Structure en titane flexible et ultra-résistante
-• Poids plume de 29g pour confort maximal
-• Autonomie 8 heures en lecture continue
-• Charge rapide magnétique : 10 min = 1,5h d'écoute
-• Bluetooth 5.3 avec portée étendue 15m
-• Double microphone avec réduction de bruit CVC 8.0
-• Vibrations optimisées pour minimiser les chatouillements
-• Mode Sport avec amplification des basses
-• Mémoire intégrée 32GB pour écoute sans téléphone
-
-La conception open-ear permet d'entendre parfaitement l'environnement (circulation, autres coureurs, instructions) tout en profitant de votre musique. Idéal pour la sécurité lors des activités extérieures.
-
-Technologies exclusives :
-- PremiumPitch 2.0+ pour basses profondes
-- LeakSlayer pour réduction des fuites sonores
-- Dual suspension pour confort longue durée
-- Revêtement nano-coating anti-transpiration
-
-Idéal pour :
-- Course à pied et trail en sécurité
-- Cyclisme urbain et VTT
-- Sports d'équipe nécessitant communication
-- Natation (mode MP3 étanche)
-- Port prolongé sans fatigue auditive
-
-Le tour de cou ergonomique avec mémoire de forme s'adapte parfaitement à toutes les morphologies et reste stable même lors des mouvements les plus intenses.
-
-Contenu du coffret : Écouteurs Air Mate, câble de charge magnétique, bouchons d'oreilles (pour environnements bruyants), pochette sport, guide d'utilisation.`,
+    description: "Écouteurs à conduction osseuse HIFUTURE Air Mate pour le sport avec oreilles libres. Restez conscient de votre environnement tout en profitant de votre musique.",
     shortDescription: 'Écouteurs conduction osseuse sport',
     metaTitle: 'HIFUTURE Air Mate Conduction - Écouteurs Sport Conduction Osseuse | Monster Phone 974',
     metaDescription: 'HIFUTURE Air Mate. Conduction osseuse, oreilles libres, IPX5, autonomie 8h. Parfait pour le sport.',
@@ -4800,8 +5294,8 @@ Contenu du coffret : Écouteurs Air Mate, câble de charge magnétique, bouchons
     sku: 'MON-ILL-TOUCH-X3',
     name: 'MONSTER Illuminescence LED Touch Light X3 RGB',
     brand: 'MONSTER',
-    category: 'Éclairage LED',
-    subcategory: 'Accessoires LED',
+    category: 'LED',
+    subcategory: 'Lampes LED',
     price: 26.99,
     description: "Pack de 3 lampes LED tactiles MONSTER Illuminescence RGB pour créer une ambiance personnalisée. Installation adhésive sans fil pour une flexibilité maximale.",
     shortDescription: 'Pack 3 lampes LED tactiles RGB',
@@ -4830,7 +5324,7 @@ Contenu du coffret : Écouteurs Air Mate, câble de charge magnétique, bouchons
     sku: 'MON-ILL-5M-IPX6',
     name: 'MONSTER Illuminescence Light Strip 5M Multicolor IPX6',
     brand: 'MONSTER',
-    category: 'Éclairage LED',
+    category: 'LED',
     subcategory: 'Bandeaux LED',
     price: 39.99,
     description: "Bande LED MONSTER Illuminescence 5M étanche IPX6 pour intérieur et extérieur. Résiste aux intempéries pour illuminer terrasse, jardin ou piscine.",
@@ -4863,7 +5357,7 @@ Contenu du coffret : Écouteurs Air Mate, câble de charge magnétique, bouchons
     category: 'High-Tech',
     subcategory: 'Appareils Photo',
     price: 59.99,
-    description: "L'appareil photo MUVIT KidPic révolutionne la photographie pour enfants avec sa technologie d'impression instantanée spécialement conçue pour les jeunes créateurs. Cet appareil innovant combine capture d'images numériques et impression immédiate, offrant aux enfants la satisfaction instantanée de voir leurs créations prendre vie.\n\nL'ergonomie pensée pour les petites mains garantit une prise en main parfaite dès 3 ans. Les boutons surdimensionnés et intuitifs permettent une utilisation autonome, encourageant l'exploration visuelle et la créativité. La coque robuste résiste aux chocs et chutes, accompagnant les aventures photographiques sans crainte.\n\nLa fonction d'impression instantanée transforme chaque photo en souvenir tangible. Les enfants découvrent la magie de voir leur image apparaître progressivement sur papier, créant une expérience sensorielle complète. Cette immédiateté renforce l'apprentissage et stimule la créativité continue.\n\nDisponible en bleu et rose, le KidPic s'adapte aux préférences de chaque enfant. Les couleurs vives et le design ludique en font un compagnon attractif qui donne envie d'explorer le monde à travers l'objectif. L'écran LCD intégré permet de visualiser les photos avant impression, développant le sens critique et artistique.\n\nLes fonctionnalités créatives incluent filtres colorés, cadres amusants et autocollants intégrés, transformant chaque photo en œuvre unique. Le mode selfie avec retardateur encourage l'expression personnelle et les photos de groupe entre amis.\n\nParfait pour les familles réunionnaises valorisant l'éveil artistique, cet appareil MUVIT favorise le développement cognitif et créatif. Idéal pour immortaliser sorties scolaires, anniversaires et moments familiaux précieux.\n\nLivré avec rouleaux de papier initial, manuel illustré adapté aux enfants et dragonnes de sécurité. Garantie constructeur 2 ans pour une utilisation sereine. Disponible dans nos boutiques locales avec démonstration possible.",
+    description: "Appareil photo numérique MUVIT KidPic conçu spécialement pour les enfants avec interface simple. Écran 2 pouces, vidéo HD et jeux intégrés pour des heures de divertissement.",
     shortDescription: 'Appareil photo numérique pour enfants',
     metaTitle: 'MUVIT KidPic - Appareil Photo Numérique Enfant | Monster Phone 974',
     metaDescription: 'MUVIT KidPic appareil photo enfant. Écran 2", vidéo HD, jeux intégrés. Disponible en bleu et rose.',
@@ -4892,7 +5386,7 @@ Contenu du coffret : Écouteurs Air Mate, câble de charge magnétique, bouchons
     name: 'CASQUE SANS FILS ENFANTS MUVIT',
     brand: 'MUVIT',
     category: 'Audio',
-    subcategory: 'Casques & Écouteurs',
+    subcategory: 'Casques Enfants',
     price: 39.99,
     description: "Casque sans fil MUVIT pour enfants avec limitation de volume et design fun. Protège l'audition des plus jeunes avec limiteur 85dB intégré.",
     shortDescription: 'Casque Bluetooth enfant avec limiteur',
@@ -4926,7 +5420,7 @@ Contenu du coffret : Écouteurs Air Mate, câble de charge magnétique, bouchons
     name: 'MUVIT Casque Sans Fil Enfant',
     brand: 'MUVIT',
     category: 'Audio',
-    subcategory: 'Casques & Écouteurs',
+    subcategory: 'Casques Enfants',
     price: 39.99,
     description: "Casque Bluetooth MUVIT pour enfants avec designs animaux et protection auditive. Confort optimal pour les longues sessions d'écoute.",
     shortDescription: 'Casque Bluetooth enfant protection auditive',
@@ -4959,7 +5453,7 @@ Contenu du coffret : Écouteurs Air Mate, câble de charge magnétique, bouchons
     sku: 'MON-ILL-SMART-RGBW',
     name: 'MONSTER Illuminescence Smart Light Strip RGB+W',
     brand: 'MONSTER',
-    category: 'Éclairage LED',
+    category: 'LED',
     subcategory: 'Bandeaux LED',
     price: 24.99,
     description: "Bande LED intelligente MONSTER RGB+W avec contrôle app et compatibilité assistants vocaux. Contrôlez vos lumières à la voix avec Alexa ou Google Assistant.",
@@ -4992,17 +5486,17 @@ Contenu du coffret : Écouteurs Air Mate, câble de charge magnétique, bouchons
     name: 'MONSTER N-Lite 206',
     brand: 'MONSTER',
     category: 'Audio',
-    subcategory: 'Casques & Écouteurs',
-    price: 19.99,
-    description: "Les écouteurs intra-auriculaires MONSTER N-Lite 206 représentent l'excellence audio accessible, offrant une expérience sonore premium dans un format compact et élégant. Conçus pour les audiophiles exigeants et les utilisateurs quotidiens, ces écouteurs filaires garantissent une qualité sonore constante et fiable sans les contraintes de batterie ou de connexion Bluetooth. La technologie acoustique avancée utilise des drivers dynamiques de 10mm spécialement calibrés pour délivrer un spectre sonore complet et équilibré. Les basses profondes et contrôlées apportent puissance et émotion à votre musique sans masquer les détails. Les médiums naturels préservent la chaleur des voix et l'authenticité des instruments acoustiques. Les aigus cristallins révèlent chaque nuance et texture sonore, des cymbales délicates aux harmoniques subtiles. Le design ergonomique étudié assure un confort optimal même après des heures d'écoute continue. Les embouts en silicone souple de qualité médicale s'adaptent parfaitement au canal auditif, créant un joint acoustique qui isole efficacement du bruit ambiant tout en garantissant un maintien sécurisé. Trois tailles d'embouts incluses permettent une personnalisation parfaite selon votre morphologie. La construction robuste utilise des matériaux premium sélectionnés pour leur durabilité. Le câble renforcé résiste aux enchevêtrements et aux tensions répétées, prolongeant significativement la durée de vie. Les connecteurs plaqués or garantissent une transmission du signal optimale et résistent à la corrosion, même dans l'environnement salin de La Réunion. Disponibles en deux coloris intemporels - Noir classique pour la discrétion professionnelle et Blanc élégant pour un style moderne - ces écouteurs s'adaptent à toutes les occasions. La finition mate anti-traces préserve l'aspect neuf même après usage intensif. La compatibilité universelle via jack 3.5mm assure une connexion immédiate avec smartphones, tablettes, ordinateurs portables, consoles de jeux et systèmes audio. Aucune configuration nécessaire, branchez et profitez instantanément de votre musique. Le microphone intégré avec bouton de contrôle permet de gérer appels et lecture musicale sans sortir votre appareil. Idéaux pour les mélomanes réunionnais recherchant qualité audio supérieure et fiabilité à prix accessible, les MONSTER N-Lite 206 offrent l'héritage sonore MONSTER dans un format pratique pour la vie quotidienne.",
+    subcategory: 'ecouteurs',
+    price: 29.99,
+    description: "Écouteurs MONSTER N-Lite 206 avec son puissant et design élégant. Driver 10mm pour des basses profondes et des aigus cristallins.",
     shortDescription: 'Écouteurs avec son puissant',
-    metaTitle: 'MONSTER N-Lite 206 - Écouteurs Intra-Auriculaires',
-    metaDescription: 'Écouteurs MONSTER N-Lite 206 intra-auriculaires avec drivers 10mm et isolation passive. Design ergonomique, câble renforcé, compatibilité universelle. Noir ou blanc disponibles La Réunion 974.',
+    metaTitle: 'MONSTER N-Lite 206 - Écouteurs Premium | Monster Phone 974',
+    metaDescription: 'MONSTER N-Lite 206. Son puissant, confort optimal, micro intégré. Rose Gold ou Midnight.',
     urlSlug: 'monster-n-lite-206-ecouteurs',
     keywords: ['MONSTER', 'N-Lite', '206', 'écouteurs'],
     variants: [
-      { color: 'Noir', colorCode: '#000000', ean: '5010016634871', stock: 12, images: [] },
-      { color: 'Blanc', colorCode: '#FFFFFF', ean: '5010016634888', stock: 15, images: [] }
+      { color: 'Rose Gold', colorCode: '#B76E79', ean: '', stock: 12, images: [] },
+      { color: 'Midnight', colorCode: '#191970', ean: '', stock: 15, images: [] }
     ],
     specifications: [
       { label: 'Driver', value: '10mm' },
@@ -5023,9 +5517,9 @@ Contenu du coffret : Écouteurs Air Mate, câble de charge magnétique, bouchons
     name: 'HIFUTURE Enceinte Ascendo',
     brand: 'HIFUTURE',
     category: 'Audio',
-    subcategory: 'Enceintes',
-    price: 54.99,
-    description: "Enceinte HIFUTURE Ascendo Rose alliant élégance féminine et performance audio. Design rose sophistiqué qui embellit votre intérieur moderne. Son premium avec technologie acoustique optimisée pour clarté exceptionnelle. Autonomie longue durée pour profiter de votre musique sans interruption. Connectivité Bluetooth stable pour streaming sans fil depuis tous vos appareils. Construction robuste avec finition soignée dans les moindres détails. Idéale pour créer une ambiance musicale raffinée. L'enceinte design parfaite pour intérieurs élégants à La Réunion.",
+    subcategory: 'Enceintes Bluetooth',
+    price: 34.99,
+    description: "Enceinte Bluetooth HIFUTURE Ascendo avec basses profondes et design compact. IPX5 pour résister aux éclaboussures lors de vos activités outdoor.",
     shortDescription: 'Enceinte Bluetooth basses profondes',
     metaTitle: 'HIFUTURE Ascendo - Enceinte Bluetooth Compacte | Monster Phone 974',
     metaDescription: 'HIFUTURE Ascendo. Basses profondes, 12h autonomie, IPX5. Disponible en 3 couleurs.',
@@ -5055,12 +5549,12 @@ Contenu du coffret : Écouteurs Air Mate, câble de charge magnétique, bouchons
     name: 'MONSTER Mission 100',
     brand: 'MONSTER',
     category: 'Audio',
-    subcategory: 'Casques & Écouteurs',
-    price: 59.99,
-    description: "Le casque MONSTER Mission 100 incarne la nouvelle génération d'accessoires audio conçus pour les passionnés exigeants. Cette référence accessible de la gamme MONSTER combine ingénierie acoustique avancée et design contemporain pour offrir une expérience sonore immersive adaptée à tous les usages : musique, films, jeux vidéo et communication. La signature sonore MONSTER se caractérise par une restitution audio précise et dynamique. Les drivers de 40mm haute performance délivrent une réponse en fréquence étendue de 20Hz à 20kHz, couvrant l'intégralité du spectre audible humain. Les basses puissantes et contrôlées créent une fondation solide sans empiéter sur les autres fréquences. Les médiums détaillés préservent la clarté des dialogues et l'authenticité des instruments. Les aigus nets révèlent les subtilités sonores souvent perdues avec des casques standards. Le confort étudié permet des sessions prolongées sans fatigue. Les coussinets circumauraux en mousse à mémoire de forme enveloppent délicatement les oreilles, distribuant uniformément la pression et créant une isolation acoustique passive efficace. Le bandeau rembourré ajustable s'adapte à toutes les morphologies, tandis que l'arceau flexible mais résistant garantit durabilité sans compression excessive. L'architecture acoustique semi-ouverte offre le meilleur des deux mondes : l'isolation nécessaire pour une écoute concentrée et la spatialisation naturelle pour une scène sonore élargie. Cette conception optimise particulièrement l'expérience multimédia, permettant de localiser précisément les sources sonores dans l'espace virtuel. Deux finitions élégantes répondent à tous les styles : le Blanc immaculé apporte une touche de modernité lumineuse, parfait pour les setups épurés, tandis que le Noir mat intemporel s'intègre discrètement dans tout environnement. La qualité de finition et les détails soignés reflètent l'attention portée à chaque aspect du produit. La connectivité jack 3.5mm universelle garantit compatibilité maximale avec tous vos appareils : smartphones, tablettes, consoles de jeux, ordinateurs et interfaces audio. Le câble détachable de 1,5 mètre offre liberté de mouvement tout en permettant un remplacement facile en cas d'usure. L'adaptateur 6.35mm inclus étend la compatibilité aux équipements audio professionnels. Parfait pour les utilisateurs réunionnais recherchant un casque polyvalent offrant qualité audio supérieure et confort longue durée à prix accessible, le MONSTER Mission 100 représente l'entrée idéale dans l'univers audio MONSTER.",
+    subcategory: 'Casques',
+    price: 99.99,
+    description: "Casque gaming MONSTER Mission 100 avec son surround virtuel et micro détachable. Éclairage RGB personnalisable pour un setup gaming parfait.",
     shortDescription: 'Casque gaming surround avec micro',
-    metaTitle: 'MONSTER Mission 100 - Casque Gaming Abordable',
-    metaDescription: 'Casque MONSTER Mission 100 avec drivers 40mm et confort optimisé. Design élégant, compatible tous appareils, isolation passive. Blanc ou noir disponibles La Réunion 974.',
+    metaTitle: 'MONSTER Mission 100 - Casque Gaming Surround | Monster Phone 974',
+    metaDescription: 'MONSTER Mission 100. Son surround 7.1, micro détachable, RGB. Storm Gray, Noir ou Crème.',
     urlSlug: 'monster-mission-100-casque-gaming',
     keywords: ['MONSTER', 'Mission 100', 'gaming', 'casque', 'surround'],
     variants: [
@@ -5087,9 +5581,9 @@ Contenu du coffret : Écouteurs Air Mate, câble de charge magnétique, bouchons
     name: 'MY WAY Powerbank',
     brand: 'MY WAY',
     category: 'Accessoires',
-    subcategory: 'Chargeur & Batteries',
+    subcategory: 'Batteries Externes',
     price: 32.99,
-    description: "La powerbank MY WAY redéfinit l'autonomie mobile avec ses capacités exceptionnelles de 10000mAh et 20000mAh. Cette batterie externe haute performance répond aux besoins énergétiques les plus exigeants des utilisateurs modernes, garantissant une alimentation fiable pour tous vos appareils.\n\nLa version 10000mAh offre jusqu'à 3 charges complètes pour un smartphone standard, idéale pour une journée intensive ou un court déplacement. Le modèle 20000mAh double cette capacité, permettant jusqu'à 6 charges complètes ou l'alimentation simultanée de plusieurs appareils pendant plusieurs jours.\n\nL'architecture multi-ports révolutionne l'usage : deux ports USB-A et un port USB-C permettent de charger simultanément trois appareils. La technologie de charge rapide 18W via USB-C réduit drastiquement les temps de charge, restaurant 50% de batterie en seulement 30 minutes sur les appareils compatibles.\n\nL'indicateur LED intelligent affiche précisément le niveau de charge restant, éliminant l'incertitude sur l'autonomie disponible. Le système de protection multiple intégré surveille en permanence température, voltage et courant, garantissant une sécurité absolue pour vos appareils premium.\n\nLe design compact optimisé facilite le transport malgré la haute capacité. La surface texturée antidérapante assure une prise en main sécurisée, tandis que la construction robuste résiste aux chocs et vibrations du quotidien.\n\nParfaitement adaptée au climat tropical de La Réunion, cette powerbank MY WAY maintient ses performances même en conditions de chaleur élevée. Indispensable pour les professionnels mobiles, voyageurs et amateurs d'activités outdoor, elle garantit une connectivité permanente.\n\nLa compatibilité universelle couvre smartphones, tablettes, écouteurs, montres connectées, appareils photo et même certains ordinateurs portables USB-C. Livrée avec câbles de charge et manuel détaillé, garantie 2 ans pour une tranquillité totale.",
+    description: "Batterie externe MY WAY haute capacité avec charge rapide et multiple ports. Jusqu'à 30000mAh pour ne jamais tomber en panne de batterie.",
     shortDescription: 'Powerbank haute capacité charge rapide',
     metaTitle: 'MY WAY Powerbank - Batterie Externe Haute Capacité | Monster Phone 974',
     metaDescription: 'MY WAY Powerbank. 10000, 20000 ou 30000mAh. Charge rapide, multi-ports, LED indicateur.',
@@ -5118,8 +5612,8 @@ Contenu du coffret : Écouteurs Air Mate, câble de charge magnétique, bouchons
     sku: 'MON-ILL-DUO-MONITOR',
     name: 'MONSTER Illuminescence DUO Monitor Light',
     brand: 'MONSTER',
-    category: 'Éclairage LED',
-    subcategory: 'Accessoires LED',
+    category: 'LED',
+    subcategory: 'Lampes Écran',
     price: 49.99,
     description: "Lampe d'écran MONSTER DUO pour double moniteur avec éclairage RGB personnalisable. Réduit la fatigue oculaire lors de longues sessions gaming.",
     shortDescription: 'Lampe double écran RGB',
@@ -5149,13 +5643,13 @@ Contenu du coffret : Écouteurs Air Mate, câble de charge magnétique, bouchons
     name: 'MONSTER Element Air',
     brand: 'MONSTER',
     category: 'Audio',
-    subcategory: 'Casques & Écouteurs',
-    price: 199.99,
-    description: "Casque MONSTER Element Air haut de gamme avec technologie sans fil avancée. Audio haute résolution pour qualité sonore exceptionnelle. Design ultra-léger pour confort maximal durant longues sessions. Autonomie exceptionnelle permettant usage intensif sans contrainte. Le casque sans fil premium pour mélomanes exigeants à La Réunion.",
-    shortDescription: 'Casque sans fil haut de gamme',
-    metaTitle: 'MONSTER Element Air - Casque Sans Fil Haut de Gamme',
-    metaDescription: 'Casque MONSTER Element Air avec technologie sans fil premium. Audio haute résolution, léger, autonomie longue durée.',
-    urlSlug: 'monster-element-air-casque-sans-fil',
+    subcategory: 'ecouteurs',
+    price: 39.99,
+    description: "Écouteurs True Wireless MONSTER Element Air avec design ergonomique et son équilibré. IPX4 pour résister à la sueur et aux éclaboussures.",
+    shortDescription: 'Écouteurs TWS ergonomiques',
+    metaTitle: 'MONSTER Element Air - Écouteurs True Wireless | Monster Phone 974',
+    metaDescription: 'MONSTER Element Air. Design ergonomique, son équilibré, autonomie 24h. Noir ou bleu.',
+    urlSlug: 'monster-element-air-tws',
     keywords: ['MONSTER', 'Element Air', 'TWS', 'écouteurs', 'true wireless'],
     variants: [
       { color: 'Noir', colorCode: '#000000', ean: '', stock: 18, images: [] },
@@ -5180,13 +5674,13 @@ Contenu du coffret : Écouteurs Air Mate, câble de charge magnétique, bouchons
     name: 'MONSTER ENCEINTE PARTY',
     brand: 'MONSTER',
     category: 'Audio',
-    subcategory: 'Enceintes',
-    price: 179.99,
-    description: "Enceinte de fête MONSTER PARTY avec système audio ultra-puissant pour événements. Éclairage LED multicolore intégré pour ambiance festive garantie. Performance sonore exceptionnelle pour animer grandes réceptions. Construction robuste conçue pour usage intensif et transport fréquent. Disponible en version standard et améliorée selon vos besoins. L'enceinte parfaite pour DJs et animateurs à La Réunion.",
+    subcategory: 'Enceintes Party',
+    price: 99.99,
+    description: "Enceinte party MONSTER avec puissance élevée et effets lumineux pour animer vos soirées. Micro karaoké inclus pour des sessions endiablées.",
     shortDescription: 'Enceinte party puissante avec LED',
-    metaTitle: 'MONSTER ENCEINTE PARTY - Système Audio Fête | Monster Phone 974',
-    metaDescription: 'Enceinte MONSTER PARTY avec éclairage LED. 2 versions disponibles. Monster Phone 974.',
-    urlSlug: 'monster-enceinte-party-systeme-audio',
+    metaTitle: 'MONSTER Enceinte Party - Son Puissant LED | Monster Phone 974',
+    metaDescription: 'MONSTER Enceinte Party. 60W, LED synchronisées, autonomie 8h, micro karaoké. Animation garantie.',
+    urlSlug: 'monster-enceinte-party',
     keywords: ['MONSTER', 'enceinte', 'party', 'soirée', 'LED'],
     variants: [
       { color: 'Noir', colorCode: '#000000', ean: '', stock: 5, images: [] }
@@ -5210,9 +5704,9 @@ Contenu du coffret : Écouteurs Air Mate, câble de charge magnétique, bouchons
     name: 'HIFUTURE Écouteur Yacht',
     brand: 'HIFUTURE',
     category: 'Audio',
-    subcategory: 'Casques & Écouteurs',
-    price: 59.99,
-    description: "Écouteurs HIFUTURE Yacht incarnant le luxe audio moderne. Design sophistiqué avec finitions premium exceptionnelles. Disponible en black classique, rose féminin ou black gold exclusif. Performance audio exceptionnelle avec technologie acoustique avancée. Bluetooth 5.3 et résistance IPX5 pour usage sans contrainte. Confort suprême avec matériaux nobles et ergonomie étudiée. Boîtier de charge élégant complétant l'expérience luxueuse. Les écouteurs premium pour mélomanes exigeants de La Réunion.",
+    subcategory: 'ecouteurs',
+    price: 54.99,
+    description: "Écouteurs True Wireless HIFUTURE Yacht premium avec finition luxueuse et son haute fidélité. ANC -30dB pour une isolation parfaite.",
     shortDescription: 'Écouteurs TWS premium luxe',
     metaTitle: 'HIFUTURE Yacht - Écouteurs True Wireless Premium | Monster Phone 974',
     metaDescription: 'HIFUTURE Yacht. Design luxe, son Hi-Fi, ANC, autonomie 30h. Noir ou blanc. Premium quality.',
@@ -5240,8 +5734,8 @@ Contenu du coffret : Écouteurs Air Mate, câble de charge magnétique, bouchons
     sku: 'MON-ILL-PRISM',
     name: 'MONSTER Illuminescence Smart Prism II RGB+IC',
     brand: 'MONSTER',
-    category: 'Éclairage LED',
-    subcategory: 'Projecteurs',
+    category: 'LED',
+    subcategory: 'Panneaux LED',
     price: 64.99,
     description: "Pack 6 panneaux LED MONSTER Smart Prism II RGB+IC avec effets flow et contrôle app. Créez des motifs lumineux uniques et personnalisés.",
     shortDescription: 'Pack 6 panneaux LED RGB+IC flow',
@@ -5271,12 +5765,12 @@ Contenu du coffret : Écouteurs Air Mate, câble de charge magnétique, bouchons
     name: 'HIFUTURE PartyBox Vocalist 300',
     brand: 'HIFUTURE',
     category: 'Audio',
-    subcategory: 'Enceintes',
-    price: 269.99,
-    description: "HIFUTURE PartyBox Vocalist 300 système audio professionnel avec fonction karaoké intégrée. Puissance impressionnante de 300W pour performances vocales exceptionnelles. Microphones professionnels inclus pour karaoké et animations. Effets vocaux et mixage pour expérience complète. Idéale pour karaokés, événements et établissements à La Réunion.",
+    subcategory: 'Enceintes Party',
+    price: 169.99,
+    description: "Enceinte karaoké HIFUTURE Vocalist 300 avec double micro sans fil et effets vocaux. 150W de puissance pour animer les plus grandes soirées.",
     shortDescription: 'Enceinte karaoké 2 micros sans fil',
-    metaTitle: 'HIFUTURE Vocalist 300 - Système Audio Karaoké Pro | Monster Phone 974',
-    metaDescription: 'PartyBox HIFUTURE Vocalist 300 avec karaoké professionnel. 300W, microphones inclus. 269,99€.',
+    metaTitle: 'HIFUTURE Vocalist 300 - Enceinte Karaoké Pro | Monster Phone 974',
+    metaDescription: 'HIFUTURE Vocalist 300. 150W, 2 micros sans fil, effets vocaux, LED. Karaoké professionnel.',
     urlSlug: 'hifuture-vocalist-300-karaoke',
     keywords: ['HIFUTURE', 'Vocalist', 'karaoké', 'micro', 'party'],
     variants: [
@@ -5300,8 +5794,8 @@ Contenu du coffret : Écouteurs Air Mate, câble de charge magnétique, bouchons
     sku: 'MON-ILL-AMPOULE-A19',
     name: 'MONSTER Illuminescence Basic Ampoule A19',
     brand: 'MONSTER',
-    category: 'Éclairage LED',
-    subcategory: 'Ampoules connectées',
+    category: 'LED',
+    subcategory: 'Ampoules Smart',
     price: 12.99,
     description: "Ampoule LED MONSTER A19 avec température de couleur réglable pour éclairage optimal. 25000 heures de durée de vie pour des économies durables.",
     shortDescription: 'Ampoule LED A19 température réglable',
@@ -5333,9 +5827,9 @@ Contenu du coffret : Écouteurs Air Mate, câble de charge magnétique, bouchons
     name: 'HIFUTURE Écouteur Flybuds 4 ANC',
     brand: 'HIFUTURE',
     category: 'Audio',
-    subcategory: 'Casques & Écouteurs',
-    price: 44.99,
-    description: "Expérience audio premium avec les écouteurs HIFUTURE Flybuds 4 ANC. Réduction active du bruit avancée pour immersion totale dans votre musique. Bluetooth 5.3 dernière génération pour connexion ultra-stable et économie d'énergie. Design premium disponible en noir classique, rose chaud féminin ou beige élégant. Résistance IPX4 pour usage quotidien sans souci même sous la pluie. Commandes tactiles intuitives pour contrôle facile sans sortir le téléphone. Boîtier de charge compact offrant plusieurs recharges complètes. Les écouteurs ANC accessibles aux mélomanes exigeants de La Réunion.",
+    subcategory: 'ecouteurs',
+    price: 79.99,
+    description: "Écouteurs True Wireless HIFUTURE Flybuds 4 avec réduction de bruit active avancée -35dB. Charge sans fil Qi pour une praticité maximale.",
     shortDescription: 'Écouteurs TWS ANC avancé',
     metaTitle: 'HIFUTURE Flybuds 4 ANC - Écouteurs Réduction Bruit | Monster Phone 974',
     metaDescription: 'HIFUTURE Flybuds 4 ANC. Réduction bruit -35dB, autonomie 32h, charge sans fil. Premium TWS.',
@@ -5364,43 +5858,9 @@ Contenu du coffret : Écouteurs Air Mate, câble de charge magnétique, bouchons
     name: 'HIFUTURE Écouteur Filaire Hi5',
     brand: 'HIFUTURE',
     category: 'Audio',
-    subcategory: 'Casques & Écouteurs',
+    subcategory: 'ecouteurs',
     price: 19.99,
-    description: `Les écouteurs filaires HIFUTURE Hi5 offrent une qualité audio exceptionnelle sans compromis, combinant la fiabilité d'une connexion filaire avec des technologies acoustiques avancées. Le câble anti-enchevêtrement et le micro intégré en font le compagnon idéal pour un usage quotidien intensif.
-
-Caractéristiques principales :
-• Drivers dynamiques 10mm haute définition
-• Réponse en fréquence étendue 20Hz-20kHz
-• Impédance optimisée 32Ω pour tous appareils
-• Sensibilité élevée 105dB pour volume puissant
-• Câble TPE anti-enchevêtrement 1.2m renforcé
-• Connecteur Jack 3.5mm plaqué or anti-corrosion
-• Microphone intégré avec bouton multifonction
-• Télécommande 3 boutons (Play/Pause, Volume +/-)
-• Embouts ergonomiques en silicone premium
-• Design intra-auriculaire avec isolation passive
-• Compatible tous appareils avec jack 3.5mm
-• Aucune latence - Parfait pour gaming et vidéos
-
-La technologie de chambre acoustique optimisée offre des basses profondes et percutantes tout en préservant la clarté des médiums et la brillance des aigus. Le design acoustique semi-ouvert évite la fatigue auditive.
-
-Avantages du filaire :
-- Zéro latence pour gaming et vidéos
-- Pas de batterie à recharger
-- Qualité audio non compressée
-- Compatibilité universelle
-- Prix accessible pour qualité premium
-
-Idéal pour :
-- Écoute musicale haute fidélité
-- Appels téléphoniques clairs
-- Gaming mobile sans latence
-- Visionnage vidéo synchronisé
-- Usage professionnel quotidien
-
-Le câble renforcé avec gaine TPE résiste aux torsions et aux tiraillements. Les connecteurs renforcés garantissent une durabilité exceptionnelle même en usage intensif.
-
-Contenu du coffret : Écouteurs Hi5, 3 paires d'embouts (S/M/L), clip de câble, pochette de transport, guide d'utilisation.`,
+    description: "Écouteurs filaires HIFUTURE Hi5 avec qualité audio supérieure et micro intégré. Câble anti-nœud pour une utilisation sans souci.",
     shortDescription: 'Écouteurs filaires haute qualité',
     metaTitle: 'HIFUTURE Hi5 Filaire - Écouteurs Jack 3.5mm | Monster Phone 974',
     metaDescription: 'HIFUTURE Hi5 filaire. Son HD, micro intégré, confort optimal. Compatible tous appareils 3.5mm.',
@@ -5428,10 +5888,10 @@ Contenu du coffret : Écouteurs Hi5, 3 paires d'embouts (S/M/L), clip de câble,
     sku: 'MUAPN001',
     name: 'MUVIT KidPic Rouleaux Papier Photo',
     brand: 'MUVIT',
-    category: 'Créativité',
-    subcategory: 'Appareils Photo',
+    category: 'Accessoires',
+    subcategory: 'Consommables',
     price: 19.99,
-    description: "Les rouleaux de papier photo MUVIT KidPic constituent l'accessoire indispensable pour votre imprimante instantanée pour enfants. Ce pack généreux de 6 rouleaux de papier thermique haute qualité garantit des heures d'impression créative et de plaisir pour les jeunes photographes. Chaque rouleau est spécialement conçu pour l'imprimante KidPic, offrant une compatibilité parfaite et des résultats d'impression optimaux à chaque utilisation. Le papier thermique premium assure des impressions nettes et durables, avec des couleurs vives et des détails précis qui donnent vie aux souvenirs capturés par vos enfants. Format pratique de carte de crédit (53 x 86 mm), idéal pour créer des mini-albums, décorer des cahiers ou partager des photos avec les amis. La technologie d'impression thermique élimine le besoin d'encre ou de cartouches, rendant l'utilisation simple, propre et économique pour les parents. Installation facile et rapide des rouleaux dans l'imprimante, permettant aux enfants de recharger eux-mêmes leur appareil en toute autonomie. Papier résistant aux taches et à l'eau, garantissant la longévité des souvenirs imprimés et leur conservation dans le temps. Pack économique de 6 rouleaux offrant un excellent rapport qualité-prix pour des sessions d'impression prolongées.",
+    description: "Pack de 3 rouleaux de papier photo pour appareil MUVIT KidPic. 150 photos au total pour immortaliser tous les souvenirs.",
     shortDescription: 'Pack 3 rouleaux papier photo KidPic',
     metaTitle: 'MUVIT KidPic Rouleaux - Papier Photo Recharge | Monster Phone 974',
     metaDescription: 'MUVIT KidPic rouleaux papier photo. Pack 3 rouleaux, impression instantanée. Compatible KidPic.',
@@ -5458,8 +5918,8 @@ Contenu du coffret : Écouteurs Hi5, 3 paires d'embouts (S/M/L), clip de câble,
     sku: 'MON-ILL-BEAM-BARS',
     name: 'MONSTER Illuminescence Smart Beam + 2X Bars Kit',
     brand: 'MONSTER',
-    category: 'Éclairage LED',
-    subcategory: 'Accessoires LED',
+    category: 'LED',
+    subcategory: 'Kits Éclairage',
     price: 79.99,
     description: "Kit complet MONSTER Smart Beam avec 2 barres LED pour éclairage gaming immersif. Synchronisation avec musique et jeux pour une expérience totale.",
     shortDescription: 'Kit éclairage gaming beam + 2 barres',
@@ -5479,424 +5939,6 @@ Contenu du coffret : Écouteurs Hi5, 3 paires d'embouts (S/M/L), clip de câble,
     images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-smart-beam-bars-kit.jpg'],
     status: 'active' as const,
     badges: ['Kit Gaming', 'RGB Sync']
-  },
-  {
-    id: 'monster-hdmi-essential-4k',
-    airtableId: 'recpoVzuFWFjjsDOD',
-    sku: 'MCB-HDMI-PHS',
-    name: 'MONSTER CABLE HDMI ESSENTIAL 4K',
-    brand: 'MONSTER',
-    category: 'Accessoires',
-    subcategory: 'Câbles & Connecteurs',
-    price: 24.99,
-    originalPrice: 34.99,
-    discount: 29,
-    promo: 'PROMO',
-    description: "Le câble MONSTER HDMI Essential 4K représente la référence absolue pour votre installation home cinéma et gaming. Certifié Premium High Speed, ce câble délivre une performance exceptionnelle avec prise en charge native de la résolution 4K à 60Hz, garantissant une fluidité parfaite pour films et jeux vidéo.\n\nLa technologie HDR (High Dynamic Range) compatible offre une palette de couleurs étendue et des contrastes saisissants, transformant votre expérience visuelle. Avec une bande passante impressionnante de 18 Gbps, ce câble transmet sans compression les flux vidéo les plus exigeants, incluant Dolby Vision et HDR10+.\n\nL'Ethernet intégré permet le partage de connexion internet entre appareils compatibles, éliminant le besoin de câbles réseau supplémentaires. Cette fonctionnalité est particulièrement appréciée pour les Smart TV et consoles de jeux nécessitant une connexion stable.\n\nDisponible en deux longueurs optimisées (1m80 et 3m60), ce câble s'adapte parfaitement à toutes les configurations d'installation. Les connecteurs plaqués or 24 carats garantissent une transmission sans perte et une résistance exceptionnelle à la corrosion, même dans le climat tropical de La Réunion.\n\nLa construction robuste avec blindage triple couche élimine les interférences électromagnétiques, assurant un signal pur et stable. Compatible avec tous les appareils HDMI : TV 4K/8K, consoles PlayStation et Xbox, lecteurs Blu-ray, box TV, projecteurs et systèmes audio home cinéma.\n\nBénéficiez de la garantie MONSTER de 3 ans, témoignage de la qualité et durabilité exceptionnelles de ce câble premium. Support technique local disponible à La Réunion pour accompagner votre installation.",
-    shortDescription: 'Câble HDMI Premium High Speed 4K@60Hz avec HDR et Ethernet intégré',
-    metaTitle: 'MONSTER CABLE HDMI ESSENTIAL 4K - Premium High Speed | Monster Phone 974',
-    metaDescription: 'Câble MONSTER HDMI Essential 4K Premium High Speed, résolution 4K@60Hz, HDR compatible, Ethernet intégré, 18 Gbps. Disponible 1m80 et 3m60. Livraison La Réunion 974.',
-    urlSlug: 'monster-cable-hdmi-essential-4k',
-    keywords: ['MONSTER HDMI', 'câble 4K', 'Premium High Speed', 'HDR', 'Ethernet', 'home cinéma', 'gaming'],
-    ean: '',
-    stock: 25,
-    stockStatus: 'in_stock' as const,
-    isNew: true,
-    isFeatured: false,
-    rating: 4.8,
-    reviews: 142,
-    specifications: [
-      { label: 'Type', value: 'HDMI Premium High Speed' },
-      { label: 'Résolution', value: '4K@60Hz' },
-      { label: 'HDR', value: 'Compatible (HDR10, Dolby Vision)' },
-      { label: 'Ethernet', value: 'Intégré' },
-      { label: 'Bande passante', value: '18 Gbps' },
-      { label: 'Connecteurs', value: 'HDMI Type A mâle/mâle' },
-      { label: 'Plaquage', value: 'Or 24 carats' },
-      { label: 'Audio', value: 'Jusqu\'à 32 canaux' },
-      { label: 'CEC', value: 'Compatible' },
-      { label: 'ARC/eARC', value: 'Supporté' },
-      { label: 'Blindage', value: 'Triple couche' },
-      { label: 'Certification', value: 'Premium High Speed' }
-    ],
-    variants: [
-      { id: 'hdmi-essential-180', name: '1m80', color: '1m80', price: 24.99, stock: 15, sku: 'MCB-HDMI-PHS-180' },
-      { id: 'hdmi-essential-360', name: '3m60', color: '3m60', price: 34.99, stock: 10, sku: 'MCB-HDMI-PHS-360' }
-    ],
-    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-hdmi-essential-4k.jpg'],
-    status: 'active' as const,
-    badges: ['4K HDR', 'Premium']
-  },
-  {
-    id: 'monster-hdmi-standard',
-    airtableId: 'recu7CfPNRVDn4nKe',
-    sku: 'MCB-HDMI-STD',
-    name: 'MONSTER Câble HDMI Standard',
-    brand: 'MONSTER',
-    category: 'Accessoires',
-    subcategory: 'Câbles & Connecteurs',
-    price: 12.99,
-    originalPrice: 19.99,
-    discount: 35,
-    promo: 'PROMO',
-    description: "Le câble MONSTER HDMI Standard offre une solution fiable et abordable pour tous vos besoins de connexion multimédia. Conçu pour délivrer une qualité d'image Full HD 1080p cristalline, ce câble est l'accessoire indispensable pour profiter pleinement de vos contenus préférés.\n\nAvec ses connecteurs HDMI Type A universels, ce câble garantit une compatibilité totale avec l'ensemble de vos appareils : téléviseurs, consoles de jeux, lecteurs DVD/Blu-ray, décodeurs TV et ordinateurs. La transmission numérique pure préserve l'intégrité du signal pour une image nette et un son parfait.\n\nDisponible en quatre longueurs pratiques (1.5m, 2m, 3m et 5m), ce câble s'adapte à toutes les configurations d'installation. Que vous connectiez votre console de jeu proche de la TV ou un projecteur au plafond, nous avons la longueur idéale pour votre setup.\n\nLa construction robuste MONSTER assure une durabilité exceptionnelle. Les connecteurs renforcés résistent aux manipulations fréquentes, tandis que le câble flexible facilite l'installation même dans les espaces restreints. Le blindage efficace protège contre les interférences pour un signal stable.\n\nCe câble supporte l'audio multicanal pour une expérience sonore immersive, transmettant jusqu'à 8 canaux audio non compressés. Compatible avec les formats Dolby Digital et DTS, il transforme votre salon en véritable salle de cinéma.\n\nBénéficiez de la garantie MONSTER de 2 ans et du support technique local à La Réunion. Un excellent rapport qualité-prix pour équiper tous vos appareils avec la fiabilité légendaire MONSTER. Disponible immédiatement dans nos boutiques réunionnaises.",
-    shortDescription: 'Câble HDMI Standard 1080p Full HD disponible en 4 longueurs',
-    metaTitle: 'MONSTER Câble HDMI Standard - Full HD 1080p | Monster Phone 974',
-    metaDescription: 'Câble MONSTER HDMI Standard, résolution 1080p Full HD, connecteurs Type A universels. Disponible en 1.5m, 2m, 3m et 5m. Garantie 2 ans. Livraison La Réunion 974.',
-    urlSlug: 'monster-cable-hdmi-standard',
-    keywords: ['MONSTER HDMI', 'câble 1080p', 'Full HD', 'HDMI Standard', 'multimédia', 'connexion TV'],
-    ean: '',
-    stock: 45,
-    stockStatus: 'in_stock' as const,
-    isNew: false,
-    isFeatured: false,
-    rating: 4.5,
-    reviews: 89,
-    specifications: [
-      { label: 'Type', value: 'HDMI Standard' },
-      { label: 'Résolution', value: '1080p Full HD' },
-      { label: 'Connecteurs', value: 'HDMI Type A' },
-      { label: 'Audio', value: 'Jusqu\'à 8 canaux' },
-      { label: 'Certification', value: 'HDMI Standard' },
-      { label: 'Débit', value: '4.95 Gbps' },
-      { label: 'Fréquence', value: '165 MHz' },
-      { label: 'Blindage', value: 'Double couche' },
-      { label: 'Conducteurs', value: 'Cuivre haute pureté' }
-    ],
-    variants: [
-      { id: 'hdmi-std-150', name: '1.5m', color: '1.5m', price: 12.99, stock: 15, sku: 'MCB-HDMI-STD-150' },
-      { id: 'hdmi-std-200', name: '2m', color: '2m', price: 14.99, stock: 12, sku: 'MCB-HDMI-STD-200' },
-      { id: 'hdmi-std-300', name: '3m', color: '3m', price: 17.99, stock: 10, sku: 'MCB-HDMI-STD-300' },
-      { id: 'hdmi-std-500', name: '5m', color: '5m', price: 22.99, stock: 8, sku: 'MCB-HDMI-STD-500' }
-    ],
-    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-hdmi-standard.jpg'],
-    status: 'active' as const,
-    badges: ['Full HD', 'Garantie 2 ans']
-  },
-
-  // HIFUTURE TOUR X ANC Casque
-  {
-    id: 'hifuture-tour-x-anc-casque',
-    airtableId: 'recD8f1N0Qr8gA7vW',
-    sku: 'HIFUTURE-TOUR -X-ANC-CASQUE',
-    name: 'HIFUTURE TOUR X ANC Casque',
-    brand: 'HIFUTURE',
-    category: 'Audio & Son',
-    subcategory: 'Casques & Écouteurs',
-    price: 69.99,
-    description: "Le casque HIFUTURE TOUR ANC révolutionne votre expérience audio avec sa technologie de réduction active du bruit de pointe. Conçu pour créer une bulle sonore parfaite, ce casque élimine jusqu'à 35 décibels de bruit ambiant, transformant les environnements les plus bruyants en espaces de concentration absolue. La réduction active du bruit utilise des microphones de détection avancés qui analysent et neutralisent les fréquences indésirables en temps réel. Idéal pour le télétravail, les transports ou simplement pour s'isoler, l'ANC s'adapte automatiquement à votre environnement. Le mode transparence permet de rester connecté au monde extérieur d'une simple pression. Les drivers dynamiques de 40mm délivrent un son haute résolution avec une réponse en fréquence étendue de 20Hz à 20kHz. Les basses profondes sans distorsion, les médiums naturels et les aigus détaillés recréent fidèlement chaque nuance de votre musique. Le codec audio HD garantit une transmission sans perte via Bluetooth. Le confort supreme est assuré par les coussinets en mousse à mémoire de forme qui épousent parfaitement la forme de vos oreilles. Le bandeau rembourré répartit uniformément le poids plume de 250 grammes, permettant des sessions d'écoute prolongées sans fatigue. La conception circum-auriculaire offre isolation passive supplémentaire. L'autonomie marathon de 30 heures avec ANC activé accompagne vos plus longues journées. La charge rapide USB-C restaure 5 heures d'écoute en 10 minutes. Le mode filaire permet utilisation illimitée via câble jack 3.5mm inclus. Le design pliable compact facilite transport dans l'étui rigide fourni. Les commandes tactiles intuitives sur l'oreillette droite gèrent musique, appels et modes ANC. Compatible avec assistants vocaux pour contrôle mains-libres. Idéal pour professionnels et voyageurs réunionnais recherchant isolation sonore et qualité audio accessibles.",
-    shortDescription: 'Casque avec réduction active du bruit -35dB, drivers 40mm HD et autonomie 30h',
-    metaTitle: 'CASQUE ANC HIFUTURE TOUR - Réduction de Bruit Active | Monster Phone 974',
-    metaDescription: 'Casque HIFUTURE TOUR ANC avec réduction active -35dB et drivers 40mm HD. Mode transparence, confort mousse mémoire, autonomie 30h. 2 coloris disponibles La Réunion 974.',
-    urlSlug: 'casque-anc-hifuture-tour',
-    keywords: ['HIFUTURE TOUR', 'casque ANC', 'réduction bruit active', 'casque audio', 'casque sans fil'],
-    variants: [
-      {
-        color: 'Champagne',
-        colorCode: '#D4AF37',
-        ean: '34030003200025',
-        stock: 15,
-        images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/hifuture-tour-x-anc-champagne.jpg']
-      },
-      {
-        color: 'Noir',
-        colorCode: '#000000',
-        ean: '34030003200035',
-        stock: 20,
-        images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/hifuture-tour-x-anc-noir.jpg']
-      }
-    ],
-    defaultVariant: 'Noir',
-    specifications: [
-      { label: 'Type', value: 'Circum-auriculaire avec ANC' },
-      { label: 'Réduction de bruit', value: 'Active -35dB' },
-      { label: 'Drivers', value: '40mm dynamiques HD' },
-      { label: 'Réponse en fréquence', value: '20Hz - 20kHz' },
-      { label: 'Autonomie', value: '30h avec ANC' },
-      { label: 'Charge rapide', value: 'USB-C (10min = 5h)' },
-      { label: 'Poids', value: '250g' },
-      { label: 'Bluetooth', value: '5.0 avec codec HD' },
-      { label: 'Mode filaire', value: 'Jack 3.5mm inclus' },
-      { label: 'Pliable', value: 'Oui, avec étui rigide' }
-    ],
-    highlights: [
-      'Réduction active du bruit -35dB',
-      'Drivers 40mm haute résolution',
-      'Autonomie 30 heures avec ANC',
-      'Confort mousse à mémoire de forme',
-      'Mode transparence adaptatif',
-      'Charge rapide USB-C',
-      'Design pliable avec étui'
-    ],
-    images: [
-      'https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/hifuture-tour-x-anc-1.jpg',
-      'https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/hifuture-tour-x-anc-2.jpg'
-    ],
-    status: 'active' as const,
-    rating: {
-      average: 4.6,
-      count: 28,
-      distribution: { 5: 18, 4: 7, 3: 2, 2: 1, 1: 0 }
-    },
-    warranty: '2 ans',
-    deliveryTime: '2-3 jours',
-    badges: ['ANC -35dB', 'Autonomie 30h', 'Premium Audio']
-  },
-
-  // Monster Illuminessence LED Strip Smart 5M IC
-  {
-    id: 'mon-ill-smart-5m-ic',
-    airtableId: 'recKOzXmP6A55Hfdj',
-    sku: 'MON-ILL-SMART-5M-IC',
-    name: 'Monster Illuminessence LED Strip Smart 5M IC',
-    brand: 'MONSTER',
-    category: 'Éclairage LED',
-    subcategory: 'Bandeaux LED',
-    price: 54.99,
-    description: "Le ruban LED Monster Illuminessence Smart 5M IC révolutionne l'éclairage d'ambiance avec sa technologie RGB+IC avancée. Chaque LED est contrôlable individuellement grâce aux circuits intégrés (IC), permettant des effets lumineux dynamiques impossibles avec des rubans LED classiques. Créez des animations fluides, des dégradés de couleurs progressifs et des effets de vague spectaculaires. L'application smartphone dédiée offre un contrôle total avec plus de 100 modes préprogrammés : arc-en-ciel fluide, effet néon, simulation feu, ambiance océan, et bien plus. La synchronisation musicale analyse en temps réel les fréquences audio pour créer un spectacle lumineux parfaitement rythmé. Idéal pour transformer votre espace gaming, home cinéma ou soirées. La technologie Flow permet des transitions de couleurs ultra-douces entre les 16 millions de nuances disponibles. Chaque segment de 5cm peut afficher une couleur différente, créant des motifs complexes et personnalisables. L'adhésif 3M premium garantit une fixation durable sur toutes surfaces. Installation simplifiée avec marquages de découpe tous les 5cm et connecteurs sans soudure inclus. Contrôle vocal via Alexa et Google Assistant pour une domotique intelligente. Programmation horaire, simulation de présence et scénarios personnalisés via l'app. Le mode économie d'énergie ajuste automatiquement la luminosité selon l'heure. Consommation optimisée de seulement 24W pour 5 mètres à pleine puissance. Durée de vie exceptionnelle de 50000 heures. Parfait pour les créateurs de contenu et gamers réunionnais cherchant un éclairage RGB personnalisable et spectaculaire.",
-    shortDescription: 'Ruban LED Smart 5M avec technologie RGB+IC pour effets dynamiques',
-    metaTitle: 'Monster Illuminessence LED Strip Smart 5M IC - RGB Contrôlable | Monster Phone 974',
-    metaDescription: 'Ruban LED Monster Smart 5M avec technologie IC pour contrôle individuel des LEDs. 100+ effets, sync musicale, app smartphone. Livraison La Réunion 974.',
-    urlSlug: 'monster-illuminessence-led-strip-smart-5m-ic',
-    keywords: ['LED strip', 'ruban LED', 'RGB IC', 'éclairage intelligent', 'Monster Illuminessence', 'LED gaming'],
-    variants: [
-      {
-        color: '5m Flow',
-        colorCode: '#FF00FF',
-        ean: '34040004200010',
-        stock: 25,
-        images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-led-smart-5m-ic.jpg']
-      }
-    ],
-    specifications: [
-      { label: 'Longueur', value: '5 mètres' },
-      { label: 'Technologie', value: 'RGB+IC (contrôle individuel)' },
-      { label: 'LEDs', value: '150 LEDs (30/mètre)' },
-      { label: 'Couleurs', value: '16 millions de nuances' },
-      { label: 'Modes', value: '100+ effets préprogrammés' },
-      { label: 'Contrôle', value: 'App smartphone + télécommande' },
-      { label: 'Sync musicale', value: 'Microphone intégré' },
-      { label: 'Découpe', value: 'Tous les 5cm' },
-      { label: 'Alimentation', value: '24W (12V/2A)' },
-      { label: 'Durée de vie', value: '50000 heures' },
-      { label: 'Étanchéité', value: 'IP20 (intérieur)' },
-      { label: 'Compatible', value: 'Alexa, Google Assistant' }
-    ],
-    highlights: [
-      'Technologie RGB+IC pour contrôle individuel',
-      '100+ modes d\'effets dynamiques',
-      'Synchronisation musicale en temps réel',
-      'Application smartphone complète',
-      'Compatible assistants vocaux',
-      'Installation facile avec adhésif 3M',
-      'Économie d\'énergie intelligente'
-    ],
-    images: [
-      'https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-led-smart-5m-ic-1.jpg',
-      'https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-led-smart-5m-ic-2.jpg'
-    ],
-    status: 'active' as const,
-    rating: {
-      average: 4.7,
-      count: 42,
-      distribution: { 5: 30, 4: 8, 3: 3, 2: 1, 1: 0 }
-    },
-    warranty: '2 ans',
-    deliveryTime: '2-3 jours',
-    badges: ['RGB+IC', 'Sync Musicale', 'Smart Control']
-  },
-
-  // Monster Illuminessence LED Strip Smart Flow
-  {
-    id: 'mon-ill-smart-flow',
-    airtableId: 'recUWnBN9UVK7VQ2g',
-    sku: 'MON-ILL-SMART-FLOW',
-    name: 'Monster Illuminessence LED Strip Smart Multicolor Flow',
-    brand: 'MONSTER',
-    category: 'Éclairage LED',
-    subcategory: 'Bandeaux LED',
-    price: 27.99,
-    description: "Le ruban LED Monster Illuminessence Smart Flow transforme instantanément votre espace avec ses effets multicolores fluides et hypnotiques. Disponible en versions 2m et 4m pour s'adapter à tous les projets d'éclairage. La technologie Flow exclusive crée des transitions de couleurs progressives et naturelles, idéales pour une ambiance relaxante ou dynamique selon vos envies. L'installation plug & play ne nécessite aucune compétence technique : déroulez, collez, branchez et illuminez. L'adhésif double face haute performance adhère sur toutes surfaces propres. Les marquages de découpe permettent d'ajuster parfaitement la longueur. Le contrôleur intelligent intégré propose 20 modes d'effets préprogrammés : respiration douce, vague arc-en-ciel, stroboscope party, ambiance coucher de soleil, et plus. La télécommande RF portée 10m permet de contrôler l'éclairage depuis votre canapé. Ajustez luminosité, vitesse des effets et couleurs en temps réel. Parfait pour décorer chambre, salon, cuisine ou espace gaming. La consommation optimisée et la technologie LED basse température garantissent sécurité et économies d'énergie. Créez des ambiances uniques pour chaque moment : détente, soirée, concentration ou sommeil. Le mode mémoire conserve vos réglages préférés. Idéal pour les foyers réunionnais cherchant une solution d'éclairage décoratif simple et efficace.",
-    shortDescription: 'Ruban LED Smart avec effets Flow multicolores, disponible en 2m et 4m',
-    metaTitle: 'Monster Illuminessence LED Strip Smart Flow - Multicolor | Monster Phone 974',
-    metaDescription: 'Ruban LED Monster Smart Flow avec transitions multicolores fluides. 20 modes, télécommande, installation facile. 2m ou 4m disponibles La Réunion 974.',
-    urlSlug: 'monster-illuminessence-led-strip-smart-flow',
-    keywords: ['LED strip', 'ruban LED', 'multicolor', 'éclairage décoratif', 'Monster Flow', 'LED ambiance'],
-    variants: [
-      {
-        color: '2m',
-        colorCode: '#00FF00',
-        ean: '34040004200020',
-        stock: 30,
-        images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-led-smart-flow-2m.jpg']
-      },
-      {
-        color: '4m',
-        colorCode: '#0000FF',
-        ean: '34040004200021',
-        stock: 20,
-        images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-led-smart-flow-4m.jpg']
-      }
-    ],
-    defaultVariant: '2m',
-    specifications: [
-      { label: 'Longueurs disponibles', value: '2m ou 4m' },
-      { label: 'Technologie', value: 'RGB Flow multicolor' },
-      { label: 'LEDs', value: '60 LEDs/mètre' },
-      { label: 'Modes', value: '20 effets préprogrammés' },
-      { label: 'Contrôle', value: 'Télécommande RF 10m' },
-      { label: 'Découpe', value: 'Tous les 10cm' },
-      { label: 'Alimentation', value: '12W (2m) / 24W (4m)' },
-      { label: 'Installation', value: 'Adhésif 3M inclus' },
-      { label: 'Angle éclairage', value: '120°' },
-      { label: 'Température couleur', value: '2700K-6500K + RGB' }
-    ],
-    highlights: [
-      'Effets Flow multicolores fluides',
-      '20 modes d\'ambiance préprogrammés',
-      'Installation plug & play simple',
-      'Télécommande RF longue portée',
-      'Disponible en 2m et 4m',
-      'Économe en énergie',
-      'Mémoire des réglages'
-    ],
-    images: [
-      'https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-led-smart-flow-1.jpg',
-      'https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-led-smart-flow-2.jpg'
-    ],
-    status: 'active' as const,
-    rating: {
-      average: 4.5,
-      count: 35,
-      distribution: { 5: 22, 4: 9, 3: 3, 2: 1, 1: 0 }
-    },
-    warranty: '2 ans',
-    deliveryTime: '2-3 jours',
-    badges: ['Flow Effect', 'Plug & Play', 'Energy Saver']
-  },
-
-  // Monster Illuminessence LED Beam Kit
-  {
-    id: 'mon-ill-beam-kit',
-    airtableId: 'reczZNn9ztInmt6ts',
-    sku: 'MON-ILL-BEAM-KIT',
-    name: 'Monster Illuminessence LED Beam Kit',
-    brand: 'MONSTER',
-    category: 'Éclairage LED',
-    subcategory: 'Accessoires LED',
-    price: 149.99,
-    description: "Le kit Monster Illuminessence Beam révolutionne l'éclairage architectural avec son système modulaire complet. Ce kit premium comprend une barre centrale Beam et 2 barres latérales pour créer des installations lumineuses spectaculaires. Chaque élément intègre la technologie LED haute densité avec diffuseur opalin pour un éclairage homogène sans points chauds visibles. Le système de montage magnétique breveté permet une installation et reconfiguration instantanées sans outils. Créez des motifs géométriques, des cadres lumineux ou des installations artistiques en quelques secondes. La connectivité sans fil entre modules élimine les câbles disgracieux. Le contrôleur central intelligent synchronise parfaitement les 3 éléments pour des effets coordonnés époustouflants. Plus de 50 scénarios d'éclairage préprogrammés transforment votre espace : aurore boréale, feu de cheminée, océan calme, néon urbain. L'application dédiée offre un contrôle précis de chaque barre individuellement ou en groupe. Programmez des ambiances pour chaque moment de la journée avec transitions douces automatiques. La technologie de gradation sans scintillement protège vos yeux lors des longues sessions. Compatible avec les écosystèmes domotiques majeurs pour une intégration smart home complète. Construction aluminium premium avec dissipation thermique optimale pour durabilité maximale. Parfait pour créer un mur d'accent, encadrer un téléviseur ou illuminer une tête de lit. Les créateurs de contenu et architectes d'intérieur réunionnais apprécient sa polyvalence et qualité professionnelle.",
-    shortDescription: 'Kit complet LED Beam avec barre centrale + 2 barres latérales modulaires',
-    metaTitle: 'Monster Illuminessence LED Beam Kit - Éclairage Architectural | Monster Phone 974',
-    metaDescription: 'Kit LED Monster Beam complet avec système modulaire magnétique. 50+ scénarios, contrôle app, installation sans outils. Premium lighting La Réunion 974.',
-    urlSlug: 'monster-illuminessence-led-beam-kit',
-    keywords: ['LED beam', 'kit éclairage', 'LED architectural', 'Monster Beam', 'éclairage modulaire', 'smart lighting'],
-    variants: [
-      {
-        color: 'Kit Complet',
-        colorCode: '#FFFFFF',
-        ean: '34040004200030',
-        stock: 10,
-        images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-led-beam-kit.jpg']
-      }
-    ],
-    specifications: [
-      { label: 'Contenu', value: '1x Beam central + 2x Bars latérales' },
-      { label: 'Longueur Beam', value: '120cm' },
-      { label: 'Longueur Bars', value: '60cm chacune' },
-      { label: 'Puissance totale', value: '45W' },
-      { label: 'Lumens', value: '4500lm total' },
-      { label: 'Installation', value: 'Magnétique sans outils' },
-      { label: 'Connectivité', value: 'Sans fil entre modules' },
-      { label: 'Contrôle', value: 'App + télécommande + vocal' },
-      { label: 'Scénarios', value: '50+ modes préprogrammés' },
-      { label: 'Matériau', value: 'Aluminium premium' },
-      { label: 'Gradation', value: '0-100% sans scintillement' },
-      { label: 'Compatible', value: 'Alexa, Google, HomeKit' }
-    ],
-    highlights: [
-      'Kit complet Beam + 2 Bars',
-      'Installation magnétique modulaire',
-      'Connexion sans fil entre éléments',
-      '50+ scénarios d\'éclairage',
-      'Contrôle app intelligent',
-      'Compatible domotique',
-      'Construction aluminium premium'
-    ],
-    images: [
-      'https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-led-beam-kit-1.jpg',
-      'https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-led-beam-kit-2.jpg'
-    ],
-    status: 'active' as const,
-    rating: {
-      average: 4.8,
-      count: 15,
-      distribution: { 5: 12, 4: 2, 3: 1, 2: 0, 1: 0 }
-    },
-    warranty: '3 ans',
-    deliveryTime: '3-5 jours',
-    badges: ['Kit Premium', 'Magnétique', 'Pro Lighting']
-  },
-
-  // MUVIT Rouleaux de papier photo
-  {
-    id: 'muapn-roll',
-    airtableId: 'recyrOXiEI3UsXLz0',
-    sku: 'MUAPN-ROLL',
-    name: 'MUVIT KidPic Rouleaux Papier Photo',
-    brand: 'MUVIT',
-    category: 'Créativité',
-    subcategory: 'Appareils Photo',
-    price: 7.99,
-    description: "Les rouleaux de papier photo MUVIT KidPic constituent l'accessoire indispensable pour prolonger l'aventure photographique des jeunes créateurs. Ce pack économique de 5 rouleaux garantit des heures d'impression instantanée, permettant aux enfants de capturer et matérialiser leurs découvertes visuelles sans interruption. Chaque rouleau contient suffisamment de papier pour imprimer jusqu'à 30 photos, offrant un total de 150 impressions par pack. Le papier thermique spécial développe instantanément les images sans encre ni cartouche, utilisant une technologie écologique et sécuritaire pour les enfants. La qualité d'impression optimisée produit des photos nettes et contrastées qui résistent au temps. Les images conservent leur éclat pendant des années, créant des souvenirs durables que les enfants peuvent collectionner, partager ou offrir. Le format compact des photos permet de créer albums, collages et projets créatifs. L'installation simplifiée permet aux enfants de changer eux-mêmes les rouleaux, développant autonomie et responsabilité. Le système de chargement intuitif évite les erreurs et garantit un alignement parfait pour des impressions réussies à chaque fois. Le papier autocollant au dos transforme chaque photo en sticker repositionnable, multipliant les possibilités créatives. Les enfants peuvent décorer cahiers, chambres et créations artistiques avec leurs propres photos, personnalisant leur univers avec leurs souvenirs préférés. Le conditionnement protégé préserve la qualité du papier contre humidité et poussière, garantissant des impressions parfaites même après stockage prolongé. Idéal pour le climat tropical de La Réunion, le papier résiste aux variations de température et d'humidité. Compatible exclusivement avec les appareils MUVIT KidPic, ce papier certifié garantit performances optimales et sécurité d'utilisation.",
-    shortDescription: 'Pack de 5 rouleaux de papier photo pour appareil MUVIT KidPic - 150 impressions',
-    metaTitle: 'Rouleaux Papier Photo MUVIT KidPic - Pack de 5 | Monster Phone 974',
-    metaDescription: 'Rouleaux papier photo MUVIT KidPic, pack 5 rouleaux pour 150 impressions instantanées. Papier autocollant écologique, installation facile. Stock La Réunion 974.',
-    urlSlug: 'muvit-kidpic-rouleaux-papier-photo',
-    keywords: ['rouleaux papier photo', 'MUVIT KidPic', 'recharge appareil photo', 'papier impression instantanée', 'accessoire KidPic'],
-    variants: [
-      {
-        color: 'Pack x5',
-        colorCode: '#FFFFFF',
-        ean: '34040004100030',
-        stock: 50,
-        images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/muvit-rouleaux-papier.jpg']
-      }
-    ],
-    specifications: [
-      { label: 'Contenu', value: 'Pack de 5 rouleaux' },
-      { label: 'Photos par rouleau', value: '30 photos' },
-      { label: 'Total impressions', value: '150 photos' },
-      { label: 'Type papier', value: 'Thermique sans encre' },
-      { label: 'Format photo', value: 'Format carte' },
-      { label: 'Dos autocollant', value: 'Oui, repositionnable' },
-      { label: 'Conservation', value: 'Plusieurs années' },
-      { label: 'Installation', value: 'Système easy-load' },
-      { label: 'Écologique', value: 'Sans encre ni cartouche' },
-      { label: 'Compatible', value: 'MUVIT KidPic uniquement' }
-    ],
-    highlights: [
-      'Pack économique 5 rouleaux',
-      '150 impressions totales',
-      'Papier thermique écologique',
-      'Dos autocollant créatif',
-      'Installation facile par enfant',
-      'Qualité d\'impression durable',
-      'Résistant climat tropical'
-    ],
-    images: [
-      'https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/muvit-rouleaux-papier-1.jpg',
-      'https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/muvit-rouleaux-papier-2.jpg'
-    ],
-    status: 'active' as const,
-    rating: {
-      average: 4.9,
-      count: 72,
-      distribution: { 5: 65, 4: 5, 3: 2, 2: 0, 1: 0 }
-    },
-    warranty: '6 mois',
-    deliveryTime: '1-2 jours',
-    badges: ['Pack Éco', 'Sans Encre', 'Autocollant']
   }
 ];
 
@@ -5914,147 +5956,102 @@ export interface CategoryStructure {
 
 export const menuStructure: CategoryStructure[] = [
   {
-    name: 'Smartphones',
+    name: '📱 Smartphones',
     slug: 'smartphones',
     subcategories: [
       {
-        name: 'Flagship',
-        slug: 'flagship',
-        brands: ['HONOR']
-      },
-      {
-        name: 'Haut de gamme',
-        slug: 'haut-de-gamme',
-        brands: ['HONOR']
-      },
-      {
-        name: 'Milieu de gamme',
-        slug: 'milieu-de-gamme',
+        name: 'Smartphone',
+        slug: 'smartphone',
         brands: ['HONOR', 'NOKIA']
       },
       {
-        name: 'Entrée de gamme',
-        slug: 'entree-de-gamme',
-        brands: ['HONOR', 'NOKIA']
+        name: 'Tablette',
+        slug: 'tablette',
+        brands: ['HONOR']
       }
     ]
   },
   {
-    name: 'Tablettes',
-    slug: 'tablettes',
-    brands: ['HONOR']
-  },
-  {
-    name: 'Montres connectées',
-    slug: 'montres-connectees',
-    brands: ['HONOR', 'HiFuture']
-  },
-  {
-    name: 'Audio',
+    name: '🎧 Audio',
     slug: 'audio',
     subcategories: [
       {
         name: 'Écouteurs',
         slug: 'ecouteurs',
-        brands: ['HIFUTURE', 'HiFuture', 'MONSTER']
+        brands: ['HIFUTURE', 'MONSTER']
       },
       {
         name: 'Enceintes',
         slug: 'enceintes',
-        brands: ['HIFUTURE', 'HiFuture', 'MONSTER']
+        brands: ['HIFUTURE', 'MONSTER']
       },
       {
-        name: 'Enceintes haut de gamme',
-        slug: 'enceintes-haut-de-gamme',
-        brands: ['MONSTER', 'HIFUTURE']
-      },
-      {
-        name: 'Casques gaming',
-        slug: 'casques-gaming',
-        brands: ['MONSTER', 'HIFUTURE']
-      },
-      {
-        name: 'Casques sport',
-        slug: 'casques-sport',
-        brands: ['MONSTER', 'HIFUTURE']
-      },
-      {
-        name: 'Microphones',
-        slug: 'microphones',
-        brands: ['HiFuture', 'HIFUTURE']
+        name: 'Casques',
+        slug: 'casques',
+        brands: ['HIFUTURE', 'MONSTER', 'MUVIT']
       }
     ]
   },
   {
-    name: 'Éclairage LED',
-    slug: 'eclairage-led',
+    name: '⌚ Montres',
+    slug: 'montres',
     subcategories: [
+      {
+        name: 'Montres connectées',
+        slug: 'montres-connectees',
+        brands: ['HIFUTURE']
+      },
+      {
+        name: 'Montres sport',
+        slug: 'montres-sport',
+        brands: ['HIFUTURE']
+      }
+    ]
+  },
+  {
+    name: '💡 LED',
+    slug: 'led',
+    subcategories: [
+      {
+        name: 'Éclairage LED',
+        slug: 'eclairage-led',
+        brands: ['MONSTER']
+      },
       {
         name: 'Bandeaux LED',
         slug: 'bandeaux-led',
         brands: ['MONSTER']
-      },
-      {
-        name: 'Néon LED',
-        slug: 'neon-led',
-        brands: ['MONSTER']
-      },
-      {
-        name: 'Ampoules connectées',
-        slug: 'ampoules-connectees',
-        brands: ['MONSTER']
-      },
-      {
-        name: 'Projecteurs',
-        slug: 'projecteurs',
-        brands: ['MONSTER']
-      },
-      {
-        name: 'Accessoires LED',
-        slug: 'accessoires-led',
-        brands: ['MONSTER']
       }
     ]
   },
   {
-    name: 'Accessoires',
+    name: '🔧 Accessoires',
     slug: 'accessoires',
     subcategories: [
       {
-        name: 'Casques & Écouteurs',
-        slug: 'casques-ecouteurs',
-        brands: ['MONSTER', 'HIFUTURE', 'MUVIT']
-      },
-      {
-        name: 'Chargeur & Batteries',
-        slug: 'chargeur-batteries',
+        name: 'Batteries & Chargeurs',
+        slug: 'batteries-chargeurs',
         brands: ['MONSTER', 'MY WAY']
       },
       {
-        name: 'Câbles & Connecteurs',
-        slug: 'cables-connecteurs',
+        name: 'Câbles & Connectiques',
+        slug: 'cables-connectiques',
+        brands: ['MONSTER']
+      },
+      {
+        name: 'Protection & Étuis',
+        slug: 'protection-etuis',
+        brands: ['MUVIT', 'MY WAY']
+      },
+      {
+        name: 'Supports & Fixations',
+        slug: 'supports-fixations',
         brands: ['MONSTER', 'MY WAY']
       },
       {
-        name: 'Enceintes',
-        slug: 'enceintes',
-        brands: ['MONSTER', 'HIFUTURE']
-      },
-      {
-        name: 'Support',
-        slug: 'support',
-        brands: ['MONSTER', 'MUVIT']
-      }
-    ]
-  },
-  {
-    name: 'Créativité',
-    slug: 'creativite',
-    subcategories: [
-      {
-        name: 'Appareils Photo',
-        slug: 'appareils-photo',
-        brands: ['MUVIT']
+        name: 'Gaming & PC',
+        slug: 'gaming-pc',
+        brands: ['MONSTER']
       }
     ]
   }
