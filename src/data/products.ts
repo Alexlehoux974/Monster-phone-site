@@ -724,7 +724,7 @@ export const allProducts: Product[] = [
     airtableId: 'rec3S3fGlA6xxWkkA',
     sku: 'HIFUTURE-HAPPYROCK-BT53',
     name: 'HIFUTURE HAPPYROCK Enceinte Bluetooth 5.3',
-    brand: 'HiFuture',
+    brand: 'HIFUTURE',
     category: 'Audio',
     subcategory: 'Enceintes portables',
     price: 39.99,
@@ -782,7 +782,7 @@ export const allProducts: Product[] = [
     airtableId: 'rec4E9K38xRxL31b9',
     sku: 'HIFUTURE-ALTUS-ANC',
     name: 'HIFUTURE ALTUS Casque sans fil ANC',
-    brand: 'HiFuture',
+    brand: 'HIFUTURE',
     category: 'Audio',
     subcategory: 'Casques',
     price: 79.99,
@@ -839,7 +839,7 @@ export const allProducts: Product[] = [
     airtableId: 'rec67QqLdQdJ1VZeL',
     sku: 'HIFUTURE-COLORBUDS2-TWS',
     name: 'HIFUTURE COLORBUDS 2 True Wireless',
-    brand: 'HiFuture',
+    brand: 'HIFUTURE',
     category: 'Audio',
     subcategory: 'ecouteurs',
     price: 49.99,
@@ -900,7 +900,7 @@ export const allProducts: Product[] = [
     airtableId: 'rec8lCbDJQwcYupxb',
     sku: 'HIFUTURE-FUTUREMATE-SWATCH',
     name: 'HIFUTURE FUTUREMATE',
-    brand: 'HiFuture',
+    brand: 'HIFUTURE',
     category: 'Montres connectées',
     subcategory: 'Sport',
     price: 89.99,
@@ -958,7 +958,7 @@ export const allProducts: Product[] = [
     airtableId: 'rec9MNXwqQT23kLRx',
     sku: 'HIFUTURE-ZONE2-SW',
     name: 'HIFUTURE ZONE 2',
-    brand: 'HiFuture',
+    brand: 'HIFUTURE',
     category: 'Montres connectées',
     subcategory: 'Sport',
     price: 69.99,
@@ -1016,7 +1016,7 @@ export const allProducts: Product[] = [
     airtableId: 'recBbzRiXLo5W4YOP',
     sku: 'HIFUTURE-ULTRAFIT',
     name: 'HIFUTURE ULTRAFIT',
-    brand: 'HiFuture',
+    brand: 'HIFUTURE',
     category: 'Montres connectées',
     subcategory: 'Sport',
     price: 99.99,
@@ -1073,7 +1073,7 @@ export const allProducts: Product[] = [
     airtableId: 'recDqA9HaRsNJWN5U',
     sku: 'HIFUTURE-FLYBUDS-TWS',
     name: 'HIFUTURE FLYBUDS Ecouteurs sans fil',
-    brand: 'HiFuture',
+    brand: 'HIFUTURE',
     category: 'Audio',
     subcategory: 'ecouteurs',
     price: 59.99,
@@ -1130,7 +1130,7 @@ export const allProducts: Product[] = [
     airtableId: 'recE79Vv4LKOcn8P2',
     sku: 'HIFUTURE-GRAVITY-360',
     name: 'HIFUTURE GRAVITY Enceinte Bluetooth',
-    brand: 'HiFuture',
+    brand: 'HIFUTURE',
     category: 'Audio',
     subcategory: 'Enceintes portables',
     price: 89.99,
@@ -1187,7 +1187,7 @@ export const allProducts: Product[] = [
     airtableId: 'recGcKLvJNRXfT1Wx',
     sku: 'HIFUTURE-FITMAX-TRACKER',
     name: 'HIFUTURE FITMAX',
-    brand: 'HiFuture',
+    brand: 'HIFUTURE',
     category: 'Montres connectées',
     subcategory: 'Sport',
     price: 49.99,
@@ -1246,7 +1246,7 @@ export const allProducts: Product[] = [
     airtableId: 'recJKq3o5Pb7wxYeL',
     sku: 'HIFUTURE-VOCALIST100',
     name: 'HIFUTURE VOCALIST 100 Micro Karaoké',
-    brand: 'HiFuture',
+    brand: 'HIFUTURE',
     category: 'Audio',
     subcategory: 'Microphones',
     price: 34.99,
@@ -1304,7 +1304,7 @@ export const allProducts: Product[] = [
     airtableId: 'recQnX8oW2kYbRvNZ',
     sku: 'HIFUTURE-TOURPRO-ANC',
     name: 'HIFUTURE TOUR PRO',
-    brand: 'HiFuture',
+    brand: 'HIFUTURE',
     category: 'Audio',
     subcategory: 'Casques',
     price: 119.99,
@@ -1360,7 +1360,7 @@ export const allProducts: Product[] = [
     airtableId: 'recRhQM7ksbT5FV3P',
     sku: 'HIFUTURE-PULSEX-SMART',
     name: 'HIFUTURE PULSE X',
-    brand: 'HiFuture',
+    brand: 'HIFUTURE',
     category: 'Montres connectées',
     subcategory: 'Sport',
     price: 119.99,
@@ -1417,7 +1417,7 @@ export const allProducts: Product[] = [
     airtableId: 'recTu9Z2QKLxY7oNX',
     sku: 'HIFUTURE-KIDDO-KIDS',
     name: 'HIFUTURE KIDDO',
-    brand: 'HiFuture',
+    brand: 'HIFUTURE',
     category: 'Montres connectées',
     subcategory: 'Sport',
     price: 59.99,
@@ -1475,7 +1475,7 @@ export const allProducts: Product[] = [
     airtableId: 'recXOdBNKL9GfWxRZ',
     sku: 'HIFUTURE-FOCUS-PRO',
     name: 'HIFUTURE FOCUS',
-    brand: 'HiFuture',
+    brand: 'HIFUTURE',
     category: 'Montres connectées',
     subcategory: 'Sport',
     price: 79.99,
@@ -5999,12 +5999,12 @@ export const menuStructure: CategoryStructure[] = [
       {
         name: 'Montres connectées',
         slug: 'montres-connectees',
-        brands: ['HIFUTURE']
+        brands: ['HIFUTURE', 'HONOR']
       },
       {
         name: 'Montres sport',
         slug: 'montres-sport',
-        brands: ['HIFUTURE']
+        brands: ['HIFUTURE', 'HONOR']
       }
     ]
   },
@@ -6036,7 +6036,7 @@ export const menuStructure: CategoryStructure[] = [
       {
         name: 'Câbles & Connectiques',
         slug: 'cables-connectiques',
-        brands: ['MONSTER']
+        brands: ['MONSTER', 'MY WAY']
       },
       {
         name: 'Protection & Étuis',
@@ -6064,8 +6064,11 @@ export function getProductBySlug(slug: string): Product | undefined {
 
 // Fonction helper pour obtenir les produits par catégorie
 export function getProductsByCategory(category: string): Product[] {
+  // Supprimer les emojis et espaces en début de chaîne
+  const cleanCategory = category.replace(/^[^\w\s]+\s*/, '').trim();
+  
   return allProducts.filter(product => 
-    product.category.toLowerCase() === category.toLowerCase()
+    product.category.toLowerCase() === cleanCategory.toLowerCase()
   );
 }
 
@@ -6133,8 +6136,12 @@ export function getBrandsByCategory(category: string): string[] {
 
 // Fonction pour obtenir les produits par marque et catégorie
 export function getProductsByBrandAndCategory(brand: string, category: string): Product[] {
+  // Supprimer les emojis et espaces en début de chaîne pour la catégorie
+  const cleanCategory = category.replace(/^[^\w\s]+\s*/, '').trim();
+  
   return allProducts.filter(
-    product => product.brand === brand && product.category === category
+    product => product.brand.toLowerCase() === brand.toLowerCase() && 
+               product.category.toLowerCase() === cleanCategory.toLowerCase()
   );
 }
 

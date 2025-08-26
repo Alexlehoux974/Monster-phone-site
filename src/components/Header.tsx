@@ -418,7 +418,22 @@ const DropdownMenu = ({
                 : menuType === 'led'
                 ? allProducts.filter(p => 
                     p.brand === hoveredBrand && 
-                    p.category === 'Éclairage LED'
+                    p.category === 'LED'
+                  )
+                : menuType === 'audio'
+                ? allProducts.filter(p => 
+                    p.brand === hoveredBrand && 
+                    p.category === 'Audio'
+                  )
+                : menuType === 'montres'
+                ? allProducts.filter(p => 
+                    p.brand === hoveredBrand && 
+                    p.category === 'Montres'
+                  )
+                : menuType === 'smartphones'
+                ? allProducts.filter(p => 
+                    p.brand === hoveredBrand && 
+                    p.category === 'Smartphones'
                   )
                 : getProductsForDisplay() || [];
 
