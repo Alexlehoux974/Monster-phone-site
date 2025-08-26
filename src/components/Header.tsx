@@ -255,7 +255,7 @@ const DropdownMenu = ({
             scrollbarWidth: 'thin',
             scrollbarColor: '#9ca3af #f3f4f6'
           }}>
-                      <div className="py-4 px-5">
+                      <div className="py-4 px-2">
                       {currentCategory.subcategories.map((subcat) => {
                         // Compter les produits dans cette sous-catégorie
                         const subcatProducts = allProducts.filter(p => 
@@ -364,7 +364,7 @@ const DropdownMenu = ({
             scrollbarWidth: 'thin',
             scrollbarColor: '#9ca3af #f3f4f6'
           }}>
-                    <div className="py-4 px-5">
+                    <div className="py-4 px-2">
                       {brands.map((brand) => {
                         const brandProducts = allProducts.filter(p => 
                           p.category === hoveredCategory && 
@@ -408,7 +408,7 @@ const DropdownMenu = ({
 
         {/* Colonne Produits */}
         {hoveredBrand && (
-          <div className="min-w-[300px] bg-gradient-to-b from-gray-50 to-white max-h-[600px] flex flex-col pr-8">
+          <div className="min-w-[225px] bg-gradient-to-b from-gray-50 to-white max-h-[600px] flex flex-col">
             {(() => {
               const products = menuType === 'accessoires' 
                 ? allProducts.filter(p => 
@@ -424,34 +424,34 @@ const DropdownMenu = ({
 
               return (
                 <>
-                  <div className="p-5 border-b border-gray-200 bg-gradient-to-r from-orange-50 to-red-50 flex-shrink-0">
-                    <h4 className="font-bold text-gray-900 text-base">
+                  <div className="p-3 border-b border-gray-200 flex-shrink-0">
+                    <h4 className="font-bold text-gray-900 text-sm">
                       {hoveredBrand}
                     </h4>
-                    <p className="text-sm text-gray-600 mt-0.5">{products.length} produit{products.length > 1 ? 's' : ''} disponible{products.length > 1 ? 's' : ''}</p>
+                    <p className="text-xs text-gray-600 mt-1">{products.length} produit{products.length > 1 ? 's' : ''}</p>
                   </div>
                   <div className="flex-1 overflow-y-auto" style={{
             scrollbarWidth: 'thin',
             scrollbarColor: '#9ca3af #f3f4f6'
           }}>
-                    <div className="py-4 px-5">
+                    <div className="py-4 px-2">
                       {products && products.length > 0 ? (
                         <>
                           {products.map((product) => (
                             <Link
                               key={product.id}
                               href={`/produit/${product.urlSlug || product.id}`}
-                              className="block px-5 py-3 hover:bg-gradient-to-r hover:from-orange-50 hover:to-transparent transition-all duration-200"
+                              className="block px-4 py-3 hover:bg-gradient-to-r hover:from-orange-50 hover:to-transparent transition-all duration-200"
                               onClick={onClose}
                             >
-                              <div className="flex items-start space-x-3">
-                                <div className="w-14 h-14 bg-white border border-gray-200 rounded-lg overflow-hidden flex-shrink-0 shadow-sm">
+                              <div className="flex items-start space-x-2">
+                                <div className="w-12 h-12 bg-white border border-gray-200 rounded overflow-hidden flex-shrink-0 shadow-sm">
                                   {product.images && product.images.length > 0 ? (
                                     <ImageWithFallback
                                       src={product.images[0]}
                                       alt={product.name}
-                                      width={56}
-                                      height={56}
+                                      width={48}
+                                      height={48}
                                       className="w-full h-full object-contain"
                                       productCategory={product.category}
                                     />
@@ -966,7 +966,7 @@ export default function Header() {
               {menuStructure.map((category) => {
                 // Extraire l'emoji et le nom du menu
                 const menuIcon = category.name.substring(0, 2); // Récupérer l'emoji
-                const menuLabel = category.name.substring(3); // Récupérer le nom sans emoji
+                const menuLabel = category.name.substring(2).trim(); // Récupérer le nom sans emoji
                 
                 return (
                   <div 
