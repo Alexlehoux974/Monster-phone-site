@@ -118,7 +118,7 @@ const DropdownMenu = ({
   };
 
   if (!isOpen) return null;
-
+  
   return (
     <div 
       className={`absolute top-full mt-1 bg-white shadow-2xl border border-gray-200 rounded-xl z-[150] ${
@@ -131,8 +131,8 @@ const DropdownMenu = ({
     >
       <div className="flex min-h-[450px] w-fit max-w-[calc(100vw-4rem)]">
         {/* Colonne 1: Catégories */}
-        <div className="min-w-[240px] bg-gradient-to-b from-gray-50 to-white border-r border-gray-200 max-h-[600px] flex flex-col">
-          <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-indigo-50 flex-shrink-0">
+        <div className="min-w-[200px] bg-gradient-to-b from-gray-50 to-white border-r border-gray-200 max-h-[600px] flex flex-col">
+          <div className="p-3 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-indigo-50 flex-shrink-0">
             <h3 className="font-bold text-gray-900 text-lg">
               {categories[0]?.name || 'Nos Produits'}
             </h3>
@@ -141,14 +141,14 @@ const DropdownMenu = ({
             scrollbarWidth: 'thin',
             scrollbarColor: '#9ca3af #f3f4f6'
           }}>
-            <div className="py-4 px-4">
+            <div className="py-2 px-2">
             {categories[0]?.subcategories && categories[0].subcategories.length > 0 ? (
               // Afficher les sous-catégories de la nouvelle structure
               categories[0].subcategories.map((subcat) => (
                 <div key={subcat.slug}>
                   <button
                     className={cn(
-                      "w-full text-left px-6 py-4 text-sm font-medium transition-all duration-200",
+                      "w-full text-left px-4 py-3 text-sm font-medium transition-all duration-200",
                       hoveredSubcategory === subcat.name 
                         ? "bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 border-l-4 border-blue-600" 
                         : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
@@ -205,15 +205,15 @@ const DropdownMenu = ({
 
         {/* Colonne 2: Marques (pour Smartphones avec sous-catégories) */}
         {hoveredSubcategory && categories[0]?.subcategories && (
-          <div className="min-w-[200px] bg-white border-r border-gray-200 max-h-[600px] flex flex-col">
-            <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-green-50 to-emerald-50 flex-shrink-0">
+          <div className="min-w-[170px] bg-white border-r border-gray-200 max-h-[600px] flex flex-col">
+            <div className="p-3 border-b border-gray-200 bg-gradient-to-r from-green-50 to-emerald-50 flex-shrink-0">
               <h4 className="font-bold text-gray-900 text-base">Marques</h4>
             </div>
             <div className="flex-1 overflow-y-auto" style={{
             scrollbarWidth: 'thin',
             scrollbarColor: '#9ca3af #f3f4f6'
           }}>
-              <div className="py-4 px-4">
+              <div className="py-2 px-2">
                 {(() => {
                   // Trouver la sous-catégorie sélectionnée
                   const selectedSubcat = categories[0].subcategories.find(sub => sub.name === hoveredSubcategory);
@@ -248,7 +248,7 @@ const DropdownMenu = ({
 
         {/* Colonne 2: Sous-catégories ou Marques */}
         {hoveredCategory && !((menuType === 'smartphones' || menuType === 'audio' || menuType === 'montres' || menuType === 'led' || menuType === 'tablettes' || menuType === 'accessoires')) && (
-          <div className="min-w-[200px] bg-white border-r border-gray-200 max-h-[600px] flex flex-col">
+          <div className="min-w-[180px] bg-white border-r border-gray-200 max-h-[600px] flex flex-col">
             {(() => {
               
               const currentCategory = getCurrentCategory();
@@ -264,7 +264,7 @@ const DropdownMenu = ({
             scrollbarWidth: 'thin',
             scrollbarColor: '#9ca3af #f3f4f6'
           }}>
-                      <div className="py-4 px-2">
+                      <div className="py-3 px-2">
                       {currentCategory.subcategories.map((subcat) => {
                         // Compter les produits dans cette sous-catégorie
                         const subcatProducts = allProducts.filter(p => 
@@ -318,7 +318,7 @@ const DropdownMenu = ({
                   <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-purple-50 to-pink-50">
                     <h4 className="font-bold text-gray-900 text-base">Marques</h4>
                   </div>
-                  <div className="py-4 px-5">
+                  <div className="py-3 px-3">
                     {brands.map((brand) => {
                       const brandProducts = getProductsByBrand(brand).filter(p => p.category === hoveredCategory);
                       return (
@@ -357,7 +357,7 @@ const DropdownMenu = ({
 
         {/* Colonne 3: Marques (si sous-catégorie sélectionnée) */}
         {hoveredSubcategory && !((menuType === 'smartphones' || menuType === 'audio' || menuType === 'montres' || menuType === 'led' || menuType === 'tablettes' || menuType === 'accessoires')) && (
-          <div className="min-w-[200px] bg-white border-r border-gray-200 max-h-[600px] flex flex-col">
+          <div className="min-w-[180px] bg-white border-r border-gray-200 max-h-[600px] flex flex-col">
             {(() => {
               
               const brands = getBrandsForSelection();
@@ -373,7 +373,7 @@ const DropdownMenu = ({
             scrollbarWidth: 'thin',
             scrollbarColor: '#9ca3af #f3f4f6'
           }}>
-                    <div className="py-4 px-2">
+                    <div className="py-3 px-2">
                       {brands.map((brand) => {
                         const brandProducts = allProducts.filter(p => 
                           p.category === hoveredCategory && 
@@ -417,7 +417,7 @@ const DropdownMenu = ({
 
         {/* Colonne Produits */}
         {(hoveredBrand || (menuType === 'tablettes' && hoveredCategory === 'Tablettes')) && (
-          <div className="min-w-[225px] bg-gradient-to-b from-gray-50 to-white max-h-[600px] flex flex-col">
+          <div className="min-w-[190px] bg-gradient-to-b from-gray-50 to-white max-h-[600px] flex flex-col">
             {(() => {
               const products = menuType === 'accessoires' 
                 ? allProducts.filter(p => 
@@ -493,7 +493,7 @@ const DropdownMenu = ({
             scrollbarWidth: 'thin',
             scrollbarColor: '#9ca3af #f3f4f6'
           }}>
-                    <div className="py-4 px-2">
+                    <div className="py-3 px-2">
                       {products && products.length > 0 ? (
                         <>
                           {products.map((product) => (
