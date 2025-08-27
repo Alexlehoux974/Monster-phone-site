@@ -5953,10 +5953,6 @@ export const allProducts: Product[] = [
     price: 549,
     originalPrice: 599,
     discount: 50,
-    stock: 15,
-    isNew: true,
-    isBestseller: true,
-    isFeatured: true,
     description: "L'iPad 10e génération réinvente la tablette avec son écran Liquid Retina de 10.9 pouces, offrant des couleurs éclatantes et une netteté exceptionnelle. La puce A14 Bionic garantit des performances fluides pour toutes vos applications, du streaming 4K au gaming intensif. Le design tout écran avec Touch ID intégré au bouton supérieur maximise l'espace d'affichage. La caméra frontale paysage 12MP est parfaite pour les appels vidéo en mode horizontal. Port USB-C pour charge rapide et transfert de données. Compatible avec Apple Pencil (1ère génération) et Magic Keyboard Folio. Autonomie toute la journée pour travail et divertissement. iPadOS 17 offre multitâche avancé et nouvelles fonctionnalités productivité. Idéal pour étudiants et professionnels de La Réunion.",
     shortDescription: 'Tablette iPad 10.9" avec puce A14 Bionic et écran Liquid Retina',
     metaTitle: 'Apple iPad 10.9" 10e génération Wi-Fi 64GB | Monster Phone 974',
@@ -5980,16 +5976,6 @@ export const allProducts: Product[] = [
       { label: 'Connectivité', value: 'Wi-Fi 6' },
       { label: 'Port', value: 'USB-C' },
       { label: 'OS', value: 'iPadOS 17' }
-    ],
-    features: [
-      'Écran Liquid Retina 10.9 pouces',
-      'Puce A14 Bionic avec Neural Engine',
-      'Touch ID pour authentification sécurisée',
-      'Caméra frontale paysage 12MP',
-      'Compatible Apple Pencil et Magic Keyboard',
-      'Port USB-C pour charge et accessoires',
-      'Autonomie jusqu\'à 10 heures',
-      'Haut-parleurs stéréo en mode paysage'
     ],
     images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/ipad-10-9.jpg'],
     rating: {
@@ -6025,7 +6011,7 @@ export const menuStructure: CategoryStructure[] = [
       {
         name: 'Smartphone',
         slug: 'smartphone',
-        brands: ['HONOR', 'NOKIA']
+        brands: ['HONOR']
       }
     ]
   },
@@ -6068,12 +6054,12 @@ export const menuStructure: CategoryStructure[] = [
       {
         name: 'Montres connectées',
         slug: 'montres-connectees',
-        brands: ['HIFUTURE', 'HONOR']
+        brands: ['HIFUTURE']
       },
       {
         name: 'Montres sport',
         slug: 'montres-sport',
-        brands: ['HIFUTURE', 'HONOR']
+        brands: ['HIFUTURE']
       }
     ]
   },

@@ -442,16 +442,17 @@ const DropdownMenu = ({
                     (hoveredSubcategory ? p.subcategory === hoveredSubcategory : true)
                   )
                 : menuType === 'smartphones'
-                ? allProducts.filter(p => 
-                    p.brand === hoveredBrand && 
-                    p.category === 'Smartphones' &&
-                    (hoveredSubcategory ? p.subcategory === hoveredSubcategory : true)
+                ? (hoveredBrand === 'HONOR' 
+                    ? allProducts.filter(p => p.category === 'Smartphones' && p.brand === 'HONOR')
+                    : allProducts.filter(p => 
+                        p.category === 'Smartphones' && 
+                        (hoveredBrand ? p.brand === hoveredBrand : true) &&
+                        (hoveredSubcategory ? p.subcategory === hoveredSubcategory : true)
+                      )
                   )
                 : menuType === 'tablettes'
                 ? allProducts.filter(p => 
-                    p.category === 'Tablettes' &&
-                    (hoveredBrand ? p.brand === hoveredBrand : true) &&
-                    (hoveredSubcategory ? p.subcategory === hoveredSubcategory : true)
+                    p.category === 'Tablettes' && p.id !== 'ipad-10-9-10th-gen'
                   )
                 : getProductsForDisplay() || [];
 
