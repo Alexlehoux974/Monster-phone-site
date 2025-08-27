@@ -6086,22 +6086,22 @@ export const menuStructure: CategoryStructure[] = [
       {
         name: 'Batteries & Chargeurs',
         slug: 'batteries-chargeurs',
-        brands: ['MONSTER', 'MY WAY']
+        brands: ['MY WAY']
       },
       {
         name: 'Câbles & Connectiques',
         slug: 'cables-connectiques',
-        brands: ['MONSTER', 'MY WAY']
+        brands: ['MONSTER']
       },
       {
         name: 'Protection & Étuis',
         slug: 'protection-etuis',
-        brands: ['MUVIT', 'MY WAY']
+        brands: ['MUVIT']
       },
       {
         name: 'Supports & Fixations',
         slug: 'supports-fixations',
-        brands: ['MONSTER', 'MY WAY']
+        brands: ['MONSTER']
       },
       {
         name: 'Gaming & PC',
