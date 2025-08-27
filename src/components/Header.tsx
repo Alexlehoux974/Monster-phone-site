@@ -425,9 +425,34 @@ const DropdownMenu = ({
                     p.category === 'Accessoires'
                   )
                 : menuType === 'led'
-                ? allProducts.filter(p => 
-                    p.brand === hoveredBrand && 
-                    p.category === 'LED'
+                ? (hoveredBrand === 'MONSTER' && hoveredSubcategory === 'Bandeaux LED'
+                    ? allProducts.filter(p => [
+                        'monster-smart-light-strip-rgbw',
+                        'monster-illuminescence-smart-prism-ii-rgb-ic', 
+                        'monster-illuminescence-smart-beam-2x-bars-kit',
+                        'monster-illuminescence-neon',
+                        'monster-basic-30m-rgb',
+                        'monster-illuminescence-color-blanc',
+                        'monster-chroma-2x-bars'
+                      ].includes(p.id))
+                    : hoveredBrand === 'MONSTER' && hoveredSubcategory === 'Éclairage LED'
+                    ? allProducts.filter(p => 
+                        p.brand === 'MONSTER' && 
+                        p.category === 'LED' &&
+                        ![
+                          'monster-smart-light-strip-rgbw',
+                          'monster-illuminescence-smart-prism-ii-rgb-ic', 
+                          'monster-illuminescence-smart-beam-2x-bars-kit',
+                          'monster-illuminescence-neon',
+                          'monster-basic-30m-rgb',
+                          'monster-illuminescence-color-blanc',
+                          'monster-chroma-2x-bars'
+                        ].includes(p.id)
+                      )
+                    : allProducts.filter(p => 
+                        p.brand === hoveredBrand && 
+                        p.category === 'LED'
+                      )
                   )
                 : menuType === 'audio'
                 ? allProducts.filter(p => 
