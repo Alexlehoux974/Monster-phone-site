@@ -67,10 +67,19 @@ const DropdownMenu = ({
       
       // Si on a une sous-catégorie sélectionnée
       if (hoveredSubcategory) {
-        return brandProducts.filter(p => 
+        const filtered = brandProducts.filter(p => 
           p.subcategory === hoveredSubcategory && 
           p.category === hoveredCategory
         );
+        console.log('Debug - Filtering for:', {
+          subcategory: hoveredSubcategory, 
+          category: hoveredCategory,
+          brand: hoveredBrand,
+          brandProductsCount: brandProducts.length,
+          filteredCount: filtered.length,
+          products: filtered.map(p => ({name: p.name, subcategory: p.subcategory, category: p.category}))
+        });
+        return filtered;
       }
       
       // Sinon filtrer par catégorie
@@ -407,7 +416,7 @@ const DropdownMenu = ({
         )}
 
         {/* Colonne Produits */}
-        {hoveredBrand && (
+        {(hoveredBrand || (menuType === 'tablettes' && hoveredCategory === 'Tablettes')) && (
           <div className="min-w-[225px] bg-gradient-to-b from-gray-50 to-white max-h-[600px] flex flex-col">
             {(() => {
               const products = menuType === 'accessoires' 
@@ -423,17 +432,26 @@ const DropdownMenu = ({
                 : menuType === 'audio'
                 ? allProducts.filter(p => 
                     p.brand === hoveredBrand && 
-                    p.category === 'Audio'
+                    p.category === 'Audio' &&
+                    (hoveredSubcategory ? p.subcategory === hoveredSubcategory : true)
                   )
                 : menuType === 'montres'
                 ? allProducts.filter(p => 
                     p.brand === hoveredBrand && 
-                    p.category === 'Montres'
+                    p.category === 'Montres' &&
+                    (hoveredSubcategory ? p.subcategory === hoveredSubcategory : true)
                   )
                 : menuType === 'smartphones'
                 ? allProducts.filter(p => 
                     p.brand === hoveredBrand && 
-                    p.category === 'Smartphones'
+                    p.category === 'Smartphones' &&
+                    (hoveredSubcategory ? p.subcategory === hoveredSubcategory : true)
+                  )
+                : menuType === 'tablettes'
+                ? allProducts.filter(p => 
+                    p.category === 'Tablettes' &&
+                    (hoveredBrand ? p.brand === hoveredBrand : true) &&
+                    (hoveredSubcategory ? p.subcategory === hoveredSubcategory : true)
                   )
                 : getProductsForDisplay() || [];
 
@@ -441,7 +459,7 @@ const DropdownMenu = ({
                 <>
                   <div className="p-3 border-b border-gray-200 flex-shrink-0">
                     <h4 className="font-bold text-gray-900 text-sm">
-                      {hoveredBrand}
+                      {hoveredBrand || (menuType === 'tablettes' ? 'Tablettes' : '')}
                     </h4>
                     <p className="text-xs text-gray-600 mt-1">{products.length} produit{products.length > 1 ? 's' : ''}</p>
                   </div>
