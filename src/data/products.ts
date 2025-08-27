@@ -5419,8 +5419,8 @@ export const allProducts: Product[] = [
     sku: 'MUAPN000',
     name: 'MUVIT KidPic Appareil Photo Enfant',
     brand: 'MUVIT',
-    category: 'High-Tech',
-    subcategory: 'Appareils Photo',
+    category: 'Accessoires',
+    subcategory: 'Appareil Photo',
     price: 59.99,
     description: "Appareil photo numérique MUVIT KidPic conçu spécialement pour les enfants avec interface simple. Écran 2 pouces, vidéo HD et jeux intégrés pour des heures de divertissement.",
     shortDescription: 'Appareil photo numérique pour enfants',
@@ -5954,7 +5954,7 @@ export const allProducts: Product[] = [
     name: 'MUVIT KidPic Rouleaux Papier Photo',
     brand: 'MUVIT',
     category: 'Accessoires',
-    subcategory: 'Consommables',
+    subcategory: 'Appareil Photo',
     price: 19.99,
     description: "Pack de 3 rouleaux de papier photo pour appareil MUVIT KidPic. 150 photos au total pour immortaliser tous les souvenirs.",
     shortDescription: 'Pack 3 rouleaux papier photo KidPic',
@@ -6164,14 +6164,9 @@ export const menuStructure: CategoryStructure[] = [
         brands: ['MUVIT']
       },
       {
-        name: 'Supports & Fixations',
-        slug: 'supports-fixations',
-        brands: ['MONSTER']
-      },
-      {
         name: 'Gaming & PC',
         slug: 'gaming-pc',
-        brands: ['MONSTER']
+        brands: []
       }
     ]
   }

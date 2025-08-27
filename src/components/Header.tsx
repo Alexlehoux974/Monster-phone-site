@@ -427,6 +427,8 @@ const DropdownMenu = ({
                       ? (hoveredSubcategory === 'Batteries & Chargeurs' ? p.subcategory === 'Batteries Externes' : p.subcategory === 'Câbles')
                       : hoveredBrand === 'MONSTER' && hoveredSubcategory === 'Câbles & Connectiques'
                       ? ['MCB-HDMI-STD', 'MCB-HDMI-PHS'].includes(p.sku)
+                      : hoveredBrand === 'MUVIT' && hoveredSubcategory === 'Appareil Photo'
+                      ? p.subcategory === 'Appareil Photo'
                       : true)
                   )
                 : menuType === 'led'
