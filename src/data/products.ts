@@ -2150,6 +2150,71 @@ export const allProducts: Product[] = [
     badges: ['Premium', 'Gaming', '8K Ready']
   },
 
+  // MONSTER Câble HDMI Standard
+  {
+    id: 'monster-cable-hdmi-standard',
+    airtableId: 'recHDMISTD001',
+    sku: 'MCB-HDMI-STD',
+    name: 'MONSTER Câble HDMI Standard',
+    brand: 'MONSTER',
+    category: 'Accessoires',
+    subcategory: 'Câbles et connecteurs',
+    price: 19.99,
+    description: "Câble HDMI Monster Standard pour une transmission vidéo et audio de qualité. Supporte la résolution Full HD 1080p et 4K à 30Hz. Connecteurs plaqués or pour une meilleure conductivité. Compatible avec tous les appareils HDMI.",
+    shortDescription: 'Câble HDMI standard Full HD et 4K@30Hz',
+    metaTitle: 'MONSTER Câble HDMI Standard - Full HD 4K | Monster Phone 974',
+    metaDescription: 'Câble HDMI Monster Standard. Support Full HD 1080p et 4K@30Hz. Disponible en 1.5m, 2m, 3m, 5m. Livraison La Réunion.',
+    urlSlug: 'monster-cable-hdmi-standard',
+    keywords: ['câble HDMI', 'Monster', 'Full HD', '4K', 'La Réunion'],
+    variants: [
+      { color: '1.5m', colorCode: '#000000', ean: '', stock: 30, images: [] },
+      { color: '2m', colorCode: '#000000', ean: '', stock: 25, images: [] },
+      { color: '3m', colorCode: '#000000', ean: '', stock: 20, images: [] },
+      { color: '5m', colorCode: '#000000', ean: '', stock: 15, images: [] }
+    ],
+    specifications: [
+      { label: 'Version HDMI', value: '1.4' },
+      { label: 'Résolution Max', value: '4K@30Hz' },
+      { label: 'Connecteurs', value: 'Plaqués or' },
+      { label: 'Longueurs disponibles', value: '1.5m, 2m, 3m, 5m' }
+    ],
+    images: [],
+    status: 'active' as const,
+    badges: ['Full HD', '4K 30Hz']
+  },
+
+  // MONSTER CABLE HDMI ESSENTIAL 4K
+  {
+    id: 'monster-cable-hdmi-essential-4k',
+    airtableId: 'recHDMIESS001',
+    sku: 'MCB-HDMI-PHS',
+    name: 'MONSTER CABLE HDMI ESSENTIAL 4K',
+    brand: 'MONSTER',
+    category: 'Accessoires',
+    subcategory: 'Câbles et connecteurs',
+    price: 24.99,
+    description: "Câble HDMI Monster Essential 4K pour une expérience 4K complète. Support 4K à 60Hz avec HDR pour des couleurs éclatantes. Construction renforcée pour une durabilité maximale. Parfait pour home cinéma et gaming.",
+    shortDescription: 'Câble HDMI Essential 4K@60Hz avec HDR',
+    metaTitle: 'MONSTER CABLE HDMI ESSENTIAL 4K - HDR Gaming | Monster Phone 974',
+    metaDescription: 'Câble HDMI Monster Essential 4K. Support 4K@60Hz, HDR, gaming. Disponible en 1m80 et 3m60. Livraison La Réunion.',
+    urlSlug: 'monster-cable-hdmi-essential-4k',
+    keywords: ['câble HDMI 4K', 'Monster Essential', 'HDR', 'gaming', 'La Réunion'],
+    variants: [
+      { color: '1m80', colorCode: '#000000', ean: '', stock: 35, images: [] },
+      { color: '3m60', colorCode: '#000000', ean: '', stock: 20, images: [] }
+    ],
+    specifications: [
+      { label: 'Version HDMI', value: '2.0' },
+      { label: 'Résolution Max', value: '4K@60Hz' },
+      { label: 'HDR', value: 'HDR10' },
+      { label: 'Longueurs disponibles', value: '1m80, 3m60' },
+      { label: 'Bande passante', value: '18 Gbps' }
+    ],
+    images: [],
+    status: 'active' as const,
+    badges: ['4K 60Hz', 'HDR']
+  },
+
   // Monster Câble USB-C Charge Rapide 100W
   {
     id: 'monster-cable-usbc-charge',
@@ -6091,11 +6156,11 @@ export const menuStructure: CategoryStructure[] = [
       {
         name: 'Câbles & Connectiques',
         slug: 'cables-connectiques',
-        brands: ['MONSTER']
+        brands: ['MONSTER', 'MY WAY']
       },
       {
-        name: 'Protection & Étuis',
-        slug: 'protection-etuis',
+        name: 'Appareil Photo',
+        slug: 'appareil-photo',
         brands: ['MUVIT']
       },
       {

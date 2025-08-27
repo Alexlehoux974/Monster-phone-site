@@ -423,7 +423,11 @@ const DropdownMenu = ({
                 ? allProducts.filter(p => 
                     p.brand === hoveredBrand && 
                     p.category === 'Accessoires' &&
-                    (hoveredBrand === 'MY WAY' ? p.subcategory === 'Batteries Externes' : true)
+                    (hoveredBrand === 'MY WAY' 
+                      ? (hoveredSubcategory === 'Batteries & Chargeurs' ? p.subcategory === 'Batteries Externes' : p.subcategory === 'Câbles')
+                      : hoveredBrand === 'MONSTER' && hoveredSubcategory === 'Câbles & Connectiques'
+                      ? ['MCB-HDMI-STD', 'MCB-HDMI-PHS'].includes(p.sku)
+                      : true)
                   )
                 : menuType === 'led'
                 ? (hoveredBrand === 'MONSTER' && hoveredSubcategory === 'Bandeaux LED'
