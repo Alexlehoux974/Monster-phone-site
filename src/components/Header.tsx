@@ -422,7 +422,8 @@ const DropdownMenu = ({
               const products = menuType === 'accessoires' 
                 ? allProducts.filter(p => 
                     p.brand === hoveredBrand && 
-                    p.category === 'Accessoires'
+                    p.category === 'Accessoires' &&
+                    (hoveredBrand === 'MY WAY' ? p.subcategory === 'Batteries Externes' : true)
                   )
                 : menuType === 'led'
                 ? (hoveredBrand === 'MONSTER' && hoveredSubcategory === 'Bandeaux LED'
