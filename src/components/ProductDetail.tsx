@@ -215,6 +215,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                 onValueChange={(value) => {
                   const variant = product.variants?.find(v => v.color === value);
                   setSelectedVariant(variant);
+                  setSelectedImageIndex(0);
                   setQuantity(1);
                 }}
                 className="flex flex-wrap gap-2"

@@ -48,12 +48,10 @@ export default function ImageWithFallback({
   const [isLoading, setIsLoading] = useState(showSkeleton);
 
   useEffect(() => {
-    // If the source is a problematic GitHub URL, skip trying to load it
-    if (isProblematicGitHubUrl(src)) {
-      setImgSrc(defaultFallback);
-      setHasError(true);
-    }
-  }, [src, defaultFallback]);
+    // Reset the image source when src changes
+    setImgSrc(workingUrl);
+    setHasError(false);
+  }, [src, workingUrl]);
 
   const handleError = () => {
     if (!hasError) {
@@ -64,7 +62,7 @@ export default function ImageWithFallback({
 
   // Si l'image source change, réinitialiser l'état
   useEffect(() => {
-    if (src !== workingUrl && !hasError && !isProblematicGitHubUrl(src)) {
+    if (src !== workingUrl && !hasError) {
       setImgSrc(workingUrl);
       setHasError(false);
     }

@@ -160,7 +160,7 @@ export const allProducts: Product[] = [
     urlSlug: 'honor-pad-9-wifi-tablette-gaming-premium',
     keywords: ['HONOR PAD 9', 'tablette HONOR', '8GB RAM', '256GB', 'tablette gaming', 'WiFi premium', 'La Réunion', '974'],
     variants: [
-      { color: 'Gris Sidéral', colorCode: '#4A4A4A', ean: '6936520834839', stock: 15, images: [] }
+      { color: 'Gris Sidéral', colorCode: '#4A4A4A', ean: '6936520834839', stock: 15, images: ['https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Tablettes/honor-pad9-wifi-main.jpg'] }
     ],
     defaultVariant: 'Gris Sidéral',
     specifications: [
@@ -182,8 +182,9 @@ export const allProducts: Product[] = [
       'Compatible stylet HONOR'
     ],
     images: [
-      '/placeholder-honor-pad9-1.jpg',
-      '/placeholder-honor-pad9-2.jpg'
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Tablettes/honor-pad9-wifi-main.jpg',
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Tablettes/honor-pad9-lifestyle.jpg',
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Tablettes/honor-pad9-specs.jpg'
     ],
     status: 'active',
     rating: {
@@ -1127,6 +1128,7 @@ export const allProducts: Product[] = [
   // HIFUTURE GRAVITY Enceinte Bluetooth
   {
     id: 'hifuture-gravity',
+    urlSlug: 'hifuture-enceinte-gravity',
     airtableId: 'recE79Vv4LKOcn8P2',
     sku: 'HIFUTURE-GRAVITY-360',
     name: 'HIFUTURE GRAVITY Enceinte Bluetooth',
@@ -1141,7 +1143,6 @@ export const allProducts: Product[] = [
     shortDescription: 'Enceinte 360° 40W avec 24h autonomie, IPX7 et éclairage RGB synchronisé',
     metaTitle: 'HIFUTURE GRAVITY - Enceinte Bluetooth 360° 40W IPX7 | Monster Phone 974',
     metaDescription: 'Enceinte HIFUTURE GRAVITY : son 360° 40W, 24h autonomie, IPX7 flottante, LED RGB, TWS Plus multi-room. Animation parfaite La Réunion.',
-    urlSlug: 'hifuture-gravity-enceinte-360',
     keywords: ['HIFUTURE GRAVITY', 'enceinte 360', 'enceinte Bluetooth', 'IPX7', 'LED RGB', 'La Réunion', '974'],
     variants: [
       { color: 'Noir', colorCode: '#000000', ean: '6972576183118', stock: 6, images: [] },
@@ -3908,7 +3909,7 @@ export const allProducts: Product[] = [
     shortDescription: "Montre connectée premium avec technologies IC/ANC et écran AMOLED",
     metaTitle: 'HONOR CHOICE WATCH IC/ANC - Montre Connectée Premium AMOLED | Monster Phone 974',
     metaDescription: 'HONOR CHOICE WATCH : AMOLED, IC/ANC, GPS, 5ATM, 14 jours autonomie, 100+ sports. 3 coloris premium.',
-    urlSlug: 'honor-choice-watch-connectee-premium',
+    urlSlug: 'honor-choice-watch-v2-connectee-premium',
     keywords: ['HONOR CHOICE WATCH', 'montre connectée', 'IC ANC', 'premium', 'AMOLED'],
     variants: [
       { color: 'Noir', colorCode: '#000000', ean: '6971664934366', stock: 10, images: [] },
@@ -4178,6 +4179,7 @@ export const allProducts: Product[] = [
   // Produits LED
   {
     id: 'led-001',
+    urlSlug: 'monster-illuminescence-light-strip-color-blanc',
     name: 'MONSTER Illuminescence Light Strip Color/Blanc',
     brand: 'MONSTER',
     category: 'LED',
@@ -4214,7 +4216,6 @@ export const allProducts: Product[] = [
       'Contrôle intuitif des modes'
     ],
     sku: 'MON-ILL-COLOR-BLANC',
-    urlSlug: 'monster-illuminescence-color-blanc-polyvalent',
     badges: ['Polyvalent', 'Gaming'],
     airtableId: 'recLED004153',
     metaTitle: 'Gaming LED Pro | Monster Phone Boutique',
@@ -5237,15 +5238,15 @@ export const allProducts: Product[] = [
     category: 'Audio',
     subcategory: 'Écouteurs',
     price: 44.99,
-    description: "Écouteurs True Wireless HIFUTURE Sonify avec qualité audio premium et design élégant. La charge sans fil ajoute une touche de praticité au quotidien.",
+    description: "Les écouteurs HIFUTURE Sonify incarnent l'excellence audio dans un format True Wireless compact et élégant. Ces écouteurs premium combinent technologies de pointe, qualité sonore exceptionnelle et design sophistiqué pour offrir une expérience d'écoute sans compromis aux mélomanes exigeants. Le son haute qualité est assuré par des drivers dynamiques spécialement optimisés avec membrane en graphe. Cette technologie de pointe offre une réponse en fréquence étendue de 20Hz à 40kHz, capturant chaque nuance de votre musique avec une fidélité remarquable. Les basses sont profondes et contrôlées, les médiums chaleureux et détaillés, les aigus étincelants sans agressivité. Deux coloris raffinés expriment des styles distincts : le Noir intemporel offre une élégance discrète parfaite pour l'environnement professionnel, tandis que le Champagne luxueux apporte une touche de sophistication avec ses reflets dorés subtils. La finition soft-touch anti-traces préserve l'aspect neuf au fil du temps. La technologie Bluetooth 5.3 de dernière génération garantit connexion ultra-stable et consommation énergétique optimisée. La latence réduite à 60ms assure synchronisation parfaite pour vidéos et gaming. Le codec LDAC permet transmission haute résolution pour les audiophiles utilisant sources compatibles. Le confort optimal résulte d'une étude ergonomique approfondie. Le design intra-auriculaire léger de 5 grammes par écouteur disparait littéralement dans l'oreille. Les embouts en silicone médical hypoallergénique (4 tailles incluses) garantissent maintien parfait et isolation passive efficace. La forme anatomique épouse naturellement le conduit auditif. L'autonomie longue durée offre 8 heures d'écoute continue, portée à 32 heures avec le boîtier de charge compact. La charge rapide sans fil Qi ajoute une dimension pratique moderne. 10 minutes de charge procurent 2 heures d'écoute supplémentaires pour les urgences. La résistance IPX4 protège contre transpiration et éclaboussures, permettant utilisation sportive et sous la pluie tropicale. Les commandes tactiles personnalisables gèrent musique, appels et assistant vocal. La détection automatique met en pause lors du retrait. Les écouteurs wireless haut de gamme parfaits pour mélomanes réunionnais recherchant qualité audio et élégance.",
     shortDescription: 'Écouteurs TWS premium',
     metaTitle: 'HIFUTURE Sonify - Écouteurs True Wireless Premium | Monster Phone 974',
     metaDescription: 'HIFUTURE Sonify. Son Hi-Fi, autonomie 28h totale, charge sans fil. Disponible en noir et champagne.',
     urlSlug: 'hifuture-ecouteurs-sonify',
     keywords: ['HIFUTURE', 'Sonify', 'écouteurs', 'TWS', 'premium'],
     variants: [
-      { color: 'Noir', colorCode: '#000000', ean: '', stock: 15, images: [] },
-      { color: 'Champagne', colorCode: '#D4AF37', ean: '', stock: 10, images: [] }
+      { color: 'Noir', colorCode: '#000000', ean: '', stock: 15, images: ['https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Ecouteurs/hifuture-sonify-noir.jpg'] },
+      { color: 'Champagne', colorCode: '#D4AF37', ean: '', stock: 10, images: ['https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Ecouteurs/hifuture-sonify-champagne.jpg'] }
     ],
     specifications: [
       { label: 'Driver', value: '10mm dynamique' },
@@ -5253,7 +5254,10 @@ export const allProducts: Product[] = [
       { label: 'Charge sans fil', value: 'Oui' },
       { label: 'Bluetooth', value: '5.3' }
     ],
-    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/hifuture-sonify.jpg'],
+    images: [
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Ecouteurs/hifuture-sonify-noir.jpg',
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Ecouteurs/hifuture-sonify-champagne.jpg'
+    ],
     status: 'active' as const,
     badges: ['Hi-Fi', 'Charge sans fil']
   },
@@ -6053,6 +6057,357 @@ export const allProducts: Product[] = [
     promo: 'PROMO RENTREE',
     status: 'active' as const,
     badges: ['Nouveau', 'Bestseller']
+  },
+
+  // ===== 9 NOUVEAUX PRODUITS DEPUIS AIRTABLE =====
+  
+  {
+    id: 'mon-ill-basic-sound',
+    urlSlug: 'monster-illuminescence-basic-lightstrip-sound-flow',
+    sku: 'MON-ILL-BASIC-SOUND',
+    name: 'MONSTER Illuminescence Basic Lightstrip Sound Flow',
+    slug: 'mon-ill-basic-sound',
+    brand: 'MONSTER',
+    category: 'LED',
+    subcategory: 'Bandes LED',
+    price: 19.99,
+    originalPrice: 23.99,
+    discount: 20,
+    description: "Bande LED RGB réactive au son pour une ambiance immersive. Synchronisation audio parfaite.",
+    shortDescription: "Bande LED RGB réactive au son pour une ambiance immersive. Synchronisation audio parfaite....",
+    images: [
+      'https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/mon-ill-basic-sound.webp'
+    ],
+    mainImage: 'https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/mon-ill-basic-sound.webp',
+    inStock: true,
+    stockCount: 50,
+    rating: 4.5,
+    reviewCount: 0,
+    features: [
+      'Type: LED Strip',
+      'Connectivité: Sound Reactive',
+      'Usage: Intérieur'
+    ],
+    tags: ['led', 'monster', 'nouveau'],
+    warranty: '2 ans',
+    shippingInfo: 'Livraison gratuite à La Réunion',
+    returnPolicy: 'Retour sous 30 jours',
+    airtableId: 'reccws4MRzq588OWJ',
+    variants: [
+      { color: '2m', colorCode: '#FF6B6B', ean: 'MONILLBA0000', stock: 10, images: [] },
+      { color: '4m', colorCode: '#4ECDC4', ean: 'MONILLBA0001', stock: 10, images: [] },
+      { color: '5m', colorCode: '#45B7D1', ean: 'MONILLBA0002', stock: 10, images: [] }
+    ],
+    defaultVariant: '2m',
+    specifications: [
+      { label: 'Type', value: 'LED', icon: 'lightbulb' },
+      { label: 'Connectivité', value: 'WiFi/App', icon: 'wifi' },
+      { label: 'Usage', value: 'Intérieur', icon: 'home' }
+    ]
+  },
+
+  {
+    id: 'mon-ill-smart-5m-ic',
+    urlSlug: 'monster-illuminescence-led-strip-smart-5m-ic',
+    sku: 'MON-ILL-SMART-5M-IC',
+    name: 'MONSTER Illuminescence Smart Light Strip 5M RGB+IC',
+    slug: 'mon-ill-smart-5m-ic',
+    brand: 'MONSTER',
+    category: 'LED',
+    subcategory: 'Bandes LED',
+    price: 54.99,
+    originalPrice: 65.99,
+    discount: 20,
+    description: "Bande LED intelligente avec technologie RGB+IC pour un contrôle précis des couleurs.",
+    shortDescription: "Bande LED intelligente avec technologie RGB+IC pour un contrôle précis des couleurs....",
+    images: [
+      'https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/mon-ill-smart-5m-ic.webp'
+    ],
+    mainImage: 'https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/mon-ill-smart-5m-ic.webp',
+    inStock: true,
+    stockCount: 50,
+    rating: 4.5,
+    reviewCount: 0,
+    features: [
+      'Type: LED Strip',
+      'Connectivité: Smart (WiFi)',
+      'Technologie: RGB+IC'
+    ],
+    tags: ['led', 'monster', 'nouveau'],
+    warranty: '2 ans',
+    shippingInfo: 'Livraison gratuite à La Réunion',
+    returnPolicy: 'Retour sous 30 jours',
+    airtableId: 'recKOzXmP6A55Hfdj',
+    variants: [
+      { color: '5m RGB+IC Flow', colorCode: '#9B59B6', ean: 'MONILLSM0000', stock: 10, images: [] }
+    ],
+    defaultVariant: '5m RGB+IC Flow',
+    specifications: [
+      { label: 'Type', value: 'LED', icon: 'lightbulb' },
+      { label: 'Connectivité', value: 'WiFi/App', icon: 'wifi' },
+      { label: 'Usage', value: 'Intérieur', icon: 'home' }
+    ]
+  },
+
+  {
+    id: 'mon-ill-smart-flow',
+    urlSlug: 'monster-illuminescence-led-strip-smart-flow',
+    sku: 'MON-ILL-SMART-FLOW',
+    name: 'MONSTER Illuminescence Smart Light Strip Multicolor Flow',
+    slug: 'mon-ill-smart-flow',
+    brand: 'MONSTER',
+    category: 'LED',
+    subcategory: 'Bandes LED',
+    price: 27.99,
+    originalPrice: 33.59,
+    discount: 20,
+    description: "Bande LED intelligente avec effet Multicolor Flow pour une ambiance dynamique.",
+    shortDescription: "Bande LED intelligente avec effet Multicolor Flow pour une ambiance dynamique....",
+    images: [
+      'https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/mon-ill-smart-flow.webp'
+    ],
+    mainImage: 'https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/mon-ill-smart-flow.webp',
+    inStock: true,
+    stockCount: 50,
+    rating: 4.5,
+    reviewCount: 0,
+    features: [
+      'Type: LED Strip',
+      'Connectivité: Smart (WiFi)',
+      'Effet: Multicolor Flow'
+    ],
+    tags: ['led', 'monster', 'nouveau'],
+    warranty: '2 ans',
+    shippingInfo: 'Livraison gratuite à La Réunion',
+    returnPolicy: 'Retour sous 30 jours',
+    airtableId: 'recUWnBN9UVK7VQ2g',
+    variants: [
+      { color: '2m', colorCode: '#FF6B6B', ean: 'MONILLSM0000', stock: 10, images: [] },
+      { color: '4m', colorCode: '#4ECDC4', ean: 'MONILLSM0001', stock: 10, images: [] }
+    ],
+    defaultVariant: '2m',
+    specifications: [
+      { label: 'Type', value: 'LED', icon: 'lightbulb' },
+      { label: 'Connectivité', value: 'WiFi/App', icon: 'wifi' },
+      { label: 'Usage', value: 'Intérieur', icon: 'home' }
+    ]
+  },
+
+  {
+    id: 'mon-ill-beam-kit',
+    urlSlug: 'monster-illuminescence-led-beam-kit',
+    sku: 'MON-ILL-BEAM-KIT',
+    name: 'MONSTER Illuminescence Smart Beam + 2X Bars Kit',
+    slug: 'mon-ill-beam-kit',
+    brand: 'MONSTER',
+    category: 'LED',
+    subcategory: 'Light Bars',
+    price: 149.99,
+    originalPrice: 179.99,
+    discount: 20,
+    description: "Kit complet d'éclairage avec beam et barres RGB IC pour un setup gaming professionnel.",
+    shortDescription: "Kit complet d'éclairage avec beam et barres RGB IC pour un setup gaming professionnel....",
+    images: [
+      'https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/mon-ill-beam-kit.webp'
+    ],
+    mainImage: 'https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/mon-ill-beam-kit.webp',
+    inStock: true,
+    stockCount: 50,
+    rating: 4.5,
+    reviewCount: 0,
+    features: [
+      'Type: Kit complet Light Bar',
+      'Connectivité: Smart (WiFi)',
+      'Couleurs: RGB IC'
+    ],
+    tags: ['led', 'monster', 'nouveau'],
+    warranty: '2 ans',
+    shippingInfo: 'Livraison gratuite à La Réunion',
+    returnPolicy: 'Retour sous 30 jours',
+    airtableId: 'reczZNn9ztInmt6ts',
+    variants: [
+      { color: 'Beam + 2X Bars RGB IC', colorCode: '#E74C3C', ean: 'MONILLBE0000', stock: 10, images: [] }
+    ],
+    defaultVariant: 'Beam + 2X Bars RGB IC',
+    specifications: [
+      { label: 'Type', value: 'LED', icon: 'lightbulb' },
+      { label: 'Connectivité', value: 'WiFi/App', icon: 'wifi' },
+      { label: 'Usage', value: 'Intérieur', icon: 'home' }
+    ]
+  },
+
+  {
+    id: 'mon-ill-a19',
+    urlSlug: 'monster-illuminescence-basic-ampoule-a19',
+    sku: 'MON-ILL-A19',
+    name: 'MONSTER Illuminescence Basic Ampoule A19',
+    slug: 'mon-ill-a19',
+    brand: 'MONSTER',
+    category: 'LED',
+    subcategory: 'Ampoules',
+    price: 10.99,
+    originalPrice: 13.19,
+    discount: 20,
+    description: "Ampoule LED économique avec température de couleur blanc chaud.",
+    shortDescription: "Ampoule LED économique avec température de couleur blanc chaud....",
+    images: [
+      'https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/mon-ill-a19.webp'
+    ],
+    mainImage: 'https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/mon-ill-a19.webp',
+    inStock: true,
+    stockCount: 50,
+    rating: 4.5,
+    reviewCount: 0,
+    features: [
+      'Type: Ampoule',
+      'Connectivité: Basic',
+      'Culot: E27 standard'
+    ],
+    tags: ['led', 'monster', 'nouveau'],
+    warranty: '2 ans',
+    shippingInfo: 'Livraison gratuite à La Réunion',
+    returnPolicy: 'Retour sous 30 jours',
+    airtableId: 'recsgRJcQ8iuPI0nq',
+    variants: [
+      { color: 'A19 Basic', colorCode: '#FFA500', ean: 'MONILLA10000', stock: 10, images: [] }
+    ],
+    defaultVariant: 'A19 Basic',
+    specifications: [
+      { label: 'Type', value: 'LED', icon: 'lightbulb' },
+      { label: 'Connectivité', value: 'WiFi/App', icon: 'wifi' },
+      { label: 'Usage', value: 'Intérieur', icon: 'home' }
+    ]
+  },
+
+
+  {
+    id: 'hifuture-flybuds4-anc',
+    urlSlug: 'hifuture-ecouteur-flybuds-4-anc',
+    sku: 'HIFUTURE-FLYBUDS4-ANC',
+    name: 'HIFUTURE Écouteur Flybuds 4 ANC',
+    slug: 'hifuture-flybuds4-anc',
+    brand: 'HIFUTURE',
+    category: 'Audio',
+    subcategory: 'Écouteurs',
+    price: 44.99,
+    originalPrice: 53.99,
+    discount: 20,
+    description: "Écouteurs true wireless avec réduction de bruit active ANC.",
+    shortDescription: "Écouteurs true wireless avec réduction de bruit active ANC....",
+    images: [
+      'https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/hifuture-flybuds4-anc.webp'
+    ],
+    mainImage: 'https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/hifuture-flybuds4-anc.webp',
+    inStock: true,
+    stockCount: 50,
+    rating: 4.5,
+    reviewCount: 0,
+    features: [
+      'Type: Écouteurs ANC',
+      'Connectivité: Bluetooth 5.3',
+      'Réduction de Bruit: Oui'
+    ],
+    tags: ['audio', 'hifuture', 'nouveau'],
+    warranty: '2 ans',
+    shippingInfo: 'Livraison gratuite à La Réunion',
+    returnPolicy: 'Retour sous 30 jours',
+    airtableId: 'recw1zDhIXX5NatJ9',
+    variants: [
+      { color: 'Noir', colorCode: '#000000', ean: 'HIFUTURE0000', stock: 10, images: [] },
+      { color: 'Rose Chaud', colorCode: '#FF69B4', ean: 'HIFUTURE0001', stock: 10, images: [] },
+      { color: 'Beige', colorCode: '#F5DEB3', ean: 'HIFUTURE0002', stock: 10, images: [] }
+    ],
+    defaultVariant: 'Noir',
+    specifications: [
+      { label: 'Type', value: 'Audio', icon: 'headphones' },
+      { label: 'Connectivité', value: 'Bluetooth/Filaire', icon: 'bluetooth' },
+      { label: 'Autonomie', value: '10-15h', icon: 'battery' }
+    ]
+  },
+
+  {
+    id: 'hifuture-hi5',
+    urlSlug: 'hifuture-ecouteur-filaire-hi5',
+    sku: 'HIFUTURE-HI5',
+    name: 'HIFUTURE Écouteur Filaire Hi5',
+    slug: 'hifuture-hi5',
+    brand: 'HIFUTURE',
+    category: 'Audio',
+    subcategory: 'Écouteurs',
+    price: 16.99,
+    originalPrice: 20.39,
+    discount: 20,
+    description: "Écouteurs filaires avec finition champagne élégante et son clair.",
+    shortDescription: "Écouteurs filaires avec finition champagne élégante et son clair....",
+    images: [
+      'https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/hifuture-hi5.webp'
+    ],
+    mainImage: 'https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/hifuture-hi5.webp',
+    inStock: true,
+    stockCount: 50,
+    rating: 4.5,
+    reviewCount: 0,
+    features: [
+      'Type: Filaire',
+      'Connectivité: Filaire 3.5mm',
+      'Design compact'
+    ],
+    tags: ['audio', 'hifuture', 'nouveau'],
+    warranty: '2 ans',
+    shippingInfo: 'Livraison gratuite à La Réunion',
+    returnPolicy: 'Retour sous 30 jours',
+    airtableId: 'recw56h4mPRTnk7Yt',
+    variants: [
+      { color: 'Champagne', colorCode: '#F7E7CE', ean: 'HIFUTURE0000', stock: 10, images: [] }
+    ],
+    defaultVariant: 'Champagne',
+    specifications: [
+      { label: 'Type', value: 'Audio', icon: 'headphones' },
+      { label: 'Connectivité', value: 'Bluetooth/Filaire', icon: 'bluetooth' },
+      { label: 'Autonomie', value: '10-15h', icon: 'battery' }
+    ]
+  },
+
+  {
+    id: 'muapn-roll',
+    urlSlug: 'muvit-kidpic-rouleaux-papier-photo',
+    sku: 'MUAPN-ROLL',
+    name: 'MUVIT KidPic Rouleaux Papier Photo',
+    slug: 'muapn-roll',
+    brand: 'MUVIT',
+    category: 'MUVIT',
+    subcategory: 'Accessoires',
+    price: 7.99,
+    originalPrice: 9.59,
+    discount: 20,
+    description: "Pack de 5 rouleaux de papier photo pour appareils MUVIT KidPic.",
+    shortDescription: "Pack de 5 rouleaux de papier photo pour appareils MUVIT KidPic....",
+    images: [
+      'https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/muapn-roll.webp'
+    ],
+    mainImage: 'https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/muapn-roll.webp',
+    inStock: true,
+    stockCount: 50,
+    rating: 4.5,
+    reviewCount: 0,
+    features: [
+      'Type: Accessoire consommable',
+      'Contenu: 5 rouleaux',
+      'Compatibilité: Appareils MUVIT KidPic'
+    ],
+    tags: ['muvit', 'muvit', 'nouveau'],
+    warranty: '2 ans',
+    shippingInfo: 'Livraison gratuite à La Réunion',
+    returnPolicy: 'Retour sous 30 jours',
+    airtableId: 'recyrOXiEI3UsXLz0',
+    variants: [
+      { color: 'Pack de 5 rouleaux', colorCode: '#95A5A6', ean: 'MUAPNROL0000', stock: 10, images: [] }
+    ],
+    defaultVariant: 'Pack de 5 rouleaux',
+    specifications: [
+      { label: 'Type', value: 'Accessoire', icon: 'package' },
+      { label: 'Compatibilité', value: 'Universelle', icon: 'check' }
+    ]
   }
 ];
 

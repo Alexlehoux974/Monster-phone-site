@@ -8,7 +8,7 @@ Monster Phone Boutique - E-commerce Next.js 15 application for gaming phone acce
 
 **Tech Stack**:
 - Next.js 15.4.2 + React 19 + TypeScript (strict mode)
-- Tailwind CSS v4 + Radix UI components + Framer Motion animations
+- Tailwind CSS v4 + Radix UI components + Framer Motion animations  
 - No backend API - fully static data architecture
 - French language interface
 
@@ -23,11 +23,11 @@ Monster Phone Boutique - E-commerce Next.js 15 application for gaming phone acce
 ```bash
 # Development
 npm run dev                    # Dev server with Turbopack (binds to 0.0.0.0)
-npm run build                  # Production build
+npm run build                  # Production build  
 npm start                      # Production server (port 3000)
 npm run lint                   # ESLint validation
 
-# Testing
+# Testing  
 npm test                       # Run Jest unit tests
 npm run test:watch            # Jest watch mode
 npm run test:coverage         # Generate coverage report
@@ -55,7 +55,7 @@ rm -rf .next                  # Clear build cache
 - **SEO Optimized**: Structured data, metadata per page, sitemap generation
 - **Responsive Design**: Mobile-first with Tailwind CSS v4
 
-### Data Flow Architecture
+### Data Flow Architecture  
 - **Product Interface**: TypeScript interface with 30+ fields including variants, specifications, ratings
 - **Menu Structure**: Complex hierarchical navigation (categories → subcategories → brands → products)
 - **Static Pattern**: No API calls, manual Airtable exports, 65+ products total
@@ -160,3 +160,47 @@ src/
 - **Cart State**: Persists in localStorage, supports test mode via `initialItems` prop
 - **Mobile First**: Test responsive design, especially complex navigation
 - **Next.js Config**: ESLint errors ignored during builds - run lint manually
+- Parcours d'intégration d'un nouveau produit
+
+  1. Récupération des données Airtable
+
+  - Vérifier le produit dans la base Airtable "E-Commerce" (appBe6BwVNs2wvp60)
+  - Table "Catalogue Produits Unifié" (tblA440HJGiI17SQJ)
+  - Noter tous les champs : SKU, nom, prix, description, catégorie, marque, variantes, etc.
+
+  2. Ajout dans products.ts
+
+  - Ouvrir /src/data/products.ts
+  - Ajouter le produit en respectant l'interface Product existante
+  - Générer un slug unique pour l'URL
+  - Mapper correctement category/subcategory selon la structure du menu
+
+  3. Gestion des images
+
+  - Comme les images GitHub retournent du text/plain, je dois :
+    - Soit utiliser les placeholders par catégorie (automatique via ImageWithFallback)
+    - Soit proposer une URL alternative si disponible
+    - Le système utilisera automatiquement le bon placeholder selon la catégorie
+
+  4. Vérification de l'intégration
+
+  - Le produit apparaîtra automatiquement sur /nos-produits (filtrage par catégorie)
+  - La page produit /produit/[slug] sera créée dynamiquement
+  - Vérifier dans le menu Header si la catégorie/marque est bien listée
+
+  5. Points de validation
+
+  - ✅ Le produit s'affiche dans la bonne catégorie
+  - ✅ Les variantes sont correctement listées
+  - ✅ Le prix et les promotions s'affichent
+  - ✅ La navigation menu → catégorie → produit fonctionne
+  - ✅ Le produit peut être ajouté au panier
+
+  6. Aucune action supplémentaire requise
+
+  - Pas de build nécessaire (Next.js gère dynamiquement)
+  - Pas de création de page (routing dynamique)
+  - Pas de mise à jour du menu (généré depuis products.ts)
+
+  Point critique : Tout passe par /src/data/products.ts - c'est le seul fichier à modifier pour ajouter un
+  produit.

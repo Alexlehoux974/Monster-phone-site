@@ -37,12 +37,8 @@ export function getWorkingImageUrl(originalUrl: string, productCategory?: string
     return getCategoryPlaceholder(productCategory || 'default');
   }
   
-  // If it's a GitHub URL that's known to have issues, use placeholder
-  if (isProblematicGitHubUrl(originalUrl)) {
-    return getCategoryPlaceholder(productCategory || 'default');
-  }
-  
-  // For local images or other sources, return as-is
+  // Return the URL as-is, including GitHub raw URLs
+  // GitHub raw URLs are now working properly
   return originalUrl;
 }
 
