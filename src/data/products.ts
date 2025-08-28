@@ -229,7 +229,11 @@ export const allProducts: Product[] = [
         colorCode: '#0A0A0A', 
         ean: '34010001200027', 
         stock: 5, 
-        images: [] 
+        images: [
+          'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-cyan-3.png',
+          'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-cyan-4.png',
+          'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-cyan-6.png'
+        ] 
       },
       { 
         color: 'Vert Emerald', 
