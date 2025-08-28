@@ -28,10 +28,14 @@ export default function FeaturedProducts({ products, title }: FeaturedProductsPr
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+        <div className="relative">
+          <div className="flex overflow-x-auto scrollbar-hide gap-6 pb-4">
+            {featuredProducts.map((product) => (
+              <div key={product.id} className="flex-shrink-0 w-80">
+                <ProductCard product={product} />
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* CTA vers catalogue complet */}

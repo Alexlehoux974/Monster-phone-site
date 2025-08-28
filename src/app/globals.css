@@ -36,6 +36,15 @@
   background: #6b7280;
 }
 
+/* Masquer scrollbar tout en gardant le scroll */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
+}
+
 /* Mode clair forcé pour l'e-commerce */
 :root {
   --background: #ffffff;
