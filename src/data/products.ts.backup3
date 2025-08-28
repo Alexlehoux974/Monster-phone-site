@@ -265,6 +265,142 @@ export const allProducts: Product[] = [
     dasBody: '1.24 W/kg'
   },
 
+  // HONOR 200 Pro 12+12/512
+  {
+    id: 'honor-200-pro-512gb',
+    airtableId: 'reccduiP3urtRzgUS',
+    sku: 'HONOR-200-PRO-12GB-512GB',
+    name: 'HONOR 200 Pro 12+12/512',
+    brand: 'HONOR',
+    category: 'Smartphones',
+    subcategory: 'Ultra Premium',
+    price: 799.99,
+    originalPrice: 899.99,
+    discount: 11,
+    promo: 'NOUVEAU',
+    description: "Le HONOR 200 Pro révolutionne la photographie mobile avec son système de caméra triple révolutionnaire co-développé avec Studio Harcourt Paris. Capteur principal 50MP avec stabilisation optique OIS et intelligence artificielle avancée pour portraits professionnels jour/nuit. Configuration mémoire exceptionnelle 12GB RAM physique extensible à 24GB via RAM Turbo pour multitâche ultime et gaming intensif. Stockage massif 512GB pour bibliothèque photo/vidéo illimitée, applications et contenus 4K. Écran AMOLED 6.78 pouces courbe 120Hz avec luminosité 5000 nits pour visibilité parfaite même sous soleil tropical. Résolution 2700x1224 pixels, certifié TÜV Rheinland pour protection oculaire. Processeur Snapdragon 8s Gen 3 gravé en 4nm pour performances flagship et efficacité énergétique optimale. Batterie 5200mAh avec charge ultra-rapide 100W (50% en 15 minutes) et charge sans fil 66W. Mode Portrait Studio Harcourt exclusif avec éclairage professionnel virtuel. Caméra selfie 50MP avec autofocus et mode portrait IA. Design premium en verre avec finition nacrée, épaisseur 8.2mm, poids 199g. 5G ultra-rapide, WiFi 6, NFC pour paiements, capteur empreinte sous écran. MagicOS 8.0 basé sur Android 14 avec 3 ans de mises à jour garanties. DAS tête 0.87 W/kg et corps 1.11 W/kg. Indice réparabilité 8.1/10 pour durabilité maximale. Le smartphone photo référence pour créateurs exigeants à La Réunion.",
+    shortDescription: 'Flagship photo avec système Studio Harcourt et charge 100W',
+    metaTitle: 'HONOR 200 Pro 12+12/512GB - Smartphone Photo Studio Harcourt | Monster Phone 974',
+    metaDescription: 'HONOR 200 Pro : Triple caméra 50MP Studio Harcourt, 12+12GB RAM, 512GB, écran AMOLED 120Hz, charge 100W. Flagship photo ultime. Monster Phone 974.',
+    urlSlug: 'honor-200-pro-smartphone-photo-studio-harcourt',
+    keywords: ['HONOR 200 Pro', 'Studio Harcourt', 'smartphone photo', '12GB RAM', '512GB', 'charge 100W', 'La Réunion', '974'],
+    variants: [
+      { 
+        color: 'Blanc Nacré', 
+        colorCode: '#F8F8F8', 
+        ean: '6936520851234', 
+        stock: 8,
+        images: [
+          'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-blanc-front.jpg',
+          'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-blanc-back.jpg',
+          'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-blanc-lifestyle.jpg'
+        ]
+      },
+      { 
+        color: 'Cyan Océan', 
+        colorCode: '#00CED1', 
+        ean: '6936520851235', 
+        stock: 6,
+        images: [
+          'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-cyan-main.jpg'
+        ]
+      }
+    ],
+    defaultVariant: 'Blanc Nacré',
+    specifications: [
+      { label: 'RAM', value: '12GB + 12GB extensible', icon: 'memory' },
+      { label: 'Stockage', value: '512GB', icon: 'storage' },
+      { label: 'Écran', value: '6.78" AMOLED 120Hz', icon: 'display' },
+      { label: 'Processeur', value: 'Snapdragon 8s Gen 3', icon: 'processor' },
+      { label: 'Caméra', value: '50MP + 50MP + 12MP', icon: 'camera' },
+      { label: 'Batterie', value: '5200mAh', icon: 'battery' },
+      { label: 'Charge', value: '100W filaire / 66W sans fil', icon: 'charging' },
+      { label: '5G', value: 'Compatible tous opérateurs', icon: 'network' },
+      { label: 'OS', value: 'MagicOS 8.0 (Android 14)', icon: 'android' }
+    ],
+    highlights: [
+      'Mode Portrait Studio Harcourt exclusif',
+      'Charge ultra-rapide 100W (50% en 15 min)',
+      'Triple caméra IA professionnelle',
+      'Écran AMOLED 5000 nits',
+      '3 ans de mises à jour garanties'
+    ],
+    images: [
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-blanc-front.jpg',
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-blanc-back.jpg'
+    ],
+    status: 'active',
+    rating: {
+      average: 4.8,
+      count: 156,
+      distribution: { 5: 120, 4: 28, 3: 6, 2: 2, 1: 0 }
+    },
+    warranty: '2 ans constructeur',
+    deliveryTime: '24-48h à La Réunion',
+    badges: ['Nouveau', 'Photo Pro', 'Charge 100W'],
+    repairabilityIndex: 8.1,
+    dasHead: '0.87 W/kg',
+    dasBody: '1.11 W/kg'
+  },
+
+  // HONOR CHOICE WATCH
+  {
+    id: 'honor-choice-watch',
+    airtableId: 'recYEgkxqGIvVGFFX',
+    sku: 'HONOR-CHOICE-WATCH',
+    name: 'HONOR CHOICE WATCH',
+    brand: 'HONOR',
+    category: 'Montres connectées',
+    subcategory: 'Premium',
+    price: 149.99,
+    originalPrice: 199.99,
+    discount: 25,
+    promo: 'SOLDES',
+    description: "La HONOR CHOICE WATCH redéfinit l'excellence des montres connectées premium avec des technologies de pointe et un design sophistiqué. Son écran AMOLED haute résolution de 1.43 pouces offre une luminosité exceptionnelle de 466x466 pixels avec technologie Always-On Display personnalisable. Les technologies exclusives IC (Intelligent Control) et ANC (Active Noise Cancellation) révolutionnent votre expérience : contrôle gestuel intelligent pour navigation sans contact et réduction de bruit active pour appels cristallins même en environnement bruyant. Suivi santé médical complet avec capteur PPG de dernière génération : monitoring cardiaque 24/7 avec alertes anormales, mesure SpO2 continue pour oxygénation sanguine, analyse avancée du sommeil avec phases REM/profond/léger, gestion du stress avec exercices de respiration guidés. Plus de 100 modes sportifs professionnels avec métriques détaillées, GPS intégré haute précision pour tracking outdoor. Résistance 5ATM permettant natation et sports aquatiques jusqu'à 50m profondeur. Autonomie record de 14 jours en usage normal, 30 jours en mode économie. Charge magnétique rapide, 5 minutes pour une journée complète. Design premium avec boîtier acier inoxydable et verre sapin 2.5D anti-rayures. Disponible en 3 finitions élégantes : Noir Titanium pour sobriété executive, Blanc Pearl pour élégance moderne, Or Rose pour raffinement féminin. Bracelets interchangeables silicone/cuir/métal. Compatible iOS/Android avec app HONOR Health complète. La montre connectée premium ultime pour professionnels actifs à La Réunion.",
+    shortDescription: 'Montre connectée premium avec écran AMOLED, technologies IC/ANC et GPS intégré',
+    metaTitle: 'HONOR CHOICE WATCH IC/ANC - Montre Connectée Premium AMOLED | Monster Phone 974',
+    metaDescription: 'HONOR CHOICE WATCH : AMOLED, IC/ANC, GPS, 5ATM, 14 jours autonomie, 100+ sports. 3 coloris premium. Monster Phone La Réunion 974.',
+    urlSlug: 'honor-choice-watch-connectee-premium',
+    keywords: ['HONOR CHOICE WATCH', 'montre connectée', 'technologie IC ANC', 'santé', 'La Réunion', '974'],
+    variants: [
+      { color: 'Noir Titanium', colorCode: '#2C2C2C', ean: '6971664934366', stock: 20, images: [] },
+      { color: 'Blanc Pearl', colorCode: '#F8F8FF', ean: '6971664934367', stock: 15, images: [] },
+      { color: 'Or Rose', colorCode: '#B76E79', ean: '6971664934368', stock: 10, images: [] }
+    ],
+    defaultVariant: 'Noir Titanium',
+    specifications: [
+      { label: 'Écran', value: '1.43" AMOLED 466x466px', icon: 'display' },
+      { label: 'Technologies', value: 'IC + ANC', icon: 'tech' },
+      { label: 'GPS', value: 'Intégré haute précision', icon: 'location' },
+      { label: 'Résistance', value: '5ATM (50m)', icon: 'water' },
+      { label: 'Autonomie', value: '14 jours', icon: 'battery' },
+      { label: 'Santé', value: 'Cardio, SpO2, Sommeil, Stress', icon: 'health' },
+      { label: 'Sports', value: '100+ modes', icon: 'sport' },
+      { label: 'Compatibilité', value: 'iOS/Android', icon: 'phone' }
+    ],
+    highlights: [
+      'Technologies IC et ANC exclusives',
+      'Écran AMOLED Always-On',
+      '14 jours d\'autonomie',
+      'GPS intégré haute précision',
+      '100+ modes sportifs'
+    ],
+    images: [
+      '/placeholder-honor-watch-1.jpg',
+      '/placeholder-honor-watch-2.jpg'
+    ],
+    status: 'active',
+    rating: {
+      average: 4.6,
+      count: 312,
+      distribution: { 5: 200, 4: 80, 3: 25, 2: 5, 1: 2 }
+    },
+    warranty: '2 ans constructeur',
+    deliveryTime: '24-48h à La Réunion',
+    badges: ['Technologies exclusives', 'Bestseller'],
+    repairabilityIndex: 7.5
+  },
+
   // HONOR 200 PRO 12+12/512
   {
     id: 'honor-200-pro-12gb-512gb',
