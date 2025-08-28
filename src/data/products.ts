@@ -421,9 +421,56 @@ export const allProducts: Product[] = [
     urlSlug: 'honor-200-pro-smartphone-flagship-pro',
     keywords: ['HONOR 200 PRO', 'smartphone flagship', '12GB RAM', '512GB stockage', 'HONOR premium pro', 'La Réunion', '974'],
     variants: [
-      { color: 'Noir Velvet', colorCode: '#0A0A0A', ean: '34010001200027', stock: 5, images: [] },
-      { color: 'Vert Emerald', colorCode: '#046307', ean: '34010001200037', stock: 4, images: [] },
-      { color: 'Blanc Moonlight', colorCode: '#F5F5DC', ean: '34010001200047', stock: 3, images: [] }
+      { 
+        color: 'Noir Velvet', 
+        colorCode: '#0A0A0A', 
+        ean: '34010001200027', 
+        stock: 5, 
+        images: [
+          'https://raw.githubusercontent.com/Monsterphoneboutique974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-general.png',
+          'https://raw.githubusercontent.com/Monsterphoneboutique974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-specs.png',
+          'https://raw.githubusercontent.com/Monsterphoneboutique974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-moonlight-white.png'
+        ] 
+      },
+      { 
+        color: 'Vert Emerald', 
+        colorCode: '#046307', 
+        ean: '34010001200037', 
+        stock: 4, 
+        images: [
+          'https://raw.githubusercontent.com/Monsterphoneboutique974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-ocean-cyan.png',
+          'https://raw.githubusercontent.com/Monsterphoneboutique974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-cyan-1.png',
+          'https://raw.githubusercontent.com/Monsterphoneboutique974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-cyan-2.png',
+          'https://raw.githubusercontent.com/Monsterphoneboutique974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-cyan-3.png',
+          'https://raw.githubusercontent.com/Monsterphoneboutique974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-cyan-4.png',
+          'https://raw.githubusercontent.com/Monsterphoneboutique974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-cyan-5.png',
+          'https://raw.githubusercontent.com/Monsterphoneboutique974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-cyan-6.png',
+          'https://raw.githubusercontent.com/Monsterphoneboutique974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-cyan-7.png',
+          'https://raw.githubusercontent.com/Monsterphoneboutique974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-cyan-8.png',
+          'https://raw.githubusercontent.com/Monsterphoneboutique974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-cyan-9.png',
+          'https://raw.githubusercontent.com/Monsterphoneboutique974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-cyan-10.png',
+          'https://raw.githubusercontent.com/Monsterphoneboutique974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-cyan-11.png'
+        ] 
+      },
+      { 
+        color: 'Blanc Moonlight', 
+        colorCode: '#F5F5DC', 
+        ean: '34010001200047', 
+        stock: 3, 
+        images: [
+          'https://raw.githubusercontent.com/Monsterphoneboutique974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-moonlight-white.png',
+          'https://raw.githubusercontent.com/Monsterphoneboutique974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-blanc-1.png',
+          'https://raw.githubusercontent.com/Monsterphoneboutique974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-blanc-2.png',
+          'https://raw.githubusercontent.com/Monsterphoneboutique974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-blanc-3.png',
+          'https://raw.githubusercontent.com/Monsterphoneboutique974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-blanc-4.png',
+          'https://raw.githubusercontent.com/Monsterphoneboutique974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-blanc-5.png',
+          'https://raw.githubusercontent.com/Monsterphoneboutique974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-blanc-6.png',
+          'https://raw.githubusercontent.com/Monsterphoneboutique974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-blanc-7.png',
+          'https://raw.githubusercontent.com/Monsterphoneboutique974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-blanc-8.png',
+          'https://raw.githubusercontent.com/Monsterphoneboutique974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-blanc-9.png',
+          'https://raw.githubusercontent.com/Monsterphoneboutique974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-blanc-10.png'
+        ] 
+      }
     ],
     defaultVariant: 'Noir Velvet',
     specifications: [
@@ -444,9 +491,9 @@ export const allProducts: Product[] = [
       'Processeur Snapdragon 8s Gen 3'
     ],
     images: [
-      '/placeholder-honor-200pro-1.jpg',
-      '/placeholder-honor-200pro-2.jpg',
-      '/placeholder-honor-200pro-3.jpg'
+      'https://raw.githubusercontent.com/Monsterphoneboutique974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-general.png',
+      'https://raw.githubusercontent.com/Monsterphoneboutique974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-moonlight-white.png',
+      'https://raw.githubusercontent.com/Monsterphoneboutique974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-ocean-cyan.png'
     ],
     status: 'active',
     rating: {
