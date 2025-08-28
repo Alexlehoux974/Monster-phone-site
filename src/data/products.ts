@@ -204,67 +204,6 @@ export const allProducts: Product[] = [
     dasBody: '1.09 W/kg'
   },
 
-  // HONOR X8B 8+8/512
-  {
-    id: 'honor-x8b-8gb-512gb',
-    airtableId: 'recW9usrNtqTaMgSL',
-    sku: 'HONOR-X8B-8GB-512GB',
-    name: 'HONOR X8B 8+8/512',
-    brand: 'HONOR',
-    category: 'Smartphones',
-    subcategory: 'Ultra Premium',
-    price: 409.99,
-    originalPrice: 499.99,
-    discount: 18,
-    promo: 'OFFRE LIMITÉE',
-    description: "Le HONOR X8B redéfinit les standards du smartphone ultra premium avec une configuration technique exceptionnelle. Sa mémoire vive de 8GB physique, extensible jusqu'à 16GB grâce à la technologie RAM virtuelle intelligente, propulse les performances à un niveau supérieur pour gérer simultanément applications professionnelles, jeux 3D et streaming 4K. Le stockage massif de 512GB libère votre créativité : stockez des milliers de photos RAW, vidéos 4K et votre bibliothèque multimédia complète. L'écran AMOLED de 6.78 pouces avec fréquence 144Hz garantit une fluidité parfaite et une réactivité instantanée pour gaming compétitif et navigation ultra-rapide. Technologie d'affichage HDR10+ pour des contrastes saisissants et une palette de couleurs DCI-P3. Système photographique quadruple caméra avec capteur principal 108MP, stabilisation optique OIS et mode nuit avancé. Autonomie exceptionnelle avec batterie 5800mAh et charge ultra-rapide 80W (50% en 15 minutes). Design sophistiqué décliné en 4 finitions premium : Noir Obsidienne pour l'élégance absolue, Gris Titanium pour le style professionnel, Vert Jade pour l'originalité raffinée et Or Pearl pour le luxe assumé. Protection Gorilla Glass, certification anti-éclaboussures, double SIM 5G. Le smartphone sans compromis pour professionnels et passionnés à La Réunion.",
-    shortDescription: 'Smartphone ultra premium avec 512GB, écran AMOLED 144Hz et caméra 108MP',
-    metaTitle: 'HONOR X8B 8+8/512GB - Smartphone Ultra Premium 144Hz AMOLED | Monster Phone 974',
-    metaDescription: 'HONOR X8B ultra premium : 8+8GB RAM, 512GB stockage massif, écran AMOLED 144Hz, quadruple caméra 108MP. 4 coloris. Monster Phone La Réunion 974.',
-    urlSlug: 'honor-x8b-8gb-512gb-smartphone-ultra',
-    keywords: ['HONOR X8B', 'smartphone ultra premium', '8GB RAM', '512GB stockage', 'téléphone HONOR', 'La Réunion', '974'],
-    variants: [
-      { color: 'Noir Obsidienne', colorCode: '#1C1C1C', ean: '6936520833467', stock: 12, images: [] },
-      { color: 'Gris Titanium', colorCode: '#7C7C7C', ean: '6936520833481', stock: 10, images: [] },
-      { color: 'Vert Jade', colorCode: '#00A86B', ean: '6936520833474', stock: 8, images: [] },
-      { color: 'Or Pearl', colorCode: '#F8E7A1', ean: '6936520833498', stock: 6, images: [] }
-    ],
-    defaultVariant: 'Noir Obsidienne',
-    specifications: [
-      { label: 'RAM', value: '8GB + 8GB extensible', icon: 'memory' },
-      { label: 'Stockage', value: '512GB', icon: 'storage' },
-      { label: 'Écran', value: '6.78" AMOLED 144Hz', icon: 'display' },
-      { label: 'Caméra principale', value: '108MP avec OIS', icon: 'camera' },
-      { label: 'Batterie', value: '5800mAh', icon: 'battery' },
-      { label: 'Charge rapide', value: '80W', icon: 'charging' },
-      { label: 'Protection', value: 'Gorilla Glass', icon: 'shield' }
-    ],
-    highlights: [
-      'Stockage massif 512GB',
-      'Caméra 108MP avec OIS',
-      'Écran AMOLED 144Hz HDR10+',
-      'Charge ultra-rapide 80W',
-      'Design premium 4 coloris'
-    ],
-    images: [
-      '/placeholder-honor-x8b-1.jpg',
-      '/placeholder-honor-x8b-2.jpg',
-      '/placeholder-honor-x8b-3.jpg'
-    ],
-    status: 'active',
-    rating: {
-      average: 4.7,
-      count: 234,
-      distribution: { 5: 180, 4: 40, 3: 10, 2: 3, 1: 1 }
-    },
-    warranty: '2 ans constructeur',
-    deliveryTime: '24-48h à La Réunion',
-    badges: ['Ultra Premium', 'Stockage XXL'],
-    repairabilityIndex: 7.8,
-    dasHead: '0.84 W/kg',
-    dasBody: '1.24 W/kg'
-  },
-
   // HONOR 200 PRO 12+12/512
   {
     id: 'honor-200-pro-12gb-512gb',
