@@ -183,7 +183,6 @@ export const allProducts: Product[] = [
     ],
     images: [
       'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Tablettes/honor-pad9-wifi-main.jpg',
-      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Tablettes/honor-pad9-lifestyle.jpg',
       'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Tablettes/honor-pad9-specs.jpg'
     ],
     status: 'active',

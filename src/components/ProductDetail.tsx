@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { Star, Shield, Truck, RefreshCw, Clock, Award, ChevronRight, Check, Package, Phone, CreditCard, Lock, Heart, Share2, Minus, Plus, Info } from 'lucide-react';
+import { Star, Shield, Truck, RefreshCw, Clock, Award, ChevronRight, ChevronLeft, Check, Package, Phone, CreditCard, Lock, Heart, Share2, Minus, Plus, Info, ZoomIn } from 'lucide-react';
 import { Product, ProductVariant } from '@/data/products';
 import { formatPrice } from '@/lib/utils';
 import { cn } from '@/lib/utils';
@@ -25,10 +25,40 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   const [quantity, setQuantity] = useState(1);
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const [isZoomed, setIsZoomed] = useState(false);
 
-  // Images du produit ou de la variante sélectionnée
-  const currentImages = selectedVariant?.images || product.images;
-  const mainImage = currentImages[selectedImageIndex] || product.images[0];
+  // Combiner toutes les images : produit principal + images de toutes les variantes
+  const getAllImages = () => {
+    const allImages: { src: string; variant?: string; variantColor?: string }[] = [];
+    
+    // Ajouter les images du produit principal
+    product.images.forEach((img) => {
+      allImages.push({ src: img });
+    });
+    
+    // Ajouter les images de chaque variante
+    if (product.variants) {
+      product.variants.forEach((variant) => {
+        if (variant.images && variant.images.length > 0) {
+          variant.images.forEach((img) => {
+            // Éviter les doublons
+            if (!allImages.find(i => i.src === img)) {
+              allImages.push({ 
+                src: img, 
+                variant: variant.color,
+                variantColor: variant.colorCode 
+              });
+            }
+          });
+        }
+      });
+    }
+    
+    return allImages;
+  };
+
+  const allImages = getAllImages();
+  const mainImage = allImages[selectedImageIndex]?.src || product.images[0];
 
   // Prix avec réduction
   const currentPrice = product.price;
@@ -90,49 +120,136 @@ export default function ProductDetail({ product }: ProductDetailProps) {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
         {/* Galerie d'images */}
         <div className="space-y-4">
-          {/* Image principale */}
-          <div className="relative aspect-square bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl overflow-hidden shadow-xl">
-            {hasDiscount && (
-              <Badge className="absolute top-4 left-4 z-10 bg-gradient-to-r from-red-500 to-red-600 text-white border-0 px-3 py-1.5 font-bold shadow-lg">
-                -{product.discount}%
-              </Badge>
+          {/* Image principale avec navigation */}
+          <div className="relative">
+            <div 
+              className={cn(
+                "relative aspect-square bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl overflow-hidden shadow-xl cursor-zoom-in group",
+                isZoomed && "cursor-zoom-out"
+              )}
+              onClick={() => setIsZoomed(!isZoomed)}
+            >
+              {hasDiscount && (
+                <Badge className="absolute top-4 left-4 z-10 bg-gradient-to-r from-red-500 to-red-600 text-white border-0 px-3 py-1.5 font-bold shadow-lg">
+                  -{product.discount}%
+                </Badge>
+              )}
+              {product.badges?.includes('Nouveau') && (
+                <Badge className="absolute top-4 right-4 z-10 bg-blue-500 text-white">
+                  Nouveau
+                </Badge>
+              )}
+              
+              {/* Indicateur de zoom */}
+              <div className="absolute bottom-4 right-4 z-10 bg-black/50 text-white p-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity">
+                <ZoomIn className="h-5 w-5" />
+              </div>
+              
+              <ImageWithFallback
+                src={mainImage}
+                alt={product.name}
+                productCategory={product.category}
+                fill
+                className={cn(
+                  "object-contain transition-transform duration-300",
+                  isZoomed && "scale-150"
+                )}
+                priority
+              />
+            </div>
+            
+            {/* Flèches de navigation si plus d'une image */}
+            {allImages.length > 1 && (
+              <>
+                <button
+                  onClick={() => {
+                    const newIndex = selectedImageIndex === 0 ? allImages.length - 1 : selectedImageIndex - 1;
+                    setSelectedImageIndex(newIndex);
+                    // Si l'image appartient à une variante, la sélectionner
+                    if (allImages[newIndex].variant) {
+                      const variant = product.variants?.find(v => v.color === allImages[newIndex].variant);
+                      if (variant) setSelectedVariant(variant);
+                    }
+                  }}
+                  className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg transition-all hover:scale-110"
+                  aria-label="Image précédente"
+                >
+                  <ChevronLeft className="h-6 w-6" />
+                </button>
+                
+                <button
+                  onClick={() => {
+                    const newIndex = selectedImageIndex === allImages.length - 1 ? 0 : selectedImageIndex + 1;
+                    setSelectedImageIndex(newIndex);
+                    // Si l'image appartient à une variante, la sélectionner
+                    if (allImages[newIndex].variant) {
+                      const variant = product.variants?.find(v => v.color === allImages[newIndex].variant);
+                      if (variant) setSelectedVariant(variant);
+                    }
+                  }}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg transition-all hover:scale-110"
+                  aria-label="Image suivante"
+                >
+                  <ChevronRight className="h-6 w-6" />
+                </button>
+              </>
             )}
-            {product.badges?.includes('Nouveau') && (
-              <Badge className="absolute top-4 right-4 z-10 bg-blue-500 text-white">
-                Nouveau
-              </Badge>
-            )}
-            <ImageWithFallback
-              src={mainImage}
-              alt={product.name}
-              productCategory={product.category}
-              fill
-              className="object-contain"
-              priority
-            />
           </div>
 
-          {/* Miniatures */}
-          {currentImages.length > 1 && (
-            <div className="grid grid-cols-4 gap-2">
-              {currentImages.map((image, index) => (
-                <button
-                  key={index}
-                  onClick={() => setSelectedImageIndex(index)}
-                  className={cn(
-                    "relative aspect-square bg-gray-100 rounded-lg overflow-hidden border-2 transition-all",
-                    selectedImageIndex === index ? "border-primary ring-2 ring-primary/20" : "border-transparent hover:border-gray-300"
-                  )}
-                >
-                  <ImageWithFallback
-                    src={image}
-                    alt={`${product.name} - Image ${index + 1}`}
-                    productCategory={product.category}
-                    fill
-                    className="object-contain"
-                  />
-                </button>
-              ))}
+          {/* Carrousel de miniatures avec toutes les images et variants */}
+          {allImages.length > 1 && (
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <p className="text-sm font-medium text-gray-700">
+                  {allImages.length} images disponibles
+                </p>
+                {allImages.some(img => img.variant) && (
+                  <p className="text-xs text-gray-500">
+                    Cliquez pour voir les différentes couleurs
+                  </p>
+                )}
+              </div>
+              <div className="grid grid-cols-5 gap-2">
+                {allImages.map((image, index) => (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      setSelectedImageIndex(index);
+                      // Si l'image appartient à une variante, la sélectionner
+                      if (image.variant) {
+                        const variant = product.variants?.find(v => v.color === image.variant);
+                        if (variant) {
+                          setSelectedVariant(variant);
+                        }
+                      }
+                    }}
+                    className={cn(
+                      "relative aspect-square bg-gray-100 rounded-lg overflow-hidden border-2 transition-all group",
+                      selectedImageIndex === index 
+                        ? "border-primary ring-2 ring-primary/20 shadow-lg" 
+                        : "border-gray-200 hover:border-primary/50 hover:shadow-md"
+                    )}
+                  >
+                    <ImageWithFallback
+                      src={image.src}
+                      alt={`${product.name} - ${image.variant ? `Couleur ${image.variant}` : `Image ${index + 1}`}`}
+                      productCategory={product.category}
+                      fill
+                      className="object-contain group-hover:scale-105 transition-transform"
+                    />
+                    {/* Badge de couleur si c'est une image de variante */}
+                    {image.variant && image.variantColor && (
+                      <div className="absolute bottom-1 right-1 p-1 bg-white/90 rounded-full shadow-sm">
+                        <div 
+                          className="w-3 h-3 rounded-full border border-gray-300"
+                          style={{ backgroundColor: image.variantColor }}
+                          title={image.variant}
+                        />
+                      </div>
+                    )}
+                  </button>
+                ))}
+              </div>
             </div>
           )}
         </div>
