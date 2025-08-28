@@ -76,12 +76,17 @@
       "Read(/root/monster-phone-dev/**)",
       "Bash(git init:*)",
       "Bash(git config:*)",
-      "Bash(git branch:*)"
+      "Bash(git branch:*)",
+      "Bash(git pull:*)",
+      "Bash(do cp \"$f\" /root/Monster-Phone-Images/HONOR/Smartphones/)",
+      "Bash(echo:*)",
+      "Bash(do cp \"$file\" /root/Monster-Phone-Images/HONOR/Smartphones/)"
     ],
     "deny": [],
     "additionalDirectories": [
       "/root/Monster-Phone-Images/Captures d''''écran",
-      "/tmp"
+      "/tmp",
+      "/root/Monster-Phone-Images"
     ]
   }
 }

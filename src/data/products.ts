@@ -100,10 +100,16 @@ export const allProducts: Product[] = [
     urlSlug: 'honor-x9b-12gb-256gb-smartphone-flagship',
     keywords: ['HONOR X9B', 'smartphone flagship', '12GB RAM', '256GB stockage', 'téléphone HONOR', 'La Réunion', '974'],
     variants: [
-      { color: 'Noir Midnight', colorCode: '#000000', ean: '6936520832545', stock: 10, images: [] },
-      { color: 'Vert Emerald', colorCode: '#50C878', ean: '6936520832538', stock: 8, images: [] },
+      { color: 'Noir Midnight', colorCode: '#000000', ean: '6936520832545', stock: 10, images: [
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x9b-noir-main.jpg'
+      ] },
+      { color: 'Vert Emerald', colorCode: '#50C878', ean: '6936520832538', stock: 8, images: [
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x9b-vert-main.jpg'
+      ] },
       { color: 'Or Sunrise', colorCode: '#FFD700', ean: '6936520832552', stock: 5, images: [] },
-      { color: 'Orange Sunset', colorCode: '#FF6B35', ean: '6936520832521', stock: 7, images: [] }
+      { color: 'Orange Sunset', colorCode: '#FF6B35', ean: '6936520832521', stock: 7, images: [
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x9b-orange-main.jpg'
+      ] }
     ],
     defaultVariant: 'Noir Midnight',
     specifications: [
@@ -123,9 +129,9 @@ export const allProducts: Product[] = [
       'Certification IP68'
     ],
     images: [
-      '/placeholder-honor-x9b-1.jpg',
-      '/placeholder-honor-x9b-2.jpg',
-      '/placeholder-honor-x9b-3.jpg'
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x9b-noir-main.jpg',
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x9b-vert-main.jpg',
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x9b-orange-main.jpg'
     ],
     status: 'active',
     rating: {
@@ -257,6 +263,84 @@ export const allProducts: Product[] = [
     repairabilityIndex: 7.8,
     dasHead: '0.84 W/kg',
     dasBody: '1.24 W/kg'
+  },
+
+  // HONOR 200 Pro 12+12/512
+  {
+    id: 'honor-200-pro-512gb',
+    airtableId: 'reccduiP3urtRzgUS',
+    sku: 'HONOR-200-PRO-12GB-512GB',
+    name: 'HONOR 200 Pro 12+12/512',
+    brand: 'HONOR',
+    category: 'Smartphones',
+    subcategory: 'Ultra Premium',
+    price: 799.99,
+    originalPrice: 899.99,
+    discount: 11,
+    promo: 'NOUVEAU',
+    description: "Le HONOR 200 Pro révolutionne la photographie mobile avec son système de caméra triple révolutionnaire co-développé avec Studio Harcourt Paris. Capteur principal 50MP avec stabilisation optique OIS et intelligence artificielle avancée pour portraits professionnels jour/nuit. Configuration mémoire exceptionnelle 12GB RAM physique extensible à 24GB via RAM Turbo pour multitâche ultime et gaming intensif. Stockage massif 512GB pour bibliothèque photo/vidéo illimitée, applications et contenus 4K. Écran AMOLED 6.78 pouces courbe 120Hz avec luminosité 5000 nits pour visibilité parfaite même sous soleil tropical. Résolution 2700x1224 pixels, certifié TÜV Rheinland pour protection oculaire. Processeur Snapdragon 8s Gen 3 gravé en 4nm pour performances flagship et efficacité énergétique optimale. Batterie 5200mAh avec charge ultra-rapide 100W (50% en 15 minutes) et charge sans fil 66W. Mode Portrait Studio Harcourt exclusif avec éclairage professionnel virtuel. Caméra selfie 50MP avec autofocus et mode portrait IA. Design premium en verre avec finition nacrée, épaisseur 8.2mm, poids 199g. 5G ultra-rapide, WiFi 6, NFC pour paiements, capteur empreinte sous écran. MagicOS 8.0 basé sur Android 14 avec 3 ans de mises à jour garanties. DAS tête 0.87 W/kg et corps 1.11 W/kg. Indice réparabilité 8.1/10 pour durabilité maximale. Le smartphone photo référence pour créateurs exigeants à La Réunion.",
+    shortDescription: 'Flagship photo avec système Studio Harcourt et charge 100W',
+    metaTitle: 'HONOR 200 Pro 12+12/512GB - Smartphone Photo Studio Harcourt | Monster Phone 974',
+    metaDescription: 'HONOR 200 Pro : Triple caméra 50MP Studio Harcourt, 12+12GB RAM, 512GB, écran AMOLED 120Hz, charge 100W. Flagship photo ultime. Monster Phone 974.',
+    urlSlug: 'honor-200-pro-smartphone-photo-studio-harcourt',
+    keywords: ['HONOR 200 Pro', 'Studio Harcourt', 'smartphone photo', '12GB RAM', '512GB', 'charge 100W', 'La Réunion', '974'],
+    variants: [
+      { 
+        color: 'Blanc Nacré', 
+        colorCode: '#F8F8F8', 
+        ean: '6936520851234', 
+        stock: 8,
+        images: [
+          'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-blanc-front.jpg',
+          'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-blanc-back.jpg',
+          'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-blanc-lifestyle.jpg'
+        ]
+      },
+      { 
+        color: 'Cyan Océan', 
+        colorCode: '#00CED1', 
+        ean: '6936520851235', 
+        stock: 6,
+        images: [
+          'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-cyan-main.jpg'
+        ]
+      }
+    ],
+    defaultVariant: 'Blanc Nacré',
+    specifications: [
+      { label: 'RAM', value: '12GB + 12GB extensible', icon: 'memory' },
+      { label: 'Stockage', value: '512GB', icon: 'storage' },
+      { label: 'Écran', value: '6.78" AMOLED 120Hz', icon: 'display' },
+      { label: 'Processeur', value: 'Snapdragon 8s Gen 3', icon: 'processor' },
+      { label: 'Caméra', value: '50MP + 50MP + 12MP', icon: 'camera' },
+      { label: 'Batterie', value: '5200mAh', icon: 'battery' },
+      { label: 'Charge', value: '100W filaire / 66W sans fil', icon: 'charging' },
+      { label: '5G', value: 'Compatible tous opérateurs', icon: 'network' },
+      { label: 'OS', value: 'MagicOS 8.0 (Android 14)', icon: 'android' }
+    ],
+    highlights: [
+      'Mode Portrait Studio Harcourt exclusif',
+      'Charge ultra-rapide 100W (50% en 15 min)',
+      'Triple caméra IA professionnelle',
+      'Écran AMOLED 5000 nits',
+      '3 ans de mises à jour garanties'
+    ],
+    images: [
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-blanc-front.jpg',
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-blanc-back.jpg'
+    ],
+    status: 'active',
+    rating: {
+      average: 4.8,
+      count: 156,
+      distribution: { 5: 120, 4: 28, 3: 6, 2: 2, 1: 0 }
+    },
+    warranty: '2 ans constructeur',
+    deliveryTime: '24-48h à La Réunion',
+    badges: ['Nouveau', 'Photo Pro', 'Charge 100W'],
+    repairabilityIndex: 8.1,
+    dasHead: '0.87 W/kg',
+    dasBody: '1.11 W/kg'
   },
 
   // HONOR CHOICE WATCH
@@ -397,8 +481,12 @@ export const allProducts: Product[] = [
     urlSlug: 'honor-x6b-6gb-128gb-smartphone-premium',
     keywords: ['HONOR X6B', 'smartphone premium', '6GB RAM', '128GB stockage', 'téléphone HONOR', 'La Réunion', '974'],
     variants: [
-      { color: 'Noir Midnight', colorCode: '#191970', ean: '6936520848195', stock: 25, images: [] },
-      { color: 'Vert Forest', colorCode: '#228B22', ean: '6936520848201', stock: 20, images: [] },
+      { color: 'Noir Midnight', colorCode: '#191970', ean: '6936520848195', stock: 25, images: [
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x6b-noir-main.jpg'
+      ] },
+      { color: 'Vert Forest', colorCode: '#228B22', ean: '6936520848201', stock: 20, images: [
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x6b-vert-main.png'
+      ] },
       { color: 'Or Sunset', colorCode: '#FFA500', ean: '34010001600033', stock: 18, images: [] }
     ],
     defaultVariant: 'Noir Midnight',
@@ -419,8 +507,9 @@ export const allProducts: Product[] = [
       'Stockage extensible 1TB'
     ],
     images: [
-      '/placeholder-honor-x6b-1.jpg',
-      '/placeholder-honor-x6b-2.jpg'
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x6b-noir-main.jpg',
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x6b-vert-main.png',
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x6b-specs.png'
     ],
     status: 'active',
     rating: {
@@ -455,8 +544,27 @@ export const allProducts: Product[] = [
     urlSlug: 'honor-x7c-8gb-256gb-smartphone-pro',
     keywords: ['HONOR X7C', 'smartphone haut de gamme', '8GB RAM', '256GB stockage', 'téléphone HONOR', 'La Réunion', '974'],
     variants: [
-      { color: 'Noir Cosmos', colorCode: '#000033', ean: '6936520854738', stock: 15, images: [] },
-      { color: 'Vert Aurora', colorCode: '#00FF7F', ean: '6936520854721', stock: 12, images: [] },
+      { color: 'Noir Cosmos', colorCode: '#000033', ean: '6936520854738', stock: 15, images: [
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x7c-noir-1.jpg',
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x7c-noir-2.jpg',
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x7c-noir-3.jpg',
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x7c-noir-4.jpg',
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x7c-noir-5.jpg',
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x7c-noir-6.jpg',
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x7c-noir-8.jpg',
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x7c-noir-9.jpg'
+      ] },
+      { color: 'Vert Aurora', colorCode: '#00FF7F', ean: '6936520854721', stock: 12, images: [
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x7c-vert-1.jpg',
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x7c-vert-2.jpg',
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x7c-vert-3.jpg',
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x7c-vert-4.jpg',
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x7c-vert-5.jpg',
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x7c-vert-6.jpg',
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x7c-vert-8.jpg',
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x7c-vert-9.jpg',
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x7c-vert-10.jpg'
+      ] },
       { color: 'Or Champagne', colorCode: '#D4AF37', ean: '6936520854745', stock: 10, images: [] }
     ],
     defaultVariant: 'Noir Cosmos',
@@ -477,8 +585,12 @@ export const allProducts: Product[] = [
       'Design premium unibody'
     ],
     images: [
-      '/placeholder-honor-x7c-1.jpg',
-      '/placeholder-honor-x7c-2.jpg'
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x7c-noir-1.jpg',
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x7c-noir-2.jpg',
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x7c-noir-3.jpg',
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x7c-vert-1.jpg',
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x7c-vert-2.jpg',
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x7c-vert-3.jpg'
     ],
     status: 'active',
     rating: {
@@ -513,8 +625,31 @@ export const allProducts: Product[] = [
     urlSlug: 'honor-x5b-4gb-64gb-smartphone-gaming',
     keywords: ['HONOR X5B', 'smartphone gaming', '4GB RAM', '64GB stockage', 'téléphone HONOR', 'La Réunion', '974'],
     variants: [
-      { color: 'Noir Classic', colorCode: '#2F4F4F', ean: '6936520854851', stock: 30, images: [] },
-      { color: 'Bleu Ocean', colorCode: '#4682B4', ean: '6936520854868', stock: 25, images: [] },
+      { color: 'Noir Classic', colorCode: '#2F4F4F', ean: '6936520854851', stock: 30, images: [
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x5b-noir-1.jpg',
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x5b-noir-2.jpg',
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x5b-noir-3.jpg',
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x5b-noir-4.jpg',
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x5b-noir-5.jpg',
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x5b-noir-6.jpg',
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x5b-noir-7.jpg',
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x5b-noir-8.jpg',
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x5b-noir-9.jpg'
+      ] },
+      { color: 'Bleu Ocean', colorCode: '#4682B4', ean: '6936520854868', stock: 25, images: [
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x5b-bleu-1.jpg',
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x5b-bleu-2.jpg',
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x5b-bleu-3.jpg',
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x5b-bleu-4.jpg',
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x5b-bleu-5.jpg',
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x5b-bleu-6.jpg',
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x5b-bleu-7.jpg',
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x5b-bleu-8.jpg',
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x5b-bleu-9.jpg',
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x5b-bleu-10.jpg',
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x5b-bleu-11.jpg',
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x5b-bleu-12.jpg'
+      ] },
       { color: 'Or Sunrise', colorCode: '#FFB347', ean: '34010001500044', stock: 22, images: [] }
     ],
     defaultVariant: 'Noir Classic',
@@ -534,8 +669,12 @@ export const allProducts: Product[] = [
       'Double SIM + carte SD'
     ],
     images: [
-      '/placeholder-honor-x5b-1.jpg',
-      '/placeholder-honor-x5b-2.jpg'
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x5b-noir-1.jpg',
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x5b-noir-2.jpg',
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x5b-noir-3.jpg',
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x5b-bleu-1.jpg',
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x5b-bleu-2.jpg',
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x5b-bleu-3.jpg'
     ],
     status: 'active',
     rating: {

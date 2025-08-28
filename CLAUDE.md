@@ -204,3 +204,114 @@ src/
 
   Point critique : Tout passe par /src/data/products.ts - c'est le seul fichier à modifier pour ajouter un
   produit.
+- Oui, je comprends maintenant parfaitement le processus ! Voici un script
+  détaillé de la démarche pour intégrer les images depuis Airtable vers le
+  site :
+
+  📋 Script d'intégration des images Airtable → GitHub → Site
+
+  1. Récupération depuis Airtable
+
+  # Process automatisé (2 produits à la fois)
+  1. Lire les produits Airtable avec champ "fait" = false
+  2. Pour chaque produit:
+     - Récupérer les URLs d'images depuis les champs:
+       • "Images produit principal"
+       • "Images variantes" (si variants existent)
+     - Parser les URLs (format: nom_fichier (URL))
+
+  2. Upload vers GitHub
+
+  # Structure des dossiers GitHub
+  Monster-Phone-Images/
+  ├── HONOR/
+  │   ├── Smartphones/
+  │   └── Tablettes/
+  ├── HIFUTURE/
+  │   └── Ecouteurs/
+  └── Accessoires/
+      └── LED/
+
+  # Téléchargement et upload
+  - wget [URL_AIRTABLE] -O [nom_fichier]
+  - git add, commit, push vers le repo GitHub
+
+  3. Mise à jour products.ts
+
+  // Structure à mettre à jour
+  {
+    id: 'produit-001',
+    name: 'Nom Produit',
+    images: [
+      'https://raw.githubusercontent.com/[USER]/Monster-Phone-Images/main/[C
+  ATEGORIE]/[nom_fichier]'
+    ],
+    variants: [
+      {
+        color: 'Noir',
+        colorCode: '#000000',
+        images: [
+          'https://raw.githubusercontent.com/[USER]/Monster-Phone-Images/mai
+  n/[CATEGORIE]/[variant_image]'
+        ],
+        stock: 10
+      }
+    ]
+  }
+
+  4. Configuration Next.js
+
+  // next.config.ts - Déjà configuré ✅
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'raw.githubusercontent.com',
+        pathname: '/**',
+      },
+    ],
+  }
+
+  5. Validation et marquage Airtable
+
+  # Après intégration réussie
+  - Vérifier l'affichage sur le site (localhost:3001)
+  - NE PAS cocher "fait" dans Airtable (consigne utilisateur)
+  - Continuer avec les 2 produits suivants
+
+  6. Points clés à retenir
+
+  Images principales:
+    - Toujours mettre dans le tableau "images" du produit
+    - Format GitHub: raw.githubusercontent.com/[user]/[repo]/main/[path]
+
+  Images variants:
+    - Placer dans variant.images[] pour chaque couleur
+    - Synchronisation automatique avec le carrousel
+
+  Carrousel:
+    - Combine automatiquement images produit + variants
+    - Gère la navigation et le zoom
+    - Badges couleur sur miniatures variants
+
+  Erreurs courantes:
+    - URL GitHub mal formée → 404
+    - Duplicate urlSlug → Compilation TypeScript échoue
+    - Images bloquées → Vérifier image-utils.ts
+
+  7. Commande complète type
+
+  # Exemple workflow complet pour 2 produits
+  mcp__airtable__list_records baseId="appBe6BwVNs2wvp60"
+  tableId="tblA440HJGiI17SQJ" filterByFormula="NOT({fait})" maxRecords=2
+
+  # Pour chaque produit:
+  wget "[URL_IMAGE]" -O "product-name.jpg"
+  cd Monster-Phone-Images && git add . && git commit -m "Add product images"
+   && git push
+
+  # Update products.ts avec les nouvelles URLs GitHub
+  # Test sur localhost:3001/produit/[slug]
+
+  Ce processus garantit que chaque produit a ses images correctement
+  intégrées et affichées dans le nouveau carrousel amélioré ! 🎯
