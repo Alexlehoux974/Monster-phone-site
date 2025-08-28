@@ -285,7 +285,11 @@ export const allProducts: Product[] = [
       'Écran OLED 4000 nits',
       'Processeur Snapdragon 8s Gen 3'
     ],
-    images: [],
+    images: [
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-cyan-10.png',
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-cyan-11.png',
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-blanc-10.png'
+    ],
     status: 'active',
     rating: {
       average: 4.9,
