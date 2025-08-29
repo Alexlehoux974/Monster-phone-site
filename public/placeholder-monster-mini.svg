@@ -1,0 +1,37 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fond noir Monster Phone -->
+  <rect width="48" height="48" fill="#0A0A0A"/>
+  
+  <!-- Gradient de fond subtil -->
+  <defs>
+    <linearGradient id="miniGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF6B35;stop-opacity:0.2" />
+      <stop offset="50%" style="stop-color:#F72585;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#7209B7;stop-opacity:0.2" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Fond avec gradient -->
+  <rect width="48" height="48" fill="url(#miniGradient)"/>
+  
+  <!-- Téléphone gaming miniature -->
+  <g transform="translate(24, 20)">
+    <!-- Corps du téléphone -->
+    <rect x="-8" y="-10" width="16" height="20" rx="2" fill="#1A1A1A" stroke="#F72585" stroke-width="1"/>
+    
+    <!-- Écran -->
+    <rect x="-6" y="-8" width="12" height="14" rx="1" fill="#0A0A0A"/>
+    
+    <!-- LEDs gaming -->
+    <rect x="-9" y="-3" width="1" height="6" fill="#FF6B35" opacity="0.9"/>
+    <rect x="8" y="-3" width="1" height="6" fill="#7209B7" opacity="0.9"/>
+    
+    <!-- Boutons -->
+    <circle cx="0" cy="9" r="1.5" fill="#F72585" opacity="0.7"/>
+  </g>
+  
+  <!-- Mini texte -->
+  <text x="24" y="38" font-family="Arial, sans-serif" font-size="6" fill="#F72585" text-anchor="middle" font-weight="bold">
+    BIENTÔT
+  </text>
+</svg>
