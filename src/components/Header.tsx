@@ -503,8 +503,8 @@ const DropdownMenu = ({
                               onClick={onClose}
                             >
                               <div className="flex items-start space-x-2">
-                                <div className="w-12 h-12 bg-white border border-gray-200 rounded overflow-hidden flex-shrink-0 shadow-sm">
-                                  {product.images && product.images.length > 0 ? (
+                                <div className="w-12 h-12 bg-black border border-gray-800 rounded overflow-hidden flex-shrink-0 shadow-sm">
+                                  {product.images && product.images.length > 0 && !product.images[0].includes('placeholder') ? (
                                     <ImageWithFallback
                                       src={product.images[0]}
                                       alt={product.name}
@@ -514,8 +514,18 @@ const DropdownMenu = ({
                                       productCategory={product.category}
                                     />
                                   ) : (
-                                    <div className="w-full h-full flex items-center justify-center bg-gray-100">
-                                      <Package className="w-5 h-5 text-gray-400" />
+                                    <div className="w-full h-full flex items-center justify-center relative">
+                                      <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 via-pink-500/15 to-purple-600/10"></div>
+                                      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="relative z-10">
+                                        <rect x="10" y="6" width="12" height="20" rx="2" fill="#1A1A1A" stroke="#F72585" strokeWidth="1.5"/>
+                                        <rect x="11.5" y="8" width="9" height="14" rx="1" fill="#0A0A0A"/>
+                                        <rect x="8.5" y="12" width="1.5" height="8" fill="#FF6B35" opacity="0.8"/>
+                                        <rect x="22" y="12" width="1.5" height="8" fill="#7209B7" opacity="0.8"/>
+                                        <circle cx="16" cy="23.5" r="1.5" fill="#F72585" opacity="0.6"/>
+                                        <text x="16" y="30" fontSize="5" fill="#F72585" textAnchor="middle" fontWeight="bold" fontFamily="Arial">
+                                          BIENTÔT
+                                        </text>
+                                      </svg>
                                     </div>
                                   )}
                                 </div>
