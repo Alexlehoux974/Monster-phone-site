@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { Building, Globe, Shield, Phone, MapPin, Calendar, User, Mail, Server } from 'lucide-react';
+import { Building, Shield, Calendar } from 'lucide-react';
 
 export default function MentionsLegalesPage() {
   useEffect(() => {

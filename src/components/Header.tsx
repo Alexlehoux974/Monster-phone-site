@@ -3,9 +3,9 @@
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Search, ShoppingCart, User, Menu, X, ChevronDown, ChevronRight, ArrowRight, Shield, Truck, Flame, Star, Trash2, CreditCard, Plus, Minus, Package, Smartphone, Watch, Headphones, Lightbulb } from 'lucide-react';
+import { Search, ShoppingCart, User, Menu, X, ChevronDown, ChevronRight, ArrowRight, Truck, Flame, Trash2, CreditCard, Plus, Minus, Package, Smartphone, Watch, Headphones, Lightbulb } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { menuStructure, type CategoryStructure, allProducts, getProductsByCategory, getProductsByBrand, getProductsByBrandAndCategory } from '@/data/products';
+import { menuStructure, type CategoryStructure, allProducts, getProductsByCategory, getProductsByBrand } from '@/data/products';
 import { useCart } from '@/contexts/CartContext';
 import { useRouter } from 'next/navigation';
 import debounce from 'lodash.debounce';
@@ -71,14 +71,6 @@ const DropdownMenu = ({
           p.subcategory === hoveredSubcategory && 
           p.category === hoveredCategory
         );
-        console.log('Debug - Filtering for:', {
-          subcategory: hoveredSubcategory, 
-          category: hoveredCategory,
-          brand: hoveredBrand,
-          brandProductsCount: brandProducts.length,
-          filteredCount: filtered.length,
-          products: filtered.map(p => ({name: p.name, subcategory: p.subcategory, category: p.category}))
-        });
         return filtered;
       }
       

@@ -13,10 +13,10 @@ Monster Phone Boutique - E-commerce Next.js 15 application for gaming phone acce
 - French language interface
 
 **Data Sources**:
-- Static product data in `/src/data/products.ts` (65+ products from Airtable export)
-- Images from GitHub CDN (known issue: returns text/plain instead of images)
-- LocalStorage for cart persistence
-- Airtable database "E-Commerce" (appBe6BwVNs2wvp60) with main table "Catalogue Produits Unifié"
+- Static product data in `/src/data/products.ts` (100+ products from Airtable export)
+- Images from GitHub CDN: `https://raw.githubusercontent.com/*/Monster-Phone-Images/main/**`
+- LocalStorage for cart persistence (key: `monsterphone-cart`)
+- Airtable database "E-Commerce" (appBe6BwVNs2wvp60) with table "Catalogue Produits Unifié" (tblA440HJGiI17SQJ)
 
 ## Development Commands
 
@@ -63,15 +63,14 @@ rm -rf .next                  # Clear build cache
 
 ### Critical Known Issues
 
-**1. Image Loading** ⚠️
-- GitHub CDN returns `text/plain` instead of images
-- All product images fail to load with validation errors
-- Solution: `ImageWithFallback` component provides placeholder images based on category
-- Placeholders mapped in `/src/lib/image-utils.ts`
+**1. GitHub Images**
+- Some GitHub CDN images may fail to load properly
+- Solution: `ImageWithFallback` component handles fallbacks automatically
+- Category-based placeholders in `/src/lib/image-utils.ts`
 
 **2. Build Configuration**
-- ESLint errors ignored during builds via `ignoreDuringBuilds: true` in next.config.ts
-- Must run `npm run lint` manually before deployment
+- ESLint errors ignored during builds (`ignoreDuringBuilds: true` in next.config.ts)
+- **Important**: Always run `npm run lint` manually before deployment
 
 ### Component Architecture
 ```
@@ -145,9 +144,9 @@ src/
 ## Airtable Synchronization
 
 **Sync Report** (`AIRTABLE_SYNC_REPORT.md`):
-- 65 products total processed from Airtable
-- 26 products synchronized
-- 39 products added to products.ts
+- 100+ products total processed from Airtable
+- All products synchronized with products.ts
+- Automatic URL slug generation for new products
 - Base: E-Commerce (appBe6BwVNs2wvp60)
 - Table: Catalogue Produits Unifié (tblA440HJGiI17SQJ)
 
@@ -159,159 +158,48 @@ src/
 - **Image Handling**: Always use `ImageWithFallback` component for product images
 - **Cart State**: Persists in localStorage, supports test mode via `initialItems` prop
 - **Mobile First**: Test responsive design, especially complex navigation
-- **Next.js Config**: ESLint errors ignored during builds - run lint manually
-- Parcours d'intégration d'un nouveau produit
+- **Production Port**: When running production, use port 3001: `npm start -- -p 3001`
 
-  1. Récupération des données Airtable
+## Product Integration Workflow
 
-  - Vérifier le produit dans la base Airtable "E-Commerce" (appBe6BwVNs2wvp60)
-  - Table "Catalogue Produits Unifié" (tblA440HJGiI17SQJ)
-  - Noter tous les champs : SKU, nom, prix, description, catégorie, marque, variantes, etc.
+### Adding New Products from Airtable
 
-  2. Ajout dans products.ts
+1. **Fetch from Airtable**: Query products where `fait` = false (max 2 at a time)
+   ```bash
+   mcp__airtable__list_records baseId="appBe6BwVNs2wvp60" tableId="tblA440HJGiI17SQJ" filterByFormula="NOT({fait})" maxRecords=2
+   ```
 
-  - Ouvrir /src/data/products.ts
-  - Ajouter le produit en respectant l'interface Product existante
-  - Générer un slug unique pour l'URL
-  - Mapper correctement category/subcategory selon la structure du menu
+2. **Add to products.ts**: Update `/src/data/products.ts` with Product interface structure
+   - Generate unique `urlSlug` 
+   - Map category/subcategory correctly
+   - Include all variants with color codes
 
-  3. Gestion des images
+3. **Handle Images**: 
+   - Download from Airtable: `wget [URL] -O filename.jpg`
+   - Upload to GitHub: `Monster-Phone-Images` repository
+   - Use format: `https://raw.githubusercontent.com/[user]/Monster-Phone-Images/main/[brand]/[category]/[file]`
 
-  - Comme les images GitHub retournent du text/plain, je dois :
-    - Soit utiliser les placeholders par catégorie (automatique via ImageWithFallback)
-    - Soit proposer une URL alternative si disponible
-    - Le système utilisera automatiquement le bon placeholder selon la catégorie
+4. **Validation**:
+   - Test on `http://localhost:3001/produit/[slug]`
+   - Verify category filtering on `/nos-produits`
+   - Check cart functionality
 
-  4. Vérification de l'intégration
+### Image Repository Structure
+```
+Monster-Phone-Images/
+├── HONOR/
+│   ├── Smartphones/
+│   └── Tablettes/
+├── HIFUTURE/
+│   └── Ecouteurs/
+└── Accessoires/
+    └── LED/
+```
 
-  - Le produit apparaîtra automatiquement sur /nos-produits (filtrage par catégorie)
-  - La page produit /produit/[slug] sera créée dynamiquement
-  - Vérifier dans le menu Header si la catégorie/marque est bien listée
+## Product Data Structure
 
-  5. Points de validation
-
-  - ✅ Le produit s'affiche dans la bonne catégorie
-  - ✅ Les variantes sont correctement listées
-  - ✅ Le prix et les promotions s'affichent
-  - ✅ La navigation menu → catégorie → produit fonctionne
-  - ✅ Le produit peut être ajouté au panier
-
-  6. Aucune action supplémentaire requise
-
-  - Pas de build nécessaire (Next.js gère dynamiquement)
-  - Pas de création de page (routing dynamique)
-  - Pas de mise à jour du menu (généré depuis products.ts)
-
-  Point critique : Tout passe par /src/data/products.ts - c'est le seul fichier à modifier pour ajouter un
-  produit.
-- Oui, je comprends maintenant parfaitement le processus ! Voici un script
-  détaillé de la démarche pour intégrer les images depuis Airtable vers le
-  site :
-
-  📋 Script d'intégration des images Airtable → GitHub → Site
-
-  1. Récupération depuis Airtable
-
-  # Process automatisé (2 produits à la fois)
-  1. Lire les produits Airtable avec champ "fait" = false
-  2. Pour chaque produit:
-     - Récupérer les URLs d'images depuis les champs:
-       • "Images produit principal"
-       • "Images variantes" (si variants existent)
-     - Parser les URLs (format: nom_fichier (URL))
-
-  2. Upload vers GitHub
-
-  # Structure des dossiers GitHub
-  Monster-Phone-Images/
-  ├── HONOR/
-  │   ├── Smartphones/
-  │   └── Tablettes/
-  ├── HIFUTURE/
-  │   └── Ecouteurs/
-  └── Accessoires/
-      └── LED/
-
-  # Téléchargement et upload
-  - wget [URL_AIRTABLE] -O [nom_fichier]
-  - git add, commit, push vers le repo GitHub
-
-  3. Mise à jour products.ts
-
-  // Structure à mettre à jour
-  {
-    id: 'produit-001',
-    name: 'Nom Produit',
-    images: [
-      'https://raw.githubusercontent.com/[USER]/Monster-Phone-Images/main/[C
-  ATEGORIE]/[nom_fichier]'
-    ],
-    variants: [
-      {
-        color: 'Noir',
-        colorCode: '#000000',
-        images: [
-          'https://raw.githubusercontent.com/[USER]/Monster-Phone-Images/mai
-  n/[CATEGORIE]/[variant_image]'
-        ],
-        stock: 10
-      }
-    ]
-  }
-
-  4. Configuration Next.js
-
-  // next.config.ts - Déjà configuré ✅
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'raw.githubusercontent.com',
-        pathname: '/**',
-      },
-    ],
-  }
-
-  5. Validation et marquage Airtable
-
-  # Après intégration réussie
-  - Vérifier l'affichage sur le site (localhost:3001)
-  - NE PAS cocher "fait" dans Airtable (consigne utilisateur)
-  - Continuer avec les 2 produits suivants
-
-  6. Points clés à retenir
-
-  Images principales:
-    - Toujours mettre dans le tableau "images" du produit
-    - Format GitHub: raw.githubusercontent.com/[user]/[repo]/main/[path]
-
-  Images variants:
-    - Placer dans variant.images[] pour chaque couleur
-    - Synchronisation automatique avec le carrousel
-
-  Carrousel:
-    - Combine automatiquement images produit + variants
-    - Gère la navigation et le zoom
-    - Badges couleur sur miniatures variants
-
-  Erreurs courantes:
-    - URL GitHub mal formée → 404
-    - Duplicate urlSlug → Compilation TypeScript échoue
-    - Images bloquées → Vérifier image-utils.ts
-
-  7. Commande complète type
-
-  # Exemple workflow complet pour 2 produits
-  mcp__airtable__list_records baseId="appBe6BwVNs2wvp60"
-  tableId="tblA440HJGiI17SQJ" filterByFormula="NOT({fait})" maxRecords=2
-
-  # Pour chaque produit:
-  wget "[URL_IMAGE]" -O "product-name.jpg"
-  cd Monster-Phone-Images && git add . && git commit -m "Add product images"
-   && git push
-
-  # Update products.ts avec les nouvelles URLs GitHub
-  # Test sur localhost:3001/produit/[slug]
-
-  Ce processus garantit que chaque produit a ses images correctement
-  intégrées et affichées dans le nouveau carrousel amélioré ! 🎯
+Key fields in `/src/data/products.ts`:
+- **Product Interface**: 30+ fields including variants, specifications, ratings
+- **ProductVariant**: color, colorCode, ean, stock, images[]
+- **Dynamic URL generation**: `/produit/[urlSlug]` pages created automatically
+- **Menu structure**: Auto-generated from product categories and brands

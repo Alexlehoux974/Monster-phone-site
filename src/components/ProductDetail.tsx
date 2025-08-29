@@ -282,7 +282,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
             </div>
 
             {/* Note et avis */}
-            {product.rating && (
+            {product.reviews && product.reviews.length > 0 && (
               <div className="flex items-center gap-2 mt-3">
                 <div className="flex items-center">
                   {Array.from({ length: 5 }).map((_, i) => (
@@ -290,15 +290,17 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                       key={i}
                       className={cn(
                         "h-5 w-5",
-                        i < Math.floor(product.rating?.average || 0)
+                        i < Math.floor(product.reviews.reduce((acc, r) => acc + r.rating, 0) / product.reviews.length)
                           ? "text-yellow-400 fill-current"
                           : "text-gray-300"
                       )}
                     />
                   ))}
-                  <span className="ml-2 font-semibold">{product.rating?.average || 0}</span>
+                  <span className="ml-2 font-semibold">
+                    {(product.reviews.reduce((acc, r) => acc + r.rating, 0) / product.reviews.length).toFixed(1)}
+                  </span>
                 </div>
-                <span className="text-gray-600">({product.rating?.count || 0} avis)</span>
+                <span className="text-gray-600">({product.reviews.length} avis)</span>
               </div>
             )}
           </div>
@@ -498,7 +500,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
               Caractéristiques
             </TabsTrigger>
             <TabsTrigger value="reviews" className="data-[state=active]:bg-white data-[state=active]:shadow-sm rounded-lg font-medium">
-              Avis ({product.rating?.count || 0})
+              Avis ({product.reviews?.length || 0})
             </TabsTrigger>
             <TabsTrigger value="shipping" className="data-[state=active]:bg-white data-[state=active]:shadow-sm rounded-lg font-medium">
               Livraison
@@ -585,53 +587,101 @@ export default function ProductDetail({ product }: ProductDetailProps) {
               <Button variant="outline">Écrire un avis</Button>
             </div>
 
-            {product.rating ? (
-              <div className="bg-gray-50 rounded-lg p-6">
-                <div className="flex items-center gap-6">
-                  <div className="text-center">
-                    <p className="text-4xl font-bold">{product.rating?.average || 0}</p>
-                    <div className="flex items-center mt-2">
-                      {Array.from({ length: 5 }).map((_, i) => (
-                        <Star
-                          key={i}
-                          className={cn(
-                            "h-4 w-4",
-                            i < Math.floor(product.rating?.average || 0)
-                              ? "text-yellow-400 fill-current"
-                              : "text-gray-300"
-                          )}
-                        />
-                      ))}
+            {product.reviews && product.reviews.length > 0 ? (
+              <>
+                {/* Résumé des avis */}
+                <div className="bg-gray-50 rounded-lg p-6">
+                  <div className="flex items-center gap-6">
+                    <div className="text-center">
+                      <p className="text-4xl font-bold">
+                        {(product.reviews.reduce((acc, r) => acc + r.rating, 0) / product.reviews.length).toFixed(1)}
+                      </p>
+                      <div className="flex items-center mt-2">
+                        {Array.from({ length: 5 }).map((_, i) => (
+                          <Star
+                            key={i}
+                            className={cn(
+                              "h-4 w-4",
+                              i < Math.floor(product.reviews.reduce((acc, r) => acc + r.rating, 0) / product.reviews.length)
+                                ? "text-yellow-400 fill-current"
+                                : "text-gray-300"
+                            )}
+                          />
+                        ))}
+                      </div>
+                      <p className="text-sm text-gray-600 mt-1">
+                        {product.reviews.length} avis vérifiés
+                      </p>
                     </div>
-                    <p className="text-sm text-gray-600 mt-1">
-                      {product.rating?.count || 0} avis vérifiés
-                    </p>
-                  </div>
-                  
-                  <div className="flex-1 space-y-2">
-                    {[5, 4, 3, 2, 1].map((stars) => {
-                      const percentage = product.rating?.distribution 
-                        ? (product.rating?.distribution[stars as keyof typeof product.rating.distribution] / (product.rating?.count || 1)) * 100
-                        : 0;
-                      return (
-                        <div key={stars} className="flex items-center gap-2">
-                          <span className="text-sm w-4">{stars}</span>
-                          <Star className="h-4 w-4 text-yellow-400 fill-current" />
-                          <div className="flex-1 bg-gray-200 rounded-full h-2">
-                            <div 
-                              className="bg-yellow-400 h-2 rounded-full"
-                              style={{ width: `${percentage}%` }}
-                            />
+                    
+                    <div className="flex-1 space-y-2">
+                      {[5, 4, 3, 2, 1].map((stars) => {
+                        const count = product.reviews?.filter(r => r.rating === stars).length || 0;
+                        const percentage = (count / (product.reviews?.length || 1)) * 100;
+                        return (
+                          <div key={stars} className="flex items-center gap-2">
+                            <span className="text-sm w-4">{stars}</span>
+                            <Star className="h-4 w-4 text-yellow-400 fill-current" />
+                            <div className="flex-1 bg-gray-200 rounded-full h-2">
+                              <div 
+                                className="bg-yellow-400 h-2 rounded-full"
+                                style={{ width: `${percentage}%` }}
+                              />
+                            </div>
+                            <span className="text-sm text-gray-600 w-10 text-right">
+                              {Math.round(percentage)}%
+                            </span>
                           </div>
-                          <span className="text-sm text-gray-600 w-10 text-right">
-                            {Math.round(percentage)}%
-                          </span>
-                        </div>
-                      );
-                    })}
+                        );
+                      })}
+                    </div>
                   </div>
                 </div>
-              </div>
+
+                {/* Liste des avis */}
+                <div className="space-y-4 max-h-96 overflow-y-auto">
+                  {product.reviews.slice(0, 10).map((review) => (
+                    <div key={review.id} className="border-b pb-4">
+                      <div className="flex items-start justify-between mb-2">
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <span className="font-semibold">{review.author}</span>
+                            {review.verified && (
+                              <Badge variant="secondary" className="text-xs">
+                                <Check className="h-3 w-3 mr-1" />
+                                Achat vérifié
+                              </Badge>
+                            )}
+                          </div>
+                          <div className="flex items-center gap-2 mt-1">
+                            <div className="flex">
+                              {Array.from({ length: 5 }).map((_, i) => (
+                                <Star
+                                  key={i}
+                                  className={cn(
+                                    "h-3 w-3",
+                                    i < review.rating
+                                      ? "text-yellow-400 fill-current"
+                                      : "text-gray-300"
+                                  )}
+                                />
+                              ))}
+                            </div>
+                            <span className="text-sm text-gray-500">{review.date}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <p className="text-gray-700">{review.comment}</p>
+                    </div>
+                  ))}
+                </div>
+
+                {product.reviews.length > 10 && (
+                  <Button variant="outline" className="w-full">
+                    Voir tous les {product.reviews.length} avis
+                  </Button>
+                )}
+              </>
             ) : (
               <p className="text-gray-600">Aucun avis pour le moment. Soyez le premier à donner votre avis !</p>
             )}

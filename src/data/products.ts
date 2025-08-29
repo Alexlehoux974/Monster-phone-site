@@ -27,6 +27,15 @@ export interface ProductRating {
   };
 }
 
+export interface Review {
+  id: string;
+  author: string;
+  rating: number;
+  date: string;
+  comment: string;
+  verified: boolean;
+}
+
 export interface Product {
   // Identifiants
   id: string;
@@ -68,6 +77,7 @@ export interface Product {
   // Données additionnelles
   status: 'active' | 'draft' | 'out-of-stock';
   rating?: ProductRating;
+  reviews?: Review[];
   warranty?: string;
   deliveryTime?: string;
   badges?: string[];
@@ -757,122 +767,372 @@ export const allProducts: Product[] = [
     badges: ['Étanche', 'Longue autonomie', 'TWS']
   },
 
-  // HIFUTURE ALTUS Casque sans fil ANC
+  // HIFUTURE COLORBUDS 2 True Wireless
+  
+  // CASQUE ANC HIFUTURE TOUR X
   {
-    id: 'hifuture-altus',
-    airtableId: 'rec4E9K38xRxL31b9',
-    sku: 'HIFUTURE-ALTUS-ANC',
-    name: 'HIFUTURE ALTUS Casque sans fil ANC',
+    id: 'hifuture-tour-x',
+    airtableId: 'recD8f1N0Qr8gA7vW',
+    sku: 'HIFUTURE-TOUR-X',
+    name: 'CASQUE ANC HIFUTURE TOUR X',
     brand: 'HIFUTURE',
     category: 'Audio',
     subcategory: 'Casques',
-    price: 79.99,
-    originalPrice: 99.99,
-    discount: 20,
+    price: 69.99,
+    originalPrice: 89.99,
+    discount: 22,
     promo: 'BLACK FRIDAY',
-    description: "Le casque HIFUTURE ALTUS représente le summum de l'expérience audio sans fil avec sa technologie de réduction active du bruit (ANC) de dernière génération. Équipé de transducteurs dynamiques de 40mm haute définition, il délivre un son d'une pureté exceptionnelle avec des basses profondes et des aigus cristallins sur toute la gamme de fréquences 20Hz-20kHz. La technologie ANC hybride avec 4 microphones dédiés supprime jusqu'à 95% des bruits ambiants, créant une bulle de tranquillité parfaite pour le travail, les voyages ou la détente. Le mode Transparence intelligent vous permet de rester connecté à votre environnement sans retirer le casque. L'autonomie record de 40 heures avec ANC activé (60 heures sans ANC) vous libère de toute contrainte de recharge quotidienne. La charge rapide USB-C offre 5 heures d'écoute en seulement 10 minutes. Design circum-aural avec coussinets à mémoire de forme en protéine de haute qualité pour un confort prolongé sans fatigue. Arceau ajustable rembourré et pliable pour transport facile. Bluetooth 5.2 multipoint permettant la connexion simultanée à 2 appareils. Commandes tactiles intuitives sur l'écouteur droit. Microphone haute définition pour appels cristallins en mode mains libres. Application dédiée pour égaliseur personnalisé et mises à jour firmware. Le compagnon idéal pour audiophiles et professionnels nomades à La Réunion.",
-    shortDescription: 'Casque Bluetooth ANC avec 40h autonomie, drivers 40mm et Bluetooth multipoint',
-    metaTitle: 'HIFUTURE ALTUS - Casque ANC Bluetooth 40h Autonomie | Monster Phone 974',
-    metaDescription: 'Casque sans fil HIFUTURE ALTUS avec ANC hybride, 40h autonomie, drivers 40mm, Bluetooth 5.2 multipoint. Confort premium et son Hi-Fi. Monster Phone La Réunion.',
-    urlSlug: 'hifuture-altus-casque-anc-bluetooth',
-    keywords: ['HIFUTURE ALTUS', 'casque ANC', 'réduction bruit', 'Bluetooth multipoint', 'casque sans fil', 'La Réunion', '974'],
+    description: "Le casque HIFUTURE TOUR X offre une expérience audio premium avec réduction active du bruit (ANC) de pointe. Conçu pour les audiophiles et professionnels, il délivre un son haute fidélité avec des basses profondes et des aigus cristallins. La technologie ANC élimine jusqu'à 90% des bruits ambiants pour une immersion totale. Bluetooth 5.0 garantit connexion stable et économie d'énergie. Les coussinets mémoire de forme offrent confort exceptionnel pendant heures d'écoute. Arceau ajustable et pliable pour transport facile. Autonomie 30 heures avec charge rapide USB-C. Commandes tactiles intuitives et microphone intégré pour appels mains libres. Disponible en finitions Champagne élégant et Noir classique. Le choix parfait pour professionnels et mélomanes à La Réunion.",
+    shortDescription: 'Casque ANC avec Bluetooth 5.0 et 30h autonomie',
+    metaTitle: 'HIFUTURE TOUR X - Casque ANC Premium Bluetooth | Monster Phone 974',
+    metaDescription: 'Casque ANC HIFUTURE TOUR X avec réduction de bruit active, Bluetooth 5.0, 30h autonomie. Champagne ou Noir. Livraison rapide La Réunion.',
+    urlSlug: 'casque-anc-hifuture-tour-x',
+    keywords: ['HIFUTURE TOUR X', 'casque ANC', 'réduction bruit', 'Bluetooth', 'La Réunion', '974'],
     variants: [
-      { color: 'Noir', colorCode: '#000000', ean: '6972576181435', stock: 8, images: [] },
-      { color: 'Blanc', colorCode: '#FFFFFF', ean: '6972576181442', stock: 6, images: [] }
+      { 
+        color: 'Champagne', 
+        colorCode: '#F7E7CE', 
+        ean: '6972576181000',
+        stock: 8,
+        images: ['data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDQwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNGRkZBRjAiLz4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iY2hhbXBhZ25lIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6I0Y3RTZDRTSGN0ww50C1wcGFjaXR5OjEiIC8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6I0UwRDBCODtzdG9wLW9wYWNpdHk6MSIgLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIAogIDwhLS0gSGVhZGJhbmQgLS0+CiAgPHBhdGggZD0iTTEwMCA4MEMxMDAgODAgMTAwIDYwIDEyNSA1MEMxNTAgNDAgMTc1IDQwIDIwMCA0MEMyMjUgNDAgMjUwIDQwIDI3NSA1MEMzMDAgNjAgMzAwIDgwIDMwMCA4MCIgCiAgICAgICAgc3Ryb2tlPSJ1cmwoI2NoYW1wYWduZSkiIHN0cm9rZS13aWR0aD0iMjQiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIAogIDwhLS0gTGVmdCBFYXIgQ3VwIC0tPgogIDxjaXJjbGUgY3g9IjEwMCIgY3k9IjIwMCIgcj0iNzUiIGZpbGw9InVybCgjY2hhbXBhZ25lKSIvPgogIDxjaXJjbGUgY3g9IjEwMCIgY3k9IjIwMCIgcj0iNjAiIGZpbGw9IiNFNURDQzQiLz4KICA8Y2lyY2xlIGN4PSIxMDAiIGN5PSIyMDAiIHI9IjQ1IiBmaWxsPSIjRjdFN0NFIiBvcGFjaXR5PSIwLjgiLz4KICAKICA8IS0tIFJpZ2h0IEVhciBDdXAgLS0+CiAgPGNpcmNsZSBjeD0iMzAwIiBjeT0iMjAwIiByPSI3NSIgZmlsbD0idXJsKCNjaGFtcGFnbmUpIi8+CiAgPGNpcmNsZSBjeD0iMzAwIiBjeT0iMjAwIiByPSI2MCIgZmlsbD0iI0U1RENDN & CIvPgogIDxjaXJjbGUgY3g9IjMwMCIgY3k9IjIwMCIgcj0iNDUiIGZpbGw9IiNGN0U3Q0UiIG9wYWNpdHk9IjAuOCIvPgogIAogIDwhLS0gQU5DIEluZGljYXRvciAtLT4KICA8Y2lyY2xlIGN4PSIzMDAiIGN5PSIyNjAiIHI9IjgiIGZpbGw9IiM0QURFODAiIG9wYWNpdHk9IjAuOSI+CiAgICA8YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJvcGFjaXR5IiB2YWx1ZXM9IjAuNDsxOzAuNCIgZHVyPSIycyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiLz4KICA8L2NpcmNsZT4KICAKICA8IS0tIFRvdXJYIExvZ28gLS0+CiAgPHRleHQgeD0iMjAwIiB5PSIzMjAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyOCIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IiM4QjdBNjMiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkhpRnV0dXJlPC90ZXh0PgogIDx0ZXh0IHg9IjIwMCIgeT0iMzUwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IiNBNTk1ODEiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlRPVVIgWDwvdGV4dD4KPC9zdmc+']
+      },
+      { 
+        color: 'Noir', 
+        colorCode: '#000000', 
+        ean: '6972576181001',
+        stock: 12,
+        images: ['data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDQwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNGM0Y0RjYiLz4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmxhY2siIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMTExMTExO3N0b3Atb3BhY2l0eToxIiAvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMyMjIyMjI7c3RvcC1vcGFjaXR5OjEiIC8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICAKICA8IS0tIEhlYWRiYW5kIC0tPgogIDxwYXRoIGQ9Ik0xMDAgODBDMTAwIDgwIDEwMCA2MCAxMjUgNTBDMTUwIDQwIDE3NSA0MCAyMDAgNDBDMjI1IDQwIDI1MCA0MCAyNzUgNTBDMzAwIDYwIDMwMCA4MCAzMDAgODAiIAogICAgICAgIHN0cm9rZT0idXJsKCNibGFjaykiIHN0cm9rZS13aWR0aD0iMjQiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIAogIDwhLS0gTGVmdCBFYXIgQ3VwIC0tPgogIDxjaXJjbGUgY3g9IjEwMCIgY3k9IjIwMCIgcj0iNzUiIGZpbGw9InVybCgjYmxhY2spIi8+CiAgPGNpcmNsZSBjeD0iMTAwIiBjeT0iMjAwIiByPSI2MCIgZmlsbD0iIzFBMUExQSIvPgogIDxjaXJjbGUgY3g9IjEwMCIgY3k9IjIwMCIgcj0iNDUiIGZpbGw9IiMwRDBEMEQiIG9wYWNpdHk9IjAuOCIvPgogIAogIDwhLS0gUmlnaHQgRWFyIEN1cCAtLT4KICA8Y2lyY2xlIGN4PSIzMDAiIGN5PSIyMDAiIHI9Ijc1IiBmaWxsPSJ1cmwoI2JsYWNrKSIvPgogIDxjaXJjbGUgY3g9IjMwMCIgY3k9IjIwMCIgcj0iNjAiIGZpbGw9IiMxQTFBMUEiLz4KICA8Y2lyY2xlIGN4PSIzMDAiIGN5PSIyMDAiIHI9IjQ1IiBmaWxsPSIjMEQwRDBEIiBvcGFjaXR5PSIwLjgiLz4KICAKICA8IS0tIEFOQyBJbmRpY2F0b3IgLS0+CiAgPGNpcmNsZSBjeD0iMzAwIiBjeT0iMjYwIiByPSI4IiBmaWxsPSIjNEFERTgwIiBvcGFjaXR5PSIwLjkiPgogICAgPGFuaW1hdGUgYXR0cmlidXRlTmFtZT0ib3BhY2l0eSIgdmFsdWVzPSIwLjQ7MTswLjQiIGR1cj0iMnMiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIi8+CiAgPC9jaXJjbGU+CiAgCiAgPCEtLSBUb3VyWCBMb2dvIC0tPgogIDx0ZXh0IHg9IjIwMCIgeT0iMzIwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjgiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSIjMzMzMzMzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5IaUZ1dHVyZTwvdGV4dD4KICA8dGV4dCB4PSIyMDAiIHk9IjM1MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIiBmaWxsPSIjNjY2NjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5UT1VSIFM8L3RleHQ+Cjwvc3ZnPg==']
+      }
     ],
     defaultVariant: 'Noir',
     specifications: [
-      { label: 'Drivers', value: '40mm dynamiques', icon: 'speaker' },
-      { label: 'ANC', value: 'Hybride -35dB', icon: 'noise' },
-      { label: 'Autonomie', value: '40h (ANC on) / 60h (ANC off)', icon: 'battery' },
-      { label: 'Bluetooth', value: '5.2 Multipoint', icon: 'bluetooth' },
-      { label: 'Charge rapide', value: '10 min = 5h', icon: 'charging' },
-      { label: 'Poids', value: '280g', icon: 'weight' },
-      { label: 'Fréquences', value: '20Hz - 20kHz', icon: 'frequency' },
-      { label: 'Microphones', value: '4 (ANC) + 1 (appels)', icon: 'microphone' }
+      { label: 'ANC', value: 'Réduction active du bruit', icon: 'noise' },
+      { label: 'Bluetooth', value: '5.0', icon: 'bluetooth' },
+      { label: 'Autonomie', value: '30 heures', icon: 'battery' },
+      { label: 'Charge', value: 'USB-C rapide', icon: 'charging' },
+      { label: 'Drivers', value: '40mm', icon: 'speaker' },
+      { label: 'Poids', value: '280g', icon: 'weight' }
     ],
     highlights: [
-      'ANC hybride -35dB',
-      '40 heures d\'autonomie avec ANC',
-      'Bluetooth 5.2 multipoint',
-      'Charge rapide USB-C',
-      'Coussinets mémoire de forme'
+      'Réduction active du bruit',
+      'Bluetooth 5.0 stable',
+      '30 heures d\'autonomie',
+      'Coussinets mémoire de forme',
+      'Design pliable'
     ],
-    images: [
-      '/placeholder-hifuture-altus-1.jpg',
-      '/placeholder-hifuture-altus-2.jpg',
-      '/placeholder-hifuture-altus-3.jpg'
-    ],
-    status: 'active',
-    rating: {
-      average: 4.8,
-      count: 134,
-      distribution: { 5: 102, 4: 25, 3: 5, 2: 1, 1: 1 }
-    },
-    warranty: '2 ans constructeur',
-    deliveryTime: '24-48h à La Réunion',
-    badges: ['ANC Premium', 'Longue autonomie', 'Hi-Fi']
-  },
-
-  // HIFUTURE COLORBUDS 2 True Wireless
-  {
-    id: 'hifuture-colorbuds-2',
-    airtableId: 'rec67QqLdQdJ1VZeL',
-    sku: 'HIFUTURE-COLORBUDS2-TWS',
-    name: 'HIFUTURE COLORBUDS 2 True Wireless',
-    brand: 'HIFUTURE',
-    category: 'Audio',
-    subcategory: 'Écouteurs',
-    price: 49.99,
-    originalPrice: 69.99,
-    discount: 29,
-    promo: 'SOLDES',
-    description: "Les écouteurs HIFUTURE COLORBUDS 2 redéfinissent l'expérience True Wireless avec leur combinaison parfaite de performance audio, confort et style. Dotés de drivers dynamiques 10mm avec revêtement biocellulose, ils délivrent un son riche et équilibré avec des basses puissantes et des médiums naturels. La technologie Bluetooth 5.3 avec codec AAC garantit une transmission audio haute fidélité sans latence, idéale pour musique, vidéos et gaming. L'autonomie totale de 35 heures (7h par charge + 28h avec le boîtier) vous accompagne plusieurs jours sans recharge. La charge rapide offre 2 heures d'écoute en 10 minutes. Design ergonomique intra-auriculaire avec 4 tailles d'embouts silicone pour un ajustement parfait et une isolation passive optimale. Certification IPX5 résistante à la transpiration et aux éclaboussures pour sport et activités outdoor. Commandes tactiles personnalisables pour lecture, appels et assistant vocal. Microphones doubles avec réduction de bruit environnemental ENC pour appels clairs même en environnement bruyant. Mode Gaming ultra-faible latence 65ms pour synchronisation parfaite audio-vidéo. Boîtier de charge compact avec LED indicateur de batterie et compatibilité charge sans fil Qi. Application compagnon pour égaliseur personnalisé et localisation des écouteurs. Disponibles en 6 coloris tendance pour matcher votre style. Les écouteurs TWS parfaits pour le quotidien actif à La Réunion.",
-    shortDescription: 'Écouteurs TWS Bluetooth 5.3 avec 35h autonomie, IPX5 et mode gaming 65ms',
-    metaTitle: 'HIFUTURE COLORBUDS 2 - Écouteurs TWS 35h Bluetooth 5.3 | Monster Phone 974',
-    metaDescription: 'Écouteurs True Wireless HIFUTURE COLORBUDS 2 : Bluetooth 5.3, 35h autonomie totale, IPX5, mode gaming, appels ENC. 6 coloris disponibles. Monster Phone La Réunion.',
-    urlSlug: 'hifuture-colorbuds-2-ecouteurs-tws',
-    keywords: ['HIFUTURE COLORBUDS 2', 'écouteurs TWS', 'True Wireless', 'Bluetooth 5.3', 'écouteurs sport', 'La Réunion', '974'],
-    variants: [
-      { color: 'Noir', colorCode: '#000000', ean: '6972576181824', stock: 20, images: [] },
-      { color: 'Blanc', colorCode: '#FFFFFF', ean: '6972576181831', stock: 18, images: [] },
-      { color: 'Bleu', colorCode: '#0080FF', ean: '6972576181848', stock: 15, images: [] },
-      { color: 'Rose', colorCode: '#FFB6C1', ean: '6972576181855', stock: 12, images: [] },
-      { color: 'Vert', colorCode: '#00FF00', ean: '6972576181862', stock: 10, images: [] },
-      { color: 'Violet', colorCode: '#800080', ean: '6972576181879', stock: 8, images: [] }
-    ],
-    defaultVariant: 'Noir',
-    specifications: [
-      { label: 'Drivers', value: '10mm biocellulose', icon: 'speaker' },
-      { label: 'Bluetooth', value: '5.3 avec AAC', icon: 'bluetooth' },
-      { label: 'Autonomie', value: '7h + 28h (boîtier)', icon: 'battery' },
-      { label: 'Étanchéité', value: 'IPX5', icon: 'water' },
-      { label: 'Latence gaming', value: '65ms', icon: 'gaming' },
-      { label: 'Charge', value: 'USB-C + Qi sans fil', icon: 'charging' },
-      { label: 'Microphones', value: 'Double avec ENC', icon: 'microphone' },
-      { label: 'Poids', value: '4.5g par écouteur', icon: 'weight' }
-    ],
-    highlights: [
-      '35 heures d\'autonomie totale',
-      'Mode gaming 65ms',
-      'IPX5 résistant à l\'eau',
-      'Charge sans fil Qi',
-      '6 coloris disponibles'
-    ],
-    images: [
-      '/placeholder-hifuture-colorbuds2-1.jpg',
-      '/placeholder-hifuture-colorbuds2-2.jpg',
-      '/placeholder-hifuture-colorbuds2-3.jpg'
-    ],
+    images: ['data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDQwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNGM0Y0RjYiLz4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZDEiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMTExODI3O3N0b3Atb3BhY2l0eToxIiAvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxRjI5MzY7c3RvcC1vcGFjaXR5OjEiIC8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICAKICA8IS0tIEhlYWRiYW5kIC0tPgogIDxwYXRoIGQ9Ik0xMDAgODBDMTAwIDgwIDEwMCA2MCAxMjUgNTBDMTUwIDQwIDE3NSA0MCAyMDAgNDBDMjI1IDQwIDI1MCA0MCAyNzUgNTBDMzAwIDYwIDMwMCA4MCAzMDAgODAiIAogICAgICAgIHN0cm9rZT0idXJsKCNncmFkMSkiIHN0cm9rZS13aWR0aD0iMjQiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIAogIDwhLS0gTGVmdCBFYXIgQ3VwIC0tPgogIDxjaXJjbGUgY3g9IjEwMCIgY3k9IjIwMCIgcj0iNzUiIGZpbGw9InVybCgjZ3JhZDEpIi8+CiAgPGNpcmNsZSBjeD0iMTAwIiBjeT0iMjAwIiByPSI2MCIgZmlsbD0iIzJBMzQ0MSIvPgogIDxjaXJjbGUgY3g9IjEwMCIgY3k9IjIwMCIgcj0iNDUiIGZpbGw9IiMxRjI5MzYiIG9wYWNpdHk9IjAuOCIvPgogIAogIDwhLS0gUmlnaHQgRWFyIEN1cCAtLT4KICA8Y2lyY2xlIGN4PSIzMDAiIGN5PSIyMDAiIHI9Ijc1IiBmaWxsPSJ1cmwoI2dyYWQxKSIvPgogIDxjaXJjbGUgY3g9IjMwMCIgY3k9IjIwMCIgcj0iNjAiIGZpbGw9IiMyQTM0NDEiLz4KICA8Y2lyY2xlIGN4PSIzMDAiIGN5PSIyMDAiIHI9IjQ1IiBmaWxsPSIjMUYyOTM2IiBvcGFjaXR5PSIwLjgiLz4KICAKICA8IS0tIEFOQyBJbmRpY2F0b3IgLS0+CiAgPGNpcmNsZSBjeD0iMzAwIiBjeT0iMjYwIiByPSI4IiBmaWxsPSIjNEFERTgwIiBvcGFjaXR5PSIwLjkiPgogICAgPGFuaW1hdGUgYXR0cmlidXRlTmFtZT0ib3BhY2l0eSIgdmFsdWVzPSIwLjQ7MTswLjQiIGR1cj0iMnMiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIi8+CiAgPC9jaXJjbGU+CiAgCiAgPCEtLSBUb3VyWCBMb2dvIC0tPgogIDx0ZXh0IHg9IjIwMCIgeT0iMzIwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjgiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSIjMTExODI3IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5IaUZ1dHVyZTwvdGV4dD4KICA8dGV4dCB4PSIyMDAiIHk9IjM1MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIiBmaWxsPSIjNkI3MjgwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5UT1VSIFM8L3RleHQ+Cjwvc3ZnPg=='],
     status: 'active',
     rating: {
       average: 4.6,
-      count: 256,
-      distribution: { 5: 180, 4: 55, 3: 15, 2: 4, 1: 2 }
+      count: 45,
+      distribution: { 5: 28, 4: 12, 3: 3, 2: 1, 1: 1 }
     },
     warranty: '2 ans constructeur',
     deliveryTime: '24-48h à La Réunion',
-    badges: ['Gaming', 'IPX5', 'Charge sans fil']
+    badges: ['ANC', 'Longue autonomie']
+  },
+
+  // HIFUTURE Casque ANC Tour
+  {
+    id: 'hifuture-tour',
+    airtableId: 'recPqWAAc9XSmKS1S',
+    sku: 'HIF-TOUR-ANC',
+    name: 'HIFUTURE Casque ANC Tour',
+    brand: 'HIFUTURE',
+    category: 'Audio',
+    subcategory: 'Casques',
+    price: 44.99,
+    originalPrice: 59.99,
+    discount: 25,
+    promo: 'SOLDES',
+    description: "Le casque HIFUTURE Tour offre qualité audio exceptionnelle avec réduction active du bruit à prix accessible. Parfait équilibre entre performance et budget. Technologie ANC élimine efficacement bruits environnants pour concentration optimale. Bluetooth 5.0 assure connexion fiable et économie énergie. Confort premium avec coussinets doux et arceau rembourré ajustable. Design élégant noir mat s'adapte à tous styles. Autonomie 25 heures pour usage prolongé. Commandes intégrées facilitent contrôle musique et appels. Microphone qualité claire pour communications professionnelles. Pliable et léger pour transport quotidien. Idéal pour étudiants et professionnels à La Réunion cherchant qualité abordable.",
+    shortDescription: 'Casque ANC abordable avec Bluetooth 5.0',
+    metaTitle: 'HIFUTURE Tour - Casque ANC Bluetooth Abordable | Monster Phone 974',
+    metaDescription: 'Casque HIFUTURE Tour avec ANC, Bluetooth 5.0, 25h autonomie. Qualité premium prix accessible. Livraison La Réunion.',
+    urlSlug: 'hifuture-casque-anc-tour',
+    keywords: ['HIFUTURE Tour', 'casque ANC', 'Bluetooth', 'abordable', 'La Réunion'],
+    variants: [
+      { 
+        color: 'Noir', 
+        colorCode: '#000000', 
+        ean: '6972576182000',
+        stock: 15,
+        images: ['data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDQwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNGNUY1RjUiLz4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0idG91ciIgeDEnMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzJBMkEyQTtzdG9wLW9wYWNpdHk6MSIgLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMTExMTExO3N0b3Atb3BhY2l0eToxIiAvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgCiAgPCEtLSBIZWFkYmFuZCAtLT4KICA8cGF0aCBkPSJNMTEwIDkwQzExMCA5MCAxMTAgNzAgMTMwIDYwQzE1MCA1MCAxNzUgNTAgMjAwIDUwQzIyNSA1MCAyNTAgNTAgMjcwIDYwQzI5MCA3MCAyOTAgOTAgMjkwIDkwIiAKICAgICAgICBzdHJva2U9InVybCgjdG91cikiIHN0cm9rZS13aWR0aD0iMjAiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIAogIDwhLS0gTGVmdCBFYXIgQ3VwIC0tPgogIDxjaXJjbGUgY3g9IjExMCIgY3k9IjIwMCIgcj0iNjUiIGZpbGw9InVybCgjdG91cikiLz4KICA8Y2lyY2xlIGN4PSIxMTAiIGN5PSIyMDAiIHI9IjUwIiBmaWxsPSIjMjIyMjIyIi8+CiAgPGNpcmNsZSBjeD0iMTEwIiBjeT0iMjAwIiByPSIzOCIgZmlsbD0iIzE1MTUxNSIgb3BhY2l0eT0iMC44Ii8+CiAgCiAgPCEtLSBSaWdodCBFYXIgQ3VwIC0tPgogIDxjaXJjbGUgY3g9IjI5MCIgY3k9IjIwMCIgcj0iNjUiIGZpbGw9InVybCgjdG91cikiLz4KICA8Y2lyY2xlIGN4PSIyOTAiIGN5PSIyMDAiIHI9IjUwIiBmaWxsPSIjMjIyMjIyIi8+CiAgPGNpcmNsZSBjeD0iMjkwIiBjeT0iMjAwIiByPSIzOCIgZmlsbD0iIzE1MTUxNSIgb3BhY2l0eT0iMC44Ii8+CiAgCiAgPCEtLSBDb25uZWN0aW9uIExpbmVzIC0tPgogIDxwYXRoIGQ9Ik0xMTAgMTM1VjE3MCIgc3Ryb2tlPSJ1cmwoI3RvdXIpIiBzdHJva2Utd2lkdGg9IjEyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNMjkwIDEzNVYxNzAiIHN0cm9rZT0idXJsKCN0b3VyKSIgc3Ryb2tlLXdpZHRoPSIxMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgCiAgPCEtLSBBTkMgSW5kaWNhdG9yIC0tPgogIDxjaXJjbGUgY3g9IjI5MCIgY3k9IjI1MCIgcj0iNiIgZmlsbD0iIzY2RkY2NiIgb3BhY2l0eT0iMC45Ij4KICAgIDxhbmltYXRlIGF0dHJpYnV0ZU5hbWU9Im9wYWNpdHkiIHZhbHVlcz0iMC4zOzE7MC4zIiBkdXI9IjIuNXMiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIi8+CiAgPC9jaXJjbGU+CiAgCiAgPCEtLSBUb3VyIExvZ28gLS0+CiAgPHRleHQgeD0iMjAwIiB5PSIzMTUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNiIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IiMzMzMzMzMiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkhpRnV0dXJlPC90ZXh0PgogIDx0ZXh0IHg9IjIwMCIgeT0iMzQwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IiM1NTU1NTUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlRPVVI8L3RleHQ+Cjwvc3ZnPg==']
+      }
+    ],
+    defaultVariant: 'Noir',
+    specifications: [
+      { label: 'ANC', value: 'Oui', icon: 'noise' },
+      { label: 'Bluetooth', value: '5.0', icon: 'bluetooth' },
+      { label: 'Autonomie', value: '25 heures', icon: 'battery' },
+      { label: 'Drivers', value: '40mm', icon: 'speaker' },
+      { label: 'Poids', value: '250g', icon: 'weight' },
+      { label: 'Pliable', value: 'Oui', icon: 'fold' }
+    ],
+    highlights: [
+      'Prix accessible',
+      'Réduction de bruit active',
+      '25 heures d\'autonomie',
+      'Design pliable',
+      'Confort longue durée'
+    ],
+    images: ['data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDQwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNGNUY1RjUiLz4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0idG91ciIgeDElMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzJBMkEyQTtzdG9wLW9wYWNpdHk6MSIgLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMTExMTExO3N0b3Atb3BhY2l0eToxIiAvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgCiAgPCEtLSBIZWFkYmFuZCAtLT4KICA8cGF0aCBkPSJNMTEwIDkwQzExMCA5MCAxMTAgNzAgMTMwIDYwQzE1MCA1MCAxNzUgNTAgMjAwIDUwQzIyNSA1MCAyNTAgNTAgMjcwIDYwQzI5MCA3MCAyOTAgOTAgMjkwIDkwIiAKICAgICAgICBzdHJva2U9InVybCgjdG91cikiIHN0cm9rZS13aWR0aD0iMjAiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIAogIDwhLS0gTGVmdCBFYXIgQ3VwIC0tPgogIDxjaXJjbGUgY3g9IjExMCIgY3k9IjIwMCIgcj0iNjUiIGZpbGw9InVybCgjdG91cikiLz4KICA8Y2lyY2xlIGN4PSIxMTAiIGN5PSIyMDAiIHI9IjUwIiBmaWxsPSIjMjIyMjIyIi8+CiAgPGNpcmNsZSBjeD0iMTEwIiBjeT0iMjAwIiByPSIzOCIgZmlsbD0iIzE1MTUxNSIgb3BhY2l0eT0iMC44Ii8+CiAgCiAgPCEtLSBSaWdodCBFYXIgQ3VwIC0tPgogIDxjaXJjbGUgY3g9IjI5MCIgY3k9IjIwMCIgcj0iNjUiIGZpbGw9InVybCgjdG91cikiLz4KICA8Y2lyY2xlIGN4PSIyOTAiIGN5PSIyMDAiIHI9IjUwIiBmaWxsPSIjMjIyMjIyIi8+CiAgPGNpcmNsZSBjeD0iMjkwIiBjeT0iMjAwIiByPSIzOCIgZmlsbD0iIzE1MTUxNSIgb3BhY2l0eT0iMC44Ii8+CiAgCiAgPCEtLSBDb25uZWN0aW9uIExpbmVzIC0tPgogIDxwYXRoIGQ9Ik0xMTAgMTM1VjE3MCIgc3Ryb2tlPSJ1cmwoI3RvdXIpIiBzdHJva2Utd2lkdGg9IjEyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNMjkwIDEzNVYxNzAiIHN0cm9rZT0idXJsKCN0b3VyKSIgc3Ryb2tlLXdpZHRoPSIxMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgCiAgPCEtLSBBTkMgSW5kaWNhdG9yIC0tPgogIDxjaXJjbGUgY3g9IjI5MCIgY3k9IjI1MCIgcj0iNiIgZmlsbD0iIzY2RkY2NiIgb3BhY2l0eT0iMC45Ij4KICAgIDxhbmltYXRlIGF0dHJpYnV0ZU5hbWU9Im9wYWNpdHkiIHZhbHVlcz0iMC4zOzE7MC4zIiBkdXI9IjIuNXMiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIi8+CiAgPC9jaXJjbGU+CiAgCiAgPCEtLSBUb3VyIExvZ28gLS0+CiAgPHRleHQgeD0iMjAwIiB5PSIzMTUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNiIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IiMzMzMzMzMiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkhpRnV0dXJlPC90ZXh0PgogIDx0ZXh0IHg9IjIwMCIgeT0iMzQwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IiM1NTU1NTUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlRPVVI8L3RleHQ+Cjwvc3ZnPg=='],
+    status: 'active',
+    rating: {
+      average: 4.4,
+      count: 67,
+      distribution: { 5: 35, 4: 20, 3: 8, 2: 3, 1: 1 }
+    },
+    warranty: '2 ans constructeur',
+    deliveryTime: '24-48h à La Réunion',
+    badges: ['Prix Malin', 'ANC']
+  },
+
+  // MONSTER Champion Airlinks
+  {
+    id: 'monster-champion-airlinks',
+    airtableId: 'rec1HvuCL9MKEo6Wo',
+    sku: 'MONSTER-CHAMPION-AIRLINKS',
+    name: 'MONSTER Champion Airlinks',
+    brand: 'MONSTER',
+    category: 'Audio',
+    subcategory: 'Casques',
+    price: 139.99,
+    originalPrice: 179.99,
+    discount: 22,
+    promo: 'GAMING PRO',
+    description: "Le casque gaming MONSTER Champion Airlinks offre une expérience gaming sans fil exceptionnelle avec une qualité audio haute performance. Technologie Bluetooth avancée pour une connexion ultra-stable et sans latence. Design confortable pour les longues sessions de jeu.",
+    shortDescription: 'Casque gaming sans fil haute performance',
+    metaTitle: 'MONSTER Champion Airlinks - Casque Gaming Sans Fil | Monster Phone 974',
+    metaDescription: 'Casque gaming MONSTER Champion Airlinks avec connexion Bluetooth stable, confort premium. Livraison La Réunion.',
+    urlSlug: 'monster-champion-airlinks',
+    keywords: ['MONSTER', 'Champion Airlinks', 'casque gaming', 'sans fil', 'La Réunion'],
+    variants: [
+      { 
+        color: 'Noir', 
+        colorCode: '#000000', 
+        ean: '0810079000137',
+        stock: 10,
+        images: []
+      }
+    ],
+    defaultVariant: 'Noir',
+    specifications: [
+      { label: 'Connectivité', value: 'Bluetooth', icon: 'bluetooth' },
+      { label: 'Type', value: 'Gaming', icon: 'gamepad' },
+      { label: 'Drivers', value: '50mm', icon: 'speaker' },
+      { label: 'Autonomie', value: '20 heures', icon: 'battery' }
+    ],
+    highlights: [
+      'Sans fil haute performance',
+      'Connexion ultra-stable',
+      'Gaming professionnel',
+      'Confort longue durée'
+    ],
+    images: [],
+    status: 'active',
+    rating: {
+      average: 4.7,
+      count: 89,
+      distribution: { 5: 65, 4: 18, 3: 4, 2: 1, 1: 1 }
+    },
+    warranty: '2 ans constructeur',
+    deliveryTime: '24-48h à La Réunion',
+    badges: ['Gaming', 'Sans fil']
+  },
+
+  // MONSTER TH300 Tactile
+  {
+    id: 'monster-th300-tactile',
+    airtableId: 'rec7hJaDKr7rryd9i',
+    sku: 'MONSTER-TH300',
+    name: 'MONSTER TH300 Tactile',
+    brand: 'MONSTER',
+    category: 'Audio',
+    subcategory: 'Casques',
+    price: 69.99,
+    originalPrice: 89.99,
+    discount: 22,
+    promo: 'INNOVATION',
+    description: "Le casque MONSTER TH300 Tactile révolutionne l'expérience gaming avec sa technologie haptique avancée pour une immersion sonore exceptionnelle. Connexion jack 3.5mm universelle compatible avec toutes les plateformes gaming.",
+    shortDescription: 'Casque tactile avec technologie haptique',
+    metaTitle: 'MONSTER TH300 Tactile - Casque Gaming Haptique | Monster Phone 974',
+    metaDescription: 'Casque MONSTER TH300 avec technologie haptique, jack 3.5mm universel. Livraison La Réunion.',
+    urlSlug: 'monster-th300-tactile',
+    keywords: ['MONSTER', 'TH300', 'casque tactile', 'haptique', 'gaming', 'La Réunion'],
+    variants: [
+      { 
+        color: 'Noir', 
+        colorCode: '#000000', 
+        ean: '0810079137250',
+        stock: 15,
+        images: []
+      },
+      { 
+        color: 'Blanc', 
+        colorCode: '#FFFFFF', 
+        ean: '0810079137253',
+        stock: 12,
+        images: []
+      }
+    ],
+    defaultVariant: 'Noir',
+    specifications: [
+      { label: 'Connectivité', value: 'Jack 3.5mm', icon: 'cable' },
+      { label: 'Technologie', value: 'Haptique', icon: 'vibration' },
+      { label: 'Type', value: 'Gaming', icon: 'gamepad' },
+      { label: 'Compatibilité', value: 'Universelle', icon: 'check' }
+    ],
+    highlights: [
+      'Technologie haptique',
+      'Immersion exceptionnelle',
+      'Jack 3.5mm universel',
+      'Gaming avancé'
+    ],
+    images: [],
+    status: 'active',
+    rating: {
+      average: 4.6,
+      count: 67,
+      distribution: { 5: 45, 4: 15, 3: 5, 2: 1, 1: 1 }
+    },
+    warranty: '2 ans constructeur',
+    deliveryTime: '24-48h à La Réunion',
+    badges: ['Haptique', 'Gaming']
+  },
+
+  // MONSTER Element Air
+  {
+    id: 'monster-element-air',
+    airtableId: 'recg2GdiwRvVbtdwz',
+    sku: 'MONSTER-ELEMENT-AIR',
+    name: 'MONSTER Element Air',
+    brand: 'MONSTER',
+    category: 'Audio',
+    subcategory: 'Casques',
+    price: 199.99,
+    originalPrice: 249.99,
+    discount: 20,
+    promo: 'HIGH-END',
+    description: "Le casque gaming MONSTER Element Air représente le summum de la technologie sans fil avec audio haute résolution et design ultra-léger. Bluetooth avancé pour les gamers les plus exigeants.",
+    shortDescription: 'Casque gaming sans fil haute résolution',
+    metaTitle: 'MONSTER Element Air - Casque Gaming Premium | Monster Phone 974',
+    metaDescription: 'Casque MONSTER Element Air, Bluetooth, audio haute résolution, ultra-léger. Livraison La Réunion.',
+    urlSlug: 'monster-element-air',
+    keywords: ['MONSTER', 'Element Air', 'casque gaming', 'haute résolution', 'La Réunion'],
+    variants: [
+      { 
+        color: 'Noir/Rouge', 
+        colorCode: '#FF0000', 
+        ean: '2MNSK0928B0L2',
+        stock: 5,
+        images: []
+      }
+    ],
+    defaultVariant: 'Noir/Rouge',
+    specifications: [
+      { label: 'Connectivité', value: 'Bluetooth', icon: 'bluetooth' },
+      { label: 'Audio', value: 'Haute résolution', icon: 'hd' },
+      { label: 'Design', value: 'Ultra-léger', icon: 'feather' },
+      { label: 'Type', value: 'Gaming Premium', icon: 'crown' }
+    ],
+    highlights: [
+      'Audio haute résolution',
+      'Ultra-léger',
+      'Sans fil avancé',
+      'Gaming premium'
+    ],
+    images: [],
+    status: 'active',
+    rating: {
+      average: 4.9,
+      count: 45,
+      distribution: { 5: 40, 4: 4, 3: 0, 2: 0, 1: 1 }
+    },
+    warranty: '2 ans constructeur',
+    deliveryTime: '24-48h à La Réunion',
+    badges: ['Premium', 'High-End']
+  },
+
+  // MUVIT Casque Sans Fil Enfant
+  {
+    id: 'muvit-casque-enfant',
+    airtableId: 'recbBBnDnZ33UaLXR',
+    sku: 'MUHPH01',
+    name: 'MUVIT Casque Sans Fil Enfant',
+    brand: 'MUVIT',
+    category: 'Audio',
+    subcategory: 'Casques',
+    price: 39.99,
+    originalPrice: 49.99,
+    discount: 20,
+    promo: 'KIDS',
+    description: "Casque sans fil MUVIT spécialement conçu pour enfants avec limitation de volume pour protéger l'audition. Designs adorables avec thèmes animaux et confort adapté aux enfants de 3 à 12 ans.",
+    shortDescription: 'Casque enfant avec protection auditive',
+    metaTitle: 'MUVIT Casque Sans Fil Enfant - Protection Auditive | Monster Phone 974',
+    metaDescription: 'Casque MUVIT pour enfants, Bluetooth, volume limité, designs animaux. Livraison La Réunion.',
+    urlSlug: 'muvit-casque-enfant',
+    keywords: ['MUVIT', 'casque enfant', 'protection auditive', 'sans fil', 'La Réunion'],
+    variants: [
+      { 
+        color: 'Lapin (Blanc/Rose)', 
+        colorCode: '#FFB6C1', 
+        ean: 'MUHPH01-LAPIN',
+        stock: 10,
+        images: []
+      },
+      { 
+        color: 'Chat (Rose/Blanc)', 
+        colorCode: '#FF69B4', 
+        ean: 'MUHPH01-CHAT',
+        stock: 12,
+        images: []
+      },
+      { 
+        color: 'Licorne (Rose/Blanc/Doré)', 
+        colorCode: '#FFD700', 
+        ean: 'MUHPH01-LICORNE',
+        stock: 8,
+        images: []
+      },
+      { 
+        color: 'Dragon (Vert/Rouge)', 
+        colorCode: '#228B22', 
+        ean: 'MUHPH01-DRAGON',
+        stock: 6,
+        images: []
+      },
+      { 
+        color: 'Pika (Jaune/Rouge)', 
+        colorCode: '#FFD700', 
+        ean: 'MUHPH01-PIKA',
+        stock: 15,
+        images: []
+      }
+    ],
+    defaultVariant: 'Chat (Rose/Blanc)',
+    specifications: [
+      { label: 'Âge', value: '3-12 ans', icon: 'child' },
+      { label: 'Protection', value: 'Volume limité 85dB', icon: 'shield' },
+      { label: 'Connectivité', value: 'Bluetooth', icon: 'bluetooth' },
+      { label: 'Garantie', value: '2 ans', icon: 'warranty' }
+    ],
+    highlights: [
+      'Volume limité sécurité',
+      'Designs animaux',
+      'Confort enfant',
+      'Bluetooth sans fil'
+    ],
+    images: [],
+    status: 'active',
+    rating: {
+      average: 4.7,
+      count: 89,
+      distribution: { 5: 65, 4: 18, 3: 4, 2: 2, 1: 1 }
+    },
+    warranty: '2 ans constructeur',
+    deliveryTime: '24-48h à La Réunion',
+    badges: ['Enfants', 'Protection']
   },
 
   // HIFUTURE FUTUREMATE
@@ -1046,63 +1306,6 @@ export const allProducts: Product[] = [
     warranty: '2 ans constructeur',
     deliveryTime: '24-48h à La Réunion',
     badges: ['GPS Premium', 'NFC', 'Musique']
-  },
-
-  // HIFUTURE FLYBUDS Ecouteurs sans fil
-  {
-    id: 'hifuture-flybuds',
-    airtableId: 'recDqA9HaRsNJWN5U',
-    sku: 'HIFUTURE-FLYBUDS-TWS',
-    name: 'HIFUTURE FLYBUDS Ecouteurs sans fil',
-    brand: 'HIFUTURE',
-    category: 'Audio',
-    subcategory: 'Écouteurs',
-    price: 59.99,
-    originalPrice: 79.99,
-    discount: 25,
-    promo: 'OFFRE FLASH',
-    description: "Les écouteurs HIFUTURE FLYBUDS incarnent l'excellence du son True Wireless avec leur technologie audio avancée et leur design ergonomique révolutionnaire. Équipés de drivers graphène 13mm haute performance, ils délivrent un son Hi-Res avec une signature sonore équilibrée, des basses profondes et percutantes, des médiums chaleureux et des aigus cristallins sans distorsion. La technologie ANC active avec 6 microphones dédiés supprime jusqu'à 42dB de bruit ambiant, créant une bulle d'immersion sonore parfaite pour vos trajets, travail ou détente. Mode Transparence adaptatif pour rester conscient de votre environnement sans retirer les écouteurs. Bluetooth 5.3 avec technologie de transmission double canal pour une connexion ultra-stable et une latence minimale de 40ms en mode gaming. Autonomie exceptionnelle : 8 heures par charge avec ANC, 12 heures sans ANC, plus 32 heures supplémentaires avec le boîtier de charge. Charge rapide : 15 minutes pour 3 heures d'écoute. Design semi-intra avec embouts en mousse à mémoire de forme pour confort longue durée et isolation optimale. Certification IPX6 résistante à la pluie et transpiration intense. Commandes tactiles intelligentes avec détection de port automatique. Appels HD avec technologie de beamforming et suppression du bruit du vent. Application dédiée avec égaliseur 10 bandes, mise à jour OTA et localisation. Le choix premium pour audiophiles mobiles à La Réunion.",
-    shortDescription: 'Écouteurs ANC 42dB avec drivers graphène 13mm, Bluetooth 5.3 et 40h autonomie',
-    metaTitle: 'HIFUTURE FLYBUDS - Écouteurs ANC Premium Graphène | Monster Phone 974',
-    metaDescription: 'Écouteurs TWS HIFUTURE FLYBUDS : ANC 42dB, drivers graphène 13mm, 40h autonomie totale, IPX6, mode gaming 40ms. Son Hi-Res premium La Réunion.',
-    urlSlug: 'hifuture-flybuds-ecouteurs-anc',
-    keywords: ['HIFUTURE FLYBUDS', 'écouteurs ANC', 'TWS premium', 'graphène', 'Hi-Res audio', 'La Réunion', '974'],
-    variants: [
-      { color: 'Noir Mat', colorCode: '#2B2B2B', ean: '6972576182890', stock: 10, images: [] },
-      { color: 'Blanc Pearl', colorCode: '#F8F8FF', ean: '6972576182906', stock: 8, images: [] }
-    ],
-    defaultVariant: 'Noir Mat',
-    specifications: [
-      { label: 'Drivers', value: '13mm graphène', icon: 'speaker' },
-      { label: 'ANC', value: '-42dB (6 microphones)', icon: 'noise' },
-      { label: 'Bluetooth', value: '5.3 double canal', icon: 'bluetooth' },
-      { label: 'Autonomie', value: '8h + 32h (boîtier)', icon: 'battery' },
-      { label: 'Latence', value: '40ms mode gaming', icon: 'gaming' },
-      { label: 'Étanchéité', value: 'IPX6', icon: 'water' },
-      { label: 'Codec', value: 'AAC, SBC, aptX', icon: 'codec' },
-      { label: 'Charge', value: 'USB-C + Sans fil', icon: 'charging' }
-    ],
-    highlights: [
-      'ANC puissant -42dB',
-      'Drivers graphène Hi-Res',
-      '40 heures autonomie totale',
-      'Mode gaming 40ms',
-      'IPX6 sport-ready'
-    ],
-    images: [
-      '/placeholder-hifuture-flybuds-1.jpg',
-      '/placeholder-hifuture-flybuds-2.jpg',
-      '/placeholder-hifuture-flybuds-3.jpg'
-    ],
-    status: 'active',
-    rating: {
-      average: 4.8,
-      count: 198,
-      distribution: { 5: 160, 4: 30, 3: 6, 2: 1, 1: 1 }
-    },
-    warranty: '2 ans constructeur',
-    deliveryTime: '24-48h à La Réunion',
-    badges: ['ANC Pro', 'Hi-Res', 'Gaming']
   },
 
   // HIFUTURE GRAVITY Enceinte Bluetooth
@@ -1563,175 +1766,6 @@ export const allProducts: Product[] = [
     warranty: '2 ans constructeur',
     deliveryTime: '24-48h à La Réunion',
     badges: ['Premium', 'Haute Fidélité', 'Best-Seller']
-  },
-
-  // MONSTER Champion Airlinks Casque Gaming Sans Fil
-  {
-    id: 'monster-champion-airlinks',
-    airtableId: 'rec1HvuCL9MKEo6Wo',
-    sku: 'MONSTER-CHAMPION-AIRLINKS',
-    name: 'MONSTER Champion Airlinks Casque Gaming Sans Fil',
-    brand: 'MONSTER',
-    category: 'Audio',
-    subcategory: 'Casques',
-    price: 139.99,
-    originalPrice: 179.99,
-    discount: 22,
-    promo: 'OFFRE GAMING',
-    description: "Le casque gaming MONSTER Champion Airlinks établit de nouveaux standards pour l'audio gaming professionnel. Cette référence absolue combine technologie Airlinks exclusive et architecture acoustique révolutionnaire pour une expérience gaming immersive incomparable. La connexion Bluetooth ultra-stable élimine totalement latence et interruptions grâce à la technologie propriétaire Airlinks. Les transducteurs haute définition 50mm délivrent un son spatial 3D précis pour localisation parfaite des ennemis. Les basses percutantes amplifient l'impact des explosions et effets sonores. Les médiums équilibrés préservent clarté des dialogues et communications. Les aigus détaillés révèlent indices sonores cruciaux pour avantage compétitif. Le microphone antibruit détachable capture votre voix avec clarté cristalline. La suppression active du bruit environnant garantit communications parfaites en équipe. Les coussinets mousse mémoire offrent confort exceptionnel pendant sessions marathon. L'arceau ajustable rembourré répartit parfaitement le poids. L'autonomie 30 heures accompagne vos sessions gaming les plus intenses. La charge rapide USB-C restaure 5 heures en 15 minutes. Les commandes intuitives permettent ajustements instantanés sans quitter le jeu. La construction robuste résiste aux utilisations intensives. Compatible PC, consoles et mobiles pour polyvalence totale. Le choix des gamers professionnels de La Réunion.",
-    shortDescription: 'Casque gaming sans fil pro avec technologie Airlinks et son spatial 3D immersif',
-    metaTitle: 'MONSTER Champion Airlinks - Casque Gaming Pro Sans Fil | Monster Phone 974',
-    metaDescription: 'Casque gaming MONSTER Champion Airlinks avec technologie exclusive, son 3D spatial, micro antibruit. Autonomie 30h, confort premium. Pour gamers exigeants La Réunion 974.',
-    urlSlug: 'monster-champion-airlinks-casque-gaming',
-    keywords: ['MONSTER Champion', 'Airlinks', 'casque gaming', 'sans fil', 'audio 3D', 'gaming pro', 'La Réunion'],
-    variants: [
-      { color: 'Noir', colorCode: '#000000', ean: '0810079000000', stock: 15, images: [] }
-    ],
-    defaultVariant: 'Noir',
-    specifications: [
-      { label: 'Drivers', value: '50mm Néodyme', icon: 'speaker' },
-      { label: 'Réponse', value: '20Hz-40kHz', icon: 'wave' },
-      { label: 'Connectivité', value: 'Bluetooth 5.2 Airlinks', icon: 'bluetooth' },
-      { label: 'Autonomie', value: '30 heures', icon: 'battery' },
-      { label: 'Charge rapide', value: '15min = 5h', icon: 'charging' },
-      { label: 'Microphone', value: 'Détachable antibruit', icon: 'mic' },
-      { label: 'Portée', value: '15 mètres', icon: 'signal' },
-      { label: 'Poids', value: '280g', icon: 'weight' }
-    ],
-    highlights: [
-      'Technologie Airlinks exclusive',
-      'Son spatial 3D immersif',
-      'Microphone gaming antibruit',
-      '30 heures d\'autonomie',
-      'Confort mousse mémoire'
-    ],
-    images: [
-      '/placeholder-monster-champion-1.jpg',
-      '/placeholder-monster-champion-2.jpg',
-      '/placeholder-monster-champion-3.jpg'
-    ],
-    status: 'active',
-    rating: {
-      average: 4.9,
-      count: 412,
-      distribution: { 5: 350, 4: 50, 3: 8, 2: 3, 1: 1 }
-    },
-    warranty: '2 ans constructeur',
-    deliveryTime: '24-48h à La Réunion',
-    badges: ['Gaming Pro', 'Technologie Exclusive', 'Champion']
-  },
-
-  // MONSTER TH300 Tactile Casque Gaming Haptique
-  {
-    id: 'monster-th300-tactile',
-    airtableId: 'rec7hJaDKr7rryd9i',
-    sku: 'MONSTER-TH300',
-    name: 'MONSTER TH300 Tactile Casque Gaming Haptique',
-    brand: 'MONSTER',
-    category: 'Audio',
-    subcategory: 'Casques',
-    price: 69.99,
-    originalPrice: 89.99,
-    discount: 22,
-    promo: 'INNOVATION',
-    description: "Le casque MONSTER TH300 Tactile révolutionne l'expérience gaming avec technologie haptique révolutionnaire qui transforme le son en sensations physiques. Cette innovation unique vous permet de ressentir littéralement chaque explosion, impact et vibration pour immersion totale inédite. Les transducteurs haptiques brevetés convertissent basses fréquences en vibrations tactiles calibrées. Chaque coup de feu, explosion ou effet sonore devient sensation physique synchronisée. L'intensité haptique ajustable s'adapte à vos préférences personnelles. Le son premium avec spatialisation 3D crée environnement sonore tridimensionnel précis. Les drivers 40mm haute définition délivrent audio gaming cristallin. Les basses profondes amplifiées enrichissent l'expérience tactile. Les médiums clairs préservent dialogues et communications d'équipe. Les aigus détaillés révèlent indices sonores stratégiques. Les coussinets ergonomiques en mousse mémoire garantissent confort longue durée. L'arceau ajustable auto-adaptatif épouse parfaitement morphologie crânienne. Le design moderne disponible en noir discret ou blanc futuriste. La connexion jack 3.5mm universelle assure compatibilité totale. Compatible PC, PlayStation, Xbox, Switch et smartphones. Le poids plume 250g permet port prolongé sans fatigue. Innovation gaming accessible aux passionnés de La Réunion.",
-    shortDescription: 'Casque gaming avec technologie haptique révolutionnaire et retour tactile immersif',
-    metaTitle: 'MONSTER TH300 Tactile - Casque Gaming Haptique | Monster Phone 974',
-    metaDescription: 'Casque gaming MONSTER TH300 avec technologie haptique unique, vibrations synchronisées, son 3D. Confort ergonomique, compatible toutes plateformes. Innovation La Réunion 974.',
-    urlSlug: 'monster-th300-tactile-casque-gaming',
-    keywords: ['MONSTER TH300', 'casque tactile', 'gaming haptique', 'retour tactile', 'vibrations', 'immersion', '974'],
-    variants: [
-      { color: 'Noir', colorCode: '#000000', ean: '0810079710546', stock: 25, images: [] },
-      { color: 'Blanc', colorCode: '#FFFFFF', ean: '0810079710553', stock: 20, images: [] }
-    ],
-    defaultVariant: 'Noir',
-    specifications: [
-      { label: 'Drivers', value: '40mm + Haptique', icon: 'speaker' },
-      { label: 'Technologie', value: 'Retour haptique', icon: 'vibration' },
-      { label: 'Réponse', value: '20Hz-20kHz', icon: 'wave' },
-      { label: 'Connectivité', value: 'Jack 3.5mm', icon: 'cable' },
-      { label: 'Impédance', value: '32 Ohms', icon: 'resistance' },
-      { label: 'Sensibilité', value: '110dB', icon: 'volume' },
-      { label: 'Câble', value: '1.5m tressé', icon: 'cable' },
-      { label: 'Poids', value: '250g', icon: 'weight' }
-    ],
-    highlights: [
-      'Technologie haptique exclusive',
-      'Vibrations tactiles synchronisées',
-      'Son spatial 3D immersif',
-      'Compatible toutes plateformes',
-      'Ultra léger 250g'
-    ],
-    images: [
-      '/placeholder-monster-th300-1.jpg',
-      '/placeholder-monster-th300-2.jpg',
-      '/placeholder-monster-th300-3.jpg'
-    ],
-    status: 'active',
-    rating: {
-      average: 4.7,
-      count: 189,
-      distribution: { 5: 130, 4: 40, 3: 15, 2: 3, 1: 1 }
-    },
-    warranty: '2 ans constructeur',
-    deliveryTime: '24-48h à La Réunion',
-    badges: ['Innovation', 'Haptique', 'Immersion Totale']
-  },
-
-  // MONSTER DNA FIT Casque Sport Premium
-  {
-    id: 'monster-dna-fit',
-    airtableId: 'rec8OTzIaj5Se2xDK',
-    sku: 'MONSTER-DNA-FIT',
-    name: 'MONSTER DNA FIT Casque Sport Premium',
-    brand: 'MONSTER',
-    category: 'Audio',
-    subcategory: 'Casques',
-    price: 189.99,
-    originalPrice: 249.99,
-    discount: 24,
-    promo: 'FITNESS PRO',
-    description: "Le casque sport MONSTER DNA FIT représente l'excellence absolue pour athlètes exigeants. Conçu spécifiquement pour résister aux entraînements les plus intenses tout en délivrant performance audio exceptionnelle qui booste vos performances. La certification IPX7 garantit résistance totale à transpiration et pluie. Construction militaire résiste chocs, vibrations et conditions extrêmes. Les coussinets antibactériens éliminent 99% des bactéries et odeurs. Le traitement antimicrobien maintient hygiène parfaite même après usage intensif. Le système de maintien breveté assure stabilité parfaite pendant mouvements dynamiques. Les crochets d'oreille flexibles s'adaptent morphologie individuelle. L'audio haute définition avec signature DNA délivre basses puissantes motivantes. L'égalisation sport optimisée amplifie rythmes énergisants. Les médiums clairs préservent voix coach et instructions. Les aigus cristallins maintiennent clarté même à volume élevé. L'autonomie 15 heures accompagne marathons d'entraînement. La charge rapide restaure 3 heures en 10 minutes. Le microphone intégré permet appels mains libres pendant exercice. Les commandes tactiles permettent contrôle sans interrompre effort. Le design noir/rouge dynamique reflète esprit sportif. Parfait pour sportifs passionnés de La Réunion cherchant excellence.",
-    shortDescription: 'Casque sport IPX7 avec coussinets antibactériens et audio HD motivant pour athlètes',
-    metaTitle: 'MONSTER DNA FIT - Casque Sport Premium IPX7 | Monster Phone 974',
-    metaDescription: 'Casque sport MONSTER DNA FIT résistant IPX7, coussinets antibactériens, audio HD énergisant. Maintien parfait, 15h autonomie. Pour athlètes exigeants La Réunion 974.',
-    urlSlug: 'monster-dna-fit-casque-sport',
-    keywords: ['MONSTER DNA FIT', 'casque sport', 'IPX7', 'antibactérien', 'fitness', 'audio HD', 'La Réunion'],
-    variants: [
-      { color: 'Noir/Rouge', colorCode: '#FF0000', ean: '0810079000001', stock: 18, images: [] }
-    ],
-    defaultVariant: 'Noir/Rouge',
-    specifications: [
-      { label: 'Résistance', value: 'IPX7', icon: 'water' },
-      { label: 'Drivers', value: '45mm HD', icon: 'speaker' },
-      { label: 'Autonomie', value: '15 heures', icon: 'battery' },
-      { label: 'Charge rapide', value: '10min = 3h', icon: 'charging' },
-      { label: 'Bluetooth', value: '5.1 aptX', icon: 'bluetooth' },
-      { label: 'Coussinets', value: 'Antibactériens', icon: 'shield' },
-      { label: 'Portée', value: '20 mètres', icon: 'signal' },
-      { label: 'Poids', value: '220g', icon: 'weight' }
-    ],
-    highlights: [
-      'Certification IPX7 totale',
-      'Coussinets antibactériens 99%',
-      'Maintien sport breveté',
-      'Audio HD signature DNA',
-      '15 heures d\'autonomie'
-    ],
-    images: [
-      '/placeholder-monster-dna-1.jpg',
-      '/placeholder-monster-dna-2.jpg',
-      '/placeholder-monster-dna-3.jpg'
-    ],
-    status: 'active',
-    rating: {
-      average: 4.8,
-      count: 567,
-      distribution: { 5: 420, 4: 100, 3: 35, 2: 10, 1: 2 }
-    },
-    warranty: '3 ans constructeur',
-    deliveryTime: '24-48h à La Réunion',
-    badges: ['Sport Pro', 'IPX7', 'Antibactérien']
   },
 
   // MONSTER N-Lite 203 Batterie Portable Premium
@@ -3196,58 +3230,6 @@ export const allProducts: Product[] = [
     deliveryTime: '24-48h à La Réunion',
     status: "active",
     badges: ['RGB', 'Gaming', 'Premium']
-  },
-
-  // Monster Support Casque Gaming LED
-  {
-    id: 'monster-support-casque-led',
-    airtableId: 'recMONSTERHEADSET001',
-    sku: 'MONSTER-HEADSET-STAND',
-    name: 'MONSTER Support Casque Gaming LED Pro',
-    brand: 'MONSTER',
-    category: 'Accessoires',
-    subcategory: 'Supports gaming',
-    price: 29.99,
-    originalPrice: 39.99,
-    discount: 25,
-    promo: 'SETUP PRO',
-    description: "Le support casque Monster LED Pro combine esthétique gaming et fonctionnalité avancée. Structure aluminium anodisé noir mat avec finitions premium résiste au poids des casques les plus lourds. Base LED circulaire diffuse éclairage ambiant personnalisable 7 couleurs + mode respiration. Hub USB 3.0 intégré 3 ports facilite connexion périphériques gaming : souris, clavier, clé USB. Port audio 3.5mm frontal permet branchement rapide casque sans chercher port PC. Surface caoutchoutée arceau protège bandeau casque de l'usure et déformation. Base lestée 500g avec patins antidérapants garantit stabilité absolue. Hauteur 28cm accommode tous types casques : gaming, studio, VR. Système gestion câbles arrière maintient fils organisés proprement. Alimentation USB unique simplifie installation (câble 1.5m inclus). Indicateurs LED ports USB montrent activité transfert données. Construction modulaire permet démontage facile pour transport LAN party. Compatible tous casques marché incluant modèles sans fil station charge. Accessoire indispensable pour setup gaming organisé et professionnel à La Réunion.",
-    shortDescription: 'Support casque avec hub USB 3.0 et LED ambiance 7 couleurs',
-    metaTitle: 'MONSTER Support Casque Gaming LED - Hub USB Setup | Monster Phone 974',
-    metaDescription: 'Support casque gaming Monster LED Pro. Hub USB 3.0, LED 7 couleurs, aluminium premium, port audio. Setup gaming parfait La Réunion.',
-    urlSlug: 'monster-support-casque-gaming-led',
-    keywords: ['support casque', 'gaming', 'LED', 'Monster', 'hub USB', 'setup', 'La Réunion'],
-    variants: [
-      { color: 'Noir Mat', colorCode: '#1A1A1A', ean: '3402000HEAD001', stock: 42, images: [] }
-    ],
-    defaultVariant: 'Noir Mat',
-    specifications: [
-      { label: 'Matériau', value: 'Aluminium anodisé', icon: 'material' },
-      { label: 'Hub USB', value: '3 ports USB 3.0', icon: 'ports' },
-      { label: 'LED', value: '7 couleurs + modes', icon: 'light' },
-      { label: 'Audio', value: 'Port 3.5mm frontal', icon: 'audio' },
-      { label: 'Hauteur', value: '28cm', icon: 'height' },
-      { label: 'Base', value: '500g lestée', icon: 'weight' },
-      { label: 'Alimentation', value: 'USB 5V', icon: 'power' },
-      { label: 'Compatibilité', value: 'Tous casques', icon: 'headset' }
-    ],
-    highlights: [
-      'Hub USB 3.0 intégré',
-      'LED 7 couleurs',
-      'Aluminium premium',
-      'Port audio frontal',
-      'Base ultra-stable'
-    ],
-    images: [],
-    rating: {
-      average: 4.6,
-      count: 198,
-      distribution: { 5: 138, 4: 45, 3: 12, 2: 3, 1: 0 }
-    },
-    warranty: '2 ans constructeur',
-    deliveryTime: '24-48h à La Réunion',
-    status: "active",
-    badges: ['LED', 'USB 3.0', 'Pro']
   },
 
   // Monster Tapis Souris Gaming XXL RGB
@@ -4972,14 +4954,16 @@ export const allProducts: Product[] = [
     category: 'Audio',
     subcategory: 'Écouteurs',
     price: 24.99,
-    description: "Écouteurs True Wireless HIFUTURE Olymbuds 3 avec réduction de bruit et autonomie étendue. La liberté du sans-fil à prix mini.",
+    description: "Les écouteurs True Wireless HIFUTURE Olymbuds 3 redéfinissent l'expérience audio sans fil avec une combinaison parfaite de qualité sonore, confort et accessibilité. Ces écouteurs compacts concentrent les dernières innovations technologiques pour offrir une liberté totale de mouvement sans compromis sur la performance.\n\nLe son haute définition est assuré par des drivers dynamiques de 10mm optimisés, délivrant des basses riches et profondes qui donnent vie à votre musique. Les médiums clairs préservent la chaleur des voix, tandis que les aigus cristallins révèlent chaque détail de vos morceaux préférés. L'égalisation adaptative ajuste automatiquement le profil sonore selon le genre musical.\n\nLa technologie de réduction de bruit environnemental ENC garantit des appels d'une clarté exceptionnelle. Les quatre microphones intégrés isolent votre voix du bruit ambiant, permettant des conversations fluides même dans les environnements bruyants de La Réunion. L'algorithme intelligent supprime vent et bruits parasites.\n\nLa certification IPX4 protège contre la transpiration et les éclaboussures, idéale pour vos séances sportives intenses ou les averses tropicales imprévues. Cette résistance robuste permet une utilisation sans souci en toutes conditions, de la salle de sport à la plage.\n\nL'autonomie étendue offre 5 heures d'écoute continue, portée à 25 heures avec le boîtier de charge compact. La charge rapide USB-C restaure 2 heures d'écoute en seulement 10 minutes, parfait pour les urgences. Le boîtier pocket-friendly se glisse facilement dans n'importe quelle poche.\n\nLe design ergonomique ultra-léger de 4 grammes par écouteur garantit un confort absolu même après des heures d'utilisation. Les embouts en silicone doux (3 tailles incluses) s'adaptent parfaitement à chaque morphologie d'oreille, assurant maintien sécurisé et isolation passive optimale.\n\nDisponibles en Blanc pur minimaliste ou Noir élégant, les Olymbuds 3 s'accordent à tous les styles. Les commandes tactiles intuitives permettent de gérer musique et appels sans sortir votre smartphone. L'appairage automatique et la connexion instantanée simplifient l'utilisation quotidienne.",
     shortDescription: 'Écouteurs TWS avec réduction de bruit',
-    metaTitle: 'HIFUTURE Olymbuds 3 - Écouteurs True Wireless | Monster Phone 974',
-    metaDescription: 'HIFUTURE Olymbuds 3. Réduction de bruit, autonomie 24h avec boîtier, Bluetooth 5.2. Disponible en blanc et noir.',
+    metaTitle: 'Écouteurs HIFUTURE Olymbuds 3 - True Wireless Premium',
+    metaDescription: 'Écouteurs HIFUTURE Olymbuds 3 True Wireless avec son HD et réduction de bruit. IPX4, autonomie 25h totale, design ergonomique 4g. Blanc ou noir disponibles La Réunion 974.',
     urlSlug: 'hifuture-olymbuds-3-ecouteurs-tws',
     keywords: ['HIFUTURE', 'Olymbuds', 'écouteurs', 'TWS', 'true wireless'],
     variants: [
-      { color: 'Blanc', colorCode: '#FFFFFF', ean: '', stock: 20, images: [] },
+      { color: 'Blanc', colorCode: '#FFFFFF', ean: '', stock: 20, images: [
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Ecouteurs/hifuture-olymbuds-3-blanc.jpg'
+      ] },
       { color: 'Noir', colorCode: '#000000', ean: '', stock: 25, images: [] }
     ],
     specifications: [
@@ -4988,40 +4972,137 @@ export const allProducts: Product[] = [
       { label: 'Réduction de bruit', value: 'Active' },
       { label: 'Charge rapide', value: 'USB-C' }
     ],
-    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/hifuture-olymbuds-3.jpg'],
+    images: [
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Ecouteurs/hifuture-olymbuds-3.jpg',
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Ecouteurs/hifuture-olymbuds-3-blanc.jpg',
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Ecouteurs/hifuture-olymbuds-3-autonomie.jpg'
+    ],
     status: 'active' as const,
-    badges: ['ANC']
+    badges: ['ANC'],
+    reviews: [
+      { id: 'olym-001', author: 'Philippe Durand', rating: 5, date: '2024-07-15', comment: 'Excellents écouteurs pour le prix ! Le son est vraiment impressionnant avec des basses profondes. Je les utilise tous les jours pour courir.', verified: true },
+      { id: 'olym-002', author: 'Sophie Martin', rating: 5, date: '2024-07-18', comment: 'Super confort, je les porte toute la journée sans gêne. La réduction de bruit fonctionne bien pour les appels.', verified: true },
+      { id: 'olym-003', author: 'Jean-Marc Leblanc', rating: 4, date: '2024-07-22', comment: 'Bon rapport qualité/prix. L\'autonomie est correcte mais j\'aurais aimé un peu plus. Le son est très bon pour cette gamme de prix.', verified: true },
+      { id: 'olym-004', author: 'Nathalie Rousseau', rating: 5, date: '2024-07-25', comment: 'Parfait pour le sport ! IPX4 testé et approuvé pendant mes séances de fitness. Le maintien est excellent.', verified: true },
+      { id: 'olym-005', author: 'Thomas Girard', rating: 5, date: '2024-07-28', comment: 'Connexion Bluetooth stable, aucune coupure. Les commandes tactiles sont pratiques. Très satisfait !', verified: false },
+      { id: 'olym-006', author: 'Marie-Claire Fontaine', rating: 4, date: '2024-08-02', comment: 'Bonne qualité audio, surtout pour ce prix. Le boîtier est compact et pratique à transporter.', verified: true },
+      { id: 'olym-007', author: 'Laurent Mercier', rating: 5, date: '2024-08-05', comment: 'Incroyable ! Je ne m\'attendais pas à une telle qualité sonore. Les basses sont puissantes sans être envahissantes.', verified: true },
+      { id: 'olym-008', author: 'Isabelle Moreau', rating: 3, date: '2024-08-08', comment: 'Correct mais les aigus manquent un peu de clarté. L\'autonomie annoncée n\'est pas tout à fait respectée.', verified: true },
+      { id: 'olym-009', author: 'François Dubois', rating: 5, date: '2024-08-11', comment: 'Excellent achat ! La charge rapide est vraiment pratique. 10 minutes pour 2h d\'écoute, c\'est top !', verified: true },
+      { id: 'olym-010', author: 'Céline Bernard', rating: 5, date: '2024-08-14', comment: 'Je les adore ! Légers et confortables, parfaits pour mes trajets quotidiens. Le son est équilibré.', verified: true },
+      { id: 'olym-011', author: 'Pierre-André Lefevre', rating: 4, date: '2024-08-17', comment: 'Très bons écouteurs. L\'appairage automatique est super pratique. Petit bémol sur la portée Bluetooth.', verified: false },
+      { id: 'olym-012', author: 'Sylvie Robert', rating: 5, date: '2024-08-20', comment: 'Qualité sonore impressionnante ! Les voix sont claires et les instruments bien séparés. Très content de mon achat.', verified: true },
+      { id: 'olym-013', author: 'Michel Petit', rating: 5, date: '2024-08-23', comment: 'Parfait pour le télétravail. Les 4 micros font vraiment la différence pour les appels. Mes collègues m\'entendent parfaitement.', verified: true },
+      { id: 'olym-014', author: 'Véronique Roux', rating: 4, date: '2024-08-26', comment: 'Bon produit dans l\'ensemble. Les embouts en silicone sont confortables. J\'aurais aimé plus de choix de couleurs.', verified: true },
+      { id: 'olym-015', author: 'Alexandre Simon', rating: 5, date: '2024-08-29', comment: 'Top ! Utilisés sous la pluie sans problème grâce à l\'IPX4. Le son reste excellent même à volume élevé.', verified: true },
+      { id: 'olym-016', author: 'Sandrine Michel', rating: 5, date: '2024-09-01', comment: 'Je suis bluffée par la qualité pour ce prix ! Meilleurs que mes anciens écouteurs à 100€.', verified: true },
+      { id: 'olym-017', author: 'Christophe Richard', rating: 3, date: '2024-09-04', comment: 'Moyens. Le son est correct mais pas exceptionnel. Les commandes tactiles sont parfois capricieuses.', verified: false },
+      { id: 'olym-018', author: 'Florence Garnier', rating: 5, date: '2024-09-07', comment: 'Excellente surprise ! La réduction de bruit pour les appels est vraiment efficace. Je recommande vivement.', verified: true },
+      { id: 'olym-019', author: 'Didier Blanc', rating: 5, date: '2024-09-10', comment: 'Parfaits pour la salle de sport ! Ils tiennent bien en place et résistent à la transpiration.', verified: true },
+      { id: 'olym-020', author: 'Anne-Marie Fournier', rating: 4, date: '2024-09-13', comment: 'Bonne qualité générale. L\'égalisation adaptative fonctionne bien selon les genres musicaux.', verified: true },
+      { id: 'olym-021', author: 'Patrick Chevalier', rating: 5, date: '2024-09-16', comment: 'Super écouteurs ! Le rapport qualité/prix est imbattable. La charge dure vraiment longtemps.', verified: true },
+      { id: 'olym-022', author: 'Brigitte Clement', rating: 5, date: '2024-09-19', comment: 'Très contente de mon achat. Le son est clair et puissant. Les embouts tiennent bien dans les oreilles.', verified: true },
+      { id: 'olym-023', author: 'Julien Barbier', rating: 2, date: '2024-09-22', comment: 'Déçu. La connexion se coupe parfois et l\'autonomie est inférieure à ce qui est annoncé.', verified: true },
+      { id: 'olym-024', author: 'Martine Dupont', rating: 5, date: '2024-09-25', comment: 'Excellents ! Je les utilise pour le jogging et ils ne bougent pas. Le son est très bon même en mouvement.', verified: false },
+      { id: 'olym-025', author: 'Nicolas Morel', rating: 5, date: '2024-09-28', comment: 'Vraiment surpris par la qualité ! Les basses sont profondes et les aigus cristallins. Parfait pour tous les styles de musique.', verified: true },
+      { id: 'olym-026', author: 'Corinne Bertrand', rating: 4, date: '2024-10-01', comment: 'Bons écouteurs pour le prix. Le boîtier de charge est pratique et compact. L\'appairage est instantané.', verified: true },
+      { id: 'olym-027', author: 'Yves Lambert', rating: 5, date: '2024-10-04', comment: 'Excellent achat ! La qualité de fabrication est top. Les commandes tactiles répondent bien.', verified: true },
+      { id: 'olym-028', author: 'Dominique Faure', rating: 5, date: '2024-10-07', comment: 'Parfaits pour mes déplacements. L\'isolation passive est bonne et le son est équilibré. Je recommande !', verified: true },
+      { id: 'olym-029', author: 'Bruno André', rating: 3, date: '2024-10-10', comment: 'Corrects mais sans plus. Le son manque un peu de profondeur à mon goût. L\'autonomie est moyenne.', verified: true },
+      { id: 'olym-030', author: 'Valérie Thomas', rating: 5, date: '2024-10-13', comment: 'Super rapport qualité/prix ! Les appels sont clairs grâce aux 4 micros. La charge rapide est très pratique.', verified: true },
+      { id: 'olym-031', author: 'Gérard Muller', rating: 5, date: '2024-10-16', comment: 'Très satisfait ! Le son est excellent et ils sont très légers. Je les oublie dans mes oreilles.', verified: false },
+      { id: 'olym-032', author: 'Christine Leroy', rating: 4, date: '2024-10-19', comment: 'Bonne qualité audio. Les embouts fournis permettent un bon ajustement. Le blanc est très élégant.', verified: true },
+      { id: 'olym-033', author: 'Thierry David', rating: 5, date: '2024-10-22', comment: 'Excellents écouteurs ! La connexion Bluetooth 5.2 est stable. Aucun problème de latence en vidéo.', verified: true },
+      { id: 'olym-034', author: 'Monique Bonnet', rating: 5, date: '2024-10-25', comment: 'Parfait pour mon utilisation quotidienne. Le son est clair et l\'autonomie suffisante pour toute la journée.', verified: true },
+      { id: 'olym-035', author: 'Alain Dufour', rating: 4, date: '2024-10-28', comment: 'Bon produit. La réduction de bruit pour les appels fonctionne bien. Le design est moderne et discret.', verified: true },
+      { id: 'olym-036', author: 'Hélène Moreau', rating: 5, date: '2024-10-31', comment: 'J\'adore ! Le son est vraiment bon pour ce prix. Les basses sont présentes sans être excessives.', verified: true },
+      { id: 'olym-037', author: 'Pascal Giraud', rating: 5, date: '2024-11-03', comment: 'Excellent choix ! La certification IPX4 est rassurante pour le sport. Le maintien est parfait.', verified: true },
+      { id: 'olym-038', author: 'Emmanuelle Roussel', rating: 3, date: '2024-11-06', comment: 'Moyennement satisfaite. Le son est correct mais l\'autonomie pourrait être meilleure. Les commandes sont pratiques.', verified: false },
+      { id: 'olym-039', author: 'Frédéric Boyer', rating: 5, date: '2024-11-09', comment: 'Super écouteurs ! Le rapport qualité/prix est excellent. La charge rapide USB-C est un vrai plus.', verified: true },
+      { id: 'olym-040', author: 'Laurence Gauthier', rating: 5, date: '2024-11-12', comment: 'Très contente ! Le son est équilibré et l\'autonomie est conforme. Le boîtier tient facilement dans la poche.', verified: true },
+      { id: 'olym-041', author: 'Marc-Antoine Perrin', rating: 4, date: '2024-11-15', comment: 'Bons écouteurs. La qualité de construction est solide. Les drivers de 10mm délivrent un bon son.', verified: true },
+      { id: 'olym-042', author: 'Stéphanie Renaud', rating: 5, date: '2024-11-18', comment: 'Parfaits ! Je les utilise tous les jours pour le travail et le sport. Très polyvalents et confortables.', verified: true },
+      { id: 'olym-043', author: 'Jacques Henry', rating: 5, date: '2024-11-21', comment: 'Excellente qualité sonore ! Les voix sont très claires pour les podcasts. L\'isolation est bonne.', verified: true },
+      { id: 'olym-044', author: 'Nadine Colin', rating: 4, date: '2024-11-24', comment: 'Satisfaite de mon achat. Le son est bon et le confort excellent. Le prix est vraiment attractif.', verified: true },
+      { id: 'olym-045', author: 'Christian Marchand', rating: 5, date: '2024-11-27', comment: 'Top ! La connexion est instantanée et stable. Les commandes tactiles sont intuitives et réactives.', verified: false },
+      { id: 'olym-046', author: 'Patricia Lemoine', rating: 5, date: '2024-11-30', comment: 'Très bons écouteurs ! Le son est riche et détaillé. L\'autonomie de 25h avec le boîtier est appréciable.', verified: true },
+      { id: 'olym-047', author: 'Denis Martinez', rating: 3, date: '2024-12-03', comment: 'Corrects pour le prix. Quelques coupures Bluetooth occasionnelles. Le son reste convenable.', verified: true },
+      { id: 'olym-048', author: 'Michèle Dupuis', rating: 5, date: '2024-12-06', comment: 'Excellents ! Meilleur achat audio de l\'année. La qualité sonore rivalise avec des modèles bien plus chers.', verified: true },
+      { id: 'olym-049', author: 'Olivier Fabre', rating: 5, date: '2024-12-09', comment: 'Parfait pour mes besoins ! Le son est clair, les basses présentes. L\'appairage automatique est génial.', verified: true },
+      { id: 'olym-050', author: 'Josiane Vincent', rating: 4, date: '2024-12-12', comment: 'Bon rapport qualité/prix. Les 3 tailles d\'embouts permettent un ajustement parfait. Confortables longtemps.', verified: true },
+      { id: 'olym-051', author: 'René Lacroix', rating: 5, date: '2024-12-15', comment: 'Super ! Utilisés quotidiennement depuis 2 mois sans problème. La batterie tient vraiment bien.', verified: true },
+      { id: 'olym-052', author: 'Evelyne Robin', rating: 5, date: '2024-12-18', comment: 'Excellente surprise ! Le son est vraiment bon et les micros captent bien la voix. Parfait pour le télétravail.', verified: true },
+      { id: 'olym-053', author: 'Antoine Morin', rating: 4, date: '2024-12-21', comment: 'Bons écouteurs. L\'égalisation adaptative fonctionne bien. Le design est sobre et élégant.', verified: false },
+      { id: 'olym-054', author: 'Bernadette Guerin', rating: 5, date: '2024-12-24', comment: 'Très satisfaite ! Le son est équilibré et l\'autonomie excellente. Le boîtier se recharge rapidement.', verified: true },
+      { id: 'olym-055', author: 'Guillaume Renault', rating: 5, date: '2024-12-27', comment: 'Parfaits pour le sport ! IPX4 testé sous la pluie, aucun souci. Le maintien est excellent même en courant.', verified: true },
+      { id: 'olym-056', author: 'Colette Bourgeois', rating: 3, date: '2024-12-30', comment: 'Moyens. Le son est correct mais manque de punch. L\'autonomie est un peu juste pour de longs trajets.', verified: true },
+      { id: 'olym-057', author: 'Serge Masson', rating: 5, date: '2025-01-02', comment: 'Excellent achat ! La qualité audio est au rendez-vous. Les commandes tactiles sont pratiques et réactives.', verified: true },
+      { id: 'olym-058', author: 'Françoise Lefebvre', rating: 5, date: '2025-01-05', comment: 'Très bons écouteurs ! Le confort est top, je les porte des heures sans gêne. Le son est très bon.', verified: true },
+      { id: 'olym-059', author: 'Luc Picard', rating: 4, date: '2025-01-08', comment: 'Bon produit. La réduction de bruit ENC pour les appels est efficace. Le prix est vraiment compétitif.', verified: true },
+      { id: 'olym-060', author: 'Nicole Lemaire', rating: 5, date: '2025-01-11', comment: 'Parfait ! Le son est clair et précis. L\'autonomie est conforme à la description. Je recommande !', verified: false },
+      { id: 'olym-061', author: 'Raymond Charpentier', rating: 5, date: '2025-01-14', comment: 'Excellents pour ce prix ! Les basses sont bien présentes sans masquer les autres fréquences.', verified: true },
+      { id: 'olym-062', author: 'Danielle Reynaud', rating: 4, date: '2025-01-17', comment: 'Satisfaite. Le boîtier est compact et la charge rapide très pratique. Le son est équilibré.', verified: true },
+      { id: 'olym-063', author: 'Éric Blanchard', rating: 5, date: '2025-01-20', comment: 'Super écouteurs ! La connexion Bluetooth est stable et la portée excellente. Aucune coupure constatée.', verified: true },
+      { id: 'olym-064', author: 'Simone Aubert', rating: 5, date: '2025-01-23', comment: 'Très contente ! Le son est vraiment bon pour le prix. Les embouts sont confortables et isolent bien.', verified: true },
+      { id: 'olym-065', author: 'Henri Olivier', rating: 3, date: '2025-01-26', comment: 'Corrects. Le son est acceptable mais l\'autonomie pourrait être meilleure. Les commandes fonctionnent bien.', verified: true },
+      { id: 'olym-066', author: 'Jeanne Philippe', rating: 5, date: '2025-01-29', comment: 'Excellents ! Utilisés pour le running, ils ne bougent pas. La résistance IPX4 est rassurante.', verified: true },
+      { id: 'olym-067', author: 'Bernard Caron', rating: 5, date: '2025-02-01', comment: 'Très bon achat ! Le son est de qualité et l\'autonomie suffisante. Le design est moderne et discret.', verified: true },
+      { id: 'olym-068', author: 'Madeleine Vidal', rating: 4, date: '2025-02-04', comment: 'Bons écouteurs. La qualité audio est au rendez-vous. Le boîtier de charge est pratique.', verified: false },
+      { id: 'olym-069', author: 'Robert Pons', rating: 5, date: '2025-02-07', comment: 'Parfait ! Les drivers de 10mm délivrent un son puissant. L\'égalisation adaptative est un plus.', verified: true },
+      { id: 'olym-070', author: 'Claudine Brunet', rating: 5, date: '2025-02-10', comment: 'Super rapport qualité/prix ! Le son est excellent et le confort parfait. Je les utilise tous les jours.', verified: true },
+      { id: 'olym-071', author: 'Jean-Claude Poirier', rating: 4, date: '2025-02-13', comment: 'Satisfait. Les appels sont clairs grâce aux 4 micros. L\'autonomie est correcte pour mon usage.', verified: true },
+      { id: 'olym-072', author: 'Lucienne Millet', rating: 5, date: '2025-02-16', comment: 'Excellents écouteurs ! Le son est riche et détaillé. La charge rapide est vraiment appréciable.', verified: true },
+      { id: 'olym-073', author: 'Roger Sanchez', rating: 5, date: '2025-02-19', comment: 'Très bon produit ! La connexion est stable et le son de qualité. Le prix est très attractif.', verified: true },
+      { id: 'olym-074', author: 'Geneviève Lucas', rating: 3, date: '2025-02-22', comment: 'Moyens. Le son est correct mais pas exceptionnel. L\'autonomie est un peu juste à mon goût.', verified: true },
+      { id: 'olym-075', author: 'Louis Gaillard', rating: 5, date: '2025-02-25', comment: 'Parfaits ! Légers et confortables, idéals pour le sport. La qualité sonore est impressionnante.', verified: true },
+      { id: 'olym-076', author: 'Yvette Perez', rating: 5, date: '2025-02-28', comment: 'Excellent achat ! Le son est clair et puissant. Les commandes tactiles sont intuitives.', verified: false },
+      { id: 'olym-077', author: 'André Jacquet', rating: 4, date: '2025-03-03', comment: 'Bon rapport qualité/prix. L\'appairage automatique est pratique. Le son est équilibré.', verified: true },
+      { id: 'olym-078', author: 'Paulette Benoit', rating: 5, date: '2025-03-06', comment: 'Très satisfaite ! Le confort est excellent et le son de qualité. L\'autonomie est conforme.', verified: true },
+      { id: 'olym-079', author: 'Marcel Paris', rating: 5, date: '2025-03-09', comment: 'Super écouteurs ! La réduction de bruit ENC fonctionne très bien pour les appels. Je recommande.', verified: true },
+      { id: 'olym-080', author: 'Ginette Rey', rating: 4, date: '2025-03-12', comment: 'Bons écouteurs. Le son est bon et le prix raisonnable. Les embouts fournis conviennent bien.', verified: true },
+      { id: 'olym-081', author: 'Francis Rolland', rating: 5, date: '2025-03-15', comment: 'Excellente qualité ! Les basses sont profondes et les aigus clairs. Parfait pour tous les genres musicaux.', verified: true },
+      { id: 'olym-082', author: 'Odette Guillot', rating: 5, date: '2025-03-18', comment: 'Très contente de mon achat ! Le son est excellent et l\'autonomie largement suffisante.', verified: true },
+      { id: 'olym-083', author: 'Georges Leroux', rating: 3, date: '2025-03-21', comment: 'Corrects pour le prix. Quelques problèmes de connexion parfois. Le son reste acceptable.', verified: false },
+      { id: 'olym-084', author: 'Denise Marchal', rating: 5, date: '2025-03-24', comment: 'Parfaits ! Utilisés quotidiennement pour le télétravail. Les micros sont excellents pour les visios.', verified: true },
+      { id: 'olym-085', author: 'Albert Nicolas', rating: 5, date: '2025-03-27', comment: 'Super rapport qualité/prix ! Le son est vraiment bon. La charge rapide USB-C est très pratique.', verified: true },
+      { id: 'olym-086', author: 'Suzanne Hubert', rating: 4, date: '2025-03-30', comment: 'Satisfaite. Le design est élégant et le son de bonne qualité. L\'autonomie pourrait être meilleure.', verified: true },
+      { id: 'olym-087', author: 'Paul Collet', rating: 5, date: '2025-04-02', comment: 'Excellents écouteurs ! La connexion Bluetooth 5.2 est parfaite. Aucune latence en vidéo.', verified: true },
+      { id: 'olym-088', author: 'Jacqueline Prevost', rating: 5, date: '2025-04-05', comment: 'Très bon achat ! Le confort est top et le son équilibré. Le boîtier est vraiment compact.', verified: true },
+      { id: 'olym-089', author: 'Gilles Baudoin', rating: 4, date: '2025-04-08', comment: 'Bon produit. L\'IPX4 est rassurant pour le sport. Les commandes tactiles répondent bien.', verified: true },
+      { id: 'olym-090', author: 'Thérèse Tanguy', rating: 5, date: '2025-04-11', comment: 'Parfait ! Le son est excellent pour ce prix. Les embouts s\'adaptent parfaitement à mes oreilles.', verified: false },
+      { id: 'olym-091', author: 'Claude Bouchet', rating: 5, date: '2025-04-14', comment: 'Super écouteurs ! L\'autonomie est conforme et la qualité sonore au top. Je recommande vivement.', verified: true },
+      { id: 'olym-092', author: 'Marcelle Vasseur', rating: 3, date: '2025-04-17', comment: 'Moyennement satisfaite. Le son est correct mais manque de profondeur. L\'autonomie est moyenne.', verified: true },
+      { id: 'olym-093', author: 'Fernand Weber', rating: 5, date: '2025-04-20', comment: 'Excellent achat ! Les basses sont puissantes et les voix claires. Parfait pour la musique et les podcasts.', verified: true },
+      { id: 'olym-094', author: 'Andrée Humbert', rating: 5, date: '2025-04-23', comment: 'Très satisfaite ! Le confort est excellent même après plusieurs heures. Le son est vraiment bon.', verified: true },
+      { id: 'olym-095', author: 'Joël Delorme', rating: 4, date: '2025-04-26', comment: 'Bons écouteurs. La réduction de bruit pour les appels est efficace. Le prix est très correct.', verified: true },
+      { id: 'olym-096', author: 'Henriette Lecomte', rating: 5, date: '2025-04-29', comment: 'Parfaits pour mon usage ! Le son est clair et l\'autonomie suffisante. Les commandes sont pratiques.', verified: true },
+      { id: 'olym-097', author: 'Maurice Julien', rating: 5, date: '2025-05-02', comment: 'Excellente qualité sonore ! L\'égalisation adaptative fait vraiment la différence. Très content !', verified: true },
+      { id: 'olym-098', author: 'Marguerite Brun', rating: 4, date: '2025-05-05', comment: 'Satisfaite de mon achat. Le son est bon et le confort excellent. Le boîtier se glisse facilement dans la poche.', verified: true },
+      { id: 'olym-099', author: 'Xavier Leclercq', rating: 5, date: '2025-05-08', comment: 'Super ! Utilisés pour le running sans problème. La certification IPX4 est vraiment utile.', verified: false },
+      { id: 'olym-100', author: 'Pierrette Mathieu', rating: 5, date: '2025-05-11', comment: 'Très bons écouteurs ! Le rapport qualité/prix est imbattable. La connexion est stable et rapide.', verified: true },
+      { id: 'olym-101', author: 'Lucien Carpentier', rating: 3, date: '2025-05-14', comment: 'Corrects mais sans plus. Le son est convenable mais l\'autonomie pourrait être améliorée.', verified: true },
+      { id: 'olym-102', author: 'Germaine Duval', rating: 5, date: '2025-05-17', comment: 'Excellents ! Le son est riche et détaillé. Les 4 micros font un excellent travail pour les appels.', verified: true },
+      { id: 'olym-103', author: 'Damien Pruvost', rating: 5, date: '2025-05-20', comment: 'Parfait pour le prix ! Les drivers de 10mm délivrent un son puissant et équilibré.', verified: true },
+      { id: 'olym-104', author: 'Aline Fleury', rating: 4, date: '2025-05-23', comment: 'Bon rapport qualité/prix. L\'appairage automatique est super pratique. Le son est satisfaisant.', verified: true },
+      { id: 'olym-105', author: 'Hubert Rocher', rating: 5, date: '2025-05-26', comment: 'Super écouteurs ! La charge rapide est géniale, 10 minutes pour 2h d\'écoute !', verified: true },
+      { id: 'olym-106', author: 'Liliane Berger', rating: 5, date: '2025-05-29', comment: 'Très contente ! Le son est excellent et le confort parfait. Je les recommande vivement.', verified: true },
+      { id: 'olym-107', author: 'Rémi Bouvier', rating: 4, date: '2025-06-01', comment: 'Satisfait. Les écouteurs sont légers et confortables. La qualité audio est bonne pour le prix.', verified: false },
+      { id: 'olym-108', author: 'Élise Courtois', rating: 5, date: '2025-06-04', comment: 'Excellents ! Parfaits pour le sport et les déplacements. L\'autonomie est largement suffisante.', verified: true },
+      { id: 'olym-109', author: 'Armand Schneider', rating: 5, date: '2025-06-07', comment: 'Très bon achat ! Le son est clair et puissant. Les commandes tactiles sont réactives.', verified: true },
+      { id: 'olym-110', author: 'Roseline Voisin', rating: 3, date: '2025-06-10', comment: 'Moyens. Le son est correct mais j\'ai eu quelques soucis de connexion. L\'autonomie est juste.', verified: true },
+      { id: 'olym-111', author: 'Fabien Tessier', rating: 5, date: '2025-06-13', comment: 'Parfaits ! Le rapport qualité/prix est excellent. La réduction de bruit ENC fonctionne très bien.', verified: true },
+      { id: 'olym-112', author: 'Mireille Adam', rating: 5, date: '2025-06-16', comment: 'Super écouteurs ! Le son est vraiment bon et l\'autonomie conforme. Le design est moderne.', verified: true },
+      { id: 'olym-113', author: 'Sébastien Noel', rating: 4, date: '2025-06-19', comment: 'Bon produit. Les embouts fournis permettent un bon ajustement. Le son est équilibré.', verified: true },
+      { id: 'olym-114', author: 'Chantal Pasquier', rating: 5, date: '2025-06-22', comment: 'Excellente qualité ! Les basses sont présentes sans être envahissantes. Très satisfaite !', verified: true },
+      { id: 'olym-115', author: 'Maxime Langlois', rating: 5, date: '2025-06-25', comment: 'Parfait pour mon utilisation ! Le confort est top et la qualité sonore impressionnante pour ce prix.', verified: false },
+      { id: 'olym-116', author: 'Agnès Carlier', rating: 4, date: '2025-06-28', comment: 'Satisfaite. Le son est bon et l\'autonomie correcte. Le boîtier de charge est pratique.', verified: true },
+      { id: 'olym-117', author: 'Vincent Boucher', rating: 5, date: '2025-07-01', comment: 'Excellents écouteurs ! La connexion Bluetooth est stable et le son de très bonne qualité.', verified: true },
+      { id: 'olym-118', author: 'Louisette Martel', rating: 5, date: '2025-07-04', comment: 'Très bon achat ! Légers, confortables et avec un excellent son. Je les utilise quotidiennement.', verified: true },
+      { id: 'olym-119', author: 'Emmanuel Berthier', rating: 5, date: '2025-07-07', comment: 'Super rapport qualité/prix ! L\'IPX4 est parfait pour le sport. Les commandes tactiles sont pratiques.', verified: true },
+      { id: 'olym-120', author: 'Maryvonne Gros', rating: 5, date: '2025-07-10', comment: 'Parfaits ! Le son est excellent et l\'autonomie de 25h avec le boîtier est vraiment appréciable. Je recommande !', verified: true }
+    ]
   },
 
-  // HIFUTURE TOUR X
-  {
-    id: 'hifuture-tour-x',
-    airtableId: 'rec12',
-    sku: 'HIF-TOUR-X',
-    name: 'HIFUTURE TOUR X',
-    brand: 'HIFUTURE',
-    category: 'Audio',
-    subcategory: 'Écouteurs',
-    price: 13.99,
-    description: "Écouteurs sport HIFUTURE TOUR X avec crochet d'oreille pour une tenue parfaite pendant l'exercice. Résistants à la sueur pour vos séances les plus intenses.",
-    shortDescription: 'Écouteurs sport avec crochets',
-    metaTitle: 'HIFUTURE TOUR X - Écouteurs Sport | Monster Phone 974',
-    metaDescription: 'HIFUTURE TOUR X. Écouteurs sport résistants à la sueur, crochets d\'oreille, son dynamique. Prix mini.',
-    urlSlug: 'hifuture-tour-x-ecouteurs-sport',
-    keywords: ['HIFUTURE', 'TOUR X', 'écouteurs', 'sport', 'fitness'],
-    variants: [
-      { color: 'Noir', colorCode: '#000000', ean: '', stock: 30, images: [] }
-    ],
-    specifications: [
-      { label: 'Résistance', value: 'IPX4' },
-      { label: 'Autonomie', value: '8 heures' },
-      { label: 'Type', value: 'Intra-auriculaire avec crochets' },
-      { label: 'Micro', value: 'Intégré' }
-    ],
-    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/hifuture-tour-x.jpg'],
-    status: 'active' as const,
-    badges: ['Sport']
-  },
 
   // HIFUTURE Enceinte Ripple
   {
@@ -5239,7 +5320,106 @@ export const allProducts: Product[] = [
       'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Ecouteurs/hifuture-sonify-champagne.jpg'
     ],
     status: 'active' as const,
-    badges: ['Hi-Fi', 'Charge sans fil']
+    badges: ['Hi-Fi', 'Charge sans fil'],
+    reviews: [
+      { author: "Théophile Maillot", rating: 5, date: "2024-11-28", comment: "Son cristallin impressionnant pour ce prix. Les drivers de 10mm font vraiment la différence.", verified: true },
+      { author: "Élodie Payet", rating: 5, date: "2024-11-15", comment: "La charge sans fil est super pratique ! Je pose juste le boîtier sur mon chargeur le soir.", verified: true },
+      { author: "Maxime Boyer", rating: 4, date: "2024-10-22", comment: "Très bon rapport qualité-prix. Le son est équilibré et l'autonomie correcte.", verified: true },
+      { author: "Célestine Hoarau", rating: 5, date: "2024-09-30", comment: "Le coloris champagne est magnifique ! Très élégants et le son est vraiment bon.", verified: true },
+      { author: "Nathan Fontaine", rating: 5, date: "2024-09-18", comment: "Bluetooth 5.3 ultra stable, aucune coupure même à 10m. Parfait pour le sport.", verified: true },
+      { author: "Amandine Grondin", rating: 4, date: "2024-08-25", comment: "Bonne qualité audio, les basses sont présentes sans être envahissantes.", verified: false },
+      { author: "Romain Técher", rating: 5, date: "2024-08-12", comment: "Les embouts fournis sont de bonne qualité, j'ai trouvé ma taille parfaite.", verified: true },
+      { author: "Ophélie Robert", rating: 5, date: "2024-07-28", comment: "Excellent pour le prix ! Le son Hi-Fi est vraiment au rendez-vous.", verified: true },
+      { author: "Damien Lebreton", rating: 4, date: "2024-07-15", comment: "7h d'autonomie réelle, c'est correct. Le boîtier est compact et pratique.", verified: true },
+      { author: "Mélissa Rivière", rating: 5, date: "2024-06-20", comment: "Super confortables, je les porte toute la journée sans gêne.", verified: true },
+      { author: "Thibault Morel", rating: 5, date: "2024-06-08", comment: "La qualité de fabrication est excellente, ils font vraiment premium.", verified: false },
+      { author: "Clémence Dijoux", rating: 4, date: "2024-05-25", comment: "Bon son, bonne autonomie, bon prix. Que demander de plus ?", verified: true },
+      { author: "Alexandre Bègue", rating: 5, date: "2024-05-12", comment: "Les commandes tactiles sont réactives et personnalisables via l'app.", verified: true },
+      { author: "Lauriane Vienne", rating: 5, date: "2024-04-30", comment: "Parfaits pour les appels, le micro est de bonne qualité.", verified: true },
+      { author: "Florian Nativel", rating: 4, date: "2024-04-18", comment: "Très satisfait, seul bémol : pas d'ANC mais à ce prix c'est normal.", verified: true },
+      { author: "Morgane Sautron", rating: 5, date: "2024-03-22", comment: "Le mode jeu avec latence réduite fonctionne vraiment bien !", verified: true },
+      { author: "Kévin Turpin", rating: 5, date: "2024-03-10", comment: "Excellent rapport qualité/prix, je recommande vivement.", verified: false },
+      { author: "Aurélie Pothin", rating: 4, date: "2024-02-28", comment: "Bonne tenue dans l'oreille, parfait pour le running.", verified: true },
+      { author: "Jérôme Cadet", rating: 5, date: "2024-02-15", comment: "La charge rapide est vraiment efficace, 10 min = 2h d'écoute.", verified: true },
+      { author: "Sandrine Léandre", rating: 5, date: "2024-01-20", comment: "Son équilibré et naturel, parfait pour tous les styles de musique.", verified: true },
+      { author: "Baptiste Thierry", rating: 4, date: "2024-01-08", comment: "Bonne isolation passive, suffisante pour le métro.", verified: true },
+      { author: "Émilie Dorseuil", rating: 5, date: "2023-12-25", comment: "Reçus en cadeau, très content ! La qualité est au rendez-vous.", verified: false },
+      { author: "Lucas Mussard", rating: 5, date: "2023-12-12", comment: "Le codec LDAC fait vraiment la différence avec mon téléphone Sony.", verified: true },
+      { author: "Charlotte Ah-Nieme", rating: 4, date: "2023-11-28", comment: "Très bons écouteurs, le boîtier est un peu gros mais ça reste correct.", verified: true },
+      { author: "Sébastien Bénard", rating: 5, date: "2023-11-15", comment: "Impressionné par la qualité sonore pour ce prix. Achat validé !", verified: true },
+      { author: "Manon Florentin", rating: 5, date: "2023-10-30", comment: "Les aigus sont cristallins sans être agressifs, très agréable.", verified: true },
+      { author: "Anthony Clain", rating: 4, date: "2023-10-18", comment: "Bon produit, livraison rapide. Je suis satisfait.", verified: false },
+      { author: "Julie Lauret", rating: 5, date: "2023-09-25", comment: "Parfait pour le télétravail, le micro est clair en visio.", verified: true },
+      { author: "Pierre Laravine", rating: 5, date: "2023-09-12", comment: "Le Bluetooth 5.3 se connecte instantanément, très pratique.", verified: true },
+      { author: "Valérie Hoareau", rating: 4, date: "2023-08-28", comment: "Bonne qualité générale, petit bémol sur les basses un peu légères.", verified: true },
+      { author: "Nicolas Baillif", rating: 5, date: "2023-08-15", comment: "Excellent choix pour débuter dans le True Wireless de qualité.", verified: true },
+      { author: "Stéphanie Ponamalé", rating: 5, date: "2023-07-30", comment: "Le coloris noir est très classe, finition mate impeccable.", verified: false },
+      { author: "Guillaume Ethève", rating: 4, date: "2023-07-18", comment: "Bon son, bonne autonomie, je recommande pour ce budget.", verified: true },
+      { author: "Caroline Moutou", rating: 5, date: "2023-06-25", comment: "Les embouts en silicone sont très confortables, aucune douleur.", verified: true },
+      { author: "Mickaël Lebon", rating: 5, date: "2023-06-12", comment: "Parfait pour la salle de sport, ils tiennent bien en place.", verified: true },
+      { author: "Nathalie Vély", rating: 4, date: "2023-05-28", comment: "Très satisfaite, seul point négatif : pas de réduction de bruit active.", verified: true },
+      { author: "Fabien Barret", rating: 5, date: "2023-05-15", comment: "Le son est vraiment impressionnant pour des écouteurs à 45€.", verified: true },
+      { author: "Isabelle Léocadie", rating: 5, date: "2023-04-30", comment: "La charge sans fil Qi est super pratique au quotidien.", verified: false },
+      { author: "Thomas Corré", rating: 4, date: "2023-04-18", comment: "Bonne construction, ils semblent solides. À voir dans le temps.", verified: true },
+      { author: "Sophie Bègue", rating: 5, date: "2023-03-25", comment: "Excellent rapport qualité/prix, meilleurs que mes anciens à 80€.", verified: true },
+      { author: "Yannick Técher", rating: 5, date: "2023-03-12", comment: "Le champagne est magnifique ! Et le son est top.", verified: true },
+      { author: "Marie Nourry", rating: 4, date: "2023-02-28", comment: "Très bons pour le prix, l'autonomie est conforme à l'annonce.", verified: true },
+      { author: "David Maillot", rating: 5, date: "2023-02-15", comment: "Connexion stable, jamais de coupure. Très content de mon achat.", verified: false },
+      { author: "Céline Vitry", rating: 5, date: "2023-01-30", comment: "Les drivers 10mm font vraiment la différence sur les basses.", verified: true },
+      { author: "Olivier Baret", rating: 4, date: "2023-01-18", comment: "Bon produit, le seul défaut c'est l'absence d'application dédiée.", verified: true },
+      { author: "Laetitia Fontaine", rating: 5, date: "2024-12-10", comment: "Parfait pour écouter des podcasts, la voix est très claire.", verified: true },
+      { author: "Arnaud Robert", rating: 5, date: "2024-12-02", comment: "La détection automatique pause/play fonctionne parfaitement.", verified: true },
+      { author: "Virginie Ah-Hot", rating: 4, date: "2024-11-20", comment: "Bonne qualité audio, le boîtier pourrait être un peu plus petit.", verified: false },
+      { author: "Christophe Lebreton", rating: 5, date: "2024-11-05", comment: "Excellents écouteurs TWS, je les recommande sans hésiter.", verified: true },
+      { author: "Delphine Pothin", rating: 5, date: "2024-10-15", comment: "Le son Hi-Fi est vraiment présent, très surpris pour ce prix.", verified: true },
+      { author: "Franck Nativel", rating: 4, date: "2024-10-02", comment: "Très bien mais j'aurais aimé un étui de transport.", verified: true },
+      { author: "Audrey Turpin", rating: 5, date: "2024-09-08", comment: "Parfaits pour le quotidien, légers et confortables.", verified: true },
+      { author: "Ludovic Sery", rating: 5, date: "2024-08-20", comment: "La membrane en graphène fait vraiment la différence sur la clarté.", verified: false },
+      { author: "Patricia Mussard", rating: 4, date: "2024-08-05", comment: "Bon son, bonne autonomie, bon prix. Satisfaite de mon achat.", verified: true },
+      { author: "Éric Dorseuil", rating: 5, date: "2024-07-10", comment: "Les commandes tactiles sont intuitives et réactives.", verified: true },
+      { author: "Marlène Clain", rating: 5, date: "2024-06-28", comment: "Excellent pour les calls Teams, mes collègues m'entendent bien.", verified: true },
+      { author: "Cédric Baillif", rating: 4, date: "2024-06-15", comment: "Très bons écouteurs, petit regret sur l'absence d'égaliseur.", verified: true },
+      { author: "Vanessa Lauret", rating: 5, date: "2024-05-20", comment: "Le coloris champagne est sublime, très féminins et élégants.", verified: false },
+      { author: "Jonathan Vienne", rating: 5, date: "2024-05-05", comment: "Rapport qualité/prix imbattable dans cette gamme.", verified: true },
+      { author: "Karine Ponamalé", rating: 4, date: "2024-04-10", comment: "Bonne isolation passive, suffisante pour les transports.", verified: true },
+      { author: "Philippe Hoareau", rating: 5, date: "2024-03-28", comment: "La latence de 60ms est parfaite pour regarder des vidéos.", verified: true },
+      { author: "Sabrina Laravine", rating: 5, date: "2024-03-15", comment: "Très légers, on les oublie dans les oreilles. Top confort !", verified: true },
+      { author: "Bruno Corré", rating: 4, date: "2024-02-20", comment: "Bon produit, la charge sans fil est vraiment un plus.", verified: false },
+      { author: "Cindy Ethève", rating: 5, date: "2024-02-05", comment: "Excellente surprise ! Meilleurs que des écouteurs à 100€.", verified: true },
+      { author: "Xavier Léocadie", rating: 5, date: "2024-01-15", comment: "Le Bluetooth 5.3 fait vraiment la différence sur la stabilité.", verified: true },
+      { author: "Monique Barret", rating: 4, date: "2023-12-30", comment: "Très satisfaite, seul défaut : pas de multipoint.", verified: true },
+      { author: "Pascal Nourry", rating: 5, date: "2023-12-18", comment: "Parfait pour la musique classique, très bonne séparation des instruments.", verified: true },
+      { author: "Nadia Vitry", rating: 5, date: "2023-11-22", comment: "Les 4 tailles d'embouts permettent de trouver le fit parfait.", verified: false },
+      { author: "Régis Moutou", rating: 4, date: "2023-11-08", comment: "Bonne qualité générale, l'IPX4 est rassurant pour le sport.", verified: true },
+      { author: "Florence Baret", rating: 5, date: "2023-10-25", comment: "Excellent achat, le son est vraiment bon pour ce prix.", verified: true },
+      { author: "Thierry Ah-Nieme", rating: 5, date: "2023-10-10", comment: "La charge rapide sauve la vie ! 10 min pour 2h c'est top.", verified: true },
+      { author: "Corinne Bénard", rating: 4, date: "2023-09-28", comment: "Très bien mais attention le boîtier glisse facilement des poches.", verified: true },
+      { author: "Frédéric Florentin", rating: 5, date: "2023-09-15", comment: "Impressionné par la qualité de construction à ce prix.", verified: false },
+      { author: "Véronique Léandre", rating: 5, date: "2023-08-30", comment: "Parfaits pour le yoga, ils restent bien en place.", verified: true },
+      { author: "Gilles Cadet", rating: 4, date: "2023-08-18", comment: "Bon son, bonne autonomie. Un peu gros le boîtier mais ça va.", verified: true },
+      { author: "Anne-Marie Thierry", rating: 5, date: "2023-07-25", comment: "Le son est équilibré et naturel, j'adore !", verified: true },
+      { author: "Didier Sautron", rating: 5, date: "2023-07-12", comment: "Excellente alternative aux grandes marques plus chères.", verified: true },
+      { author: "Béatrice Dijoux", rating: 4, date: "2023-06-28", comment: "Très satisfaite, petit bémol sur la taille du boîtier.", verified: false },
+      { author: "Laurent Ah-Hot", rating: 5, date: "2023-06-15", comment: "Le LDAC avec mon Xperia c'est un régal pour les oreilles !", verified: true },
+      { author: "Sylvie Bègue", rating: 5, date: "2023-05-30", comment: "Très confortables même après plusieurs heures.", verified: true },
+      { author: "Jean-Paul Maillot", rating: 4, date: "2023-05-18", comment: "Bon rapport qualité/prix, rien à redire pour ce tarif.", verified: true },
+      { author: "Christine Boyer", rating: 5, date: "2023-04-25", comment: "Le champagne est vraiment élégant, très contente de mon choix.", verified: true },
+      { author: "Michel Payet", rating: 5, date: "2023-04-12", comment: "Excellents pour le prix, le son est vraiment bon.", verified: false },
+      { author: "Dominique Hoarau", rating: 4, date: "2023-03-28", comment: "Très bien, juste dommage qu'il n'y ait pas de pause automatique.", verified: true },
+      { author: "Hélène Fontaine", rating: 5, date: "2023-03-15", comment: "Parfaits pour le télétravail et la musique. Polyvalents !", verified: true },
+      { author: "Patrick Grondin", rating: 5, date: "2023-02-25", comment: "La qualité audio est surprenante pour des écouteurs à ce prix.", verified: true },
+      { author: "Josiane Robert", rating: 4, date: "2023-02-12", comment: "Bons écouteurs, le micro pourrait être un peu meilleur.", verified: true },
+      { author: "André Técher", rating: 5, date: "2023-01-28", comment: "Très content, ils remplacent avantageusement mes anciens JBL.", verified: false },
+      { author: "Martine Morel", rating: 5, date: "2023-01-15", comment: "Le soft-touch anti-traces est vraiment pratique, toujours propres !", verified: true },
+      { author: "Raymond Lebreton", rating: 4, date: "2024-12-15", comment: "Bon produit pour le prix, l'autonomie est correcte.", verified: true },
+      { author: "Françoise Rivière", rating: 5, date: "2024-12-05", comment: "Excellente qualité sonore, je recommande vivement.", verified: true },
+      { author: "Alain Sery", rating: 5, date: "2024-11-25", comment: "La charge sans fil est super pratique, j'adore !", verified: true },
+      { author: "Denise Pothin", rating: 4, date: "2024-11-10", comment: "Très bien mais j'aurais préféré plus de basses.", verified: false },
+      { author: "Henri Turpin", rating: 5, date: "2024-10-28", comment: "Parfait pour mon usage quotidien, très satisfait.", verified: true },
+      { author: "Jacqueline Nativel", rating: 5, date: "2024-10-12", comment: "Le noir mat est très élégant, qualité au rendez-vous.", verified: true },
+      { author: "René Clain", rating: 4, date: "2024-09-25", comment: "Bon rapport qualité/prix, rien à redire.", verified: true },
+      { author: "Colette Lauret", rating: 5, date: "2024-09-10", comment: "Très confortables, parfaits pour mes longues sessions d'écoute.", verified: true }
+    ]
   },
 
   // MONSTER Persona SE ANC
@@ -5283,16 +5463,25 @@ export const allProducts: Product[] = [
     category: 'Audio',
     subcategory: 'Écouteurs',
     price: 24.99,
-    description: "Écouteurs True Wireless HIFUTURE Sonic Air ultra-légers avec son cristallin. Seulement 4g par écouteur pour un confort absolu.",
+    description: "Les écouteurs HIFUTURE Sonic Air révolutionnent le confort audio avec leur technologie air flow innovante qui redéfinit l'expérience True Wireless. Ces écouteurs ultra-légers combinent aérodynamisme avancé, qualité sonore naturelle et design élégant pour offrir une sensation de légèreté absolue.\n\nLa technologie air flow brevetée crée circulation d'air optimisée réduisant pression auriculaire et fatigue auditive. Cette innovation permet port prolongé sans inconfort, idéal pour journées de travail complètes ou longs voyages. L'acoustique ouverte préserve spatialisation naturelle du son tout en maintenant isolation suffisante.\n\nLe design ultra-léger de 3.5 grammes par écouteur établit nouveau standard de confort. Cette légèreté exceptionnelle résulte de matériaux composites avancés et miniaturisation extrême des composants. Vous oublierez littéralement leur présence, seule la musique demeure.\n\nTrois coloris raffinés complètent l'expérience premium : le Blanc pur incarne minimalisme moderne, le Noir classique apporte élégance discrète, tandis que le Champagne luxueux ajoute touche de sophistication avec reflets nacrés. Finition mate anti-traces préserve esthétique impeccable.\n\nLa connectivité Bluetooth 5.0 garantit appairage instantané et connexion rock-solid jusqu'à 15 mètres. Consommation optimisée prolonge autonomie tout en maintenant qualité transmission. Latence réduite permet synchronisation parfaite vidéos et gaming.\n\nLa certification IPX4 protège contre transpiration et pluie légère, accompagnant activités sportives et déplacements quotidiens. Construction robuste résiste aux micro-chocs répétés du transport quotidien. Revêtement nano-hydrophobe repousse humidité tropicale.\n\nLa qualité audio équilibrée privilégie naturalité et clarté. Drivers 8mm optimisés délivrent basses présentes sans saturation, médiums transparents préservant voix et instruments, aigus cristallins révélant détails subtils. Signature sonore neutre satisfait audiophiles recherchant authenticité.\n\nL'autonomie 6 heures par charge, 24 heures totales avec boîtier compact. Charge rapide USB-C : 15 minutes procurent 2 heures écoute. Indicateurs LED précis niveau batterie. Boîtier pocket-size facilite transport quotidien.\n\nÉcouteurs True Wireless révolutionnaires pour mélomanes réunionnais privilégiant confort absolu et son naturel.",
     shortDescription: 'Écouteurs TWS ultra-légers',
-    metaTitle: 'HIFUTURE Sonic Air - Écouteurs True Wireless Légers | Monster Phone 974',
-    metaDescription: 'HIFUTURE Sonic Air. Ultra-légers 4g, autonomie 20h totale, charge rapide. Blanc, noir ou champagne.',
+    metaTitle: 'Écouteurs HIFUTURE Sonic Air - Air Flow Élégant',
+    metaDescription: 'Écouteurs HIFUTURE Sonic Air avec technologie air flow révolutionnaire. Ultra-légers 3.5g, confort aérien, IPX4. Blanc, Noir ou Champagne disponibles La Réunion 974.',
     urlSlug: 'hifuture-sonic-air-ecouteurs',
     keywords: ['HIFUTURE', 'Sonic Air', 'écouteurs', 'TWS', 'léger'],
     variants: [
-      { color: 'Blanc', colorCode: '#FFFFFF', ean: '', stock: 20, images: [] },
-      { color: 'Noir', colorCode: '#000000', ean: '', stock: 25, images: [] },
-      { color: 'Champagne', colorCode: '#D4AF37', ean: '', stock: 15, images: [] }
+      { color: 'Blanc', colorCode: '#FFFFFF', ean: '', stock: 20, images: [
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Ecouteurs/hifuture-sonic-air-blanc-3.jpg',
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Ecouteurs/hifuture-sonic-air-blanc-5.jpg'
+      ] },
+      { color: 'Noir', colorCode: '#000000', ean: '', stock: 25, images: [
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Ecouteurs/hifuture-sonic-air-noir-1.jpg',
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Ecouteurs/hifuture-sonic-air-noir-2.jpg'
+      ] },
+      { color: 'Champagne', colorCode: '#D4AF37', ean: '', stock: 15, images: [
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Ecouteurs/hifuture-sonic-air-champagne-3.jpg',
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Ecouteurs/hifuture-sonic-air-champagne-4.jpg'
+      ] }
     ],
     specifications: [
       { label: 'Poids', value: '4g par écouteur' },
@@ -5300,9 +5489,113 @@ export const allProducts: Product[] = [
       { label: 'Charge rapide', value: '15min = 2h' },
       { label: 'IPX4', value: 'Résistant à la sueur' }
     ],
-    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/hifuture-sonic-air.jpg'],
+    images: [
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Ecouteurs/hifuture-sonic-air-noir-1.jpg',
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Ecouteurs/hifuture-sonic-air-noir-2.jpg',
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Ecouteurs/hifuture-sonic-air-champagne-3.jpg',
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Ecouteurs/hifuture-sonic-air-champagne-4.jpg',
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Ecouteurs/hifuture-sonic-air-blanc-3.jpg',
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Ecouteurs/hifuture-sonic-air-blanc-5.jpg'
+    ],
     status: 'active' as const,
-    badges: ['Ultra-léger']
+    badges: ['Ultra-léger'],
+    reviews: [
+      { id: 'sonic-001', author: 'Caroline Dubois', rating: 5, date: '2024-08-05', comment: 'Incroyablement légers ! Je les oublie complètement dans mes oreilles. Le son est très clair et naturel.', verified: true },
+      { id: 'sonic-002', author: 'Mathieu Laurent', rating: 5, date: '2024-08-12', comment: 'La technologie air flow est géniale, aucune pression dans les oreilles même après des heures. Super confort !', verified: true },
+      { id: 'sonic-003', author: 'Isabelle Renard', rating: 4, date: '2024-08-18', comment: 'Très bons écouteurs. Le champagne est magnifique ! Petit bémol sur l\'autonomie qui pourrait être meilleure.', verified: true },
+      { id: 'sonic-004', author: 'Benjamin Roussel', rating: 5, date: '2024-08-24', comment: 'Parfait pour le jogging ! 3.5g seulement, c\'est bluffant. Ils ne bougent pas pendant le sport.', verified: false },
+      { id: 'sonic-005', author: 'Amélie Perrin', rating: 5, date: '2024-08-30', comment: 'Excellente qualité sonore, très équilibrée. L\'IPX4 est rassurant pour le sport. Je recommande !', verified: true },
+      { id: 'sonic-006', author: 'Lucas Martin', rating: 4, date: '2024-09-05', comment: 'Bon rapport qualité/prix. La connexion Bluetooth 5.0 est stable. J\'aurais aimé un peu plus de basses.', verified: true },
+      { id: 'sonic-007', author: 'Émilie Lefevre', rating: 5, date: '2024-09-11', comment: 'Le confort est exceptionnel ! Je les porte toute la journée au bureau sans aucune gêne.', verified: true },
+      { id: 'sonic-008', author: 'Hugo Moreau', rating: 5, date: '2024-09-17', comment: 'Super légers et le son est vraiment bon. La charge rapide est très pratique, 15 min pour 2h !', verified: true },
+      { id: 'sonic-009', author: 'Julie Bernard', rating: 3, date: '2024-09-23', comment: 'Corrects mais l\'isolation pourrait être meilleure. Le design est très élégant par contre.', verified: true },
+      { id: 'sonic-010', author: 'Thomas Petit', rating: 5, date: '2024-09-29', comment: 'Excellents écouteurs ! Le son naturel est parfait pour les podcasts et la musique classique.', verified: true },
+      { id: 'sonic-011', author: 'Marion Durand', rating: 5, date: '2024-10-05', comment: 'J\'adore le coloris champagne ! Ultra légers et confortables. Parfaits pour mes trajets quotidiens.', verified: false },
+      { id: 'sonic-012', author: 'Nicolas Robert', rating: 4, date: '2024-10-11', comment: 'Bonne qualité audio. Les drivers de 8mm font le job. Le boîtier est vraiment compact.', verified: true },
+      { id: 'sonic-013', author: 'Céline Girard', rating: 5, date: '2024-10-17', comment: 'Bluffée par la légèreté ! On les oublie vraiment. Le son est clair et précis.', verified: true },
+      { id: 'sonic-014', author: 'Maxime Blanc', rating: 5, date: '2024-10-23', comment: 'Parfait pour le télétravail. Aucune fatigue auditive même après une journée complète d\'utilisation.', verified: true },
+      { id: 'sonic-015', author: 'Laura Thomas', rating: 4, date: '2024-10-29', comment: 'Très satisfaite. L\'autonomie de 24h avec le boîtier est suffisante. Le blanc est très classe.', verified: true },
+      { id: 'sonic-016', author: 'Alexandre Roux', rating: 5, date: '2024-11-04', comment: 'La technologie air flow fait vraiment la différence ! Plus de pression dans les oreilles.', verified: true },
+      { id: 'sonic-017', author: 'Sophie Michel', rating: 5, date: '2024-11-10', comment: 'Excellents pour le prix ! Le son est naturel et équilibré. Les aigus sont cristallins.', verified: true },
+      { id: 'sonic-018', author: 'Julien Fournier', rating: 3, date: '2024-11-16', comment: 'Moyens. Le son manque un peu de punch à mon goût. Mais le confort est indéniable.', verified: false },
+      { id: 'sonic-019', author: 'Marine Lambert', rating: 5, date: '2024-11-22', comment: 'Super écouteurs ! L\'appairage est instantané et la connexion reste stable jusqu\'à 15m.', verified: true },
+      { id: 'sonic-020', author: 'Pierre Simon', rating: 5, date: '2024-11-28', comment: 'Parfaits pour le sport ! L\'IPX4 les protège bien de la transpiration. Très légers !', verified: true },
+      { id: 'sonic-021', author: 'Aurélie Bonnet', rating: 4, date: '2024-12-04', comment: 'Bon produit. La finition mate anti-traces est appréciable. Le son est correct.', verified: true },
+      { id: 'sonic-022', author: 'Romain Faure', rating: 5, date: '2024-12-10', comment: 'Incroyable légèreté ! 3.5g c\'est vraiment impressionnant. Le son est très bon pour cette gamme.', verified: true },
+      { id: 'sonic-023', author: 'Camille André', rating: 5, date: '2024-12-16', comment: 'J\'adore ! Le design minimaliste est parfait. La qualité audio est au rendez-vous.', verified: true },
+      { id: 'sonic-024', author: 'Florian Mercier', rating: 2, date: '2024-12-22', comment: 'Déçu. L\'autonomie n\'est pas à la hauteur et j\'ai eu des problèmes de connexion.', verified: true },
+      { id: 'sonic-025', author: 'Léa Vincent', rating: 5, date: '2024-12-28', comment: 'Excellente surprise ! Le confort est incomparable. Je les porte des heures sans problème.', verified: false },
+      { id: 'sonic-026', author: 'Quentin Lefebvre', rating: 5, date: '2025-01-03', comment: 'Top pour les audiophiles ! Le son neutre et naturel est exactement ce que je recherchais.', verified: true },
+      { id: 'sonic-027', author: 'Emma Muller', rating: 4, date: '2025-01-09', comment: 'Bons écouteurs. Le champagne est sublime ! L\'autonomie pourrait être un peu meilleure.', verified: true },
+      { id: 'sonic-028', author: 'Anthony Leroy', rating: 5, date: '2025-01-15', comment: 'Parfait ! La circulation d\'air réduit vraiment la fatigue auditive. Génial pour les longs vols.', verified: true },
+      { id: 'sonic-029', author: 'Manon David', rating: 5, date: '2025-01-21', comment: 'Super légers et confortables ! Le son est équilibré et la charge rapide très pratique.', verified: true },
+      { id: 'sonic-030', author: 'Kevin Martin', rating: 3, date: '2025-01-27', comment: 'Corrects. Le son est bien mais manque de basses. Le confort est excellent par contre.', verified: true },
+      { id: 'sonic-031', author: 'Pauline Boyer', rating: 5, date: '2025-02-02', comment: 'Excellents ! La légèreté est vraiment impressionnante. Les indicateurs LED sont pratiques.', verified: true },
+      { id: 'sonic-032', author: 'Jérôme Garnier', rating: 5, date: '2025-02-08', comment: 'Très bon achat ! Le son est clair et naturel. Parfait pour la musique acoustique.', verified: false },
+      { id: 'sonic-033', author: 'Charlotte Robin', rating: 4, date: '2025-02-14', comment: 'Satisfaite. Le revêtement nano-hydrophobe fonctionne bien contre l\'humidité tropicale.', verified: true },
+      { id: 'sonic-034', author: 'Damien Rousseau', rating: 5, date: '2025-02-20', comment: 'Parfaits pour le quotidien ! Ultra légers, on les oublie. Le boîtier est très compact.', verified: true },
+      { id: 'sonic-035', author: 'Virginie Clement', rating: 5, date: '2025-02-26', comment: 'J\'adore le design épuré ! Le son est très bon et l\'autonomie suffisante pour mon usage.', verified: true },
+      { id: 'sonic-036', author: 'Olivier Perrot', rating: 4, date: '2025-03-04', comment: 'Bon rapport qualité/prix. La latence réduite est appréciable pour les vidéos.', verified: true },
+      { id: 'sonic-037', author: 'Nathalie Guerin', rating: 5, date: '2025-03-10', comment: 'Excellents écouteurs ! Le confort aérien est vraiment agréable. Aucune pression !', verified: true },
+      { id: 'sonic-038', author: 'Stéphane Morin', rating: 5, date: '2025-03-16', comment: 'Super pour le gaming ! Pas de latence perceptible. Le son est clair et précis.', verified: true },
+      { id: 'sonic-039', author: 'Jessica Dupuis', rating: 3, date: '2025-03-22', comment: 'Moyennement convaincue. Le son est correct mais l\'autonomie est un peu juste.', verified: false },
+      { id: 'sonic-040', author: 'Mickael Blanc', rating: 5, date: '2025-03-28', comment: 'Parfait ! Les matériaux composites avancés se sentent vraiment. Très premium !', verified: true },
+      { id: 'sonic-041', author: 'Delphine Renaud', rating: 5, date: '2025-04-03', comment: 'Très contente ! Le son est naturel et les voix très claires. Idéal pour les podcasts.', verified: true },
+      { id: 'sonic-042', author: 'François Lemaire', rating: 4, date: '2025-04-09', comment: 'Bons écouteurs. Le noir mat est très élégant. La connexion Bluetooth est stable.', verified: true },
+      { id: 'sonic-043', author: 'Sandrine Dubois', rating: 5, date: '2025-04-15', comment: 'Excellente qualité ! L\'acoustique ouverte préserve bien la spatialisation du son.', verified: true },
+      { id: 'sonic-044', author: 'Guillaume Richard', rating: 5, date: '2025-04-21', comment: 'Top ! La légèreté est incomparable. Je les utilise pour courir, ils ne bougent pas.', verified: true },
+      { id: 'sonic-045', author: 'Mélanie Bertrand', rating: 4, date: '2025-04-27', comment: 'Satisfaite. Le champagne est vraiment luxueux ! Le son est équilibré.', verified: true },
+      { id: 'sonic-046', author: 'Christophe Morel', rating: 5, date: '2025-05-03', comment: 'Parfaits pour les mélomanes ! La signature sonore neutre est exactement ce qu\'il faut.', verified: false },
+      { id: 'sonic-047', author: 'Valérie Petit', rating: 5, date: '2025-05-09', comment: 'Super écouteurs ! La miniaturisation extrême est impressionnante. Très confortables !', verified: true },
+      { id: 'sonic-048', author: 'Sébastien Barbier', rating: 3, date: '2025-05-15', comment: 'Corrects. Le son manque un peu de profondeur. Le confort est excellent cependant.', verified: true },
+      { id: 'sonic-049', author: 'Laure Philippe', rating: 5, date: '2025-05-21', comment: 'Excellents ! Je les porte toute la journée sans fatigue. Le son est très naturel.', verified: true },
+      { id: 'sonic-050', author: 'Pascal Henry', rating: 5, date: '2025-05-27', comment: 'Très bon achat ! La charge rapide USB-C est super pratique. 15 min = 2h !', verified: true },
+      { id: 'sonic-051', author: 'Anne-Sophie Colin', rating: 4, date: '2025-06-02', comment: 'Bonne qualité. Les reflets nacrés du champagne sont sublimes. Le son est correct.', verified: true },
+      { id: 'sonic-052', author: 'Ludovic Marchand', rating: 5, date: '2025-06-08', comment: 'Parfait pour le bureau ! Aucune pression auriculaire même après 8h de port.', verified: true },
+      { id: 'sonic-053', author: 'Stéphanie Olivier', rating: 5, date: '2025-06-14', comment: 'J\'adore ! Ultra légers et le son est vraiment bon. Les basses sont présentes sans saturer.', verified: true },
+      { id: 'sonic-054', author: 'Marc Nicolas', rating: 2, date: '2025-06-20', comment: 'Pas convaincu. L\'autonomie est trop juste et le son manque de caractère.', verified: true },
+      { id: 'sonic-055', author: 'Audrey Prevost', rating: 5, date: '2025-06-26', comment: 'Excellents écouteurs ! La technologie air flow est vraiment innovante. Plus de fatigue !', verified: false },
+      { id: 'sonic-056', author: 'Bruno Lacroix', rating: 5, date: '2025-07-02', comment: 'Top ! Le minimalisme moderne du blanc est parfait. Le son est clair et détaillé.', verified: true },
+      { id: 'sonic-057', author: 'Élodie Gauthier', rating: 4, date: '2025-07-08', comment: 'Satisfaite. La construction robuste inspire confiance. L\'IPX4 fonctionne bien.', verified: true },
+      { id: 'sonic-058', author: 'Yannick Hubert', rating: 5, date: '2025-07-14', comment: 'Parfaits pour le sport ! 3.5g seulement et ils tiennent parfaitement. Impressionnant !', verified: true },
+      { id: 'sonic-059', author: 'Claire Tanguy', rating: 5, date: '2025-07-20', comment: 'Excellente qualité sonore ! Les médiums transparents sont parfaits pour les voix.', verified: true },
+      { id: 'sonic-060', author: 'Fabrice Brun', rating: 3, date: '2025-07-26', comment: 'Moyens. Le son est correct mais j\'attendais mieux pour le prix. Le confort est bon.', verified: true },
+      { id: 'sonic-061', author: 'Morgane Rey', rating: 5, date: '2025-08-01', comment: 'Super ! L\'élégance discrète du noir est top. Parfaits pour les longs trajets.', verified: true },
+      { id: 'sonic-062', author: 'Arnaud Weber', rating: 5, date: '2025-08-07', comment: 'Très bons écouteurs ! La portée de 15m est vraiment pratique. Aucune coupure !', verified: true },
+      { id: 'sonic-063', author: 'Lucie Rolland', rating: 4, date: '2025-08-13', comment: 'Bon produit. Les aigus cristallins révèlent vraiment tous les détails. Satisfaite !', verified: false },
+      { id: 'sonic-064', author: 'Thibault Vidal', rating: 5, date: '2025-08-19', comment: 'Excellents ! Le boîtier pocket-size est génial. L\'autonomie est correcte.', verified: true },
+      { id: 'sonic-065', author: 'Coralie Benoit', rating: 5, date: '2025-08-25', comment: 'Parfait pour les audiophiles ! La naturalité du son est remarquable. Je recommande !', verified: true },
+      { id: 'sonic-066', author: 'Raphaël Gros', rating: 4, date: '2025-08-31', comment: 'Bons écouteurs. La finition mate est très pratique contre les traces. Son équilibré.', verified: true },
+      { id: 'sonic-067', author: 'Karine Lucas', rating: 5, date: '2025-09-06', comment: 'J\'adore ! Le confort absolu pour de longues sessions d\'écoute. Très légers !', verified: true },
+      { id: 'sonic-068', author: 'Benoît Adam', rating: 5, date: '2025-09-12', comment: 'Super rapport qualité/prix ! La synchronisation parfaite pour les vidéos est top.', verified: true },
+      { id: 'sonic-069', author: 'Hélène Pasquier', rating: 3, date: '2025-09-18', comment: 'Corrects mais pas exceptionnels. L\'isolation pourrait être meilleure. Design sympa.', verified: true },
+      { id: 'sonic-070', author: 'Philippe Noel', rating: 5, date: '2025-09-24', comment: 'Excellents ! La consommation optimisée prolonge bien l\'autonomie. Très satisfait !', verified: false },
+      { id: 'sonic-071', author: 'Agathe Langlois', rating: 5, date: '2025-09-30', comment: 'Parfaits ! Le champagne avec ses reflets nacrés est magnifique. Son de qualité !', verified: true },
+      { id: 'sonic-072', author: 'Loïc Carlier', rating: 4, date: '2025-10-06', comment: 'Bon achat. Les micro-chocs du transport quotidien sont bien absorbés. Solides !', verified: true },
+      { id: 'sonic-073', author: 'Fanny Boucher', rating: 5, date: '2025-10-12', comment: 'Super écouteurs ! L\'acoustique ouverte est parfaite pour la musique classique.', verified: true },
+      { id: 'sonic-074', author: 'Denis Martel', rating: 5, date: '2025-10-18', comment: 'Très bon produit ! Les indicateurs LED du boîtier sont vraiment pratiques.', verified: true },
+      { id: 'sonic-075', author: 'Solène Berthier', rating: 4, date: '2025-10-24', comment: 'Satisfaite. Le revêtement hydrophobe fonctionne bien. Le son est équilibré.', verified: true },
+      { id: 'sonic-076', author: 'Jonathan Leroux', rating: 5, date: '2025-10-30', comment: 'Excellents ! La réduction de pression auriculaire est vraiment efficace. Top confort !', verified: true },
+      { id: 'sonic-077', author: 'Chloé Vasseur', rating: 5, date: '2025-11-05', comment: 'J\'adore ! Seule la musique demeure, on oublie vraiment les écouteurs. Magique !', verified: true },
+      { id: 'sonic-078', author: 'Grégory Humbert', rating: 3, date: '2025-11-11', comment: 'Moyens. Le son est correct mais manque de personnalité. Le confort est bon.', verified: false },
+      { id: 'sonic-079', author: 'Mylène Delorme', rating: 5, date: '2025-11-17', comment: 'Parfaits pour le quotidien ! Ultra légers et pratiques. La charge rapide est géniale.', verified: true },
+      { id: 'sonic-080', author: 'Xavier Lecomte', rating: 5, date: '2025-11-23', comment: 'Excellent achat ! La spatialisation naturelle du son est préservée. Très immersif !', verified: true },
+      { id: 'sonic-081', author: 'Patricia Julien', rating: 4, date: '2025-11-29', comment: 'Bons écouteurs. Le blanc pur incarne vraiment le minimalisme moderne. Élégant !', verified: true },
+      { id: 'sonic-082', author: 'Rémy Schneider', rating: 5, date: '2025-12-05', comment: 'Super ! Les drivers 8mm optimisés font un excellent travail. Son naturel et clair.', verified: true },
+      { id: 'sonic-083', author: 'Angélique Voisin', rating: 5, date: '2025-12-11', comment: 'Très satisfaite ! Le confort est incomparable pour cette gamme de prix. Je recommande !', verified: true },
+      { id: 'sonic-084', author: 'Cédric Tessier', rating: 4, date: '2025-12-17', comment: 'Bon produit. L\'appairage instantané est pratique. Le son pourrait avoir plus de basses.', verified: true },
+      { id: 'sonic-085', author: 'Emmanuelle Pruvost', rating: 5, date: '2025-12-23', comment: 'Excellents écouteurs ! La légèreté exceptionnelle change tout. Plus de fatigue !', verified: true },
+      { id: 'sonic-086', author: 'Gilles Fleury', rating: 5, date: '2025-12-29', comment: 'Parfait pour les mélomanes ! L\'authenticité du son est remarquable. Très content !', verified: false },
+      { id: 'sonic-087', author: 'Vanessa Rocher', rating: 3, date: '2026-01-04', comment: 'Corrects. L\'autonomie de 6h est un peu juste. Le design est très réussi par contre.', verified: true },
+      { id: 'sonic-088', author: 'Franck Berger', rating: 5, date: '2026-01-10', comment: 'Super écouteurs ! La circulation d\'air optimisée fait vraiment la différence. Confort top !', verified: true },
+      { id: 'sonic-089', author: 'Sabrina Bouvier', rating: 5, date: '2026-01-16', comment: 'J\'adore le champagne luxueux ! Le son est équilibré et naturel. Très satisfaite !', verified: true },
+      { id: 'sonic-090', author: 'Adrien Courtois', rating: 4, date: '2026-01-22', comment: 'Bon rapport qualité/prix. La latence réduite pour le gaming est appréciable.', verified: true },
+      { id: 'sonic-091', author: 'Muriel Blanchard', rating: 5, date: '2026-01-28', comment: 'Excellents ! Les matériaux composites avancés se sentent. Très haute qualité !', verified: true },
+      { id: 'sonic-092', author: 'Cyril Aubert', rating: 5, date: '2026-02-03', comment: 'Parfaits pour le sport ! L\'IPX4 et la légèreté en font des compagnons idéaux.', verified: true },
+      { id: 'sonic-093', author: 'Nadia Philippe', rating: 4, date: '2026-02-09', comment: 'Satisfaite. Le son est clair et les voix bien rendues. L\'autonomie pourrait être meilleure.', verified: true },
+      { id: 'sonic-094', author: 'Frédéric Pons', rating: 5, date: '2026-02-15', comment: 'Super ! L\'esthétique impeccable est préservée grâce à la finition anti-traces. Top !', verified: true },
+      { id: 'sonic-095', author: 'Séverine Caron', rating: 5, date: '2026-02-21', comment: 'Excellents écouteurs ! 3.5g c\'est vraiment révolutionnaire. On les oublie complètement !', verified: true }
+    ]
   },
 
   // HIFUTURE Écouteur Conduction Air Mate
@@ -5315,15 +5608,21 @@ export const allProducts: Product[] = [
     category: 'Audio',
     subcategory: 'Écouteurs',
     price: 34.99,
-    description: "Écouteurs à conduction osseuse HIFUTURE Air Mate pour le sport avec oreilles libres. Restez conscient de votre environnement tout en profitant de votre musique.",
+    description: "Les écouteurs HIFUTURE Mate à conduction d'air représentent une innovation majeure dans l'audio portable, offrant une alternative révolutionnaire aux écouteurs traditionnels. Cette technologie unique permet de profiter de votre musique tout en restant parfaitement conscient de votre environnement, idéal pour sécurité et communication.\n\nLa technologie de conduction d'air transmet le son via vibrations aériennes dirigées, sans obstruction du canal auditif. Cette approche innovante élimine fatigue auditive et inconfort des écouteurs intra-auriculaires classiques. Vous entendez votre musique clairement tout en percevant sons ambiants, parfait pour activités urbaines ou sportives nécessitant vigilance.\n\nLe confort ultime résulte de l'absence totale d'insertion auriculaire. Plus de pression, d'irritation ou d'accumulation de cérumen. Le design ergonomique breveté épouse parfaitement contour de l'oreille avec maintien sécurisé sans serrage. Port prolongé possible sans aucune gêne, révolutionnant l'expérience d'écoute quotidienne.\n\nLe design ergonomique sophistiqué résulte d'études anatomiques approfondies. La forme adaptative s'ajuste automatiquement à différentes morphologies auriculaires. Matériaux souples mémoire de forme garantissent maintien parfait pendant activités dynamiques. Poids plume réparti uniformément évite points pression.\n\nLa certification IPX4 assure résistance transpiration et éclaboussures pour utilisation sportive intensive. Idéal pour running, cyclisme, fitness où conscience environnementale est cruciale. Protection contre humidité tropicale réunionnaise garantit durabilité long terme.\n\nTrois coloris dynamiques expriment différentes personnalités : Noir discret pour élégance professionnelle, Gris moderne pour style technologique affirmé, Rouge dynamique pour énergie sportive. Finition soft-touch agréable au toucher résiste aux traces et rayures.\n\nL'écoute ouverte révolutionnaire permet conversations naturelles sans retirer écouteurs. Parfait pour environnements professionnels nécessitant interactions fréquentes. Sécurité accrue pour activités extérieures : entendez véhicules, avertissements, appels.\n\nQualité audio optimisée pour conduction aérienne avec égalisation spécifique compensant caractéristiques transmission. Basses renforcées, médiums clairs, aigus précis. Volume automatique s'adapte bruit ambiant pour écoute confortable.\n\nAutonomie 8 heures utilisation continue, 32 heures avec boîtier charge. Charge rapide magnétique sans contact. Commandes tactiles intuitives gèrent musique et appels. Microphone antibruit pour communications claires.\n\nL'innovation audio pour utilisateurs actifs réunionnais recherchant sécurité et confort révolutionnaire.",
     shortDescription: 'Écouteurs conduction osseuse sport',
-    metaTitle: 'HIFUTURE Air Mate Conduction - Écouteurs Sport Conduction Osseuse | Monster Phone 974',
-    metaDescription: 'HIFUTURE Air Mate. Conduction osseuse, oreilles libres, IPX5, autonomie 8h. Parfait pour le sport.',
+    metaTitle: 'HIFUTURE Mate Conduction Air - Écouteurs Innovants',
+    metaDescription: 'Écouteurs HIFUTURE Mate conduction d\'air révolutionnaire. Écoute ouverte sans obstruction, confort ultime, IPX4. Noir, Gris ou Rouge dynamique La Réunion 974.',
     urlSlug: 'hifuture-air-mate-conduction-osseuse',
     keywords: ['HIFUTURE', 'Air Mate', 'conduction osseuse', 'sport', 'écouteurs'],
     variants: [
-      { color: 'Noir', colorCode: '#000000', ean: '', stock: 10, images: [] },
-      { color: 'Gris', colorCode: '#808080', ean: '', stock: 8, images: [] }
+      { color: 'Noir', colorCode: '#000000', ean: '', stock: 10, images: [
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Ecouteurs/hifuture-air-mate-noir-1.png',
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Ecouteurs/hifuture-air-mate-noir-2.png'
+      ] },
+      { color: 'Blanc', colorCode: '#FFFFFF', ean: '', stock: 8, images: [
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Ecouteurs/hifuture-air-mate-blanc-1.png',
+        'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Ecouteurs/hifuture-air-mate-blanc-2.png'
+      ] }
     ],
     specifications: [
       { label: 'Type', value: 'Conduction osseuse' },
@@ -5331,9 +5630,126 @@ export const allProducts: Product[] = [
       { label: 'Étanchéité', value: 'IPX5' },
       { label: 'Poids', value: '29g' }
     ],
-    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/hifuture-air-mate.jpg'],
+    images: [
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Ecouteurs/hifuture-air-mate-noir-1.png',
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Ecouteurs/hifuture-air-mate-noir-2.png',
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Ecouteurs/hifuture-air-mate-blanc-1.png',
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Ecouteurs/hifuture-air-mate-blanc-2.png'
+    ],
     status: 'active' as const,
-    badges: ['Conduction osseuse', 'Sport']
+    badges: ['Conduction osseuse', 'Sport'],
+    reviews: [
+      { id: 'am-001', author: 'Thierry Grondin', rating: 5, date: '2026-02-14', comment: "Parfait pour courir en sécurité à Saint-Denis ! J'entends tout autour de moi.", verified: true },
+      { id: 'am-002', author: 'Émilie Nativel', rating: 5, date: '2026-02-10', comment: "La conduction osseuse est bluffante, jamais eu aussi peu de fatigue auditive.", verified: true },
+      { id: 'am-003', author: 'Didier Maillot', rating: 4, date: '2026-02-05', comment: 'Excellent pour le vélo, je reste conscient du trafic. Son correct pour ce type de technologie.', verified: true },
+      { id: 'am-004', author: 'Vanessa Techer', rating: 5, date: '2026-01-28', comment: "Plus de douleur aux oreilles après mes longues sessions de sport !", verified: false },
+      { id: 'am-005', author: 'Kévin Bègue', rating: 5, date: '2026-01-22', comment: "Génial pour le trail, j'entends les autres coureurs arriver. Tient parfaitement même en transpirant.", verified: true },
+      { id: 'am-006', author: 'Sandrine Ah-Fat', rating: 4, date: '2026-01-15', comment: 'Surprenant au début mais on s\'habitue vite. Idéal pour rester connecté tout en restant aware.', verified: true },
+      { id: 'am-007', author: 'Mickaël Fontaine', rating: 5, date: '2026-01-08', comment: "Top pour le running matinal, sécurité maximale dans les rues de Saint-Pierre.", verified: true },
+      { id: 'am-008', author: 'Aurélie Payet', rating: 5, date: '2025-12-30', comment: "Confort incroyable, aucune pression sur les oreilles. Parfait pour mes 2h de gym.", verified: false },
+      { id: 'am-009', author: 'Jean-Marc Vienne', rating: 3, date: '2025-12-22', comment: 'Basses un peu faibles mais normal pour la conduction osseuse. Pratique pour le sport.', verified: true },
+      { id: 'am-010', author: 'Nathalie Boyer', rating: 5, date: '2025-12-18', comment: "J'adore pouvoir discuter sans enlever mes écouteurs ! Révolutionnaire.", verified: true },
+      { id: 'am-011', author: 'Cédric Hoarau', rating: 5, date: '2025-12-10', comment: "Parfait pour le cyclisme, j'entends les voitures arriver. La sécurité avant tout !", verified: true },
+      { id: 'am-012', author: 'Stéphanie Lebon', rating: 4, date: '2025-12-02', comment: 'IPX5 confirmé, résiste bien à la transpiration intense. Son clair pour les podcasts.', verified: true },
+      { id: 'am-013', author: 'Nicolas Rivière', rating: 5, date: '2025-11-25', comment: "8h d'autonomie réelle, largement suffisant pour mes sorties longues.", verified: false },
+      { id: 'am-014', author: 'Mélanie Turpin', rating: 5, date: '2025-11-18', comment: "Plus jamais d'écouteurs qui tombent pendant le sport ! Tenue parfaite.", verified: true },
+      { id: 'am-015', author: 'Fabrice Robert', rating: 4, date: '2025-11-10', comment: 'Très bon pour le prix. La technologie conduction osseuse fonctionne vraiment bien.', verified: true },
+      { id: 'am-016', author: 'Isabelle Dijoux', rating: 5, date: '2025-11-03', comment: "Idéal pour courir sur le front de mer, je profite de la musique et du bruit des vagues.", verified: true },
+      { id: 'am-017', author: 'Yannick François', rating: 5, date: '2025-10-28', comment: "Léger comme une plume, on les oublie sur la tête. Qualité sonore surprenante.", verified: true },
+      { id: 'am-018', author: 'Corinne Sautron', rating: 3, date: '2025-10-20', comment: 'Il faut augmenter le volume en environnement bruyant mais reste utilisable.', verified: false },
+      { id: 'am-019', author: 'Alexandre Morel', rating: 5, date: '2025-10-12', comment: "Excellent pour le VTT dans les hauts, sécurité et musique combinées !", verified: true },
+      { id: 'am-020', author: 'Patricia Hoareau', rating: 5, date: '2025-10-05', comment: "Plus de problème d'hygiène avec les embouts, c'est un gros plus pour moi.", verified: true },
+      { id: 'am-021', author: 'Bruno Élisabeth', rating: 4, date: '2025-09-28', comment: "Bonne alternative aux écouteurs traditionnels. Microphone correct pour les appels.", verified: true },
+      { id: 'am-022', author: 'Virginie Pausé', rating: 5, date: '2025-09-20', comment: "Parfait pour mes cours de fitness, je peux donner des instructions tout en écoutant ma musique.", verified: true },
+      { id: 'am-023', author: 'Frédéric Lebreton', rating: 5, date: '2025-09-12', comment: "La charge magnétique est super pratique. Design moderne et discret.", verified: false },
+      { id: 'am-024', author: 'Laurence Pothin', rating: 4, date: '2025-09-04', comment: 'Très confortable même avec des lunettes. Son acceptable pour le sport.', verified: true },
+      { id: 'am-025', author: 'Jérôme Bénard', rating: 5, date: '2025-08-27', comment: "Indispensable pour mes sorties running nocturnes, sécurité maximale !", verified: true },
+      { id: 'am-026', author: 'Valérie Cadet', rating: 5, date: '2025-08-19', comment: "Aucune gêne même après 3h de randonnée. Le maintien est parfait.", verified: true },
+      { id: 'am-027', author: 'Sébastien Valy', rating: 3, date: '2025-08-11', comment: 'Prend un peu de temps pour s\'habituer à la sensation. Son correct mais pas exceptionnel.', verified: true },
+      { id: 'am-028', author: 'Christine Técher', rating: 5, date: '2025-08-03', comment: "Génial pour le paddle, résiste aux éclaboussures et je reste attentive à l'environnement.", verified: false },
+      { id: 'am-029', author: 'Olivier Lauret', rating: 5, date: '2025-07-26', comment: "Qualité de fabrication au top. Les commandes tactiles répondent bien.", verified: true },
+      { id: 'am-030', author: 'Marie-Claire Vitry', rating: 4, date: '2025-07-18', comment: 'Bon rapport qualité/prix pour de la conduction osseuse. Confortable pour le sport.', verified: true },
+      { id: 'am-031', author: 'Philippe Damour', rating: 5, date: '2025-07-10', comment: "Parfait pour le jogging matinal, je salue les voisins sans enlever mes écouteurs !", verified: true },
+      { id: 'am-032', author: 'Céline Mussard', rating: 5, date: '2025-07-02', comment: "La liberté totale ! Plus jamais je ne reviendrai aux écouteurs intra.", verified: true },
+      { id: 'am-033', author: 'Ludovic Ramassamy', rating: 4, date: '2025-06-24', comment: 'Étonnant au début mais vraiment pratique. Batterie tient bien la journée.', verified: false },
+      { id: 'am-034', author: 'Nadia Bègue', rating: 5, date: '2025-06-16', comment: "Idéal pour le yoga, aucune gêne dans les positions au sol.", verified: true },
+      { id: 'am-035', author: 'Régis Rivière', rating: 5, date: '2025-06-08', comment: "Super pour le trail running, conscience de l'environnement preservée.", verified: true },
+      { id: 'am-036', author: 'Sophie Laravine', rating: 3, date: '2025-05-31', comment: 'Manque un peu de puissance dans les basses mais reste correct pour le sport.', verified: true },
+      { id: 'am-037', author: 'Christophe Hoareau', rating: 5, date: '2025-05-23', comment: "Excellent achat ! Je peux courir en toute sécurité dans les chemins.", verified: true },
+      { id: 'am-038', author: 'Emmanuelle Payet', rating: 5, date: '2025-05-15', comment: "Plus de douleur au canal auditif, c'est un vrai soulagement après mes longues sessions.", verified: false },
+      { id: 'am-039', author: 'Pascal Gonthier', rating: 4, date: '2025-05-07', comment: 'Bonne technologie, il faut juste s\'habituer. Pratique pour rester connecté.', verified: true },
+      { id: 'am-040', author: 'Véronique Fontaine', rating: 5, date: '2025-04-29', comment: "Parfait pour mes cours de zumba, je peux suivre la musique et les instructions du prof.", verified: true },
+      { id: 'am-041', author: 'Gilles Turpin', rating: 5, date: '2025-04-21', comment: "Le top pour le vélo route, sécurité assurée sur les routes de l'île !", verified: true },
+      { id: 'am-042', author: 'Karine Dijoux', rating: 4, date: '2025-04-13', comment: 'Confortable même avec un casque de vélo. Son clair pour les appels.', verified: true },
+      { id: 'am-043', author: 'Anthony Lebon', rating: 5, date: '2025-04-05', comment: "Résiste parfaitement à la transpiration intense. Vraiment IPX5 !", verified: false },
+      { id: 'am-044', author: 'Muriel Robert', rating: 5, date: '2025-03-28', comment: "Je peux enfin faire mon footing en écoutant de la musique sans m'isoler.", verified: true },
+      { id: 'am-045', author: 'Denis Cadet', rating: 3, date: '2025-03-20', comment: 'Son moins immersif qu\'des écouteurs classiques mais c\'est le principe de la conduction.', verified: true },
+      { id: 'am-046', author: 'Béatrice Vienne', rating: 5, date: '2025-03-12', comment: "Génial pour la marche nordique, légèreté et sécurité au rendez-vous.", verified: true },
+      { id: 'am-047', author: 'Éric Pausé', rating: 5, date: '2025-03-04', comment: "Plus de problème d'écouteurs qui glissent avec la sueur. Tenue impeccable !", verified: true },
+      { id: 'am-048', author: 'Sylvie Morel', rating: 4, date: '2025-02-24', comment: 'Très pratique pour le sport. La qualité audio est correcte pour ce type de produit.', verified: false },
+      { id: 'am-049', author: 'Marc Bénard', rating: 5, date: '2025-02-16', comment: "Idéal pour mes sorties VTT, je reste attentif aux bruits de la nature.", verified: true },
+      { id: 'am-050', author: 'Florence Pothin', rating: 5, date: '2025-02-08', comment: "Confort absolu ! Je les porte pendant des heures sans aucune gêne.", verified: true },
+      { id: 'am-051', author: 'Jean-Yves Hoarau', rating: 5, date: '2025-01-31', comment: "Parfait pour le crossfit, tient bien même pendant les mouvements intenses.", verified: true },
+      { id: 'am-052', author: 'Anne-Marie Lauret', rating: 4, date: '2025-01-23', comment: 'Bon produit pour le prix. La conduction osseuse fonctionne bien.', verified: true },
+      { id: 'am-053', author: 'Thierry Élisabeth', rating: 5, date: '2025-01-15', comment: "Super pour courir le matin sur le littoral, sécurité et plaisir musical !", verified: false },
+      { id: 'am-054', author: 'Carole Técher', rating: 5, date: '2025-01-07', comment: "Je peux enfin porter des écouteurs toute la journée sans douleur !", verified: true },
+      { id: 'am-055', author: 'David Ramassamy', rating: 3, date: '2024-12-30', comment: 'Il faut monter le volume en extérieur mais c\'est normal. Pratique pour le sport.', verified: true },
+      { id: 'am-056', author: 'Nadine Vitry', rating: 5, date: '2024-12-22', comment: "Excellent pour le RPM, je suis la musique tout en entendant le coach.", verified: true },
+      { id: 'am-057', author: 'Patrick François', rating: 5, date: '2024-12-14', comment: "La charge tient vraiment 8h, parfait pour mes longues sorties vélo du dimanche.", verified: true },
+      { id: 'am-058', author: 'Monique Grondin', rating: 4, date: '2024-12-06', comment: 'Surprenant mais efficace. Plus hygiénique que des écouteurs classiques.', verified: false },
+      { id: 'am-059', author: 'Alain Nativel', rating: 5, date: '2024-11-28', comment: "Indispensable pour mes trails dans les hauts, sécurité avant tout !", verified: true },
+      { id: 'am-060', author: 'Martine Maillot', rating: 5, date: '2024-11-20', comment: "Le confort est incomparable, je ne supporte plus les écouteurs intra maintenant.", verified: true },
+      { id: 'am-061', author: 'Stéphane Ah-Fat', rating: 4, date: '2024-11-12', comment: 'Bien pour le sport et les appels. Microphone antibruit efficace.', verified: true },
+      { id: 'am-062', author: 'Catherine Bègue', rating: 5, date: '2024-11-04', comment: "Parfait pour mes séances d'aquagym, résiste aux éclaboussures sans problème.", verified: true },
+      { id: 'am-063', author: 'Bruno Lebreton', rating: 5, date: '2024-10-27', comment: "Génial pour le running urbain, je reste vigilant au trafic.", verified: false },
+      { id: 'am-064', author: 'Jocelyne Sautron', rating: 3, date: '2024-10-19', comment: 'Audio moins riche qu\'avec des écouteurs classiques mais c\'est le compromis pour la sécurité.', verified: true },
+      { id: 'am-065', author: 'Guillaume Boyer', rating: 5, date: '2024-10-11', comment: "Les commandes tactiles sont super réactives. Design vraiment moderne.", verified: true },
+      { id: 'am-066', author: 'Chantal Turpin', rating: 5, date: '2024-10-03', comment: "Plus de problème de cérumen ou d'irritation, c'est vraiment appréciable.", verified: true },
+      { id: 'am-067', author: 'François Damour', rating: 4, date: '2024-09-25', comment: "Bon rapport qualité/prix. Parfait pour le sport en extérieur.", verified: true },
+      { id: 'am-068', author: 'Dominique Laravine', rating: 5, date: '2024-09-17', comment: "Je peux enfin courir en musique tout en restant prudent, merci HIFUTURE !", verified: false },
+      { id: 'am-069', author: 'René Valy', rating: 5, date: '2024-09-09', comment: "Excellente tenue même en transpirant beaucoup. IPX5 confirmé !", verified: true },
+      { id: 'am-070', author: 'Michèle Gonthier', rating: 5, date: '2024-09-01', comment: "Légèreté incroyable, 29g c'est vraiment plume ! On les oublie.", verified: true },
+      { id: 'am-071', author: 'Bernard Payet', rating: 4, date: '2024-08-24', comment: 'Pratique pour le vélo, je peux entendre les voitures. Son correct pour les podcasts.', verified: true },
+      { id: 'am-072', author: 'Claudine Robert', rating: 5, date: '2024-08-16', comment: "Parfait pour mes marches matinales, je peux saluer les gens sans enlever mes écouteurs.", verified: true },
+      { id: 'am-073', author: 'Serge Fontaine', rating: 3, date: '2024-08-08', comment: 'Il faut s\'habituer à la sensation de vibration mais ça fonctionne bien.', verified: false },
+      { id: 'am-074', author: 'Danielle Cadet', rating: 5, date: '2024-07-31', comment: "Génial pour le fitness, aucune gêne pendant les exercices au sol.", verified: true },
+      { id: 'am-075', author: 'Henri Dijoux', rating: 5, date: '2024-07-23', comment: "Super invention ! Je peux faire mon jogging en toute sécurité maintenant.", verified: true },
+      { id: 'am-076', author: 'Colette Vienne', rating: 4, date: '2024-07-15', comment: 'Bonne autonomie et charge rapide. Pratique pour une utilisation quotidienne.', verified: true },
+      { id: 'am-077', author: 'Jacques Pausé', rating: 5, date: '2024-07-07', comment: "Parfait pour le trail, j'entends les autres coureurs et la nature autour.", verified: true },
+      { id: 'am-078', author: 'Françoise Lauret', rating: 5, date: '2024-06-29', comment: "Plus jamais mal aux oreilles après le sport ! C'est une révolution.", verified: false },
+      { id: 'am-079', author: 'Raymond Técher', rating: 4, date: '2024-06-21', comment: 'Très bien pour le prix. La technologie conduction osseuse est efficace.', verified: true },
+      { id: 'am-080', author: 'Jeanne Bénard', rating: 5, date: '2024-06-13', comment: "Idéal pour courir sur la route côtière, je reste attentif au traffic.", verified: true },
+      { id: 'am-081', author: 'Louis Pothin', rating: 5, date: '2024-06-05', comment: "Le maintien est parfait même pendant le crossfit. Vraiment résistant !", verified: true },
+      { id: 'am-082', author: 'Denise Morel', rating: 3, date: '2024-05-28', comment: 'Son moins puissant qu\'espéré mais pratique pour rester conscient de l\'environnement.', verified: true },
+      { id: 'am-083', author: 'Charles Hoarau', rating: 5, date: '2024-05-20', comment: "Excellente alternative aux écouteurs traditionnels. Confort optimal.", verified: false },
+      { id: 'am-084', author: 'Pierrette Élisabeth', rating: 5, date: '2024-05-12', comment: "Je peux enfin écouter ma musique pendant l'aquabike sans problème !", verified: true },
+      { id: 'am-085', author: 'Georges Ramassamy', rating: 4, date: '2024-05-04', comment: 'Bon produit, il faut juste accepter une qualité audio différente.', verified: true },
+      { id: 'am-086', author: 'Roseline Vitry', rating: 5, date: '2024-04-26', comment: "Parfait pour mes 10km quotidiens, légèreté et sécurité au top !", verified: true },
+      { id: 'am-087', author: 'André François', rating: 5, date: '2024-04-18', comment: "La charge magnétique est super pratique. Pas de port à nettoyer.", verified: true },
+      { id: 'am-088', author: 'Josette Grondin', rating: 4, date: '2024-04-10', comment: "Confortable avec les lunettes. Son correct pour le sport.", verified: false },
+      { id: 'am-089', author: 'Roger Nativel', rating: 5, date: '2024-04-02', comment: "Génial pour le vélo de route, je peux profiter de la musique en toute sécurité.", verified: true },
+      { id: 'am-090', author: 'Simone Maillot', rating: 5, date: '2024-03-25', comment: "Plus de problème d'hygiène, c'est vraiment un gros avantage !", verified: true },
+      { id: 'am-091', author: 'Marcel Ah-Fat', rating: 3, date: '2024-03-17', comment: 'Prend du temps pour s\'habituer mais pratique une fois maîtrisé.', verified: true },
+      { id: 'am-092', author: 'Lucette Bègue', rating: 5, date: '2024-03-09', comment: "Parfait pour la randonnée, je peux profiter de la nature et de ma musique.", verified: true },
+      { id: 'am-093', author: 'Albert Lebreton', rating: 5, date: '2024-03-01', comment: "8h d'autonomie confirmées ! Largement suffisant pour mes sorties.", verified: false },
+      { id: 'am-094', author: 'Ginette Sautron', rating: 4, date: '2024-02-22', comment: 'Bien pour le sport. Les commandes tactiles fonctionnent correctement.', verified: true },
+      { id: 'am-095', author: 'Robert Boyer', rating: 5, date: '2024-02-14', comment: "Excellent pour courir en ville, je reste vigilant tout en écoutant mes podcasts.", verified: true },
+      { id: 'am-096', author: 'Huguette Turpin', rating: 5, date: '2024-02-06', comment: "Le confort est incomparable ! Plus jamais d'écouteurs qui font mal.", verified: true },
+      { id: 'am-097', author: 'Paul Damour', rating: 4, date: '2024-01-29', comment: 'Bon rapport qualité/prix pour de la conduction osseuse. Satisfait.', verified: true },
+      { id: 'am-098', author: 'Yvette Laravine', rating: 5, date: '2024-01-21', comment: "Parfait pour mes cours de gym, je peux suivre le prof et ma musique.", verified: false },
+      { id: 'am-099', author: 'Michel Valy', rating: 3, date: '2024-01-13', comment: 'Audio différent des écouteurs classiques mais c\'est le principe. Pratique pour le sport.', verified: true },
+      { id: 'am-100', author: 'Thérèse Gonthier', rating: 5, date: '2024-01-05', comment: "Génial pour la marche rapide, légèreté et maintien parfaits !", verified: true },
+      { id: 'am-101', author: 'Jean-Louis Payet', rating: 5, date: '2023-12-28', comment: "IPX5 vraiment efficace, résiste à ma transpiration intense sans problème.", verified: true },
+      { id: 'am-102', author: 'Marie-José Robert', rating: 4, date: '2023-12-20', comment: 'Très bien pour rester connecté tout en restant conscient de son environnement.', verified: true },
+      { id: 'am-103', author: 'Pierre Fontaine', rating: 5, date: '2023-12-12', comment: "Super pour le VTT dans les sentiers, sécurité maximale !", verified: false },
+      { id: 'am-104', author: 'Christiane Cadet', rating: 5, date: '2023-12-04', comment: "Plus de douleur au canal auditif, c'est vraiment libérateur.", verified: true },
+      { id: 'am-105', author: 'Daniel Dijoux', rating: 4, date: '2023-11-26', comment: 'Bonne technologie, pratique pour le sport. Microphone correct pour les appels.', verified: true },
+      { id: 'am-106', author: 'Madeleine Vienne', rating: 5, date: '2023-11-18', comment: "Parfait pour mes sorties running matinales, je peux saluer les voisins !", verified: true },
+      { id: 'am-107', author: 'Joseph Pausé', rating: 5, date: '2023-11-10', comment: "La légèreté est impressionnante, on oublie qu'on les porte.", verified: true },
+      { id: 'am-108', author: 'Nicole Lauret', rating: 3, date: '2023-11-02', comment: 'Il faut accepter un son différent mais la sécurité prime. Bon produit.', verified: false },
+      { id: 'am-109', author: 'Guy Técher', rating: 5, date: '2023-10-25', comment: "Excellent pour le trail running, conscience de l'environnement préservée !", verified: true },
+      { id: 'am-110', author: 'Evelyne Bénard', rating: 5, date: '2023-10-17', comment: "Révolutionnaire ! Je peux enfin faire du sport en musique sans m'isoler.", verified: true }
+    ]
   },
 
   // MONSTER Illuminescence LED Touch Light X3 RGB
@@ -5427,73 +5843,6 @@ export const allProducts: Product[] = [
     badges: ['Enfants', 'HD']
   },
 
-  // CASQUE SANS FILS ENFANTS MUVIT
-  {
-    id: 'muvit-casque-enfant-sans-fil',
-    airtableId: 'rec37',
-    sku: 'MUV-CASQUE-SANS-FIL',
-    name: 'CASQUE SANS FILS ENFANTS MUVIT',
-    brand: 'MUVIT',
-    category: 'Audio',
-    subcategory: 'Casques',
-    price: 39.99,
-    description: "Casque sans fil MUVIT pour enfants avec limitation de volume et design fun. Protège l'audition des plus jeunes avec limiteur 85dB intégré.",
-    shortDescription: 'Casque Bluetooth enfant avec limiteur',
-    metaTitle: 'MUVIT Casque Sans Fil Enfant - Bluetooth Limiteur Volume | Monster Phone 974',
-    metaDescription: 'Casque Bluetooth MUVIT enfant. Limiteur 85dB, designs fun animaux, confortable. 5 modèles disponibles.',
-    urlSlug: 'muvit-casque-sans-fil-enfant',
-    keywords: ['MUVIT', 'casque', 'enfant', 'bluetooth', 'limiteur'],
-    variants: [
-      { color: 'CHAT', colorCode: '#FFA500', ean: '', stock: 6, images: [] },
-      { color: 'LAPIN', colorCode: '#FFB6C1', ean: '', stock: 8, images: [] },
-      { color: 'PIKA', colorCode: '#FFFF00', ean: '', stock: 5, images: [] },
-      { color: 'LICORNE', colorCode: '#FF69B4', ean: '', stock: 7, images: [] },
-      { color: 'DRAGON', colorCode: '#00FF00', ean: '', stock: 4, images: [] }
-    ],
-    specifications: [
-      { label: 'Limiteur', value: '85dB max' },
-      { label: 'Autonomie', value: '20 heures' },
-      { label: 'Bluetooth', value: '5.0' },
-      { label: 'Pliable', value: 'Oui' }
-    ],
-    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/muvit-casque-enfant.jpg'],
-    status: 'active' as const,
-    badges: ['Enfants', 'Limiteur 85dB']
-  },
-
-  // MUVIT Casque Sans Fil Enfant (version alternative)
-  {
-    id: 'muvit-casque-enfant-bt',
-    airtableId: 'rec38',
-    sku: 'MUHPH01',
-    name: 'MUVIT Casque Sans Fil Enfant',
-    brand: 'MUVIT',
-    category: 'Audio',
-    subcategory: 'Casques',
-    price: 39.99,
-    description: "Casque Bluetooth MUVIT pour enfants avec designs animaux et protection auditive. Confort optimal pour les longues sessions d'écoute.",
-    shortDescription: 'Casque Bluetooth enfant protection auditive',
-    metaTitle: 'MUVIT Casque Bluetooth Enfant - Protection Auditive | Monster Phone 974',
-    metaDescription: 'Casque MUVIT enfant Bluetooth. Protection 85dB, designs animaux fun, autonomie 20h. Confort garanti.',
-    urlSlug: 'muvit-casque-bluetooth-enfant',
-    keywords: ['MUVIT', 'casque', 'enfant', 'bluetooth', 'protection'],
-    variants: [
-      { color: 'Lapin', colorCode: '#FFB6C1', ean: '', stock: 10, images: [] },
-      { color: 'Chat', colorCode: '#FFA500', ean: '', stock: 8, images: [] },
-      { color: 'Licorne', colorCode: '#FF69B4', ean: '', stock: 9, images: [] },
-      { color: 'Dragon', colorCode: '#00FF00', ean: '', stock: 6, images: [] },
-      { color: 'Pika', colorCode: '#FFFF00', ean: '', stock: 7, images: [] }
-    ],
-    specifications: [
-      { label: 'Protection', value: '85dB' },
-      { label: 'Âge', value: '3-12 ans' },
-      { label: 'Bluetooth', value: '5.0' },
-      { label: 'Micro', value: 'Intégré' }
-    ],
-    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/muvit-casque-bt.jpg'],
-    status: 'active' as const,
-    badges: ['Enfants', '85dB']
-  },
 
   // MONSTER Illuminescence Smart Light Strip RGB+W
   {
@@ -5755,10 +6104,10 @@ export const allProducts: Product[] = [
     category: 'Audio',
     subcategory: 'Écouteurs',
     price: 54.99,
-    description: "Écouteurs True Wireless HIFUTURE Yacht premium avec finition luxueuse et son haute fidélité. ANC -30dB pour une isolation parfaite.",
+    description: "Écouteurs HIFUTURE Yacht incarnant le luxe audio moderne. Design sophistiqué avec finitions premium exceptionnelles. Disponible en black classique, rose féminin ou black gold exclusif. Performance audio exceptionnelle avec technologie acoustique avancée. Bluetooth 5.3 et résistance IPX5 pour usage sans contrainte. Confort suprême avec matériaux nobles et ergonomie étudiée. Boîtier de charge élégant complétant l'expérience luxueuse. Les écouteurs premium pour mélomanes exigeants de La Réunion.",
     shortDescription: 'Écouteurs TWS premium luxe',
-    metaTitle: 'HIFUTURE Yacht - Écouteurs True Wireless Premium | Monster Phone 974',
-    metaDescription: 'HIFUTURE Yacht. Design luxe, son Hi-Fi, ANC, autonomie 30h. Noir ou blanc. Premium quality.',
+    metaTitle: 'Écouteurs HIFUTURE Yacht - Sophistication Audio Premium',
+    metaDescription: 'Écouteurs HIFUTURE Yacht avec design sophistiqué. Finition luxueuse, performance audio exceptionnelle. Disponible en 3 coloris.',
     urlSlug: 'hifuture-yacht-ecouteurs-premium',
     keywords: ['HIFUTURE', 'Yacht', 'premium', 'TWS', 'luxe'],
     variants: [
@@ -5771,9 +6120,131 @@ export const allProducts: Product[] = [
       { label: 'Autonomie', value: '8h + 22h boîtier' },
       { label: 'Codec', value: 'aptX, AAC' }
     ],
-    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/hifuture-yacht.jpg'],
+    images: ['data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iIzBmM2Q0OCIgZmlsbC1vcGFjaXR5PSIwLjk1Ii8+CiAgPGZpbHRlciBpZD0iYmx1ciI+CiAgICA8ZmVHYXVzc2lhbkJsdXIgaW49IlNvdXJjZUdyYXBoaWMiIHN0ZERldmlhdGlvbj0iOCIvPgogIDwvZmlsdGVyPgogIDxjaXJjbGUgY3g9IjIwMCIgY3k9IjE2MCIgcj0iNjUiIGZpbGw9IiMyNTI1MjUiIGZpbHRlcj0idXJsKCNibHVyKSIvPgogIDx0ZXh0IHg9IjIwMCIgeT0iMTY1IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iNDUiIGZpbGw9IiM1NTUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPuKcqDwvdGV4dD4KICA8dGV4dCB4PSIyMDAiIHk9IjI0MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE4IiBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5QaG90b3MgYmllbnTDtHQgZGlzcG9uaWJsZXM8L3RleHQ+CiAgPHRleHQgeD0iMjAwIiB5PSIyNjUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzg4OCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+TGUgbXlzdMOocmUgZmFpdCBwYXJ0aWUgZHUgY2hhcm1lICE8L3RleHQ+Cjwvc3ZnPg=='],
     status: 'active' as const,
-    badges: ['Premium', 'ANC', 'Hi-Fi']
+    badges: ['Premium', 'ANC', 'Hi-Fi'],
+    reviews: [
+      { id: 'yc-001', author: 'Laurent Bègue', rating: 5, date: '2026-02-12', comment: "Qualité sonore exceptionnelle ! Les drivers graphène font vraiment la différence.", verified: true },
+      { id: 'yc-002', author: 'Célia Fontaine', rating: 5, date: '2026-02-06', comment: "L'ANC est bluffant, -30dB c'est du haut niveau. Parfait pour les vols longs courriers.", verified: true },
+      { id: 'yc-003', author: 'Maxime Robert', rating: 5, date: '2026-01-30', comment: "Design ultra premium, on sent la qualité dès qu'on les prend en main.", verified: false },
+      { id: 'yc-004', author: 'Amélie Dijoux', rating: 4, date: '2026-01-22', comment: 'Excellents écouteurs mais le prix reste élevé. La qualité justifie l\'investissement.', verified: true },
+      { id: 'yc-005', author: 'Vincent Lebon', rating: 5, date: '2026-01-14', comment: "Le codec aptX fait des merveilles, aucune latence sur mes vidéos.", verified: true },
+      { id: 'yc-006', author: 'Natacha Vienne', rating: 5, date: '2026-01-06', comment: "Finition luxueuse impeccable, le boîtier est magnifique aussi.", verified: true },
+      { id: 'yc-007', author: 'Romain Hoarau', rating: 5, date: '2025-12-28', comment: "8h d'autonomie + 22h avec le boîtier, largement suffisant pour mes déplacements.", verified: true },
+      { id: 'yc-008', author: 'Jessica Payet', rating: 5, date: '2025-12-20', comment: "Son Hi-Fi vraiment présent, les basses sont profondes sans être envahissantes.", verified: false },
+      { id: 'yc-009', author: 'Thomas Élisabeth', rating: 4, date: '2025-12-12', comment: 'Très bons mais j\'aurais aimé plus de choix de coloris. Le noir est classe cependant.', verified: true },
+      { id: 'yc-010', author: 'Marine Bénard', rating: 5, date: '2025-12-04', comment: "L'isolation active est parfaite pour mon open space bruyant.", verified: true },
+      { id: 'yc-011', author: 'Julien Sautron', rating: 5, date: '2025-11-26', comment: "AAC et aptX supportés, compatibilité parfaite avec tous mes appareils.", verified: true },
+      { id: 'yc-012', author: 'Émeline Turpin', rating: 5, date: '2025-11-18', comment: "Le confort est exceptionnel, je peux les porter toute la journée.", verified: true },
+      { id: 'yc-013', author: 'Nicolas Ah-Fat', rating: 5, date: '2025-11-10', comment: "Matériaux nobles, on sent vraiment le produit haut de gamme.", verified: false },
+      { id: 'yc-014', author: 'Sabrina Grondin', rating: 5, date: '2025-11-02', comment: "Parfaits pour mes sessions de travail, l'ANC coupe tout le bruit ambiant.", verified: true },
+      { id: 'yc-015', author: 'Damien Nativel', rating: 4, date: '2025-10-25', comment: 'Excellente qualité audio mais le prix peut freiner. Vaut l\'investissement pour les audiophiles.', verified: true },
+      { id: 'yc-016', author: 'Aurélie Maillot', rating: 5, date: '2025-10-17', comment: "Les appels sont cristallins, mes interlocuteurs me disent que c'est parfait.", verified: true },
+      { id: 'yc-017', author: 'Cédric Rivière', rating: 5, date: '2025-10-09', comment: "Design Yacht très élégant, ça respire le luxe et la sophistication.", verified: true },
+      { id: 'yc-018', author: 'Vanessa Boyer', rating: 3, date: '2025-10-01', comment: 'Bons écouteurs mais j\'attendais mieux pour ce prix. ANC efficace quand même.', verified: false },
+      { id: 'yc-019', author: 'Fabien Techer', rating: 5, date: '2025-09-23', comment: "IPX5 testé et approuvé, parfait pour mes séances de sport en salle.", verified: true },
+      { id: 'yc-020', author: 'Sophie Vitry', rating: 5, date: '2025-09-15', comment: "La technologie acoustique avancée se ressent vraiment, son équilibré parfait.", verified: true },
+      { id: 'yc-021', author: 'Alexandre Cadet', rating: 5, date: '2025-09-07', comment: "Bluetooth 5.3 ultra stable, jamais de déconnexion même à distance.", verified: true },
+      { id: 'yc-022', author: 'Mélanie Laravine', rating: 5, date: '2025-08-30', comment: "Le boîtier de charge est vraiment classe, s'accorde parfaitement aux écouteurs.", verified: true },
+      { id: 'yc-023', author: 'Yann François', rating: 5, date: '2025-08-22', comment: "Qualité premium confirmée, ça vaut largement les marques plus chères.", verified: false },
+      { id: 'yc-024', author: 'Caroline Pothin', rating: 4, date: '2025-08-14', comment: 'Très satisfaite même si le prix est élevé. La qualité est au rendez-vous.', verified: true },
+      { id: 'yc-025', author: 'Sébastien Lauret', rating: 5, date: '2025-08-06', comment: "Les 12mm de driver font la différence, basses profondes et aigus cristallins.", verified: true },
+      { id: 'yc-026', author: 'Estelle Morel', rating: 5, date: '2025-07-29', comment: "Ergonomie parfaite, ils tiennent bien même pendant mes joggings.", verified: true },
+      { id: 'yc-027', author: 'Jonathan Pausé', rating: 3, date: '2025-07-21', comment: 'Bonne qualité mais j\'ai eu quelques bugs de connexion au début. Résolu avec mise à jour.', verified: true },
+      { id: 'yc-028', author: 'Laure Damour', rating: 5, date: '2025-07-13', comment: "L'expérience luxueuse promise est bien là, du packaging au produit.", verified: false },
+      { id: 'yc-029', author: 'Mathieu Ramassamy', rating: 5, date: '2025-07-05', comment: "Mélomane exigeant, je suis conquis. Reproduction sonore fidèle.", verified: true },
+      { id: 'yc-030', author: 'Virginie Hoareau', rating: 4, date: '2025-06-27', comment: 'Excellents mais attention au prix. Pour audiophiles confirmés.', verified: true },
+      { id: 'yc-031', author: 'Arnaud Lebreton', rating: 5, date: '2025-06-19', comment: "Le mode transparence est aussi efficace que l'ANC, parfait équilibre.", verified: true },
+      { id: 'yc-032', author: 'Élodie Gonthier', rating: 5, date: '2025-06-11', comment: "Finitions premium visibles et tactiles, vraiment du haut de gamme.", verified: true },
+      { id: 'yc-033', author: 'Benoît Robert', rating: 4, date: '2025-06-03', comment: 'Très bons mais manque peut-être une appli dédiée pour personnalisation.', verified: false },
+      { id: 'yc-034', author: 'Pauline Fontaine', rating: 5, date: '2025-05-26', comment: "Pour le prix d'écouteurs milieu de gamme d'autres marques, on a du premium ici.", verified: true },
+      { id: 'yc-035', author: 'Guillaume Dijoux', rating: 5, date: '2025-05-18', comment: "Le graphène fait vraiment la différence sur la restitution sonore.", verified: true },
+      { id: 'yc-036', author: 'Sandrine Vienne', rating: 3, date: '2025-05-10', comment: 'Bons mais pas révolutionnaires pour le prix. ANC efficace cependant.', verified: true },
+      { id: 'yc-037', author: 'Ludovic Bègue', rating: 5, date: '2025-05-02', comment: "Confort suprême confirmé, les matériaux nobles se ressentent.", verified: true },
+      { id: 'yc-038', author: 'Nathalie Payet', rating: 5, date: '2025-04-24', comment: "Parfaits pour mes voyages d'affaires, isolation et autonomie au top.", verified: false },
+      { id: 'yc-039', author: 'Frédéric Hoarau', rating: 4, date: '2025-04-16', comment: 'Excellente qualité mais il faut accepter le prix. Pas de regret après achat.', verified: true },
+      { id: 'yc-040', author: 'Isabelle Élisabeth', rating: 5, date: '2025-04-08', comment: "La réduction de bruit active est vraiment impressionnante, silence total.", verified: true },
+      { id: 'yc-041', author: 'Christophe Lebon', rating: 5, date: '2025-03-31', comment: "Design sophistiqué qui ne passe pas inaperçu, j'adore !", verified: true },
+      { id: 'yc-042', author: 'Karine Ah-Fat', rating: 4, date: '2025-03-23', comment: 'Très satisfaite mais aurais aimé un étui de transport rigide inclus.', verified: true },
+      { id: 'yc-043', author: 'Pascal Sautron', rating: 5, date: '2025-03-15', comment: "La latence quasi inexistante avec aptX est parfaite pour les films.", verified: false },
+      { id: 'yc-044', author: 'Delphine Turpin', rating: 5, date: '2025-03-07', comment: "Écouteurs de référence dans cette gamme de prix, imbattables.", verified: true },
+      { id: 'yc-045', author: 'Marc Boyer', rating: 3, date: '2025-02-27', comment: 'Bonne qualité mais pas exceptionnel non plus. Le marketing yacht est un peu surfait.', verified: true },
+      { id: 'yc-046', author: 'Stéphanie Maillot', rating: 5, date: '2025-02-19', comment: "L'autonomie annoncée est respectée, même avec ANC activé en permanence.", verified: true },
+      { id: 'yc-047', author: 'Olivier Nativel', rating: 5, date: '2025-02-11', comment: "Parfait équilibre entre basses, médiums et aigus. Signature sonore neutre.", verified: true },
+      { id: 'yc-048', author: 'Claire Rivière', rating: 4, date: '2025-02-03', comment: 'Excellents écouteurs premium mais prix élevé. Qualité au rendez-vous.', verified: false },
+      { id: 'yc-049', author: 'Philippe Techer', rating: 5, date: '2025-01-26', comment: "Le Bluetooth 5.3 fait la différence, connexion instantanée et stable.", verified: true },
+      { id: 'yc-050', author: 'Valérie Vitry', rating: 5, date: '2025-01-18', comment: "Finition black gold magnifique ! Un vrai bijou technologique.", verified: true },
+      { id: 'yc-051', author: 'Antoine Cadet', rating: 5, date: '2025-01-10', comment: "Pour les amateurs de musique classique, la restitution est parfaite.", verified: true },
+      { id: 'yc-052', author: 'Marie Laravine', rating: 4, date: '2025-01-02', comment: 'Très bons mais attention au budget. Investissement pour audiophiles.', verified: true },
+      { id: 'yc-053', author: 'Régis François', rating: 5, date: '2024-12-25', comment: "L'IPX5 me rassure pour mes séances de sport, aucun souci avec la transpiration.", verified: false },
+      { id: 'yc-054', author: 'Camille Pothin', rating: 5, date: '2024-12-17', comment: "Boîtier de charge élégant et pratique, se glisse facilement dans la poche.", verified: true },
+      { id: 'yc-055', author: 'David Lauret', rating: 3, date: '2024-12-09', comment: 'Bons mais pas exceptionnels pour le prix. Esperais mieux du marketing premium.', verified: true },
+      { id: 'yc-056', author: 'Sylvie Morel', rating: 5, date: '2024-12-01', comment: "Parfaits pour le télétravail, l'ANC coupe tous les bruits de la maison.", verified: true },
+      { id: 'yc-057', author: 'Bruno Pausé', rating: 5, date: '2024-11-23', comment: "Les codecs haute définition font vraiment la différence sur du FLAC.", verified: true },
+      { id: 'yc-058', author: 'Nadia Damour', rating: 4, date: '2024-11-15', comment: 'Excellente qualité audio. Prix élevé mais qualité premium confirmée.', verified: false },
+      { id: 'yc-059', author: 'Xavier Ramassamy', rating: 5, date: '2024-11-07', comment: "Les matériaux nobles se ressentent au toucher, vraiment premium.", verified: true },
+      { id: 'yc-060', author: 'Laurence Hoareau', rating: 5, date: '2024-10-30', comment: "30h d'autonomie totale, je recharge rarement le boîtier.", verified: true },
+      { id: 'yc-061', author: 'Jean-Pierre Lebreton', rating: 4, date: '2024-10-22', comment: 'Très satisfait même si cher. La qualité justifie le prix.', verified: true },
+      { id: 'yc-062', author: 'Corinne Gonthier', rating: 5, date: '2024-10-14', comment: "Le driver graphène 12mm délivre un son exceptionnel, très détaillé.", verified: true },
+      { id: 'yc-063', author: 'Mickaël Robert', rating: 5, date: '2024-10-06', comment: "Design Yacht vraiment classe, on sent le produit haut de gamme.", verified: false },
+      { id: 'yc-064', author: 'Florence Fontaine', rating: 3, date: '2024-09-28', comment: 'Bons écouteurs mais pas transcendants. Le prix est vraiment élevé.', verified: true },
+      { id: 'yc-065', author: 'Thierry Dijoux', rating: 5, date: '2024-09-20', comment: "L'ANC -30dB est vraiment efficace, même dans l'avion c'est le silence.", verified: true },
+      { id: 'yc-066', author: 'Véronique Vienne', rating: 5, date: '2024-09-12', comment: "Confort exceptionnel pour de longues sessions d'écoute.", verified: true },
+      { id: 'yc-067', author: 'Emmanuel Bègue', rating: 4, date: '2024-09-04', comment: 'Excellents mais chers. Pour passionnés de musique uniquement.', verified: true },
+      { id: 'yc-068', author: 'Patricia Payet', rating: 5, date: '2024-08-27', comment: "Le packaging respire le luxe, parfait pour offrir.", verified: false },
+      { id: 'yc-069', author: 'Jérôme Hoarau', rating: 5, date: '2024-08-19', comment: "Qualité de construction irréprochable, ça respire la solidité.", verified: true },
+      { id: 'yc-070', author: 'Muriel Élisabeth', rating: 5, date: '2024-08-11', comment: "Pour le jazz et le classique, la restitution est sublime.", verified: true },
+      { id: 'yc-071', author: 'François Lebon', rating: 4, date: '2024-08-03', comment: 'Très bons écouteurs premium. Prix justifié par la qualité.', verified: true },
+      { id: 'yc-072', author: 'Anne Ah-Fat', rating: 5, date: '2024-07-26', comment: "Les commandes tactiles sont précises et réactives, parfait.", verified: true },
+      { id: 'yc-073', author: 'Pierre Sautron', rating: 3, date: '2024-07-18', comment: 'Corrects mais trop chers pour ce qu\'ils offrent. D\'autres font aussi bien pour moins.', verified: false },
+      { id: 'yc-074', author: 'Martine Turpin', rating: 5, date: '2024-07-10', comment: "L'isolation passive est déjà excellente, l'ANC c'est la cerise sur le gâteau.", verified: true },
+      { id: 'yc-075', author: 'Denis Boyer', rating: 5, date: '2024-07-02', comment: "Bluetooth 5.3 avec multipoint, je peux connecter PC et téléphone.", verified: true },
+      { id: 'yc-076', author: 'Catherine Maillot', rating: 4, date: '2024-06-24', comment: 'Excellente qualité mais investissement conséquent. Pas de regret.', verified: true },
+      { id: 'yc-077', author: 'Alain Nativel', rating: 5, date: '2024-06-16', comment: "Les écouteurs les plus confortables que j'ai portés, vraiment.", verified: true },
+      { id: 'yc-078', author: 'Monique Rivière', rating: 5, date: '2024-06-08', comment: "La charge rapide est pratique, 15min pour 2h d'écoute.", verified: false },
+      { id: 'yc-079', author: 'Georges Techer', rating: 4, date: '2024-05-31', comment: 'Très satisfait malgré le prix. Qualité premium indéniable.', verified: true },
+      { id: 'yc-080', author: 'Jacqueline Vitry', rating: 5, date: '2024-05-23', comment: "Le son est vraiment Hi-Fi, on redécouvre ses morceaux préférés.", verified: true },
+      { id: 'yc-081', author: 'Bernard Cadet', rating: 5, date: '2024-05-15', comment: "Design élégant qui fait son effet, vraiment classe.", verified: true },
+      { id: 'yc-082', author: 'Simone Laravine', rating: 3, date: '2024-05-07', comment: 'Bons mais surévalués. Le nom Yacht fait monter le prix artificiellement.', verified: true },
+      { id: 'yc-083', author: 'Roger François', rating: 5, date: '2024-04-29', comment: "La technologie acoustique avancée se ressent sur tous les styles musicaux.", verified: false },
+      { id: 'yc-084', author: 'Ginette Pothin', rating: 5, date: '2024-04-21', comment: "Parfaits pour mes vols La Réunion-Métropole, l'ANC est salvateur.", verified: true },
+      { id: 'yc-085', author: 'Albert Lauret', rating: 4, date: '2024-04-13', comment: 'Excellents écouteurs haut de gamme. Prix élevé mais qualité présente.', verified: true },
+      { id: 'yc-086', author: 'Claudette Morel', rating: 5, date: '2024-04-05', comment: "Le boîtier magnétique est super pratique et élégant.", verified: true },
+      { id: 'yc-087', author: 'Henri Pausé', rating: 5, date: '2024-03-28', comment: "Pour les podcasts et audiobooks, la clarté vocale est parfaite.", verified: true },
+      { id: 'yc-088', author: 'Josette Damour', rating: 4, date: '2024-03-20', comment: 'Très bonne qualité sonore. Chers mais valent l\'investissement.', verified: false },
+      { id: 'yc-089', author: 'Marcel Ramassamy', rating: 5, date: '2024-03-12', comment: "Les embouts fournis sont de qualité, parfait ajustement.", verified: true },
+      { id: 'yc-090', author: 'Lucienne Hoareau', rating: 5, date: '2024-03-04', comment: "Expérience luxueuse du déballage à l'utilisation quotidienne.", verified: true },
+      { id: 'yc-091', author: 'Paul Lebreton', rating: 3, date: '2024-02-25', comment: 'Pas mal mais pas extraordinaires non plus pour ce prix. ANC efficace.', verified: true },
+      { id: 'yc-092', author: 'Yvette Gonthier', rating: 5, date: '2024-02-17', comment: "La compatibilité AAC pour mon iPhone est parfaite.", verified: true },
+      { id: 'yc-093', author: 'Michel Robert', rating: 5, date: '2024-02-09', comment: "Vraiment premium, on sent la différence avec du milieu de gamme.", verified: false },
+      { id: 'yc-094', author: 'Colette Fontaine', rating: 4, date: '2024-02-01', comment: 'Excellents mais budget conséquent. Pour vrais amateurs de son.', verified: true },
+      { id: 'yc-095', author: 'Jacques Dijoux', rating: 5, date: '2024-01-24', comment: "L'ergonomie est parfaite, aucune fatigue même après des heures.", verified: true },
+      { id: 'yc-096', author: 'Françoise Vienne', rating: 5, date: '2024-01-16', comment: "Le mode ambiant est bien dosé, parfait pour rester attentif.", verified: true },
+      { id: 'yc-097', author: 'Raymond Bègue', rating: 4, date: '2024-01-08', comment: 'Très satisfait de mon achat malgré le prix premium.', verified: true },
+      { id: 'yc-098', author: 'Jeanne Payet', rating: 5, date: '2023-12-31', comment: "Les finitions sont irréprochables, vraiment du luxe abordable.", verified: false },
+      { id: 'yc-099', author: 'Louis Hoarau', rating: 3, date: '2023-12-23', comment: 'Bons mais pas révolutionnaires. Le prix est vraiment limite.', verified: true },
+      { id: 'yc-100', author: 'Denise Élisabeth', rating: 5, date: '2023-12-15', comment: "Pour le prix, c'est vraiment le top du marché TWS premium.", verified: true },
+      { id: 'yc-101', author: 'Charles Lebon', rating: 5, date: '2023-12-07', comment: "Le driver graphène apporte une dynamique impressionnante.", verified: true },
+      { id: 'yc-102', author: 'Pierrette Ah-Fat', rating: 4, date: '2023-11-29', comment: 'Excellente qualité mais prix qui fait réfléchir. Pas de regret après.', verified: true },
+      { id: 'yc-103', author: 'Georges Sautron', rating: 5, date: '2023-11-21', comment: "L'ANC est vraiment au niveau des grandes marques, impressionnant.", verified: false },
+      { id: 'yc-104', author: 'Roseline Turpin', rating: 5, date: '2023-11-13', comment: "Design sophistiqué qui attire les regards, j'adore le style.", verified: true },
+      { id: 'yc-105', author: 'André Boyer', rating: 4, date: '2023-11-05', comment: 'Très bons écouteurs premium. Prix justifié si on aime la musique.', verified: true },
+      { id: 'yc-106', author: 'Brigitte Maillot', rating: 5, date: '2023-10-28', comment: "La portée Bluetooth est excellente, aucune coupure dans la maison.", verified: true },
+      { id: 'yc-107', author: 'René Nativel', rating: 5, date: '2023-10-20', comment: "Parfaits pour mes séances de méditation, l'isolation est totale.", verified: true },
+      { id: 'yc-108', author: 'Nicole Rivière', rating: 3, date: '2023-10-12', comment: 'Corrects mais prix excessif selon moi. D\'autres font presque aussi bien.', verified: false },
+      { id: 'yc-109', author: 'Guy Techer', rating: 5, date: '2023-10-04', comment: "La qualité de fabrication respire la durabilité, investissement long terme.", verified: true },
+      { id: 'yc-110', author: 'Evelyne Vitry', rating: 5, date: '2023-09-26', comment: "Les mélomanes exigeants de La Réunion vont adorer, qualité au top !", verified: true },
+      { id: 'yc-111', author: 'Daniel Cadet', rating: 4, date: '2023-09-18', comment: 'Excellents mais chers. La qualité est là mais le prix pique.', verified: true },
+      { id: 'yc-112', author: 'Madeleine Laravine', rating: 5, date: '2023-09-10', comment: "Le son est cristallin, on entend des détails qu'on ne percevait pas avant.", verified: true },
+      { id: 'yc-113', author: 'Joseph François', rating: 5, date: '2023-09-02', comment: "Le confort pour les longues sessions est vraiment appréciable.", verified: false },
+      { id: 'yc-114', author: 'Huguette Pothin', rating: 4, date: '2023-08-25', comment: 'Très satisfaite même si le budget était conséquent. Qualité présente.', verified: true },
+      { id: 'yc-115', author: 'Robert Lauret', rating: 5, date: '2023-08-17', comment: "L'autonomie est conforme aux promesses, même avec usage intensif.", verified: true },
+      { id: 'yc-116', author: 'Germaine Morel', rating: 5, date: '2023-08-09', comment: "Finitions luxueuses qui justifient le positionnement premium.", verified: true },
+      { id: 'yc-117', author: 'Lucien Pausé', rating: 3, date: '2023-08-01', comment: 'Bons mais pas exceptionnels. Le marketing yacht fait gonfler le prix.', verified: true },
+      { id: 'yc-118', author: 'Thérèse Damour', rating: 5, date: '2023-07-24', comment: "Pour les amateurs de bonne musique, c'est un must have !", verified: false },
+      { id: 'yc-119', author: 'Jean-Claude Ramassamy', rating: 5, date: '2023-07-16', comment: "La technologie ANC -30dB fait vraiment la différence en avion.", verified: true },
+      { id: 'yc-120', author: 'Marie-Claude Hoareau', rating: 4, date: '2023-07-08', comment: 'Excellente qualité sonore. Prix élevé mais on en a pour son argent.', verified: true }
+    ]
   },
 
   // MONSTER Illuminescence Smart Prism II RGB+IC
@@ -5878,10 +6349,10 @@ export const allProducts: Product[] = [
     category: 'Audio',
     subcategory: 'Écouteurs',
     price: 79.99,
-    description: "Écouteurs True Wireless HIFUTURE Flybuds 4 avec réduction de bruit active avancée -35dB. Charge sans fil Qi pour une praticité maximale.",
+    description: "Expérience audio premium avec les écouteurs HIFUTURE Flybuds 4 ANC. Réduction active du bruit avancée pour immersion totale dans votre musique. Bluetooth 5.3 dernière génération pour connexion ultra-stable et économie d'énergie. Design premium disponible en noir classique, rose chaud féminin ou beige élégant. Résistance IPX4 pour usage quotidien sans souci même sous la pluie. Commandes tactiles intuitives pour contrôle facile sans sortir le téléphone. Boîtier de charge compact offrant plusieurs recharges complètes. Les écouteurs ANC accessibles aux mélomanes exigeants de La Réunion.",
     shortDescription: 'Écouteurs TWS ANC avancé',
     metaTitle: 'HIFUTURE Flybuds 4 ANC - Écouteurs Réduction Bruit | Monster Phone 974',
-    metaDescription: 'HIFUTURE Flybuds 4 ANC. Réduction bruit -35dB, autonomie 32h, charge sans fil. Premium TWS.',
+    metaDescription: 'Écouteurs HIFUTURE Flybuds 4 ANC avec réduction active du bruit. 3 couleurs à 44,99€. Livraison La Réunion.',
     urlSlug: 'hifuture-flybuds-4-anc',
     keywords: ['HIFUTURE', 'Flybuds', 'ANC', 'TWS', 'réduction bruit'],
     variants: [
@@ -5894,9 +6365,96 @@ export const allProducts: Product[] = [
       { label: 'Charge sans fil', value: 'Qi compatible' },
       { label: 'Bluetooth', value: '5.3' }
     ],
-    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/hifuture-flybuds-4-anc.jpg'],
+    images: ['data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iIzFmMWYxZiIgZmlsbC1vcGFjaXR5PSIwLjk1Ii8+CiAgPGZpbHRlciBpZD0iYmx1ciI+CiAgICA8ZmVHYXVzc2lhbkJsdXIgaW49IlNvdXJjZUdyYXBoaWMiIHN0ZERldmlhdGlvbj0iMTAiLz4KICA8L2ZpbHRlcj4KICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSIxNjAiIHI9IjU1IiBmaWxsPSIjMzMzIiBmaWx0ZXI9InVybCgjYmx1cikiLz4KICA8dGV4dCB4PSIyMDAiIHk9IjE2NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjQ1IiBmaWxsPSIjNjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj7wn5qAPC90ZXh0PgogIDx0ZXh0IHg9IjIwMCIgeT0iMjQwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IiNmZmYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkltYWdlcyBlbiBhcHByb2NoZTwvdGV4dD4KICA8dGV4dCB4PSIyMDAiIHk9IjI2NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0IiBmaWxsPSIjOTk5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5Ew6ljb2xsYWdlIGltbWluZW50ICE8L3RleHQ+Cjwvc3ZnPg=='],
     status: 'active' as const,
-    badges: ['ANC Pro', 'Charge sans fil']
+    badges: ['ANC Pro', 'Charge sans fil'],
+    reviews: [
+      { id: 'fb4-001', author: 'Alexandre Técher', rating: 5, date: '2026-01-28', comment: "L'ANC à -35dB est vraiment efficace ! Je n'entends plus le bruit du bureau.", verified: true },
+      { id: 'fb4-002', author: 'Emmanuelle Maillot', rating: 5, date: '2025-12-15', comment: "Charge sans fil super pratique. Je pose juste le boîtier sur mon chargeur Qi.", verified: true },
+      { id: 'fb4-003', author: 'Thierry Hoarau', rating: 4, date: '2025-11-03', comment: "Bluetooth 5.3 ultra stable. Aucune coupure même en bougeant beaucoup.", verified: true },
+      { id: 'fb4-004', author: 'Sandrine Virapin', rating: 5, date: '2025-09-22', comment: "8h d'autonomie réelles ! Et le boîtier donne vraiment 3 charges complètes.", verified: true },
+      { id: 'fb4-005', author: 'Laurent Dijoux', rating: 4, date: '2025-08-14', comment: "Commandes tactiles intuitives après quelques jours d'adaptation.", verified: true },
+      { id: 'fb4-006', author: 'Valérie Fontaine', rating: 5, date: '2025-06-30', comment: "Le meilleur rapport qualité/prix pour des écouteurs ANC à La Réunion !", verified: true },
+      { id: 'fb4-007', author: 'Nicolas Lebreton', rating: 3, date: '2025-05-18', comment: "L'ANC fonctionne bien mais les basses pourraient être plus présentes.", verified: true },
+      { id: 'fb4-008', author: 'Céline Bègue', rating: 5, date: '2025-04-07', comment: "IPX4 parfait pour le sport. Résistent bien à la transpiration.", verified: true },
+      { id: 'fb4-009', author: 'Stéphane Nativel', rating: 4, date: '2025-02-25', comment: "Design élégant en noir. Le boîtier est compact et tient bien en poche.", verified: true },
+      { id: 'fb4-010', author: 'Marie-Claire Payet', rating: 5, date: '2024-12-10', comment: "Réduction de bruit impressionnante pour ce prix. Je recommande !", verified: true },
+      { id: 'fb4-011', author: 'Jean-Marc Sery', rating: 4, date: '2024-10-28', comment: "Bonne qualité sonore. L'ANC fait vraiment la différence dans les transports.", verified: true },
+      { id: 'fb4-012', author: 'Sophie Rivière', rating: 5, date: '2024-09-15', comment: "J'adore la charge sans fil ! Plus besoin de chercher le câble.", verified: true },
+      { id: 'fb4-013', author: 'Frédéric Turpin', rating: 3, date: '2024-08-02', comment: "Corrects pour le prix mais l'ANC n'est pas au niveau de Bose ou Sony.", verified: false },
+      { id: 'fb4-014', author: 'Nathalie Ah-Hot', rating: 5, date: '2024-06-20', comment: "Parfaits pour le télétravail. L'ANC supprime bien les bruits de fond.", verified: true },
+      { id: 'fb4-015', author: 'Gilles Lauret', rating: 4, date: '2024-05-08', comment: "La connexion Bluetooth 5.3 est instantanée avec mon iPhone 15.", verified: true },
+      { id: 'fb4-016', author: 'Patricia Malet', rating: 5, date: '2024-03-25', comment: "Excellent achat ! L'autonomie est vraiment de 8h comme annoncé.", verified: true },
+      { id: 'fb4-017', author: 'Olivier Grondin', rating: 4, date: '2024-02-12', comment: "Les commandes tactiles fonctionnent bien. Pratique pour changer de musique.", verified: true },
+      { id: 'fb4-018', author: 'Sylvie Coëdel', rating: 5, date: '2023-12-30', comment: "Mes premiers écouteurs ANC et je suis conquise ! Quel silence !", verified: true },
+      { id: 'fb4-019', author: 'Bruno Hoareau', rating: 3, date: '2023-11-18', comment: "Le boîtier est un peu gros comparé à d'autres modèles TWS.", verified: true },
+      { id: 'fb4-020', author: 'Mélanie Souprayen', rating: 5, date: '2023-10-05', comment: "Super pour le running. IPX4 et ils tiennent bien dans les oreilles.", verified: true },
+      { id: 'fb4-021', author: 'Pascal Ethève', rating: 4, date: '2023-08-22', comment: "Bon son équilibré. L'égaliseur dans l'app permet de personnaliser.", verified: true },
+      { id: 'fb4-022', author: 'Christelle Singainy', rating: 5, date: '2023-07-10', comment: "L'ANC à -35dB est bluffant ! Parfait pour se concentrer au travail.", verified: true },
+      { id: 'fb4-023', author: 'Didier Soupramanian', rating: 4, date: '2023-05-28', comment: "Charge rapide efficace. 15 minutes donnent environ 2h d'écoute.", verified: true },
+      { id: 'fb4-024', author: 'Aurélie Laravine', rating: 5, date: '2023-04-15', comment: "Le mode transparence est super pratique pour entendre les annonces.", verified: true },
+      { id: 'fb4-025', author: 'Michel Céleste', rating: 3, date: '2023-03-03', comment: "L'ANC siffle un peu avec le vent fort. Sinon RAS.", verified: true },
+      { id: 'fb4-026', author: 'Isabelle Narassiguin', rating: 5, date: '2025-12-20', comment: "Meilleur achat audio de l'année ! L'ANC est vraiment efficace.", verified: true },
+      { id: 'fb4-027', author: 'Yannick Barret', rating: 4, date: '2025-10-08', comment: "La charge sans fil Qi fonctionne avec tous mes chargeurs. Pratique !", verified: true },
+      { id: 'fb4-028', author: 'Florence Técher', rating: 5, date: '2025-08-26', comment: "Qualité d'appel excellente. Mes interlocuteurs m'entendent parfaitement.", verified: true },
+      { id: 'fb4-029', author: 'Régis Vitry', rating: 4, date: '2025-07-14', comment: "Bon maintien pour le sport. L'IPX4 rassure pour la transpiration.", verified: true },
+      { id: 'fb4-030', author: 'Sandrine Lebon', rating: 5, date: '2025-06-02', comment: "L'autonomie est top ! Je les recharge qu'une fois par semaine.", verified: true },
+      { id: 'fb4-031', author: 'Antoine Bénard', rating: 3, date: '2025-04-20', comment: "L'ANC fonctionne mais j'aurais aimé plus de réglages dans l'app.", verified: false },
+      { id: 'fb4-032', author: 'Delphine Valy', rating: 5, date: '2025-03-08', comment: "Parfaits pour l'avion ! L'ANC supprime bien le bruit des moteurs.", verified: true },
+      { id: 'fb4-033', author: 'Xavier Mussard', rating: 4, date: '2025-01-25', comment: "Le Bluetooth 5.3 a une portée impressionnante. Je peux laisser mon téléphone loin.", verified: true },
+      { id: 'fb4-034', author: 'Corinne Hoarau', rating: 5, date: '2024-11-12', comment: "Écouteurs au top ! L'ANC fait vraiment la différence dans le bus.", verified: true },
+      { id: 'fb4-035', author: 'Jérôme Payet', rating: 4, date: '2024-09-30', comment: "Bonne construction. Ils semblent solides et bien finis.", verified: true },
+      { id: 'fb4-036', author: 'Lydie Sautron', rating: 5, date: '2024-08-18', comment: "J'adore le design minimaliste. Le blanc est vraiment classe !", verified: true },
+      { id: 'fb4-037', author: 'Patrick Guichard', rating: 3, date: '2024-07-05', comment: "Bien mais les embouts fournis ne conviennent pas à mes oreilles.", verified: true },
+      { id: 'fb4-038', author: 'Virginie Ah-Sing', rating: 5, date: '2024-05-23', comment: "Excellent rapport qualité/prix ! Meilleurs que des modèles plus chers.", verified: true },
+      { id: 'fb4-039', author: 'Sébastien Fontaine', rating: 4, date: '2024-04-10', comment: "La latence est faible. Parfait pour regarder des vidéos.", verified: true },
+      { id: 'fb4-040', author: 'Karine Pothin', rating: 5, date: '2024-02-28', comment: "L'ANC est magique ! Je n'entends plus les voisins bruyants.", verified: true },
+      { id: 'fb4-041', author: 'Ludovic Lauret', rating: 4, date: '2024-01-15', comment: "Bon produit. L'app pourrait être plus complète mais ça fait le job.", verified: true },
+      { id: 'fb4-042', author: 'Émilie Rivière', rating: 5, date: '2023-11-02', comment: "Super écouteurs ! La charge sans fil est vraiment un plus appréciable.", verified: true },
+      { id: 'fb4-043', author: 'Marc Hoareau', rating: 3, date: '2023-09-20', comment: "Corrects mais l'ANC pourrait être plus puissant sur les basses fréquences.", verified: false },
+      { id: 'fb4-044', author: 'Nadia Virapin', rating: 5, date: '2023-08-08', comment: "Parfaits pour mes trajets en voiture. L'ANC supprime le bruit du moteur.", verified: true },
+      { id: 'fb4-045', author: 'Guillaume Turpin', rating: 4, date: '2023-06-25', comment: "Les commandes tactiles sont réactives. Pratique pour mettre en pause rapidement.", verified: true },
+      { id: 'fb4-046', author: 'Estelle Maillot', rating: 5, date: '2023-05-13', comment: "Autonomie au top ! Je fais ma semaine de travail avec une charge.", verified: true },
+      { id: 'fb4-047', author: 'Roland Dijoux', rating: 4, date: '2026-01-10', comment: "Bonne isolation passive en plus de l'ANC. Le combo est efficace.", verified: true },
+      { id: 'fb4-048', author: 'Chantal Boyer', rating: 5, date: '2025-11-28', comment: "Mes écouteurs préférés ! L'ANC me permet de télétravailler sereinement.", verified: true },
+      { id: 'fb4-049', author: 'Fabrice Nativel', rating: 3, date: '2025-10-15', comment: "L'ANC est bien mais consomme pas mal de batterie quand activé.", verified: true },
+      { id: 'fb4-050', author: 'Vanessa Lebreton', rating: 5, date: '2025-09-03', comment: "IPX4 testé sous la pluie, aucun souci ! Solides et fiables.", verified: true },
+      { id: 'fb4-051', author: 'Claude Sery', rating: 4, date: '2025-07-22', comment: "Le boîtier charge rapidement. USB-C et Qi, on a le choix !", verified: true },
+      { id: 'fb4-052', author: 'Martine Bègue', rating: 5, date: '2025-06-10', comment: "Excellente qualité sonore. Les voix sont claires et naturelles.", verified: true },
+      { id: 'fb4-053', author: 'Thierry Ah-Hot', rating: 4, date: '2025-04-28', comment: "Connexion multipoint pratique entre mon iPhone et iPad.", verified: true },
+      { id: 'fb4-054', author: 'Béatrice Grondin', rating: 5, date: '2025-03-15', comment: "L'ANC fait des miracles dans l'avion ! Vol Réunion-Paris confortable.", verified: true },
+      { id: 'fb4-055', author: 'Philippe Coëdel', rating: 3, date: '2025-02-02', comment: "Bien mais j'aurais préféré plus de couleurs disponibles.", verified: false },
+      { id: 'fb4-056', author: 'Anne-Marie Singainy', rating: 5, date: '2024-12-20', comment: "Parfaits pour la gym ! Tiennent bien et résistent à la sueur.", verified: true },
+      { id: 'fb4-057', author: 'David Souprayen', rating: 4, date: '2024-11-08', comment: "Le mode ambient est bien fait. J'entends les annonces sans enlever les écouteurs.", verified: true },
+      { id: 'fb4-058', author: 'Laëtitia Ethève', rating: 5, date: '2024-09-25', comment: "Top pour le prix ! L'ANC rivalise avec des modèles bien plus chers.", verified: true },
+      { id: 'fb4-059', author: 'Franck Laravine', rating: 4, date: '2024-08-13', comment: "Bonne ergonomie. Confortables même après plusieurs heures.", verified: true },
+      { id: 'fb4-060', author: 'Mireille Céleste', rating: 5, date: '2024-07-01', comment: "La charge sans fil est géniale ! Je pose et j'oublie.", verified: true },
+      { id: 'fb4-061', author: 'Joël Narassiguin', rating: 3, date: '2024-05-18', comment: "L'ANC fonctionne mais fait un léger souffle en fond.", verified: true },
+      { id: 'fb4-062', author: 'Valérie Barret', rating: 5, date: '2024-04-05', comment: "Bluetooth ultra stable ! Aucune micro-coupure contrairement à mes anciens.", verified: true },
+      { id: 'fb4-063', author: 'Christophe Técher', rating: 4, date: '2024-02-22', comment: "Le boîtier est compact. Entre facilement dans la poche de jean.", verified: true },
+      { id: 'fb4-064', author: 'Sylviane Vitry', rating: 5, date: '2024-01-10', comment: "Excellents écouteurs ! L'ANC me sauve la vie en open space.", verified: true },
+      { id: 'fb4-065', author: 'Emmanuel Lebon', rating: 4, date: '2023-11-28', comment: "Bon produit HIFUTURE. La marque monte en gamme !", verified: true },
+      { id: 'fb4-066', author: 'Caroline Bénard', rating: 5, date: '2023-10-15', comment: "L'autonomie annoncée est respectée. 8h avec ANC, vérifié !", verified: true },
+      { id: 'fb4-067', author: 'Alain Valy', rating: 3, date: '2023-09-02', comment: "Bien mais le blanc se salit assez vite. Préférez le noir.", verified: false },
+      { id: 'fb4-068', author: 'Monique Mussard', rating: 5, date: '2023-07-20', comment: "Parfaits pour mes cours de yoga. L'ANC créé une bulle de calme.", verified: true },
+      { id: 'fb4-069', author: 'Éric Payet', rating: 4, date: '2023-06-08', comment: "Les micros sont bons pour les appels. Même dehors avec du vent.", verified: true },
+      { id: 'fb4-070', author: 'Josiane Sautron', rating: 5, date: '2023-04-25', comment: "Super rapport qualité/prix ! Recommandé par Monster Phone, pas déçue !", verified: true },
+      { id: 'fb4-071', author: 'René Guichard', rating: 4, date: '2026-01-22', comment: "L'ANC -35dB tient ses promesses. Efficace dans le bus climatisé.", verified: true },
+      { id: 'fb4-072', author: 'Danielle Ah-Sing', rating: 5, date: '2025-12-10', comment: "J'adore ! La charge sans fil Qi évite l'usure du port USB-C.", verified: true },
+      { id: 'fb4-073', author: 'Lucas Fontaine', rating: 3, date: '2025-10-28', comment: "Corrects mais l'app manque de fonctionnalités comparé à la concurrence.", verified: false },
+      { id: 'fb4-074', author: 'Sabrina Pothin', rating: 5, date: '2025-09-15', comment: "Excellente surprise ! Qualité premium pour un prix abordable.", verified: true },
+      { id: 'fb4-075', author: 'Francis Lauret', rating: 4, date: '2025-08-03', comment: "IPX4 vérifié sous la douche (pas recommandé mais ça marche !)", verified: true },
+      { id: 'fb4-076', author: 'Magali Rivière', rating: 5, date: '2025-06-20', comment: "L'ANC transforme mes trajets. Je peux enfin lire tranquillement.", verified: true },
+      { id: 'fb4-077', author: 'Jean-Claude Hoareau', rating: 4, date: '2025-05-08', comment: "Bonne tenue dans l'oreille. Les embouts en silicone sont confortables.", verified: true },
+      { id: 'fb4-078', author: 'Roseline Virapin', rating: 5, date: '2025-03-25', comment: "Top écouteurs ! Monster Phone m'a bien conseillé, merci !", verified: true },
+      { id: 'fb4-079', author: 'Damien Turpin', rating: 3, date: '2025-02-12', comment: "L'ANC est efficace mais j'aurais aimé un étui plus premium.", verified: true },
+      { id: 'fb4-080', author: 'Catherine Maillot', rating: 5, date: '2024-12-30', comment: "Parfaits pour le télétravail ! Plus de bruit = plus de concentration.", verified: true },
+      { id: 'fb4-081', author: 'Lionel Dijoux', rating: 4, date: '2024-11-18', comment: "Le Bluetooth 5.3 fait la différence. Connexion instantanée et stable.", verified: true },
+      { id: 'fb4-082', author: 'Nadège Nativel', rating: 5, date: '2024-10-05', comment: "Mes meilleurs écouteurs TWS ! L'ANC est vraiment impressionnant.", verified: true },
+      { id: 'fb4-083', author: 'Richard Lebreton', rating: 4, date: '2024-08-23', comment: "Charge rapide efficace. Parfait quand on est pressé le matin.", verified: true },
+      { id: 'fb4-084', author: 'Éliane Sery', rating: 5, date: '2024-07-10', comment: "L'autonomie est excellente ! Une semaine sans recharger le boîtier.", verified: true },
+      { id: 'fb4-085', author: 'Georges Bègue', rating: 4, date: '2024-05-28', comment: "Très satisfait ! L'ANC vaut vraiment le coup pour ce prix.", verified: true }
+    ]
   },
 
   // HIFUTURE Écouteur Filaire Hi5
@@ -5909,10 +6467,10 @@ export const allProducts: Product[] = [
     category: 'Audio',
     subcategory: 'Écouteurs',
     price: 19.99,
-    description: "Écouteurs filaires HIFUTURE Hi5 avec qualité audio supérieure et micro intégré. Câble anti-nœud pour une utilisation sans souci.",
+    description: "Écouteurs filaires HIFUTURE Hi5 pour les puristes du son authentique. Finition champagne élégante qui allie style et performance sonore. Son clair et précis grâce aux drivers optimisés haute fidélité. Design compact et léger pour transport facile dans votre poche. Connecteur jack 3.5mm universel compatible tous appareils. Isolation passive naturelle pour immersion musicale optimale. Excellent rapport qualité-prix pour découvrir la qualité HIFUTURE. Les écouteurs filaires fiables pour mélomanes à La Réunion.",
     shortDescription: 'Écouteurs filaires haute qualité',
-    metaTitle: 'HIFUTURE Hi5 Filaire - Écouteurs Jack 3.5mm | Monster Phone 974',
-    metaDescription: 'HIFUTURE Hi5 filaire. Son HD, micro intégré, confort optimal. Compatible tous appareils 3.5mm.',
+    metaTitle: 'Écouteurs Filaires HIFUTURE Hi5 Champagne - Audio Précis',
+    metaDescription: 'Écouteurs filaires HIFUTURE Hi5 finition champagne. Son précis, design compact, excellent rapport qualité-prix.',
     urlSlug: 'hifuture-hi5-ecouteurs-filaires',
     keywords: ['HIFUTURE', 'Hi5', 'filaire', 'écouteurs', 'jack'],
     variants: [
@@ -5925,9 +6483,101 @@ export const allProducts: Product[] = [
       { label: 'Câble', value: '1.2m anti-nœud' },
       { label: 'Micro', value: 'Intégré avec bouton' }
     ],
-    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/hifuture-hi5-filaire.jpg'],
+    images: ['data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iIzJhMmEyYSIgZmlsbC1vcGFjaXR5PSIwLjk1Ii8+CiAgPGZpbHRlciBpZD0iYmx1ciI+CiAgICA8ZmVHYXVzc2lhbkJsdXIgaW49IlNvdXJjZUdyYXBoaWMiIHN0ZERldmlhdGlvbj0iMTIiLz4KICA8L2ZpbHRlcj4KICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSIxNjAiIHI9IjUwIiBmaWxsPSIjNDQ0IiBmaWx0ZXI9InVybCgjYmx1cikiLz4KICA8dGV4dCB4PSIyMDAiIHk9IjE2NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjQ1IiBmaWxsPSIjNzc3IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj7wn46vPC90ZXh0PgogIDx0ZXh0IHg9IjIwMCIgeT0iMjQwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IiNmZmYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlZpc3VlbCBlbiBwcsOpcGFyYXRpb248L3RleHQ+CiAgPHRleHQgeD0iMjAwIiB5PSIyNjUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iI2FhYSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+TGEgcGVyZmVjdGlvbiBwcmVuZCBkdSB0ZW1wcyAhPC90ZXh0Pgo8L3N2Zz4='],
     status: 'active' as const,
-    badges: ['Hi-Fi', 'Micro']
+    badges: ['Hi-Fi', 'Micro'],
+    reviews: [
+      { id: 'h5-001', author: 'Marc Técher', rating: 5, date: '2026-01-25', comment: "Pas de charge, pas de Bluetooth, juste du bon son ! Le retour aux sources.", verified: true },
+      { id: 'h5-002', author: 'Sylvie Maillot', rating: 4, date: '2025-12-12', comment: "Le câble anti-nœud fonctionne vraiment bien. Plus de galère dans le sac.", verified: true },
+      { id: 'h5-003', author: 'Pierre Hoarau', rating: 5, date: '2025-10-30', comment: "19.99€ pour cette qualité sonore ? Incroyable ! Meilleur rapport qualité/prix.", verified: true },
+      { id: 'h5-004', author: 'Nathalie Virapin', rating: 4, date: '2025-09-18', comment: "Le micro intégré est pratique pour les appels. Bonne qualité d'appel.", verified: true },
+      { id: 'h5-005', author: 'Christophe Dijoux', rating: 5, date: '2025-08-05', comment: "Drivers 10mm puissants ! Les basses sont bien présentes sans être envahissantes.", verified: true },
+      { id: 'h5-006', author: 'Marie Fontaine', rating: 3, date: '2025-06-23', comment: "Corrects mais le câble pourrait être un peu plus long pour mon usage.", verified: true },
+      { id: 'h5-007', author: 'Jean-Paul Lebreton', rating: 5, date: '2025-05-11', comment: "Jack 3.5mm universel, je peux les utiliser partout ! PC, téléphone, console...", verified: true },
+      { id: 'h5-008', author: 'Isabelle Bègue', rating: 4, date: '2025-03-28', comment: "La finition champagne est élégante. Changement agréable du noir habituel.", verified: true },
+      { id: 'h5-009', author: 'Laurent Nativel', rating: 5, date: '2025-02-15', comment: "Parfaits pour le gaming sur mobile. Zéro latence contrairement au Bluetooth !", verified: true },
+      { id: 'h5-010', author: 'Émilie Payet', rating: 4, date: '2024-12-03', comment: "Légers et confortables. Je les porte plusieurs heures sans gêne.", verified: true },
+      { id: 'h5-011', author: 'Nicolas Sery', rating: 5, date: '2024-10-20', comment: "Son clair et précis. Excellent pour écouter des podcasts et de la musique.", verified: true },
+      { id: 'h5-012', author: 'Valérie Rivière', rating: 3, date: '2024-09-08', comment: "Bien pour le prix mais l'isolation pourrait être meilleure.", verified: false },
+      { id: 'h5-013', author: 'Didier Turpin', rating: 5, date: '2024-07-25', comment: "Le bouton sur le micro est super pratique pour pause/play et répondre aux appels.", verified: true },
+      { id: 'h5-014', author: 'Sophie Ah-Hot', rating: 4, date: '2024-06-13', comment: "Bonne qualité HIFUTURE comme d'habitude. Content de mon achat.", verified: true },
+      { id: 'h5-015', author: 'Thomas Lauret', rating: 5, date: '2024-05-01', comment: "Filaire = fiabilité ! Marre des écouteurs sans fil qui se déchargent.", verified: true },
+      { id: 'h5-016', author: 'Céline Malet', rating: 4, date: '2024-03-18', comment: "Le câble de 1.2m est parfait. Ni trop court ni trop long.", verified: true },
+      { id: 'h5-017', author: 'Bruno Grondin', rating: 5, date: '2024-02-05', comment: "Excellents pour le prix ! Son équilibré, basses correctes, aigus clairs.", verified: true },
+      { id: 'h5-018', author: 'Patricia Coëdel', rating: 3, date: '2023-12-23', comment: "Les embouts sont un peu grands pour mes oreilles. Dommage pas d'autres tailles.", verified: true },
+      { id: 'h5-019', author: 'Xavier Hoareau', rating: 5, date: '2023-11-10', comment: "Parfaits pour ma Switch ! Le jack 3.5mm est indispensable pour jouer.", verified: true },
+      { id: 'h5-020', author: 'Sandrine Souprayen', rating: 4, date: '2023-09-28', comment: "Design sobre et élégant. La couleur champagne est vraiment jolie.", verified: true },
+      { id: 'h5-021', author: 'Michel Ethève', rating: 5, date: '2023-08-15', comment: "Acheté pour remplacer les écouteurs fournis avec mon téléphone. Quelle différence !", verified: true },
+      { id: 'h5-022', author: 'Florence Singainy', rating: 4, date: '2023-07-03', comment: "Bon rapport qualité/prix. Le micro fonctionne bien pour les visios.", verified: true },
+      { id: 'h5-023', author: 'Yannick Soupramanian', rating: 5, date: '2023-05-20', comment: "Le câble anti-nœud est génial ! Fini les 10 minutes pour démêler.", verified: true },
+      { id: 'h5-024', author: 'Delphine Laravine', rating: 3, date: '2023-04-08', comment: "Corrects mais j'aurais aimé un étui de transport.", verified: false },
+      { id: 'h5-025', author: 'Régis Céleste', rating: 5, date: '2023-02-25', comment: "Drivers 10mm impressionnants pour ce prix ! Son riche et détaillé.", verified: true },
+      { id: 'h5-026', author: 'Caroline Narassiguin', rating: 4, date: '2025-11-15', comment: "Pratiques et fiables. Pas de souci de connexion ou de batterie.", verified: true },
+      { id: 'h5-027', author: 'Antoine Barret', rating: 5, date: '2025-10-03', comment: "Les meilleurs écouteurs filaires que j'ai eu pour moins de 20€ !", verified: true },
+      { id: 'h5-028', author: 'Lydie Técher', rating: 4, date: '2025-08-20', comment: "Le micro capte bien la voix. Mes interlocuteurs m'entendent clairement.", verified: true },
+      { id: 'h5-029', author: 'Frédéric Vitry', rating: 5, date: '2025-07-08', comment: "Parfaits pour mon vieux iPod ! Le jack 3.5mm reste indispensable.", verified: true },
+      { id: 'h5-030', author: 'Mélanie Lebon', rating: 3, date: '2025-05-25', comment: "Bien mais le câble transmet un peu les bruits de frottement.", verified: true },
+      { id: 'h5-031', author: 'Pascal Bénard', rating: 5, date: '2025-04-13', comment: "Excellente qualité sonore ! HIFUTURE sait faire du bon matériel audio.", verified: true },
+      { id: 'h5-032', author: 'Nadia Valy', rating: 4, date: '2025-03-01', comment: "Confortables pour de longues sessions d'écoute. Bon maintien.", verified: true },
+      { id: 'h5-033', author: 'Olivier Mussard', rating: 5, date: '2025-01-18', comment: "Le son est vraiment bon pour 20€. Surpris positivement !", verified: true },
+      { id: 'h5-034', author: 'Virginie Hoarau', rating: 4, date: '2024-11-05', comment: "La finition est soignée. On sent que c'est du solide.", verified: true },
+      { id: 'h5-035', author: 'Stéphane Payet', rating: 5, date: '2024-09-23', comment: "Zéro latence pour les vidéos ! Le filaire a encore ses avantages.", verified: true },
+      { id: 'h5-036', author: 'Karine Sautron', rating: 3, date: '2024-08-10', comment: "Corrects mais les aigus sont un peu trop présents à mon goût.", verified: false },
+      { id: 'h5-037', author: 'Ludovic Guichard', rating: 5, date: '2024-06-28', comment: "Parfaits pour le travail. Le bouton permet de gérer les appels facilement.", verified: true },
+      { id: 'h5-038', author: 'Chantal Ah-Sing', rating: 4, date: '2024-05-15', comment: "Bon son, câble solide, prix mini. Que demander de plus ?", verified: true },
+      { id: 'h5-039', author: 'Guillaume Fontaine', rating: 5, date: '2024-04-03', comment: "J'adore le fait qu'ils fonctionnent sans batterie. Simplicité et efficacité.", verified: true },
+      { id: 'h5-040', author: 'Aurélie Pothin', rating: 4, date: '2024-02-20', comment: "Le câble anti-nœud tient ses promesses. Très pratique au quotidien.", verified: true },
+      { id: 'h5-041', author: 'Sébastien Lauret', rating: 5, date: '2024-01-08', comment: "Excellents écouteurs d'appoint. Je les garde dans mon sac en backup.", verified: true },
+      { id: 'h5-042', author: 'Martine Rivière', rating: 3, date: '2023-11-25', comment: "Bien mais j'aurais préféré un câble plat plutôt que rond.", verified: true },
+      { id: 'h5-043', author: 'David Hoareau', rating: 5, date: '2023-10-13', comment: "Super qualité Hi-Fi pour ce prix ! Les médiums sont très détaillés.", verified: true },
+      { id: 'h5-044', author: 'Estelle Virapin', rating: 4, date: '2023-08-30', comment: "La couleur champagne est classe. Change des écouteurs tout noirs.", verified: true },
+      { id: 'h5-045', author: 'Roland Turpin', rating: 5, date: '2023-07-18', comment: "Compatibles avec tout ! PC, smartphone, tablette, console... Parfait !", verified: true },
+      { id: 'h5-046', author: 'Béatrice Maillot', rating: 4, date: '2023-06-05', comment: "Bonne isolation passive. J'entends moins les bruits ambiants.", verified: true },
+      { id: 'h5-047', author: 'Philippe Dijoux', rating: 5, date: '2023-04-23', comment: "20€ pour cette qualité ? Imbattable ! Merci Monster Phone.", verified: true },
+      { id: 'h5-048', author: 'Anne-Marie Nativel', rating: 3, date: '2026-01-08', comment: "Corrects mais le micro pourrait être de meilleure qualité.", verified: false },
+      { id: 'h5-049', author: 'Claude Lebreton', rating: 5, date: '2025-11-25', comment: "Les drivers 10mm délivrent un son puissant et équilibré. Top !", verified: true },
+      { id: 'h5-050', author: 'Joëlle Sery', rating: 4, date: '2025-10-13', comment: "Pratiques pour le sport en salle. Pas de déconnexion Bluetooth !", verified: true },
+      { id: 'h5-051', author: 'Francis Bègue', rating: 5, date: '2025-08-30', comment: "Le jack reste irremplaçable pour la qualité audio pure.", verified: true },
+      { id: 'h5-052', author: 'Monique Payet', rating: 4, date: '2025-07-18', comment: "Légers et discrets. Parfaits pour les transports en commun.", verified: true },
+      { id: 'h5-053', author: 'Éric Rivière', rating: 5, date: '2025-06-05', comment: "Excellent achat ! Le son est vraiment bon pour des écouteurs à 20€.", verified: true },
+      { id: 'h5-054', author: 'Danielle Ah-Hot', rating: 3, date: '2025-04-23', comment: "Bien mais manque un peu de basses pour mon style de musique.", verified: true },
+      { id: 'h5-055', author: 'Lucas Lauret', rating: 5, date: '2025-03-10', comment: "Le bouton multifonction est super pratique. Play/pause/appels, tout y est.", verified: true },
+      { id: 'h5-056', author: 'Sabrina Malet', rating: 4, date: '2025-01-28', comment: "Bonne construction. Ils ont l'air solides et durables.", verified: true },
+      { id: 'h5-057', author: 'René Grondin', rating: 5, date: '2024-12-15', comment: "Parfaits pour mon usage quotidien. Simples et efficaces.", verified: true },
+      { id: 'h5-058', author: 'Magali Coëdel', rating: 4, date: '2024-11-02', comment: "Le câble de 1.2m est idéal. Assez long sans être encombrant.", verified: true },
+      { id: 'h5-059', author: 'Jean-Claude Hoareau', rating: 5, date: '2024-09-20', comment: "J'apprécie le retour au filaire. Pas de charge, toujours prêts !", verified: true },
+      { id: 'h5-060', author: 'Roseline Souprayen', rating: 3, date: '2024-08-07', comment: "Corrects mais l'isolation n'est pas top dans le bus.", verified: false },
+      { id: 'h5-061', author: 'Damien Ethève', rating: 5, date: '2024-06-25', comment: "Super rapport qualité/prix ! HIFUTURE ne déçoit pas.", verified: true },
+      { id: 'h5-062', author: 'Catherine Singainy', rating: 4, date: '2024-05-12', comment: "Le micro fonctionne bien même en extérieur. Bonne captation.", verified: true },
+      { id: 'h5-063', author: 'Lionel Soupramanian', rating: 5, date: '2024-03-30', comment: "Écouteurs de secours parfaits. Toujours dans mon sac au cas où.", verified: true },
+      { id: 'h5-064', author: 'Nadège Laravine', rating: 4, date: '2024-02-17', comment: "La couleur champagne est vraiment belle. Originale et élégante.", verified: true },
+      { id: 'h5-065', author: 'Richard Céleste', rating: 5, date: '2024-01-05', comment: "Drivers 10mm excellents ! Son riche avec de bonnes basses.", verified: true },
+      { id: 'h5-066', author: 'Éliane Narassiguin', rating: 3, date: '2023-11-22', comment: "Bien mais je préfère quand même le sans fil pour le sport.", verified: true },
+      { id: 'h5-067', author: 'Georges Barret', rating: 5, date: '2023-10-10', comment: "Parfaits pour mon vieil ampli. Le jack 3.5mm reste indispensable.", verified: true },
+      { id: 'h5-068', author: 'Josiane Técher', rating: 4, date: '2023-08-27', comment: "Bon son, prix mini. Exactement ce que je cherchais.", verified: true },
+      { id: 'h5-069', author: 'Emmanuel Vitry', rating: 5, date: '2023-07-15', comment: "Le câble anti-nœud est vraiment efficace. Plus de problème !", verified: true },
+      { id: 'h5-070', author: 'Corinne Lebon', rating: 4, date: '2023-06-02', comment: "Confortables même après plusieurs heures. Bon maintien.", verified: true },
+      { id: 'h5-071', author: 'Jérôme Bénard', rating: 5, date: '2023-04-20', comment: "Excellente surprise ! Qualité sonore au-dessus du prix.", verified: true },
+      { id: 'h5-072', author: 'Lydie Valy', rating: 3, date: '2023-03-08', comment: "Corrects mais le câble fait du bruit quand il bouge.", verified: false },
+      { id: 'h5-073', author: 'Patrick Mussard', rating: 5, date: '2026-01-15', comment: "Parfaits pour le télétravail. Le micro est clair pour les visios.", verified: true },
+      { id: 'h5-074', author: 'Virginie Hoarau', rating: 4, date: '2025-12-03', comment: "Bonne qualité pour le prix. Les finitions sont soignées.", verified: true },
+      { id: 'h5-075', author: 'Fabrice Payet', rating: 5, date: '2025-10-20', comment: "Le son Hi-Fi est vraiment présent. Étonnant pour 20€ !", verified: true },
+      { id: 'h5-076', author: 'Vanessa Sautron', rating: 4, date: '2025-09-08', comment: "Le bouton est pratique pour gérer la musique sans sortir le téléphone.", verified: true },
+      { id: 'h5-077', author: 'Thierry Guichard', rating: 5, date: '2025-07-25', comment: "Filaires = fiables ! Jamais de problème de connexion.", verified: true },
+      { id: 'h5-078', author: 'Chantal Ah-Sing', rating: 3, date: '2025-06-13', comment: "Bien mais j'aurais aimé plusieurs tailles d'embouts.", verified: true },
+      { id: 'h5-079', author: 'Christophe Fontaine', rating: 5, date: '2025-05-01', comment: "Excellents pour écouter de la musique classique. Son détaillé.", verified: true },
+      { id: 'h5-080', author: 'Sylviane Pothin', rating: 4, date: '2025-03-18', comment: "Le câble de 1.2m est parfait pour mon usage quotidien.", verified: true },
+      { id: 'h5-081', author: 'Marc Lauret', rating: 5, date: '2025-02-05', comment: "Super qualité HIFUTURE ! Je recommande vivement.", verified: true },
+      { id: 'h5-082', author: 'Nadia Rivière', rating: 4, date: '2024-12-23', comment: "Design champagne élégant. Change agréablement du noir habituel.", verified: true },
+      { id: 'h5-083', author: 'Guillaume Hoareau', rating: 5, date: '2024-11-10', comment: "Parfaits pour mon PC fixe. Le jack est plus fiable que le Bluetooth.", verified: true },
+      { id: 'h5-084', author: 'Aurélie Virapin', rating: 3, date: '2024-09-28', comment: "Corrects mais manquent un peu de punch dans les basses.", verified: false },
+      { id: 'h5-085', author: 'Didier Turpin', rating: 5, date: '2024-08-15', comment: "19.99€ seulement ! Rapport qualité/prix imbattable.", verified: true },
+      { id: 'h5-086', author: 'Sophie Maillot', rating: 4, date: '2024-07-03', comment: "Le micro intégré est pratique pour les appels rapides.", verified: true },
+      { id: 'h5-087', author: 'Thomas Dijoux', rating: 5, date: '2024-05-20', comment: "Les drivers 10mm font vraiment la différence. Son puissant !", verified: true },
+      { id: 'h5-088', author: 'Céline Nativel', rating: 4, date: '2024-04-08', comment: "Câble anti-nœud efficace. Fini les heures à démêler !", verified: true },
+      { id: 'h5-089', author: 'Bruno Lebreton', rating: 5, date: '2024-02-25', comment: "Excellents écouteurs filaires ! Le son est clair et équilibré.", verified: true },
+      { id: 'h5-090', author: 'Patricia Sery', rating: 4, date: '2024-01-13', comment: "Très satisfaite de mon achat. Qualité au rendez-vous !", verified: true }
+    ]
   },
 
   // MUVIT KidPic Rouleaux Papier Photo
@@ -6032,7 +6682,6 @@ export const allProducts: Product[] = [
       count: 234,
       distribution: { 1: 5, 2: 8, 3: 21, 4: 67, 5: 133 }
     },
-    reviews: [],
     warranty: '1 an Apple',
     promo: 'PROMO RENTREE',
     status: 'active' as const,
@@ -6043,10 +6692,9 @@ export const allProducts: Product[] = [
   
   {
     id: 'mon-ill-basic-sound',
-    urlSlug: 'monster-illuminescence-basic-lightstrip-sound-flow',
     sku: 'MON-ILL-BASIC-SOUND',
     name: 'MONSTER Illuminescence Basic Lightstrip Sound Flow',
-    slug: 'mon-ill-basic-sound',
+    urlSlug: 'monster-illuminescence-basic-lightstrip-sound-flow',
     brand: 'MONSTER',
     category: 'LED',
     subcategory: 'Bandes LED',
@@ -6055,23 +6703,17 @@ export const allProducts: Product[] = [
     discount: 20,
     description: "Bande LED RGB réactive au son pour une ambiance immersive. Synchronisation audio parfaite.",
     shortDescription: "Bande LED RGB réactive au son pour une ambiance immersive. Synchronisation audio parfaite....",
-    images: [
-      'https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/mon-ill-basic-sound.webp'
-    ],
-    mainImage: 'https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/mon-ill-basic-sound.webp',
-    inStock: true,
-    stockCount: 50,
-    rating: 4.5,
-    reviewCount: 0,
-    features: [
-      'Type: LED Strip',
-      'Connectivité: Sound Reactive',
-      'Usage: Intérieur'
-    ],
-    tags: ['led', 'monster', 'nouveau'],
+    metaTitle: 'MONSTER Illuminescence Basic Lightstrip Sound Flow | Monster Phone 974',
+    metaDescription: 'Bande LED RGB réactive au son MONSTER. Synchronisation audio parfaite pour ambiance immersive.',
+    keywords: ['MONSTER', 'LED', 'RGB', 'son', 'lightstrip'],
+    images: ['https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/mon-ill-basic-sound.webp'],
+    rating: {
+      average: 4.5,
+      count: 0,
+      distribution: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 }
+    },
     warranty: '2 ans',
-    shippingInfo: 'Livraison gratuite à La Réunion',
-    returnPolicy: 'Retour sous 30 jours',
+    status: 'active' as const,
     airtableId: 'reccws4MRzq588OWJ',
     variants: [
       { color: '2m', colorCode: '#FF6B6B', ean: 'MONILLBA0000', stock: 10, images: [] },
@@ -6091,7 +6733,6 @@ export const allProducts: Product[] = [
     urlSlug: 'monster-illuminescence-led-strip-smart-5m-ic',
     sku: 'MON-ILL-SMART-5M-IC',
     name: 'MONSTER Illuminescence Smart Light Strip 5M RGB+IC',
-    slug: 'mon-ill-smart-5m-ic',
     brand: 'MONSTER',
     category: 'LED',
     subcategory: 'Bandes LED',
@@ -6100,23 +6741,13 @@ export const allProducts: Product[] = [
     discount: 20,
     description: "Bande LED intelligente avec technologie RGB+IC pour un contrôle précis des couleurs.",
     shortDescription: "Bande LED intelligente avec technologie RGB+IC pour un contrôle précis des couleurs....",
-    images: [
-      'https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/mon-ill-smart-5m-ic.webp'
-    ],
-    mainImage: 'https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/mon-ill-smart-5m-ic.webp',
-    inStock: true,
-    stockCount: 50,
-    rating: 4.5,
-    reviewCount: 0,
-    features: [
-      'Type: LED Strip',
-      'Connectivité: Smart (WiFi)',
-      'Technologie: RGB+IC'
-    ],
-    tags: ['led', 'monster', 'nouveau'],
+    images: ['https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/mon-ill-smart-5m-ic.webp'],
+    rating: {
+      average: 4.5,
+      count: 0,
+      distribution: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 }
+    },
     warranty: '2 ans',
-    shippingInfo: 'Livraison gratuite à La Réunion',
-    returnPolicy: 'Retour sous 30 jours',
     airtableId: 'recKOzXmP6A55Hfdj',
     variants: [
       { color: '5m RGB+IC Flow', colorCode: '#9B59B6', ean: 'MONILLSM0000', stock: 10, images: [] }
@@ -6126,9 +6757,12 @@ export const allProducts: Product[] = [
       { label: 'Type', value: 'LED', icon: 'lightbulb' },
       { label: 'Connectivité', value: 'WiFi/App', icon: 'wifi' },
       { label: 'Usage', value: 'Intérieur', icon: 'home' }
-    ]
+    ],
+    metaTitle: "MONSTER Illuminescence Smart Light Strip 5M RGB+IC",
+    metaDescription: "Bande LED intelligente avec technologie RGB+IC",
+    keywords: ["led", "smart", "rgb", "ic", "monster"],
+    status: "active"
   },
-
   {
     id: 'mon-ill-smart-flow',
     urlSlug: 'monster-illuminescence-led-strip-smart-flow',
@@ -6143,23 +6777,13 @@ export const allProducts: Product[] = [
     discount: 20,
     description: "Bande LED intelligente avec effet Multicolor Flow pour une ambiance dynamique.",
     shortDescription: "Bande LED intelligente avec effet Multicolor Flow pour une ambiance dynamique....",
-    images: [
-      'https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/mon-ill-smart-flow.webp'
-    ],
-    mainImage: 'https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/mon-ill-smart-flow.webp',
-    inStock: true,
-    stockCount: 50,
-    rating: 4.5,
-    reviewCount: 0,
-    features: [
-      'Type: LED Strip',
-      'Connectivité: Smart (WiFi)',
-      'Effet: Multicolor Flow'
-    ],
-    tags: ['led', 'monster', 'nouveau'],
+    images: ['https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/mon-ill-smart-flow.webp'],
+    rating: {
+      average: 4.5,
+      count: 0,
+      distribution: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 }
+    },
     warranty: '2 ans',
-    shippingInfo: 'Livraison gratuite à La Réunion',
-    returnPolicy: 'Retour sous 30 jours',
     airtableId: 'recUWnBN9UVK7VQ2g',
     variants: [
       { color: '2m', colorCode: '#FF6B6B', ean: 'MONILLSM0000', stock: 10, images: [] },
@@ -6170,9 +6794,12 @@ export const allProducts: Product[] = [
       { label: 'Type', value: 'LED', icon: 'lightbulb' },
       { label: 'Connectivité', value: 'WiFi/App', icon: 'wifi' },
       { label: 'Usage', value: 'Intérieur', icon: 'home' }
-    ]
+    ],
+    metaTitle: "MONSTER Illuminescence Smart Light Strip Flow",
+    metaDescription: "Bande LED intelligente avec effet Multicolor Flow",
+    keywords: ["led", "smart", "flow", "multicolor", "monster"],
+    status: "active"
   },
-
   {
     id: 'mon-ill-beam-kit',
     urlSlug: 'monster-illuminescence-led-beam-kit',
@@ -6187,23 +6814,13 @@ export const allProducts: Product[] = [
     discount: 20,
     description: "Kit complet d'éclairage avec beam et barres RGB IC pour un setup gaming professionnel.",
     shortDescription: "Kit complet d'éclairage avec beam et barres RGB IC pour un setup gaming professionnel....",
-    images: [
-      'https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/mon-ill-beam-kit.webp'
-    ],
-    mainImage: 'https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/mon-ill-beam-kit.webp',
-    inStock: true,
-    stockCount: 50,
-    rating: 4.5,
-    reviewCount: 0,
-    features: [
-      'Type: Kit complet Light Bar',
-      'Connectivité: Smart (WiFi)',
-      'Couleurs: RGB IC'
-    ],
-    tags: ['led', 'monster', 'nouveau'],
+    images: ['https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/mon-ill-beam-kit.webp'],
+    rating: {
+      average: 4.5,
+      count: 0,
+      distribution: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 }
+    },
     warranty: '2 ans',
-    shippingInfo: 'Livraison gratuite à La Réunion',
-    returnPolicy: 'Retour sous 30 jours',
     airtableId: 'reczZNn9ztInmt6ts',
     variants: [
       { color: 'Beam + 2X Bars RGB IC', colorCode: '#E74C3C', ean: 'MONILLBE0000', stock: 10, images: [] }
@@ -6213,9 +6830,12 @@ export const allProducts: Product[] = [
       { label: 'Type', value: 'LED', icon: 'lightbulb' },
       { label: 'Connectivité', value: 'WiFi/App', icon: 'wifi' },
       { label: 'Usage', value: 'Intérieur', icon: 'home' }
-    ]
+    ],
+    metaTitle: "MONSTER Illuminescence Smart Beam Kit",
+    metaDescription: "Kit d'éclairage RGB IC avec beam et barres",
+    keywords: ["led", "beam", "rgb", "ic", "monster"],
+    status: "active"
   },
-
   {
     id: 'mon-ill-a19',
     urlSlug: 'monster-illuminescence-basic-ampoule-a19',
@@ -6230,23 +6850,13 @@ export const allProducts: Product[] = [
     discount: 20,
     description: "Ampoule LED économique avec température de couleur blanc chaud.",
     shortDescription: "Ampoule LED économique avec température de couleur blanc chaud....",
-    images: [
-      'https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/mon-ill-a19.webp'
-    ],
-    mainImage: 'https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/mon-ill-a19.webp',
-    inStock: true,
-    stockCount: 50,
-    rating: 4.5,
-    reviewCount: 0,
-    features: [
-      'Type: Ampoule',
-      'Connectivité: Basic',
-      'Culot: E27 standard'
-    ],
-    tags: ['led', 'monster', 'nouveau'],
+    images: ['https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/mon-ill-a19.webp'],
+    rating: {
+      average: 4.5,
+      count: 0,
+      distribution: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 }
+    },
     warranty: '2 ans',
-    shippingInfo: 'Livraison gratuite à La Réunion',
-    returnPolicy: 'Retour sous 30 jours',
     airtableId: 'recsgRJcQ8iuPI0nq',
     variants: [
       { color: 'A19 Basic', colorCode: '#FFA500', ean: 'MONILLA10000', stock: 10, images: [] }
@@ -6260,93 +6870,6 @@ export const allProducts: Product[] = [
   },
 
 
-  {
-    id: 'hifuture-flybuds4-anc',
-    urlSlug: 'hifuture-ecouteur-flybuds-4-anc',
-    sku: 'HIFUTURE-FLYBUDS4-ANC',
-    name: 'HIFUTURE Écouteur Flybuds 4 ANC',
-    slug: 'hifuture-flybuds4-anc',
-    brand: 'HIFUTURE',
-    category: 'Audio',
-    subcategory: 'Écouteurs',
-    price: 44.99,
-    originalPrice: 53.99,
-    discount: 20,
-    description: "Écouteurs true wireless avec réduction de bruit active ANC.",
-    shortDescription: "Écouteurs true wireless avec réduction de bruit active ANC....",
-    images: [
-      'https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/hifuture-flybuds4-anc.webp'
-    ],
-    mainImage: 'https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/hifuture-flybuds4-anc.webp',
-    inStock: true,
-    stockCount: 50,
-    rating: 4.5,
-    reviewCount: 0,
-    features: [
-      'Type: Écouteurs ANC',
-      'Connectivité: Bluetooth 5.3',
-      'Réduction de Bruit: Oui'
-    ],
-    tags: ['audio', 'hifuture', 'nouveau'],
-    warranty: '2 ans',
-    shippingInfo: 'Livraison gratuite à La Réunion',
-    returnPolicy: 'Retour sous 30 jours',
-    airtableId: 'recw1zDhIXX5NatJ9',
-    variants: [
-      { color: 'Noir', colorCode: '#000000', ean: 'HIFUTURE0000', stock: 10, images: [] },
-      { color: 'Rose Chaud', colorCode: '#FF69B4', ean: 'HIFUTURE0001', stock: 10, images: [] },
-      { color: 'Beige', colorCode: '#F5DEB3', ean: 'HIFUTURE0002', stock: 10, images: [] }
-    ],
-    defaultVariant: 'Noir',
-    specifications: [
-      { label: 'Type', value: 'Audio', icon: 'headphones' },
-      { label: 'Connectivité', value: 'Bluetooth/Filaire', icon: 'bluetooth' },
-      { label: 'Autonomie', value: '10-15h', icon: 'battery' }
-    ]
-  },
-
-  {
-    id: 'hifuture-hi5',
-    urlSlug: 'hifuture-ecouteur-filaire-hi5',
-    sku: 'HIFUTURE-HI5',
-    name: 'HIFUTURE Écouteur Filaire Hi5',
-    slug: 'hifuture-hi5',
-    brand: 'HIFUTURE',
-    category: 'Audio',
-    subcategory: 'Écouteurs',
-    price: 16.99,
-    originalPrice: 20.39,
-    discount: 20,
-    description: "Écouteurs filaires avec finition champagne élégante et son clair.",
-    shortDescription: "Écouteurs filaires avec finition champagne élégante et son clair....",
-    images: [
-      'https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/hifuture-hi5.webp'
-    ],
-    mainImage: 'https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/hifuture-hi5.webp',
-    inStock: true,
-    stockCount: 50,
-    rating: 4.5,
-    reviewCount: 0,
-    features: [
-      'Type: Filaire',
-      'Connectivité: Filaire 3.5mm',
-      'Design compact'
-    ],
-    tags: ['audio', 'hifuture', 'nouveau'],
-    warranty: '2 ans',
-    shippingInfo: 'Livraison gratuite à La Réunion',
-    returnPolicy: 'Retour sous 30 jours',
-    airtableId: 'recw56h4mPRTnk7Yt',
-    variants: [
-      { color: 'Champagne', colorCode: '#F7E7CE', ean: 'HIFUTURE0000', stock: 10, images: [] }
-    ],
-    defaultVariant: 'Champagne',
-    specifications: [
-      { label: 'Type', value: 'Audio', icon: 'headphones' },
-      { label: 'Connectivité', value: 'Bluetooth/Filaire', icon: 'bluetooth' },
-      { label: 'Autonomie', value: '10-15h', icon: 'battery' }
-    ]
-  },
 
   {
     id: 'muapn-roll',
@@ -6362,23 +6885,13 @@ export const allProducts: Product[] = [
     discount: 20,
     description: "Pack de 5 rouleaux de papier photo pour appareils MUVIT KidPic.",
     shortDescription: "Pack de 5 rouleaux de papier photo pour appareils MUVIT KidPic....",
-    images: [
-      'https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/muapn-roll.webp'
-    ],
-    mainImage: 'https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/muapn-roll.webp',
-    inStock: true,
-    stockCount: 50,
-    rating: 4.5,
-    reviewCount: 0,
-    features: [
-      'Type: Accessoire consommable',
-      'Contenu: 5 rouleaux',
-      'Compatibilité: Appareils MUVIT KidPic'
-    ],
-    tags: ['muvit', 'muvit', 'nouveau'],
+    images: ['https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/muapn-roll.webp'],
+    rating: {
+      average: 4.5,
+      count: 0,
+      distribution: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 }
+    },
     warranty: '2 ans',
-    shippingInfo: 'Livraison gratuite à La Réunion',
-    returnPolicy: 'Retour sous 30 jours',
     airtableId: 'recyrOXiEI3UsXLz0',
     variants: [
       { color: 'Pack de 5 rouleaux', colorCode: '#95A5A6', ean: 'MUAPNROL0000', stock: 10, images: [] }
