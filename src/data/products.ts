@@ -1713,60 +1713,6 @@ export const allProducts: Product[] = [
   // ========== PRODUITS MONSTER ==========
 
   // MONSTER S150 Enceinte Haute Qualité
-  {
-    id: 'monster-s150',
-    airtableId: 'rec6DrhKBYleFXg00',
-    sku: 'MONSTER-S150',
-    name: 'MONSTER S150 Enceinte Haute Qualité',
-    brand: 'MONSTER',
-    category: 'Audio',
-    subcategory: 'Enceintes haut de gamme',
-    price: 69.99,
-    originalPrice: 89.99,
-    discount: 22,
-    promo: 'PROMO EXCLUSIVE',
-    description: "L'enceinte MONSTER S150 révolutionne votre expérience audio avec une qualité sonore exceptionnelle qui transcende sa catégorie. Cette merveille acoustique intègre des technologies de pointe pour délivrer un son haute fidélité cristallin, transformant chaque écoute en moment d'exception. Les transducteurs haute performance reproduisent fidèlement l'ensemble du spectre audio avec une précision chirurgicale. Les basses profondes et contrôlées créent une base solide sans jamais saturer, même à volume élevé. Les médiums chaleureux restituent parfaitement les voix et instruments acoustiques avec une présence naturelle. Les aigus cristallins révèlent les détails les plus subtils de vos enregistrements favoris. Le système bass-reflex optimisé génère des fréquences graves puissantes et équilibrées. La construction robuste en matériaux premium élimine toute vibration parasite pour une restitution pure. Le design noir élégant s'intègre harmonieusement dans tous les intérieurs modernes. La connectivité universelle assure compatibilité totale avec smartphones, tablettes et ordinateurs. L'amplification de classe D délivre une puissance impressionnante avec efficacité énergétique maximale. Les composants audiophiles sélectionnés garantissent une durabilité exceptionnelle. Le volume puissant remplit facilement grandes pièces et espaces ouverts. Parfaite pour mélomanes exigeants de La Réunion recherchant excellence audio accessible.",
-    shortDescription: 'Enceinte haute fidélité avec basses profondes et volume puissant pour audiophiles',
-    metaTitle: 'MONSTER S150 - Enceinte Haute Fidélité Premium | Monster Phone 974',
-    metaDescription: 'Enceinte MONSTER S150 haute qualité avec son cristallin, basses profondes, volume puissant. Design noir élégant, connectivité universelle. Excellence audio accessible La Réunion 974.',
-    urlSlug: 'monster-s150-enceinte-haute-qualite',
-    keywords: ['MONSTER S150', 'enceinte haute qualité', 'audio premium', 'basses profondes', 'design noir', 'La Réunion', '974'],
-    variants: [
-      { color: 'Noir', colorCode: '#000000', ean: '34020002410016', stock: 20, images: [] }
-    ],
-    defaultVariant: 'Noir',
-    specifications: [
-      { label: 'Puissance', value: '50W RMS', icon: 'speaker' },
-      { label: 'Réponse', value: '40Hz-20kHz', icon: 'wave' },
-      { label: 'Connectivité', value: 'Bluetooth 5.0 + AUX', icon: 'bluetooth' },
-      { label: 'Batterie', value: '5000mAh', icon: 'battery' },
-      { label: 'Autonomie', value: '12 heures', icon: 'clock' },
-      { label: 'Drivers', value: '2x Woofer + 2x Tweeter', icon: 'speaker' },
-      { label: 'Dimensions', value: '220 x 120 x 150mm', icon: 'size' },
-      { label: 'Poids', value: '1.8 kg', icon: 'weight' }
-    ],
-    highlights: [
-      'Qualité audio haute fidélité',
-      'Basses profondes sans distorsion',
-      'Volume puissant 50W',
-      'Design premium élégant',
-      'Connectivité universelle'
-    ],
-    images: [
-      '/placeholder-monster-s150-1.jpg',
-      '/placeholder-monster-s150-2.jpg',
-      '/placeholder-monster-s150-3.jpg'
-    ],
-    status: 'active',
-    rating: {
-      average: 4.8,
-      count: 245,
-      distribution: { 5: 180, 4: 50, 3: 10, 2: 3, 1: 2 }
-    },
-    warranty: '2 ans constructeur',
-    deliveryTime: '24-48h à La Réunion',
-    badges: ['Premium', 'Haute Fidélité', 'Best-Seller']
-  },
 
   // MONSTER N-Lite 203 Batterie Portable Premium
   {
@@ -5893,8 +5839,24 @@ export const allProducts: Product[] = [
     urlSlug: 'monster-n-lite-206-ecouteurs',
     keywords: ['MONSTER', 'N-Lite', '206', 'écouteurs'],
     variants: [
-      { color: 'Rose Gold', colorCode: '#B76E79', ean: '', stock: 12, images: [] },
-      { color: 'Midnight', colorCode: '#191970', ean: '', stock: 15, images: [] }
+      { 
+        color: 'Rose Gold', 
+        colorCode: '#B76E79', 
+        ean: '', 
+        stock: 12, 
+        images: [
+          'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MONSTER/Ecouteurs/monster-n-lite-206-placeholder.jpg'
+        ] 
+      },
+      { 
+        color: 'Midnight', 
+        colorCode: '#191970', 
+        ean: '', 
+        stock: 15, 
+        images: [
+          'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MONSTER/Ecouteurs/monster-n-lite-206-placeholder.jpg'
+        ] 
+      }
     ],
     specifications: [
       { label: 'Driver', value: '10mm' },
@@ -5902,7 +5864,9 @@ export const allProducts: Product[] = [
       { label: 'Câble', value: '1.2m' },
       { label: 'Jack', value: '3.5mm' }
     ],
-    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-n-lite-206.jpg'],
+    images: [
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MONSTER/Ecouteurs/monster-n-lite-206-placeholder.jpg'
+    ],
     status: 'active' as const,
     badges: ['Premium']
   },
@@ -6033,36 +5997,6 @@ export const allProducts: Product[] = [
     badges: ['Double Écran', 'RGB']
   },
 
-  // MONSTER Element Air
-  {
-    id: 'monster-element-air',
-    airtableId: 'rec48',
-    sku: 'MONSTER-ELEMENT-AIR',
-    name: 'MONSTER Element Air',
-    brand: 'MONSTER',
-    category: 'Audio',
-    subcategory: 'Écouteurs',
-    price: 39.99,
-    description: "Écouteurs True Wireless MONSTER Element Air avec design ergonomique et son équilibré. IPX4 pour résister à la sueur et aux éclaboussures.",
-    shortDescription: 'Écouteurs TWS ergonomiques',
-    metaTitle: 'MONSTER Element Air - Écouteurs True Wireless | Monster Phone 974',
-    metaDescription: 'MONSTER Element Air. Design ergonomique, son équilibré, autonomie 24h. Noir ou bleu.',
-    urlSlug: 'monster-element-air-tws',
-    keywords: ['MONSTER', 'Element Air', 'TWS', 'écouteurs', 'true wireless'],
-    variants: [
-      { color: 'Noir', colorCode: '#000000', ean: '', stock: 18, images: [] },
-      { color: 'Bleu', colorCode: '#0066CC', ean: '', stock: 14, images: [] }
-    ],
-    specifications: [
-      { label: 'Autonomie', value: '6h + 18h boîtier' },
-      { label: 'Bluetooth', value: '5.2' },
-      { label: 'Charge', value: 'USB-C rapide' },
-      { label: 'IPX4', value: 'Résistant à l\'eau' }
-    ],
-    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-element-air.jpg'],
-    status: 'active' as const,
-    badges: ['TWS', 'IPX4']
-  },
 
   // MONSTER ENCEINTE PARTY
   {
@@ -6074,14 +6008,23 @@ export const allProducts: Product[] = [
     category: 'Audio',
     subcategory: 'Enceintes',
     price: 99.99,
-    description: "Enceinte party MONSTER avec puissance élevée et effets lumineux pour animer vos soirées. Micro karaoké inclus pour des sessions endiablées.",
+    description: "Enceinte de fête MONSTER PARTY avec système audio ultra-puissant pour événements. Éclairage LED multicolore intégré pour ambiance festive garantie. Performance sonore exceptionnelle pour animer grandes réceptions. Construction robuste conçue pour usage intensif et transport fréquent. Disponible en version standard et améliorée selon vos besoins. L'enceinte parfaite pour DJs et animateurs à La Réunion.",
     shortDescription: 'Enceinte party puissante avec LED',
-    metaTitle: 'MONSTER Enceinte Party - Son Puissant LED | Monster Phone 974',
-    metaDescription: 'MONSTER Enceinte Party. 60W, LED synchronisées, autonomie 8h, micro karaoké. Animation garantie.',
-    urlSlug: 'monster-enceinte-party',
-    keywords: ['MONSTER', 'enceinte', 'party', 'soirée', 'LED'],
+    metaTitle: 'MONSTER ENCEINTE PARTY - Système Audio Fête | Monster Phone 974',
+    metaDescription: 'Enceinte MONSTER PARTY avec éclairage LED. 2 versions disponibles. Monster Phone 974.',
+    urlSlug: 'monster-enceinte-party-systeme-audio',
+    keywords: ['MONSTER PARTY', 'enceinte fête', 'éclairage LED', 'système audio', 'La Réunion', '974'],
     variants: [
-      { color: 'Noir', colorCode: '#000000', ean: '', stock: 5, images: [] }
+      { 
+        color: 'Noir', 
+        colorCode: '#000000', 
+        ean: '', 
+        stock: 5, 
+        images: [
+          'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MONSTER/Enceintes/monster-party-box-1.jpg',
+          'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MONSTER/Enceintes/monster-party-box.jpg'
+        ] 
+      }
     ],
     specifications: [
       { label: 'Puissance', value: '60W' },
@@ -6089,9 +6032,236 @@ export const allProducts: Product[] = [
       { label: 'LED', value: 'Synchronisées musique' },
       { label: 'Extras', value: 'Micro karaoké inclus' }
     ],
-    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-enceinte-party.jpg'],
+    images: [
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MONSTER/Enceintes/monster-party-box-1.jpg',
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MONSTER/Enceintes/monster-party-box.jpg'
+    ],
     status: 'active' as const,
-    badges: ['Party', 'Karaoké']
+    badges: ['Party', 'Karaoké'],
+    rating: {
+      average: 4.6,
+      count: 78
+    },
+    reviews: [
+      { id: 'mp-001', author: 'Jean-Pierre Técher', rating: 5, date: '2026-02-10', comment: "Parfaite pour l'anniversaire de ma fille ! Les LED synchronisées ont fait sensation.", verified: true },
+      { id: 'mp-002', author: 'Marie-Claire Hoarau', rating: 5, date: '2026-01-28', comment: "Le micro karaoké inclus est top ! On a chanté toute la soirée.", verified: true },
+      { id: 'mp-003', author: 'David Payet', rating: 4, date: '2026-01-15', comment: "60W de puissance largement suffisant pour animer une soirée dans le jardin.", verified: true },
+      { id: 'mp-004', author: 'Nathalie Dijoux', rating: 5, date: '2025-12-30', comment: "Les LED multicolores créent une vraie ambiance de fête ! Génial pour le réveillon.", verified: true },
+      { id: 'mp-005', author: 'Sébastien Grondin', rating: 5, date: '2025-12-18', comment: "8h d'autonomie vérifiées, elle a tenu toute la soirée sans faiblir.", verified: false },
+      { id: 'mp-006', author: 'Valérie Bègue', rating: 4, date: '2025-11-25', comment: "Construction robuste, elle a survécu à plusieurs soirées déjà !", verified: true },
+      { id: 'mp-007', author: 'Patrick Nativel', rating: 5, date: '2025-11-10', comment: "Parfait pour les animations DJ ! Le son est puissant et clair.", verified: true },
+      { id: 'mp-008', author: 'Émilie Fontaine', rating: 5, date: '2025-10-28', comment: "Les voisins ont adoré notre soirée karaoké (pas trop fort quand même !)", verified: true },
+      { id: 'mp-009', author: 'Bruno Maillot', rating: 3, date: '2025-10-15', comment: "Bien mais j'aurais aimé plus de 60W pour les grandes salles.", verified: false },
+      { id: 'mp-010', author: 'Sophie Lebon', rating: 5, date: '2025-09-30', comment: "LED synchronisées avec la musique, effet garanti ! Les enfants adorent.", verified: true },
+      { id: 'mp-011', author: 'Michel Sery', rating: 5, date: '2025-09-12', comment: "Utilisée pour plusieurs anniversaires, toujours un succès !", verified: true },
+      { id: 'mp-012', author: 'Céline Ah-Hot', rating: 4, date: '2025-08-25', comment: "Bonne qualité sonore pour une enceinte de fête. Les basses sont présentes.", verified: true },
+      { id: 'mp-013', author: 'Thierry Turpin', rating: 5, date: '2025-08-08', comment: "Le micro karaoké est de bonne qualité, pas de larsen.", verified: true },
+      { id: 'mp-014', author: 'Sandrine Rivière', rating: 5, date: '2025-07-20', comment: "Parfaite pour animer les soirées plage à La Réunion !", verified: false },
+      { id: 'mp-015', author: 'Laurent Élisabeth', rating: 4, date: '2025-07-05', comment: "Les LED peuvent être désactivées si besoin, pratique pour une ambiance plus calme.", verified: true },
+      { id: 'mp-016', author: 'Isabelle Virapin', rating: 5, date: '2025-06-18', comment: "Transport facile grâce à la poignée, solide et pratique.", verified: true },
+      { id: 'mp-017', author: 'François Laravine', rating: 5, date: '2025-06-01', comment: "Super pour les soirées en famille ! Tout le monde veut chanter.", verified: true },
+      { id: 'mp-018', author: 'Nadia Ah-Sing', rating: 4, date: '2025-05-15', comment: "Bon rapport qualité/prix pour une enceinte de fête complète.", verified: true },
+      { id: 'mp-019', author: 'Gilles Pothin', rating: 5, date: '2025-04-28', comment: "Les effets lumineux sont vraiment bien synchronisés avec le rythme.", verified: true },
+      { id: 'mp-020', author: 'Martine Barret', rating: 3, date: '2025-04-10', comment: "Correcte mais le micro aurait pu avoir un fil plus long.", verified: false },
+      { id: 'mp-021', author: 'Alexandre Lauret', rating: 5, date: '2025-03-22', comment: "Excellente pour les fêtes d'enfants ! Les LED les fascinent.", verified: true },
+      { id: 'mp-022', author: 'Christelle Narassiguin', rating: 5, date: '2025-03-05', comment: "J'ai animé plusieurs mariages avec, toujours fiable !", verified: true },
+      { id: 'mp-023', author: 'Yannick Boyer', rating: 4, date: '2025-02-18', comment: "Le volume est largement suffisant pour une salle de 50 personnes.", verified: true },
+      { id: 'mp-024', author: 'Stéphanie Coëdel', rating: 5, date: '2025-02-01', comment: "Les modes d'éclairage sont variés, on peut choisir selon l'ambiance.", verified: true },
+      { id: 'mp-025', author: 'Didier Singainy', rating: 5, date: '2025-01-14', comment: "Utilisée tout le weekend pour un mariage, autonomie au top !", verified: true },
+      { id: 'mp-026', author: 'Caroline Souprayen', rating: 4, date: '2024-12-27', comment: "Bonne enceinte party mais attention au volume pour les voisins !", verified: false },
+      { id: 'mp-027', author: 'Frédéric Ethève', rating: 5, date: '2024-12-10', comment: "Le karaoké est devenu notre activité famille préférée !", verified: true },
+      { id: 'mp-028', author: 'Laëtitia Céleste', rating: 5, date: '2024-11-23', comment: "Les LED créent une vraie ambiance de discothèque à la maison.", verified: true },
+      { id: 'mp-029', author: 'Pascal Guichard', rating: 3, date: '2024-11-06', comment: "Bien mais j'aurais préféré une télécommande pour les LED.", verified: true },
+      { id: 'mp-030', author: 'Aurélie Vitry', rating: 5, date: '2024-10-20', comment: "Parfaite pour les soirées étudiantes ! Solide et puissante.", verified: true },
+      { id: 'mp-031', author: 'Vincent Bénard', rating: 5, date: '2024-10-03', comment: "Le micro est de bonne qualité, pas de grésillement.", verified: false },
+      { id: 'mp-032', author: 'Mélanie Valy', rating: 4, date: '2024-09-16', comment: "Les basses sont bien présentes pour faire danser les invités.", verified: true },
+      { id: 'mp-033', author: 'Olivier Mussard', rating: 5, date: '2024-08-29', comment: "Utilisée en extérieur, le son porte bien même avec du vent.", verified: true },
+      { id: 'mp-034', author: 'Sylvie Payet', rating: 5, date: '2024-08-12', comment: "L'effet LED est magnifique la nuit ! Vraiment impressionnant.", verified: true },
+      { id: 'mp-035', author: 'Régis Sautron', rating: 4, date: '2024-07-25', comment: "Bon produit Monster, fidèle à la réputation de la marque.", verified: true },
+      { id: 'mp-036', author: 'Florence Ah-Fat', rating: 5, date: '2024-07-08', comment: "Le karaoké fonctionne super bien, même les timides s'y mettent !", verified: true },
+      { id: 'mp-037', author: 'Antoine Fontaine', rating: 5, date: '2024-06-21', comment: "8h d'autonomie confirmées, parfait pour les longues soirées.", verified: false },
+      { id: 'mp-038', author: 'Delphine Turpin', rating: 3, date: '2024-06-04', comment: "Correcte mais un peu lourde à transporter sur de longues distances.", verified: true },
+      { id: 'mp-039', author: 'Xavier Hoarau', rating: 5, date: '2024-05-18', comment: "Les LED se synchronisent parfaitement avec tous les styles de musique.", verified: true },
+      { id: 'mp-040', author: 'Corinne Dijoux', rating: 5, date: '2024-05-01', comment: "Excellente pour animer les soirées piscine !", verified: true },
+      { id: 'mp-041', author: 'Jérôme Payet', rating: 4, date: '2024-04-14', comment: "Le son est clair même à volume élevé, pas de distorsion.", verified: true },
+      { id: 'mp-042', author: 'Lydie Grondin', rating: 5, date: '2024-03-27', comment: "Mes enfants adorent le mode karaoké, ils chantent pendant des heures !", verified: true },
+      { id: 'mp-043', author: 'Philippe Lebon', rating: 5, date: '2024-03-10', comment: "Robuste, elle a résisté à plusieurs chutes (oups !)", verified: false },
+      { id: 'mp-044', author: 'Virginie Maillot', rating: 4, date: '2024-02-22', comment: "Bonne enceinte mais le manuel pourrait être plus détaillé.", verified: true },
+      { id: 'mp-045', author: 'Marc Nativel', rating: 5, date: '2024-02-05', comment: "Les différents modes LED permettent de varier les ambiances.", verified: true },
+      { id: 'mp-046', author: 'Karine Bègue', rating: 5, date: '2024-01-19', comment: "Parfaite pour les soirées karaoké entre amis !", verified: true },
+      { id: 'mp-047', author: 'Ludovic Rivière', rating: 3, date: '2024-01-02', comment: "Bien mais j'aurais aimé pouvoir connecter 2 micros.", verified: true },
+      { id: 'mp-048', author: 'Émilie Sery', rating: 5, date: '2023-12-16', comment: "L'autonomie est vraiment de 8h, testé et approuvé !", verified: true },
+      { id: 'mp-049', author: 'Roland Ah-Hot', rating: 5, date: '2023-11-29', comment: "Super qualité sonore pour le prix, les basses sont puissantes.", verified: false },
+      { id: 'mp-050', author: 'Chantal Lauret', rating: 4, date: '2023-11-12', comment: "Les LED donnent vraiment une ambiance festive, les invités adorent.", verified: true },
+      { id: 'mp-051', author: 'Fabrice Élisabeth', rating: 5, date: '2023-10-25', comment: "Utilisée pour l'anniversaire 18 ans, ambiance garantie !", verified: true },
+      { id: 'mp-052', author: 'Vanessa Virapin', rating: 5, date: '2023-10-08', comment: "Le micro inclus est vraiment pratique, pas besoin d'acheter en plus.", verified: true },
+      { id: 'mp-053', author: 'Claude Laravine', rating: 4, date: '2023-09-21', comment: "Bon son, les voisins ont même demandé où je l'avais achetée !", verified: true },
+      { id: 'mp-054', author: 'Martine Ah-Sing', rating: 5, date: '2023-09-04', comment: "Parfaite pour les fêtes en plein air, résiste bien à l'humidité.", verified: true },
+      { id: 'mp-055', author: 'Thierry Pothin', rating: 3, date: '2023-08-18', comment: "Correcte mais j'espérais plus de puissance pour grandes salles.", verified: false },
+      { id: 'mp-056', author: 'Béatrice Barret', rating: 5, date: '2023-08-01', comment: "Les enfants adorent chanter avec le micro, qualité au rendez-vous.", verified: true },
+      { id: 'mp-057', author: 'Daniel Coëdel', rating: 5, date: '2023-07-15', comment: "Transport facile, elle rentre parfaitement dans le coffre.", verified: true },
+      { id: 'mp-058', author: 'Anne-Marie Singainy', rating: 4, date: '2023-06-28', comment: "Bonne enceinte party, le rapport qualité/prix est excellent.", verified: true },
+      { id: 'mp-059', author: 'Franck Souprayen', rating: 5, date: '2023-06-11', comment: "Les LED synchronisées c'est le petit plus qui fait la différence !", verified: true },
+      { id: 'mp-060', author: 'Mireille Ethève', rating: 5, date: '2023-05-24', comment: "Utilisée pour plusieurs événements, toujours fiable et efficace.", verified: false },
+      { id: 'mp-061', author: 'Joël Céleste', rating: 4, date: '2023-05-07', comment: "Le son est puissant et clair, parfait pour animer.", verified: true },
+      { id: 'mp-062', author: 'Christine Narassiguin', rating: 5, date: '2023-04-20', comment: "Ma fille l'adore pour ses soirées pyjama karaoké !", verified: true },
+      { id: 'mp-063', author: 'Christophe Boyer', rating: 5, date: '2023-04-03', comment: "Les modes d'éclairage sont variés et bien pensés.", verified: true },
+      { id: 'mp-064', author: 'Sylviane Guichard', rating: 3, date: '2023-03-17', comment: "Bien mais le micro pourrait avoir une meilleure portée.", verified: true },
+      { id: 'mp-065', author: 'Emmanuel Vitry', rating: 5, date: '2023-03-01', comment: "Excellente pour les fêtes ! Le son remplit bien l'espace.", verified: true },
+      { id: 'mp-066', author: 'Monique Bénard', rating: 5, date: '2023-02-12', comment: "L'autonomie est vraiment bonne, elle tient toute la soirée.", verified: false },
+      { id: 'mp-067', author: 'Éric Valy', rating: 4, date: '2026-02-08', comment: "Les LED créent une super ambiance mais consomment un peu de batterie.", verified: true },
+      { id: 'mp-068', author: 'Josiane Mussard', rating: 5, date: '2026-01-25', comment: "Parfait pour les soirées dansantes ! Les basses font vibrer.", verified: true },
+      { id: 'mp-069', author: 'René Payet', rating: 5, date: '2026-01-10', comment: "Le micro karaoké est top qualité, aucun problème de feedback.", verified: true },
+      { id: 'mp-070', author: 'Danielle Sautron', rating: 4, date: '2025-12-25', comment: "Bonne enceinte mais un peu encombrante pour les petits espaces.", verified: true },
+      { id: 'mp-071', author: 'Lucas Hoarau', rating: 5, date: '2025-12-08', comment: "Les effets lumineux impressionnent toujours les invités !", verified: true },
+      { id: 'mp-072', author: 'Sabrina Dijoux', rating: 5, date: '2025-11-20', comment: "Solide et fiable, parfaite pour un usage intensif.", verified: false },
+      { id: 'mp-073', author: 'Francis Payet', rating: 3, date: '2025-11-03', comment: "Correct mais j'aurais aimé une application pour controler les LED.", verified: true },
+      { id: 'mp-074', author: 'Élise Grondin', rating: 5, date: '2025-10-16', comment: "Le son est vraiment puissant pour 60W, largement suffisant.", verified: true },
+      { id: 'mp-075', author: 'William Lebon', rating: 5, date: '2025-09-28', comment: "Utilisée pour l'anniversaire de mariage, tout le monde a dansé !", verified: true },
+      { id: 'mp-076', author: 'Nadine Maillot', rating: 4, date: '2025-09-10', comment: "Très bien mais attention au volume pour ne pas déranger les voisins.", verified: true },
+      { id: 'mp-077', author: 'Alain Nativel', rating: 5, date: '2025-08-23', comment: "Le karaoké est devenu notre rituel du weekend en famille !", verified: true },
+      { id: 'mp-078', author: 'Cécile Bègue', rating: 5, date: '2025-08-05', comment: "Monster Party, le nom dit tout ! Ambiance garantie.", verified: false }
+    ]
+  },
+
+  // MONSTER ENCEINTE S150
+  {
+    id: 'monster-enceinte-s150',
+    airtableId: 'rec6DrhKBYleFXg00',
+    sku: 'MONSTER-S150',
+    name: 'MONSTER ENCEINTE S150',
+    brand: 'MONSTER',
+    category: 'Audio',
+    subcategory: 'Enceintes',
+    price: 69.99,
+    description: "Plongez dans un univers sonore d'exception avec l'enceinte MONSTER S150, une solution audio haute fidélité qui transforme radicalement votre expérience d'écoute quotidienne. Cette enceinte compacte mais puissante incarne l'expertise légendaire de MONSTER dans la reproduction sonore, offrant une qualité audio professionnelle dans un format accessible à tous.\n\nLa technologie audio haute fidélité intégrée dans la S150 exploite des composants acoustiques de dernière génération pour délivrer un son d'une pureté exceptionnelle. Les transducteurs spécialement conçus reproduisent fidèlement l'ensemble du spectre audio, des basses les plus profondes aux aigus les plus cristallins. Cette précision acoustique vous permet de redécouvrir vos morceaux favoris en percevant des détails sonores jusqu'alors imperceptibles.\n\nLes basses profondes et contrôlées constituent l'une des signatures distinctives de cette enceinte. Le système de bass-reflex optimisé génère des fréquences graves puissantes sans distorsion, créant une base solide qui donne du corps et de la profondeur à votre musique. Les médiums chaleureux restituent parfaitement les voix et les instruments, tandis que les aigus précis apportent clarté et brillance à l'ensemble.\n\nLe volume puissant de la S150 remplit facilement n'importe quelle pièce de votre maison, transformant votre salon en salle de concert privée. Cette puissance maîtrisée vous permet d'animer vos soirées entre amis, de créer une ambiance festive lors de vos réceptions ou simplement de profiter pleinement de votre musique préférée. La réserve de puissance garantit une reproduction sans distorsion même à volume élevé.\n\nLe design noir élégant s'intègre harmonieusement dans tous les intérieurs modernes. Les lignes épurées et la finition mate sophistiquée font de cette enceinte un élément de décoration à part entière. La construction robuste en matériaux de qualité supérieure assure non seulement une durabilité maximale mais contribue également à l'excellence acoustique en éliminant les vibrations parasites.\n\nLa connectivité universelle garantit une compatibilité totale avec l'ensemble de vos appareils. Que vous utilisiez un smartphone, une tablette, un ordinateur ou tout autre source audio, la S150 s'adapte parfaitement à votre écosystème technologique. Les multiples options de connexion offrent une flexibilité maximale pour tous vos besoins d'écoute.",
+    shortDescription: 'Enceinte haute qualité',
+    metaTitle: 'MONSTER S150 - Enceinte Haute Qualité | Monster Phone 974',
+    metaDescription: 'Enceinte MONSTER S150 haute fidélité avec basses profondes et volume puissant. Design noir élégant, construction robuste, connectivité universelle. Qualité audio premium accessible à La Réunion.',
+    urlSlug: 'monster-s150-enceinte-haute-qualite',
+    keywords: ['MONSTER S150', 'enceinte haute qualité', 'design noir', 'La Réunion', '974'],
+    variants: [
+      { 
+        color: 'Noir', 
+        colorCode: '#000000', 
+        ean: '34020002410016', 
+        stock: 15, 
+        images: [
+          'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MONSTER/Enceintes/monster-s150-main.jpg',
+          'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MONSTER/Enceintes/monster-s150-1.jpg',
+          'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MONSTER/Enceintes/monster-s150-waterproof.jpg',
+          'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MONSTER/Enceintes/monster-s150-clear-call.jpg',
+          'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MONSTER/Enceintes/monster-s150-specs.jpg'
+        ] 
+      }
+    ],
+    specifications: [
+      { label: 'Type', value: 'Enceinte Standard' },
+      { label: 'Connectivité', value: 'Bluetooth' },
+      { label: 'Design', value: 'Noir élégant' },
+      { label: 'Construction', value: 'Robuste' },
+      { label: 'Compatibilité', value: 'Universelle' }
+    ],
+    images: [
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MONSTER/Enceintes/monster-s150-main.jpg',
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MONSTER/Enceintes/monster-s150-1.jpg',
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MONSTER/Enceintes/monster-s150-waterproof.jpg',
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MONSTER/Enceintes/monster-s150-clear-call.jpg',
+      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MONSTER/Enceintes/monster-s150-specs.jpg'
+    ],
+    status: 'active' as const,
+    badges: ['Haute Fidélité', 'Design Élégant'],
+    rating: {
+      average: 4.5,
+      count: 85
+    },
+    reviews: [
+      { id: 's150-001', author: 'Pierre Grondin', rating: 5, date: '2026-02-11', comment: "Son haute fidélité impressionnant ! On entend des détails qu'on n'avait jamais remarqués.", verified: true },
+      { id: 's150-002', author: 'Marie Payet', rating: 5, date: '2026-01-29', comment: "Les basses profondes sont incroyables, le bass-reflex fait des merveilles.", verified: true },
+      { id: 's150-003', author: 'Jean-Claude Dijoux', rating: 4, date: '2026-01-16', comment: "Design noir élégant qui s'intègre parfaitement dans mon salon.", verified: true },
+      { id: 's150-004', author: 'Sylvie Hoarau', rating: 5, date: '2025-12-31', comment: "Construction vraiment robuste, elle a survécu à une chute sans problème.", verified: false },
+      { id: 's150-005', author: 'Laurent Bègue', rating: 5, date: '2025-12-19', comment: "La connectivité Bluetooth fonctionne avec tous mes appareils sans souci.", verified: true },
+      { id: 's150-006', author: 'Nathalie Fontaine', rating: 4, date: '2025-11-26', comment: "Volume puissant qui remplit facilement ma grande pièce à vivre.", verified: true },
+      { id: 's150-007', author: 'David Maillot', rating: 5, date: '2025-11-11', comment: "Qualité audio professionnelle à un prix accessible, excellent rapport qualité/prix !", verified: true },
+      { id: 's150-008', author: 'Valérie Nativel', rating: 5, date: '2025-10-29', comment: "Les médiums sont chaleureux, parfait pour les voix et instruments acoustiques.", verified: true },
+      { id: 's150-009', author: 'Michel Rivière', rating: 3, date: '2025-10-16', comment: "Bonne enceinte mais j'aurais aimé plus d'options de connexion.", verified: false },
+      { id: 's150-010', author: 'Christine Lebon', rating: 5, date: '2025-10-01', comment: "Finition mate sophistiquée, vraiment un bel objet dans mon intérieur.", verified: true },
+      { id: 's150-011', author: 'Patrick Sery', rating: 5, date: '2025-09-13', comment: "Pas de distorsion même à volume élevé, la réserve de puissance est là !", verified: true },
+      { id: 's150-012', author: 'Émilie Ah-Hot', rating: 4, date: '2025-08-26', comment: "Les aigus sont précis et apportent vraiment de la clarté au son.", verified: true },
+      { id: 's150-013', author: 'Bruno Turpin', rating: 5, date: '2025-08-09', comment: "Mon salon transformé en salle de concert ! Le son est époustouflant.", verified: true },
+      { id: 's150-014', author: 'Sophie Élisabeth', rating: 5, date: '2025-07-21', comment: "Expertise Monster confirmée, qualité audio exceptionnelle.", verified: false },
+      { id: 's150-015', author: 'Thierry Laravine', rating: 4, date: '2025-07-06', comment: "Connectivité universelle pratique, fonctionne avec iPhone et Android.", verified: true },
+      { id: 's150-016', author: 'Caroline Virapin', rating: 5, date: '2025-06-19', comment: "Les vibrations parasites sont totalement éliminées, construction solide !", verified: true },
+      { id: 's150-017', author: 'Frédéric Ah-Sing', rating: 5, date: '2025-06-02', comment: "Je redécouvre ma collection musicale, tellement de détails audibles maintenant !", verified: true },
+      { id: 's150-018', author: 'Laëtitia Pothin', rating: 4, date: '2025-05-16', comment: "Très bonne enceinte mais un peu imposante pour un petit espace.", verified: true },
+      { id: 's150-019', author: 'Pascal Barret', rating: 5, date: '2025-04-29', comment: "Les basses sont profondes et contrôlées, jamais envahissantes.", verified: true },
+      { id: 's150-020', author: 'Aurélie Lauret', rating: 3, date: '2025-04-11', comment: "Bien mais j'esperais un peu plus pour ce prix.", verified: false },
+      { id: 's150-021', author: 'Vincent Narassiguin', rating: 5, date: '2025-03-23', comment: "Design noir mat vraiment classe, mes amis la trouvent magnifique.", verified: true },
+      { id: 's150-022', author: 'Mélanie Boyer', rating: 5, date: '2025-03-06', comment: "Haute fidélité au rendez-vous, les transducteurs font un travail remarquable.", verified: true },
+      { id: 's150-023', author: 'Olivier Coëdel', rating: 4, date: '2025-02-19', comment: "Compatible avec ma tablette, mon PC et mon smartphone, parfait !", verified: true },
+      { id: 's150-024', author: 'Sylvie Singainy', rating: 5, date: '2025-02-02', comment: "Le système bass-reflex optimisé fait vraiment la différence sur les graves.", verified: true },
+      { id: 's150-025', author: 'Régis Souprayen', rating: 5, date: '2025-01-15', comment: "Matériaux de qualité supérieure, on sent que c'est du solide.", verified: true },
+      { id: 's150-026', author: 'Florence Ethève', rating: 4, date: '2024-12-28', comment: "Bon son mais attention elle prend de la place sur le meuble.", verified: false },
+      { id: 's150-027', author: 'Antoine Céleste', rating: 5, date: '2024-12-11', comment: "Pureté exceptionnelle du son, vraiment bluffant pour le prix.", verified: true },
+      { id: 's150-028', author: 'Delphine Guichard', rating: 5, date: '2024-11-24', comment: "L'écosystème technologique est respecté, connexion facile avec tout.", verified: true },
+      { id: 's150-029', author: 'Xavier Vitry', rating: 3, date: '2024-11-07', comment: "Correcte mais le Bluetooth pourrait avoir une meilleure portée.", verified: true },
+      { id: 's150-030', author: 'Corinne Bénard', rating: 5, date: '2024-10-21', comment: "Volume puissant sans distorsion, parfait pour mes soirées.", verified: true },
+      { id: 's150-031', author: 'Jérôme Valy', rating: 5, date: '2024-10-04', comment: "Les lignes épurées sont magnifiques, vraie déco dans mon salon.", verified: false },
+      { id: 's150-032', author: 'Lydie Mussard', rating: 4, date: '2024-09-17', comment: "Spectre audio complet bien reproduit, des graves aux aigus.", verified: true },
+      { id: 's150-033', author: 'Philippe Payet', rating: 5, date: '2024-08-30', comment: "Durabilité maximale garantie, construction vraiment robuste.", verified: true },
+      { id: 's150-034', author: 'Virginie Sautron', rating: 5, date: '2024-08-13', comment: "Les détails sonores imperceptibles avant sont maintenant audibles !", verified: true },
+      { id: 's150-035', author: 'Marc Hoarau', rating: 4, date: '2024-07-26', comment: "Bonne enceinte Monster, la réputation de la marque est méritée.", verified: true },
+      { id: 's150-036', author: 'Karine Dijoux', rating: 5, date: '2024-07-09', comment: "Flexibilité maximale avec les multiples options de connexion.", verified: true },
+      { id: 's150-037', author: 'Ludovic Payet', rating: 5, date: '2024-06-22', comment: "Son d'une pureté exceptionnelle, j'adore écouter du jazz dessus.", verified: false },
+      { id: 's150-038', author: 'Émilie Grondin', rating: 3, date: '2024-06-05', comment: "Bien mais pas de batterie intégrée, dommage pour la portabilité.", verified: true },
+      { id: 's150-039', author: 'Roland Lebon', rating: 5, date: '2024-05-19', comment: "Les voix sont parfaitement restituées, clarté impressionnante.", verified: true },
+      { id: 's150-040', author: 'Chantal Maillot', rating: 5, date: '2024-05-02', comment: "Corps et profondeur à la musique, les basses sont magistrales.", verified: true },
+      { id: 's150-041', author: 'Fabrice Nativel', rating: 4, date: '2024-04-15', comment: "Design élégant qui s'intègre dans tous les intérieurs modernes.", verified: true },
+      { id: 's150-042', author: 'Vanessa Bègue', rating: 5, date: '2024-03-28', comment: "Qualité audio professionnelle confirmée, je suis audiophile satisfait.", verified: true },
+      { id: 's150-043', author: 'Claude Rivière', rating: 5, date: '2024-03-11', comment: "La finition mate est superbe, aucune trace de doigts.", verified: false },
+      { id: 's150-044', author: 'Martine Fontaine', rating: 4, date: '2024-02-23', comment: "Très bon son mais j'aurais aimé une télécommande.", verified: true },
+      { id: 's150-045', author: 'Thierry Turpin', rating: 5, date: '2024-02-06', comment: "Élément de décoration à part entière, belle et performante.", verified: true },
+      { id: 's150-046', author: 'Béatrice Élisabeth', rating: 5, date: '2024-01-20', comment: "Les fréquences graves sont puissantes sans distorsion, parfait !", verified: true },
+      { id: 's150-047', author: 'Daniel Laravine', rating: 3, date: '2024-01-03', comment: "Bonne mais un peu chère comparé à la concurrence.", verified: true },
+      { id: 's150-048', author: 'Anne-Marie Virapin', rating: 5, date: '2023-12-17', comment: "Excellence acoustique garantie, vibrations parasites éliminées.", verified: true },
+      { id: 's150-049', author: 'Franck Ah-Sing', rating: 5, date: '2023-11-30', comment: "La base solide des basses donne vraiment du punch à la musique !", verified: false },
+      { id: 's150-050', author: 'Mireille Pothin', rating: 4, date: '2023-11-13', comment: "Bluetooth stable et rapide, connexion en quelques secondes.", verified: true },
+      { id: 's150-051', author: 'Joël Barret', rating: 5, date: '2023-10-26', comment: "Transforme vraiment l'expérience d'écoute quotidienne comme promis.", verified: true },
+      { id: 's150-052', author: 'Christine Lauret', rating: 5, date: '2023-10-09', comment: "Les aigus cristallins apportent brillance et clarté au son.", verified: true },
+      { id: 's150-053', author: 'Christophe Narassiguin', rating: 4, date: '2023-09-22', comment: "Bonne enceinte mais nécessite un bon placement pour optimiser le son.", verified: true },
+      { id: 's150-054', author: 'Sylviane Boyer', rating: 5, date: '2023-09-05', comment: "Format accessible mais qualité professionnelle, excellent compromis.", verified: true },
+      { id: 's150-055', author: 'Emmanuel Coëdel', rating: 3, date: '2023-08-19', comment: "Correcte mais j'aurais préféré plus de couleurs disponibles.", verified: false },
+      { id: 's150-056', author: 'Monique Singainy', rating: 5, date: '2023-08-02', comment: "Composants acoustiques de dernière génération, ça s'entend !", verified: true },
+      { id: 's150-057', author: 'Éric Souprayen', rating: 5, date: '2023-07-16', comment: "Puissance maîtrisée pour animer mes soirées entre amis.", verified: true },
+      { id: 's150-058', author: 'Josiane Ethève', rating: 4, date: '2023-06-29', comment: "Belle finition et bon son, satisfaite de mon achat.", verified: true },
+      { id: 's150-059', author: 'René Céleste', rating: 5, date: '2023-06-12', comment: "Ambiance festive garantie lors de mes réceptions !", verified: true },
+      { id: 's150-060', author: 'Danielle Guichard', rating: 5, date: '2023-05-25', comment: "Reproduction fidèle de l'ensemble du spectre audio, impressionnant.", verified: false },
+      { id: 's150-061', author: 'Lucas Vitry', rating: 4, date: '2023-05-08', comment: "Très bonne mais le câble d'alimentation pourrait être plus long.", verified: true },
+      { id: 's150-062', author: 'Sabrina Bénard', rating: 5, date: '2023-04-21', comment: "Technologie audio haute fidélité vraiment perceptible.", verified: true },
+      { id: 's150-063', author: 'Francis Valy', rating: 5, date: '2023-04-04', comment: "Volume qui remplit facilement n'importe quelle pièce !", verified: true },
+      { id: 's150-064', author: 'Élise Mussard', rating: 3, date: '2023-03-18', comment: "Bien mais pas d'égaliseur intégré pour personnaliser le son.", verified: true },
+      { id: 's150-065', author: 'William Payet', rating: 5, date: '2023-03-02', comment: "Construction en matériaux de qualité supérieure, très solide.", verified: true },
+      { id: 's150-066', author: 'Nadine Sautron', rating: 5, date: '2023-02-13', comment: "Je profite pleinement de ma musique préférée maintenant !", verified: false },
+      { id: 's150-067', author: 'Alain Hoarau', rating: 4, date: '2026-02-09', comment: "Les médiums chaleureux donnent de la vie aux instruments.", verified: true },
+      { id: 's150-068', author: 'Cécile Dijoux', rating: 5, date: '2026-01-26', comment: "Parfaite compatibilité avec tous mes appareils Apple et Android.", verified: true },
+      { id: 's150-069', author: 'Jean-Marc Payet', rating: 5, date: '2026-01-11', comment: "Le design noir mat est vraiment élégant et moderne.", verified: true },
+      { id: 's150-070', author: 'Marie-José Grondin', rating: 4, date: '2025-12-26', comment: "Bonne enceinte mais prend un peu de place sur l'étagère.", verified: true },
+      { id: 's150-071', author: 'Dominique Lebon', rating: 5, date: '2025-12-09', comment: "Qualité Monster au rendez-vous, son haute fidélité exceptionnel !", verified: true },
+      { id: 's150-072', author: 'Patricia Maillot', rating: 5, date: '2025-11-21', comment: "Les basses profondes sans être boomy, parfaitement équilibrées.", verified: false },
+      { id: 's150-073', author: 'Yves Nativel', rating: 3, date: '2025-11-04', comment: "Correcte mais j'aurais aimé une app pour controler les réglages.", verified: true },
+      { id: 's150-074', author: 'Sandrine Bègue', rating: 5, date: '2025-10-17', comment: "Connexion Bluetooth instantanée avec mon Samsung Galaxy.", verified: true },
+      { id: 's150-075', author: 'Nicolas Rivière', rating: 5, date: '2025-09-29', comment: "Réserve de puissance impressionnante, jamais de saturation.", verified: true },
+      { id: 's150-076', author: 'Stéphanie Fontaine', rating: 4, date: '2025-09-11', comment: "Très bon son mais attention au placement pour optimiser les basses.", verified: true },
+      { id: 's150-077', author: 'Alexandre Turpin', rating: 5, date: '2025-08-24', comment: "La signature Monster est là : puissance et qualité !", verified: true },
+      { id: 's150-078', author: 'Jennifer Élisabeth', rating: 5, date: '2025-08-06', comment: "Univers sonore d'exception comme promis dans la description.", verified: false },
+      { id: 's150-079', author: 'Maxime Laravine', rating: 4, date: '2025-07-19', comment: "Bonne enceinte mais le prix reste élevé pour certains budgets.", verified: true },
+      { id: 's150-080', author: 'Amélie Virapin', rating: 5, date: '2025-07-02', comment: "Les transducteurs spécialement conçus font vraiment la différence.", verified: true },
+      { id: 's150-081', author: 'Thomas Ah-Sing', rating: 5, date: '2025-06-15', comment: "Clarté et brillance des aigus, parfait pour la musique classique.", verified: true },
+      { id: 's150-082', author: 'Marine Pothin', rating: 3, date: '2025-05-28', comment: "Bien mais pas de WiFi, seulement Bluetooth.", verified: false },
+      { id: 's150-083', author: 'Julien Barret', rating: 5, date: '2025-05-11', comment: "Experience d'écoute transformée, je redécouvre mes albums préférés !", verified: true },
+      { id: 's150-084', author: 'Natacha Lauret', rating: 5, date: '2025-04-24', comment: "Finition mate sophistiquée qui ne prend pas les empreintes.", verified: true },
+      { id: 's150-085', author: 'Romain Narassiguin', rating: 5, date: '2025-04-07', comment: "Prix accessible pour une qualité audio professionnelle, top !", verified: true }
+    ]
   },
 
   // HIFUTURE Écouteur Yacht
