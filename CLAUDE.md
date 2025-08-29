@@ -58,7 +58,7 @@ rm -rf .next                  # Clear build cache
 ### Data Flow Architecture  
 - **Product Interface**: TypeScript interface with 30+ fields including variants, specifications, ratings
 - **Menu Structure**: Complex hierarchical navigation (categories → subcategories → brands → products)
-- **Static Pattern**: No API calls, manual Airtable exports, 65+ products total
+- **Static Pattern**: No API calls, manual Airtable exports, 100+ products total
 - **Cart Persistence**: LocalStorage with key `monsterphone-cart`
 
 ### Critical Known Issues
@@ -90,7 +90,7 @@ src/
 │   ├── CartContext.tsx    # Shopping cart state management
 │   └── AuthContext.tsx    # User authentication (mock)
 ├── data/
-│   └── products.ts        # Static product data (65+ products)
+│   └── products.ts        # Static product data (100+ products)
 └── lib/
     ├── utils.ts           # cn() helper, formatPrice()
     └── image-utils.ts     # Image fallback handling
