@@ -6,11 +6,19 @@
  * Map product categories to placeholder images
  */
 const categoryPlaceholders: Record<string, string> = {
-  'Smartphones': '/placeholder-phone.svg',
-  'Audio & Son': '/placeholder-audio.svg',
-  'Chargement & Énergie': '/placeholder-charger.svg',
-  'Créativité & Enfants': '/placeholder-creative.svg',
-  'default': '/placeholder-product.svg'
+  'Smartphones': '/placeholder-monster.svg',
+  'Audio & Son': '/placeholder-monster.svg',
+  'Audio': '/placeholder-monster.svg',
+  'Chargement & Énergie': '/placeholder-monster.svg',
+  'Créativité & Enfants': '/placeholder-monster.svg',
+  'Tablettes': '/placeholder-monster.svg',
+  'Écouteurs': '/placeholder-monster.svg',
+  'Casques': '/placeholder-monster.svg',
+  'Enceintes': '/placeholder-monster.svg',
+  'Montres connectées': '/placeholder-monster.svg',
+  'LED': '/placeholder-monster.svg',
+  'Accessoires': '/placeholder-monster.svg',
+  'default': '/placeholder-monster.svg'
 };
 
 /**
