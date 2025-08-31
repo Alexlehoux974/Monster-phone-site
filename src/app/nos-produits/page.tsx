@@ -9,7 +9,7 @@ import Footer from '@/components/Footer';
 import FilterPanel, { FilterState } from '@/components/FilterPanel';
 import Pagination from '@/components/Pagination';
 import SortDropdown, { SortOption } from '@/components/SortDropdown';
-import { allProducts } from '@/data/products';
+import { products as allProducts } from '@/data/products_menu';
 import { Button } from '@/components/ui/button';
 import { Filter, X, Search } from 'lucide-react';
 import ProductCardSkeleton from '@/components/ProductCardSkeleton';
