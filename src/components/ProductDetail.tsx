@@ -282,7 +282,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
             </div>
 
             {/* Note et avis */}
-            {product.reviews && product.reviews.length > 0 && (
+            {product.rating && product.rating.count > 0 && (
               <div className="flex items-center gap-2 mt-3">
                 <div className="flex items-center">
                   {Array.from({ length: 5 }).map((_, i) => (
@@ -290,17 +290,17 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                       key={i}
                       className={cn(
                         "h-5 w-5",
-                        i < Math.floor(product.reviews.reduce((acc, r) => acc + r.rating, 0) / product.reviews.length)
+                        i < Math.floor(product.rating.average)
                           ? "text-yellow-400 fill-current"
                           : "text-gray-300"
                       )}
                     />
                   ))}
                   <span className="ml-2 font-semibold">
-                    {(product.reviews.reduce((acc, r) => acc + r.rating, 0) / product.reviews.length).toFixed(1)}
+                    {product.rating.average.toFixed(1)}
                   </span>
                 </div>
-                <span className="text-gray-600">({product.reviews.length} avis)</span>
+                <span className="text-gray-600">({product.rating.count} avis)</span>
               </div>
             )}
           </div>
@@ -500,7 +500,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
               Caractéristiques
             </TabsTrigger>
             <TabsTrigger value="reviews" className="data-[state=active]:bg-white data-[state=active]:shadow-sm rounded-lg font-medium">
-              Avis ({product.reviews?.length || 0})
+              Avis ({product.rating?.reviews?.length || product.rating?.count || 0})
             </TabsTrigger>
             <TabsTrigger value="shipping" className="data-[state=active]:bg-white data-[state=active]:shadow-sm rounded-lg font-medium">
               Livraison
@@ -587,14 +587,14 @@ export default function ProductDetail({ product }: ProductDetailProps) {
               <Button variant="outline">Écrire un avis</Button>
             </div>
 
-            {product.reviews && product.reviews.length > 0 ? (
+            {product.rating?.reviews && product.rating.reviews.length > 0 ? (
               <>
                 {/* Résumé des avis */}
                 <div className="bg-gray-50 rounded-lg p-6">
                   <div className="flex items-center gap-6">
                     <div className="text-center">
                       <p className="text-4xl font-bold">
-                        {(product.reviews.reduce((acc, r) => acc + r.rating, 0) / product.reviews.length).toFixed(1)}
+                        {product.rating.average.toFixed(1)}
                       </p>
                       <div className="flex items-center mt-2">
                         {Array.from({ length: 5 }).map((_, i) => (
@@ -602,7 +602,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                             key={i}
                             className={cn(
                               "h-4 w-4",
-                              i < Math.floor(product.reviews.reduce((acc, r) => acc + r.rating, 0) / product.reviews.length)
+                              i < Math.floor(product.rating.average)
                                 ? "text-yellow-400 fill-current"
                                 : "text-gray-300"
                             )}
@@ -610,14 +610,14 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                         ))}
                       </div>
                       <p className="text-sm text-gray-600 mt-1">
-                        {product.reviews.length} avis vérifiés
+                        {product.rating.count} avis vérifiés
                       </p>
                     </div>
                     
                     <div className="flex-1 space-y-2">
                       {[5, 4, 3, 2, 1].map((stars) => {
-                        const count = product.reviews?.filter(r => r.rating === stars).length || 0;
-                        const percentage = (count / (product.reviews?.length || 1)) * 100;
+                        const count = product.rating.distribution[stars] || 0;
+                        const percentage = (count / product.rating.count) * 100;
                         return (
                           <div key={stars} className="flex items-center gap-2">
                             <span className="text-sm w-4">{stars}</span>
@@ -640,7 +640,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
                 {/* Liste des avis */}
                 <div className="space-y-4 max-h-96 overflow-y-auto">
-                  {product.reviews.slice(0, 10).map((review) => (
+                  {product.rating.reviews.slice(0, 10).map((review) => (
                     <div key={review.id} className="border-b pb-4">
                       <div className="flex items-start justify-between mb-2">
                         <div>
@@ -671,14 +671,22 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                           </div>
                         </div>
                       </div>
+                      {review.title && (
+                        <h4 className="font-semibold text-gray-900 mb-1">{review.title}</h4>
+                      )}
                       <p className="text-gray-700">{review.comment}</p>
+                      {review.helpful > 0 && (
+                        <div className="mt-2 text-xs text-gray-500">
+                          {review.helpful} personne(s) ont trouvé cet avis utile
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>
 
-                {product.reviews.length > 10 && (
+                {product.rating.reviews.length > 10 && (
                   <Button variant="outline" className="w-full">
-                    Voir tous les {product.reviews.length} avis
+                    Voir tous les {product.rating.reviews.length} avis
                   </Button>
                 )}
               </>

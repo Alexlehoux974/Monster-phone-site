@@ -85,7 +85,10 @@
       "Bash(gradient:'#2a2a2a-#0f0f0f' )",
       "Bash('gradient:#1a1a1a-#2d2d2d' )",
       "Bash(/tmp/monster-s150-placeholder.jpg)",
-      "Bash(/tmp/ascendo-placeholder.jpg)"
+      "Bash(/tmp/ascendo-placeholder.jpg)",
+      "Bash(do echo -n \"$product: \")",
+      "Bash(chmod:*)",
+      "Bash(/root/monster-phone-dev/monster-phone-boutique/remove_products.sh:*)"
     ],
     "deny": [],
     "additionalDirectories": [

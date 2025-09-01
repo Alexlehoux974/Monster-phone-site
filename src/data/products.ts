@@ -1330,35 +1330,35 @@ export const allProducts: Product[] = [
         colorCode: '#FFB6C1', 
         ean: 'MUHPH01-LAPIN',
         stock: 10,
-        images: []
+        images: ['/placeholder-monster-mini.svg']
       },
       { 
         color: 'Chat (Rose/Blanc)', 
         colorCode: '#FF69B4', 
         ean: 'MUHPH01-CHAT',
         stock: 12,
-        images: []
+        images: ['/placeholder-monster-mini.svg']
       },
       { 
         color: 'Licorne (Rose/Blanc/Doré)', 
         colorCode: '#FFD700', 
         ean: 'MUHPH01-LICORNE',
         stock: 8,
-        images: []
+        images: ['/placeholder-monster-mini.svg']
       },
       { 
         color: 'Dragon (Vert/Rouge)', 
         colorCode: '#228B22', 
         ean: 'MUHPH01-DRAGON',
         stock: 6,
-        images: []
+        images: ['/placeholder-monster-mini.svg']
       },
       { 
         color: 'Pika (Jaune/Rouge)', 
         colorCode: '#FFD700', 
         ean: 'MUHPH01-PIKA',
         stock: 15,
-        images: []
+        images: ['/placeholder-monster-mini.svg']
       }
     ],
     defaultVariant: 'Chat (Rose/Blanc)',
@@ -1374,7 +1374,7 @@ export const allProducts: Product[] = [
       'Confort enfant',
       'Bluetooth sans fil'
     ],
-    images: [],
+    images: ['/placeholder-monster-mini.svg'],
     status: 'active',
     rating: {
       average: 4.7,
@@ -1416,179 +1416,6 @@ export const allProducts: Product[] = [
     warranty: '2 ans constructeur',
     deliveryTime: '24-48h à La Réunion',
     badges: ['Enfants', 'Protection']
-  },
-
-  // HIFUTURE FUTUREMATE
-  {
-    id: 'hifuture-futuremate',
-    airtableId: 'rec8lCbDJQwcYupxb',
-    sku: 'HIFUTURE-FUTUREMATE-SWATCH',
-    name: 'HIFUTURE FUTUREMATE',
-    brand: 'HIFUTURE',
-    category: 'Montres connectées',
-    subcategory: 'Sport',
-    price: 89.99,
-    originalPrice: 119.99,
-    discount: 25,
-    promo: 'PROMO TECH',
-    description: "La montre connectée HIFUTURE FUTUREMATE représente l'alliance parfaite entre technologie de pointe et élégance intemporelle. Son écran AMOLED de 1.43 pouces avec résolution 466x466 pixels offre une clarté exceptionnelle et des couleurs éclatantes visibles même en plein soleil tropical. Le boîtier en alliage d'aluminium premium avec finition brossée allie robustesse et légèreté pour un confort optimal au quotidien. Équipée d'un capteur cardiaque optique dernière génération, elle surveille votre fréquence cardiaque 24h/24 avec une précision médicale. Le suivi SpO2 continu mesure votre saturation en oxygène sanguin, essentiel pour optimiser vos performances sportives. Plus de 100 modes sportifs intégrés avec GPS haute précision pour tracker vos activités : course, natation (étanche 5ATM), vélo, randonnée et sports nautiques populaires à La Réunion. Analyse avancée du sommeil avec phases REM, profond et léger. Assistant vocal intégré, appels Bluetooth avec haut-parleur et microphone haute définition. Notifications intelligentes avec réponses rapides prédéfinies. Autonomie exceptionnelle de 10 jours en utilisation normale, 30 jours en mode économie. Charge magnétique rapide en 2 heures. Plus de 200 cadrans personnalisables via l'application dédiée. Bracelet en silicone hypoallergénique interchangeable. Compatible iOS et Android. La smartwatch complète pour un mode de vie actif et connecté.",
-    shortDescription: 'Montre connectée AMOLED 1.43" avec GPS, 100+ sports et 10 jours d\'autonomie',
-    metaTitle: 'HIFUTURE FUTUREMATE - Smartwatch AMOLED GPS 100 Sports | Monster Phone 974',
-    metaDescription: 'Montre connectée HIFUTURE FUTUREMATE : écran AMOLED 1.43", GPS intégré, 100+ modes sport, étanche 5ATM, 10 jours autonomie. Idéale sport La Réunion.',
-    urlSlug: 'hifuture-futuremate-montre-connectee',
-    keywords: ['HIFUTURE FUTUREMATE', 'montre connectée', 'smartwatch', 'GPS', 'tracker fitness', 'La Réunion', '974'],
-    variants: [
-      { color: 'Noir', colorCode: '#000000', ean: '6972576182234', stock: 12, images: [] },
-      { color: 'Argent', colorCode: '#C0C0C0', ean: '6972576182241', stock: 10, images: [] },
-      { color: 'Or Rose', colorCode: '#B76E79', ean: '6972576182258', stock: 8, images: [] }
-    ],
-    defaultVariant: 'Noir',
-    specifications: [
-      { label: 'Écran', value: '1.43" AMOLED 466x466', icon: 'display' },
-      { label: 'GPS', value: 'Intégré haute précision', icon: 'location' },
-      { label: 'Modes sport', value: '100+', icon: 'sport' },
-      { label: 'Étanchéité', value: '5ATM (50m)', icon: 'water' },
-      { label: 'Autonomie', value: '10 jours', icon: 'battery' },
-      { label: 'Capteurs', value: 'Cardiaque, SpO2, Accéléromètre', icon: 'sensor' },
-      { label: 'Connectivité', value: 'Bluetooth 5.2', icon: 'bluetooth' },
-      { label: 'Compatibilité', value: 'iOS 10+ / Android 5+', icon: 'phone' }
-    ],
-    highlights: [
-      'Écran AMOLED haute résolution',
-      'GPS intégré précis',
-      '100+ modes sportifs',
-      'Étanche 5ATM pour natation',
-      '10 jours d\'autonomie'
-    ],
-    images: [
-      '/placeholder-hifuture-futuremate-1.jpg',
-      '/placeholder-hifuture-futuremate-2.jpg',
-      '/placeholder-hifuture-futuremate-3.jpg'
-    ],
-    status: 'active',
-    rating: {
-      average: 4.7,
-      count: 178,
-      distribution: { 5: 130, 4: 35, 3: 10, 2: 2, 1: 1 }
-    },
-    warranty: '2 ans constructeur',
-    deliveryTime: '24-48h à La Réunion',
-    badges: ['GPS', 'AMOLED', '5ATM']
-  },
-
-  // HIFUTURE ZONE 2 Sport
-  {
-    id: 'hifuture-zone-2-sport',
-    airtableId: 'rec9MNXwqQT23kLRx',
-    sku: 'HIFUTURE-ZONE2-SW',
-    name: 'HIFUTURE ZONE 2',
-    brand: 'HIFUTURE',
-    category: 'Montres connectées',
-    subcategory: 'Sport',
-    price: 69.99,
-    originalPrice: 89.99,
-    discount: 22,
-    promo: 'OFFRE LIMITÉE',
-    description: "La HIFUTURE ZONE 2 redéfinit les standards de la montre connectée avec son design sophistiqué et ses fonctionnalités avancées à prix accessible. L'écran tactile IPS de 1.28 pouces avec résolution 240x240 pixels offre une lisibilité parfaite dans toutes les conditions d'éclairage. Le verre 2.5D renforcé résiste aux rayures et impacts du quotidien. Architecture multi-capteurs pour un suivi santé complet : moniteur cardiaque 24/7, oxymètre SpO2, thermomètre corporel et analyse du stress. Plus de 70 modes sportifs professionnels avec algorithmes d'analyse avancés pour optimiser vos performances. Suivi automatique des activités quotidiennes : pas, calories, distance, étages montés. Analyse détaillée du sommeil avec conseils personnalisés pour améliorer la qualité de votre repos. Notifications intelligentes avec vibration personnalisable pour appels, SMS et applications. Contrôle musical et appareil photo à distance. Rappels sédentarité et hydratation. Autonomie remarquable de 15 jours en usage normal grâce à la puce basse consommation. Charge magnétique complète en 2.5 heures. Étanchéité IP68 pour usage quotidien et sports aquatiques légers. Interface utilisateur intuitive avec navigation par gestes. Application mobile complète avec historique détaillé et objectifs personnalisables. Bracelet silicone respirant interchangeable en plusieurs coloris. Le tracker santé et fitness idéal pour un mode de vie actif à La Réunion.",
-    shortDescription: 'Montre connectée IPS 1.28" avec 70+ sports, multi-capteurs santé et 15 jours autonomie',
-    metaTitle: 'HIFUTURE ZONE 2 - Montre Connectée 70 Sports IP68 | Monster Phone 974',
-    metaDescription: 'Montre connectée HIFUTURE ZONE 2 : écran IPS 1.28", 70+ modes sport, capteurs santé complets, IP68, 15 jours autonomie. Tracker fitness La Réunion.',
-    urlSlug: 'hifuture-zone-2-montre-sport',
-    keywords: ['HIFUTURE ZONE 2', 'montre sport', 'tracker fitness', 'montre santé', 'smartwatch', 'La Réunion', '974'],
-    variants: [
-      { color: 'Noir', colorCode: '#000000', ean: '6972576182456', stock: 15, images: [] },
-      { color: 'Bleu', colorCode: '#0080FF', ean: '6972576182463', stock: 12, images: [] },
-      { color: 'Rose', colorCode: '#FFB6C1', ean: '6972576182470', stock: 10, images: [] }
-    ],
-    defaultVariant: 'Noir',
-    specifications: [
-      { label: 'Écran', value: '1.28" IPS 240x240', icon: 'display' },
-      { label: 'Modes sport', value: '70+', icon: 'sport' },
-      { label: 'Capteurs', value: 'Cardiaque, SpO2, Température', icon: 'sensor' },
-      { label: 'Étanchéité', value: 'IP68', icon: 'water' },
-      { label: 'Autonomie', value: '15 jours', icon: 'battery' },
-      { label: 'Bluetooth', value: '5.0', icon: 'bluetooth' },
-      { label: 'Poids', value: '38g', icon: 'weight' },
-      { label: 'Compatibilité', value: 'iOS 9+ / Android 4.4+', icon: 'phone' }
-    ],
-    highlights: [
-      '15 jours d\'autonomie',
-      '70+ modes sportifs',
-      'Multi-capteurs santé',
-      'Étanchéité IP68',
-      'Écran tactile IPS'
-    ],
-    images: [
-      '/placeholder-hifuture-zone2-1.jpg',
-      '/placeholder-hifuture-zone2-2.jpg',
-      '/placeholder-hifuture-zone2-3.jpg'
-    ],
-    status: 'active',
-    rating: {
-      average: 4.5,
-      count: 234,
-      distribution: { 5: 150, 4: 60, 3: 18, 2: 4, 1: 2 }
-    },
-    warranty: '2 ans constructeur',
-    deliveryTime: '24-48h à La Réunion',
-    badges: ['15 jours autonomie', 'IP68', 'Multi-capteurs']
-  },
-
-  // HIFUTURE ULTRAFIT
-  {
-    id: 'hifuture-ultrafit',
-    airtableId: 'recBbzRiXLo5W4YOP',
-    sku: 'HIFUTURE-ULTRAFIT',
-    name: 'HIFUTURE ULTRAFIT',
-    brand: 'HIFUTURE',
-    category: 'Montres connectées',
-    subcategory: 'Sport',
-    price: 99.99,
-    originalPrice: 129.99,
-    discount: 23,
-    promo: 'FITNESS PROMO',
-    description: "La HIFUTURE ULTRAFIT est la montre connectée ultime pour les passionnés de fitness et les athlètes exigeants. Son écran AMOLED incurvé de 1.39 pouces avec résolution 454x454 pixels offre une expérience visuelle immersive avec always-on display personnalisable. Le boîtier en acier inoxydable 316L garantit durabilité et élégance pour toutes les occasions. Technologie GPS double fréquence L1+L5 pour un tracking ultra-précis de vos parcours, même en environnement urbain dense ou sous couvert forestier. Plus de 120 modes sportifs professionnels avec métriques avancées : VO2 max, temps de récupération, charge d'entraînement, prédiction de performance. Coach virtuel intégré avec plans d'entraînement adaptatifs basés sur vos objectifs et condition physique. Capteur cardiaque nouvelle génération avec variabilité de fréquence cardiaque (HRV) pour analyse du stress et récupération. Altimètre barométrique, boussole et gyroscope pour sports outdoor. Étanchéité 5ATM avec mode natation avancé : reconnaissance automatique des styles, SWOLF, analyse technique. Musique embarquée 4GB pour 500 chansons sans smartphone. Paiement sans contact NFC (compatible avec services locaux). Autonomie intelligente : 14 jours en usage normal, 48h avec GPS actif, 30 jours en mode économie. Écosystème complet avec application analytique avancée et communauté fitness. La montre de référence pour dépasser vos limites à La Réunion.",
-    shortDescription: 'Montre sport AMOLED 1.39" avec GPS L1+L5, 120 sports et musique 4GB',
-    metaTitle: 'HIFUTURE ULTRAFIT - Montre Sport GPS Premium AMOLED | Monster Phone 974',
-    metaDescription: 'Montre connectée HIFUTURE ULTRAFIT : AMOLED 1.39", GPS double fréquence, 120 sports, musique 4GB, paiement NFC. La référence fitness La Réunion.',
-    urlSlug: 'hifuture-ultrafit-montre-gps-premium',
-    keywords: ['HIFUTURE ULTRAFIT', 'montre GPS', 'smartwatch sport', 'montre fitness', 'NFC', 'La Réunion', '974'],
-    variants: [
-      { color: 'Noir Titanium', colorCode: '#1C1C1C', ean: '6972576182678', stock: 8, images: [] },
-      { color: 'Argent', colorCode: '#C0C0C0', ean: '6972576182685', stock: 6, images: [] }
-    ],
-    defaultVariant: 'Noir Titanium',
-    specifications: [
-      { label: 'Écran', value: '1.39" AMOLED 454x454', icon: 'display' },
-      { label: 'GPS', value: 'Double fréquence L1+L5', icon: 'location' },
-      { label: 'Modes sport', value: '120+', icon: 'sport' },
-      { label: 'Musique', value: '4GB stockage', icon: 'music' },
-      { label: 'Étanchéité', value: '5ATM', icon: 'water' },
-      { label: 'Autonomie', value: '14 jours / 48h GPS', icon: 'battery' },
-      { label: 'Paiement', value: 'NFC sans contact', icon: 'payment' },
-      { label: 'Matériaux', value: 'Acier inoxydable 316L', icon: 'material' }
-    ],
-    highlights: [
-      'GPS double fréquence L1+L5',
-      'Musique 4GB embarquée',
-      'Paiement NFC',
-      '120+ modes sportifs pro',
-      'AMOLED always-on'
-    ],
-    images: [
-      '/placeholder-hifuture-ultrafit-1.jpg',
-      '/placeholder-hifuture-ultrafit-2.jpg',
-      '/placeholder-hifuture-ultrafit-3.jpg'
-    ],
-    status: 'active',
-    rating: {
-      average: 4.9,
-      count: 156,
-      distribution: { 5: 140, 4: 12, 3: 3, 2: 1, 1: 0 }
-    },
-    warranty: '2 ans constructeur',
-    deliveryTime: '24-48h à La Réunion',
-    badges: ['GPS Premium', 'NFC', 'Musique']
   },
 
   // HIFUTURE GRAVITY Enceinte Bluetooth
@@ -1746,237 +1573,6 @@ export const allProducts: Product[] = [
     warranty: '2 ans constructeur',
     deliveryTime: '24-48h à La Réunion',
     badges: ['360°', 'IPX7', 'LED RGB']
-  },
-
-  // HIFUTURE FITMAX
-  {
-    id: 'hifuture-fitmax',
-    airtableId: 'recGcKLvJNRXfT1Wx',
-    sku: 'HIFUTURE-FITMAX-TRACKER',
-    name: 'HIFUTURE FITMAX',
-    brand: 'HIFUTURE',
-    category: 'Montres connectées',
-    subcategory: 'Sport',
-    price: 49.99,
-    originalPrice: 69.99,
-    discount: 29,
-    promo: 'SPORT DEAL',
-    description: "Le bracelet connecté HIFUTURE FITMAX est le compagnon fitness idéal pour suivre et améliorer votre santé au quotidien. Son écran AMOLED couleur de 1.1 pouces affiche clairement toutes vos données même en plein soleil. Design ultra-fin de seulement 11mm d'épaisseur et poids plume de 25g pour un port invisible et confortable 24h/24. Capteurs de pointe pour un suivi santé complet : fréquence cardiaque continue avec alertes anormales, oxymétrie SpO2, analyse du stress et suivi menstruel. Plus de 50 modes sportifs avec reconnaissance automatique des activités principales. GPS connecté via smartphone pour cartographie précise de vos parcours. Analyse avancée du sommeil avec score de qualité et conseils personnalisés. Notifications intelligentes discrètes avec vibration personnalisable. Autonomie record de 20 jours grâce à la puce ultra basse consommation. Charge magnétique rapide en 1.5 heures. Étanchéité 5ATM pour natation et sports aquatiques. Application intuitive avec tableaux de bord détaillés, défis communautaires et badges de récompense. Bracelet en TPU médical hypoallergénique, disponible en multiples coloris pour s'adapter à votre style. Compatible avec Strava, Google Fit et Apple Health. Le tracker fitness accessible et complet pour atteindre vos objectifs santé à La Réunion.",
-    shortDescription: 'Bracelet fitness AMOLED avec 50+ sports, GPS connecté et 20 jours autonomie',
-    metaTitle: 'HIFUTURE FITMAX - Bracelet Connecté Fitness AMOLED | Monster Phone 974',
-    metaDescription: 'Bracelet connecté HIFUTURE FITMAX : écran AMOLED, 50+ sports, GPS connecté, 5ATM, 20 jours autonomie. Tracker santé complet La Réunion.',
-    urlSlug: 'hifuture-fitmax-bracelet-fitness',
-    keywords: ['HIFUTURE FITMAX', 'bracelet connecté', 'fitness tracker', 'montre sport', 'tracker santé', 'La Réunion', '974'],
-    variants: [
-      { color: 'Noir', colorCode: '#000000', ean: '6972576183347', stock: 20, images: [] },
-      { color: 'Bleu Navy', colorCode: '#000080', ean: '6972576183354', stock: 18, images: [] },
-      { color: 'Rose', colorCode: '#FFB6C1', ean: '6972576183361', stock: 15, images: [] },
-      { color: 'Vert', colorCode: '#00FF00', ean: '6972576183378', stock: 12, images: [] }
-    ],
-    defaultVariant: 'Noir',
-    specifications: [
-      { label: 'Écran', value: '1.1" AMOLED couleur', icon: 'display' },
-      { label: 'Modes sport', value: '50+', icon: 'sport' },
-      { label: 'GPS', value: 'Connecté (smartphone)', icon: 'location' },
-      { label: 'Étanchéité', value: '5ATM', icon: 'water' },
-      { label: 'Autonomie', value: '20 jours', icon: 'battery' },
-      { label: 'Poids', value: '25g', icon: 'weight' },
-      { label: 'Épaisseur', value: '11mm', icon: 'dimension' },
-      { label: 'Compatibilité', value: 'iOS/Android', icon: 'phone' }
-    ],
-    highlights: [
-      '20 jours d\'autonomie',
-      'Écran AMOLED couleur',
-      'Ultra léger 25g',
-      '5ATM pour natation',
-      '50+ modes sportifs'
-    ],
-    images: [
-      '/placeholder-hifuture-fitmax-1.jpg',
-      '/placeholder-hifuture-fitmax-2.jpg',
-      '/placeholder-hifuture-fitmax-3.jpg'
-    ],
-    status: 'active',
-    rating: {
-      average: 4.4,
-      count: 312,
-      distribution: { 5: 180, 4: 90, 3: 30, 2: 8, 1: 4 }
-    },
-    warranty: '2 ans constructeur',
-    deliveryTime: '24-48h à La Réunion',
-    badges: ['20 jours', 'AMOLED', '5ATM']
-  },
-
-  // HIFUTURE PULSE X
-  {
-    id: 'hifuture-pulse-x',
-    airtableId: 'recRhQM7ksbT5FV3P',
-    sku: 'HIFUTURE-PULSEX-SMART',
-    name: 'HIFUTURE PULSE X',
-    brand: 'HIFUTURE',
-    category: 'Montres connectées',
-    subcategory: 'Sport',
-    price: 119.99,
-    originalPrice: 149.99,
-    discount: 20,
-    promo: 'SMART TECH',
-    description: "La HIFUTURE PULSE X représente l'avant-garde des montres connectées avec son écosystème complet de santé et fitness. Écran AMOLED LTPO de 1.43 pouces avec résolution 466x466 pixels et luminosité 1000 nits pour visibilité parfaite même sous le soleil tropical de La Réunion. Technologie always-on display avec consommation optimisée. Processeur dual-core avec co-processeur dédié pour efficacité énergétique maximale. Suite complète de capteurs biomédicaux : ECG médical pour électrocardiogramme, capteur PPG de 3ème génération pour fréquence cardiaque et variabilité (HRV), oxymètre de pouls clinique, capteur de température cutanée, capteur de stress électrodermique. Analyse avancée du sommeil avec détection des apnées. Plus de 150 modes sportifs avec coaching vocal IA personnalisé. GPS/GLONASS/Galileo/BeiDou pour localisation mondiale précise. Altimètre, baromètre, boussole pour activités outdoor. eSIM intégrée pour appels 4G autonomes sans smartphone. Mémoire 16GB pour musique et apps. Assistant vocal avec IA conversationnelle. Paiement NFC universel. Batterie 500mAh avec autonomie intelligente : 7 jours usage intensif, 14 jours normal, 45 jours économie. Charge sans fil Qi magnétique. Boîtier titane grade 2 avec verre saphir. Étanchéité 10ATM pour plongée. La montre santé ultime pour mode de vie actif.",
-    shortDescription: 'Smartwatch médicale AMOLED avec ECG, eSIM 4G et 150+ sports',
-    metaTitle: 'HIFUTURE PULSE X - Montre Connectée ECG eSIM 4G | Monster Phone 974',
-    metaDescription: 'Montre connectée HIFUTURE PULSE X : ECG médical, eSIM 4G, AMOLED LTPO, 150+ sports, GPS 4 systèmes, NFC. Santé complète La Réunion.',
-    urlSlug: 'hifuture-pulse-x-montre-medicale',
-    keywords: ['HIFUTURE PULSE X', 'montre ECG', 'smartwatch eSIM', 'montre 4G', 'montre médicale', 'La Réunion', '974'],
-    variants: [
-      { color: 'Titane', colorCode: '#878681', ean: '6972576184006', stock: 4, images: [] },
-      { color: 'Noir Titane', colorCode: '#1C1B1A', ean: '6972576184013', stock: 3, images: [] }
-    ],
-    defaultVariant: 'Titane',
-    specifications: [
-      { label: 'Écran', value: '1.43" AMOLED LTPO 466x466', icon: 'display' },
-      { label: 'Santé', value: 'ECG, PPG, SpO2, Temp', icon: 'health' },
-      { label: 'GPS', value: '4 systèmes (GPS/GLONASS/Galileo/BeiDou)', icon: 'location' },
-      { label: 'Connectivité', value: 'eSIM 4G, NFC, WiFi', icon: 'network' },
-      { label: 'Modes sport', value: '150+', icon: 'sport' },
-      { label: 'Autonomie', value: '7-45 jours', icon: 'battery' },
-      { label: 'Étanchéité', value: '10ATM (100m)', icon: 'water' },
-      { label: 'Matériaux', value: 'Titane + Saphir', icon: 'material' }
-    ],
-    highlights: [
-      'ECG médical intégré',
-      'eSIM 4G autonome',
-      'Boîtier titane/saphir',
-      '10ATM pour plongée',
-      '150+ modes sportifs'
-    ],
-    images: [
-      '/placeholder-hifuture-pulsex-1.jpg',
-      '/placeholder-hifuture-pulsex-2.jpg',
-      '/placeholder-hifuture-pulsex-3.jpg'
-    ],
-    status: 'active',
-    rating: {
-      average: 4.9,
-      count: 45,
-      distribution: { 5: 41, 4: 3, 3: 1, 2: 0, 1: 0 }
-    },
-    warranty: '3 ans constructeur',
-    deliveryTime: '48-72h à La Réunion',
-    badges: ['ECG Medical', 'eSIM 4G', 'Premium']
-  },
-
-  // HIFUTURE KIDDO
-  {
-    id: 'hifuture-kiddo',
-    airtableId: 'recTu9Z2QKLxY7oNX',
-    sku: 'HIFUTURE-KIDDO-KIDS',
-    name: 'HIFUTURE KIDDO',
-    brand: 'HIFUTURE',
-    category: 'Montres connectées',
-    subcategory: 'Sport',
-    price: 59.99,
-    originalPrice: 79.99,
-    discount: 25,
-    promo: 'KIDS SAFE',
-    description: "La montre connectée HIFUTURE KIDDO est spécialement conçue pour la sécurité et le bien-être des enfants tout en restant fun et moderne. Écran tactile IPS de 1.4 pouces avec verre renforcé anti-chocs et résolution adaptée pour jeunes yeux. Interface colorée et intuitive avec navigation simplifiée par icônes. Fonction SOS d'urgence : appui 3 secondes pour alerter automatiquement les parents avec localisation GPS. Géolocalisation temps réel GPS + LBS + WiFi pour tracking précis intérieur/extérieur. Zones de sécurité géofence avec alertes immédiates si l'enfant sort du périmètre défini. Appels bidirectionnels avec liste de contacts autorisés par les parents (jusqu'à 10 numéros). Chat vocal avec messages vocaux de 15 secondes. Caméra frontale 0.3MP pour photos et appels vidéo avec famille. Podomètre et encouragements pour activité physique quotidienne. Jeux éducatifs intégrés : maths, mémoire, puzzle. Mode classe silencieux programmable pour heures d'école. Lampe torche LED intégrée pour sécurité. Batterie 750mAh pour 3 jours d'autonomie. Étanchéité IP67 résistante aux éclaboussures et jeux d'eau. Application parentale complète pour contrôle à distance et historique de localisation 30 jours. Bracelet silicone alimentaire hypoallergénique en couleurs vives. La tranquillité d'esprit pour parents et liberté sécurisée pour enfants à La Réunion.",
-    shortDescription: 'Montre enfant GPS avec SOS, appels et zones de sécurité géofence',
-    metaTitle: 'HIFUTURE KIDDO - Montre Connectée Enfant GPS SOS | Monster Phone 974',
-    metaDescription: 'Montre enfant HIFUTURE KIDDO : GPS temps réel, bouton SOS, appels sécurisés, géofence, IP67. Sécurité et fun pour enfants La Réunion.',
-    urlSlug: 'hifuture-kiddo-montre-enfant-gps',
-    keywords: ['HIFUTURE KIDDO', 'montre enfant', 'montre GPS enfant', 'SOS', 'géofence', 'La Réunion', '974'],
-    variants: [
-      { color: 'Bleu', colorCode: '#00BFFF', ean: '6972576184228', stock: 12, images: [] },
-      { color: 'Rose', colorCode: '#FF69B4', ean: '6972576184235', stock: 10, images: [] },
-      { color: 'Vert', colorCode: '#32CD32', ean: '6972576184242', stock: 8, images: [] }
-    ],
-    defaultVariant: 'Bleu',
-    specifications: [
-      { label: 'Écran', value: '1.4" IPS tactile', icon: 'display' },
-      { label: 'Localisation', value: 'GPS + LBS + WiFi', icon: 'location' },
-      { label: 'Communication', value: 'Appels + Chat vocal', icon: 'phone' },
-      { label: 'Sécurité', value: 'SOS + Géofence', icon: 'security' },
-      { label: 'Caméra', value: '0.3MP frontale', icon: 'camera' },
-      { label: 'Étanchéité', value: 'IP67', icon: 'water' },
-      { label: 'Autonomie', value: '3 jours', icon: 'battery' },
-      { label: 'Âge', value: '4-12 ans', icon: 'age' }
-    ],
-    highlights: [
-      'Bouton SOS urgence',
-      'GPS temps réel',
-      'Zones sécurité géofence',
-      'Appels bidirectionnels',
-      'Mode classe silencieux'
-    ],
-    images: [
-      '/placeholder-hifuture-kiddo-1.jpg',
-      '/placeholder-hifuture-kiddo-2.jpg',
-      '/placeholder-hifuture-kiddo-3.jpg'
-    ],
-    status: 'active',
-    rating: {
-      average: 4.7,
-      count: 89,
-      distribution: { 5: 68, 4: 15, 3: 4, 2: 1, 1: 1 }
-    },
-    warranty: '2 ans constructeur',
-    deliveryTime: '24-48h à La Réunion',
-    badges: ['Enfants', 'GPS Sécurité', 'SOS']
-  },
-
-  // HIFUTURE FOCUS
-  {
-    id: 'hifuture-focus',
-    airtableId: 'recXOdBNKL9GfWxRZ',
-    sku: 'HIFUTURE-FOCUS-PRO',
-    name: 'HIFUTURE FOCUS',
-    brand: 'HIFUTURE',
-    category: 'Montres connectées',
-    subcategory: 'Sport',
-    price: 79.99,
-    originalPrice: 99.99,
-    discount: 20,
-    promo: 'BUSINESS',
-    description: "La montre HIFUTURE FOCUS est conçue pour les professionnels actifs recherchant élégance et fonctionnalités business avancées. Écran AMOLED rectangulaire de 1.57 pouces rappelant l'esthétique des montres premium, avec résolution 400x502 pixels pour affichage net des notifications détaillées. Design sophistiqué avec boîtier en acier inoxydable brossé et couronne rotative fonctionnelle pour navigation intuitive. Assistant productivité intégré : gestion calendrier avec rappels intelligents, minuteur Pomodoro pour concentration optimale, dictaphone pour notes vocales instantanées. Notifications enrichies avec réponses rapides prédéfinies et clavier T9. Traduction instantanée 12 langues pour voyageurs d'affaires. Mode présentation désactivant toutes notifications pendant réunions. Analyse du stress professionnel avec exercices de respiration guidée. Suivi d'activité discret adapté au bureau : rappels de mouvement, compteur d'étages, calories. Plus de 80 modes sportifs pour équilibre vie pro/perso. Moniteur de santé 24/7 : cardiaque, SpO2, sommeil avec sieste power nap. Autonomie 7 jours pour semaine de travail complète sans recharge. Charge rapide magnétique 80% en 45 minutes. Étanchéité 3ATM pour usage quotidien. Bracelets interchangeables : cuir, métal, silicone pour adapter au dress code. Application business avec rapports hebdomadaires de productivité et bien-être. La montre connectée élégante pour professionnels modernes à La Réunion.",
-    shortDescription: 'Montre business AMOLED avec assistant productivité et design premium',
-    metaTitle: 'HIFUTURE FOCUS - Montre Connectée Business Premium | Monster Phone 974',
-    metaDescription: 'Montre connectée HIFUTURE FOCUS : AMOLED 1.57", assistant productivité, design acier premium, 80+ sports. Pour professionnels La Réunion.',
-    urlSlug: 'hifuture-focus-montre-business',
-    keywords: ['HIFUTURE FOCUS', 'montre business', 'smartwatch professionnelle', 'montre élégante', 'productivité', 'La Réunion', '974'],
-    variants: [
-      { color: 'Noir Business', colorCode: '#1A1A1A', ean: '6972576184457', stock: 10, images: [] },
-      { color: 'Argent', colorCode: '#C0C0C0', ean: '6972576184464', stock: 8, images: [] }
-    ],
-    defaultVariant: 'Noir Business',
-    specifications: [
-      { label: 'Écran', value: '1.57" AMOLED 400x502', icon: 'display' },
-      { label: 'Design', value: 'Acier inoxydable + couronne', icon: 'design' },
-      { label: 'Productivité', value: 'Calendrier, Pomodoro, Dictaphone', icon: 'productivity' },
-      { label: 'Modes sport', value: '80+', icon: 'sport' },
-      { label: 'Autonomie', value: '7 jours', icon: 'battery' },
-      { label: 'Charge rapide', value: '80% en 45 min', icon: 'charging' },
-      { label: 'Étanchéité', value: '3ATM', icon: 'water' },
-      { label: 'Bracelets', value: 'Interchangeables', icon: 'strap' }
-    ],
-    highlights: [
-      'Design business premium',
-      'Assistant productivité',
-      'AMOLED rectangulaire',
-      'Couronne rotative',
-      '7 jours autonomie'
-    ],
-    images: [
-      '/placeholder-hifuture-focus-1.jpg',
-      '/placeholder-hifuture-focus-2.jpg',
-      '/placeholder-hifuture-focus-3.jpg'
-    ],
-    status: 'active',
-    rating: {
-      average: 4.6,
-      count: 124,
-      distribution: { 5: 85, 4: 30, 3: 7, 2: 1, 1: 1 }
-    },
-    warranty: '2 ans constructeur',
-    deliveryTime: '24-48h à La Réunion',
-    badges: ['Business', 'Premium', 'Productivité']
   },
 
   // ========== PRODUITS MONSTER ==========
@@ -3604,52 +3200,6 @@ export const allProducts: Product[] = [
   },
 
   // ========== MONTRES CONNECTÉES ==========
-  
-  // HIFUTURE MIX2
-  {
-    id: 'hifuture-mix2',
-    airtableId: 'rec4euPu7FP1sX7Rs',
-    sku: 'HIFUTURE-MIX2',
-    name: 'HIFUTURE MIX2',
-    brand: 'HIFUTURE',
-    category: 'Montres',
-    subcategory: 'Montres connectées',
-    price: 99.99,
-    description: "La montre connectée HIFUTURE MIX2 représente l'excellence technologique au service de votre bien-être quotidien. Son écran AMOLED haute résolution offre une lisibilité parfaite sous le soleil tropical réunionnais, avec des couleurs éclatantes et des contrastes profonds qui subliment chaque interface. Le suivi santé complet intègre les technologies les plus avancées : moniteur cardiaque fonctionnant 24h/24 avec alertes personnalisables, oxymètre de pouls (SpO2) pour surveiller votre oxygénation sanguine, analyse détaillée des phases de sommeil incluant sommeil paradoxal et score de qualité. Le GPS intégré haute précision cartographie tous vos parcours sportifs sans nécessiter votre smartphone.",
-    shortDescription: "Montre connectée performance avec écran AMOLED HD et GPS intégré",
-    metaTitle: 'HIFUTURE MIX2 - Montre Connectée Performance | Monster Phone 974',
-    metaDescription: 'Montre HIFUTURE MIX2 avec écran AMOLED HD et GPS intégré. Suivi santé complet 24/7, étanchéité IP67, autonomie 7-10 jours.',
-    urlSlug: 'hifuture-mix2-montre-connectee-performance',
-    keywords: ['HIFUTURE MIX2', 'montre connectée', 'performance', 'suivi santé', 'autonomie', 'noir', 'orange'],
-    variants: [
-      { color: 'Noir', colorCode: '#000000', ean: '6972576181008', stock: 15, images: [] },
-      { color: 'Orange', colorCode: '#FF6B35', ean: '6972576181022', stock: 12, images: [] }
-    ],
-    defaultVariant: 'Noir',
-    specifications: [
-      { label: 'Type Écran', value: 'AMOLED haute résolution', icon: 'display' },
-      { label: 'GPS', value: 'Intégré', icon: 'location' },
-      { label: 'Résistance', value: 'IP67', icon: 'shield' },
-      { label: 'Autonomie', value: '7-10 jours', icon: 'battery' }
-    ],
-    highlights: [
-      'Écran AMOLED HD',
-      'GPS intégré haute précision',
-      'Suivi santé 24/7',
-      'Certification IP67',
-      'Autonomie 7-10 jours'
-    ],
-    images: [],
-    rating: {
-      average: 4.6,
-      count: 234,
-      distribution: { 5: 140, 4: 70, 3: 20, 2: 3, 1: 1 }
-    },
-    warranty: '2 ans constructeur',
-    deliveryTime: '24-48h à La Réunion',
-    status: "active",
-    badges: ['Performance', 'GPS']
-  },
 
   // HIFUTURE EVO 2
   {
@@ -3661,16 +3211,16 @@ export const allProducts: Product[] = [
     category: 'Montres',
     subcategory: 'Montres connectées',
     price: 34.99,
-    description: "La montre connectée HIFUTURE EVO 2 démocratise l'accès aux technologies de santé connectée avec un rapport qualité-prix exceptionnel. L'écran LCD couleur lumineux affiche clairement toutes vos données vitales et notifications. Le moniteur cardiaque optique surveille votre rythme en continu, détectant anomalies et tendances pour une prévention active.",
+    description: "La montre connectée HIFUTURE EVO 2 démocratise l'accès aux technologies de santé connectée avec un rapport qualité-prix exceptionnel. Conçue pour s'adapter à tous les styles de vie, cette montre intelligente combine fonctionnalités essentielles et design raffiné dans un package accessible à tous.\n\nL'écran LCD couleur lumineux affiche clairement toutes vos données vitales et notifications. La technologie rétro-éclairage adaptée garantit une lisibilité optimale en toutes conditions, du bureau climatisé aux plages ensoleillées de La Réunion. L'interface intuitive permet une navigation fluide entre les différentes fonctions.\n\nLe moniteur cardiaque optique surveille votre rythme en continu, détectant anomalies et tendances pour une prévention active. Le podomètre précis compte chaque pas, encourageant l'atteinte de vos objectifs quotidiens de 10 000 pas. L'analyse du sommeil identifie vos phases de repos pour optimiser votre récupération.\n\nTrois finitions élégantes répondent à toutes les préférences : le Beige chic apporte une touche de douceur féminine, le Noir intemporel s'adapte à toutes les tenues, tandis que le Rose Gold tendance ajoute une note de luxe accessible. Les bracelets en silicone doux hypoallergénique garantissent confort toute la journée.\n\nLa résistance IP68 permet immersion jusqu'à 1,5 mètre pendant 30 minutes, idéale pour natation légère et protection contre la pluie. Cette certification militaire assure également résistance aux chocs, vibrations et températures extrêmes du climat tropical.\n\nL'autonomie de 5 à 7 jours libère des contraintes de charge fréquente. La batterie optimisée maintient performances constantes même après des centaines de cycles. La charge magnétique sans effort se complète en moins de 2 heures.\n\nLes fonctions intelligentes incluent notifications d'appels et messages, contrôle caméra à distance, rappels de sédentarité et alarmes personnalisables. Le suivi du cycle féminin intégré (versions Beige et Rose Gold) offre prédictions et rappels discrets.\n\nAccessible à tous les budgets, l'EVO 2 démontre que la technologie de santé connectée peut être abordable sans compromis sur la qualité.",
     shortDescription: "Montre connectée abordable avec suivi santé complet",
     metaTitle: 'HIFUTURE EVO 2 - Montre Connectée Abordable | Monster Phone 974',
-    metaDescription: 'Montre HIFUTURE EVO 2 au rapport qualité-prix imbattable. Écran couleur, suivi santé complet, IP68.',
+    metaDescription: 'Montre HIFUTURE EVO 2 au rapport qualité-prix imbattable. Écran couleur, suivi santé complet, IP68. 3 coloris élégants, autonomie 5-7 jours. Accessible à tous La Réunion 974.',
     urlSlug: 'hifuture-evo-2-montre-connectee-abordable',
-    keywords: ['HIFUTURE EVO 2', 'montre connectée', 'abordable', 'écran couleur', 'suivi santé'],
+    keywords: ['HIFUTURE EVO 2', 'montre connectée abordable', 'écran couleur', 'suivi santé', 'design moderne', 'beige', 'noir', 'rose gold'],
     variants: [
-      { color: 'Beige', colorCode: '#F5DEB3', ean: '6972576181725', stock: 20, images: [] },
-      { color: 'Noir', colorCode: '#000000', ean: '6972576181701', stock: 25, images: [] },
-      { color: 'Rose Gold', colorCode: '#E0BFB8', ean: '6972576181718', stock: 18, images: [] }
+      { color: 'Beige', colorCode: '#F5DEB3', ean: '6972576181725', stock: 20, images: ['/placeholder-monster-mini.svg'] },
+      { color: 'Noir', colorCode: '#000000', ean: '6972576181701', stock: 25, images: ['/placeholder-monster-mini.svg'] },
+      { color: 'Rose Gold', colorCode: '#E0BFB8', ean: '6972576181718', stock: 18, images: ['/placeholder-monster-mini.svg'] }
     ],
     defaultVariant: 'Noir',
     specifications: [
@@ -3686,7 +3236,7 @@ export const allProducts: Product[] = [
       'Rapport qualité-prix excellent',
       'Design élégant'
     ],
-    images: [],
+    images: ['/placeholder-monster-mini.svg'],
     rating: {
       average: 4.4,
       count: 567,
@@ -3698,100 +3248,6 @@ export const allProducts: Product[] = [
     badges: ['Meilleur prix', 'Populaire']
   },
 
-  // HIFUTURE Zone 2
-  {
-    id: 'hifuture-zone-2',
-    airtableId: 'rec8lWHktlfatIBkr',
-    sku: 'HIFUTURE-ZONE-2',
-    name: 'HIFUTURE Zone 2',
-    brand: 'HIFUTURE',
-    category: 'Montres',
-    subcategory: 'Montres connectées',
-    price: 49.99,
-    description: "La montre connectée HIFUTURE Zone 2 incarne la polyvalence absolue pour les utilisateurs actifs. Son écran AMOLED lumineux garantit une visibilité cristalline même sous le soleil éclatant de La Réunion. Le suivi multi-sport révolutionnaire propose plus de 20 modes d'entraînement spécialisés.",
-    shortDescription: "Montre connectée polyvalente avec écran AMOLED et 20+ modes sport",
-    metaTitle: 'HIFUTURE Zone 2 - Montre Connectée Polyvalente | Monster Phone 974',
-    metaDescription: 'Montre HIFUTURE Zone 2 avec écran AMOLED et 20+ modes sport. GPS intégré, capteurs avancés, IP67.',
-    urlSlug: 'hifuture-zone-2-montre-connectee-polyvalente',
-    keywords: ['HIFUTURE Zone 2', 'montre connectée', 'polyvalente', 'AMOLED', 'multi-sport'],
-    variants: [
-      { color: 'Gris', colorCode: '#808080', ean: '6972576181268', stock: 15, images: [] },
-      { color: 'Rose', colorCode: '#FFB6C1', ean: '6972576181251', stock: 12, images: [] },
-      { color: 'Noir', colorCode: '#000000', ean: '6972576181244', stock: 20, images: [] }
-    ],
-    defaultVariant: 'Noir',
-    specifications: [
-      { label: 'Type Écran', value: 'AMOLED', icon: 'display' },
-      { label: 'GPS', value: 'Intégré', icon: 'location' },
-      { label: 'Résistance', value: 'IP67', icon: 'shield' },
-      { label: 'Autonomie', value: '7-10 jours', icon: 'battery' }
-    ],
-    highlights: [
-      'Écran AMOLED',
-      'GPS intégré haute sensibilité',
-      '20+ modes sport',
-      'Design unisexe',
-      'Certification IP67'
-    ],
-    images: [],
-    rating: {
-      average: 4.5,
-      count: 189,
-      distribution: { 5: 100, 4: 60, 3: 20, 2: 7, 1: 2 }
-    },
-    warranty: '2 ans constructeur',
-    deliveryTime: '24-48h à La Réunion',
-    status: "active",
-    badges: ['Multi-sport', 'Unisexe']
-  },
-
-  // HIFUTURE GO PRO
-  {
-    id: 'hifuture-go-pro',
-    airtableId: 'recCyaVqCobr575k0',
-    sku: 'HIFUTURE-GO-PRO',
-    name: 'HIFUTURE GO PRO',
-    brand: 'HIFUTURE',
-    category: 'Montres',
-    subcategory: 'Montres sport',
-    price: 99.99,
-    description: "La gamme HIFUTURE GO PRO établit de nouveaux standards pour les montres connectées dédiées aux athlètes. Le GPS haute précision multi-constellation (GPS, GLONASS, Galileo) garantit un tracking optimal. L'analyse VO2 Max évalue scientifiquement votre capacité aérobie maximale.",
-    shortDescription: "Montre connectée sport pro avec GPS multi-constellation et analyse VO2 Max",
-    metaTitle: 'HIFUTURE GO PRO - Montre Connectée Sport Pro | Monster Phone 974',
-    metaDescription: 'Montres HIFUTURE GO PRO avec GPS multi-constellation et analyse VO2 Max. Écran AMOLED, ATM5, autonomie 12 jours.',
-    urlSlug: 'hifuture-go-pro-montre-connectee-sport-pro',
-    keywords: ['HIFUTURE GO PRO', 'montre sport', 'GPS', 'VO2 Max', 'performance'],
-    variants: [
-      { color: 'GO PRO Gris', colorCode: '#808080', ean: '6972576180919', stock: 10, images: [] },
-      { color: 'GO PRO Noir', colorCode: '#000000', ean: '6972576180902', stock: 12, images: [] },
-      { color: 'GO PRO 2 Noir', colorCode: '#1C1C1C', ean: '6972576182340', stock: 8, images: [] }
-    ],
-    defaultVariant: 'GO PRO Noir',
-    specifications: [
-      { label: 'Type Écran', value: 'AMOLED', icon: 'display' },
-      { label: 'GPS', value: 'Multi-constellation', icon: 'location' },
-      { label: 'Résistance', value: 'ATM5', icon: 'shield' },
-      { label: 'Autonomie', value: '8-12 jours', icon: 'battery' }
-    ],
-    highlights: [
-      'GPS multi-constellation',
-      'Analyse VO2 Max',
-      'Écran AMOLED ultra-lumineux',
-      'Résistance ATM5',
-      'Mode triathlon'
-    ],
-    images: [],
-    rating: {
-      average: 4.8,
-      count: 156,
-      distribution: { 5: 120, 4: 30, 3: 5, 2: 1, 1: 0 }
-    },
-    warranty: '2 ans constructeur',
-    deliveryTime: '24-48h à La Réunion',
-    status: "active",
-    badges: ['Sport Pro', 'Performance']
-  },
-
   // HIFUTURE Active
   {
     id: 'hifuture-active',
@@ -3800,17 +3256,17 @@ export const allProducts: Product[] = [
     name: 'HIFUTURE Active',
     brand: 'HIFUTURE',
     category: 'Montres',
-    subcategory: 'Montres premium',
+    subcategory: 'Montres sport',
     price: 169.99,
-    description: "La montre connectée HIFUTURE Active incarne l'excellence premium avec son boîtier métallique raffiné. L'écran AMOLED haute définition offre une luminosité exceptionnelle de 1000 nits. Plus de 100 modes sportifs couvrent toutes les disciplines imaginables.",
+    description: "La montre connectée HIFUTURE Active incarne l'excellence premium avec son boîtier métallique raffiné qui allie robustesse et élégance. Cette montre haut de gamme fusionne matériaux nobles, technologies avancées et design sophistiqué pour répondre aux exigences des professionnels actifs les plus discriminants.\n\nDeux designs exclusifs expriment des personnalités distinctes : le Silver métallique classique apporte une touche d'intemporalité luxueuse parfaite pour l'environnement professionnel, tandis que le Black + Red racing sportif unique capture l'esprit de compétition avec ses accents rouges dynamiques sur fond noir profond.\n\nL'écran AMOLED haute définition offre une luminosité exceptionnelle de 1000 nits, garantissant une lisibilité parfaite même sous le soleil éclatant de La Réunion. La résolution supérieure affiche graphiques et données avec une netteté cristalline. Le verre saphir anti-rayures préserve l'intégrité de l'écran dans toutes les conditions.\n\nLes fonctions sport professionnelles avancées transforment chaque entraînement en session d'optimisation. Plus de 100 modes sportifs couvrent toutes les disciplines imaginables. L'analyse biométrique en temps réel évalue performance, fatigue et récupération. Les plans d'entraînement adaptatifs s'ajustent à votre progression.\n\nLa certification ATM5 autorise plongée jusqu'à 50 mètres et natation en eau libre sans restriction. La construction ultra-robuste résiste aux chocs extrêmes, variations thermiques et conditions les plus hostiles. Le boîtier en acier inoxydable 316L de qualité marine garantit durabilité éternelle.\n\nL'autonomie exceptionnelle de 12 à 16 jours libère totalement des contraintes de charge. La gestion énergétique intelligente optimise consommation selon usage. Le mode ultra-économie prolonge l'autonomie jusqu'à 30 jours pour les situations critiques.\n\nLe GPS haute précision multi-constellation et les capteurs professionnels intégrés offrent mesures d'une précision inégalée. Accéléromètre, gyroscope, magnétomètre, baromètre et capteur de lumière ambiante créent un écosystème de données complet.\n\nLa montre métallique premium définitive pour professionnels actifs exigeants de La Réunion.",
     shortDescription: "Montre connectée premium avec boîtier métallique et écran AMOLED 1000 nits",
     metaTitle: 'HIFUTURE Active - Montre Connectée Premium Métallique | Monster Phone 974',
-    metaDescription: 'Montre HIFUTURE Active avec boîtier métallique premium et écran AMOLED 1000 nits. ATM5, 100+ modes sport, autonomie 16 jours.',
+    metaDescription: 'Montre HIFUTURE Active avec boîtier métallique premium et écran AMOLED 1000 nits. ATM5, 100+ modes sport, autonomie 16 jours. Silver ou Black/Red racing La Réunion 974.',
     urlSlug: 'hifuture-active-montre-connectee-premium-metallique',
-    keywords: ['HIFUTURE Active', 'montre métallique', 'premium', 'AMOLED HD', 'sport avancé'],
+    keywords: ['HIFUTURE Active', 'montre métallique premium', 'écran AMOLED HD', 'sport avancé', 'silver', 'black red racing'],
     variants: [
-      { color: 'Silver', colorCode: '#C0C0C0', ean: '6972576182012', stock: 6, images: [] },
-      { color: 'Black + Red', colorCode: '#000000', ean: '6972576181992', stock: 8, images: [] }
+      { color: 'Silver', colorCode: '#C0C0C0', ean: '6972576182012', stock: 6, images: ['/placeholder-monster-mini.svg'] },
+      { color: 'Black + Red', colorCode: '#000000', ean: '6972576181992', stock: 8, images: ['/placeholder-monster-mini.svg'] }
     ],
     defaultVariant: 'Silver',
     specifications: [
@@ -3826,7 +3282,7 @@ export const allProducts: Product[] = [
       'Certification ATM5',
       'Autonomie exceptionnelle'
     ],
-    images: [],
+    images: ['/placeholder-monster-mini.svg'],
     rating: {
       average: 4.9,
       count: 89,
@@ -3838,53 +3294,6 @@ export const allProducts: Product[] = [
     badges: ['Premium', 'Luxe']
   },
 
-  // HIFUTURE Ultra2 Pro
-  {
-    id: 'hifuture-ultra2-pro',
-    airtableId: 'recKqhg8jQkVmfndb',
-    sku: 'HIFUTURE-ULTRA2-PRO',
-    name: 'HIFUTURE Ultra2 Pro',
-    brand: 'HIFUTURE',
-    category: 'Montres',
-    subcategory: 'Montres connectées',
-    price: 69.99,
-    description: "La montre connectée HIFUTURE Ultra2 Pro représente le summum de la technologie portable avec ses fonctionnalités premium. L'écran AMOLED HD délivre des couleurs éclatantes et des noirs profonds avec un contraste infini.",
-    shortDescription: "Montre connectée premium avec écran AMOLED HD et fonctions sport pro",
-    metaTitle: 'HIFUTURE Ultra2 Pro - Montre Connectée Premium | Monster Phone 974',
-    metaDescription: 'Montre HIFUTURE Ultra2 Pro avec écran AMOLED HD et fonctions sport pro. GPS intégré, ATM5, autonomie 12 jours.',
-    urlSlug: 'hifuture-ultra2-pro-montre-connectee-premium',
-    keywords: ['HIFUTURE Ultra2 Pro', 'montre connectée', 'premium', 'AMOLED HD', 'sport avancé'],
-    variants: [
-      { color: 'Black', colorCode: '#000000', ean: '6972576181145', stock: 15, images: [] },
-      { color: 'Grise', colorCode: '#808080', ean: '6972576181152', stock: 12, images: [] },
-      { color: 'Rose', colorCode: '#FFB6C1', ean: '6972576181169', stock: 10, images: [] }
-    ],
-    defaultVariant: 'Black',
-    specifications: [
-      { label: 'Type Écran', value: 'AMOLED HD', icon: 'display' },
-      { label: 'GPS', value: 'Intégré', icon: 'location' },
-      { label: 'Résistance', value: 'ATM5', icon: 'shield' },
-      { label: 'Autonomie', value: '10-12 jours', icon: 'battery' }
-    ],
-    highlights: [
-      'Écran AMOLED HD',
-      'GPS intégré haute sensibilité',
-      'Résistance ATM5',
-      'Mode sport avancé',
-      'Charge rapide'
-    ],
-    images: [],
-    rating: {
-      average: 4.7,
-      count: 198,
-      distribution: { 5: 130, 4: 50, 3: 15, 2: 2, 1: 1 }
-    },
-    warranty: '2 ans constructeur',
-    deliveryTime: '24-48h à La Réunion',
-    status: "active",
-    badges: ['Premium', 'Populaire']
-  },
-
   // HIFUTURE Aurora
   {
     id: 'hifuture-aurora',
@@ -3893,18 +3302,18 @@ export const allProducts: Product[] = [
     name: 'HIFUTURE Aurora',
     brand: 'HIFUTURE',
     category: 'Montres',
-    subcategory: 'Montres business',
+    subcategory: 'Montres connectées',
     price: 89.99,
-    description: "La montre connectée HIFUTURE Aurora harmonise parfaitement élégance professionnelle et performance technologique. Son boîtier métallique premium témoigne d'un savoir-faire horloger traditionnel enrichi des innovations les plus modernes.",
+    description: "La montre connectée HIFUTURE Aurora harmonise parfaitement élégance professionnelle et performance technologique. Son boîtier métallique premium témoigne d'un savoir-faire horloger traditionnel enrichi des innovations les plus modernes, créant un accessoire business qui transcende la simple fonctionnalité. L'écran AMOLED brillant illumine chaque détail avec des couleurs vibrantes et des contrastes saisissants. La résolution supérieure affiche informations et graphiques avec une clarté exceptionnelle. L'interface élégante propose multiples cadrans personnalisables pour s'adapter à chaque occasion professionnelle ou personnelle. Les fonctions wellness complètes équilibrent vie professionnelle intensive et bien-être personnel. Le monitoring du stress analyse variabilité cardiaque pour détecter tensions et recommander exercices de respiration. Le coach sommeil optimise vos cycles de repos. Les rappels d'hydratation et de mouvement maintiennent votre vitalité. Trois finitions métalliques prestigieuses expriment différentes facettes du succès : le Silver classique incarne l'élégance intemporelle du monde des affaires, le Bleu dynamique apporte une touche de modernité sportive, tandis que le Brown élégant évoque le luxe discret des grandes maisons horlogères. Le GPS intégré accompagne vos déplacements professionnels et activités sportives avec précision absolue. La fonction Find My Phone retrouve votre smartphone égaré. Le contrôle caméra à distance facilite selfies et photos de groupe lors d'événements. La certification ATM5 garantit résistance à l'eau jusqu'à 50 mètres, permettant natation et sports aquatiques sans inquiétude. La construction robuste supporte les exigences d'un lifestyle actif entre réunions, voyages d'affaires et activités sportives. L'autonomie de 10 à 12 jours libère des contraintes de charge quotidienne. La batterie optimisée maintient performances constantes tout au long du cycle. La charge sans fil Qi ajoute une dimension pratique supplémentaire pour les déplacements. Les notifications intelligentes filtrent communications importantes, affichant emails professionnels, messages et rappels calendrier. L'intégration avec assistants vocaux permet gestion mains-libres de votre agenda. L'accessoire business parfait pour professionnels réunionnais alliant style et performance.",
     shortDescription: "Montre connectée business avec boîtier métallique premium et écran AMOLED",
     metaTitle: 'HIFUTURE Aurora - Montre Connectée Business Métallique | Monster Phone 974',
     metaDescription: 'Montre HIFUTURE Aurora business avec boîtier métallique premium et écran AMOLED. Fonctions wellness, GPS, ATM5.',
     urlSlug: 'hifuture-aurora-montre-connectee-business-metallique',
     keywords: ['HIFUTURE Aurora', 'montre business', 'boîtier métallique', 'wellness', 'élégante'],
     variants: [
-      { color: 'Silver', colorCode: '#C0C0C0', ean: '6972576182029', stock: 10, images: [] },
-      { color: 'Bleu', colorCode: '#4169E1', ean: '6972576182036', stock: 8, images: [] },
-      { color: 'Brown', colorCode: '#8B4513', ean: '6972576182050', stock: 6, images: [] }
+      { color: 'Silver', colorCode: '#C0C0C0', ean: '6972576182029', stock: 10, images: ['/placeholder-monster-mini.svg'] },
+      { color: 'Bleu', colorCode: '#4169E1', ean: '6972576182036', stock: 8, images: ['/placeholder-monster-mini.svg'] },
+      { color: 'Brown', colorCode: '#8B4513', ean: '6972576182050', stock: 6, images: ['/placeholder-monster-mini.svg'] }
     ],
     defaultVariant: 'Silver',
     specifications: [
@@ -3920,7 +3329,7 @@ export const allProducts: Product[] = [
       'GPS intégré',
       'Charge sans fil Qi'
     ],
-    images: [],
+    images: ['/placeholder-monster-mini.svg'],
     rating: {
       average: 4.6,
       count: 145,
@@ -3940,17 +3349,17 @@ export const allProducts: Product[] = [
     name: 'HIFUTURE Vela',
     brand: 'HIFUTURE',
     category: 'Montres',
-    subcategory: 'Montres premium',
+    subcategory: 'Montres sport',
     price: 129.99,
-    description: "La montre connectée HIFUTURE Vela incarne l'excellence absolue avec ses technologies de pointe. L'écran Always-On AMOLED révolutionnaire permet consultation permanente sans mouvement du poignet. Plus de 120 modes sportifs couvrent toutes les disciplines.",
+    description: "La montre connectée HIFUTURE Vela incarne l'excellence absolue avec ses technologies de pointe et son design haut de gamme. Cette pièce maîtresse de la collection HIFUTURE fusionne innovation technologique, matériaux nobles et esthétique raffinée pour créer une expérience utilisateur exceptionnelle. L'écran Always-On AMOLED révolutionnaire permet consultation permanente sans mouvement du poignet. Cette technologie premium affiche heure, notifications et métriques essentielles en permanence avec une consommation énergétique optimisée. La luminosité adaptative garantit lisibilité parfaite en toutes conditions. Les fonctions sport professionnelles transforment la Vela en véritable coach personnel. Plus de 120 modes sportifs couvrent toutes les disciplines, du yoga au trail en passant par le kitesurf. L'analyse biomécanique avancée évalue technique, efficacité et progression. Les programmes d'entraînement adaptatifs évoluent avec vos performances. Les fonctions wellness complètes surveillent votre santé 24/7 avec précision médicale. Le monitoring cardiaque continu détecte anomalies et tendances. L'analyse du stress propose exercices de cohérence cardiaque. Le score de vitalité quotidien synthétise votre état global. Deux designs sophistiqués répondent aux goûts les plus exigeants : le Noir profond incarne l'élégance masculine avec sa finition mate anti-traces, tandis que le Beige féminin apporte douceur et raffinement avec ses reflets nacrés subtils. La version Beige intègre suivi du cycle féminin avancé. La résistance ATM5 autorise tous les sports aquatiques incluant plongée jusqu'à 50 mètres. La certification militaire garantit résistance aux conditions extrêmes. Le boîtier en céramique haute technologie allie légèreté, résistance et confort thermique optimal. Le GPS intégré double fréquence offre précision centimétrique même en environnement difficile. La cartographie offline permet navigation sans connexion. Le baromètre altimétrique mesure dénivelés avec précision pour les activités montagne. L'autonomie remarquable de 10 à 14 jours maintient toutes fonctions actives sans compromis. La charge rapide sans fil restaure une journée complète en 15 minutes. Le mode ultra-endurance prolonge l'autonomie jusqu'à 45 jours. La montre premium wellness définitive pour utilisateurs exigeants de La Réunion recherchant excellence absolue.",
     shortDescription: "Montre connectée haut de gamme avec écran Always-On AMOLED et 120+ modes sport",
     metaTitle: 'HIFUTURE Vela - Montre Connectée Haut de Gamme | Monster Phone 974',
     metaDescription: 'Montre HIFUTURE Vela haut de gamme avec écran Always-On AMOLED et 120+ modes sport. Wellness complet, GPS double fréquence, ATM5.',
     urlSlug: 'hifuture-vela-montre-connectee-premium',
     keywords: ['HIFUTURE Vela', 'montre haut de gamme', 'Always-On', 'sport professionnel', 'wellness'],
     variants: [
-      { color: 'Noir', colorCode: '#000000', ean: '6972576182371', stock: 8, images: [] },
-      { color: 'Beige', colorCode: '#F5DEB3', ean: '6972576182388', stock: 6, images: [] }
+      { color: 'Noir', colorCode: '#000000', ean: '6972576182371', stock: 8, images: ['/placeholder-monster-mini.svg'] },
+      { color: 'Beige', colorCode: '#F5DEB3', ean: '6972576182388', stock: 6, images: ['/placeholder-monster-mini.svg'] }
     ],
     defaultVariant: 'Noir',
     specifications: [
@@ -3966,7 +3375,7 @@ export const allProducts: Product[] = [
       'Boîtier céramique',
       'Autonomie remarquable'
     ],
-    images: [],
+    images: ['/placeholder-monster-mini.svg'],
     rating: {
       average: 4.8,
       count: 112,
@@ -3978,53 +3387,6 @@ export const allProducts: Product[] = [
     badges: ['Premium', 'Always-On']
   },
 
-  // HIFUTURE Aura
-  {
-    id: 'hifuture-aura',
-    airtableId: 'recUH7wOmWbF5YNFX',
-    sku: 'HIFUTURE-AURA',
-    name: 'HIFUTURE Aura',
-    brand: 'HIFUTURE',
-    category: 'Montres',
-    subcategory: 'Montres santé',
-    price: 99.99,
-    description: "La montre connectée HIFUTURE Aura synthétise l'excellence technologique avec ses fonctions santé avancées. L'écran Always-On révolutionnaire affiche en permanence informations essentielles. Les fonctions santé complètes incluent ECG médical pour détecter fibrillation auriculaire.",
-    shortDescription: "Montre connectée premium avec ECG médical et écran Always-On",
-    metaTitle: 'HIFUTURE Aura - Montre Connectée Premium Always-On | Monster Phone 974',
-    metaDescription: 'Montre HIFUTURE Aura avec ECG médical et écran Always-On. Capteurs avancés PPG, autonomie 15 jours, ATM5.',
-    urlSlug: 'hifuture-aura-montre-connectee-premium',
-    keywords: ['HIFUTURE Aura', 'montre connectée', 'ECG', 'Always-On', 'santé complète'],
-    variants: [
-      { color: 'Noir', colorCode: '#000000', ean: '6972576181176', stock: 12, images: [] },
-      { color: 'Gris', colorCode: '#808080', ean: '6972576181183', stock: 10, images: [] },
-      { color: 'Rose', colorCode: '#FFB6C1', ean: '6972576181190', stock: 8, images: [] }
-    ],
-    defaultVariant: 'Noir',
-    specifications: [
-      { label: 'Type Écran', value: 'Always-On', icon: 'display' },
-      { label: 'ECG', value: 'Médical certifié', icon: 'heart' },
-      { label: 'Résistance', value: 'ATM5', icon: 'shield' },
-      { label: 'Autonomie', value: '12-15 jours', icon: 'battery' }
-    ],
-    highlights: [
-      'ECG médical certifié',
-      'Écran Always-On',
-      'Capteurs PPG avancés',
-      'Autonomie 15 jours',
-      'Bluetooth 5.0'
-    ],
-    images: [],
-    rating: {
-      average: 4.7,
-      count: 167,
-      distribution: { 5: 100, 4: 50, 3: 15, 2: 2, 1: 0 }
-    },
-    warranty: '2 ans constructeur',
-    deliveryTime: '24-48h à La Réunion',
-    status: "active",
-    badges: ['ECG', 'Santé']
-  },
-
   // HIFUTURE Aura 2
   {
     id: 'hifuture-aura-2',
@@ -4033,18 +3395,18 @@ export const allProducts: Product[] = [
     name: 'HIFUTURE Aura 2',
     brand: 'HIFUTURE',
     category: 'Montres',
-    subcategory: 'Montres santé',
+    subcategory: 'Montres sport',
     price: 89.99,
-    description: "La montre connectée HIFUTURE Aura 2 perfectionne la formule gagnante avec améliorations significatives. L'écran Always-On lumineux nouvelle génération offre visibilité permanente améliorée avec consommation réduite de 30%.",
+    description: "La montre connectée HIFUTURE Aura 2 perfectionne la formule gagnante de sa prédécesseure avec améliorations significatives et nouvelles fonctionnalités. Cette évolution réussie combine technologies de santé avancées, design premium et accessibilité tarifaire pour démocratiser l'excellence connectée. L'écran Always-On lumineux nouvelle génération offre visibilité permanente améliorée avec consommation réduite de 30%. Cette technologie AMOLED optimisée affiche informations essentielles 24/7 : heure, notifications, métriques santé. Les multiples cadrans always-on personnalisables s'adaptent à votre style et besoins. La suite santé avancée intègre ECG médical certifié pour détection précoce d'anomalies cardiaques. Le monitoring cardiaque continu analyse rythme avec précision ±0.5 bpm. L'analyse du sommeil paradoxal REM optimise récupération cognitive. Le score de stress quotidien recommande exercices respiratoires personnalisés. Trois finitions luxueuses expriment différentes facettes du raffinement : le Noir intemporel pour l'élégance absolue, le Gris moderne pour le style technologique, et le Rose Gold féminin pour la sophistication douce. Chaque version bénéficie de finitions métalliques premium et verre courbé 2.5D. La résistance ATM5 libère totalement pour sports aquatiques incluant natation en mer et plongée jusqu'à 50 mètres. La certification militaire MIL-STD-810H garantit résistance aux chocs, vibrations, températures extrêmes et humidité tropicale. Construction durable pour années d'utilisation intensive. Le GPS haute précision amélioré utilise triple constellation (GPS, GLONASS, BeiDou) pour localisation rapide et précise. La puce GPS basse consommation maintient tracking 30 heures. Cartographie offline intégrée pour navigation sans connexion dans zones reculées. L'autonomie remarquable atteint 15 jours utilisation normale avec toutes fonctions actives. L'optimisation intelligente adapte consommation selon usage. Mode ultra-endurance prolonge autonomie jusqu'à 60 jours. Charge rapide 50% en 30 minutes via station magnétique. Les matériaux premium incluent boîtier alliage aluminium aérospatial, bracelet silicone médical hypoallergénique et boucle acier inoxydable. Confort optimal garanti même port prolongé. La montre haut de gamme accessible offrant technologies médicales avancées aux passionnés réunionnais.",
     shortDescription: "Montre connectée haut de gamme avec ECG certifié et écran Always-On amélioré",
     metaTitle: 'HIFUTURE Aura 2 - Montre Connectée Haut de Gamme | Monster Phone 974',
     metaDescription: 'Montre HIFUTURE Aura 2 avec ECG certifié et écran Always-On amélioré. GPS triple, ATM5, autonomie 15 jours.',
     urlSlug: 'hifuture-aura-2-montre-connectee-haut-gamme',
     keywords: ['HIFUTURE Aura 2', 'montre haut de gamme', 'ECG', 'Always-On', 'santé avancée'],
     variants: [
-      { color: 'Noir', colorCode: '#000000', ean: '6972576182524', stock: 14, images: [] },
-      { color: 'Gris', colorCode: '#808080', ean: '6972576182531', stock: 12, images: [] },
-      { color: 'Rose Gold', colorCode: '#E0BFB8', ean: '6972576182548', stock: 10, images: [] }
+      { color: 'Noir', colorCode: '#000000', ean: '6972576182524', stock: 14, images: ['/placeholder-monster-mini.svg'] },
+      { color: 'Gris', colorCode: '#808080', ean: '6972576182531', stock: 12, images: ['/placeholder-monster-mini.svg'] },
+      { color: 'Rose Gold', colorCode: '#E0BFB8', ean: '6972576182548', stock: 10, images: ['/placeholder-monster-mini.svg'] }
     ],
     defaultVariant: 'Noir',
     specifications: [
@@ -4060,7 +3422,7 @@ export const allProducts: Product[] = [
       'Certification MIL-STD-810H',
       'Charge rapide 50% en 30min'
     ],
-    images: [],
+    images: ['/placeholder-monster-mini.svg'],
     rating: {
       average: 4.8,
       count: 198,
@@ -4072,98 +3434,6 @@ export const allProducts: Product[] = [
     badges: ['ECG Certifié', 'Nouveau']
   },
 
-  // HONOR CHOICE WATCH
-  {
-    id: 'honor-choice-watch-v2',
-    airtableId: 'recYEgkxqGIvVGFFX',
-    sku: 'HONOR-CHOICE-WATCH',
-    name: 'HONOR CHOICE WATCH',
-    brand: 'HONOR',
-    category: 'Montres',
-    subcategory: 'Montres premium',
-    price: 149.99,
-    description: "La HONOR CHOICE WATCH redéfinit l'excellence des montres connectées premium. Son écran AMOLED haute résolution de 1.43 pouces offre une luminosité exceptionnelle. Les technologies exclusives IC et ANC révolutionnent votre expérience.",
-    shortDescription: "Montre connectée premium avec technologies IC/ANC et écran AMOLED",
-    metaTitle: 'HONOR CHOICE WATCH IC/ANC - Montre Connectée Premium AMOLED | Monster Phone 974',
-    metaDescription: 'HONOR CHOICE WATCH : AMOLED, IC/ANC, GPS, 5ATM, 14 jours autonomie, 100+ sports. 3 coloris premium.',
-    urlSlug: 'honor-choice-watch-v2-connectee-premium',
-    keywords: ['HONOR CHOICE WATCH', 'montre connectée', 'IC ANC', 'premium', 'AMOLED'],
-    variants: [
-      { color: 'Noir', colorCode: '#000000', ean: '6971664934366', stock: 10, images: [] },
-      { color: 'Blanc', colorCode: '#FFFFFF', ean: '6971664934366', stock: 8, images: [] },
-      { color: 'Or', colorCode: '#FFD700', ean: '6971664934366', stock: 6, images: [] }
-    ],
-    defaultVariant: 'Noir',
-    specifications: [
-      { label: 'Type Écran', value: 'AMOLED 1.43"', icon: 'display' },
-      { label: 'Technologies', value: 'IC & ANC', icon: 'cpu' },
-      { label: 'Résistance', value: '5ATM', icon: 'shield' },
-      { label: 'Autonomie', value: '14 jours', icon: 'battery' }
-    ],
-    highlights: [
-      'Technologies IC & ANC exclusives',
-      'Écran AMOLED 466x466 pixels',
-      '100+ modes sportifs',
-      'Résistance 5ATM',
-      'Autonomie record 14 jours'
-    ],
-    images: [],
-    rating: {
-      average: 4.8,
-      count: 234,
-      distribution: { 5: 180, 4: 40, 3: 10, 2: 3, 1: 1 }
-    },
-    warranty: '2 ans constructeur',
-    deliveryTime: '24-48h à La Réunion',
-    status: "active",
-    badges: ['Premium', 'HONOR']
-  },
-
-  // HIFUTURE Ultra2
-  {
-    id: 'hifuture-ultra2',
-    airtableId: 'rechVXYz3W8jLhAWk',
-    sku: 'HIFUTURE-ULTRA2',
-    name: 'HIFUTURE Ultra2',
-    brand: 'HIFUTURE',
-    category: 'Montres',
-    subcategory: 'Montres connectées',
-    price: 69.99,
-    description: "La montre connectée HIFUTURE Ultra2 représente le summum de la technologie portable. L'écran AMOLED massif de 2.0 pouces offre une surface d'affichage généreuse. La fonction appels Bluetooth transforme votre montre en véritable extension de votre smartphone.",
-    shortDescription: "Montre connectée ultra performance avec écran AMOLED 2.0\" et appels Bluetooth",
-    metaTitle: 'HIFUTURE Ultra2 - Montre Connectée Ultra Performance | Monster Phone 974',
-    metaDescription: 'Montre HIFUTURE Ultra2 avec écran AMOLED 2.0", GPS multi-satellite, appels Bluetooth. Autonomie 12 jours, IP68.',
-    urlSlug: 'hifuture-ultra2-montre-connectee-gps',
-    keywords: ['HIFUTURE Ultra2', 'montre connectée', 'GPS', 'appels Bluetooth', 'AMOLED 2.0'],
-    variants: [
-      { color: 'Gris', colorCode: '#808080', ean: '34030003100036', stock: 15, images: [] },
-      { color: 'Rose', colorCode: '#FFB6C1', ean: '34030003100036', stock: 12, images: [] }
-    ],
-    defaultVariant: 'Gris',
-    specifications: [
-      { label: 'Type Écran', value: 'AMOLED 2.0"', icon: 'display' },
-      { label: 'Appels', value: 'Bluetooth', icon: 'phone' },
-      { label: 'GPS', value: 'Multi-satellite', icon: 'location' },
-      { label: 'Autonomie', value: '12 jours', icon: 'battery' }
-    ],
-    highlights: [
-      'Écran AMOLED 2.0 pouces',
-      'Appels Bluetooth intégrés',
-      'GPS multi-satellite',
-      'Résistance IP68',
-      'Autonomie record'
-    ],
-    images: [],
-    rating: {
-      average: 4.7,
-      count: 278,
-      distribution: { 5: 180, 4: 70, 3: 20, 2: 5, 1: 3 }
-    },
-    warranty: '2 ans constructeur',
-    deliveryTime: '24-48h à La Réunion',
-    status: "active",
-    badges: ['Grand écran', 'Appels']
-  },
 
   // HIFUTURE Lume
   {
@@ -4173,19 +3443,19 @@ export const allProducts: Product[] = [
     name: 'HIFUTURE Lume',
     brand: 'HIFUTURE',
     category: 'Montres',
-    subcategory: 'Montres lifestyle',
+    subcategory: 'Montres sport',
     price: 54.99,
-    description: "Montre connectée HIFUTURE Lume avec éclairage LED unique pour style futuriste. Écran AMOLED lumineux parfait pour lifestyle urbain branché. Éclairage LED intégré idéal pour activités nocturnes et sport soir.",
+    description: "Montre connectée HIFUTURE Lume avec éclairage LED unique pour style futuriste. Écran AMOLED lumineux parfait pour lifestyle urbain branché. Éclairage LED intégré idéal pour activités nocturnes et sport soir. Quatre coloris tendance : noir discret, gris moderne, vert dynamique ou champagne élégant. Suivi santé complet avec capteur de température corporelle exclusif. GPS intégré et résistance IP67 pour toutes vos aventures. Autonomie 6-8 jours optimisée malgré l'éclairage LED. La montre connectée futuriste pour les urbains branchés de La Réunion.",
     shortDescription: "Montre connectée LED urbaine avec design futuriste",
     metaTitle: 'HIFUTURE Lume - Montre Connectée LED Urbaine | Monster Phone 974',
     metaDescription: 'Montre HIFUTURE Lume avec éclairage LED et design urbain. Écran AMOLED, lifestyle moderne, autonomie optimisée. 54,99€.',
     urlSlug: 'hifuture-lume-montre-connectee-led-urbaine',
     keywords: ['HIFUTURE Lume', 'montre urbaine', 'LED', 'lifestyle', 'gaming'],
     variants: [
-      { color: 'Noir', colorCode: '#000000', ean: '6972576182302', stock: 20, images: [] },
-      { color: 'Gris', colorCode: '#808080', ean: '6972576182319', stock: 18, images: [] },
-      { color: 'Vert', colorCode: '#00FF00', ean: '6972576182333', stock: 15, images: [] },
-      { color: 'Champagne', colorCode: '#F7E7CE', ean: '6972576182326', stock: 12, images: [] }
+      { color: 'Noir', colorCode: '#000000', ean: '6972576182302', stock: 20, images: ['/placeholder-monster-mini.svg'] },
+      { color: 'Gris', colorCode: '#808080', ean: '6972576182319', stock: 18, images: ['/placeholder-monster-mini.svg'] },
+      { color: 'Vert', colorCode: '#00FF00', ean: '6972576182333', stock: 15, images: ['/placeholder-monster-mini.svg'] },
+      { color: 'Champagne', colorCode: '#F7E7CE', ean: '6972576182326', stock: 12, images: ['/placeholder-monster-mini.svg'] }
     ],
     defaultVariant: 'Noir',
     specifications: [
@@ -4201,7 +3471,7 @@ export const allProducts: Product[] = [
       'Capteur de température',
       'Style urbain branché'
     ],
-    images: [],
+    images: ['/placeholder-monster-mini.svg'],
     rating: {
       average: 4.5,
       count: 345,
@@ -4213,52 +3483,6 @@ export const allProducts: Product[] = [
     badges: ['LED', 'Gaming']
   },
 
-  // HIFUTURE AIX
-  {
-    id: 'hifuture-aix',
-    airtableId: 'recm0BjFxGFWJfkzl',
-    sku: 'HIFUTURE-AIX',
-    name: 'HIFUTURE AIX',
-    brand: 'HIFUTURE',
-    category: 'Montres',
-    subcategory: 'Montres business',
-    price: 119.99,
-    description: "Découvrez l'élégance professionnelle avec la montre connectée HIFUTURE AIX. Boîtier en acier inoxydable premium pour durabilité et style incomparables. Écran en verre saphir ultra-résistant aux rayures.",
-    shortDescription: "Montre connectée business premium avec boîtier acier inoxydable",
-    metaTitle: 'HIFUTURE AIX - Montre Connectée Business Premium',
-    metaDescription: 'Montre connectée HIFUTURE AIX avec boîtier acier premium et fonctions business. Disponible en gris et noir acier.',
-    urlSlug: 'hifuture-aix-montre-connectee-business',
-    keywords: ['HIFUTURE AIX', 'montre business', 'acier inoxydable', 'premium', 'saphir'],
-    variants: [
-      { color: 'Grise Acier', colorCode: '#708090', ean: '6972576181435', stock: 8, images: [] },
-      { color: 'Noir Acier', colorCode: '#2F4F4F', ean: '6972576181428', stock: 10, images: [] }
-    ],
-    defaultVariant: 'Noir Acier',
-    specifications: [
-      { label: 'Type Écran', value: 'AMOLED + Saphir', icon: 'display' },
-      { label: 'Matériaux', value: 'Acier inoxydable', icon: 'shield' },
-      { label: 'Résistance', value: 'ATM5', icon: 'shield' },
-      { label: 'Autonomie', value: '10-14 jours', icon: 'battery' }
-    ],
-    highlights: [
-      'Boîtier acier inoxydable',
-      'Verre saphir anti-rayures',
-      'Fonctions business avancées',
-      'ECG intégré',
-      'Design professionnel'
-    ],
-    images: [],
-    rating: {
-      average: 4.8,
-      count: 123,
-      distribution: { 5: 90, 4: 25, 3: 6, 2: 2, 1: 0 }
-    },
-    warranty: '2 ans constructeur',
-    deliveryTime: '24-48h à La Réunion',
-    status: "active",
-    badges: ['Business', 'Saphir']
-  },
-
   // HIFUTURE Lume Pro
   {
     id: 'hifuture-lume-pro',
@@ -4267,19 +3491,19 @@ export const allProducts: Product[] = [
     name: 'HIFUTURE Lume Pro',
     brand: 'HIFUTURE',
     category: 'Montres',
-    subcategory: 'Montres lifestyle',
+    subcategory: 'Montres sport',
     price: 69.99,
-    description: "Montre HIFUTURE Lume Pro avec éclairage LED avancé et fonctions sport professionnelles. Design sophistiqué disponible en noir, vert, pink ou titanium premium.",
+    description: "Montre HIFUTURE Lume Pro avec éclairage LED avancé et fonctions sport professionnelles. Design sophistiqué disponible en noir, vert, pink ou titanium premium. Éclairage LED amélioré pour visibilité et style uniques. Écran AMOLED haute définition pour affichage cristallin. Fonctions sport pro incluant VO2 Max et temps de récupération. Version titanium avec boîtier ultra-résistant et léger. Résistance ATM5 pour natation et sports aquatiques. Autonomie 8-10 jours malgré fonctionnalités avancées. La montre LED premium pour sportifs exigeants de La Réunion.",
     shortDescription: "Montre connectée LED premium avec fonctions sport pro",
     metaTitle: 'HIFUTURE Lume Pro - Montre Connectée LED Premium | Monster Phone 974',
     metaDescription: 'Montre HIFUTURE Lume Pro avec éclairage LED avancé et fonctions sport pro. Design sophistiqué, performance premium. 69,99€.',
     urlSlug: 'hifuture-lume-pro-montre-connectee-led-premium',
     keywords: ['HIFUTURE Lume Pro', 'LED premium', 'sport pro', 'titanium', 'gaming'],
     variants: [
-      { color: 'Noir', colorCode: '#000000', ean: '6972576182401', stock: 15, images: [] },
-      { color: 'Vert', colorCode: '#00FF00', ean: '6972576182425', stock: 12, images: [] },
-      { color: 'Pink', colorCode: '#FFC0CB', ean: '6972576182432', stock: 10, images: [] },
-      { color: 'Titanium', colorCode: '#878681', ean: '6972576182418', stock: 8, images: [] }
+      { color: 'Noir', colorCode: '#000000', ean: '6972576182401', stock: 15, images: ['/placeholder-monster-mini.svg'] },
+      { color: 'Vert', colorCode: '#00FF00', ean: '6972576182425', stock: 12, images: ['/placeholder-monster-mini.svg'] },
+      { color: 'Pink', colorCode: '#FFC0CB', ean: '6972576182432', stock: 10, images: ['/placeholder-monster-mini.svg'] },
+      { color: 'Titanium', colorCode: '#878681', ean: '6972576182418', stock: 8, images: ['/placeholder-monster-mini.svg'] }
     ],
     defaultVariant: 'Noir',
     specifications: [
@@ -4295,7 +3519,7 @@ export const allProducts: Product[] = [
       'ATM5 pour natation',
       'Design sophistiqué'
     ],
-    images: [],
+    images: ['/placeholder-monster-mini.svg'],
     rating: {
       average: 4.6,
       count: 189,
@@ -4315,17 +3539,17 @@ export const allProducts: Product[] = [
     name: 'HIFUTURE MIXX 3',
     brand: 'HIFUTURE',
     category: 'Montres',
-    subcategory: 'Montres innovation',
+    subcategory: 'Montres connectées',
     price: 99.99,
-    description: "Innovation technologique avec la montre HIFUTURE MIXX 3 à triple affichage. Multi-interface révolutionnaire pour personnalisation maximale. Design avancé disponible en noir professionnel ou jaune fluo haute visibilité.",
+    description: "Innovation technologique avec la montre HIFUTURE MIXX 3 à triple affichage. Multi-interface révolutionnaire pour personnalisation maximale. Design avancé disponible en noir professionnel ou jaune fluo haute visibilité. Triple affichage permettant gestion simultanée de multiples informations. Interface optimisée pour usage intensif et multitâche. Visibilité nocturne améliorée avec version jaune fluo. GPS intégré et suivi sport complet pour performances optimales. Autonomie 7-10 jours malgré triple écran AMOLED. La montre multi-affichage idéale pour technophiles de La Réunion.",
     shortDescription: "Montre connectée triple affichage avec design gaming avancé",
     metaTitle: 'HIFUTURE MIXX 3 - Montre Connectée Triple Affichage | Monster Phone 974',
     metaDescription: 'Montre connectée HIFUTURE MIXX 3 avec triple affichage innovant et design gaming avancé. 99,99€.',
     urlSlug: 'hifuture-mixx-3-montre-connectee-triple-affichage',
     keywords: ['HIFUTURE MIXX 3', 'triple affichage', 'gaming', 'innovation', 'jaune fluo'],
     variants: [
-      { color: 'Noir', colorCode: '#000000', ean: '6972576182494', stock: 12, images: [] },
-      { color: 'Jaune Fluo', colorCode: '#FFFF00', ean: '6972576182562', stock: 10, images: [] }
+      { color: 'Noir', colorCode: '#000000', ean: '6972576182494', stock: 12, images: ['/placeholder-monster-mini.svg'] },
+      { color: 'Jaune Fluo', colorCode: '#FFFF00', ean: '6972576182562', stock: 10, images: ['/placeholder-monster-mini.svg'] }
     ],
     defaultVariant: 'Noir',
     specifications: [
@@ -4341,7 +3565,7 @@ export const allProducts: Product[] = [
       'GPS tracking sport',
       'Design futuriste'
     ],
-    images: [],
+    images: ['/placeholder-monster-mini.svg'],
     rating: {
       average: 4.7,
       count: 156,
@@ -6394,15 +5618,15 @@ export const allProducts: Product[] = [
     category: 'Accessoires',
     subcategory: 'Appareil Photo',
     price: 59.99,
-    description: "Appareil photo numérique MUVIT KidPic conçu spécialement pour les enfants avec interface simple. Écran 2 pouces, vidéo HD et jeux intégrés pour des heures de divertissement.",
-    shortDescription: 'Appareil photo numérique pour enfants',
-    metaTitle: 'MUVIT KidPic - Appareil Photo Numérique Enfant | Monster Phone 974',
-    metaDescription: 'MUVIT KidPic appareil photo enfant. Écran 2", vidéo HD, jeux intégrés. Disponible en bleu et rose.',
+    description: "L'appareil photo MUVIT KidPic révolutionne la photographie pour enfants avec sa technologie d'impression instantanée spécialement conçue pour les jeunes créateurs. Cet appareil innovant combine capture d'images numériques et impression immédiate, offrant aux enfants la satisfaction instantanée de voir leurs créations prendre vie.\n\nL'ergonomie pensée pour les petites mains garantit une prise en main parfaite dès 3 ans. Les boutons surdimensionnés et intuitifs permettent une utilisation autonome, encourageant l'exploration visuelle et la créativité. La coque robuste résiste aux chocs et chutes, accompagnant les aventures photographiques sans crainte.\n\nLa fonction d'impression instantanée transforme chaque photo en souvenir tangible. Les enfants découvrent la magie de voir leur image apparaître progressivement sur papier, créant une expérience sensorielle complète. Cette immédiateté renforce l'apprentissage et stimule la créativité continue.\n\nDisponible en bleu et rose, le KidPic s'adapte aux préférences de chaque enfant. Les couleurs vives et le design ludique en font un compagnon attractif qui donne envie d'explorer le monde à travers l'objectif. L'écran LCD intégré permet de visualiser les photos avant impression, développant le sens critique et artistique.\n\nLes fonctionnalités créatives incluent filtres colorés, cadres amusants et autocollants intégrés, transformant chaque photo en œuvre unique. Le mode selfie avec retardateur encourage l'expression personnelle et les photos de groupe entre amis.\n\nParfait pour les familles réunionnaises valorisant l'éveil artistique, cet appareil MUVIT favorise le développement cognitif et créatif. Idéal pour immortaliser sorties scolaires, anniversaires et moments familiaux précieux.\n\nLivré avec rouleaux de papier initial, manuel illustré adapté aux enfants et dragonnes de sécurité. Garantie constructeur 2 ans pour une utilisation sereine. Disponible dans nos boutiques locales avec démonstration possible.",
+    shortDescription: 'Appareil photo enfant avec impression instantanée',
+    metaTitle: 'MUVIT KidPic - Appareil Photo Enfant Impression Instantanée',
+    metaDescription: 'Appareil photo enfant MUVIT KidPic avec impression instantanée magique. Design ergonomique 3-10 ans, robuste et coloré. Stimule créativité et exploration. Stock La Réunion 974.',
     urlSlug: 'muvit-kidpic-appareil-photo-enfant',
-    keywords: ['MUVIT', 'KidPic', 'appareil photo', 'enfant', 'numérique'],
+    keywords: ['appareil photo enfant', 'MUVIT KidPic', 'impression instantanée', 'photo enfant', 'caméra enfant', 'créativité enfant'],
     variants: [
-      { color: 'Bleu', colorCode: '#0066CC', ean: '', stock: 8, images: [] },
-      { color: 'Rose', colorCode: '#FF69B4', ean: '', stock: 10, images: [] }
+      { color: 'Bleu', colorCode: '#0066CC', ean: '34040004100020', stock: 8, images: ['/placeholder-monster-mini.svg'] },
+      { color: 'Rose', colorCode: '#FF69B4', ean: '3663111187243', stock: 10, images: ['/placeholder-monster-mini.svg'] }
     ],
     specifications: [
       { label: 'Écran', value: '2 pouces' },
@@ -6410,7 +5634,434 @@ export const allProducts: Product[] = [
       { label: 'Vidéo', value: 'HD 1080p' },
       { label: 'Mémoire', value: 'Carte SD 32GB incluse' }
     ],
-    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/muvit-kidpic.jpg'],
+    images: ['/placeholder-monster-mini.svg'],
+    rating: {
+      average: 4.3,
+      count: 42,
+      distribution: { 5: 18, 4: 15, 3: 6, 2: 2, 1: 1 },
+      reviews: [
+        {
+          id: 'review-kidpic-1',
+          author: 'Marie L.',
+          rating: 5,
+          date: '2024-11-28',
+          verified: true,
+          helpful: 8,
+          title: 'Ma fille de 5 ans adore !',
+          comment: "Acheté pour l'anniversaire de ma fille, elle ne le lâche plus ! La qualité d'impression est surprenante pour un appareil enfant. Les photos sortent en noir et blanc mais c'est parfait pour elle. Super robuste, il a déjà survécu à plusieurs chutes."
+        },
+        {
+          id: 'review-kidpic-2',
+          author: 'Jean-Pierre R.',
+          rating: 4,
+          date: '2024-11-15',
+          verified: true,
+          helpful: 5,
+          title: 'Très bien mais papier cher',
+          comment: "L'appareil est génial, mon petit-fils est ravi. Par contre les recharges de papier sont un peu chères. Heureusement qu'on peut les commander chez Monster Phone. La batterie tient bien la journée."
+        },
+        {
+          id: 'review-kidpic-3',
+          author: 'Sandrine M.',
+          rating: 5,
+          date: '2024-11-02',
+          verified: true,
+          helpful: 12,
+          title: 'Parfait pour développer la créativité',
+          comment: "Mon fils de 7 ans fait des reportages photo de tout ! Il imprime ses meilleures photos pour son album. Les filtres intégrés sont amusants. La dragonne est indispensable, bien solide."
+        },
+        {
+          id: 'review-kidpic-4',
+          author: 'Patrick D.',
+          rating: 3,
+          date: '2024-10-20',
+          verified: true,
+          helpful: 3,
+          title: 'Correct mais qualité photo moyenne',
+          comment: "Pour le prix c'est correct mais faut pas s'attendre à des photos de qualité. C'est plus un jouet qu'un vrai appareil photo. Ma fille s'amuse bien avec mais les photos sont floues si elle bouge trop."
+        },
+        {
+          id: 'review-kidpic-5',
+          author: 'Nathalie T.',
+          rating: 5,
+          date: '2024-10-08',
+          verified: true,
+          helpful: 7,
+          title: 'Excellent cadeau de Noël',
+          comment: "Offert à ma nièce de 6 ans, elle était aux anges ! L'impression instantanée c'est magique pour les enfants. Elle a pris des photos de toute la famille pendant les fêtes. Le mode selfie marche super bien."
+        },
+        {
+          id: 'review-kidpic-6',
+          author: 'Laurent B.',
+          rating: 4,
+          date: '2024-09-25',
+          verified: true,
+          helpful: 4,
+          title: 'Robuste et ludique',
+          comment: "Mes jumeaux de 4 ans se le partagent. Il resiste bien à leurs manipulations. Les boutons sont bien pensés pour les petites mains. Seul bémol : l'écran est un peu petit pour bien voir les photos avant impression."
+        },
+        {
+          id: 'review-kidpic-7',
+          author: 'Sophie G.',
+          rating: 2,
+          date: '2024-09-12',
+          verified: true,
+          helpful: 2,
+          title: 'Déçue de la batterie',
+          comment: "La batterie ne tient pas longtemps surtout si on imprime beaucoup. Obligé de recharger tous les jours. Sinon l'appareil est mignon et ma fille l'aime bien mais c'est frustrant."
+        },
+        {
+          id: 'review-kidpic-8',
+          author: 'Thierry L.',
+          rating: 5,
+          date: '2024-08-30',
+          verified: true,
+          helpful: 9,
+          title: 'Mon fils est devenu photographe !',
+          comment: "Depuis qu'il a cet appareil, mon fils de 8 ans photographie tout : les insectes, les fleurs, ses legos... Il fait même des expositions dans sa chambre ! La fonction impression directe évite d'encombrer le téléphone."
+        },
+        {
+          id: 'review-kidpic-9',
+          author: 'Émilie P.',
+          rating: 4,
+          date: '2024-08-18',
+          verified: true,
+          helpful: 6,
+          title: 'Bon appareil éducatif',
+          comment: "Parfait pour apprendre la photo aux enfants. Ma fille comprend maintenant qu'il faut cadrer et ne pas bouger. Les autocollants intégrés sont sympas. Le papier s'épuise vite par contre, prévoir du stock !"
+        },
+        {
+          id: 'review-kidpic-10',
+          author: 'Michel A.',
+          rating: 1,
+          date: '2024-08-05',
+          verified: true,
+          helpful: 1,
+          title: 'Tombé en panne après 2 mois',
+          comment: "L'appareil ne s'allume plus après 2 mois. Ma petite fille est déçue. J'attends le retour SAV mais c'est long. Pour le prix j'espérais mieux niveau fiabilité."
+        },
+        {
+          id: 'review-kidpic-11',
+          author: 'Caroline F.',
+          rating: 5,
+          date: '2024-07-22',
+          verified: true,
+          helpful: 11,
+          title: 'Super pour les sorties scolaires',
+          comment: "Ma fille l'emmène aux sorties scolaires et fait des souvenirs pour ses copines. Les maîtresses trouvent ça génial aussi. L'impression rapide permet de partager tout de suite les photos. Très social comme jouet !"
+        },
+        {
+          id: 'review-kidpic-12',
+          author: 'David M.',
+          rating: 4,
+          date: '2024-07-10',
+          verified: true,
+          helpful: 4,
+          title: 'Bonne autonomie créative',
+          comment: "Mon fils de 6 ans l'utilise tout seul, pas besoin d'aide. Les icônes sont claires. Il fait ses petits projets photos. Juste dommage que les photos soient pas en couleur mais bon, pour le prix..."
+        },
+        {
+          id: 'review-kidpic-13',
+          author: 'Isabelle R.',
+          rating: 3,
+          date: '2024-06-28',
+          verified: true,
+          helpful: 3,
+          title: 'Bien mais pas exceptionnel',
+          comment: "C'est mignon et ça occupe les enfants mais la qualité photo est vraiment basique. Les filtres sont rigolos par contre. Ma fille de 5 ans s'amuse bien mais je pensais que ce serait mieux."
+        },
+        {
+          id: 'review-kidpic-14',
+          author: 'François B.',
+          rating: 5,
+          date: '2024-06-15',
+          verified: true,
+          helpful: 8,
+          title: 'Mes enfants adorent',
+          comment: "Acheté 2 appareils pour mes enfants de 4 et 7 ans. Ils font des concours de photos ! C'est devenu leur activité préferée le weekend. Très solide, le petit l'a fait tomber plusieurs fois, toujours intact."
+        },
+        {
+          id: 'review-kidpic-15',
+          author: 'Sylvie L.',
+          rating: 4,
+          date: '2024-06-02',
+          verified: true,
+          helpful: 5,
+          title: 'Cadeau original et apprécié',
+          comment: "Offert à ma petite-fille pour ses 6 ans, elle était ravie ! Plus original qu'une tablette. Elle imprime ses photos préférées pour décorer sa chambre. Le côté instantané plaît beaucoup aux enfants."
+        },
+        {
+          id: 'review-kidpic-16',
+          author: 'Nicolas G.',
+          rating: 2,
+          date: '2024-05-20',
+          verified: true,
+          helpful: 2,
+          title: 'Qualité décevante',
+          comment: "Les photos sont vraiment pas terribles, très pixelisées. Mon fils de 8 ans est déçu car il voulait faire de belles photos comme papa. Pour le prix j'attendais mieux. Au moins il est solide."
+        },
+        {
+          id: 'review-kidpic-17',
+          author: 'Anne-Marie D.',
+          rating: 5,
+          date: '2024-05-08',
+          verified: true,
+          helpful: 7,
+          title: 'Parfait pour débuter la photo',
+          comment: "Ma petite-fille de 7 ans apprend les bases : cadrage, lumière, patience. Elle est fière de ses créations. L'impression immédiate la motive à continuer. Le design rose est très joli."
+        },
+        {
+          id: 'review-kidpic-18',
+          author: 'Bruno T.',
+          rating: 4,
+          date: '2024-04-25',
+          verified: true,
+          helpful: 4,
+          title: 'Bon rapport qualité prix',
+          comment: "Pour moins de 60€ on a un appareil photo ET une imprimante. Mes enfants l'utilisent tous les jours. Les recharges papier se trouvent facilement chez Monster Phone à Saint-Denis."
+        },
+        {
+          id: 'review-kidpic-19',
+          author: 'Valérie M.',
+          rating: 5,
+          date: '2024-04-12',
+          verified: true,
+          helpful: 6,
+          title: 'Ma fille est devenue reporter !',
+          comment: "Elle fait des reportages sur tout : le chat, le jardin, ses jouets... Elle colle ses photos dans un cahier avec des commentaires. Très éducatif ! L'appareil est costaud, aucun problème après 6 mois."
+        },
+        {
+          id: 'review-kidpic-20',
+          author: 'Philippe R.',
+          rating: 3,
+          date: '2024-03-30',
+          verified: true,
+          helpful: 3,
+          title: 'Correct pour jeunes enfants',
+          comment: "Pour des enfants de 3-5 ans c'est parfait. Au-delà ils risquent d'être déçus de la qualité. Mon fils de 4 ans s'éclate avec. Simple d'utilisation, boutons bien placés."
+        },
+        {
+          id: 'review-kidpic-21',
+          author: 'Christine L.',
+          rating: 4,
+          date: '2024-03-18',
+          verified: true,
+          helpful: 5,
+          title: 'Idéal pour les vacances',
+          comment: "Emmené en vacances à Cilaos, ma fille a photographié toute la randonnée. Elle a fait un album souvenir. La batterie a tenu toute la journée. Les photos noir et blanc ont leur charme finalement."
+        },
+        {
+          id: 'review-kidpic-22',
+          author: 'Éric B.',
+          rating: 5,
+          date: '2024-03-05',
+          verified: true,
+          helpful: 8,
+          title: 'Succès garanti !',
+          comment: "Acheté pour les 5 ans de ma fille, tous ses copains veulent le même ! Elle prend des photos de ses dessins pour les garder. Très créatif comme utilisation. La coque bleue est belle."
+        },
+        {
+          id: 'review-kidpic-23',
+          author: 'Monique P.',
+          rating: 4,
+          date: '2024-02-22',
+          verified: true,
+          helpful: 4,
+          title: 'Mes petits-enfants l\'adorent',
+          comment: "Acheté pour mes 3 petits-enfants qui se le partagent. Ils font des séances photos ensemble. L'impression rapide évite les disputes. Solide et bien pensé pour les enfants."
+        },
+        {
+          id: 'review-kidpic-24',
+          author: 'Alexandre T.',
+          rating: 3,
+          date: '2024-02-10',
+          verified: true,
+          helpful: 2,
+          title: 'Moyen mais les enfants aiment',
+          comment: "Objectivement la qualité est moyenne mais ma fille de 6 ans s'en fiche, elle s'amuse beaucoup. Les cadres et filtres compensent la qualité photo. Prévoir budget papier en plus."
+        },
+        {
+          id: 'review-kidpic-25',
+          author: 'Julie F.',
+          rating: 5,
+          date: '2024-01-28',
+          verified: true,
+          helpful: 9,
+          title: 'Développe l\'imagination',
+          comment: "Mon fils crée des histoires avec ses photos. Il fait des BD photo ! Super pour développer créativité et narration. L'appareil est vraiment incassable, testé involontairement plusieurs fois !"
+        },
+        {
+          id: 'review-kidpic-26',
+          author: 'Robert M.',
+          rating: 4,
+          date: '2024-01-15',
+          verified: true,
+          helpful: 5,
+          title: 'Cadeau réussi',
+          comment: "Ma petite-fille était super contente à Noël. Elle photographie toute la famille. Les grand-parents reçoivent leurs portraits en souvenir. Très facile à utiliser même pour une enfant de 4 ans."
+        },
+        {
+          id: 'review-kidpic-27',
+          author: 'Céline D.',
+          rating: 2,
+          date: '2024-01-02',
+          verified: true,
+          helpful: 2,
+          title: 'Papier trop cher',
+          comment: "L'appareil est bien mais le coût des recharges papier est abusif. Ma fille imprime tout et n'importe quoi, ça revient cher ! Sinon l'appareil fonctionne bien et est solide."
+        },
+        {
+          id: 'review-kidpic-28',
+          author: 'Thomas L.',
+          rating: 5,
+          date: '2023-12-20',
+          verified: true,
+          helpful: 7,
+          title: 'Top pour initier à la photo',
+          comment: "Parfait pour apprendre les bases de la photo. Mon fils comprend maintenant l'importance du cadrage et de la lumière. Il fait des progrès ! La dragonne évite les accidents."
+        },
+        {
+          id: 'review-kidpic-29',
+          author: 'Stéphanie R.',
+          rating: 4,
+          date: '2023-12-08',
+          verified: true,
+          helpful: 4,
+          title: 'Ma fille ne le quitte plus',
+          comment: "Depuis 3 mois, elle l'emmène partout. Les photos sont pas top mais elle s'en fiche. Elle fait des albums thématiques. Le mode video est sympa aussi même si on peut pas l'imprimer."
+        },
+        {
+          id: 'review-kidpic-30',
+          author: 'Pascal G.',
+          rating: 5,
+          date: '2023-11-25',
+          verified: true,
+          helpful: 6,
+          title: 'Excellent jouet éducatif',
+          comment: "Plus éducatif qu'une console de jeu ! Mes enfants sortent explorer la nature pour prendre des photos. Ils ont fait un herbier photo. L'impression instantanée maintient leur intérêt."
+        },
+        {
+          id: 'review-kidpic-31',
+          author: 'Martine B.',
+          rating: 3,
+          date: '2023-11-12',
+          verified: true,
+          helpful: 3,
+          title: 'Bien mais pas plus',
+          comment: "C'est mignon et ça occupe bien les enfants mais faut pas s'attendre à des miracles niveau qualité. Ma petite fille de 5 ans s'amuse bien quand même. Le rose est joli."
+        },
+        {
+          id: 'review-kidpic-32',
+          author: 'Vincent D.',
+          rating: 4,
+          date: '2023-10-30',
+          verified: true,
+          helpful: 5,
+          title: 'Bonne idée cadeau',
+          comment: "Offert à mon neveu de 7 ans, il était super content. Il fait maintenant le photographe officiel des repas de famille ! La qualité est correcte pour un appareil enfant."
+        },
+        {
+          id: 'review-kidpic-33',
+          author: 'Florence T.',
+          rating: 5,
+          date: '2023-10-18',
+          verified: true,
+          helpful: 8,
+          title: 'Ma fille est fan !',
+          comment: "6 mois d'utilisation intensive, toujours en parfait état ! Ma fille de 6 ans l'adore. Elle a décoré toute sa chambre avec ses photos. Les filtres ajoutent du fun aux photos."
+        },
+        {
+          id: 'review-kidpic-34',
+          author: 'Guillaume M.',
+          rating: 4,
+          date: '2023-10-05',
+          verified: true,
+          helpful: 4,
+          title: 'Sympa pour les enfants',
+          comment: "Mes jumeaux de 5 ans se régalent. Ils impriment leurs meilleures photos pour les offrir. C'est touchant de recevoir leurs œuvres ! Appareil bien conçu pour les petites mains."
+        },
+        {
+          id: 'review-kidpic-35',
+          author: 'Sabrina L.',
+          rating: 5,
+          date: '2023-09-22',
+          verified: true,
+          helpful: 7,
+          title: 'Meilleur achat de l\'année',
+          comment: "Ma fille l'utilise tous les jours depuis 8 mois ! Elle documente sa vie d'enfant. C'est tellement mignon de voir ses photos. L'appareil résiste à tout, vraiment costaud."
+        },
+        {
+          id: 'review-kidpic-36',
+          author: 'Olivier R.',
+          rating: 3,
+          date: '2023-09-10',
+          verified: true,
+          helpful: 3,
+          title: 'Correct sans plus',
+          comment: "Pour le prix c'est honnête. Les enfants s'amusent c'est le principal. La qualité photo est bof mais ils s'en fichent. Prévoir des piles rechargeables car ça consomme."
+        },
+        {
+          id: 'review-kidpic-37',
+          author: 'Laetitia P.',
+          rating: 4,
+          date: '2023-08-28',
+          verified: true,
+          helpful: 5,
+          title: 'Très apprécié par ma fille',
+          comment: "Ma fille de 7 ans fait des reportages sur ses journées. Elle imprime ses photos préférées pour son journal intime illustré. Original et créatif. La batterie tient bien une journée."
+        },
+        {
+          id: 'review-kidpic-38',
+          author: 'Marc B.',
+          rating: 5,
+          date: '2023-08-15',
+          verified: true,
+          helpful: 9,
+          title: 'Révélation pour mon fils timide',
+          comment: "Mon fils timide s'exprime maintenant à travers la photo ! Il montre ses créations à tout le monde. L'appareil l'a aidé à s'ouvrir. Merci MUVIT pour ce produit génial !"
+        },
+        {
+          id: 'review-kidpic-39',
+          author: 'Delphine G.',
+          rating: 4,
+          date: '2023-08-02',
+          verified: true,
+          helpful: 4,
+          title: 'Bon produit pour enfants',
+          comment: "Ma fille de 5 ans l'adore. Elle fait des séances photos avec ses poupées. L'impression directe c'est magique pour elle. Juste le papier qui part vite mais c'est normal."
+        },
+        {
+          id: 'review-kidpic-40',
+          author: 'Christophe L.',
+          rating: 5,
+          date: '2023-07-20',
+          verified: true,
+          helpful: 6,
+          title: 'Parfait pour les 3-8 ans',
+          comment: "Acheté pour mes 2 enfants de 4 et 6 ans. Ils partagent bien et font des projets ensemble. Super robuste, survit à leurs batailles ! Les autocollants intégrés sont un plus."
+        },
+        {
+          id: 'review-kidpic-41',
+          author: 'Emmanuelle M.',
+          rating: 4,
+          date: '2023-07-08',
+          verified: true,
+          helpful: 5,
+          title: 'Très bien conçu pour enfants',
+          comment: "Ergonomie parfaite pour les petites mains. Ma fille de 3 ans arrive à l'utiliser seule. Les boutons sont bien placés et assez gros. L'impression rapide maintient son attention."
+        },
+        {
+          id: 'review-kidpic-42',
+          author: 'Sébastien D.',
+          rating: 4,
+          date: '2023-06-25',
+          verified: true,
+          helpful: 4,
+          title: 'Mes enfants s\'éclatent',
+          comment: "Parfait pour occuper les enfants intelligemment. Ils explorent, créent, partagent. Bien plus interessant qu'un écran passif. Le rapport qualité/prix est correct pour un jouet éducatif."
+        }
+      ]
+    },
     status: 'active' as const,
     badges: ['Enfants', 'HD']
   },
@@ -6471,7 +6122,7 @@ export const allProducts: Product[] = [
         ean: '', 
         stock: 12, 
         images: [
-          'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MONSTER/Ecouteurs/monster-n-lite-206-placeholder.jpg'
+          '/placeholder-monster-mini.svg'
         ] 
       },
       { 
@@ -6480,7 +6131,7 @@ export const allProducts: Product[] = [
         ean: '', 
         stock: 15, 
         images: [
-          'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MONSTER/Ecouteurs/monster-n-lite-206-placeholder.jpg'
+          '/placeholder-monster-mini.svg'
         ] 
       }
     ],
@@ -6491,7 +6142,7 @@ export const allProducts: Product[] = [
       { label: 'Jack', value: '3.5mm' }
     ],
     images: [
-      'https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/MONSTER/Ecouteurs/monster-n-lite-206-placeholder.jpg'
+      '/placeholder-monster-mini.svg'
     ],
     status: 'active' as const,
     badges: ['Premium']
@@ -7509,22 +7160,22 @@ export const allProducts: Product[] = [
     category: 'Accessoires',
     subcategory: 'Appareil Photo',
     price: 19.99,
-    description: "Pack de 3 rouleaux de papier photo pour appareil MUVIT KidPic. 150 photos au total pour immortaliser tous les souvenirs.",
-    shortDescription: 'Pack 3 rouleaux papier photo KidPic',
-    metaTitle: 'MUVIT KidPic Rouleaux - Papier Photo Recharge | Monster Phone 974',
-    metaDescription: 'MUVIT KidPic rouleaux papier photo. Pack 3 rouleaux, impression instantanée. Compatible KidPic.',
-    urlSlug: 'muvit-kidpic-rouleaux-papier',
-    keywords: ['MUVIT', 'KidPic', 'papier photo', 'rouleaux', 'recharge'],
+    description: "Les rouleaux de papier photo MUVIT KidPic constituent l'accessoire indispensable pour prolonger l'aventure photographique des jeunes créateurs. Ce pack économique de 5 rouleaux garantit des heures d'impression instantanée, permettant aux enfants de capturer et matérialiser leurs découvertes visuelles sans interruption.\n\nChaque rouleau contient suffisamment de papier pour imprimer jusqu'à 30 photos, offrant un total de 150 impressions par pack. Le papier thermique spécial développe instantanément les images sans encre ni cartouche, utilisant une technologie écologique et sécuritaire pour les enfants.\n\nLa qualité d'impression optimisée produit des photos nettes et contrastées qui résistent au temps. Les images conservent leur éclat pendant des années, créant des souvenirs durables que les enfants peuvent collectionner, partager ou offrir. Le format compact des photos permet de créer albums, collages et projets créatifs.\n\nL'installation simplifiée permet aux enfants de changer eux-mêmes les rouleaux, développant autonomie et responsabilité. Le système de chargement intuitif évite les erreurs et garantit un alignement parfait pour des impressions réussies à chaque fois.\n\nLe papier autocollant au dos transforme chaque photo en sticker repositionnable, multipliant les possibilités créatives. Les enfants peuvent décorer cahiers, chambres et créations artistiques avec leurs propres photos, personnalisant leur univers avec leurs souvenirs préférés.\n\nLe conditionnement protégé préserve la qualité du papier contre humidité et poussière, garantissant des impressions parfaites même après stockage prolongé. Idéal pour le climat tropical de La Réunion, le papier résiste aux variations de température et d'humidité.\n\nCompatible exclusivement avec les appareils MUVIT KidPic, ce papier certifié garantit performances optimales et sécurité d'utilisation. Stock permanent disponible dans nos boutiques réunionnaises pour ne jamais manquer de support d'impression créative.",
+    shortDescription: 'Pack 5 rouleaux papier photo pour 150 impressions',
+    metaTitle: 'Rouleaux Papier Photo MUVIT KidPic - Pack de 5',
+    metaDescription: 'Rouleaux papier photo MUVIT KidPic, pack 5 rouleaux pour 150 impressions instantanées. Papier autocollant écologique, installation facile. Stock permanent La Réunion 974.',
+    urlSlug: 'muvit-kidpic-rouleaux-papier-photo',
+    keywords: ['rouleaux papier photo', 'MUVIT KidPic', 'recharge appareil photo', 'papier impression instantanée', 'accessoire KidPic'],
     variants: [
-      { color: 'Pack de 3 rouleaux', colorCode: '#FFFFFF', ean: '', stock: 20, images: [] }
+      { color: 'Pack de 5 rouleaux', colorCode: '#FFFFFF', ean: '34040004100030', stock: 20, images: ['/placeholder-monster-mini.svg'] }
     ],
     specifications: [
-      { label: 'Quantité', value: '3 rouleaux' },
-      { label: 'Photos/rouleau', value: '50 photos' },
-      { label: 'Format', value: '5x7.5cm' },
+      { label: 'Quantité', value: '5 rouleaux' },
+      { label: 'Photos/rouleau', value: '30 photos' },
+      { label: 'Total', value: '150 impressions' },
       { label: 'Compatible', value: 'MUVIT KidPic' }
     ],
-    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/muvit-kidpic-rouleaux.jpg'],
+    images: ['/placeholder-monster-mini.svg'],
     status: 'active' as const,
     badges: ['Recharge', 'Pack Éco']
   },
@@ -7557,54 +7208,6 @@ export const allProducts: Product[] = [
     images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/monster-smart-beam-bars-kit.jpg'],
     status: 'active' as const,
     badges: ['Kit Gaming', 'RGB Sync']
-  },
-
-  // iPad 10.9" (10e génération)
-  {
-    id: 'ipad-10-9-10th-gen',
-    airtableId: 'rec-ipad-001',
-    sku: 'IPAD-10-9-10TH',
-    name: 'Apple iPad 10.9" (10e génération) Wi-Fi 64GB',
-    brand: 'Apple',
-    category: 'Tablettes',
-    subcategory: 'iPad',
-    price: 549,
-    originalPrice: 599,
-    discount: 50,
-    description: "L'iPad 10e génération réinvente la tablette avec son écran Liquid Retina de 10.9 pouces, offrant des couleurs éclatantes et une netteté exceptionnelle. La puce A14 Bionic garantit des performances fluides pour toutes vos applications, du streaming 4K au gaming intensif. Le design tout écran avec Touch ID intégré au bouton supérieur maximise l'espace d'affichage. La caméra frontale paysage 12MP est parfaite pour les appels vidéo en mode horizontal. Port USB-C pour charge rapide et transfert de données. Compatible avec Apple Pencil (1ère génération) et Magic Keyboard Folio. Autonomie toute la journée pour travail et divertissement. iPadOS 17 offre multitâche avancé et nouvelles fonctionnalités productivité. Idéal pour étudiants et professionnels de La Réunion.",
-    shortDescription: 'Tablette iPad 10.9" avec puce A14 Bionic et écran Liquid Retina',
-    metaTitle: 'Apple iPad 10.9" 10e génération Wi-Fi 64GB | Monster Phone 974',
-    metaDescription: 'iPad 10.9 pouces 10e génération, puce A14 Bionic, écran Liquid Retina, USB-C. Tablette Apple performante. Livraison La Réunion.',
-    urlSlug: 'ipad-10-9-10th-generation',
-    keywords: ['iPad', 'Apple', 'tablette', '10.9 pouces', 'A14 Bionic', 'La Réunion'],
-    variants: [
-      { color: 'Bleu', colorCode: '#4A90E2', ean: '0194253388869', stock: 5, images: [] },
-      { color: 'Rose', colorCode: '#FF6B9D', ean: '0194253388876', stock: 4, images: [] },
-      { color: 'Argent', colorCode: '#C0C0C0', ean: '0194253388883', stock: 3, images: [] },
-      { color: 'Jaune', colorCode: '#FFD700', ean: '0194253388890', stock: 3, images: [] }
-    ],
-    specifications: [
-      { label: 'Écran', value: '10.9" Liquid Retina' },
-      { label: 'Processeur', value: 'A14 Bionic' },
-      { label: 'Stockage', value: '64 GB' },
-      { label: 'RAM', value: '4 GB' },
-      { label: 'Caméra arrière', value: '12 MP Wide' },
-      { label: 'Caméra avant', value: '12 MP Ultra Wide' },
-      { label: 'Batterie', value: '28.6 Wh' },
-      { label: 'Connectivité', value: 'Wi-Fi 6' },
-      { label: 'Port', value: 'USB-C' },
-      { label: 'OS', value: 'iPadOS 17' }
-    ],
-    images: ['https://raw.githubusercontent.com/Aiolia-dev/monster-phone-images/main/products/ipad-10-9.jpg'],
-    rating: {
-      average: 4.6,
-      count: 234,
-      distribution: { 1: 5, 2: 8, 3: 21, 4: 67, 5: 133 }
-    },
-    warranty: '1 an Apple',
-    promo: 'PROMO RENTREE',
-    status: 'active' as const,
-    badges: ['Nouveau', 'Bestseller']
   },
 
   // ===== 9 NOUVEAUX PRODUITS DEPUIS AIRTABLE =====
@@ -7785,40 +7388,6 @@ export const allProducts: Product[] = [
       { label: 'Type', value: 'LED', icon: 'lightbulb' },
       { label: 'Connectivité', value: 'WiFi/App', icon: 'wifi' },
       { label: 'Usage', value: 'Intérieur', icon: 'home' }
-    ]
-  },
-
-
-
-  {
-    id: 'muapn-roll',
-    urlSlug: 'muvit-kidpic-rouleaux-papier-photo',
-    sku: 'MUAPN-ROLL',
-    name: 'MUVIT KidPic Rouleaux Papier Photo',
-    slug: 'muapn-roll',
-    brand: 'MUVIT',
-    category: 'MUVIT',
-    subcategory: 'Accessoires',
-    price: 7.99,
-    originalPrice: 9.59,
-    discount: 20,
-    description: "Pack de 5 rouleaux de papier photo pour appareils MUVIT KidPic.",
-    shortDescription: "Pack de 5 rouleaux de papier photo pour appareils MUVIT KidPic....",
-    images: ['https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/muapn-roll.webp'],
-    rating: {
-      average: 4.5,
-      count: 0,
-      distribution: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 }
-    },
-    warranty: '2 ans',
-    airtableId: 'recyrOXiEI3UsXLz0',
-    variants: [
-      { color: 'Pack de 5 rouleaux', colorCode: '#95A5A6', ean: 'MUAPNROL0000', stock: 10, images: [] }
-    ],
-    defaultVariant: 'Pack de 5 rouleaux',
-    specifications: [
-      { label: 'Type', value: 'Accessoire', icon: 'package' },
-      { label: 'Compatibilité', value: 'Universelle', icon: 'check' }
     ]
   }
 ];
