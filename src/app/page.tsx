@@ -1,5 +1,6 @@
 import Header from '@/components/Header';
 import MonsterPhoneHero from '@/components/MonsterPhoneHero';
+import SmartphonePackBanner from '@/components/SmartphonePackBanner';
 import TrustSection from '@/components/TrustSection';
 import FeaturedProducts from '@/components/FeaturedProducts';
 import FeaturesSection from '@/components/FeaturesSection';
@@ -55,6 +56,7 @@ export default function Home() {
       <Header />
       <div className="pt-[110px]">
         <MonsterPhoneHero />
+        <SmartphonePackBanner />
         <FeaturedProducts />
         <TrustSection />
         <FeaturesSection />
