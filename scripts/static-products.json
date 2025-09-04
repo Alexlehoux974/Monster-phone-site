@@ -1,0 +1,6099 @@
+[
+  {
+    "id": "honor-x9b-12gb-256gb",
+    "sku": "HONOR-X9B-12GB-256GB",
+    "name": "HONOR X9B 12+8/256",
+    "brand": "HONOR",
+    "category": "Smartphones",
+    "subcategory": "Flagship",
+    "price": 549.99,
+    "originalPrice": 649.99,
+    "discount": 15,
+    "description": "Découvrez le smartphone HONOR X9B, véritable flagship technologique conçu pour les utilisateurs les plus exigeants. Doté d",
+    "shortDescription": "Smartphone flagship avec 12+8GB RAM, écran AMOLED 165Hz et batterie 6000mAh",
+    "urlSlug": "honor-x9b-12gb-256gb-smartphone-flagship",
+    "warranty": "2 ans constructeur + 1 an offert",
+    "deliveryTime": "24-48h à La Réunion",
+    "repairabilityIndex": 8,
+    "dasHead": "0.82 W/kg",
+    "dasBody": "1.27 W/kg",
+    "images": [
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x9b-noir-main.jpg"
+    ],
+    "keywords": [
+      "HONOR X9B",
+      "smartphone flagship",
+      "12GB RAM",
+      "256GB stockage",
+      "téléphone HONOR",
+      "La Réunion",
+      "974"
+    ],
+    "highlights": [
+      "Écran AMOLED 165Hz ultra-fluide",
+      "RAM extensible jusqu\\",
+      ",\n      ",
+      ",\n      ",
+      ",\n      "
+    ],
+    "badges": [
+      "Bestseller",
+      "Nouveau",
+      "Promo"
+    ],
+    "specifications": [
+      {
+        "label": "RAM",
+        "value": "12GB + 8GB extensible"
+      },
+      {
+        "label": "Stockage",
+        "value": "256GB"
+      },
+      {
+        "label": "Écran",
+        "value": "6.8"
+      },
+      {
+        "label": "Batterie",
+        "value": "6000mAh"
+      },
+      {
+        "label": "Charge rapide",
+        "value": "66W"
+      },
+      {
+        "label": "Connectivité",
+        "value": "5G"
+      },
+      {
+        "label": "Certification",
+        "value": "IP68"
+      }
+    ],
+    "rating": {
+      "average": 4.8,
+      "count": 156
+    },
+    "status": "active"
+  },
+  {
+    "id": "honor-pad-9-wifi",
+    "sku": "HONOR-PAD9-WIFI",
+    "name": "HONOR PAD 9 WiFi",
+    "brand": "HONOR",
+    "category": "Tablettes",
+    "subcategory": "Premium",
+    "price": 359.99,
+    "originalPrice": 429.99,
+    "discount": 16,
+    "description": "La tablette HONOR PAD 9 WiFi révolutionne votre expérience numérique avec des performances exceptionnelles et un design premium. Dotée d",
+    "shortDescription": "Tablette premium 12.1",
+    "urlSlug": "honor-pad-9-wifi-tablette-gaming-premium",
+    "warranty": "2 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "repairabilityIndex": 8.3,
+    "dasBody": "1.09 W/kg",
+    "images": [
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Tablettes/honor-pad9-wifi-main.jpg"
+    ],
+    "keywords": [
+      "HONOR PAD 9",
+      "tablette HONOR",
+      "8GB RAM",
+      "256GB",
+      "tablette gaming",
+      "WiFi premium",
+      "La Réunion",
+      "974"
+    ],
+    "highlights": [
+      "Écran 2.5K 120Hz certifié TÜV Rheinland",
+      "Quad-speakers Harman Kardon",
+      "Design ultra-fin 6.9mm",
+      "14 heures d\\",
+      ",\n      "
+    ],
+    "badges": [
+      "Premium",
+      "Professionnel"
+    ],
+    "specifications": [
+      {
+        "label": "RAM",
+        "value": "8GB + 8GB extensible"
+      },
+      {
+        "label": "Stockage",
+        "value": "256GB"
+      },
+      {
+        "label": "Écran",
+        "value": "12.1"
+      },
+      {
+        "label": "Résolution",
+        "value": "2560x1600 pixels"
+      },
+      {
+        "label": "Batterie",
+        "value": "8300mAh"
+      },
+      {
+        "label": "Audio",
+        "value": "Quad-speakers Harman Kardon"
+      },
+      {
+        "label": "Connectivité",
+        "value": "WiFi 6, Bluetooth 5.2"
+      },
+      {
+        "label": "Épaisseur",
+        "value": "6.9mm"
+      },
+      {
+        "label": "Poids",
+        "value": "555g"
+      }
+    ],
+    "rating": {
+      "average": 4.9,
+      "count": 89
+    },
+    "status": "active"
+  },
+  {
+    "id": "honor-200-pro-12gb-512gb",
+    "sku": "HONOR-200-PRO-12GB-512GB",
+    "name": "HONOR 200 PRO 12+12/512",
+    "brand": "HONOR",
+    "category": "Smartphones",
+    "subcategory": "Flagship Pro",
+    "price": 799.99,
+    "originalPrice": 999.99,
+    "discount": 20,
+    "description": "Le HONOR 200 PRO incarne l",
+    "shortDescription": "Flagship photographique avec triple 50MP Harcourt Edition et 24GB RAM total",
+    "urlSlug": "honor-200-pro-smartphone-flagship-pro",
+    "warranty": "2 ans constructeur + extension 1 an offerte",
+    "deliveryTime": "24-48h à La Réunion",
+    "repairabilityIndex": 8.1,
+    "dasHead": "0.87 W/kg",
+    "dasBody": "1.11 W/kg",
+    "images": [
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-cyan-3.png",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-cyan-4.png",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-200-pro-cyan-6.png"
+    ],
+    "keywords": [
+      "HONOR 200 PRO",
+      "smartphone flagship",
+      "12GB RAM",
+      "512GB stockage",
+      "HONOR premium pro",
+      "La Réunion",
+      "974"
+    ],
+    "highlights": [
+      "Triple caméra 50MP Harcourt Edition",
+      "24GB RAM total (12+12GB)",
+      "Charge SuperCharge 100W",
+      "Écran OLED 4000 nits",
+      "Processeur Snapdragon 8s Gen 3"
+    ],
+    "badges": [
+      "Flagship",
+      "Harcourt Edition",
+      "Photo Pro"
+    ],
+    "specifications": [
+      {
+        "label": "RAM",
+        "value": "12GB + 12GB (24GB total)"
+      },
+      {
+        "label": "Stockage",
+        "value": "512GB"
+      },
+      {
+        "label": "Écran",
+        "value": "6.78"
+      },
+      {
+        "label": "Caméra",
+        "value": "Triple 50MP Harcourt"
+      },
+      {
+        "label": "Batterie",
+        "value": "5200mAh Silicon-Carbon"
+      },
+      {
+        "label": "Charge",
+        "value": "100W filaire, 66W sans fil"
+      },
+      {
+        "label": "Processeur",
+        "value": "Snapdragon 8s Gen 3"
+      },
+      {
+        "label": "Certification",
+        "value": "IP65"
+      }
+    ],
+    "rating": {
+      "average": 4.9,
+      "count": 67
+    },
+    "status": "active"
+  },
+  {
+    "id": "honor-x6b-6gb-128gb",
+    "sku": "HONOR-X6B-6GB-128GB",
+    "name": "HONOR X6B 6+6/128",
+    "brand": "HONOR",
+    "category": "Smartphones",
+    "subcategory": "Milieu de gamme",
+    "price": 199.99,
+    "originalPrice": 249.99,
+    "discount": 20,
+    "description": "Le HONOR X6B incarne l",
+    "shortDescription": "Smartphone équilibré avec 6+6GB RAM, 128GB et écran Full HD+ certifié TÜV",
+    "urlSlug": "honor-x6b-6gb-128gb-smartphone-premium",
+    "warranty": "2 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "repairabilityIndex": 8.1,
+    "dasHead": "0.76 W/kg",
+    "dasBody": "1.19 W/kg",
+    "images": [
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x6b-noir-main.jpg"
+    ],
+    "keywords": [
+      "HONOR X6B",
+      "smartphone premium",
+      "6GB RAM",
+      "128GB stockage",
+      "téléphone HONOR",
+      "La Réunion",
+      "974"
+    ],
+    "highlights": [
+      "Écran certifié TÜV Rheinland",
+      "Caméra 50MP avec IA",
+      "RAM extensible jusqu\\",
+      ",\n      ",
+      "autonomie",
+      "Stockage extensible 1TB"
+    ],
+    "badges": [
+      "Rapport qualité-prix",
+      "Populaire"
+    ],
+    "specifications": [
+      {
+        "label": "RAM",
+        "value": "6GB + 6GB extensible"
+      },
+      {
+        "label": "Stockage",
+        "value": "128GB (extensible 1TB)"
+      },
+      {
+        "label": "Écran",
+        "value": "6.67"
+      },
+      {
+        "label": "Caméra",
+        "value": "50MP avec IA"
+      },
+      {
+        "label": "Batterie",
+        "value": "5200mAh"
+      },
+      {
+        "label": "Charge",
+        "value": "22.5W"
+      },
+      {
+        "label": "Protection",
+        "value": "TÜV Rheinland"
+      }
+    ],
+    "rating": {
+      "average": 4.5,
+      "count": 423
+    },
+    "status": "active"
+  },
+  {
+    "id": "honor-x7c-8gb-256gb",
+    "sku": "HONOR-X7C-8GB-256GB",
+    "name": "HONOR X7C 8+6/256",
+    "brand": "HONOR",
+    "category": "Smartphones",
+    "subcategory": "Haut de gamme",
+    "price": 269.99,
+    "originalPrice": 329.99,
+    "discount": 18,
+    "description": "Le HONOR X7C représente l",
+    "shortDescription": "Smartphone haut de gamme avec écran AMOLED 120Hz et triple caméra 64MP OIS",
+    "urlSlug": "honor-x7c-8gb-256gb-smartphone-pro",
+    "warranty": "2 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "repairabilityIndex": 8.1,
+    "dasHead": "0.77 W/kg",
+    "dasBody": "1.05 W/kg",
+    "images": [
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x7c-noir-1.jpg",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x7c-noir-2.jpg",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x7c-noir-3.jpg",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x7c-noir-4.jpg",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x7c-noir-5.jpg",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x7c-noir-6.jpg",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x7c-noir-8.jpg",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x7c-noir-9.jpg"
+    ],
+    "keywords": [
+      "HONOR X7C",
+      "smartphone haut de gamme",
+      "8GB RAM",
+      "256GB stockage",
+      "téléphone HONOR",
+      "La Réunion",
+      "974"
+    ],
+    "highlights": [
+      "Écran AMOLED 120Hz DCI-P3",
+      "Triple caméra 64MP avec OIS",
+      "RAM extensible jusqu\\",
+      ",\n      ",
+      ",\n      "
+    ],
+    "badges": [
+      "Haut de gamme",
+      "Triple caméra"
+    ],
+    "specifications": [
+      {
+        "label": "RAM",
+        "value": "8GB + 6GB extensible"
+      },
+      {
+        "label": "Stockage",
+        "value": "256GB"
+      },
+      {
+        "label": "Écran",
+        "value": "6.7"
+      },
+      {
+        "label": "Caméra",
+        "value": "Triple 64MP avec OIS"
+      },
+      {
+        "label": "Batterie",
+        "value": "5400mAh"
+      },
+      {
+        "label": "Charge",
+        "value": "40W Turbo"
+      },
+      {
+        "label": "Sécurité",
+        "value": "Empreinte latérale"
+      }
+    ],
+    "rating": {
+      "average": 4.6,
+      "count": 189
+    },
+    "status": "active"
+  },
+  {
+    "id": "honor-x5b-4gb-64gb",
+    "sku": "HONOR-X5B-4GB-64GB",
+    "name": "HONOR X5B 4+4/64",
+    "brand": "HONOR",
+    "category": "Smartphones",
+    "subcategory": "Entrée de gamme",
+    "price": 149.99,
+    "originalPrice": 179.99,
+    "discount": 17,
+    "description": "Le HONOR X5B est le smartphone idéal pour débuter dans l",
+    "shortDescription": "Smartphone accessible avec grande autonomie et écran HD+ 6.56",
+    "urlSlug": "honor-x5b-4gb-64gb-smartphone-gaming",
+    "warranty": "2 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "repairabilityIndex": 8.1,
+    "dasHead": "1.04 W/kg",
+    "dasBody": "1.00 W/kg",
+    "images": [
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x5b-noir-1.jpg",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x5b-noir-2.jpg",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x5b-noir-3.jpg",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x5b-noir-4.jpg",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x5b-noir-5.jpg",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x5b-noir-6.jpg",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x5b-noir-7.jpg",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x5b-noir-8.jpg",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HONOR/Smartphones/honor-x5b-noir-9.jpg"
+    ],
+    "keywords": [
+      "HONOR X5B",
+      "smartphone gaming",
+      "4GB RAM",
+      "64GB stockage",
+      "téléphone HONOR",
+      "La Réunion",
+      "974"
+    ],
+    "highlights": [
+      "Batterie 5000mAh longue durée",
+      "RAM extensible à 8GB",
+      "Stockage extensible 256GB",
+      "Protection oculaire intégrée",
+      "Double SIM + carte SD"
+    ],
+    "badges": [
+      "Meilleure autonomie",
+      "Prix attractif"
+    ],
+    "specifications": [
+      {
+        "label": "RAM",
+        "value": "4GB + 4GB extensible"
+      },
+      {
+        "label": "Stockage",
+        "value": "64GB (extensible 256GB)"
+      },
+      {
+        "label": "Écran",
+        "value": "6.56"
+      },
+      {
+        "label": "Caméra",
+        "value": "13MP avec HDR"
+      },
+      {
+        "label": "Batterie",
+        "value": "5000mAh"
+      },
+      {
+        "label": "Slots",
+        "value": "Double SIM + SD"
+      }
+    ],
+    "rating": {
+      "average": 4.3,
+      "count": 567
+    },
+    "status": "active"
+  },
+  {
+    "id": "nokia-110-2023",
+    "sku": "NOKIA-110-2023",
+    "name": "NOKIA 110 2023",
+    "brand": "NOKIA",
+    "category": "Smartphones",
+    "subcategory": "Entrée de gamme",
+    "price": 34.99,
+    "description": "Le NOKIA 110 édition 2023 perpétue l",
+    "shortDescription": "Téléphone simple avec autonomie exceptionnelle de plusieurs semaines",
+    "urlSlug": "nokia-110-2023-telephone-simple",
+    "warranty": "1 an constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "dasHead": "1.226 W/kg",
+    "dasBody": "1.226 W/kg",
+    "keywords": [
+      "NOKIA 110",
+      "téléphone simple",
+      "NOKIA classique",
+      "autonomie longue",
+      "téléphone robuste",
+      "La Réunion",
+      "974"
+    ],
+    "highlights": [
+      "Autonomie exceptionnelle de plusieurs semaines",
+      "Design Nokia classique et robuste",
+      "Double SIM pour deux numéros",
+      "Radio FM intégrée",
+      "Lampe torche pratique"
+    ],
+    "badges": [
+      "Autonomie record",
+      "Simple et fiable"
+    ],
+    "specifications": [
+      {
+        "label": "Type",
+        "value": "Téléphone simple"
+      },
+      {
+        "label": "Écran",
+        "value": "1.77"
+      },
+      {
+        "label": "Batterie",
+        "value": "1000mAh"
+      },
+      {
+        "label": "Autonomie",
+        "value": "Plusieurs semaines"
+      },
+      {
+        "label": "Dual SIM",
+        "value": "Oui"
+      },
+      {
+        "label": "Radio FM",
+        "value": "Oui"
+      },
+      {
+        "label": "Lampe torche",
+        "value": "Oui"
+      }
+    ],
+    "rating": {
+      "average": 4.5,
+      "count": 234
+    },
+    "status": "active"
+  },
+  {
+    "id": "nokia-110-4g-2025",
+    "sku": "NOKIA-110-4G-2025",
+    "name": "NOKIA 110 4G 2025",
+    "brand": "NOKIA",
+    "category": "Smartphones",
+    "subcategory": "Entrée de gamme",
+    "price": 64.99,
+    "description": "Le NOKIA 110 4G édition 2025 révolutionne le concept du téléphone simple en intégrant la connectivité 4G LTE ultra-rapide dans un format classique éprouvé. Cette évolution majeure transforme l",
+    "shortDescription": "Téléphone simple avec connexion 4G rapide",
+    "urlSlug": "nokia-110-4g-2025-telephone-simple",
+    "warranty": "1 an constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "repairabilityIndex": 4.1,
+    "dasHead": "1.321 W/kg",
+    "dasBody": "1.524 W/kg",
+    "keywords": [
+      "NOKIA 110 4G",
+      "téléphone 4G",
+      "NOKIA 2025",
+      "connexion rapide",
+      "téléphone bleu",
+      "La Réunion",
+      "974"
+    ],
+    "highlights": [
+      "Connexion 4G rapide",
+      "Design Nokia robuste",
+      "Autonomie longue durée",
+      "Double SIM pratique",
+      "Appareil photo intégré"
+    ],
+    "badges": [
+      "4G rapide",
+      "Nouveau modèle 2025"
+    ],
+    "specifications": [
+      {
+        "label": "Type",
+        "value": "Téléphone simple 4G"
+      },
+      {
+        "label": "Écran",
+        "value": "1.8"
+      },
+      {
+        "label": "Connectivité",
+        "value": "4G LTE"
+      },
+      {
+        "label": "Batterie",
+        "value": "1450mAh"
+      },
+      {
+        "label": "Autonomie",
+        "value": "Longue durée"
+      },
+      {
+        "label": "Dual SIM",
+        "value": "Oui"
+      },
+      {
+        "label": "Appareil photo",
+        "value": "0.3MP"
+      }
+    ],
+    "rating": {
+      "average": 4.3,
+      "count": 178
+    },
+    "status": "active"
+  },
+  {
+    "id": "nokia-g22",
+    "sku": "NOKIA-G22",
+    "name": "NOKIA G22",
+    "brand": "NOKIA",
+    "category": "Smartphones",
+    "subcategory": "Milieu de gamme",
+    "price": 199.99,
+    "description": "Le NOKIA G22 incarne la vision moderne de Nokia en combinant durabilité exceptionnelle, réparabilité révolutionnaire et performances Android optimales. Premier smartphone conçu en partenariat avec iFixit pour réparabilité maximale : écran remplaçable en 5 minutes avec outils basiques, batterie interchangeable sans soudure, modules caméra et port USB-C facilement remplaçables, guides de réparation officiels gratuits et pièces détachées garanties 5 ans. Cette approche écologique pionnière réduit l",
+    "shortDescription": "Smartphone Android durable et facilement réparable",
+    "urlSlug": "nokia-g22-smartphone-android",
+    "warranty": "2 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "repairabilityIndex": 8.1,
+    "dasHead": "1.10 W/kg",
+    "dasBody": "1.27 W/kg",
+    "keywords": [
+      "NOKIA G22",
+      "smartphone Android",
+      "téléphone durable",
+      "smartphone écologique",
+      "La Réunion",
+      "974"
+    ],
+    "highlights": [
+      "Android pur avec mises à jour garanties",
+      "Design durable et réparable",
+      "Écran 90Hz fluide",
+      "Batterie 5050mAh longue durée",
+      "Indice de réparabilité élevé 8.1"
+    ],
+    "badges": [
+      "Écologique",
+      "Réparable",
+      "Android pur"
+    ],
+    "specifications": [
+      {
+        "label": "OS",
+        "value": "Android 12 (pur)"
+      },
+      {
+        "label": "Écran",
+        "value": "6.5"
+      },
+      {
+        "label": "RAM",
+        "value": "4GB"
+      },
+      {
+        "label": "Stockage",
+        "value": "64GB extensible"
+      },
+      {
+        "label": "Batterie",
+        "value": "5050mAh"
+      },
+      {
+        "label": "Charge",
+        "value": "20W"
+      },
+      {
+        "label": "Caméra principale",
+        "value": "50MP"
+      },
+      {
+        "label": "Caméra selfie",
+        "value": "8MP"
+      }
+    ],
+    "rating": {
+      "average": 4.6,
+      "count": 345
+    },
+    "status": "active"
+  },
+  {
+    "id": "ca65"
+  },
+  {
+    "id": "ca83"
+  },
+  {
+    "id": "ca87"
+  },
+  {
+    "id": "ca88"
+  },
+  {
+    "id": "ca89"
+  },
+  {
+    "id": "casque-anc-hifuture-tour-x",
+    "sku": "HIFUTURE-TOUR-X",
+    "name": "CASQUE ANC HIFUTURE TOUR X",
+    "brand": "HIFUTURE",
+    "category": "Audio",
+    "subcategory": "Casques",
+    "price": 69.99,
+    "originalPrice": 89.99,
+    "discount": 22,
+    "description": "Le casque HIFUTURE TOUR X offre une expérience audio premium avec réduction active du bruit (ANC) de pointe. Conçu pour les audiophiles et professionnels, il délivre un son haute fidélité avec des basses profondes et des aigus cristallins. La technologie ANC élimine jusqu",
+    "shortDescription": "Casque ANC avec Bluetooth 5.0 et 30h autonomie",
+    "urlSlug": "casque-anc-hifuture-tour-x",
+    "warranty": "12 mois",
+    "deliveryTime": "24-48h à La Réunion",
+    "images": [
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Casques/hifuture-tour-x-3.jpg",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Casques/hifuture-tour-x-4.jpg",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Casques/hifuture-tour-x-1.jpg"
+    ],
+    "keywords": [
+      "HIFUTURE TOUR X",
+      "casque ANC",
+      "réduction bruit",
+      "Bluetooth",
+      "La Réunion",
+      "974"
+    ],
+    "highlights": [
+      "Réduction active du bruit ANC",
+      "Bluetooth 5.0 stable",
+      "30 heures d\\",
+      ",\n      ",
+      ",\n      ",
+      ",\n      ",
+      ",\n      ",
+      ",\n      "
+    ],
+    "badges": [
+      "ANC",
+      "Longue autonomie"
+    ],
+    "specifications": [
+      {
+        "label": "Technologie",
+        "value": "ANC (Active Noise Cancelling)"
+      },
+      {
+        "label": "Bluetooth",
+        "value": "5.0"
+      },
+      {
+        "label": "Autonomie",
+        "value": "30 heures"
+      },
+      {
+        "label": "Temps de charge",
+        "value": "2 heures"
+      },
+      {
+        "label": "Drivers",
+        "value": "40mm"
+      },
+      {
+        "label": "Réponse fréquence",
+        "value": "20Hz-20kHz"
+      },
+      {
+        "label": "Impédance",
+        "value": "32Ω"
+      },
+      {
+        "label": "Sensibilité",
+        "value": "105dB"
+      },
+      {
+        "label": "Microphone",
+        "value": "Intégré avec réduction de bruit"
+      },
+      {
+        "label": "Poids",
+        "value": "280g"
+      }
+    ],
+    "rating": {
+      "average": 4.5,
+      "count": 42
+    },
+    "status": "active"
+  },
+  {
+    "id": "hifuture-casque-anc-tour",
+    "sku": "HIF-TOUR-ANC",
+    "name": "HIFUTURE Casque ANC Tour",
+    "brand": "HIFUTURE",
+    "category": "Audio",
+    "subcategory": "Casques",
+    "price": 44.99,
+    "originalPrice": 59.99,
+    "discount": 25,
+    "description": "Le casque HIFUTURE Tour avec ANC offre une qualité audio exceptionnelle à prix accessible. La réduction active du bruit permet de s",
+    "shortDescription": "Casque ANC abordable avec Bluetooth 5.0",
+    "urlSlug": "hifuture-casque-anc-tour",
+    "warranty": "12 mois",
+    "deliveryTime": "24-48h à La Réunion",
+    "images": [
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Casques/hifuture-tour-1.jpg",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Casques/hifuture-tour-2.jpg",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Casques/hifuture-tour-3.jpg",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Casques/hifuture-tour-4.jpg",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Casques/hifuture-tour-5.jpg",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Casques/hifuture-tour-6.jpg",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Casques/hifuture-tour-7.jpg",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Casques/hifuture-tour-8.jpg",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Casques/hifuture-tour-9.jpg",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Casques/hifuture-tour-10.jpg"
+    ],
+    "keywords": [
+      "HIFUTURE Tour",
+      "casque ANC",
+      "prix malin",
+      "Bluetooth",
+      "La Réunion",
+      "974"
+    ],
+    "highlights": [
+      "Réduction active du bruit",
+      "Bluetooth 5.0",
+      "25 heures d\\",
+      ",\n      ",
+      ",\n      ",
+      ",\n      ",
+      ",\n      ",
+      ",\n      "
+    ],
+    "badges": [
+      "Prix Malin",
+      "ANC"
+    ],
+    "specifications": [
+      {
+        "label": "Technologie",
+        "value": "ANC (Active Noise Cancelling)"
+      },
+      {
+        "label": "Bluetooth",
+        "value": "5.0"
+      },
+      {
+        "label": "Autonomie",
+        "value": "25 heures"
+      },
+      {
+        "label": "Temps de charge",
+        "value": "2.5 heures"
+      },
+      {
+        "label": "Drivers",
+        "value": "40mm"
+      },
+      {
+        "label": "Réponse fréquence",
+        "value": "20Hz-20kHz"
+      },
+      {
+        "label": "Impédance",
+        "value": "32Ω"
+      },
+      {
+        "label": "Sensibilité",
+        "value": "102dB"
+      },
+      {
+        "label": "Microphone",
+        "value": "Intégré"
+      },
+      {
+        "label": "Poids",
+        "value": "250g"
+      }
+    ],
+    "rating": {
+      "average": 4.3,
+      "count": 67
+    },
+    "status": "active"
+  },
+  {
+    "id": "th300-review-44"
+  },
+  {
+    "id": "th300-review-59"
+  },
+  {
+    "id": "th300-review-64"
+  },
+  {
+    "id": "th300-review-65"
+  },
+  {
+    "id": "th300-review-66"
+  },
+  {
+    "id": "monster-element-air",
+    "sku": "MONSTER-ELEMENT-AIR",
+    "name": "MONSTER Element Air",
+    "brand": "MONSTER",
+    "category": "Audio",
+    "subcategory": "Casques",
+    "price": 199.99,
+    "originalPrice": 249.99,
+    "discount": 20,
+    "description": "Casque MONSTER Element Air haut de gamme avec technologie sans fil avancée. Audio haute résolution pour qualité sonore exceptionnelle. Design ultra-léger pour confort maximal durant longues sessions. Autonomie exceptionnelle permettant usage intensif sans contrainte. Le casque sans fil premium pour mélomanes exigeants à La Réunion.",
+    "shortDescription": "Casque sans fil haut de gamme avec audio haute résolution",
+    "urlSlug": "monster-element-air-casque-sans-fil",
+    "warranty": "2 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "keywords": [
+      "MONSTER Element Air",
+      "casque sans fil",
+      "audio haute résolution",
+      "ultra-léger",
+      "autonomie exceptionnelle"
+    ],
+    "highlights": [
+      "Audio haute résolution",
+      "Ultra-léger",
+      "Sans fil avancé",
+      "Gaming premium"
+    ],
+    "badges": [
+      "Premium",
+      "High-End"
+    ],
+    "specifications": [
+      {
+        "label": "Connectivité",
+        "value": "Bluetooth"
+      },
+      {
+        "label": "Audio",
+        "value": "Haute résolution"
+      },
+      {
+        "label": "Design",
+        "value": "Ultra-léger"
+      },
+      {
+        "label": "Type",
+        "value": "Gaming Premium"
+      }
+    ],
+    "rating": {
+      "average": 4.9,
+      "count": 45
+    },
+    "status": "active"
+  },
+  {
+    "id": "muvit-casque-enfant",
+    "sku": "MUHPH01",
+    "name": "MUVIT Casque Sans Fil Enfant",
+    "brand": "MUVIT",
+    "category": "Audio",
+    "subcategory": "Casques",
+    "price": 39.99,
+    "originalPrice": 49.99,
+    "discount": 20,
+    "description": "Plongez dans l",
+    "shortDescription": "Casque enfant avec protection auditive",
+    "urlSlug": "muvit-casque-enfant",
+    "warranty": "2 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "images": [
+      "/placeholder-monster-mini.svg"
+    ],
+    "keywords": [
+      "MUVIT",
+      "casque enfant",
+      "protection auditive",
+      "sans fil",
+      "La Réunion"
+    ],
+    "highlights": [
+      "Volume limité sécurité",
+      "Designs animaux",
+      "Confort enfant",
+      "Bluetooth sans fil"
+    ],
+    "badges": [
+      "Enfants",
+      "Protection"
+    ],
+    "specifications": [
+      {
+        "label": "Âge",
+        "value": "3-12 ans"
+      },
+      {
+        "label": "Protection",
+        "value": "Volume limité 85dB"
+      },
+      {
+        "label": "Connectivité",
+        "value": "Bluetooth"
+      },
+      {
+        "label": "Garantie",
+        "value": "2 ans"
+      }
+    ],
+    "rating": {
+      "average": 4.7,
+      "count": 89
+    },
+    "status": "active"
+  },
+  {
+    "id": "hifuture-gravity",
+    "sku": "HIFUTURE-GRAVITY-360",
+    "name": "HIFUTURE GRAVITY Enceinte Bluetooth",
+    "brand": "HIFUTURE",
+    "category": "Audio",
+    "subcategory": "Enceintes",
+    "price": 89.99,
+    "originalPrice": 119.99,
+    "discount": 25,
+    "description": "Puissance et profondeur avec l",
+    "shortDescription": "Enceinte 360° 40W avec 24h autonomie, IPX7 et éclairage RGB synchronisé",
+    "urlSlug": "hifuture-enceinte-gravity",
+    "warranty": "2 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "images": [
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Enceintes/gravity-noir.png",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Enceintes/gravity-noir-1.png",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Enceintes/gravity-noir-2.png",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Enceintes/gravity-noir-3.png",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Enceintes/gravity-noir-4.png",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Enceintes/gravity-noir-5.png",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Enceintes/gravity-noir-6.png",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Enceintes/gravity-noir-eclater.png",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Enceintes/gravity-noir-et-bleu.png"
+    ],
+    "keywords": [
+      "HIFUTURE GRAVITY",
+      "enceinte 360",
+      "enceinte Bluetooth",
+      "IPX7",
+      "LED RGB",
+      "La Réunion",
+      "974"
+    ],
+    "highlights": [
+      "Son 360° immersif 40W",
+      "24 heures d\\",
+      ",\n      ",
+      ",\n      ",
+      ",\n      "
+    ],
+    "badges": [
+      "360°",
+      "IPX7",
+      "LED RGB"
+    ],
+    "specifications": [
+      {
+        "label": "Puissance",
+        "value": "40W RMS"
+      },
+      {
+        "label": "Son",
+        "value": "360° immersif"
+      },
+      {
+        "label": "Autonomie",
+        "value": "24 heures"
+      },
+      {
+        "label": "Batterie",
+        "value": "6600mAh + Powerbank"
+      },
+      {
+        "label": "Étanchéité",
+        "value": "IPX7 (flottante)"
+      },
+      {
+        "label": "Bluetooth",
+        "value": "5.2 Multipoint"
+      },
+      {
+        "label": "Portée",
+        "value": "30 mètres"
+      },
+      {
+        "label": "Extras",
+        "value": "LED RGB, FM, MicroSD"
+      }
+    ],
+    "rating": {
+      "average": 4.9,
+      "count": 85
+    },
+    "status": "active"
+  },
+  {
+    "id": "monster-n-lite-203",
+    "sku": "MONSTER-N-LITE-203",
+    "name": "MONSTER N-Lite 203 Batterie Portable Premium 20000mAh",
+    "brand": "MONSTER",
+    "category": "Accessoires",
+    "subcategory": "Batteries externes",
+    "price": 49.99,
+    "originalPrice": 69.99,
+    "discount": 29,
+    "description": "La batterie portable MONSTER N-Lite 203 incarne l",
+    "shortDescription": "Batterie 20000mAh ultra-compacte avec charge rapide 22.5W et triple sortie simultanée",
+    "urlSlug": "monster-n-lite-203-batterie-portable",
+    "warranty": "2 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "keywords": [
+      "MONSTER N-Lite 203",
+      "batterie portable",
+      "20000mAh",
+      "charge rapide",
+      "powerbank",
+      "gold",
+      "noir"
+    ],
+    "highlights": [
+      "Capacité massive 20000mAh",
+      "Charge rapide 22.5W",
+      "Triple sortie simultanée",
+      "Design ultra-compact",
+      "Certifié transport aérien"
+    ],
+    "badges": [
+      "Best-Seller",
+      "Charge Rapide",
+      "20000mAh"
+    ],
+    "specifications": [
+      {
+        "label": "Capacité",
+        "value": "20000mAh"
+      },
+      {
+        "label": "Charge rapide",
+        "value": "22.5W PD/QC3.0"
+      },
+      {
+        "label": "Sorties",
+        "value": "2x USB-A + 1x USB-C"
+      },
+      {
+        "label": "Entrée",
+        "value": "USB-C 18W"
+      },
+      {
+        "label": "Temps charge",
+        "value": "4 heures"
+      },
+      {
+        "label": "Affichage",
+        "value": "LED intelligent"
+      },
+      {
+        "label": "Dimensions",
+        "value": "145x68x28mm"
+      },
+      {
+        "label": "Poids",
+        "value": "380g"
+      }
+    ],
+    "rating": {
+      "average": 4.9,
+      "count": 892
+    },
+    "status": "active"
+  },
+  {
+    "id": "monster-illuminescence-basic-multi",
+    "sku": "MON-ILL-BASIC-MULTI",
+    "name": "MONSTER Illuminescence Basic Lightstrip Multicouleur",
+    "brand": "MONSTER",
+    "category": "LED",
+    "subcategory": "Bandeaux LED",
+    "price": 13.99,
+    "originalPrice": 19.99,
+    "discount": 30,
+    "description": "Le bandeau LED MONSTER Illuminescence Basic transforme instantanément votre espace avec éclairage RGB personnalisable infini. Cette solution versatile crée ambiances uniques adaptées chaque moment vie. Technologie RGB déploie millions couleurs pour atmosphères sur-mesure. Des teintes chaudes relaxantes aux couleurs vives festives, palette illimitée. Disponible 3 longueurs : 2m espaces compacts, 4m installations moyennes, 5m grandes surfaces. Installation révolutionnaire avec adhésif 3M industriel fixation durable toutes surfaces. Aucun perçage, câblage complexe ou compétence technique requise. Alimentation USB universelle compatible tous ports standards. Parfait éclairage bureau gaming, rétro-éclairage TV, décoration chambre. Crée ambiances cinéma immersives ou atmosphères festives soirées. LED haute efficacité consomment minimum énergie durée vie exceptionnelle. Luminosité constante sans dégradation après années utilisation. Résistance variations température garantit performance stable. Flexible épouse contours, contourne obstacles, suit formes complexes. Coupable tous 5cm pour ajustement parfait dimensions. Contrôleur inclus permet sélection couleurs et modes dynamiques. Solution idéale moderniser intérieur avec créativité accessible La Réunion.",
+    "shortDescription": "Bandeau LED RGB multicouleur avec installation adhésive facile et alimentation USB",
+    "urlSlug": "monster-illuminescence-basic-multicouleur",
+    "warranty": "1 an constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "keywords": [
+      "MONSTER Illuminescence",
+      "bandeau LED",
+      "RGB",
+      "gaming",
+      "éclairage",
+      "multicouleur",
+      "974"
+    ],
+    "highlights": [
+      "RGB millions de couleurs",
+      "Installation adhésive facile",
+      "Alimentation USB universelle",
+      "3 longueurs disponibles",
+      "Coupable et flexible"
+    ],
+    "badges": [
+      "RGB",
+      "Gaming",
+      "Facile"
+    ],
+    "specifications": [
+      {
+        "label": "Type",
+        "value": "LED RGB"
+      },
+      {
+        "label": "Longueurs",
+        "value": "2m/4m/5m"
+      },
+      {
+        "label": "Alimentation",
+        "value": "USB 5V"
+      },
+      {
+        "label": "LED/mètre",
+        "value": "30 LED"
+      },
+      {
+        "label": "Adhésif",
+        "value": "3M industriel"
+      },
+      {
+        "label": "Coupable",
+        "value": "Tous les 5cm"
+      },
+      {
+        "label": "Angle",
+        "value": "120°"
+      },
+      {
+        "label": "Durée vie",
+        "value": "50000 heures"
+      }
+    ],
+    "rating": {
+      "average": 4.6,
+      "count": 456
+    },
+    "status": "active"
+  },
+  {
+    "id": "monster-illuminescence-color-blanc",
+    "sku": "MON-ILL-COLOR-BLANC",
+    "name": "MONSTER Illuminescence Light Strip Color/Blanc",
+    "brand": "MONSTER",
+    "category": "LED",
+    "subcategory": "Bandeaux LED",
+    "price": 17.99,
+    "originalPrice": 24.99,
+    "discount": 28,
+    "description": "Le bandeau LED MONSTER Illuminescence Color/Blanc révolutionne éclairage avec double technologie RGB multicouleur et blanc chaud. Cette polyvalence unique permet créer ambiances festives colorées ou éclairage fonctionnel optimal selon besoins. Mode RGB transforme espace avec palette infinie teintes vibrantes. Créez atmosphères personnalisées pour gaming, soirées, relaxation. Mode blanc chaud apporte lumière douce naturelle idéale travail lecture. Température couleur 3000K réduit fatigue oculaire sessions prolongées. Basculez instantanément entre modes selon activité moment. Installation 2 mètres parfaite bureau, étagères, contour écran. Adhésif 3M haute qualité garantit fixation permanente propre. Alimentation USB compatible chargeurs, PC, batteries portables. Flexibilité permet suivre contours, angles, formes complexes. LED haute efficacité 5050 offrent luminosité exceptionnelle. Consommation optimisée pour impact minimal facture électrique. Durée vie 50000 heures garantit investissement durable. Contrôleur intelligent mémorise derniers réglages utilisés. Idéal espaces polyvalents nécessitant éclairage adaptatif. Solution parfaite habitants La Réunion cherchant versatilité maximale.",
+    "shortDescription": "Bandeau LED double mode RGB multicouleur + blanc chaud pour polyvalence totale",
+    "urlSlug": "monster-illuminescence-color-blanc",
+    "warranty": "1 an constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "keywords": [
+      "MONSTER LED",
+      "double mode",
+      "RGB blanc",
+      "éclairage polyvalent",
+      "gaming travail",
+      "La Réunion"
+    ],
+    "highlights": [
+      "Double mode RGB + Blanc",
+      "Polyvalence gaming/travail",
+      "Blanc chaud 3000K",
+      "Installation USB simple",
+      "Mémoire derniers réglages"
+    ],
+    "badges": [
+      "Double Mode",
+      "Polyvalent",
+      "Gaming/Travail"
+    ],
+    "specifications": [
+      {
+        "label": "Modes",
+        "value": "RGB + Blanc chaud"
+      },
+      {
+        "label": "Longueur",
+        "value": "2 mètres"
+      },
+      {
+        "label": "Température",
+        "value": "3000K blanc"
+      },
+      {
+        "label": "LED type",
+        "value": "5050 SMD"
+      },
+      {
+        "label": "Alimentation",
+        "value": "USB 5V 2A"
+      },
+      {
+        "label": "Luminosité",
+        "value": "800 lumens"
+      },
+      {
+        "label": "Angle",
+        "value": "120°"
+      },
+      {
+        "label": "Durée vie",
+        "value": "50000h"
+      }
+    ],
+    "rating": {
+      "average": 4.7,
+      "count": 234
+    },
+    "status": "active"
+  },
+  {
+    "id": "monster-illuminescence-neon",
+    "sku": "MON-ILL-NEON",
+    "name": "MONSTER Illuminescence Neon Light Strip",
+    "brand": "MONSTER",
+    "category": "LED",
+    "subcategory": "Néon LED",
+    "price": 26.99,
+    "originalPrice": 39.99,
+    "discount": 33,
+    "description": "Le bandeau MONSTER Illuminescence Neon reproduit effet néon emblématique avec technologie LED moderne révolutionnaire. Cette innovation fusionne charme rétro-futuriste néon traditionnel avec efficacité LED contemporaine. Effet néon continu élimine points lumineux individuels créant ligne lumière homogène. Technologie diffusion avancée produit halo doux enveloppant signature néon authentique. Design cyberpunk transforme intérieur en espace branché métropole nocturne. Esthétique futuriste évoque univers science-fiction et gaming moderne. Polyvalence intérieur/extérieur avec construction étanche résistante. Illuminez terrasses, jardins, façades ou espaces intérieurs même efficacité. Version Basic 2m réactivité sonore transforme musique spectacle pulsant. Version Smart 5m contrôle WiFi complet personnalisation smartphone. Version Smart Flow 5m effets flux programmables animations hypnotiques. Réactivité sonore analyse fréquences temps réel synchronisation parfaite. Basses déclenchent pulsations intenses, aigus génèrent scintillements. Contrôle WiFi permet programmation horaires, scènes personnalisées. Compatible assistants vocaux pour contrôle mains libres. Installation flexible suit contours architecturaux complexes. Solution créative habitants La Réunion passionnés design futuriste.",
+    "shortDescription": "Bandeau LED effet néon continu avec versions sonore et WiFi pour ambiance futuriste",
+    "urlSlug": "monster-illuminescence-neon-strip",
+    "warranty": "2 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "keywords": [
+      "MONSTER Neon",
+      "LED néon",
+      "cyberpunk",
+      "gaming futuriste",
+      "effet continu",
+      "WiFi",
+      "974"
+    ],
+    "highlights": [
+      "Effet néon authentique",
+      "Design cyberpunk futuriste",
+      "Intérieur/Extérieur IP65",
+      "Versions sonore et WiFi",
+      "Diffusion lumière uniforme"
+    ],
+    "badges": [
+      "Néon",
+      "Cyberpunk",
+      "Smart"
+    ],
+    "specifications": [
+      {
+        "label": "Effet",
+        "value": "Néon continu"
+      },
+      {
+        "label": "Versions",
+        "value": "2m/5m/5m Flow"
+      },
+      {
+        "label": "Usage",
+        "value": "Int/Ext IP65"
+      },
+      {
+        "label": "Contrôle",
+        "value": "Son/WiFi/Flow"
+      },
+      {
+        "label": "Diffusion",
+        "value": "360° uniforme"
+      },
+      {
+        "label": "Matière",
+        "value": "Silicone flexible"
+      },
+      {
+        "label": "Température",
+        "value": "-20°C à 50°C"
+      },
+      {
+        "label": "Durée vie",
+        "value": "50000h"
+      }
+    ],
+    "rating": {
+      "average": 4.8,
+      "count": 167
+    },
+    "status": "active"
+  },
+  {
+    "id": "monster-chroma-2x-bars",
+    "sku": "MON-ILL-CHROMA-2X",
+    "name": "MONSTER Illuminescence Smart Chroma Light 2X Bars",
+    "brand": "MONSTER",
+    "category": "LED",
+    "subcategory": "Barres LED",
+    "price": 49.99,
+    "originalPrice": 79.99,
+    "discount": 38,
+    "description": "Le pack MONSTER Chroma Light 2X Bars révolutionne éclairage intelligent avec système double barres LED technologie RGB IC avancée. Cette solution connectée transforme environnement en spectacle lumineux époustouflant possibilités créatives illimitées. Technologie RGB IC permet contrôle individuel chaque LED créant effets complexes. Motifs fluides, dégradés parfaits, animations synchronisées transforment murs œuvres vivantes. Contrôle WiFi smartphone via application intuitive personnalisation totale. Ajustez couleurs, intensité, vitesse, programmation, scènes personnalisées instantanément. Synchronisation musicale transforme espace salle spectacle privée. Barres réagissent temps réel rythmes fréquences show chorégraphié. Installation modulaire flexible s",
+    "shortDescription": "Pack 2 barres LED RGB IC WiFi avec synchronisation musicale et contrôle vocal",
+    "urlSlug": "monster-chroma-2x-bars-smart",
+    "warranty": "2 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "keywords": [
+      "MONSTER Chroma",
+      "2X bars",
+      "RGB IC",
+      "WiFi",
+      "gaming pro",
+      "sync musicale",
+      "974"
+    ],
+    "highlights": [
+      "RGB IC contrôle pixel",
+      "WiFi + App smartphone",
+      "Synchronisation musicale",
+      "Compatible Alexa/Google",
+      "Installation modulaire"
+    ],
+    "badges": [
+      "Smart Home",
+      "RGB IC",
+      "Pro Gaming"
+    ],
+    "specifications": [
+      {
+        "label": "Technologie",
+        "value": "RGB IC intelligent"
+      },
+      {
+        "label": "Contenu",
+        "value": "2 barres LED"
+      },
+      {
+        "label": "Contrôle",
+        "value": "WiFi + App"
+      },
+      {
+        "label": "Sync",
+        "value": "Musicale temps réel"
+      },
+      {
+        "label": "Assistants",
+        "value": "Alexa/Google"
+      },
+      {
+        "label": "Effets",
+        "value": "50+ prédéfinis"
+      },
+      {
+        "label": "Dimensions",
+        "value": "30cm/barre"
+      },
+      {
+        "label": "Installation",
+        "value": "Modulaire"
+      }
+    ],
+    "rating": {
+      "average": 4.9,
+      "count": 89
+    },
+    "status": "active"
+  },
+  {
+    "id": "monster-basic-30m-rgb",
+    "sku": "MON-ILL-BASIC-30M",
+    "name": "MONSTER Illuminescence Basic Light Strip 30M RGB",
+    "brand": "MONSTER",
+    "category": "LED",
+    "subcategory": "Bandeaux LED",
+    "price": 74.99,
+    "originalPrice": 119.99,
+    "discount": 38,
+    "description": "Le méga bandeau MONSTER Illuminescence 30M RGB représente solution ultime installations envergure nécessitant couverture lumineuse complète spectaculaire. Cette longueur monumentale 30 mètres offre possibilités véritablement illimitées projets ambitieux. Illuminez intégralité grande pièce, créez chemins lumineux continus plusieurs espaces. Encadrez structures architecturales complètes, réalisez installations artistiques envergure. Technologie RGB déploie spectre infini couleurs vibrantes transformant atmosphère. Ambiances chaleureuses accueillantes aux effets dynamiques énergisants parfaits. Éclairage grands espaces calibré pour surfaces importantes uniformité totale. Salons spacieux, lofts, espaces commerciaux, salles réception parfaitement illuminés. Couleurs RGB immersives enveloppent environnement atmosphère lumineuse totale. Immersion chromatique transforme perception espace effets profondeur spectaculaires. Installation professionnelle avec planification minutieuse reste accessible adhésif continu. Flexibilité permet suivre contours architecturaux, contourner obstacles créer motifs. LED haute efficacité maintiennent luminosité fidélité chromatique années. Consommation optimisée reste raisonnable malgré longueur technologie dernière génération. Solution idéale projets envergure La Réunion nécessitant transformation radicale espaces.",
+    "shortDescription": "Méga bandeau LED 30 mètres RGB pour installations complètes grands espaces",
+    "urlSlug": "monster-basic-30m-rgb-mega",
+    "warranty": "2 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "keywords": [
+      "MONSTER 30M",
+      "méga LED",
+      "RGB",
+      "grands espaces",
+      "installation complète",
+      "pro",
+      "974"
+    ],
+    "highlights": [
+      "Longueur monumentale 30m",
+      "RGB millions couleurs",
+      "Grands espaces complets",
+      "Installation professionnelle",
+      "Luminosité 12000 lumens"
+    ],
+    "badges": [
+      "Méga Pack",
+      "30 Mètres",
+      "Pro Installation"
+    ],
+    "specifications": [
+      {
+        "label": "Longueur",
+        "value": "30 mètres"
+      },
+      {
+        "label": "LED totales",
+        "value": "900 LED"
+      },
+      {
+        "label": "Puissance",
+        "value": "150W max"
+      },
+      {
+        "label": "Sections",
+        "value": "6x5m reliées"
+      },
+      {
+        "label": "Alimentation",
+        "value": "220V adaptateur"
+      },
+      {
+        "label": "Luminosité",
+        "value": "12000 lumens"
+      },
+      {
+        "label": "Coupable",
+        "value": "Tous les 10cm"
+      },
+      {
+        "label": "Durée vie",
+        "value": "50000h"
+      }
+    ],
+    "rating": {
+      "average": 4.7,
+      "count": 78
+    },
+    "status": "active"
+  },
+  {
+    "id": "monster-cable-hdmi-ultra",
+    "sku": "MONSTER-HDMI-ULTRA",
+    "name": "MONSTER Câble HDMI Ultra HD 4K 2M",
+    "brand": "MONSTER",
+    "category": "Accessoires",
+    "subcategory": "Câbles et connecteurs",
+    "price": 29.99,
+    "originalPrice": 39.99,
+    "discount": 25,
+    "description": "Le câble HDMI Monster Ultra HD 4K représente l",
+    "shortDescription": "Câble HDMI 2.1 premium 4K@120Hz HDR avec connecteurs plaqués or",
+    "urlSlug": "monster-cable-hdmi-ultra-4k-2m",
+    "warranty": "5 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "keywords": [
+      "câble HDMI 4K",
+      "Monster HDMI",
+      "HDMI 2.1",
+      "gaming",
+      "PS5",
+      "Xbox",
+      "8K",
+      "La Réunion"
+    ],
+    "highlights": [
+      "HDMI 2.1 dernière génération",
+      "4K@120Hz pour gaming",
+      "HDR complet (HDR10, Dolby Vision)",
+      "Audio Dolby Atmos",
+      "Connecteurs plaqués or 24K"
+    ],
+    "badges": [
+      "Premium",
+      "Gaming",
+      "8K Ready"
+    ],
+    "specifications": [
+      {
+        "label": "Version HDMI",
+        "value": "2.1"
+      },
+      {
+        "label": "Résolution Max",
+        "value": "8K@60Hz / 4K@120Hz"
+      },
+      {
+        "label": "Bande passante",
+        "value": "48 Gbps"
+      },
+      {
+        "label": "Longueur",
+        "value": "2 mètres"
+      },
+      {
+        "label": "HDR",
+        "value": "HDR10, Dolby Vision, HLG"
+      },
+      {
+        "label": "Audio",
+        "value": "Dolby Atmos, DTS:X"
+      },
+      {
+        "label": "Connecteurs",
+        "value": "Plaqués or 24K"
+      },
+      {
+        "label": "Blindage",
+        "value": "Triple blindage EMI"
+      }
+    ],
+    "rating": {
+      "average": 4.8,
+      "count": 89
+    },
+    "status": "active"
+  },
+  {
+    "id": "monster-cable-hdmi-standard",
+    "sku": "MCB-HDMI-STD",
+    "name": "MONSTER Câble HDMI Standard",
+    "brand": "MONSTER",
+    "category": "Accessoires",
+    "subcategory": "Câbles et connecteurs",
+    "price": 19.99,
+    "description": "Câble HDMI Monster Standard pour une transmission vidéo et audio de qualité. Supporte la résolution Full HD 1080p et 4K à 30Hz. Connecteurs plaqués or pour une meilleure conductivité. Compatible avec tous les appareils HDMI.",
+    "shortDescription": "Câble HDMI standard Full HD et 4K@30Hz",
+    "urlSlug": "monster-cable-hdmi-standard",
+    "keywords": [
+      "câble HDMI",
+      "Monster",
+      "Full HD",
+      "4K",
+      "La Réunion"
+    ],
+    "badges": [
+      "Full HD",
+      "4K 30Hz"
+    ],
+    "specifications": [
+      {
+        "label": "Version HDMI",
+        "value": "1.4"
+      },
+      {
+        "label": "Résolution Max",
+        "value": "4K@30Hz"
+      },
+      {
+        "label": "Connecteurs",
+        "value": "Plaqués or"
+      },
+      {
+        "label": "Longueurs disponibles",
+        "value": "1.5m, 2m, 3m, 5m"
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "id": "monster-cable-hdmi-essential-4k",
+    "sku": "MCB-HDMI-PHS",
+    "name": "MONSTER CABLE HDMI ESSENTIAL 4K",
+    "brand": "MONSTER",
+    "category": "Accessoires",
+    "subcategory": "Câbles et connecteurs",
+    "price": 24.99,
+    "description": "Câble HDMI Monster Essential 4K pour une expérience 4K complète. Support 4K à 60Hz avec HDR pour des couleurs éclatantes. Construction renforcée pour une durabilité maximale. Parfait pour home cinéma et gaming.",
+    "shortDescription": "Câble HDMI Essential 4K@60Hz avec HDR",
+    "urlSlug": "monster-cable-hdmi-essential-4k",
+    "keywords": [
+      "câble HDMI 4K",
+      "Monster Essential",
+      "HDR",
+      "gaming",
+      "La Réunion"
+    ],
+    "badges": [
+      "4K 60Hz",
+      "HDR"
+    ],
+    "specifications": [
+      {
+        "label": "Version HDMI",
+        "value": "2.0"
+      },
+      {
+        "label": "Résolution Max",
+        "value": "4K@60Hz"
+      },
+      {
+        "label": "HDR",
+        "value": "HDR10"
+      },
+      {
+        "label": "Longueurs disponibles",
+        "value": "1m80, 3m60"
+      },
+      {
+        "label": "Bande passante",
+        "value": "18 Gbps"
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "id": "monster-cable-usbc-charge",
+    "sku": "MONSTER-USBC-100W",
+    "name": "MONSTER Câble USB-C Charge Rapide 100W",
+    "brand": "MONSTER",
+    "category": "Accessoires",
+    "subcategory": "Câbles et connecteurs",
+    "price": 24.99,
+    "originalPrice": 34.99,
+    "discount": 29,
+    "description": "Le câble USB-C Monster 100W révolutionne la charge rapide avec sa capacité Power Delivery exceptionnelle. Conçu pour alimenter les appareils les plus exigeants, ce câble supporte une puissance de charge allant jusqu",
+    "shortDescription": "Câble USB-C PD 100W avec transfert 10Gbps et gaine militaire",
+    "urlSlug": "monster-cable-usbc-charge-rapide-100w",
+    "warranty": "3 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "keywords": [
+      "câble USB-C 100W",
+      "Monster USB-C",
+      "Power Delivery",
+      "charge rapide",
+      "MacBook",
+      "La Réunion"
+    ],
+    "highlights": [
+      "Charge 100W ultra-puissante",
+      "Transfert 10Gbps haute vitesse",
+      "Gaine militaire 30000 flexions",
+      "Compatible tous appareils USB-C",
+      "Puce E-Marker sécurité"
+    ],
+    "badges": [
+      "100W",
+      "Pro",
+      "Durable"
+    ],
+    "specifications": [
+      {
+        "label": "Puissance",
+        "value": "100W (20V/5A)"
+      },
+      {
+        "label": "Transfert",
+        "value": "USB 3.2 Gen 2 - 10Gbps"
+      },
+      {
+        "label": "Longueur",
+        "value": "1.5 mètres"
+      },
+      {
+        "label": "Protocoles",
+        "value": "PD 3.0, QC 4.0, PPS"
+      },
+      {
+        "label": "Vidéo",
+        "value": "4K@60Hz Alt Mode"
+      },
+      {
+        "label": "Durabilité",
+        "value": "30000 flexions"
+      },
+      {
+        "label": "Certification",
+        "value": "USB-IF"
+      },
+      {
+        "label": "Matériau",
+        "value": "Nylon tressé militaire"
+      }
+    ],
+    "rating": {
+      "average": 4.7,
+      "count": 156
+    },
+    "status": "active"
+  },
+  {
+    "id": "monster-cable-lightning",
+    "sku": "MONSTER-LIGHTNING-PRO",
+    "name": "MONSTER Câble Lightning Pro MFi Certifié",
+    "brand": "MONSTER",
+    "category": "Accessoires",
+    "subcategory": "Câbles et connecteurs",
+    "price": 19.99,
+    "originalPrice": 29.99,
+    "discount": 33,
+    "description": "Le câble Lightning Monster Pro bénéficie de la certification MFi (Made for iPhone/iPad) d",
+    "shortDescription": "Câble Lightning certifié MFi Apple avec charge rapide 2.4A",
+    "urlSlug": "monster-cable-lightning-pro-mfi",
+    "warranty": "Garantie à vie",
+    "deliveryTime": "24-48h à La Réunion",
+    "keywords": [
+      "câble Lightning",
+      "MFi",
+      "iPhone",
+      "iPad",
+      "Monster",
+      "Apple",
+      "La Réunion"
+    ],
+    "highlights": [
+      "Certification MFi officielle Apple",
+      "Charge rapide 2.4A sécurisée",
+      "Aluminium usiné CNC premium",
+      "Garantie à vie constructeur",
+      "Compatible tous iPhone/iPad"
+    ],
+    "badges": [
+      "MFi",
+      "Apple",
+      "Garantie à vie"
+    ],
+    "specifications": [
+      {
+        "label": "Certification",
+        "value": "MFi Apple"
+      },
+      {
+        "label": "Charge",
+        "value": "2.4A max"
+      },
+      {
+        "label": "Transfert",
+        "value": "USB 2.0 - 480Mbps"
+      },
+      {
+        "label": "Longueur",
+        "value": "1 mètre"
+      },
+      {
+        "label": "Durabilité",
+        "value": "25000 insertions"
+      },
+      {
+        "label": "Flexions",
+        "value": "20000 cycles"
+      },
+      {
+        "label": "Matériau",
+        "value": "Aluminium + TPE"
+      },
+      {
+        "label": "Compatibilité",
+        "value": "Tous appareils Lightning"
+      }
+    ],
+    "rating": {
+      "average": 4.6,
+      "count": 203
+    },
+    "status": "active"
+  },
+  {
+    "id": "monster-cable-aux-gold",
+    "sku": "MONSTER-AUX-GOLD",
+    "name": "MONSTER Câble AUX 3.5mm Gold Plated Pro",
+    "brand": "MONSTER",
+    "category": "Accessoires",
+    "subcategory": "Câbles et connecteurs",
+    "price": 14.99,
+    "originalPrice": 19.99,
+    "discount": 25,
+    "description": "Le câble AUX Monster Gold Plated Pro offre une transmission audio analogique de qualité audiophile. Les connecteurs plaqués or 24K garantissent une conductivité optimale et une résistance totale à la corrosion, préservant la qualité du signal sur le long terme. Conducteurs en cuivre OFC (Oxygen-Free Copper) de haute pureté minimisent la résistance et les interférences. Double blindage avec feuille d",
+    "shortDescription": "Câble audio AUX 3.5mm avec connecteurs plaqués or 24K",
+    "urlSlug": "monster-cable-aux-35mm-gold-plated",
+    "warranty": "2 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "keywords": [
+      "câble AUX",
+      "3.5mm",
+      "jack audio",
+      "Monster",
+      "plaqué or",
+      "La Réunion"
+    ],
+    "highlights": [
+      "Connecteurs plaqués or 24K",
+      "Cuivre OFC haute pureté",
+      "Double blindage anti-interférences",
+      "Compatible coques épaisses",
+      "Qualité audio audiophile"
+    ],
+    "badges": [
+      "Audiophile",
+      "Gold",
+      "Pro"
+    ],
+    "specifications": [
+      {
+        "label": "Connecteurs",
+        "value": "Jack 3.5mm mâle/mâle"
+      },
+      {
+        "label": "Plaquage",
+        "value": "Or 24K"
+      },
+      {
+        "label": "Conducteur",
+        "value": "Cuivre OFC"
+      },
+      {
+        "label": "Blindage",
+        "value": "Double (alu + cuivre)"
+      },
+      {
+        "label": "Longueur",
+        "value": "1.2 mètres"
+      },
+      {
+        "label": "Diamètre",
+        "value": "3.5mm slim"
+      },
+      {
+        "label": "Signal",
+        "value": "Stéréo analogique"
+      },
+      {
+        "label": "Impédance",
+        "value": "32-600 Ohms"
+      }
+    ],
+    "rating": {
+      "average": 4.5,
+      "count": 312
+    },
+    "status": "active"
+  },
+  {
+    "id": "monster-cable-micro-usb",
+    "sku": "MONSTER-MICRO-USB",
+    "name": "MONSTER Câble Micro USB Renforcé Military Grade",
+    "brand": "MONSTER",
+    "category": "Accessoires",
+    "subcategory": "Câbles et connecteurs",
+    "price": 12.99,
+    "originalPrice": 17.99,
+    "discount": 28,
+    "description": "Le câble Micro USB Monster Military Grade établit nouvelle référence en matière de durabilité. Construction renforcée avec gaine en nylon balistique tressé résiste aux conditions les plus extrêmes. Testés pour supporter plus de 50000 flexions sans dégradation des performances. Connecteurs moulés avec relief de tension en TPU flexible empêchent rupture aux points faibles. Conducteurs en cuivre étamé garantissent charge rapide jusqu",
+    "shortDescription": "Câble Micro USB military grade résistant 50000 flexions",
+    "urlSlug": "monster-cable-micro-usb-military-grade",
+    "warranty": "2 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "keywords": [
+      "câble Micro USB",
+      "Monster",
+      "military grade",
+      "résistant",
+      "Android",
+      "La Réunion"
+    ],
+    "highlights": [
+      "Résistance 50000 flexions",
+      "Nylon balistique military",
+      "Charge rapide 2.4A",
+      "Anti-enchevêtrement",
+      "Garantie 2 ans"
+    ],
+    "badges": [
+      "Military",
+      "Durable",
+      "Resistant"
+    ],
+    "specifications": [
+      {
+        "label": "Type",
+        "value": "USB-A vers Micro-B"
+      },
+      {
+        "label": "Charge",
+        "value": "2.4A max"
+      },
+      {
+        "label": "Transfert",
+        "value": "USB 2.0 - 480Mbps"
+      },
+      {
+        "label": "Longueur",
+        "value": "1 mètre"
+      },
+      {
+        "label": "Durabilité",
+        "value": "50000 flexions"
+      },
+      {
+        "label": "Matériau",
+        "value": "Nylon balistique"
+      },
+      {
+        "label": "Protection",
+        "value": "Anti-surchauffe"
+      },
+      {
+        "label": "Diamètre",
+        "value": "4mm renforcé"
+      }
+    ],
+    "rating": {
+      "average": 4.4,
+      "count": 428
+    },
+    "status": "active"
+  },
+  {
+    "id": "monster-cable-multi-3en1",
+    "sku": "MONSTER-3IN1",
+    "name": "MONSTER Câble Multi 3-en-1 Universal",
+    "brand": "MONSTER",
+    "category": "Accessoires",
+    "subcategory": "Câbles et connecteurs",
+    "price": 27.99,
+    "originalPrice": 37.99,
+    "discount": 26,
+    "description": "Le câble Monster Multi 3-en-1 révolutionne la connectivité mobile avec sa polyvalence exceptionnelle. Un seul câble remplace trois câbles différents grâce aux connecteurs USB-C, Lightning et Micro USB intégrés. Design innovant avec connecteurs magnétiques détachables facilitent utilisation et évitent usure prématurée. Charge simultanée possible de 3 appareils avec répartition intelligente de puissance jusqu",
+    "shortDescription": "Câble universel 3-en-1 USB-C, Lightning et Micro USB",
+    "urlSlug": "monster-cable-multi-3en1-universal",
+    "warranty": "2 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "keywords": [
+      "câble 3 en 1",
+      "USB-C",
+      "Lightning",
+      "Micro USB",
+      "Monster",
+      "universel",
+      "La Réunion"
+    ],
+    "highlights": [
+      "3 connecteurs en 1 câble",
+      "Charge 3 appareils simultanément",
+      "Système rétractable 0.3-1.2m",
+      "Connecteurs magnétiques",
+      "Compatible 99% appareils"
+    ],
+    "badges": [
+      "3-en-1",
+      "Universal",
+      "Magnetic"
+    ],
+    "specifications": [
+      {
+        "label": "Connecteurs",
+        "value": "USB-C + Lightning + Micro"
+      },
+      {
+        "label": "Charge totale",
+        "value": "3.5A max"
+      },
+      {
+        "label": "Longueur",
+        "value": "0.3m - 1.2m rétractable"
+      },
+      {
+        "label": "Multi-charge",
+        "value": "3 appareils simultanés"
+      },
+      {
+        "label": "Matériau",
+        "value": "Zinc + Nylon"
+      },
+      {
+        "label": "Système",
+        "value": "Magnétique détachable"
+      },
+      {
+        "label": "LED",
+        "value": "Indicateur charge"
+      },
+      {
+        "label": "Protection",
+        "value": "Anti-surcharge"
+      }
+    ],
+    "rating": {
+      "average": 4.6,
+      "count": 167
+    },
+    "status": "active"
+  },
+  {
+    "id": "monster-led-strip-rgb",
+    "sku": "MONSTER-LED-STRIP-5M",
+    "name": "MONSTER LED Strip RGB Gaming 5M Sync Music",
+    "brand": "MONSTER",
+    "category": "Accessoires",
+    "subcategory": "Éclairage LED",
+    "price": 39.99,
+    "originalPrice": 59.99,
+    "discount": 33,
+    "description": "La bande LED RGB Monster Gaming transforme votre espace en véritable station de jeu immersive. 5 mètres de LEDs RGB haute luminosité avec 150 LEDs SMD 5050 offrent éclairage puissant et couleurs éclatantes. Synchronisation musicale avancée avec micro intégré fait danser lumières au rythme de votre musique ou sons du jeu. Application smartphone dédiée permet contrôle total : 16 millions de couleurs, luminosité, modes prédéfinis, programmation horaire. 20 modes d",
+    "shortDescription": "Bande LED RGB 5M avec sync musique et contrôle app",
+    "urlSlug": "monster-led-strip-rgb-gaming-5m",
+    "warranty": "2 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "keywords": [
+      "LED RGB",
+      "gaming",
+      "Monster",
+      "strip LED",
+      "sync musique",
+      "setup",
+      "La Réunion"
+    ],
+    "highlights": [
+      "Sync musique temps réel",
+      "16 millions de couleurs",
+      "Contrôle app smartphone",
+      "20 modes dynamiques",
+      "Installation facile 3M"
+    ],
+    "badges": [
+      "Gaming",
+      "RGB",
+      "Music Sync"
+    ],
+    "specifications": [
+      {
+        "label": "Longueur",
+        "value": "5 mètres"
+      },
+      {
+        "label": "LEDs",
+        "value": "150 SMD 5050"
+      },
+      {
+        "label": "Couleurs",
+        "value": "16 millions RGB"
+      },
+      {
+        "label": "Modes",
+        "value": "20 effets dynamiques"
+      },
+      {
+        "label": "Contrôle",
+        "value": "App + Télécommande"
+      },
+      {
+        "label": "Sync",
+        "value": "Musique via micro"
+      },
+      {
+        "label": "Découpe",
+        "value": "Tous les 10cm"
+      },
+      {
+        "label": "Alimentation",
+        "value": "12V 5A inclus"
+      }
+    ],
+    "rating": {
+      "average": 4.7,
+      "count": 234
+    },
+    "status": "active"
+  },
+  {
+    "id": "monster-led-ring-light",
+    "sku": "MONSTER-RING-LIGHT",
+    "name": "MONSTER Ring Light Pro 18",
+    "brand": "MONSTER",
+    "category": "Accessoires",
+    "subcategory": "Éclairage LED",
+    "price": 49.99,
+    "originalPrice": 69.99,
+    "discount": 29,
+    "description": "Le Ring Light Monster Pro 18 pouces est l",
+    "shortDescription": "Ring Light pro 18",
+    "urlSlug": "monster-ring-light-pro-18-streaming",
+    "warranty": "2 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "keywords": [
+      "ring light",
+      "streaming",
+      "Monster",
+      "YouTube",
+      "TikTok",
+      "éclairage",
+      "La Réunion"
+    ],
+    "highlights": [
+      "Diamètre pro 18 pouces",
+      "3 températures couleur",
+      "Trépied jusqu\\",
+      ",\n      ",
+      ",\n      "
+    ],
+    "badges": [
+      "Pro",
+      "Streaming",
+      "18"
+    ],
+    "specifications": [
+      {
+        "label": "Diamètre",
+        "value": "18"
+      },
+      {
+        "label": "LEDs",
+        "value": "480 unités"
+      },
+      {
+        "label": "Température",
+        "value": "3200K-5600K"
+      },
+      {
+        "label": "Luminosité",
+        "value": "10%-100% variable"
+      },
+      {
+        "label": "Trépied",
+        "value": "50cm-210cm"
+      },
+      {
+        "label": "Contrôle",
+        "value": "Télécommande Bluetooth"
+      },
+      {
+        "label": "Support",
+        "value": "Smartphone + DSLR"
+      },
+      {
+        "label": "Alimentation",
+        "value": "USB + Adaptateur"
+      }
+    ],
+    "rating": {
+      "average": 4.8,
+      "count": 189
+    },
+    "status": "active"
+  },
+  {
+    "id": "monster-led-desk-lamp",
+    "sku": "MONSTER-DESK-LAMP",
+    "name": "MONSTER Lampe Bureau LED Tactile",
+    "brand": "MONSTER",
+    "category": "Accessoires",
+    "subcategory": "Éclairage LED",
+    "price": 34.99,
+    "originalPrice": 44.99,
+    "discount": 22,
+    "description": "La lampe de bureau LED Monster allie design moderne et fonctionnalité intelligente pour créer l",
+    "shortDescription": "Lampe bureau LED avec contrôle tactile et port USB charge",
+    "urlSlug": "monster-lampe-bureau-led-tactile",
+    "warranty": "2 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "keywords": [
+      "lampe bureau",
+      "LED",
+      "Monster",
+      "tactile",
+      "USB",
+      "éclairage",
+      "La Réunion"
+    ],
+    "highlights": [
+      "Contrôle tactile intelligent",
+      "5 niveaux luminosité",
+      "Port USB charge intégré",
+      "Sans scintillement",
+      "Col de cygne 360°"
+    ],
+    "badges": [
+      "Smart",
+      "USB",
+      "Eco"
+    ],
+    "specifications": [
+      {
+        "label": "Puissance",
+        "value": "10W LED"
+      },
+      {
+        "label": "Luminosité",
+        "value": "5 niveaux"
+      },
+      {
+        "label": "Température",
+        "value": "3000K-6500K"
+      },
+      {
+        "label": "Port USB",
+        "value": "5V/2A charge"
+      },
+      {
+        "label": "Contrôle",
+        "value": "Tactile + Mémoire"
+      },
+      {
+        "label": "Flexibilité",
+        "value": "360° ajustable"
+      },
+      {
+        "label": "Minuterie",
+        "value": "30/60 minutes"
+      },
+      {
+        "label": "Durée vie",
+        "value": "50000 heures"
+      }
+    ],
+    "rating": {
+      "average": 4.6,
+      "count": 156
+    },
+    "status": "active"
+  },
+  {
+    "id": "monster-led-hexagon",
+    "sku": "MONSTER-HEXAGON-6",
+    "name": "MONSTER Panneaux LED Hexagonaux x6",
+    "brand": "MONSTER",
+    "category": "Accessoires",
+    "subcategory": "Éclairage LED",
+    "price": 89.99,
+    "originalPrice": 119.99,
+    "discount": 25,
+    "description": "Les panneaux LED hexagonaux Monster transforment instantanément n",
+    "shortDescription": "Kit 6 panneaux LED hexagonaux modulaires RGB tactiles",
+    "urlSlug": "monster-panneaux-led-hexagonaux-6",
+    "warranty": "2 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "keywords": [
+      "panneaux LED",
+      "hexagonal",
+      "Monster",
+      "RGB",
+      "gaming",
+      "modulaire",
+      "La Réunion"
+    ],
+    "highlights": [
+      "Touch control interactif",
+      "Modulaire reconfigurable",
+      "WiFi et contrôle vocal",
+      "Sync musique",
+      "Installation sans perçage"
+    ],
+    "badges": [
+      "Modular",
+      "WiFi",
+      "Touch"
+    ],
+    "specifications": [
+      {
+        "label": "Quantité",
+        "value": "6 panneaux"
+      },
+      {
+        "label": "Couleurs",
+        "value": "16 millions RGB"
+      },
+      {
+        "label": "Contrôle",
+        "value": "Touch + App + WiFi"
+      },
+      {
+        "label": "Effets",
+        "value": "19 modes"
+      },
+      {
+        "label": "Sync",
+        "value": "Musique temps réel"
+      },
+      {
+        "label": "Installation",
+        "value": "Adhésif 3M"
+      },
+      {
+        "label": "Connexion",
+        "value": "Magnétique"
+      },
+      {
+        "label": "Consommation",
+        "value": "24W total"
+      }
+    ],
+    "rating": {
+      "average": 4.8,
+      "count": 145
+    },
+    "status": "active"
+  },
+  {
+    "id": "monster-led-neon-sign",
+    "sku": "MONSTER-NEON-GAMER",
+    "name": "MONSTER Néon LED Gaming ",
+    "brand": "MONSTER",
+    "category": "Accessoires",
+    "subcategory": "Éclairage LED",
+    "price": 44.99,
+    "originalPrice": 59.99,
+    "discount": 25,
+    "description": "L",
+    "shortDescription": "Enseigne néon LED gaming avec 8 modes éclairage",
+    "urlSlug": "monster-neon-led-gaming-game-on",
+    "warranty": "2 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "keywords": [
+      "néon LED",
+      "gaming",
+      "Monster",
+      "GAME ON",
+      "décoration",
+      "setup",
+      "La Réunion"
+    ],
+    "highlights": [
+      "Design GAME ON gaming",
+      "8 modes dynamiques",
+      "Télécommande incluse",
+      "Alimentation USB",
+      "Installation facile"
+    ],
+    "badges": [
+      "Gaming",
+      "Neon",
+      "USB"
+    ],
+    "specifications": [
+      {
+        "label": "Dimensions",
+        "value": "40x20cm"
+      },
+      {
+        "label": "Message",
+        "value": "GAME ON + Manette"
+      },
+      {
+        "label": "Modes",
+        "value": "8 effets dynamiques"
+      },
+      {
+        "label": "Contrôle",
+        "value": "Télécommande RF"
+      },
+      {
+        "label": "Alimentation",
+        "value": "USB 5V"
+      },
+      {
+        "label": "Consommation",
+        "value": "5W"
+      },
+      {
+        "label": "Matériau",
+        "value": "Acrylique 5mm"
+      },
+      {
+        "label": "Durée vie",
+        "value": "30000 heures"
+      }
+    ],
+    "rating": {
+      "average": 4.5,
+      "count": 198
+    },
+    "status": "active"
+  },
+  {
+    "id": "monster-led-projector",
+    "sku": "MONSTER-STAR-PROJ",
+    "name": "MONSTER Projecteur LED Galaxie Bluetooth",
+    "brand": "MONSTER",
+    "category": "Accessoires",
+    "subcategory": "Éclairage LED",
+    "price": 54.99,
+    "originalPrice": 74.99,
+    "discount": 27,
+    "description": "Le projecteur LED Monster Galaxie transforme votre pièce en cosmos spectaculaire avec projection ultra-réaliste. Double projection laser crée milliers d",
+    "shortDescription": "Projecteur galaxie LED avec Bluetooth et sync musique",
+    "urlSlug": "monster-projecteur-led-galaxie-bluetooth",
+    "warranty": "2 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "keywords": [
+      "projecteur LED",
+      "galaxie",
+      "Monster",
+      "Bluetooth",
+      "étoiles",
+      "ambiance",
+      "La Réunion"
+    ],
+    "highlights": [
+      "Double projection galaxie",
+      "Bluetooth audio intégré",
+      "Sync musique réactive",
+      "Silencieux <35dB",
+      "Couverture 200m²"
+    ],
+    "badges": [
+      "Galaxy",
+      "Bluetooth",
+      "Music"
+    ],
+    "specifications": [
+      {
+        "label": "Projection",
+        "value": "Étoiles + Nébuleuse"
+      },
+      {
+        "label": "Couleurs",
+        "value": "10 nébuleuses"
+      },
+      {
+        "label": "Bluetooth",
+        "value": "5.0 + Haut-parleur"
+      },
+      {
+        "label": "Couverture",
+        "value": "Jusqu\\"
+      },
+      {
+        "label": "Angle",
+        "value": "45° ajustable"
+      },
+      {
+        "label": "Minuterie",
+        "value": "1/2/4 heures"
+      },
+      {
+        "label": "Bruit",
+        "value": "<35dB silencieux"
+      },
+      {
+        "label": "Contrôle",
+        "value": "Télécommande + App"
+      }
+    ],
+    "rating": {
+      "average": 4.7,
+      "count": 267
+    },
+    "status": "active"
+  },
+  {
+    "id": "monster-led-bar-monitor",
+    "sku": "MONSTER-MONITOR-BAR",
+    "name": "MONSTER Barre LED Écran Eye-Care",
+    "brand": "MONSTER",
+    "category": "Accessoires",
+    "subcategory": "Éclairage LED",
+    "price": 37.99,
+    "originalPrice": 49.99,
+    "discount": 24,
+    "description": "La barre LED Monster Eye-Care révolutionne l",
+    "shortDescription": "Barre LED écran avec capteur auto et protection yeux",
+    "urlSlug": "monster-barre-led-ecran-eye-care",
+    "warranty": "2 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "keywords": [
+      "barre LED",
+      "écran",
+      "Monster",
+      "eye-care",
+      "bureau",
+      "protection",
+      "La Réunion"
+    ],
+    "highlights": [
+      "Capteur luminosité auto",
+      "Anti-reflet écran",
+      "Protection anti-fatigue",
+      "3 modes température",
+      "Installation sans vis"
+    ],
+    "badges": [
+      "Eye-Care",
+      "Auto",
+      "Pro"
+    ],
+    "specifications": [
+      {
+        "label": "Compatibilité",
+        "value": "17-34 pouces"
+      },
+      {
+        "label": "Modes",
+        "value": "3 températures"
+      },
+      {
+        "label": "Capteur",
+        "value": "Auto-ajustement"
+      },
+      {
+        "label": "CRI",
+        "value": "Ra>95"
+      },
+      {
+        "label": "Angle",
+        "value": "25° ajustable"
+      },
+      {
+        "label": "Puissance",
+        "value": "10W"
+      },
+      {
+        "label": "USB",
+        "value": "Passthrough"
+      },
+      {
+        "label": "Matériau",
+        "value": "Aluminium"
+      }
+    ],
+    "rating": {
+      "average": 4.6,
+      "count": 234
+    },
+    "status": "active"
+  },
+  {
+    "id": "monster-led-cube",
+    "sku": "MONSTER-CUBE-RGB",
+    "name": "MONSTER Cube LED RGB Intelligent WiFi",
+    "brand": "MONSTER",
+    "category": "Accessoires",
+    "subcategory": "Éclairage LED",
+    "price": 29.99,
+    "originalPrice": 39.99,
+    "discount": 25,
+    "description": "Le cube LED Monster intelligent combine design moderne et technologie avancée pour éclairage d",
+    "shortDescription": "Cube LED RGB WiFi avec contrôle app et sync musique",
+    "urlSlug": "monster-cube-led-rgb-intelligent-wifi",
+    "warranty": "2 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "keywords": [
+      "cube LED",
+      "RGB",
+      "Monster",
+      "WiFi",
+      "intelligent",
+      "smart",
+      "La Réunion"
+    ],
+    "highlights": [
+      "WiFi et contrôle vocal",
+      "16 millions couleurs",
+      "Batterie 8h autonomie",
+      "Sync musique",
+      "Mode réveil soleil"
+    ],
+    "badges": [
+      "Smart",
+      "WiFi",
+      "Portable"
+    ],
+    "specifications": [
+      {
+        "label": "Dimensions",
+        "value": "10x10x10cm"
+      },
+      {
+        "label": "Couleurs",
+        "value": "16 millions RGB"
+      },
+      {
+        "label": "Connexion",
+        "value": "WiFi 2.4GHz"
+      },
+      {
+        "label": "Contrôle",
+        "value": "App + Voix"
+      },
+      {
+        "label": "Batterie",
+        "value": "2000mAh / 8h"
+      },
+      {
+        "label": "Effets",
+        "value": "20 modes"
+      },
+      {
+        "label": "Sync",
+        "value": "Musique micro"
+      },
+      {
+        "label": "Matériau",
+        "value": "ABS premium"
+      }
+    ],
+    "rating": {
+      "average": 4.4,
+      "count": 312
+    },
+    "status": "active"
+  },
+  {
+    "id": "monster-chargeur-gan-65w",
+    "sku": "MONSTER-GAN-65W",
+    "name": "MONSTER Chargeur Mural GaN 65W 3 Ports",
+    "brand": "MONSTER",
+    "category": "Accessoires",
+    "subcategory": "Chargeurs",
+    "price": 44.99,
+    "originalPrice": 59.99,
+    "discount": 25,
+    "description": "Le chargeur Monster GaN 65W représente la pointe de la technologie de charge avec ses semi-conducteurs au nitrure de gallium. Cette technologie GaN III permet une taille 50% plus compacte qu",
+    "shortDescription": "Chargeur GaN 65W ultra-compact 3 ports avec charge rapide universelle",
+    "urlSlug": "monster-chargeur-gan-65w-3-ports",
+    "warranty": "2 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "keywords": [
+      "chargeur GaN",
+      "65W",
+      "Monster",
+      "USB-C",
+      "MacBook",
+      "charge rapide",
+      "La Réunion"
+    ],
+    "highlights": [
+      "Technologie GaN III avancée",
+      "65W pour laptops et mobiles",
+      "3 ports charge simultanée",
+      "50% plus compact",
+      "Multi-protocoles universels"
+    ],
+    "badges": [
+      "GaN",
+      "65W",
+      "Compact"
+    ],
+    "specifications": [
+      {
+        "label": "Puissance",
+        "value": "65W max"
+      },
+      {
+        "label": "Technologie",
+        "value": "GaN III"
+      },
+      {
+        "label": "Ports",
+        "value": "2 USB-C + 1 USB-A"
+      },
+      {
+        "label": "Protocoles",
+        "value": "PD 3.0, PPS, QC 4+"
+      },
+      {
+        "label": "Taille",
+        "value": "50% plus compact"
+      },
+      {
+        "label": "Protection",
+        "value": "8 couches sécurité"
+      },
+      {
+        "label": "Prise",
+        "value": "EU/UK/US incluses"
+      },
+      {
+        "label": "Certification",
+        "value": "CE, FCC, RoHS"
+      }
+    ],
+    "rating": {
+      "average": 4.8,
+      "count": 142
+    },
+    "status": "active"
+  },
+  {
+    "id": "monster-batterie-20000mah",
+    "sku": "MONSTER-POWER-20K",
+    "name": "MONSTER Batterie Externe 20000mAh PD 22.5W",
+    "brand": "MONSTER",
+    "category": "Accessoires",
+    "subcategory": "Chargeurs",
+    "price": 39.99,
+    "originalPrice": 54.99,
+    "discount": 27,
+    "description": "La batterie externe Monster 20000mAh assure une autonomie exceptionnelle pour tous vos appareils mobiles. Capacité massive permettant 5 charges complètes iPhone 15 ou 3 charges iPad Air. Charge rapide bidirectionnelle 22.5W via USB-C Power Delivery pour recharge ultra-rapide des appareils et de la batterie elle-même (3h pour charge complète). Triple sortie simultanée : USB-C PD, USB-A QC 3.0 et USB-A standard pour charger 3 appareils. Écran LED digital affiche précisément pourcentage batterie restante. Cellules lithium-polymère haute densité garantissent 1000+ cycles charge. Mode charge faible puissance pour écouteurs et montres connectées. Protection intelligente contre surcharge, décharge excessive, court-circuit et surchauffe. Design slim 15mm d",
+    "shortDescription": "Batterie 20000mAh avec charge rapide PD 22.5W et écran LED",
+    "urlSlug": "monster-batterie-externe-20000mah-pd",
+    "warranty": "18 mois constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "keywords": [
+      "batterie externe",
+      "20000mAh",
+      "Monster",
+      "powerbank",
+      "PD",
+      "charge rapide",
+      "La Réunion"
+    ],
+    "highlights": [
+      "5 charges iPhone complètes",
+      "Charge rapide 22.5W",
+      "Écran LED pourcentage",
+      "Ultra-slim 15mm",
+      "3 appareils simultanés"
+    ],
+    "badges": [
+      "20000mAh",
+      "PD",
+      "Digital"
+    ],
+    "specifications": [
+      {
+        "label": "Capacité",
+        "value": "20000mAh / 74Wh"
+      },
+      {
+        "label": "Charge rapide",
+        "value": "22.5W PD"
+      },
+      {
+        "label": "Ports",
+        "value": "1 USB-C + 2 USB-A"
+      },
+      {
+        "label": "Recharge",
+        "value": "3h avec 18W"
+      },
+      {
+        "label": "Écran",
+        "value": "LED digital %"
+      },
+      {
+        "label": "Épaisseur",
+        "value": "15mm ultra-slim"
+      },
+      {
+        "label": "Cycles",
+        "value": "1000+ charges"
+      },
+      {
+        "label": "Sécurité",
+        "value": "Multi-protection"
+      }
+    ],
+    "rating": {
+      "average": 4.7,
+      "count": 298
+    },
+    "status": "active"
+  },
+  {
+    "id": "monster-chargeur-voiture-45w",
+    "sku": "MONSTER-CAR-45W",
+    "name": "MONSTER Chargeur Voiture 45W Dual USB-C",
+    "brand": "MONSTER",
+    "category": "Accessoires",
+    "subcategory": "Chargeurs",
+    "price": 24.99,
+    "originalPrice": 34.99,
+    "discount": 29,
+    "description": "Le chargeur voiture Monster 45W transforme votre allume-cigare en station de charge haute performance. Double port USB-C Power Delivery permet charge simultanée de 2 appareils avec répartition intelligente 25W+20W ou 45W single. Compatible 12V/24V fonctionne dans voitures, camions, camping-cars. Puce intelligente reconnaît automatiquement appareils et ajuste puissance optimale. Design aluminium avec dissipation thermique avancée prévient surchauffe même en usage intensif. LED ambiante bleue facilite localisation ports dans obscurité. Système anti-vibration maintient connexion stable sur routes cahoteuses. Protection contre surtension véhicule et pics électriques démarrage moteur. Charge iPhone 15 à 50% en 30min ou MacBook Air en conduite. Compact 5cm ne gêne pas levier vitesse ou autres commandes. Contacts plaqués or résistent corrosion environnement automobile. Ressorts renforcés garantissent maintien ferme dans prise. Certification CE automobile et test -20°C à +80°C. Parfait pour trajets quotidiens et road trips à La Réunion.",
+    "shortDescription": "Chargeur voiture 45W double USB-C avec charge rapide PD",
+    "urlSlug": "monster-chargeur-voiture-45w-usbc",
+    "warranty": "2 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "keywords": [
+      "chargeur voiture",
+      "45W",
+      "USB-C",
+      "Monster",
+      "allume-cigare",
+      "PD",
+      "La Réunion"
+    ],
+    "highlights": [
+      "Double USB-C 45W",
+      "Charge 2 appareils",
+      "Aluminium premium",
+      "LED localisation nuit",
+      "Anti-vibration stable"
+    ],
+    "badges": [
+      "45W",
+      "Dual USB-C",
+      "Auto"
+    ],
+    "specifications": [
+      {
+        "label": "Puissance",
+        "value": "45W total"
+      },
+      {
+        "label": "Ports",
+        "value": "2x USB-C PD"
+      },
+      {
+        "label": "Répartition",
+        "value": "25W+20W ou 45W"
+      },
+      {
+        "label": "Compatibilité",
+        "value": "12V/24V"
+      },
+      {
+        "label": "Matériau",
+        "value": "Aluminium"
+      },
+      {
+        "label": "LED",
+        "value": "Éclairage bleu"
+      },
+      {
+        "label": "Température",
+        "value": "-20°C à +80°C"
+      },
+      {
+        "label": "Taille",
+        "value": "5cm compact"
+      }
+    ],
+    "rating": {
+      "average": 4.6,
+      "count": 187
+    },
+    "status": "active"
+  },
+  {
+    "id": "monster-chargeur-sans-fil",
+    "sku": "MONSTER-WIRELESS-15W",
+    "name": "MONSTER Station Charge Sans Fil 15W Qi",
+    "brand": "MONSTER",
+    "category": "Accessoires",
+    "subcategory": "Chargeurs",
+    "price": 29.99,
+    "originalPrice": 39.99,
+    "discount": 25,
+    "description": "La station de charge sans fil Monster 15W offre la liberté de charge par induction magnétique Qi. Compatible avec tous smartphones Qi incluant iPhone 12+ MagSafe et Samsung Galaxy. Puissance adaptative : 15W Android, 7.5W iPhone, 5W écouteurs. Bobines doubles élargies permettent charge dans toute position portrait ou paysage. Surface antidérapante silicone protège téléphone des rayures et maintient position stable. Détection corps étrangers stoppe charge si objet métallique détecté pour sécurité. Ventilateur silencieux intégré dissipe chaleur pour charge optimale continue. LED indicateur multicolore : bleu charge, vert complet, rouge erreur. Design ultra-fin 8mm s",
+    "shortDescription": "Chargeur sans fil Qi 15W avec charge rapide adaptative",
+    "urlSlug": "monster-station-charge-sans-fil-15w",
+    "warranty": "2 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "keywords": [
+      "chargeur sans fil",
+      "Qi",
+      "15W",
+      "Monster",
+      "wireless",
+      "MagSafe",
+      "La Réunion"
+    ],
+    "highlights": [
+      "Charge 15W ultra-rapide",
+      "Compatible tous Qi",
+      "Ultra-fin 8mm",
+      "Ventilateur silencieux",
+      "Détection objets étrangers"
+    ],
+    "badges": [
+      "Wireless",
+      "15W",
+      "Qi"
+    ],
+    "specifications": [
+      {
+        "label": "Puissance",
+        "value": "15W max adaptive"
+      },
+      {
+        "label": "Standard",
+        "value": "Qi certified"
+      },
+      {
+        "label": "Compatibilité",
+        "value": "iPhone/Android"
+      },
+      {
+        "label": "Bobines",
+        "value": "Double coil"
+      },
+      {
+        "label": "Épaisseur",
+        "value": "8mm ultra-fin"
+      },
+      {
+        "label": "Coque",
+        "value": "Jusqu\\"
+      },
+      {
+        "label": "Protection",
+        "value": "FOD + température"
+      },
+      {
+        "label": "Ventilateur",
+        "value": "Silencieux intégré"
+      }
+    ],
+    "rating": {
+      "average": 4.5,
+      "count": 224
+    },
+    "status": "active"
+  },
+  {
+    "id": "monster-chargeur-6-ports",
+    "sku": "MONSTER-6PORT-120W",
+    "name": "MONSTER Station Charge 6 Ports 120W Desktop",
+    "brand": "MONSTER",
+    "category": "Accessoires",
+    "subcategory": "Chargeurs",
+    "price": 59.99,
+    "originalPrice": 79.99,
+    "discount": 25,
+    "description": "La station de charge Monster 6 ports 120W est la solution ultime pour familles et bureaux multi-appareils. Puissance totale 120W répartie intelligemment sur 6 ports : 3 USB-C PD (65W/30W/20W) et 3 USB-A QC (18W chacun). Technologie GaN II permet design compact malgré puissance élevée. Charge simultanée laptop, tablette, 2 smartphones, écouteurs et montre sans perte performance. Système allocation dynamique ajuste automatiquement puissance selon besoins chaque appareil. Écran LCD affiche tension, courant et puissance temps réel chaque port. Protection individuelle par port avec fusibles réarmables automatiques. Ventilation active silencieuse maintient température optimale charge intensive. Base antidérapante lestée stabilité parfaite sur bureau. Séparateurs amovibles organisent câbles proprement. Compatible tous protocoles : PD 3.0, QC 4+, AFC, FCP, PPS. Cordon alimentation 1.5m avec prise terre sécurité renforcée. Mode éco coupe ports inutilisés pour économie énergie. Boîtier aluminium anodisé dissipe efficacement chaleur. Solution professionnelle pour espaces travail connectés La Réunion.",
+    "shortDescription": "Station 6 ports 120W avec écran LCD et charge intelligente",
+    "urlSlug": "monster-station-charge-6-ports-120w",
+    "warranty": "3 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "keywords": [
+      "station charge",
+      "6 ports",
+      "120W",
+      "Monster",
+      "multi-charge",
+      "bureau",
+      "La Réunion"
+    ],
+    "highlights": [
+      "6 ports charge simultanée",
+      "Écran LCD monitoring",
+      "Technologie GaN II",
+      "120W puissance totale",
+      "Protection par port"
+    ],
+    "badges": [
+      "120W",
+      "6 Ports",
+      "Pro"
+    ],
+    "specifications": [
+      {
+        "label": "Puissance",
+        "value": "120W total"
+      },
+      {
+        "label": "Ports",
+        "value": "3 USB-C + 3 USB-A"
+      },
+      {
+        "label": "Technologie",
+        "value": "GaN II"
+      },
+      {
+        "label": "Écran",
+        "value": "LCD monitoring"
+      },
+      {
+        "label": "USB-C Max",
+        "value": "65W PD"
+      },
+      {
+        "label": "Protection",
+        "value": "Individuelle/port"
+      },
+      {
+        "label": "Ventilation",
+        "value": "Active silencieuse"
+      },
+      {
+        "label": "Matériau",
+        "value": "Aluminium anodisé"
+      }
+    ],
+    "rating": {
+      "average": 4.9,
+      "count": 98
+    },
+    "status": "active"
+  },
+  {
+    "id": "monster-support-manette-rgb",
+    "sku": "MONSTER-CONTROLLER-STAND",
+    "name": "MONSTER Support Manette Gaming RGB Premium",
+    "brand": "MONSTER",
+    "category": "Accessoires",
+    "subcategory": "Supports gaming",
+    "price": 34.99,
+    "originalPrice": 44.99,
+    "discount": 22,
+    "description": "Le support manette Monster RGB transforme vos contrôleurs en véritables œuvres d",
+    "shortDescription": "Support 2 manettes avec RGB personnalisable et charge USB",
+    "urlSlug": "monster-support-manette-gaming-rgb",
+    "warranty": "2 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "keywords": [
+      "support manette",
+      "RGB",
+      "gaming",
+      "PS5",
+      "Xbox",
+      "Monster",
+      "La Réunion"
+    ],
+    "highlights": [
+      "RGB 16 millions couleurs",
+      "Charge 2 manettes",
+      "Compatible toutes consoles",
+      "Hub USB intégré",
+      "Aluminium premium"
+    ],
+    "badges": [
+      "RGB",
+      "Gaming",
+      "Premium"
+    ],
+    "specifications": [
+      {
+        "label": "Compatibilité",
+        "value": "PS5/PS4/Xbox/Switch"
+      },
+      {
+        "label": "Capacité",
+        "value": "2 manettes"
+      },
+      {
+        "label": "RGB",
+        "value": "16M couleurs"
+      },
+      {
+        "label": "Modes",
+        "value": "12 effets"
+      },
+      {
+        "label": "Charge",
+        "value": "USB-C intégrée"
+      },
+      {
+        "label": "Hub",
+        "value": "2 ports USB"
+      },
+      {
+        "label": "Matériau",
+        "value": "Aluminium + ABS"
+      },
+      {
+        "label": "Dimensions",
+        "value": "15x20x10cm"
+      }
+    ],
+    "rating": {
+      "average": 4.7,
+      "count": 156
+    },
+    "status": "active"
+  },
+  {
+    "id": "monster-tapis-souris-xxl",
+    "sku": "MONSTER-MOUSEPAD-XXL",
+    "name": "MONSTER Tapis Souris Gaming XXL RGB 900x400mm",
+    "brand": "MONSTER",
+    "category": "Accessoires",
+    "subcategory": "Supports gaming",
+    "price": 44.99,
+    "originalPrice": 59.99,
+    "discount": 25,
+    "description": "Le tapis souris Monster XXL RGB redéfinit l",
+    "shortDescription": "Tapis XXL 900x400mm avec RGB 14 zones et surface optimisée",
+    "urlSlug": "monster-tapis-souris-gaming-xxl-rgb",
+    "warranty": "2 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "keywords": [
+      "tapis souris",
+      "XXL",
+      "RGB",
+      "gaming",
+      "Monster",
+      "900x400",
+      "La Réunion"
+    ],
+    "highlights": [
+      "XXL 900x400mm",
+      "RGB 14 zones",
+      "Surface gaming optimisée",
+      "Sync écosystèmes RGB",
+      "Bords cousus durables"
+    ],
+    "badges": [
+      "XXL",
+      "RGB",
+      "Pro Gaming"
+    ],
+    "specifications": [
+      {
+        "label": "Dimensions",
+        "value": "900x400x4mm"
+      },
+      {
+        "label": "Surface",
+        "value": "Micro-texturée"
+      },
+      {
+        "label": "RGB",
+        "value": "14 zones"
+      },
+      {
+        "label": "Compatibilité",
+        "value": "Tous capteurs"
+      },
+      {
+        "label": "Base",
+        "value": "Caoutchouc 4mm"
+      },
+      {
+        "label": "Bords",
+        "value": "Cousus renforcés"
+      },
+      {
+        "label": "Sync RGB",
+        "value": "Multi-écosystème"
+      },
+      {
+        "label": "Câble",
+        "value": "USB 1.8m tressé"
+      }
+    ],
+    "rating": {
+      "average": 4.8,
+      "count": 145
+    },
+    "status": "active"
+  },
+  {
+    "id": "monster-bungee-souris",
+    "sku": "MONSTER-BUNGEE",
+    "name": "MONSTER Bungee Souris Gaming Anti-Friction",
+    "brand": "MONSTER",
+    "category": "Accessoires",
+    "subcategory": "Supports gaming",
+    "price": 19.99,
+    "originalPrice": 24.99,
+    "discount": 20,
+    "description": "Le bungee souris Monster élimine définitivement friction et accrochage câble pendant sessions gaming intenses. Bras flexible silicone medical-grade maintient câble hauteur optimale sans résistance. Compatible tous diamètres câbles souris 1.5mm à 4mm marché. Base lestée 280g avec 6 patins antidérapants garantit stabilité absolue même mouvements rapides. Hub USB 2.0 intégré 4 ports augmente connectivité setup gaming. LED RGB personnalisable base ajoute touche esthétique setup coordonné. Système ressort tension ajustable adapte différentes longueurs préférences câble. Revêtement soft-touch empêche rayures câble maintient souplesse long terme. Hauteur réglable 13-20cm accommode différentes configurations bureau. Système clip rapide permet installation/retrait câble une main. Port charge USB-C additionnel pour souris sans fil gaming. Construction ABS renforcé fibre verre résiste années utilisation intensive. Design compact n",
+    "shortDescription": "Bungee anti-friction avec hub USB et base lestée 280g",
+    "urlSlug": "monster-bungee-souris-gaming",
+    "warranty": "2 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "keywords": [
+      "bungee souris",
+      "gaming",
+      "Monster",
+      "anti-friction",
+      "hub USB",
+      "FPS",
+      "La Réunion"
+    ],
+    "highlights": [
+      "Élimine friction câble",
+      "Hub USB 4 ports",
+      "Base 280g ultra-stable",
+      "LED RGB gaming",
+      "Hauteur ajustable"
+    ],
+    "badges": [
+      "Anti-Friction",
+      "USB Hub",
+      "Pro"
+    ],
+    "specifications": [
+      {
+        "label": "Base",
+        "value": "280g lestée"
+      },
+      {
+        "label": "Hub USB",
+        "value": "4 ports 2.0"
+      },
+      {
+        "label": "Hauteur",
+        "value": "13-20cm réglable"
+      },
+      {
+        "label": "Câbles",
+        "value": "1.5-4mm diamètre"
+      },
+      {
+        "label": "LED",
+        "value": "RGB personnalisable"
+      },
+      {
+        "label": "Patins",
+        "value": "6 antidérapants"
+      },
+      {
+        "label": "Matériau",
+        "value": "ABS + silicone"
+      },
+      {
+        "label": "USB-C",
+        "value": "Port charge bonus"
+      }
+    ],
+    "rating": {
+      "average": 4.5,
+      "count": 267
+    },
+    "status": "active"
+  },
+  {
+    "id": "monster-support-ecran-rgb",
+    "sku": "MONSTER-MONITOR-STAND",
+    "name": "MONSTER Support Écran Gaming RGB avec Tiroirs",
+    "brand": "MONSTER",
+    "category": "Accessoires",
+    "subcategory": "Supports gaming",
+    "price": 54.99,
+    "originalPrice": 69.99,
+    "discount": 21,
+    "description": "Le support écran Monster RGB améliore ergonomie et esthétique setup gaming complet. Élévation écran 10cm réduit fatigue cervicale aligne vision angle optimal. Plateau supérieur supporte jusqu",
+    "shortDescription": "Support écran avec tiroirs, hub USB et RGB ambiance gaming",
+    "urlSlug": "monster-support-ecran-gaming-rgb-tiroirs",
+    "warranty": "2 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "keywords": [
+      "support écran",
+      "gaming",
+      "RGB",
+      "Monster",
+      "ergonomie",
+      "tiroirs",
+      "La Réunion"
+    ],
+    "highlights": [
+      "Élévation ergonomique 10cm",
+      "2 tiroirs rangement",
+      "Hub USB 3.0 frontal",
+      "RGB gaming ambiance",
+      "Charge wireless Qi"
+    ],
+    "badges": [
+      "Ergonomie",
+      "RGB",
+      "Storage"
+    ],
+    "specifications": [
+      {
+        "label": "Dimensions",
+        "value": "60x25x10cm"
+      },
+      {
+        "label": "Capacité",
+        "value": "30kg max"
+      },
+      {
+        "label": "Tiroirs",
+        "value": "2 coulissants"
+      },
+      {
+        "label": "Hub USB",
+        "value": "4 ports 3.0"
+      },
+      {
+        "label": "RGB",
+        "value": "LED périmètre"
+      },
+      {
+        "label": "Charge Qi",
+        "value": "10W intégrée"
+      },
+      {
+        "label": "Matériau",
+        "value": "MDF 18mm premium"
+      },
+      {
+        "label": "Écran max",
+        "value": "32 pouces"
+      }
+    ],
+    "rating": {
+      "average": 4.7,
+      "count": 112
+    },
+    "status": "active"
+  },
+  {
+    "id": "hifuture-evo-2",
+    "sku": "HIFUTURE-EVO-2",
+    "name": "HIFUTURE EVO 2",
+    "brand": "HIFUTURE",
+    "category": "Montres",
+    "subcategory": "Montres connectées",
+    "price": 34.99,
+    "description": "La montre connectée HIFUTURE EVO 2 démocratise l",
+    "shortDescription": "Montre connectée abordable avec suivi santé complet",
+    "urlSlug": "hifuture-evo-2-montre-connectee-abordable",
+    "warranty": "2 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "images": [
+      "/placeholder-monster-mini.svg"
+    ],
+    "keywords": [
+      "HIFUTURE EVO 2",
+      "montre connectée abordable",
+      "écran couleur",
+      "suivi santé",
+      "design moderne",
+      "beige",
+      "noir",
+      "rose gold"
+    ],
+    "highlights": [
+      "Écran LCD couleur",
+      "Suivi santé complet",
+      "Certification IP68",
+      "Rapport qualité-prix excellent",
+      "Design élégant"
+    ],
+    "badges": [
+      "Meilleur prix",
+      "Populaire"
+    ],
+    "specifications": [
+      {
+        "label": "Type Écran",
+        "value": "LCD couleur"
+      },
+      {
+        "label": "Résistance",
+        "value": "IP68"
+      },
+      {
+        "label": "Autonomie",
+        "value": "5-7 jours"
+      },
+      {
+        "label": "Cycle féminin",
+        "value": "Oui (Beige/Rose Gold)"
+      }
+    ],
+    "rating": {
+      "average": 4.4,
+      "count": 567
+    },
+    "status": "active"
+  },
+  {
+    "id": "hifuture-active",
+    "sku": "HIFUTURE-ACTIVE",
+    "name": "HIFUTURE Active",
+    "brand": "HIFUTURE",
+    "category": "Montres",
+    "subcategory": "Montres sport",
+    "price": 169.99,
+    "description": "La montre connectée HIFUTURE Active incarne l",
+    "shortDescription": "Montre connectée premium avec boîtier métallique et écran AMOLED 1000 nits",
+    "urlSlug": "hifuture-active-montre-connectee-premium-metallique",
+    "warranty": "2 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "images": [
+      "/placeholder-monster-mini.svg"
+    ],
+    "keywords": [
+      "HIFUTURE Active",
+      "montre métallique premium",
+      "écran AMOLED HD",
+      "sport avancé",
+      "silver",
+      "black red racing"
+    ],
+    "highlights": [
+      "Boîtier métallique premium",
+      "Écran AMOLED 1000 nits",
+      "100+ modes sport",
+      "Certification ATM5",
+      "Autonomie exceptionnelle"
+    ],
+    "badges": [
+      "Premium",
+      "Luxe"
+    ],
+    "specifications": [
+      {
+        "label": "Type Écran",
+        "value": "AMOLED HD 1000 nits"
+      },
+      {
+        "label": "GPS",
+        "value": "Intégré"
+      },
+      {
+        "label": "Résistance",
+        "value": "ATM5"
+      },
+      {
+        "label": "Autonomie",
+        "value": "12-16 jours"
+      }
+    ],
+    "rating": {
+      "average": 4.9,
+      "count": 89
+    },
+    "status": "active"
+  },
+  {
+    "id": "hifuture-aurora",
+    "sku": "HIFUTURE-AURORA",
+    "name": "HIFUTURE Aurora",
+    "brand": "HIFUTURE",
+    "category": "Montres",
+    "subcategory": "Montres connectées",
+    "price": 89.99,
+    "description": "La montre connectée HIFUTURE Aurora harmonise parfaitement élégance professionnelle et performance technologique. Son boîtier métallique premium témoigne d",
+    "shortDescription": "Montre connectée business avec boîtier métallique premium et écran AMOLED",
+    "urlSlug": "hifuture-aurora-montre-connectee-business-metallique",
+    "warranty": "2 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "images": [
+      "/placeholder-monster-mini.svg"
+    ],
+    "keywords": [
+      "HIFUTURE Aurora",
+      "montre business",
+      "boîtier métallique",
+      "wellness",
+      "élégante"
+    ],
+    "highlights": [
+      "Boîtier métallique premium",
+      "Design business élégant",
+      "Fonctions wellness complètes",
+      "GPS intégré",
+      "Charge sans fil Qi"
+    ],
+    "badges": [
+      "Business",
+      "Élégant"
+    ],
+    "specifications": [
+      {
+        "label": "Type Écran",
+        "value": "AMOLED"
+      },
+      {
+        "label": "GPS",
+        "value": "Intégré"
+      },
+      {
+        "label": "Résistance",
+        "value": "ATM5"
+      },
+      {
+        "label": "Autonomie",
+        "value": "10-12 jours"
+      }
+    ],
+    "rating": {
+      "average": 4.6,
+      "count": 145
+    },
+    "status": "active"
+  },
+  {
+    "id": "hifuture-vela",
+    "sku": "HIFUTURE-VELA",
+    "name": "HIFUTURE Vela",
+    "brand": "HIFUTURE",
+    "category": "Montres",
+    "subcategory": "Montres sport",
+    "price": 129.99,
+    "description": "La montre connectée HIFUTURE Vela incarne l",
+    "shortDescription": "Montre connectée haut de gamme avec écran Always-On AMOLED et 120+ modes sport",
+    "urlSlug": "hifuture-vela-montre-connectee-premium",
+    "warranty": "2 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "images": [
+      "/placeholder-monster-mini.svg"
+    ],
+    "keywords": [
+      "HIFUTURE Vela",
+      "montre haut de gamme",
+      "Always-On",
+      "sport professionnel",
+      "wellness"
+    ],
+    "highlights": [
+      "Écran Always-On AMOLED",
+      "120+ modes sport",
+      "GPS double fréquence",
+      "Boîtier céramique",
+      "Autonomie remarquable"
+    ],
+    "badges": [
+      "Premium",
+      "Always-On"
+    ],
+    "specifications": [
+      {
+        "label": "Type Écran",
+        "value": "Always-On AMOLED"
+      },
+      {
+        "label": "GPS",
+        "value": "Double fréquence"
+      },
+      {
+        "label": "Résistance",
+        "value": "ATM5"
+      },
+      {
+        "label": "Autonomie",
+        "value": "10-14 jours"
+      }
+    ],
+    "rating": {
+      "average": 4.8,
+      "count": 112
+    },
+    "status": "active"
+  },
+  {
+    "id": "hifuture-aura-2",
+    "sku": "HIFUTURE-AURA-2",
+    "name": "HIFUTURE Aura 2",
+    "brand": "HIFUTURE",
+    "category": "Montres",
+    "subcategory": "Montres sport",
+    "price": 89.99,
+    "description": "La montre connectée HIFUTURE Aura 2 perfectionne la formule gagnante de sa prédécesseure avec améliorations significatives et nouvelles fonctionnalités. Cette évolution réussie combine technologies de santé avancées, design premium et accessibilité tarifaire pour démocratiser l",
+    "shortDescription": "Montre connectée haut de gamme avec ECG certifié et écran Always-On amélioré",
+    "urlSlug": "hifuture-aura-2-montre-connectee-haut-gamme",
+    "warranty": "2 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "images": [
+      "/placeholder-monster-mini.svg"
+    ],
+    "keywords": [
+      "HIFUTURE Aura 2",
+      "montre haut de gamme",
+      "ECG",
+      "Always-On",
+      "santé avancée"
+    ],
+    "highlights": [
+      "ECG certifié",
+      "Always-On nouvelle génération",
+      "GPS triple constellation",
+      "Certification MIL-STD-810H",
+      "Charge rapide 50% en 30min"
+    ],
+    "badges": [
+      "ECG Certifié",
+      "Nouveau"
+    ],
+    "specifications": [
+      {
+        "label": "Type Écran",
+        "value": "Always-On amélioré"
+      },
+      {
+        "label": "ECG",
+        "value": "Certifié"
+      },
+      {
+        "label": "GPS",
+        "value": "Triple constellation"
+      },
+      {
+        "label": "Autonomie",
+        "value": "12-15 jours"
+      }
+    ],
+    "rating": {
+      "average": 4.8,
+      "count": 198
+    },
+    "status": "active"
+  },
+  {
+    "id": "hifuture-lume",
+    "sku": "HIFUTURE-LUME",
+    "name": "HIFUTURE Lume",
+    "brand": "HIFUTURE",
+    "category": "Montres",
+    "subcategory": "Montres sport",
+    "price": 54.99,
+    "description": "Montre connectée HIFUTURE Lume avec éclairage LED unique pour style futuriste. Écran AMOLED lumineux parfait pour lifestyle urbain branché. Éclairage LED intégré idéal pour activités nocturnes et sport soir. Quatre coloris tendance : noir discret, gris moderne, vert dynamique ou champagne élégant. Suivi santé complet avec capteur de température corporelle exclusif. GPS intégré et résistance IP67 pour toutes vos aventures. Autonomie 6-8 jours optimisée malgré l",
+    "shortDescription": "Montre connectée LED urbaine avec design futuriste",
+    "urlSlug": "hifuture-lume-montre-connectee-led-urbaine",
+    "warranty": "2 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "images": [
+      "/placeholder-monster-mini.svg"
+    ],
+    "keywords": [
+      "HIFUTURE Lume",
+      "montre urbaine",
+      "LED",
+      "lifestyle",
+      "gaming"
+    ],
+    "highlights": [
+      "Éclairage LED unique",
+      "Design futuriste",
+      "GPS intégré",
+      "Capteur de température",
+      "Style urbain branché"
+    ],
+    "badges": [
+      "LED",
+      "Gaming"
+    ],
+    "specifications": [
+      {
+        "label": "Type Écran",
+        "value": "AMOLED"
+      },
+      {
+        "label": "Éclairage",
+        "value": "LED intégré"
+      },
+      {
+        "label": "Résistance",
+        "value": "IP67"
+      },
+      {
+        "label": "Autonomie",
+        "value": "6-8 jours"
+      }
+    ],
+    "rating": {
+      "average": 4.5,
+      "count": 345
+    },
+    "status": "active"
+  },
+  {
+    "id": "hifuture-lume-pro",
+    "sku": "HIFUTURE-LUME-PRO",
+    "name": "HIFUTURE Lume Pro",
+    "brand": "HIFUTURE",
+    "category": "Montres",
+    "subcategory": "Montres sport",
+    "price": 69.99,
+    "description": "Montre HIFUTURE Lume Pro avec éclairage LED avancé et fonctions sport professionnelles. Design sophistiqué disponible en noir, vert, pink ou titanium premium. Éclairage LED amélioré pour visibilité et style uniques. Écran AMOLED haute définition pour affichage cristallin. Fonctions sport pro incluant VO2 Max et temps de récupération. Version titanium avec boîtier ultra-résistant et léger. Résistance ATM5 pour natation et sports aquatiques. Autonomie 8-10 jours malgré fonctionnalités avancées. La montre LED premium pour sportifs exigeants de La Réunion.",
+    "shortDescription": "Montre connectée LED premium avec fonctions sport pro",
+    "urlSlug": "hifuture-lume-pro-montre-connectee-led-premium",
+    "warranty": "2 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "images": [
+      "/placeholder-monster-mini.svg"
+    ],
+    "keywords": [
+      "HIFUTURE Lume Pro",
+      "LED premium",
+      "sport pro",
+      "titanium",
+      "gaming"
+    ],
+    "highlights": [
+      "LED gaming avancée",
+      "VO2 Max & Recovery",
+      "Version titanium premium",
+      "ATM5 pour natation",
+      "Design sophistiqué"
+    ],
+    "badges": [
+      "LED Pro",
+      "Gaming"
+    ],
+    "specifications": [
+      {
+        "label": "Type Écran",
+        "value": "AMOLED"
+      },
+      {
+        "label": "Éclairage",
+        "value": "LED avancé"
+      },
+      {
+        "label": "Résistance",
+        "value": "ATM5"
+      },
+      {
+        "label": "Autonomie",
+        "value": "8-10 jours"
+      }
+    ],
+    "rating": {
+      "average": 4.6,
+      "count": 189
+    },
+    "status": "active"
+  },
+  {
+    "id": "hifuture-mixx-3",
+    "sku": "HIFUTURE-MIXX-3",
+    "name": "HIFUTURE MIXX 3",
+    "brand": "HIFUTURE",
+    "category": "Montres",
+    "subcategory": "Montres connectées",
+    "price": 99.99,
+    "description": "Innovation technologique avec la montre HIFUTURE MIXX 3 à triple affichage. Multi-interface révolutionnaire pour personnalisation maximale. Design avancé disponible en noir professionnel ou jaune fluo haute visibilité. Triple affichage permettant gestion simultanée de multiples informations. Interface optimisée pour usage intensif et multitâche. Visibilité nocturne améliorée avec version jaune fluo. GPS intégré et suivi sport complet pour performances optimales. Autonomie 7-10 jours malgré triple écran AMOLED. La montre multi-affichage idéale pour technophiles de La Réunion.",
+    "shortDescription": "Montre connectée triple affichage avec design gaming avancé",
+    "urlSlug": "hifuture-mixx-3-montre-connectee-triple-affichage",
+    "warranty": "2 ans constructeur",
+    "deliveryTime": "24-48h à La Réunion",
+    "images": [
+      "/placeholder-monster-mini.svg"
+    ],
+    "keywords": [
+      "HIFUTURE MIXX 3",
+      "triple affichage",
+      "gaming",
+      "innovation",
+      "jaune fluo"
+    ],
+    "highlights": [
+      "Triple affichage AMOLED",
+      "Interface gaming avancée",
+      "Visibilité nocturne",
+      "GPS tracking sport",
+      "Design futuriste"
+    ],
+    "badges": [
+      "Innovation",
+      "Gaming"
+    ],
+    "specifications": [
+      {
+        "label": "Type Écran",
+        "value": "AMOLED triple"
+      },
+      {
+        "label": "Interface",
+        "value": "Triple affichage"
+      },
+      {
+        "label": "GPS",
+        "value": "Intégré"
+      },
+      {
+        "label": "Autonomie",
+        "value": "7-10 jours"
+      }
+    ],
+    "rating": {
+      "average": 4.7,
+      "count": 156
+    },
+    "status": "active"
+  },
+  {
+    "id": "led-001",
+    "sku": "MON-ILL-COLOR-BLANC",
+    "name": "MONSTER Illuminescence Light Strip Color/Blanc",
+    "brand": "MONSTER",
+    "category": "LED",
+    "subcategory": "Bandeaux LED",
+    "price": 17.99,
+    "originalPrice": 24.99,
+    "discount": 28,
+    "description": "Transformez radicalement votre espace de vie avec le bandeau LED MONSTER Illuminescence Light Strip Color/Blanc, une solution d\\",
+    "shortDescription": "Bandeau LED double mode RGB multicouleur et blanc chaud, 2m",
+    "urlSlug": "monster-illuminescence-light-strip-color-blanc",
+    "warranty": "1 an",
+    "deliveryTime": "24-48h",
+    "images": [
+      "/placeholder-product.png"
+    ],
+    "keywords": [
+      "led",
+      "gaming",
+      "rgb",
+      "éclairage",
+      "monster"
+    ],
+    "highlights": [
+      "Double technologie RGB + Blanc chaud",
+      "Installation adhésive simple 3M",
+      "Alimentation USB universelle",
+      "Contrôle intuitif des modes"
+    ],
+    "badges": [
+      "Polyvalent",
+      "Gaming"
+    ],
+    "specifications": [
+      {
+        "label": "Type",
+        "value": "LED Strip"
+      },
+      {
+        "label": "Connectivité",
+        "value": "Basic (USB)"
+      },
+      {
+        "label": "Longueur",
+        "value": "2m"
+      },
+      {
+        "label": "Usage",
+        "value": "Intérieur"
+      },
+      {
+        "label": "Modes",
+        "value": "RGB + Blanc chaud"
+      },
+      {
+        "label": "Utilisation",
+        "value": "Gaming et travail"
+      }
+    ],
+    "rating": {
+      "average": 4.7,
+      "count": 0
+    },
+    "status": "active"
+  },
+  {
+    "id": "led-002",
+    "sku": "MON-ILL-BASIC-MULTI",
+    "name": "MONSTER Illuminescence Basic Lightstrip Multicouleur",
+    "brand": "MONSTER",
+    "category": "LED",
+    "subcategory": "Bandeaux LED",
+    "price": 13.99,
+    "originalPrice": 19.99,
+    "discount": 30,
+    "description": "Illuminez et personnalisez votre espace de vie avec le bandeau LED MONSTER Illuminescence Basic Lightstrip Multicouleur, une solution d\\",
+    "shortDescription": "Bandeau LED RGB multicouleur, disponible en 2m, 4m et 5m",
+    "urlSlug": "monster-illuminescence-basic-lightstrip-multicouleur",
+    "warranty": "1 an",
+    "deliveryTime": "24-48h",
+    "images": [
+      "/placeholder-product.png"
+    ],
+    "keywords": [
+      "led",
+      "gaming",
+      "rgb",
+      "éclairage",
+      "monster"
+    ],
+    "highlights": [
+      "Technologie RGB - millions de couleurs",
+      "Trois longueurs disponibles",
+      "Installation adhésive facile",
+      "Alimentation USB pratique",
+      "Consommation énergétique minimale"
+    ],
+    "badges": [
+      "Best-seller",
+      "Gaming"
+    ],
+    "specifications": [
+      {
+        "label": "Type",
+        "value": "LED Strip"
+      },
+      {
+        "label": "Connectivité",
+        "value": "Basic (USB)"
+      },
+      {
+        "label": "Usage",
+        "value": "Intérieur"
+      },
+      {
+        "label": "Couleurs",
+        "value": "RGB multicouleur"
+      },
+      {
+        "label": "Longueurs",
+        "value": "2m, 4m, 5m"
+      },
+      {
+        "label": "Installation",
+        "value": "Adhésif 3M"
+      }
+    ],
+    "rating": {
+      "average": 4.6,
+      "count": 0
+    },
+    "status": "active"
+  },
+  {
+    "id": "led-003",
+    "sku": "MON-ILL-CHROMA-2X",
+    "name": "MONSTER Illuminescence Smart Chroma Light 2X Bars",
+    "brand": "MONSTER",
+    "category": "LED",
+    "subcategory": "Barres LED",
+    "price": 49.99,
+    "originalPrice": 69.99,
+    "discount": 29,
+    "description": "Transformez votre environnement en spectacle lumineux époustouflant avec le pack MONSTER Illuminescence Smart Chroma Light 2X Bars, une solution d\\",
+    "shortDescription": "Pack 2 barres LED RGB IC avec contrôle WiFi et synchronisation musicale",
+    "urlSlug": "monster-illuminescence-chroma-2x-bars",
+    "warranty": "1 an",
+    "deliveryTime": "24-48h",
+    "images": [
+      "/placeholder-product.png"
+    ],
+    "keywords": [
+      "led",
+      "gaming",
+      "rgb",
+      "éclairage",
+      "monster"
+    ],
+    "highlights": [
+      "Technologie RGB IC - contrôle pixel par pixel",
+      "Contrôle WiFi via smartphone",
+      "Synchronisation musicale en temps réel",
+      "Compatible Alexa et Google Assistant",
+      "Installation modulaire flexible"
+    ],
+    "badges": [
+      "Premium",
+      "Smart Home"
+    ],
+    "specifications": [
+      {
+        "label": "Type",
+        "value": "Light Bar"
+      },
+      {
+        "label": "Connectivité",
+        "value": "Smart (WiFi)"
+      },
+      {
+        "label": "Technologie",
+        "value": "RGB IC"
+      },
+      {
+        "label": "Contenu",
+        "value": "2 barres"
+      },
+      {
+        "label": "Effet",
+        "value": "Chroma immersif"
+      },
+      {
+        "label": "Installation",
+        "value": "Modulaire"
+      }
+    ],
+    "rating": {
+      "average": 4.8,
+      "count": 0
+    },
+    "status": "active"
+  },
+  {
+    "id": "led-004",
+    "sku": "MON-ILL-NEON",
+    "name": "MONSTER Illuminescence Neon Light Strip",
+    "brand": "MONSTER",
+    "category": "LED",
+    "subcategory": "Néon LED",
+    "price": 26.99,
+    "originalPrice": 39.99,
+    "discount": 33,
+    "description": "Découvrez l\\",
+    "shortDescription": "Bandeau LED effet néon continu, design cyberpunk",
+    "urlSlug": "monster-illuminescence-neon-light-strip",
+    "warranty": "1 an",
+    "deliveryTime": "24-48h",
+    "images": [
+      "/placeholder-product.png"
+    ],
+    "keywords": [
+      "led",
+      "gaming",
+      "rgb",
+      "éclairage",
+      "monster"
+    ],
+    "highlights": [
+      "Effet néon continu sans points visibles",
+      "Design futuriste cyberpunk",
+      "Usage intérieur et extérieur",
+      "Version Basic avec réactivité sonore",
+      "Version Smart avec contrôle WiFi"
+    ],
+    "badges": [
+      "Futuriste",
+      "Design"
+    ],
+    "specifications": [
+      {
+        "label": "Type",
+        "value": "Neon Strip"
+      },
+      {
+        "label": "Effet",
+        "value": "Néon continu"
+      },
+      {
+        "label": "Usage",
+        "value": "Intérieur/Extérieur"
+      },
+      {
+        "label": "Versions",
+        "value": "2m Basic, 5m Smart"
+      },
+      {
+        "label": "Design",
+        "value": "Cyberpunk/Rétro-wave"
+      }
+    ],
+    "rating": {
+      "average": 4.7,
+      "count": 0
+    },
+    "status": "active"
+  },
+  {
+    "id": "led-005",
+    "sku": "GT-RGB-BARS-PRO",
+    "name": "MONSTER RGB Gaming Light Bars Pro",
+    "brand": "MONSTER",
+    "category": "LED",
+    "subcategory": "Barres LED",
+    "price": 39.99,
+    "originalPrice": 54.99,
+    "discount": 27,
+    "description": "Barres LED gaming professionnelles avec synchronisation écran et effets dynamiques pour une immersion totale.",
+    "shortDescription": "Barres LED gaming avec sync écran",
+    "urlSlug": "rgb-gaming-light-bars-pro",
+    "warranty": "1 an",
+    "deliveryTime": "24-48h",
+    "images": [
+      "/placeholder-product.png"
+    ],
+    "keywords": [
+      "led",
+      "gaming",
+      "rgb",
+      "éclairage",
+      "monster"
+    ],
+    "highlights": [
+      "Synchronisation avec l\\",
+      ",\n      ",
+      ",\n      ",
+      ",\n      "
+    ],
+    "badges": [
+      "Gaming",
+      "Pro"
+    ],
+    "specifications": [
+      {
+        "label": "Type",
+        "value": "Gaming Light Bar"
+      },
+      {
+        "label": "Technologie",
+        "value": "RGB"
+      },
+      {
+        "label": "Synchronisation",
+        "value": "Écran + Audio"
+      },
+      {
+        "label": "Nombre",
+        "value": "2 barres"
+      },
+      {
+        "label": "Modes",
+        "value": "15 effets prédéfinis"
+      }
+    ],
+    "rating": {
+      "average": 4.6,
+      "count": 0
+    },
+    "status": "active"
+  },
+  {
+    "id": "led-006",
+    "sku": "TL-HEX-KIT-9",
+    "name": "MONSTER Smart LED Panel Hexagonal Kit",
+    "brand": "MONSTER",
+    "category": "LED",
+    "subcategory": "Panneaux LED",
+    "price": 89.99,
+    "originalPrice": 119.99,
+    "discount": 25,
+    "description": "Kit de panneaux LED hexagonaux modulaires avec contrôle intelligent pour créer des designs muraux uniques.",
+    "shortDescription": "Kit 9 panneaux LED hexagonaux connectés",
+    "urlSlug": "smart-led-panel-hexagonal-kit",
+    "warranty": "1 an",
+    "deliveryTime": "24-48h",
+    "images": [
+      "/placeholder-product.png"
+    ],
+    "keywords": [
+      "led",
+      "gaming",
+      "rgb",
+      "éclairage",
+      "monster"
+    ],
+    "highlights": [
+      "Design modulaire extensible",
+      "Contrôle tactile sur panneaux",
+      "Application smartphone dédiée",
+      "Compatible assistants vocaux",
+      "Installation murale facile"
+    ],
+    "badges": [
+      "Innovation",
+      "Design"
+    ],
+    "specifications": [
+      {
+        "label": "Type",
+        "value": "LED Panels"
+      },
+      {
+        "label": "Forme",
+        "value": "Hexagonale"
+      },
+      {
+        "label": "Quantité",
+        "value": "9 panneaux"
+      },
+      {
+        "label": "Connectivité",
+        "value": "WiFi + Bluetooth"
+      },
+      {
+        "label": "Contrôle",
+        "value": "App + Tactile"
+      }
+    ],
+    "rating": {
+      "average": 4.9,
+      "count": 0
+    },
+    "status": "active"
+  },
+  {
+    "id": "led-007",
+    "sku": "VL-TV-BL-4K",
+    "name": "MONSTER Ambient TV LED Backlight 4K",
+    "brand": "MONSTER",
+    "category": "LED",
+    "subcategory": "Rétroéclairage TV",
+    "price": 34.99,
+    "originalPrice": 49.99,
+    "discount": 30,
+    "description": "Système de rétroéclairage LED pour TV avec synchronisation des couleurs pour une expérience visuelle immersive.",
+    "shortDescription": "Rétroéclairage TV avec sync couleurs, compatible 55-75",
+    "urlSlug": "ambient-tv-led-backlight-4k",
+    "warranty": "1 an",
+    "deliveryTime": "24-48h",
+    "images": [
+      "/placeholder-product.png"
+    ],
+    "keywords": [
+      "led",
+      "gaming",
+      "rgb",
+      "éclairage",
+      "monster"
+    ],
+    "highlights": [
+      "Synchronisation couleurs écran",
+      "Réduit fatigue oculaire",
+      "Installation universelle",
+      "Contrôle via télécommande",
+      "Mode cinéma optimisé"
+    ],
+    "badges": [
+      "4K",
+      "Cinéma"
+    ],
+    "specifications": [
+      {
+        "label": "Type",
+        "value": "TV Backlight"
+      },
+      {
+        "label": "Compatibilité",
+        "value": "55"
+      },
+      {
+        "label": "Technologie",
+        "value": "Ambilight"
+      },
+      {
+        "label": "Modes",
+        "value": "Sync + Manuel"
+      },
+      {
+        "label": "Installation",
+        "value": "Adhésive"
+      }
+    ],
+    "rating": {
+      "average": 4.5,
+      "count": 0
+    },
+    "status": "active"
+  },
+  {
+    "id": "led-008",
+    "sku": "CL-GALAXY-PRO",
+    "name": "MONSTER Projecteur LED Galaxy Starlight",
+    "brand": "MONSTER",
+    "category": "LED",
+    "subcategory": "Projecteurs",
+    "price": 44.99,
+    "originalPrice": 59.99,
+    "discount": 25,
+    "description": "Projecteur LED créant un ciel étoilé avec nébuleuses colorées pour transformer votre chambre en galaxie.",
+    "shortDescription": "Projecteur galaxie avec télécommande et timer",
+    "urlSlug": "projecteur-led-galaxy-starlight",
+    "warranty": "1 an",
+    "deliveryTime": "24-48h",
+    "images": [
+      "/placeholder-product.png"
+    ],
+    "keywords": [
+      "led",
+      "gaming",
+      "rgb",
+      "éclairage",
+      "monster"
+    ],
+    "highlights": [
+      "Effets galaxie réalistes",
+      "Nébuleuses multicolores",
+      "Mode musique réactif",
+      "Timer programmable",
+      "Télécommande incluse"
+    ],
+    "badges": [
+      "Best-seller",
+      "Ambiance"
+    ],
+    "specifications": [
+      {
+        "label": "Type",
+        "value": "Projecteur LED"
+      },
+      {
+        "label": "Effets",
+        "value": "Étoiles + Nébuleuses"
+      },
+      {
+        "label": "Contrôle",
+        "value": "Télécommande + App"
+      },
+      {
+        "label": "Timer",
+        "value": "Auto-off 1/2/4h"
+      },
+      {
+        "label": "Couverture",
+        "value": "15-30m²"
+      }
+    ],
+    "rating": {
+      "average": 4.8,
+      "count": 0
+    },
+    "status": "active"
+  },
+  {
+    "id": "led-009",
+    "sku": "PL-RING-18-PRO",
+    "name": "MONSTER LED Ring Light Studio Pro 18",
+    "brand": "MONSTER",
+    "category": "LED",
+    "subcategory": "Éclairage Studio",
+    "price": 79.99,
+    "originalPrice": 99.99,
+    "discount": 20,
+    "description": "Ring light professionnel 18 pouces pour streaming, photographie et maquillage avec température de couleur réglable.",
+    "shortDescription": "Ring light 18",
+    "urlSlug": "led-ring-light-studio-pro-18",
+    "warranty": "1 an",
+    "deliveryTime": "24-48h",
+    "images": [
+      "/placeholder-product.png"
+    ],
+    "keywords": [
+      "led",
+      "gaming",
+      "rgb",
+      "éclairage",
+      "monster"
+    ],
+    "highlights": [
+      "Éclairage uniforme sans ombre",
+      "Température couleur réglable",
+      "Trépied ajustable 2m",
+      "Support smartphone/caméra",
+      "Télécommande Bluetooth"
+    ],
+    "badges": [
+      "Pro",
+      "Streaming"
+    ],
+    "specifications": [
+      {
+        "label": "Type",
+        "value": "Ring Light"
+      },
+      {
+        "label": "Diamètre",
+        "value": "18 pouces"
+      },
+      {
+        "label": "Température",
+        "value": "3200K-5600K"
+      },
+      {
+        "label": "Intensité",
+        "value": "Variable 1-100%"
+      },
+      {
+        "label": "Hauteur",
+        "value": "Jusqu\\"
+      }
+    ],
+    "rating": {
+      "average": 4.7,
+      "count": 0
+    },
+    "status": "active"
+  },
+  {
+    "id": "led-010",
+    "sku": "HL-BULB-RGB-4",
+    "name": "MONSTER Smart Bulb RGB WiFi Pack x4",
+    "brand": "MONSTER",
+    "category": "LED",
+    "subcategory": "Ampoules Smart",
+    "price": 54.99,
+    "originalPrice": 74.99,
+    "discount": 27,
+    "description": "Pack de 4 ampoules LED intelligentes RGB avec contrôle WiFi pour automatiser l\\",
+    "shortDescription": "Pack 4 ampoules smart RGB E27, compatible Alexa/Google",
+    "urlSlug": "smart-bulb-rgb-wifi-pack-4",
+    "warranty": "1 an",
+    "deliveryTime": "24-48h",
+    "images": [
+      "/placeholder-product.png"
+    ],
+    "keywords": [
+      "led",
+      "gaming",
+      "rgb",
+      "éclairage",
+      "monster"
+    ],
+    "highlights": [
+      "Contrôle vocal Alexa/Google",
+      "16 millions de couleurs",
+      "Programmation horaire",
+      "Scénarios personnalisés",
+      "Économie énergie 85%"
+    ],
+    "badges": [
+      "Smart Home",
+      "Économique"
+    ],
+    "specifications": [
+      {
+        "label": "Type",
+        "value": "Ampoule Smart"
+      },
+      {
+        "label": "Culot",
+        "value": "E27"
+      },
+      {
+        "label": "Puissance",
+        "value": "9W = 60W"
+      },
+      {
+        "label": "Couleurs",
+        "value": "16 millions"
+      },
+      {
+        "label": "Connectivité",
+        "value": "WiFi 2.4GHz"
+      }
+    ],
+    "rating": {
+      "average": 4.6,
+      "count": 0
+    },
+    "status": "active"
+  },
+  {
+    "id": "led-011",
+    "sku": "MON-LED-GAME5M",
+    "name": "MONSTER LED Strip Gaming Setup 5M",
+    "brand": "MONSTER",
+    "category": "LED",
+    "subcategory": "Bandeaux LED",
+    "price": 29.99,
+    "originalPrice": 39.99,
+    "discount": 25,
+    "description": "Bandeau LED spécialement conçu pour les setups gaming avec synchronisation musique et effets dynamiques.",
+    "shortDescription": "Bandeau LED 5M gaming avec sync musique",
+    "urlSlug": "monster-led-strip-gaming-setup-5m",
+    "warranty": "1 an",
+    "deliveryTime": "24-48h",
+    "images": [
+      "/placeholder-product.png"
+    ],
+    "keywords": [
+      "led",
+      "gaming",
+      "rgb",
+      "éclairage",
+      "monster"
+    ],
+    "highlights": [
+      "Synchronisation musique",
+      "Effets gaming dynamiques",
+      "Application mobile dédiée",
+      "Installation facile"
+    ],
+    "badges": [
+      "Gaming",
+      "Sync musique"
+    ],
+    "specifications": [
+      {
+        "label": "Longueur",
+        "value": "5 mètres"
+      },
+      {
+        "label": "LEDs",
+        "value": "150 LEDs"
+      },
+      {
+        "label": "Couleurs",
+        "value": "RGB + Blanc"
+      },
+      {
+        "label": "Modes",
+        "value": "20 modes"
+      },
+      {
+        "label": "Contrôle",
+        "value": "App + Télécommande"
+      }
+    ],
+    "rating": {
+      "average": 4.6,
+      "count": 0
+    },
+    "status": "active"
+  },
+  {
+    "id": "led-012",
+    "sku": "MON-CUBE-LED",
+    "name": "MONSTER Cube LED Modulaire Smart",
+    "brand": "MONSTER",
+    "category": "LED",
+    "subcategory": "Panneaux LED",
+    "price": 49.99,
+    "originalPrice": 69.99,
+    "discount": 29,
+    "description": "Cubes LED modulaires connectables pour créer des designs lumineux personnalisés.",
+    "shortDescription": "6 cubes LED modulaires WiFi",
+    "urlSlug": "monster-cube-led-modulaire-smart",
+    "warranty": "1 an",
+    "deliveryTime": "24-48h",
+    "images": [
+      "/placeholder-product.png"
+    ],
+    "keywords": [
+      "led",
+      "gaming",
+      "rgb",
+      "éclairage",
+      "monster"
+    ],
+    "highlights": [
+      "Design modulaire",
+      "Connexion magnétique",
+      "Contrôle vocal",
+      "Effets personnalisables"
+    ],
+    "badges": [
+      "Modulaire",
+      "Smart"
+    ],
+    "specifications": [
+      {
+        "label": "Dimensions",
+        "value": "10x10x10 cm par cube"
+      },
+      {
+        "label": "Quantité",
+        "value": "6 cubes"
+      },
+      {
+        "label": "Couleurs",
+        "value": "16 millions"
+      },
+      {
+        "label": "Contrôle",
+        "value": "WiFi + Bluetooth"
+      },
+      {
+        "label": "Compatibilité",
+        "value": "Alexa, Google Home"
+      }
+    ],
+    "rating": {
+      "average": 4.7,
+      "count": 0
+    },
+    "status": "active"
+  },
+  {
+    "id": "led-013",
+    "sku": "MON-CORNER-RGB",
+    "name": "MONSTER Lightning Pro Corner RGB",
+    "brand": "MONSTER",
+    "category": "LED",
+    "subcategory": "Barres LED",
+    "price": 44.99,
+    "originalPrice": 59.99,
+    "discount": 25,
+    "description": "Barres LED d\\",
+    "shortDescription": "2 barres LED d\\",
+    "urlSlug": "monster-lightning-pro-corner-rgb",
+    "warranty": "1 an",
+    "deliveryTime": "24-48h",
+    "images": [
+      "/placeholder-product.png"
+    ],
+    "keywords": [
+      "led",
+      "gaming",
+      "rgb",
+      "éclairage",
+      "monster"
+    ],
+    "highlights": [
+      "Design pour angles",
+      "Éclairage immersif",
+      "Télécommande RF",
+      "Installation simple"
+    ],
+    "badges": [
+      "Design",
+      "Corner"
+    ],
+    "specifications": [
+      {
+        "label": "Longueur",
+        "value": "1 mètre par barre"
+      },
+      {
+        "label": "Quantité",
+        "value": "2 barres"
+      },
+      {
+        "label": "Angle",
+        "value": "90 degrés"
+      },
+      {
+        "label": "Couleurs",
+        "value": "RGB + Blanc"
+      },
+      {
+        "label": "Installation",
+        "value": "Adhésif 3M"
+      }
+    ],
+    "rating": {
+      "average": 4.5,
+      "count": 0
+    },
+    "status": "active"
+  },
+  {
+    "id": "led-014",
+    "sku": "MON-FLOOD-50W",
+    "name": "MONSTER Flood Light Extérieur 50W",
+    "brand": "MONSTER",
+    "category": "LED",
+    "subcategory": "Projecteurs",
+    "price": 59.99,
+    "originalPrice": 79.99,
+    "discount": 25,
+    "description": "Projecteur LED extérieur puissant avec détection de mouvement et résistance IP65.",
+    "shortDescription": "Projecteur LED 50W IP65 avec détecteur",
+    "urlSlug": "monster-flood-light-exterieur-50w",
+    "warranty": "1 an",
+    "deliveryTime": "24-48h",
+    "images": [
+      "/placeholder-product.png"
+    ],
+    "keywords": [
+      "led",
+      "gaming",
+      "rgb",
+      "éclairage",
+      "monster"
+    ],
+    "highlights": [
+      "Détection de mouvement",
+      "Résistant aux intempéries",
+      "Économe en énergie",
+      "Longue durée de vie"
+    ],
+    "badges": [
+      "Extérieur",
+      "IP65"
+    ],
+    "specifications": [
+      {
+        "label": "Puissance",
+        "value": "50W"
+      },
+      {
+        "label": "Luminosité",
+        "value": "5000 lumens"
+      },
+      {
+        "label": "Température",
+        "value": "6500K"
+      },
+      {
+        "label": "Détection",
+        "value": "Capteur PIR 10m"
+      },
+      {
+        "label": "Résistance",
+        "value": "IP65"
+      }
+    ],
+    "rating": {
+      "average": 4.8,
+      "count": 0
+    },
+    "status": "active"
+  },
+  {
+    "id": "led-015",
+    "sku": "MON-INFINITY-3D",
+    "name": "MONSTER Infinity Mirror LED 3D",
+    "brand": "MONSTER",
+    "category": "LED",
+    "subcategory": "Déco LED",
+    "price": 89.99,
+    "originalPrice": 119.99,
+    "discount": 25,
+    "description": "Miroir infini LED 3D pour une décoration futuriste avec effets de profondeur illimités.",
+    "shortDescription": "Miroir infini LED 40x40cm avec effets 3D",
+    "urlSlug": "monster-infinity-mirror-led-3d",
+    "warranty": "1 an",
+    "deliveryTime": "24-48h",
+    "images": [
+      "/placeholder-product.png"
+    ],
+    "keywords": [
+      "led",
+      "gaming",
+      "rgb",
+      "éclairage",
+      "monster"
+    ],
+    "highlights": [
+      "Effet 3D infini",
+      "Contrôle vocal",
+      "25 animations",
+      "Cadre aluminium premium"
+    ],
+    "badges": [
+      "Premium",
+      "3D Effect"
+    ],
+    "specifications": [
+      {
+        "label": "Dimensions",
+        "value": "40x40 cm"
+      },
+      {
+        "label": "Profondeur",
+        "value": "Effet infini"
+      },
+      {
+        "label": "Couleurs",
+        "value": "RGB programmable"
+      },
+      {
+        "label": "Modes",
+        "value": "25 animations"
+      },
+      {
+        "label": "Contrôle",
+        "value": "App + Commande vocale"
+      }
+    ],
+    "rating": {
+      "average": 4.9,
+      "count": 0
+    },
+    "status": "active"
+  },
+  {
+    "id": "hifuture-enceinte-altus",
+    "sku": "HIFUTURE-ALTUS",
+    "name": "HIFUTURE Enceinte Altus",
+    "brand": "HIFUTURE",
+    "category": "Audio",
+    "subcategory": "Enceintes",
+    "price": 29.99,
+    "description": "L",
+    "shortDescription": "Enceinte Bluetooth portable avec son HD",
+    "urlSlug": "hifuture-altus-enceinte-portable-gaming",
+    "keywords": [
+      "HIFUTURE Altus",
+      "enceinte portable",
+      "gaming nomade",
+      "Bluetooth",
+      "La Réunion",
+      "974"
+    ],
+    "badges": [
+      "Nouveau"
+    ],
+    "specifications": [
+      {
+        "label": "Connectivité",
+        "value": "Bluetooth 5.0"
+      },
+      {
+        "label": "Autonomie",
+        "value": "12 heures"
+      },
+      {
+        "label": "Puissance",
+        "value": "10W"
+      },
+      {
+        "label": "Étanchéité",
+        "value": "IPX5"
+      }
+    ],
+    "rating": {
+      "average": 4.9,
+      "count": 91
+    },
+    "status": "active"
+  },
+  {
+    "id": "hifuture-event-horizon",
+    "sku": "HIF-EVENT-HORIZON",
+    "name": "HIFUTURE PartyBox Event Horizon",
+    "brand": "HIFUTURE",
+    "category": "Audio",
+    "subcategory": "Enceintes",
+    "price": 199.99,
+    "description": "La HIFUTURE PartyBox Event Horizon transcende les limites de l",
+    "shortDescription": "Enceinte party avec LED et son puissant",
+    "urlSlug": "hifuture-event-horizon-partybox-premium",
+    "images": [
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Enceintes/event-horizon-1.jpg",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Enceintes/event-horizon-2.jpg",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Enceintes/event-horizon-3.jpg",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Enceintes/event-horizon-s8.jpg",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Enceintes/event-horizon-specs.jpg"
+    ],
+    "keywords": [
+      "HIFUTURE Event Horizon",
+      "PartyBox premium",
+      "enceinte professionnelle",
+      "La Réunion",
+      "974"
+    ],
+    "badges": [
+      "Party",
+      "LED"
+    ],
+    "specifications": [
+      {
+        "label": "Puissance",
+        "value": "100W RMS"
+      },
+      {
+        "label": "Autonomie",
+        "value": "8 heures"
+      },
+      {
+        "label": "Éclairage",
+        "value": "LED RGB"
+      },
+      {
+        "label": "Connectivité",
+        "value": "Bluetooth, USB, AUX"
+      }
+    ],
+    "rating": {
+      "average": 4.9,
+      "count": 77
+    },
+    "status": "active"
+  },
+  {
+    "id": "olym-120"
+  },
+  {
+    "id": "hifuture-ripple",
+    "sku": "HIFUTURE-RIPPLE",
+    "name": "HIFUTURE Enceinte Ripple",
+    "brand": "HIFUTURE",
+    "category": "Audio",
+    "subcategory": "Enceintes",
+    "price": 64.99,
+    "description": "L",
+    "shortDescription": "Enceinte 360° avec son immersif",
+    "urlSlug": "hifuture-ripple-enceinte-gaming-medium",
+    "images": [
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Enceintes/ripple-noir-1.png",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Enceintes/ripple-noir-2.png",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Enceintes/ripple-noir-3.png",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Enceintes/ripple-noir-4.png",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Enceintes/ripple-noir-5.png",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Enceintes/ripple-noir-6.png",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Enceintes/ripple-noir-7.png",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Enceintes/ripple-noir-8.png",
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Enceintes/ripple-noir-9.png"
+    ],
+    "keywords": [
+      "HIFUTURE Ripple",
+      "enceinte médium",
+      "son équilibré",
+      "gaming immersif",
+      "La Réunion",
+      "974"
+    ],
+    "badges": [
+      "360°"
+    ],
+    "specifications": [
+      {
+        "label": "Son",
+        "value": "360°"
+      },
+      {
+        "label": "Puissance",
+        "value": "20W"
+      },
+      {
+        "label": "Autonomie",
+        "value": "15 heures"
+      },
+      {
+        "label": "Bluetooth",
+        "value": "5.0"
+      }
+    ],
+    "rating": {
+      "average": 4.9,
+      "count": 94
+    },
+    "status": "active"
+  },
+  {
+    "id": "myway-cable-lumineux-usbc",
+    "sku": "MYWCBL-LUM-USBC",
+    "name": "MY WAY Câble Lumineux USB-C",
+    "brand": "MY WAY",
+    "category": "Accessoires",
+    "subcategory": "Câbles",
+    "price": 14.99,
+    "description": "Câble lumineux MY WAY USB-C avec indicateur LED de charge pour une expérience visuelle unique. Suivez la charge en temps réel grâce à l",
+    "shortDescription": "Câble USB-C lumineux avec LED",
+    "urlSlug": "myway-cable-lumineux-usb-c",
+    "keywords": [
+      "MY WAY",
+      "câble",
+      "USB-C",
+      "lumineux",
+      "LED"
+    ],
+    "badges": [
+      "LED",
+      "Charge Rapide"
+    ],
+    "specifications": [
+      {
+        "label": "Longueur",
+        "value": "1 mètre"
+      },
+      {
+        "label": "Charge",
+        "value": "3A Max"
+      },
+      {
+        "label": "LED",
+        "value": "Indicateur lumineux"
+      },
+      {
+        "label": "Matériau",
+        "value": "Nylon tressé"
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "id": "myway-cable-lumineux-usba",
+    "sku": "MYWCBL-LUM-USBA",
+    "name": "MY WAY Câble Lumineux USB-A",
+    "brand": "MY WAY",
+    "category": "Accessoires",
+    "subcategory": "Câbles",
+    "price": 12.99,
+    "description": "Câble lumineux MY WAY USB-A avec indicateur LED pour visualiser la charge en temps réel. Compatible avec tous vos appareils.",
+    "shortDescription": "Câble USB-A lumineux avec LED",
+    "urlSlug": "myway-cable-lumineux-usb-a",
+    "keywords": [
+      "MY WAY",
+      "câble",
+      "USB-A",
+      "lumineux",
+      "LED"
+    ],
+    "badges": [
+      "LED"
+    ],
+    "specifications": [
+      {
+        "label": "Longueur",
+        "value": "1 mètre"
+      },
+      {
+        "label": "Charge",
+        "value": "2.4A Max"
+      },
+      {
+        "label": "LED",
+        "value": "Indicateur lumineux"
+      },
+      {
+        "label": "Compatibilité",
+        "value": "Universal"
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "id": "monster-illuminescence-pack-2x5m",
+    "sku": "MON-ILL-PACK-2X5M",
+    "name": "MONSTER Illuminescence Light Strip Pack 2X 5M RGB+W",
+    "brand": "MONSTER",
+    "category": "LED",
+    "subcategory": "Bandeaux LED",
+    "price": 55.99,
+    "description": "Pack de 2 bandes LED MONSTER Illuminescence 5M RGB+W avec contrôle sonore pour une ambiance personnalisée. Synchronisez vos lumières avec votre musique.",
+    "shortDescription": "Pack 2x5M bandes LED RGB+W avec contrôle sonore",
+    "urlSlug": "monster-illuminescence-pack-2x5m-rgb-w",
+    "keywords": [
+      "MONSTER",
+      "Illuminescence",
+      "LED",
+      "RGB",
+      "sound reactive"
+    ],
+    "badges": [
+      "Pack",
+      "Sound Reactive"
+    ],
+    "specifications": [
+      {
+        "label": "Longueur",
+        "value": "2 x 5 mètres"
+      },
+      {
+        "label": "LED",
+        "value": "RGB + Blanc"
+      },
+      {
+        "label": "Contrôle",
+        "value": "Sound Reactive"
+      },
+      {
+        "label": "Alimentation",
+        "value": "12V inclus"
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "id": "hifuture-sonify",
+    "sku": "HIFUTURE-SONIFY",
+    "name": "HIFUTURE Écouteur Sonify",
+    "brand": "HIFUTURE",
+    "category": "Audio",
+    "subcategory": "Écouteurs",
+    "price": 44.99,
+    "description": "Les écouteurs HIFUTURE Sonify incarnent l",
+    "shortDescription": "Écouteurs TWS premium",
+    "urlSlug": "hifuture-ecouteurs-sonify",
+    "images": [
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Ecouteurs/hifuture-sonify-noir.jpg"
+    ],
+    "keywords": [
+      "HIFUTURE",
+      "Sonify",
+      "écouteurs",
+      "TWS",
+      "premium"
+    ],
+    "badges": [
+      "Hi-Fi",
+      "Charge sans fil"
+    ],
+    "specifications": [
+      {
+        "label": "Driver",
+        "value": "10mm dynamique"
+      },
+      {
+        "label": "Autonomie",
+        "value": "7h + 21h boîtier"
+      },
+      {
+        "label": "Charge sans fil",
+        "value": "Oui"
+      },
+      {
+        "label": "Bluetooth",
+        "value": "5.3"
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "id": "monster-persona-se-anc",
+    "sku": "MONSTER-PERSONA-SE-ANC",
+    "name": "MONSTER Persona SE ANC",
+    "brand": "MONSTER",
+    "category": "Audio",
+    "subcategory": "Casques",
+    "price": 99.99,
+    "description": "Immergez-vous dans un cocon de silence avec le casque MONSTER Persona SE ANC, une solution audio premium qui combine réduction de bruit active professionnelle et confort exceptionnel pour créer l",
+    "shortDescription": "Casque ANC professionnel avec confort premium et audio cristallin",
+    "urlSlug": "monster-persona-se-anc-casque",
+    "keywords": [
+      "MONSTER Persona SE",
+      "ANC",
+      "réduction bruit",
+      "audio premium",
+      "confort exceptionnel"
+    ],
+    "badges": [
+      "ANC Premium",
+      "Audiophile"
+    ],
+    "specifications": [
+      {
+        "label": "ANC",
+        "value": "Hybride -35dB"
+      },
+      {
+        "label": "Driver",
+        "value": "40mm"
+      },
+      {
+        "label": "Autonomie",
+        "value": "40 heures"
+      },
+      {
+        "label": "Codec",
+        "value": "aptX HD, LDAC"
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "id": "sonic-095"
+  },
+  {
+    "id": "am-110"
+  },
+  {
+    "id": "monster-touch-light-x3",
+    "sku": "MON-ILL-TOUCH-X3",
+    "name": "MONSTER Illuminescence LED Touch Light X3 RGB",
+    "brand": "MONSTER",
+    "category": "LED",
+    "subcategory": "Lampes LED",
+    "price": 26.99,
+    "description": "Pack de 3 lampes LED tactiles MONSTER Illuminescence RGB pour créer une ambiance personnalisée. Installation adhésive sans fil pour une flexibilité maximale.",
+    "shortDescription": "Pack 3 lampes LED tactiles RGB",
+    "urlSlug": "monster-led-touch-light-x3-rgb",
+    "keywords": [
+      "MONSTER",
+      "touch light",
+      "LED",
+      "RGB",
+      "tactile"
+    ],
+    "badges": [
+      "Pack",
+      "Tactile"
+    ],
+    "specifications": [
+      {
+        "label": "Quantité",
+        "value": "3 lampes"
+      },
+      {
+        "label": "Contrôle",
+        "value": "Tactile + télécommande"
+      },
+      {
+        "label": "Couleurs",
+        "value": "16 RGB"
+      },
+      {
+        "label": "Alimentation",
+        "value": "Piles AAA"
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "id": "monster-light-strip-5m-ipx6",
+    "sku": "MON-ILL-5M-IPX6",
+    "name": "MONSTER Illuminescence Light Strip 5M Multicolor IPX6",
+    "brand": "MONSTER",
+    "category": "LED",
+    "subcategory": "Bandeaux LED",
+    "price": 39.99,
+    "description": "Bande LED MONSTER Illuminescence 5M étanche IPX6 pour intérieur et extérieur. Résiste aux intempéries pour illuminer terrasse, jardin ou piscine.",
+    "shortDescription": "Bande LED 5M étanche IPX6",
+    "urlSlug": "monster-light-strip-5m-ipx6",
+    "keywords": [
+      "MONSTER",
+      "LED",
+      "IPX6",
+      "étanche",
+      "multicolor"
+    ],
+    "badges": [
+      "IPX6",
+      "Extérieur"
+    ],
+    "specifications": [
+      {
+        "label": "Longueur",
+        "value": "5 mètres"
+      },
+      {
+        "label": "Étanchéité",
+        "value": "IPX6"
+      },
+      {
+        "label": "LED",
+        "value": "Multicolore RGB"
+      },
+      {
+        "label": "Usage",
+        "value": "Intérieur/Extérieur"
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "id": "review-kidpic-1"
+  },
+  {
+    "id": "review-kidpic-2"
+  },
+  {
+    "id": "review-kidpic-3"
+  },
+  {
+    "id": "review-kidpic-4"
+  },
+  {
+    "id": "review-kidpic-5"
+  },
+  {
+    "id": "review-kidpic-6"
+  },
+  {
+    "id": "review-kidpic-7"
+  },
+  {
+    "id": "review-kidpic-8"
+  },
+  {
+    "id": "review-kidpic-9"
+  },
+  {
+    "id": "review-kidpic-10"
+  },
+  {
+    "id": "review-kidpic-11"
+  },
+  {
+    "id": "review-kidpic-12"
+  },
+  {
+    "id": "review-kidpic-13"
+  },
+  {
+    "id": "review-kidpic-14"
+  },
+  {
+    "id": "review-kidpic-15"
+  },
+  {
+    "id": "review-kidpic-16"
+  },
+  {
+    "id": "review-kidpic-17"
+  },
+  {
+    "id": "review-kidpic-18"
+  },
+  {
+    "id": "review-kidpic-19"
+  },
+  {
+    "id": "review-kidpic-20"
+  },
+  {
+    "id": "review-kidpic-21"
+  },
+  {
+    "id": "review-kidpic-22"
+  },
+  {
+    "id": "review-kidpic-23"
+  },
+  {
+    "id": "review-kidpic-24"
+  },
+  {
+    "id": "review-kidpic-25"
+  },
+  {
+    "id": "review-kidpic-26"
+  },
+  {
+    "id": "review-kidpic-27"
+  },
+  {
+    "id": "review-kidpic-28"
+  },
+  {
+    "id": "review-kidpic-29"
+  },
+  {
+    "id": "review-kidpic-30"
+  },
+  {
+    "id": "review-kidpic-31"
+  },
+  {
+    "id": "review-kidpic-32"
+  },
+  {
+    "id": "review-kidpic-33"
+  },
+  {
+    "id": "review-kidpic-34"
+  },
+  {
+    "id": "review-kidpic-35"
+  },
+  {
+    "id": "review-kidpic-36"
+  },
+  {
+    "id": "review-kidpic-37"
+  },
+  {
+    "id": "review-kidpic-38"
+  },
+  {
+    "id": "review-kidpic-39"
+  },
+  {
+    "id": "review-kidpic-40"
+  },
+  {
+    "id": "review-kidpic-41"
+  },
+  {
+    "id": "review-kidpic-42"
+  },
+  {
+    "id": "monster-smart-light-strip-rgbw",
+    "sku": "MON-ILL-SMART-RGBW",
+    "name": "MONSTER Illuminescence Smart Light Strip RGB+W",
+    "brand": "MONSTER",
+    "category": "LED",
+    "subcategory": "Bandeaux LED",
+    "price": 24.99,
+    "description": "Bande LED intelligente MONSTER RGB+W avec contrôle app et compatibilité assistants vocaux. Contrôlez vos lumières à la voix avec Alexa ou Google Assistant.",
+    "shortDescription": "Bande LED smart RGB+W contrôle app",
+    "urlSlug": "monster-smart-light-strip-rgbw",
+    "keywords": [
+      "MONSTER",
+      "smart",
+      "LED",
+      "RGB",
+      "connectée"
+    ],
+    "badges": [
+      "Smart",
+      "Voice Control"
+    ],
+    "specifications": [
+      {
+        "label": "Contrôle",
+        "value": "App + Voice"
+      },
+      {
+        "label": "Couleurs",
+        "value": "16 millions"
+      },
+      {
+        "label": "Compatible",
+        "value": "Alexa, Google"
+      },
+      {
+        "label": "WiFi",
+        "value": "2.4GHz"
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "id": "monster-n-lite-206",
+    "sku": "MNLT206",
+    "name": "MONSTER N-Lite 206",
+    "brand": "MONSTER",
+    "category": "Audio",
+    "subcategory": "Écouteurs",
+    "price": 29.99,
+    "description": "Écouteurs MONSTER N-Lite 206 avec son puissant et design élégant. Driver 10mm pour des basses profondes et des aigus cristallins.",
+    "shortDescription": "Écouteurs avec son puissant",
+    "urlSlug": "monster-n-lite-206-ecouteurs",
+    "images": [
+      "/placeholder-monster-mini.svg"
+    ],
+    "keywords": [
+      "MONSTER",
+      "N-Lite",
+      "206",
+      "écouteurs"
+    ],
+    "badges": [
+      "Premium"
+    ],
+    "specifications": [
+      {
+        "label": "Driver",
+        "value": "10mm"
+      },
+      {
+        "label": "Impédance",
+        "value": "32Ω"
+      },
+      {
+        "label": "Câble",
+        "value": "1.2m"
+      },
+      {
+        "label": "Jack",
+        "value": "3.5mm"
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "id": "hifuture-ascendo",
+    "sku": "HIF-ASCENDO",
+    "name": "HIFUTURE Enceinte Ascendo",
+    "brand": "HIFUTURE",
+    "category": "Audio",
+    "subcategory": "Enceintes",
+    "price": 54.99,
+    "description": "Enceinte HIFUTURE Ascendo Rose alliant élégance féminine et performance audio. Design rose sophistiqué qui embellit votre intérieur moderne. Son premium avec technologie acoustique optimisée pour clarté exceptionnelle. Autonomie longue durée pour profiter de votre musique sans interruption. Connectivité Bluetooth stable pour streaming sans fil depuis tous vos appareils. Construction robuste avec finition soignée dans les moindres détails. Idéale pour créer une ambiance musicale raffinée. L",
+    "shortDescription": "Enceinte Bluetooth design élégant",
+    "urlSlug": "hifuture-ascendo-rose-enceinte-premium",
+    "images": [
+      "https://raw.githubusercontent.com/Alexlehoux974/Monster-Phone-Images/main/HIFUTURE/Enceintes/ascendo-placeholder.jpg"
+    ],
+    "keywords": [
+      "HIFUTURE Ascendo",
+      "enceinte rose",
+      "audio premium",
+      "design élégant",
+      "La Réunion",
+      "974"
+    ],
+    "badges": [
+      "Basses+",
+      "IPX5"
+    ],
+    "specifications": [
+      {
+        "label": "Puissance",
+        "value": "15W"
+      },
+      {
+        "label": "Autonomie",
+        "value": "12 heures"
+      },
+      {
+        "label": "Étanchéité",
+        "value": "IPX5"
+      },
+      {
+        "label": "Bluetooth",
+        "value": "5.0"
+      }
+    ],
+    "rating": {
+      "average": 4.9,
+      "count": 68
+    },
+    "status": "active"
+  },
+  {
+    "id": "monster-mission-100",
+    "sku": "MONSTER-MISSION-100",
+    "name": "MONSTER Mission 100",
+    "brand": "MONSTER",
+    "category": "Audio",
+    "subcategory": "Casques",
+    "price": 99.99,
+    "description": "Le casque MONSTER Mission 100 incarne la nouvelle génération d",
+    "shortDescription": "Casque gaming abordable avec drivers 40mm et confort optimisé",
+    "urlSlug": "monster-mission-100-casque-gaming",
+    "keywords": [
+      "MONSTER Mission 100",
+      "casque gaming",
+      "audio précis",
+      "gaming abordable",
+      "confort gaming"
+    ],
+    "badges": [
+      "Gaming",
+      "7.1 Surround"
+    ],
+    "specifications": [
+      {
+        "label": "Son",
+        "value": "Surround 7.1"
+      },
+      {
+        "label": "Driver",
+        "value": "50mm"
+      },
+      {
+        "label": "Micro",
+        "value": "Détachable"
+      },
+      {
+        "label": "RGB",
+        "value": "Oui"
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "id": "myway-powerbank",
+    "sku": "MYWPB",
+    "name": "MY WAY Powerbank",
+    "brand": "MY WAY",
+    "category": "Accessoires",
+    "subcategory": "Batteries Externes",
+    "price": 32.99,
+    "description": "Batterie externe MY WAY haute capacité avec charge rapide et multiple ports. Jusqu",
+    "shortDescription": "Powerbank haute capacité charge rapide",
+    "urlSlug": "myway-powerbank-batterie-externe",
+    "keywords": [
+      "MY WAY",
+      "powerbank",
+      "batterie externe",
+      "charge rapide"
+    ],
+    "badges": [
+      "Charge Rapide",
+      "Multi-ports"
+    ],
+    "specifications": [
+      {
+        "label": "Ports",
+        "value": "2 USB-A + 1 USB-C"
+      },
+      {
+        "label": "Charge rapide",
+        "value": "18W PD"
+      },
+      {
+        "label": "LED",
+        "value": "Indicateur 4 niveaux"
+      },
+      {
+        "label": "Protection",
+        "value": "Multi-protection"
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "id": "monster-duo-monitor-light",
+    "sku": "MON-ILL-DUO-MONITOR",
+    "name": "MONSTER Illuminescence DUO Monitor Light",
+    "brand": "MONSTER",
+    "category": "LED",
+    "subcategory": "Lampes Écran",
+    "price": 49.99,
+    "description": "Lampe d",
+    "shortDescription": "Lampe double écran RGB",
+    "urlSlug": "monster-duo-monitor-light-rgb",
+    "keywords": [
+      "MONSTER",
+      "monitor light",
+      "RGB",
+      "double écran",
+      "gaming"
+    ],
+    "badges": [
+      "Double Écran",
+      "RGB"
+    ],
+    "specifications": [
+      {
+        "label": "Compatibilité",
+        "value": "Double écran"
+      },
+      {
+        "label": "Éclairage",
+        "value": "RGB personnalisable"
+      },
+      {
+        "label": "Alimentation",
+        "value": "USB"
+      },
+      {
+        "label": "Réglable",
+        "value": "Angle et intensité"
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "id": "mp-078"
+  },
+  {
+    "id": "s150-085"
+  },
+  {
+    "id": "yc-120"
+  },
+  {
+    "id": "monster-smart-prism-ii",
+    "sku": "MON-ILL-PRISM",
+    "name": "MONSTER Illuminescence Smart Prism II RGB+IC",
+    "brand": "MONSTER",
+    "category": "LED",
+    "subcategory": "Panneaux LED",
+    "price": 64.99,
+    "description": "Pack 6 panneaux LED MONSTER Smart Prism II RGB+IC avec effets flow et contrôle app. Créez des motifs lumineux uniques et personnalisés.",
+    "shortDescription": "Pack 6 panneaux LED RGB+IC flow",
+    "urlSlug": "monster-smart-prism-ii-rgb-ic",
+    "keywords": [
+      "MONSTER",
+      "prism",
+      "LED",
+      "RGB",
+      "IC",
+      "flow"
+    ],
+    "badges": [
+      "Modulaire",
+      "IC Flow"
+    ],
+    "specifications": [
+      {
+        "label": "Quantité",
+        "value": "6 panneaux"
+      },
+      {
+        "label": "Type",
+        "value": "RGB+IC"
+      },
+      {
+        "label": "Effets",
+        "value": "Flow dynamique"
+      },
+      {
+        "label": "Contrôle",
+        "value": "App + Voice"
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "id": "monster-ampoule-a19",
+    "sku": "MON-ILL-AMPOULE-A19",
+    "name": "MONSTER Illuminescence Basic Ampoule A19",
+    "brand": "MONSTER",
+    "category": "LED",
+    "subcategory": "Ampoules Smart",
+    "price": 12.99,
+    "description": "Ampoule LED MONSTER A19 avec température de couleur réglable pour éclairage optimal. 25000 heures de durée de vie pour des économies durables.",
+    "shortDescription": "Ampoule LED A19 température réglable",
+    "urlSlug": "monster-ampoule-led-a19",
+    "keywords": [
+      "MONSTER",
+      "ampoule",
+      "LED",
+      "A19",
+      "température couleur"
+    ],
+    "badges": [
+      "Économie",
+      "Longue durée"
+    ],
+    "specifications": [
+      {
+        "label": "Puissance",
+        "value": "9W (60W équiv)"
+      },
+      {
+        "label": "Lumens",
+        "value": "800lm"
+      },
+      {
+        "label": "Culot",
+        "value": "E27"
+      },
+      {
+        "label": "Durée vie",
+        "value": "25000h"
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "id": "fb4-085"
+  },
+  {
+    "id": "h5-090"
+  },
+  {
+    "id": "muvit-kidpic-rouleaux",
+    "sku": "MUAPN001",
+    "name": "MUVIT KidPic Rouleaux Papier Photo",
+    "brand": "MUVIT",
+    "category": "Accessoires",
+    "subcategory": "Appareil Photo",
+    "price": 19.99,
+    "description": "Les rouleaux de papier photo MUVIT KidPic constituent l",
+    "shortDescription": "Pack 5 rouleaux papier photo pour 150 impressions",
+    "urlSlug": "muvit-kidpic-rouleaux-papier-photo",
+    "images": [
+      "/placeholder-monster-mini.svg"
+    ],
+    "keywords": [
+      "rouleaux papier photo",
+      "MUVIT KidPic",
+      "recharge appareil photo",
+      "papier impression instantanée",
+      "accessoire KidPic"
+    ],
+    "badges": [
+      "Recharge",
+      "Pack Éco"
+    ],
+    "specifications": [
+      {
+        "label": "Quantité",
+        "value": "5 rouleaux"
+      },
+      {
+        "label": "Photos/rouleau",
+        "value": "30 photos"
+      },
+      {
+        "label": "Total",
+        "value": "150 impressions"
+      },
+      {
+        "label": "Compatible",
+        "value": "MUVIT KidPic"
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "id": "monster-smart-beam-bars-kit",
+    "sku": "MON-ILL-BEAM-BARS",
+    "name": "MONSTER Illuminescence Smart Beam + 2X Bars Kit",
+    "brand": "MONSTER",
+    "category": "LED",
+    "subcategory": "Kits Éclairage",
+    "price": 79.99,
+    "description": "Kit complet MONSTER Smart Beam avec 2 barres LED pour éclairage gaming immersif. Synchronisation avec musique et jeux pour une expérience totale.",
+    "shortDescription": "Kit éclairage gaming beam + 2 barres",
+    "urlSlug": "monster-smart-beam-bars-kit",
+    "keywords": [
+      "MONSTER",
+      "smart beam",
+      "bars",
+      "kit",
+      "gaming",
+      "RGB"
+    ],
+    "badges": [
+      "Kit Gaming",
+      "RGB Sync"
+    ],
+    "specifications": [
+      {
+        "label": "Contenu",
+        "value": "1 beam + 2 barres"
+      },
+      {
+        "label": "RGB",
+        "value": "16M couleurs"
+      },
+      {
+        "label": "Sync",
+        "value": "Musique et jeux"
+      },
+      {
+        "label": "Contrôle",
+        "value": "App + PC software"
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "id": "mon-ill-basic-sound",
+    "sku": "MON-ILL-BASIC-SOUND",
+    "name": "MONSTER Illuminescence Basic Lightstrip Sound Flow",
+    "brand": "MONSTER",
+    "category": "LED",
+    "subcategory": "Bandes LED",
+    "price": 19.99,
+    "originalPrice": 23.99,
+    "discount": 20,
+    "description": "Bande LED RGB réactive au son pour une ambiance immersive. Synchronisation audio parfaite.",
+    "shortDescription": "Bande LED RGB réactive au son pour une ambiance immersive. Synchronisation audio parfaite....",
+    "urlSlug": "monster-illuminescence-basic-lightstrip-sound-flow",
+    "warranty": "2 ans",
+    "images": [
+      "https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/mon-ill-basic-sound.webp"
+    ],
+    "keywords": [
+      "MONSTER",
+      "LED",
+      "RGB",
+      "son",
+      "lightstrip"
+    ],
+    "specifications": [
+      {
+        "label": "Type",
+        "value": "LED"
+      },
+      {
+        "label": "Connectivité",
+        "value": "WiFi/App"
+      },
+      {
+        "label": "Usage",
+        "value": "Intérieur"
+      }
+    ],
+    "rating": {
+      "average": 4.5,
+      "count": 0
+    },
+    "status": "active"
+  },
+  {
+    "id": "mon-ill-smart-5m-ic",
+    "sku": "MON-ILL-SMART-5M-IC",
+    "name": "MONSTER Illuminescence Smart Light Strip 5M RGB+IC",
+    "brand": "MONSTER",
+    "category": "LED",
+    "subcategory": "Bandes LED",
+    "price": 54.99,
+    "originalPrice": 65.99,
+    "discount": 20,
+    "description": "Bande LED intelligente avec technologie RGB+IC pour un contrôle précis des couleurs.",
+    "shortDescription": "Bande LED intelligente avec technologie RGB+IC pour un contrôle précis des couleurs....",
+    "urlSlug": "monster-illuminescence-led-strip-smart-5m-ic",
+    "warranty": "2 ans",
+    "images": [
+      "https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/mon-ill-smart-5m-ic.webp"
+    ],
+    "keywords": [
+      "led",
+      "smart",
+      "rgb",
+      "ic",
+      "monster"
+    ],
+    "specifications": [
+      {
+        "label": "Type",
+        "value": "LED"
+      },
+      {
+        "label": "Connectivité",
+        "value": "WiFi/App"
+      },
+      {
+        "label": "Usage",
+        "value": "Intérieur"
+      }
+    ],
+    "rating": {
+      "average": 4.5,
+      "count": 0
+    },
+    "status": "active"
+  },
+  {
+    "id": "mon-ill-smart-flow",
+    "sku": "MON-ILL-SMART-FLOW",
+    "name": "MONSTER Illuminescence Smart Light Strip Multicolor Flow",
+    "brand": "MONSTER",
+    "category": "LED",
+    "subcategory": "Bandes LED",
+    "price": 27.99,
+    "originalPrice": 33.59,
+    "discount": 20,
+    "description": "Bande LED intelligente avec effet Multicolor Flow pour une ambiance dynamique.",
+    "shortDescription": "Bande LED intelligente avec effet Multicolor Flow pour une ambiance dynamique....",
+    "urlSlug": "monster-illuminescence-led-strip-smart-flow",
+    "warranty": "2 ans",
+    "images": [
+      "https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/mon-ill-smart-flow.webp"
+    ],
+    "keywords": [
+      "led",
+      "smart",
+      "flow",
+      "multicolor",
+      "monster"
+    ],
+    "specifications": [
+      {
+        "label": "Type",
+        "value": "LED"
+      },
+      {
+        "label": "Connectivité",
+        "value": "WiFi/App"
+      },
+      {
+        "label": "Usage",
+        "value": "Intérieur"
+      }
+    ],
+    "rating": {
+      "average": 4.5,
+      "count": 0
+    },
+    "status": "active"
+  },
+  {
+    "id": "mon-ill-beam-kit",
+    "sku": "MON-ILL-BEAM-KIT",
+    "name": "MONSTER Illuminescence Smart Beam + 2X Bars Kit",
+    "brand": "MONSTER",
+    "category": "LED",
+    "subcategory": "Light Bars",
+    "price": 149.99,
+    "originalPrice": 179.99,
+    "discount": 20,
+    "description": "Kit complet d",
+    "shortDescription": "Kit complet d",
+    "urlSlug": "monster-illuminescence-led-beam-kit",
+    "warranty": "2 ans",
+    "images": [
+      "https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/mon-ill-beam-kit.webp"
+    ],
+    "keywords": [
+      "led",
+      "beam",
+      "rgb",
+      "ic",
+      "monster"
+    ],
+    "specifications": [
+      {
+        "label": "Type",
+        "value": "LED"
+      },
+      {
+        "label": "Connectivité",
+        "value": "WiFi/App"
+      },
+      {
+        "label": "Usage",
+        "value": "Intérieur"
+      }
+    ],
+    "rating": {
+      "average": 4.5,
+      "count": 0
+    },
+    "status": "active"
+  },
+  {
+    "id": "mon-ill-a19",
+    "sku": "MON-ILL-A19",
+    "name": "MONSTER Illuminescence Basic Ampoule A19",
+    "brand": "MONSTER",
+    "category": "LED",
+    "subcategory": "Ampoules",
+    "price": 10.99,
+    "originalPrice": 13.19,
+    "discount": 20,
+    "description": "Ampoule LED économique avec température de couleur blanc chaud.",
+    "shortDescription": "Ampoule LED économique avec température de couleur blanc chaud....",
+    "urlSlug": "monster-illuminescence-basic-ampoule-a19",
+    "warranty": "2 ans",
+    "images": [
+      "https://raw.githubusercontent.com/Tinquen59/monster-phone-images/main/products/mon-ill-a19.webp"
+    ],
+    "specifications": [
+      {
+        "label": "Type",
+        "value": "LED"
+      },
+      {
+        "label": "Connectivité",
+        "value": "WiFi/App"
+      },
+      {
+        "label": "Usage",
+        "value": "Intérieur"
+      }
+    ],
+    "rating": {
+      "average": 4.5,
+      "count": 0
+    }
+  }
+]

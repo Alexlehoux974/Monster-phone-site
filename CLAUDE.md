@@ -4,149 +4,125 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Monster Phone Boutique - E-commerce Next.js application for gaming phone accessories and smartphones, targeting the La Réunion market (974). The application uses a fully static data architecture with no backend API.
+Monster Phone Boutique - E-commerce Next.js application for gaming phone accessories and smartphones, targeting the La Réunion market (974).
 
 **Tech Stack**:
-- Next.js 15.4.2 + React 19 + TypeScript (strict mode enabled)
-- Tailwind CSS v4 + Radix UI components + Framer Motion animations
-- Static product data architecture (no backend API)
+- Next.js 15.4.2 + React 19 + TypeScript (strict mode)
+- Tailwind CSS v4 + Radix UI components + Framer Motion
+- Supabase integration for product data (migration in progress)
+- Static product data fallback in `/src/data/products.ts`
 - French language interface
-
-**Data Sources**:
-- Static product data in `/src/data/products.ts` (100+ products from Airtable export)
-- Images from GitHub CDN: `https://raw.githubusercontent.com/*/Monster-Phone-Images/main/**`
-- LocalStorage for cart persistence (key: `monsterphone-cart`)
-- Airtable database: Base "E-Commerce" (appBe6BwVNs2wvp60), Table "Catalogue Produits Unifié" (tblA440HJGiI17SQJ)
 
 ## Development Commands
 
 ```bash
 # Development
-npm run dev                    # Dev server with Turbopack (binds to 0.0.0.0)
+npm run dev                    # Dev server with Turbopack on 0.0.0.0:3000
 npm run build                  # Production build
-npm start                      # Production server (port 3000)
-npm run lint                   # ESLint validation
+npm start -- -p 3001           # Production server on port 3001 (preferred)
+npm run lint                   # ESLint validation (always run before deployment)
 
 # Testing
 npm test                       # Run Jest unit tests
-npm run test:watch            # Jest watch mode
-npm run test:coverage         # Generate coverage report
-npm run test:e2e              # Run Playwright E2E tests
-npm run test:e2e:ui           # Open Playwright UI
-npm run test:e2e:debug        # Debug Playwright tests
-npm run test:e2e:report       # Show test report
-
-# Run specific tests
-npm test -- ComponentName      # Match pattern in Jest
+npm test -- ComponentName      # Run specific test pattern
+npm run test:coverage          # Generate coverage report
+npm run test:e2e              # Run all Playwright E2E tests
 npx playwright test homepage   # Run specific E2E test
+npm run test:e2e:ui           # Open Playwright UI for debugging
+
+# Database (Supabase)
+npm run db:setup              # Apply initial schema (run migration 001 first in dashboard)
+npm run db:migrate            # Migrate static products to Supabase
 ```
 
 ## High-Level Architecture
 
-### Core Application Structure
-- **App Router**: Next.js 15 App Router with server components by default
-- **Cart State**: React Context API with localStorage persistence (`CartContext`)
-- **Static Data**: All product data hardcoded in `/src/data/products.ts`
-- **SEO Optimized**: Structured data, metadata per page, sitemap generation
-- **Responsive Design**: Mobile-first with Tailwind CSS v4
+### Dual Data Architecture (Migration in Progress)
+- **Static Data Path**: `/src/data/products.ts` → React Components → LocalStorage Cart
+- **Supabase Path**: Supabase DB → `/src/lib/supabase/client.ts` → Adapter → React Components
+- **Adapter Layer**: `/src/lib/supabase/adapters.ts` converts between formats
+- **Parallel Pages**: `/nos-produits` (static) and `/produits-supabase` (database)
+- **Cart State**: React Context with localStorage persistence (key: `monsterphone-cart`)
 
-### Data Flow Architecture
-- **Product Interface**: TypeScript interface with 30+ fields including variants, specifications, ratings
-- **Menu Structure**: Complex hierarchical navigation (categories → subcategories → brands → products)
-- **Static Pattern**: No API calls, manual Airtable exports, 100+ products total
-- **Cart Persistence**: LocalStorage with key `monsterphone-cart`
+### Critical Image System
+- **Primary Source**: GitHub CDN `https://raw.githubusercontent.com/*/Monster-Phone-Images/main/**`
+- **Fallback Component**: `ImageWithFallback` with category-based placeholders
+- **Image Utils**: `/src/lib/image-utils.ts` handles URL transformations
+- **Known Issue**: Some GitHub images may return 404 or text responses
 
-### Critical Known Issues
+### Navigation Architecture
+The Header component implements multi-level navigation:
+- **Structure**: Categories → Subcategories → Brands → Products
+- **URL Pattern**: `/nos-produits?category=...&subcategory=...&brand=...`
+- **Data Sources**: Static (`products_menu.ts`) or dynamic (Supabase)
+- **Mobile**: Responsive drawer with touch-optimized navigation
 
-**1. GitHub Images**
-- Some GitHub CDN images may fail to load properly
-- Solution: `ImageWithFallback` component handles fallbacks automatically
-- Category-based placeholders in `/src/lib/image-utils.ts`
+### Product Display System
+- **Catalog Pages**: `/nos-produits` (static) and `/produits-supabase` (database)
+- **Product Pages**: Dynamic routes `/produit/[slug]` and `/produit-supabase/[slug]`
+- **Reviews**: Mandatory rating object and reviews array for static products
+- **Variants**: Color/size options with stock tracking
 
-**2. Build Configuration**
-- ESLint errors ignored during builds (`ignoreDuringBuilds: true` in next.config.ts)
-- **Important**: Always run `npm run lint` manually before deployment
+## Supabase Integration
 
-### Component Architecture
-```
-src/
-├── app/                    # Next.js App Router pages
-│   ├── page.tsx           # Homepage with hero, features, products
-│   ├── nos-produits/      # Product catalog with filtering
-│   ├── produit/[slug]/    # Dynamic product pages
-│   ├── checkout/          # Checkout flow
-│   └── legal/             # Legal pages (RGPD compliance)
-├── components/            
-│   ├── Header.tsx         # Complex navigation system
-│   ├── ImageWithFallback.tsx # Handles broken GitHub images
-│   ├── ProductCard.tsx   # Product display component
-│   └── ui/               # Radix UI primitives
-├── contexts/
-│   └── CartContext.tsx    # Shopping cart state management
-├── data/
-│   └── products.ts        # Static product data (100+ products)
-└── lib/
-    ├── utils.ts           # cn() helper, formatPrice()
-    └── image-utils.ts     # Image fallback handling
-```
+**Database**: `nswlznqoadjffpxkagoz.supabase.co`
+**Tables**: products, brands, categories, variants, images, specifications, reviews, collections
 
-### Navigation System
-**Header Component** (`/src/components/Header.tsx`):
-- Multi-level dropdown: Categories → Subcategories → Brands → Products
-- Complex hover state management
-- URL pattern: `/nos-produits?category=...&brand=...`
-- PromoBar component with animated gradient
-- Cart dropdown with live preview and quantity controls
+**Key Adapter Functions**:
+- `supabaseProductToLegacy()`: Converts DB product to static format
+- `legacyProductToSupabase()`: Converts static product to DB format
+- `generateMenuStructureFromProducts()`: Builds navigation from DB products
+
+**Migration Status**:
+- Products table populated with 100+ products
+- Images and variants migrated
+- Reviews and ratings migrated
+- Navigation menu generation working
+- Full-text search implemented
 
 ## Testing Infrastructure
 
-**Jest Configuration** (`jest.config.js`):
-- Next.js preset with TypeScript support
-- Test files in `src/__tests__/` and component `__tests__` folders
-- Module path alias: `@/` → `src/`
-- Coverage excludes layout and page components
+**Jest Configuration**: Tests in `src/__tests__/` and component `__tests__` folders
+- Module alias: `@/` maps to `src/`
+- Coverage excludes layouts and pages
 
-**Playwright Configuration** (`playwright.config.ts`):
-- E2E tests in `e2e/` directory (7 test files)
-- Tests against Chromium, Firefox, WebKit, Mobile Chrome, Mobile Safari
-- Base URL: http://localhost:3000
+**Playwright E2E**: Tests in `e2e/` directory
+- All major browsers and mobile viewports
 - Auto-starts dev server before tests
+- Base URL: http://localhost:3000
 
 ## Key Utilities
 
 **`/src/lib/utils.ts`**:
-- `cn()` - Tailwind CSS class merging with clsx and tailwind-merge
-- `formatPrice()` - Format numbers as EUR currency (French locale)
+- `cn()`: Tailwind class merging
+- `formatPrice()`: EUR currency formatting
 
 **`/src/lib/image-utils.ts`**:
-- `getCategoryPlaceholder()` - Returns placeholder by product category
-- `isProblematicGitHubUrl()` - Detects problematic GitHub URLs
-- `getWorkingImageUrl()` - Transforms or replaces broken image URLs
-- `generateProductPlaceholder()` - Dynamic placeholder generation
+- `getCategoryPlaceholder()`: Category-specific fallbacks
+- `getWorkingImageUrl()`: URL transformation
+- `generateProductPlaceholder()`: Dynamic placeholders
 
-## TypeScript Configuration
+**`/src/hooks/useSupabaseData.ts`**:
+- `useSupabaseProducts()`: Fetch products with relations
+- `useSupabaseCategories()`: Category data
+- `useSupabaseBrands()`: Brand data
 
-- **Strict Mode**: Enabled in `tsconfig.json`
-- **Path Alias**: `@/*` maps to `./src/*`
-- **Target**: ES2017
-- **Module**: ESNext with bundler resolution
-- **JSX**: Preserve for Next.js processing
+## Build Configuration
 
-## Airtable Synchronization
+**ESLint**: Errors ignored during builds (`ignoreDuringBuilds: true`)
+- **Important**: Always run `npm run lint` manually before deployment
+- Common warnings in Header component may be intentional
 
-**Sync Report** (`AIRTABLE_SYNC_REPORT.md`):
-- 100+ products total processed from Airtable
-- All products synchronized with products.ts
-- Automatic URL slug generation for new products
-- Base: E-Commerce (appBe6BwVNs2wvp60)
-- Table: Catalogue Produits Unifié (tblA440HJGiI17SQJ)
+**TypeScript**: Strict mode enabled
+- Path alias: `@/*` maps to `./src/*`
+- Target: ES2017
 
 ## Important Development Notes
 
 - **French Language**: All user-facing content must be in French
-- **La Réunion Focus**: 974 area code, local delivery emphasis
-- **Static Data**: Always import from `/src/data/products.ts`, no API calls
-- **Image Handling**: Always use `ImageWithFallback` component for product images
-- **Cart State**: Persists in localStorage, supports test mode via `initialItems` prop
-- **Mobile First**: Test responsive design, especially complex navigation
-- **Production Port**: When running production, use port 3001: `npm start -- -p 3001`
+- **Production Port**: Always use port 3001: `npm start -- -p 3001`
+- **Image Component**: Always use `ImageWithFallback` for product images
+- **Reviews Required**: Every static product needs rating and reviews arrays
+- **Cart Testing**: CartContext supports test mode via `initialItems` prop
+- **Mobile First**: Test responsive design, especially navigation
+- **Migration Path**: New features should use Supabase, maintain static compatibility

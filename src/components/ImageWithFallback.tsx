@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import { getWorkingImageUrl, getCategoryPlaceholder, isProblematicGitHubUrl } from '@/lib/image-utils';
+import { getWorkingImageUrl, getCategoryPlaceholder } from '@/lib/image-utils';
 import { Skeleton } from '@/components/ui/skeleton';
 
 interface ImageWithFallbackProps {

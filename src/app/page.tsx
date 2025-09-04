@@ -6,6 +6,7 @@ import FeaturedProducts from '@/components/FeaturedProducts';
 import FeaturesSection from '@/components/FeaturesSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import Footer from '@/components/Footer';
+import SupabaseMenu from '@/components/SupabaseMenu';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -63,6 +64,7 @@ export default function Home() {
         <TestimonialsSection />
         <Footer />
       </div>
+      <SupabaseMenu />
     </div>
   );
 }

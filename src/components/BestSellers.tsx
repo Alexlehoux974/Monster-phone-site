@@ -1,35 +1,24 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { TrendingUp, Star, Award, Crown } from 'lucide-react';
 import { motion, useInView } from 'framer-motion';
 import Link from 'next/link';
-import { allProducts } from '@/data/products';
 import ProductCard from '@/components/ProductCard';
 import { cn } from '@/lib/utils';
+import { useBestSellers } from '@/hooks/useSupabaseData';
+import { supabaseProductToLegacy } from '@/lib/supabase/adapters';
 
 const BestSellers = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-
-  // Sélectionner les meilleures ventes basées sur les critères
-  const bestSellers = allProducts
-    .filter(p => {
-      // Critères de sélection : rating élevé, badges bestseller, ou discount important
-      const hasGoodRating = p.rating && p.rating.average >= 4;
-      const hasBestseller = p.badges?.includes('Bestseller');
-      const hasHighDiscount = p.discount && p.discount >= 20;
-      return hasGoodRating || hasBestseller || hasHighDiscount;
-    })
-    .sort((a, b) => {
-      // Trier par rating puis par discount
-      const ratingA = a.rating?.average || 0;
-      const ratingB = b.rating?.average || 0;
-      if (ratingA !== ratingB) return ratingB - ratingA;
-      return (b.discount || 0) - (a.discount || 0);
-    })
-    .slice(0, 8);
+  
+  // Récupérer les meilleures ventes depuis Supabase
+  const { products: supabaseProducts, loading } = useBestSellers(8);
+  
+  // Convertir les produits Supabase vers le format legacy
+  const bestSellers = supabaseProducts.map(supabaseProductToLegacy);
 
   // Fonction pour obtenir le badge de position
   const getPositionBadge = (index: number) => {
@@ -44,6 +33,25 @@ const BestSellers = () => {
         return null;
     }
   };
+
+  // Afficher un skeleton pendant le chargement
+  if (loading) {
+    return (
+      <section className="py-12 lg:py-16 bg-gradient-to-b from-white to-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <div className="h-10 bg-gray-200 rounded-lg w-64 mx-auto mb-4 animate-pulse" />
+            <div className="h-6 bg-gray-200 rounded-lg w-96 mx-auto animate-pulse" />
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[...Array(8)].map((_, i) => (
+              <div key={i} className="bg-gray-200 rounded-lg h-80 animate-pulse" />
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section ref={ref} className="py-12 lg:py-16 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">

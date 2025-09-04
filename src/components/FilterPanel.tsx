@@ -24,14 +24,19 @@ export interface FilterState {
 export default function FilterPanel({ products, onFiltersChange, initialFilters }: FilterPanelProps) {
   const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set(['price', 'brand']));
   
+  // Sécurité si products n'est pas défini
+  const safeProducts = products || [];
+  
   // Calculer les prix min et max depuis les produits
-  const prices = products.map(p => p.price).filter(p => p !== undefined);
-  const minPrice = Math.floor(Math.min(...prices));
-  const maxPrice = Math.ceil(Math.max(...prices));
+  const prices = safeProducts.length > 0 
+    ? safeProducts.map(p => p.price).filter(p => p !== undefined)
+    : [0];
+  const minPrice = prices.length > 0 ? Math.floor(Math.min(...prices)) : 0;
+  const maxPrice = prices.length > 0 ? Math.ceil(Math.max(...prices)) : 2000;
   
   // Extraire les marques et catégories uniques
-  const uniqueBrands = Array.from(new Set(products.map(p => p.brand))).sort();
-  const uniqueCategories = Array.from(new Set(products.map(p => p.category))).sort();
+  const uniqueBrands = Array.from(new Set(safeProducts.map(p => p.brand))).sort();
+  const uniqueCategories = Array.from(new Set(safeProducts.map(p => p.category))).sort();
   
   const [filters, setFilters] = useState<FilterState>(initialFilters || {
     priceRange: [minPrice, maxPrice],

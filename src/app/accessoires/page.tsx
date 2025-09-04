@@ -1,13 +1,15 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Image from 'next/image';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Sidebar from '@/components/Sidebar';
-import { allProducts } from '@/data/products';
 import { Button } from '@/components/ui/button';
 import { Filter, X } from 'lucide-react';
+import { useSupabaseProducts } from '@/hooks/useSupabaseData';
+import { supabaseProductToLegacy } from '@/lib/supabase/adapters';
+import type { Product } from '@/data/products';
 
 export default function AccessoiresPage() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -15,11 +17,24 @@ export default function AccessoiresPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [selectedProduct, setSelectedProduct] = useState<string>('');
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [products, setProducts] = useState<Product[]>([]);
 
-  // Filtrer uniquement les accessoires (pas les smartphones)
-  const products = useMemo(() => {
-    return allProducts.filter(product => product.category !== 'Smartphones');
-  }, []);
+  // Charger tous les produits depuis Supabase
+  const { products: supabaseProducts, loading } = useSupabaseProducts({ 
+    limit: 1000,
+    sortBy: 'name',
+    sortOrder: 'asc'
+  });
+
+  useEffect(() => {
+    if (supabaseProducts && supabaseProducts.length > 0) {
+      // Convertir et filtrer uniquement les accessoires (pas les smartphones)
+      const legacyProducts = supabaseProducts
+        .map(supabaseProductToLegacy)
+        .filter(product => product.category !== 'Smartphones');
+      setProducts(legacyProducts);
+    }
+  }, [supabaseProducts]);
 
   const filteredProducts = useMemo(() => {
     return products.filter(product => {
@@ -155,6 +170,20 @@ export default function AccessoiresPage() {
               </div>
 
               {/* Grille de produits optimisée */}
+              {loading ? (
+                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 gap-4 lg:gap-5">
+                  {[...Array(12)].map((_, index) => (
+                    <div key={index} className="bg-white rounded-lg shadow-sm">
+                      <div className="aspect-square bg-gray-200 rounded-t-lg animate-pulse" />
+                      <div className="p-3 lg:p-4 space-y-2">
+                        <div className="h-4 bg-gray-200 rounded animate-pulse" />
+                        <div className="h-3 bg-gray-200 rounded animate-pulse w-2/3" />
+                        <div className="h-5 bg-gray-200 rounded animate-pulse w-1/2" />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
               <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 gap-4 lg:gap-5">
                 {filteredProducts.map((product) => (
                   <div 
@@ -187,6 +216,7 @@ export default function AccessoiresPage() {
                   </div>
                 ))}
               </div>
+              )}
 
               {/* Message si aucun produit */}
               {filteredProducts.length === 0 && (

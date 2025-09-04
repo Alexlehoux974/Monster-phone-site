@@ -20,16 +20,12 @@ import {
   Zap,
   Package
 } from 'lucide-react';
-import { allProducts } from '@/data/products';
+import { useDiscountedProducts } from '@/hooks/useSupabaseData';
+import { supabaseProductToLegacy } from '@/lib/supabase/adapters';
+import type { Product } from '@/data/products';
 
-// Simuler des promotions sur certains produits populaires
-const promotionProducts = [
-  { productId: "recFsFez7xoI10570", discount: 15, originalPrice: "899€", promoPrice: "764€" }, // HONOR 200 PRO
-  { productId: "recI46bEz5s7kH98x", discount: 20, originalPrice: "299€", promoPrice: "239€" }, // Honor X5b
-  { productId: "recfJ2tXa7B5kN73h", discount: 25, originalPrice: "39€", promoPrice: "29€" },   // Câble MYWAY
-  { productId: "recG4qW8mR9sL52k", discount: 30, originalPrice: "89€", promoPrice: "62€" },    // Accessoire MUVIT
-  { productId: "recAB3cD4f5gH67i", discount: 10, originalPrice: "159€", promoPrice: "143€" }   // Écouteurs
-];
+// Ces IDs seront utilisés pour filtrer les produits de Supabase
+// Maintenant les promotions viennent directement de la base de données
 
 // Client-only Floating Particles
 const ClientParticles = () => {
@@ -192,6 +188,10 @@ const TextShimmer = ({ children, className, duration = 2 }: { children: string; 
 export default function PromotionsPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [sortBy, setSortBy] = useState<'discount' | 'price' | 'name'>('discount');
+  const [productsWithPromotions, setProductsWithPromotions] = useState<Product[]>([]);
+
+  // Charger les produits en promotion depuis Supabase
+  const { products: supabaseProducts, loading } = useDiscountedProducts(50);
 
   // Aurora background animation
   const color = useMotionValue("#DC2626");
@@ -208,18 +208,22 @@ export default function PromotionsPage() {
   const border = useMotionTemplate`1px solid ${color}`;
   const boxShadow = useMotionTemplate`0px 4px 24px ${color}`;
 
-  // Créer la liste des produits en promotion avec leurs infos de promotion
-  const productsWithPromotions = useMemo(() => {
-    return allProducts
-      .filter(product => promotionProducts.some(promo => promo.productId === product.id))
-      .map(product => {
-        const promoInfo = promotionProducts.find(promo => promo.productId === product.id);
-        return {
+  // Convertir les produits Supabase et ajouter les infos de promotion
+  useEffect(() => {
+    if (supabaseProducts && supabaseProducts.length > 0) {
+      const legacyProducts = supabaseProducts
+        .map(supabaseProductToLegacy)
+        .map(product => ({
           ...product,
-          promotion: promoInfo
-        };
-      });
-  }, []);
+          promotion: {
+            discount: product.discount || 0,
+            originalPrice: product.originalPrice ? `${product.originalPrice}€` : '',
+            promoPrice: `${product.price}€`
+          }
+        }));
+      setProductsWithPromotions(legacyProducts);
+    }
+  }, [supabaseProducts]);
 
   // Filtrer et trier les produits
   const filteredProducts = useMemo(() => {
@@ -429,6 +433,20 @@ export default function PromotionsPage() {
             </motion.div>
 
             {/* Grille des produits en promotion */}
+            {loading ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {[...Array(8)].map((_, index) => (
+                  <div key={index} className="bg-white rounded-lg border shadow-sm overflow-hidden">
+                    <div className="aspect-square bg-gray-200 animate-pulse" />
+                    <div className="p-4 space-y-2">
+                      <div className="h-4 bg-gray-200 rounded animate-pulse" />
+                      <div className="h-3 bg-gray-200 rounded animate-pulse w-2/3" />
+                      <div className="h-5 bg-gray-200 rounded animate-pulse w-1/2" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {filteredProducts.map((product, index) => (
                 <motion.div
@@ -518,6 +536,7 @@ export default function PromotionsPage() {
                 </motion.div>
               ))}
             </div>
+            )}
 
             {/* Message si aucun produit */}
             {filteredProducts.length === 0 && (

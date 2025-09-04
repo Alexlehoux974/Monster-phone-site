@@ -2,11 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import { Clock, Zap, TrendingDown } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { allProducts } from '@/data/products';
 import ProductCard from '@/components/ProductCard';
 import { cn } from '@/lib/utils';
+import { useDiscountedProducts } from '@/hooks/useSupabaseData';
+import { supabaseProductToLegacy } from '@/lib/supabase/adapters';
 
 interface TimeLeft {
   hours: number;
@@ -18,11 +19,13 @@ const FlashDeals = () => {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({ hours: 23, minutes: 59, seconds: 59 });
   const [isUrgent, setIsUrgent] = useState(false);
 
-  // Sélectionner 6 produits avec les meilleurs discounts
-  const flashProducts = allProducts
-    .filter(p => p.discount && p.discount > 0)
-    .sort((a, b) => (b.discount || 0) - (a.discount || 0))
-    .slice(0, 6);
+  // Récupérer les produits en promotion depuis Supabase (minimum 15% de réduction)
+  const { products: supabaseProducts, loading } = useDiscountedProducts(15);
+  
+  // Convertir et limiter à 6 produits
+  const flashProducts = supabaseProducts
+    .slice(0, 6)
+    .map(supabaseProductToLegacy);
 
   // Compte à rebours
   useEffect(() => {
@@ -58,6 +61,25 @@ const FlashDeals = () => {
 
   const formatTime = (value: number) => value.toString().padStart(2, '0');
 
+  // Afficher un skeleton pendant le chargement
+  if (loading) {
+    return (
+      <section className="py-12 lg:py-16 bg-gradient-to-br from-gray-900 via-gray-800 to-black">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between mb-8">
+            <div className="h-10 bg-gray-700 rounded-lg w-48 animate-pulse" />
+            <div className="h-16 bg-gray-700 rounded-lg w-64 animate-pulse" />
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="bg-gray-700 rounded-lg h-80 animate-pulse" />
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="py-12 lg:py-16 bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white relative overflow-hidden">
       {/* Effets de fond animés */}
@@ -84,7 +106,7 @@ const FlashDeals = () => {
               <h2 className="text-3xl lg:text-4xl font-bold">
                 Offres Flash
               </h2>
-              <p className="text-gray-300 text-sm">Jusqu'à -70% de réduction !</p>
+              <p className="text-gray-300 text-sm">Jusqu&apos;à -70% de réduction !</p>
             </div>
           </motion.div>
 
@@ -139,7 +161,7 @@ const FlashDeals = () => {
           >
             <p className="text-red-300 font-medium flex items-center justify-center gap-2">
               <TrendingDown className="w-4 h-4" />
-              ⚡ Dernières heures ! Les stocks s'épuisent rapidement
+              ⚡ Dernières heures ! Les stocks s&apos;épuisent rapidement
             </p>
           </motion.div>
         )}

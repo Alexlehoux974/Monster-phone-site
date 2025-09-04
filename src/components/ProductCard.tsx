@@ -6,8 +6,7 @@ import { Product } from '@/data/products';
 import { useCart } from '@/contexts/CartContext';
 import { useState } from 'react';
 import ImageWithFallback from './ImageWithFallback';
-import { formatPrice } from '@/lib/utils';
-import { cn } from '@/lib/utils';
+import { formatPrice, cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
 
 interface ProductCardProps {

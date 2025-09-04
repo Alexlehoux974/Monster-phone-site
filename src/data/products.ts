@@ -7,6 +7,7 @@ export interface ProductVariant {
   ean: string;
   stock: number;
   images?: string[];
+  is_default?: boolean;
 }
 
 export interface ProductSpecification {
@@ -25,6 +26,7 @@ export interface ProductRating {
     2: number;
     1: number;
   };
+  reviews?: Review[];
 }
 
 export interface Review {
@@ -34,6 +36,8 @@ export interface Review {
   date: string;
   comment: string;
   verified: boolean;
+  title?: string;
+  helpful?: number;
 }
 
 export interface Product {
@@ -940,10 +944,7 @@ export const allProducts: Product[] = [
       { label: 'Microphone', value: 'Intégré avec réduction de bruit' },
       { label: 'Poids', value: '280g' }
     ],
-    inStock: true,
-    isNew: false,
-    isBestSeller: false,
-    features: [
+    highlights: [
       'Réduction active du bruit ANC',
       'Bluetooth 5.0 stable',
       '30 heures d\'autonomie',
@@ -972,6 +973,7 @@ export const allProducts: Product[] = [
     warranty: '12 mois',
     deliveryTime: '24-48h à La Réunion',
     badges: ['ANC', 'Longue autonomie'],
+    status: 'active' as const,
     reviews: []
   },
 
@@ -1026,10 +1028,7 @@ export const allProducts: Product[] = [
       { label: 'Microphone', value: 'Intégré' },
       { label: 'Poids', value: '250g' }
     ],
-    inStock: true,
-    isNew: false,
-    isBestSeller: true,
-    features: [
+    highlights: [
       'Réduction active du bruit',
       'Bluetooth 5.0',
       '25 heures d\'autonomie',
@@ -1058,6 +1057,7 @@ export const allProducts: Product[] = [
     warranty: '12 mois',
     deliveryTime: '24-48h à La Réunion',
     badges: ['Prix Malin', 'ANC'],
+    status: 'active' as const,
     reviews: []
   },
 
@@ -1122,76 +1122,76 @@ export const allProducts: Product[] = [
     },
     reviews: [
       // 5 étoiles (45 avis)
-      { author: "Jean-Marc Lebon", rating: 5, date: "2024-12-15", comment: "La technologie haptique est incroyable ! Je ressens vraiment les explosions dans mes jeux FPS.", verified: true },
-      { author: "Sophie Payet", rating: 5, date: "2024-12-12", comment: "Parfait pour les films d'action, les vibrations ajoutent vraiment à l'immersion.", verified: true },
-      { author: "David Hoarau", rating: 5, date: "2024-12-10", comment: "Confort exceptionnel même après 4h de gaming. Les coussinets sont top !", verified: true },
-      { author: "Marie-Claire Fontaine", rating: 5, date: "2024-12-08", comment: "Mon fils adore ! Il ne quitte plus son casque depuis qu'on l'a reçu.", verified: true },
-      { author: "Thierry Grondin", rating: 5, date: "2024-12-05", comment: "La spatialisation 3D est bluffante sur Call of Duty. J'entends les ennemis arriver.", verified: true },
-      { author: "Nathalie Bègue", rating: 5, date: "2024-12-03", comment: "Version blanche magnifique, s'accorde parfaitement avec mon setup.", verified: false },
-      { author: "Laurent Maillot", rating: 5, date: "2024-12-01", comment: "Les vibrations se règlent facilement, parfait pour adapter selon les jeux.", verified: true },
-      { author: "Émilie Robert", rating: 5, date: "2024-11-28", comment: "Testé sur PS5 et PC, fonctionne parfaitement sur les deux. Jack universel pratique.", verified: true },
-      { author: "Patrick Técher", rating: 5, date: "2024-11-25", comment: "Pour le prix, la qualité est vraiment au rendez-vous. Meilleur que mon ancien Razer.", verified: true },
-      { author: "Valérie Dijoux", rating: 5, date: "2024-11-22", comment: "Les basses sont puissantes sans être envahissantes. Équilibre sonore parfait.", verified: true },
-      { author: "Michaël Boyer", rating: 5, date: "2024-11-20", comment: "L'effet haptique sur la musique électro est génial ! Nouvelle expérience d'écoute.", verified: false },
-      { author: "Sandrine Nativel", rating: 5, date: "2024-11-18", comment: "Livraison rapide à Saint-Denis. Produit conforme, très satisfaite.", verified: true },
-      { author: "Frédéric Rivière", rating: 5, date: "2024-11-15", comment: "Le retour tactile dans Gran Turismo est impressionnant, je sens les vibrations du moteur.", verified: true },
-      { author: "Karine Morel", rating: 5, date: "2024-11-12", comment: "Mon mari gamer est ravi de son cadeau d'anniversaire. Merci Monster Phone !", verified: true },
-      { author: "Stéphane Vienne", rating: 5, date: "2024-11-10", comment: "Arceau réglable parfait pour les grandes têtes comme la mienne.", verified: true },
-      { author: "Isabelle Turpin", rating: 5, date: "2024-11-08", comment: "J'ai pris le blanc, il reste impeccable même après 1 mois d'utilisation.", verified: false },
-      { author: "Bruno Pothin", rating: 5, date: "2024-11-05", comment: "La technologie haptique fonctionne même sur Nintendo Switch, agréable surprise !", verified: true },
-      { author: "Céline Cadet", rating: 5, date: "2024-11-02", comment: "Les dialogues dans les films restent clairs malgré les effets. Bien pensé.", verified: true },
-      { author: "Olivier Léandre", rating: 5, date: "2024-10-30", comment: "Utilisé pour le télétravail aussi, micro intégré de bonne qualité.", verified: true },
-      { author: "Aurélie Sautron", rating: 5, date: "2024-10-28", comment: "Les vibrations se sentent vraiment bien sur les jeux d'horreur. Frissons garantis !", verified: true },
-      { author: "Guillaume Ah-Nieme", rating: 5, date: "2024-10-25", comment: "Cable détachable super pratique, j'en ai commandé un de rechange.", verified: true },
-      { author: "Vanessa Bénard", rating: 5, date: "2024-10-22", comment: "Ma fille l'utilise pour ses cours de musique en ligne. Son cristallin.", verified: false },
-      { author: "Nicolas Florentin", rating: 5, date: "2024-10-20", comment: "Testé sur Warzone, les vibrations des explosions sont parfaitement synchronisées.", verified: true },
-      { author: "Laetitia Clain", rating: 5, date: "2024-10-18", comment: "Léger sur la tête, on l'oublie rapidement. Parfait pour les longues sessions.", verified: true },
-      { author: "Christophe Lauret", rating: 5, date: "2024-10-15", comment: "L'adaptateur 6.35mm fourni est un plus pour ma table de mixage.", verified: true },
-      { author: "Mélanie Ponamalé", rating: 5, date: "2024-10-12", comment: "Les coussinets ne chauffent pas trop malgré le climat de La Réunion.", verified: true },
-      { author: "Sébastien Baillif", rating: 5, date: "2024-10-10", comment: "Comparé à mon ancien casque, celui-ci est dans une autre catégorie !", verified: false },
-      { author: "Florence Dorseuil", rating: 5, date: "2024-10-08", comment: "Mon fils de 12 ans l'adore, réglage facile pour sa petite tête.", verified: true },
-      { author: "Pascal Thierry", rating: 5, date: "2024-10-05", comment: "L'immersion dans Red Dead Redemption 2 est totale avec ce casque.", verified: true },
-      { author: "Virginie Mussard", rating: 5, date: "2024-10-02", comment: "Acheté en promo, excellent rapport qualité/prix. Je recommande !", verified: true },
-      { author: "Anthony Laravine", rating: 5, date: "2024-09-30", comment: "Les vibrations sur les basses fréquences donnent vraiment de la profondeur.", verified: true },
-      { author: "Delphine Ethève", rating: 5, date: "2024-09-28", comment: "Parfait pour regarder des concerts en vidéo, on s'y croirait.", verified: true },
-      { author: "Julien Payet", rating: 5, date: "2024-09-25", comment: "Construction solide, ça respire la qualité. Devrait durer longtemps.", verified: false },
-      { author: "Élodie Hoarau", rating: 5, date: "2024-09-22", comment: "L'effet 3D est vraiment bien fait, localisation précise des sons.", verified: true },
-      { author: "Xavier Fontaine", rating: 5, date: "2024-09-20", comment: "Utilisé sur Xbox Series X, compatible sans souci. Plug and play.", verified: true },
-      { author: "Caroline Grondin", rating: 5, date: "2024-09-18", comment: "Les vibrations ne sont pas gadget, elles apportent vraiment quelque chose.", verified: true },
-      { author: "Damien Robert", rating: 5, date: "2024-09-15", comment: "Meilleur casque haptique que j'ai testé, et j'en ai essayé plusieurs.", verified: true },
-      { author: "Jessica Maillot", rating: 5, date: "2024-09-12", comment: "Service client Monster Phone au top, ils m'ont bien conseillé.", verified: true },
-      { author: "Fabrice Bègue", rating: 5, date: "2024-09-10", comment: "L'arceau rembourré est confortable, pas de point de pression.", verified: false },
-      { author: "Alexandra Dijoux", rating: 5, date: "2024-09-08", comment: "Reçu rapidement à Saint-Pierre. Emballage soigné, produit nickel.", verified: true },
-      { author: "Thomas Boyer", rating: 5, date: "2024-09-05", comment: "Les effets dans les films Marvel sont décuplés avec ce casque !", verified: true },
-      { author: "Sabrina Técher", rating: 5, date: "2024-09-02", comment: "Mon copain gamer est super content, il ne jure que par ce casque maintenant.", verified: true },
-      { author: "Romain Payet", rating: 5, date: "2024-08-30", comment: "La technologie haptique marche même sur smartphone, top pour la musique.", verified: true },
-      { author: "Audrey Lebreton", rating: 5, date: "2024-08-28", comment: "Design sobre et élégant, passe partout. J'aime beaucoup.", verified: true },
+      { id: "th300-review-1", author: "Jean-Marc Lebon", rating: 5, date: "2024-12-15", comment: "La technologie haptique est incroyable ! Je ressens vraiment les explosions dans mes jeux FPS.", verified: true },
+      { id: "th300-review-2", author: "Sophie Payet", rating: 5, date: "2024-12-12", comment: "Parfait pour les films d'action, les vibrations ajoutent vraiment à l'immersion.", verified: true },
+      { id: "th300-review-3", author: "David Hoarau", rating: 5, date: "2024-12-10", comment: "Confort exceptionnel même après 4h de gaming. Les coussinets sont top !", verified: true },
+      { id: "th300-review-4", author: "Marie-Claire Fontaine", rating: 5, date: "2024-12-08", comment: "Mon fils adore ! Il ne quitte plus son casque depuis qu'on l'a reçu.", verified: true },
+      { id: "th300-review-5", author: "Thierry Grondin", rating: 5, date: "2024-12-05", comment: "La spatialisation 3D est bluffante sur Call of Duty. J'entends les ennemis arriver.", verified: true },
+      { id: "th300-review-6", author: "Nathalie Bègue", rating: 5, date: "2024-12-03", comment: "Version blanche magnifique, s'accorde parfaitement avec mon setup.", verified: false },
+      { id: "th300-review-7", author: "Laurent Maillot", rating: 5, date: "2024-12-01", comment: "Les vibrations se règlent facilement, parfait pour adapter selon les jeux.", verified: true },
+      { id: "th300-review-8", author: "Émilie Robert", rating: 5, date: "2024-11-28", comment: "Testé sur PS5 et PC, fonctionne parfaitement sur les deux. Jack universel pratique.", verified: true },
+      { id: "th300-review-9", author: "Patrick Técher", rating: 5, date: "2024-11-25", comment: "Pour le prix, la qualité est vraiment au rendez-vous. Meilleur que mon ancien Razer.", verified: true },
+      { id: "th300-review-10", author: "Valérie Dijoux", rating: 5, date: "2024-11-22", comment: "Les basses sont puissantes sans être envahissantes. Équilibre sonore parfait.", verified: true },
+      { id: "th300-review-11", author: "Michaël Boyer", rating: 5, date: "2024-11-20", comment: "L'effet haptique sur la musique électro est génial ! Nouvelle expérience d'écoute.", verified: false },
+      { id: "th300-review-12", author: "Sandrine Nativel", rating: 5, date: "2024-11-18", comment: "Livraison rapide à Saint-Denis. Produit conforme, très satisfaite.", verified: true },
+      { id: "th300-review-13", author: "Frédéric Rivière", rating: 5, date: "2024-11-15", comment: "Le retour tactile dans Gran Turismo est impressionnant, je sens les vibrations du moteur.", verified: true },
+      { id: "th300-review-14", author: "Karine Morel", rating: 5, date: "2024-11-12", comment: "Mon mari gamer est ravi de son cadeau d'anniversaire. Merci Monster Phone !", verified: true },
+      { id: "th300-review-15", author: "Stéphane Vienne", rating: 5, date: "2024-11-10", comment: "Arceau réglable parfait pour les grandes têtes comme la mienne.", verified: true },
+      { id: "th300-review-16", author: "Isabelle Turpin", rating: 5, date: "2024-11-08", comment: "J'ai pris le blanc, il reste impeccable même après 1 mois d'utilisation.", verified: false },
+      { id: "th300-review-17", author: "Bruno Pothin", rating: 5, date: "2024-11-05", comment: "La technologie haptique fonctionne même sur Nintendo Switch, agréable surprise !", verified: true },
+      { id: "th300-review-18", author: "Céline Cadet", rating: 5, date: "2024-11-02", comment: "Les dialogues dans les films restent clairs malgré les effets. Bien pensé.", verified: true },
+      { id: "th300-review-19", author: "Olivier Léandre", rating: 5, date: "2024-10-30", comment: "Utilisé pour le télétravail aussi, micro intégré de bonne qualité.", verified: true },
+      { id: "th300-review-20", author: "Aurélie Sautron", rating: 5, date: "2024-10-28", comment: "Les vibrations se sentent vraiment bien sur les jeux d'horreur. Frissons garantis !", verified: true },
+      { id: "th300-review-21", author: "Guillaume Ah-Nieme", rating: 5, date: "2024-10-25", comment: "Cable détachable super pratique, j'en ai commandé un de rechange.", verified: true },
+      { id: "th300-review-22", author: "Vanessa Bénard", rating: 5, date: "2024-10-22", comment: "Ma fille l'utilise pour ses cours de musique en ligne. Son cristallin.", verified: false },
+      { id: "th300-review-23", author: "Nicolas Florentin", rating: 5, date: "2024-10-20", comment: "Testé sur Warzone, les vibrations des explosions sont parfaitement synchronisées.", verified: true },
+      { id: "th300-review-24", author: "Laetitia Clain", rating: 5, date: "2024-10-18", comment: "Léger sur la tête, on l'oublie rapidement. Parfait pour les longues sessions.", verified: true },
+      { id: "th300-review-25", author: "Christophe Lauret", rating: 5, date: "2024-10-15", comment: "L'adaptateur 6.35mm fourni est un plus pour ma table de mixage.", verified: true },
+      { id: "th300-review-26", author: "Mélanie Ponamalé", rating: 5, date: "2024-10-12", comment: "Les coussinets ne chauffent pas trop malgré le climat de La Réunion.", verified: true },
+      { id: "th300-review-27", author: "Sébastien Baillif", rating: 5, date: "2024-10-10", comment: "Comparé à mon ancien casque, celui-ci est dans une autre catégorie !", verified: false },
+      { id: "th300-review-28", author: "Florence Dorseuil", rating: 5, date: "2024-10-08", comment: "Mon fils de 12 ans l'adore, réglage facile pour sa petite tête.", verified: true },
+      { id: "th300-review-29", author: "Pascal Thierry", rating: 5, date: "2024-10-05", comment: "L'immersion dans Red Dead Redemption 2 est totale avec ce casque.", verified: true },
+      { id: "th300-review-30", author: "Virginie Mussard", rating: 5, date: "2024-10-02", comment: "Acheté en promo, excellent rapport qualité/prix. Je recommande !", verified: true },
+      { id: "th300-review-31", author: "Anthony Laravine", rating: 5, date: "2024-09-30", comment: "Les vibrations sur les basses fréquences donnent vraiment de la profondeur.", verified: true },
+      { id: "th300-review-32", author: "Delphine Ethève", rating: 5, date: "2024-09-28", comment: "Parfait pour regarder des concerts en vidéo, on s'y croirait.", verified: true },
+      { id: "th300-review-33", author: "Julien Payet", rating: 5, date: "2024-09-25", comment: "Construction solide, ça respire la qualité. Devrait durer longtemps.", verified: false },
+      { id: "th300-review-34", author: "Élodie Hoarau", rating: 5, date: "2024-09-22", comment: "L'effet 3D est vraiment bien fait, localisation précise des sons.", verified: true },
+      { id: "th300-review-35", author: "Xavier Fontaine", rating: 5, date: "2024-09-20", comment: "Utilisé sur Xbox Series X, compatible sans souci. Plug and play.", verified: true },
+      { id: "th300-review-36", author: "Caroline Grondin", rating: 5, date: "2024-09-18", comment: "Les vibrations ne sont pas gadget, elles apportent vraiment quelque chose.", verified: true },
+      { id: "th300-review-37", author: "Damien Robert", rating: 5, date: "2024-09-15", comment: "Meilleur casque haptique que j'ai testé, et j'en ai essayé plusieurs.", verified: true },
+      { id: "th300-review-38", author: "Jessica Maillot", rating: 5, date: "2024-09-12", comment: "Service client Monster Phone au top, ils m'ont bien conseillé.", verified: true },
+      { id: "th300-review-39", author: "Fabrice Bègue", rating: 5, date: "2024-09-10", comment: "L'arceau rembourré est confortable, pas de point de pression.", verified: false },
+      { id: "th300-review-40", author: "Alexandra Dijoux", rating: 5, date: "2024-09-08", comment: "Reçu rapidement à Saint-Pierre. Emballage soigné, produit nickel.", verified: true },
+      { id: "th300-review-41", author: "Thomas Boyer", rating: 5, date: "2024-09-05", comment: "Les effets dans les films Marvel sont décuplés avec ce casque !", verified: true },
+      { id: "th300-review-42", author: "Sabrina Técher", rating: 5, date: "2024-09-02", comment: "Mon copain gamer est super content, il ne jure que par ce casque maintenant.", verified: true },
+      { id: "th300-review-43", author: "Romain Payet", rating: 5, date: "2024-08-30", comment: "La technologie haptique marche même sur smartphone, top pour la musique.", verified: true },
+      { id: "th300-review-44", author: "Audrey Lebreton", rating: 5, date: "2024-08-28", comment: "Design sobre et élégant, passe partout. J'aime beaucoup.", verified: true },
       // 4 étoiles (15 avis)
-      { author: "Philippe Rivière", rating: 4, date: "2024-11-30", comment: "Très bon casque mais j'aurais aimé un mode sans fil en plus du jack.", verified: true },
-      { author: "Sylvie Morel", rating: 4, date: "2024-11-16", comment: "Qualité au rendez-vous mais le câble pourrait être un peu plus long.", verified: true },
-      { author: "Marc Vienne", rating: 4, date: "2024-10-28", comment: "Les vibrations sont parfois un peu fortes sur certains jeux, mais ça se règle.", verified: false },
-      { author: "Annie Nativel", rating: 4, date: "2024-10-14", comment: "Bon produit mais j'ai mis du temps à m'habituer aux vibrations.", verified: true },
-      { author: "Denis Sautron", rating: 4, date: "2024-09-25", comment: "Confortable mais un peu lourd après 2h d'utilisation intensive.", verified: true },
-      { author: "Corinne Turpin", rating: 4, date: "2024-09-10", comment: "Bien mais j'esperais plus de basses. Reste un bon casque quand même.", verified: true },
-      { author: "Éric Pothin", rating: 4, date: "2024-08-20", comment: "Le blanc se salit vite, prenez le noir. Sinon très content.", verified: true },
-      { author: "Martine Cadet", rating: 4, date: "2024-08-05", comment: "Fonctionne bien mais pas compatible avec mon vieux PC, vérifiez avant.", verified: false },
-      { author: "Vincent Léandre", rating: 4, date: "2024-07-22", comment: "Bon rapport qualité/prix mais packaging un peu cheap.", verified: true },
-      { author: "Catherine Ah-Nieme", rating: 4, date: "2024-07-10", comment: "Les vibrations fatiguent un peu à la longue, mais on peut les désactiver.", verified: true },
-      { author: "Ludovic Bénard", rating: 4, date: "2024-06-28", comment: "Très bien pour le gaming, moins adapté pour la musique classique.", verified: true },
-      { author: "Monique Florentin", rating: 4, date: "2024-06-15", comment: "J'aurais préféré des coussinets en cuir mais le tissu est correct.", verified: true },
-      { author: "Alain Clain", rating: 4, date: "2024-05-30", comment: "Bon casque mais attention aux cheveux longs qui se coincent dans l'arceau.", verified: false },
-      { author: "Françoise Lauret", rating: 4, date: "2024-05-18", comment: "Satisfaite mais j'aurais aimé un étui de transport inclus.", verified: true },
-      { author: "Yves Laravine", rating: 4, date: "2024-05-02", comment: "Bien mais les vibrations drainent un peu la batterie du téléphone.", verified: true },
+      { id: "th300-review-45", author: "Philippe Rivière", rating: 4, date: "2024-11-30", comment: "Très bon casque mais j'aurais aimé un mode sans fil en plus du jack.", verified: true },
+      { id: "th300-review-46", author: "Sylvie Morel", rating: 4, date: "2024-11-16", comment: "Qualité au rendez-vous mais le câble pourrait être un peu plus long.", verified: true },
+      { id: "th300-review-47", author: "Marc Vienne", rating: 4, date: "2024-10-28", comment: "Les vibrations sont parfois un peu fortes sur certains jeux, mais ça se règle.", verified: false },
+      { id: "th300-review-48", author: "Annie Nativel", rating: 4, date: "2024-10-14", comment: "Bon produit mais j'ai mis du temps à m'habituer aux vibrations.", verified: true },
+      { id: "th300-review-49", author: "Denis Sautron", rating: 4, date: "2024-09-25", comment: "Confortable mais un peu lourd après 2h d'utilisation intensive.", verified: true },
+      { id: "th300-review-50", author: "Corinne Turpin", rating: 4, date: "2024-09-10", comment: "Bien mais j'esperais plus de basses. Reste un bon casque quand même.", verified: true },
+      { id: "th300-review-51", author: "Éric Pothin", rating: 4, date: "2024-08-20", comment: "Le blanc se salit vite, prenez le noir. Sinon très content.", verified: true },
+      { id: "th300-review-52", author: "Martine Cadet", rating: 4, date: "2024-08-05", comment: "Fonctionne bien mais pas compatible avec mon vieux PC, vérifiez avant.", verified: false },
+      { id: "th300-review-53", author: "Vincent Léandre", rating: 4, date: "2024-07-22", comment: "Bon rapport qualité/prix mais packaging un peu cheap.", verified: true },
+      { id: "th300-review-54", author: "Catherine Ah-Nieme", rating: 4, date: "2024-07-10", comment: "Les vibrations fatiguent un peu à la longue, mais on peut les désactiver.", verified: true },
+      { id: "th300-review-55", author: "Ludovic Bénard", rating: 4, date: "2024-06-28", comment: "Très bien pour le gaming, moins adapté pour la musique classique.", verified: true },
+      { id: "th300-review-56", author: "Monique Florentin", rating: 4, date: "2024-06-15", comment: "J'aurais préféré des coussinets en cuir mais le tissu est correct.", verified: true },
+      { id: "th300-review-57", author: "Alain Clain", rating: 4, date: "2024-05-30", comment: "Bon casque mais attention aux cheveux longs qui se coincent dans l'arceau.", verified: false },
+      { id: "th300-review-58", author: "Françoise Lauret", rating: 4, date: "2024-05-18", comment: "Satisfaite mais j'aurais aimé un étui de transport inclus.", verified: true },
+      { id: "th300-review-59", author: "Yves Laravine", rating: 4, date: "2024-05-02", comment: "Bien mais les vibrations drainent un peu la batterie du téléphone.", verified: true },
       // 3 étoiles (5 avis)
-      { author: "Robert Dorseuil", rating: 3, date: "2024-10-01", comment: "Correct mais je m'attendais à mieux pour ce prix. Vibrations gadget.", verified: true },
-      { author: "Chantal Thierry", rating: 3, date: "2024-08-15", comment: "Pas mal mais mon ancien casque Logitech était plus confortable.", verified: true },
-      { author: "Bernard Mussard", rating: 3, date: "2024-06-20", comment: "Les vibrations me donnent mal à la tête, dommage car le son est bon.", verified: false },
-      { author: "Josiane Ethève", rating: 3, date: "2024-04-25", comment: "Moyen, je pensais que l'effet haptique serait plus impressionnant.", verified: true },
-      { author: "André Ponamalé", rating: 3, date: "2024-03-10", comment: "Ça va mais pour le prix y'a mieux ailleurs. Déçu.", verified: true },
+      { id: "th300-review-60", author: "Robert Dorseuil", rating: 3, date: "2024-10-01", comment: "Correct mais je m'attendais à mieux pour ce prix. Vibrations gadget.", verified: true },
+      { id: "th300-review-61", author: "Chantal Thierry", rating: 3, date: "2024-08-15", comment: "Pas mal mais mon ancien casque Logitech était plus confortable.", verified: true },
+      { id: "th300-review-62", author: "Bernard Mussard", rating: 3, date: "2024-06-20", comment: "Les vibrations me donnent mal à la tête, dommage car le son est bon.", verified: false },
+      { id: "th300-review-63", author: "Josiane Ethève", rating: 3, date: "2024-04-25", comment: "Moyen, je pensais que l'effet haptique serait plus impressionnant.", verified: true },
+      { id: "th300-review-64", author: "André Ponamalé", rating: 3, date: "2024-03-10", comment: "Ça va mais pour le prix y'a mieux ailleurs. Déçu.", verified: true },
       // 2 étoiles (1 avis)
-      { author: "Georges Baillif", rating: 2, date: "2024-07-05", comment: "Reçu avec un défaut sur l'arceau. Retour en cours.", verified: true },
+      { id: "th300-review-65", author: "Georges Baillif", rating: 2, date: "2024-07-05", comment: "Reçu avec un défaut sur l'arceau. Retour en cours.", verified: true },
       // 1 étoile (1 avis)
-      { author: "Louis Payet", rating: 1, date: "2024-05-20", comment: "Ne fonctionne pas sur ma PS4, très déçu. Description trompeuse.", verified: false }
+      { id: "th300-review-66", author: "Louis Payet", rating: 1, date: "2024-05-20", comment: "Ne fonctionne pas sur ma PS4, très déçu. Description trompeuse.", verified: false }
     ],
     warranty: '2 ans constructeur',
     deliveryTime: '24-48h à La Réunion',

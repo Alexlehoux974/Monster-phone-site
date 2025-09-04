@@ -2,6 +2,8 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Product } from '@/data/products';
+import { ProductFullView } from '@/lib/supabase/client';
+import { supabaseProductToLegacy } from '@/lib/supabase/adapters';
 
 export interface CartItem {
   product: Product;
@@ -11,9 +13,9 @@ export interface CartItem {
 
 interface CartContextType {
   items: CartItem[];
-  addToCart: (product: Product, quantity?: number, variant?: string) => void;
+  addToCart: (product: Product | ProductFullView, quantity?: number, variant?: string) => void;
   removeFromCart: (productId: string) => void;
-  updateQuantity: (productId: string, quantity: number) => void;
+  updateQuantity: (productId: string, quantity: number, variant?: string) => void;
   clearCart: () => void;
   getCartTotal: () => number;
   getItemCount: () => number;
@@ -49,25 +51,65 @@ export function CartProvider({ children, initialItems }: { children: ReactNode; 
     }
   }, [items, isLoaded]);
 
-  const addToCart = (product: Product, quantity = 1, variant?: string) => {
+  const addToCart = (product: Product | ProductFullView, quantity = 1, variant?: string) => {
+    // Convertir ProductFullView en Product si nécessaire
+    const productToAdd: Product = 'category_id' in product 
+      ? supabaseProductToLegacy(product as ProductFullView)
+      : product as Product;
+    
+    // Vérifier le stock disponible
+    let availableStock = 0;
+    
+    if (productToAdd.hasVariants && variant) {
+      // Si le produit a des variants, vérifier le stock du variant spécifique
+      const selectedVariant = productToAdd.variants?.find(v => v.color === variant);
+      if (!selectedVariant) {
+        console.error(`Variant ${variant} non trouvé pour le produit ${productToAdd.name}`);
+        return;
+      }
+      availableStock = selectedVariant.stock || 0;
+    } else {
+      // Sinon, utiliser le stock du produit principal
+      availableStock = productToAdd.stock || 0;
+    }
+    
+    // Vérifier si le stock est suffisant
+    if (availableStock === 0) {
+      console.error(`Produit en rupture de stock: ${productToAdd.name}`);
+      return;
+    }
+    
     setItems(currentItems => {
       // Pour les tests avec variants, on vérifie si le produit avec ce variant existe déjà
       const existingItemIndex = currentItems.findIndex(item => 
-        item.product.id === product.id && 
+        item.product.id === productToAdd.id && 
         (variant ? item.variant === variant : !item.variant)
       );
 
       if (existingItemIndex !== -1) {
-        // Le produit existe déjà, on met à jour la quantité
+        // Le produit existe déjà, vérifier si on peut ajouter la quantité demandée
+        const currentQuantity = currentItems[existingItemIndex].quantity;
+        const newQuantity = Math.min(currentQuantity + quantity, availableStock);
+        
+        if (newQuantity === currentQuantity) {
+          console.warn(`Stock insuffisant pour ${productToAdd.name}. Maximum disponible: ${availableStock}`);
+          return currentItems; // Pas de changement si le stock est insuffisant
+        }
+        
         const newItems = [...currentItems];
         newItems[existingItemIndex] = {
           ...newItems[existingItemIndex],
-          quantity: newItems[existingItemIndex].quantity + quantity
+          quantity: newQuantity
         };
         return newItems;
       } else {
         // Nouveau produit ou nouvelle variante
-        return [...currentItems, { product, quantity, variant }];
+        const quantityToAdd = Math.min(quantity, availableStock);
+        if (quantityToAdd === 0) {
+          console.warn(`Stock insuffisant pour ${productToAdd.name}`);
+          return currentItems;
+        }
+        return [...currentItems, { product: productToAdd, quantity: quantityToAdd, variant }];
       }
     });
   };
@@ -76,18 +118,38 @@ export function CartProvider({ children, initialItems }: { children: ReactNode; 
     setItems(currentItems => currentItems.filter(item => item.product.id !== productId));
   };
 
-  const updateQuantity = (productId: string, quantity: number) => {
+  const updateQuantity = (productId: string, quantity: number, variant?: string) => {
     if (quantity <= 0) {
       removeFromCart(productId);
       return;
     }
 
     setItems(currentItems =>
-      currentItems.map(item =>
-        item.product.id === productId
-          ? { ...item, quantity }
-          : item
-      )
+      currentItems.map(item => {
+        if (item.product.id === productId && 
+            (variant ? item.variant === variant : !item.variant)) {
+          // Vérifier le stock disponible
+          let availableStock = 0;
+          
+          if (item.product.hasVariants && item.variant) {
+            const selectedVariant = item.product.variants?.find(v => v.color === item.variant);
+            availableStock = selectedVariant?.stock || 0;
+          } else {
+            availableStock = item.product.stock || 0;
+          }
+          
+          // Limiter la quantité au stock disponible
+          const newQuantity = Math.min(quantity, availableStock);
+          
+          if (newQuantity === 0) {
+            console.warn(`Stock insuffisant pour ${item.product.name}`);
+            return item;
+          }
+          
+          return { ...item, quantity: newQuantity };
+        }
+        return item;
+      })
     );
   };
 

@@ -1,11 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import Image from 'next/image';
-import { Star, Shield, Truck, RefreshCw, Clock, Award, ChevronRight, ChevronLeft, Check, Package, Phone, CreditCard, Lock, Heart, Share2, Minus, Plus, Info, ZoomIn } from 'lucide-react';
+import { useState } from 'react';
+import Link from 'next/link';
+import { Star, Shield, Truck, RefreshCw, Clock, Award, ChevronRight, ChevronLeft, Check, Package, Phone, CreditCard, Lock, Heart, Share2, Minus, Plus, ZoomIn } from 'lucide-react';
 import { Product, ProductVariant } from '@/data/products';
-import { formatPrice } from '@/lib/utils';
-import { cn } from '@/lib/utils';
+import { formatPrice, cn } from '@/lib/utils';
 import { useCart } from '@/contexts/CartContext';
 import ImageWithFallback from '@/components/ImageWithFallback';
 import { Button } from '@/components/ui/button';
@@ -21,7 +20,11 @@ interface ProductDetailProps {
 
 export default function ProductDetail({ product }: ProductDetailProps) {
   const { addToCart } = useCart();
-  const [selectedVariant, setSelectedVariant] = useState<ProductVariant | undefined>(product.variants?.[0]);
+  // Sélectionner le variant par défaut ou le premier disponible avec du stock
+  const defaultVariant = product.variants?.find(v => v.is_default) || 
+                        product.variants?.find(v => v.stock > 0) || 
+                        product.variants?.[0];
+  const [selectedVariant, setSelectedVariant] = useState<ProductVariant | undefined>(defaultVariant);
   const [quantity, setQuantity] = useState(1);
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -66,10 +69,13 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   const hasDiscount = product.discount && product.discount > 0;
   const savings = hasDiscount ? originalPrice - currentPrice : 0;
 
-  // Stock de la variante sélectionnée
-  const currentStock = selectedVariant?.stock || 10;
+  // Stock de la variante sélectionnée ou stock du produit principal
+  const currentStock = product.hasVariants 
+    ? (selectedVariant?.stock || 0) 
+    : (product.stock || 0);
   const isInStock = currentStock > 0;
   const isLowStock = currentStock > 0 && currentStock <= 5;
+  const isOutOfStock = currentStock === 0;
 
   const handleAddToCart = () => {
     addToCart(product, quantity, selectedVariant?.color);
@@ -108,11 +114,11 @@ export default function ProductDetail({ product }: ProductDetailProps) {
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Fil d'Ariane */}
         <nav className="flex items-center space-x-2 text-sm text-gray-600 mb-6">
-          <a href="/" className="hover:text-red-600 transition-colors">Accueil</a>
+          <Link href="/" className="hover:text-red-600 transition-colors">Accueil</Link>
           <ChevronRight className="h-4 w-4 text-gray-400" />
-          <a href="/nos-produits" className="hover:text-red-600 transition-colors">Produits</a>
+          <Link href="/nos-produits" className="hover:text-red-600 transition-colors">Produits</Link>
           <ChevronRight className="h-4 w-4 text-gray-400" />
-          <a href={`/nos-produits?category=${product.category}`} className="hover:text-red-600 transition-colors">{product.category}</a>
+          <Link href={`/nos-produits?category=${product.category}`} className="hover:text-red-600 transition-colors">{product.category}</Link>
           <ChevronRight className="h-4 w-4 text-gray-400" />
           <span className="text-gray-900 font-semibold">{product.name}</span>
         </nav>
@@ -290,17 +296,17 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                       key={i}
                       className={cn(
                         "h-5 w-5",
-                        i < Math.floor(product.rating.average)
+                        i < Math.floor(product.rating?.average || 0)
                           ? "text-yellow-400 fill-current"
                           : "text-gray-300"
                       )}
                     />
                   ))}
                   <span className="ml-2 font-semibold">
-                    {product.rating.average.toFixed(1)}
+                    {product.rating?.average?.toFixed(1) || "0.0"}
                   </span>
                 </div>
-                <span className="text-gray-600">({product.rating.count} avis)</span>
+                <span className="text-gray-600">({product.rating?.count || 0} avis)</span>
               </div>
             )}
           </div>
@@ -361,9 +367,11 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                         />
                       )}
                       <span>{variant.color}</span>
-                      {variant.stock === 0 && (
-                        <Badge variant="secondary" className="ml-2">Rupture</Badge>
-                      )}
+                      {variant.stock === 0 ? (
+                        <Badge variant="secondary" className="ml-2 text-red-600">Rupture</Badge>
+                      ) : variant.stock <= 5 ? (
+                        <Badge variant="secondary" className="ml-2 text-orange-600">{variant.stock} restant{variant.stock > 1 ? 's' : ''}</Badge>
+                      ) : null}
                     </Label>
                   </div>
                 ))}
@@ -399,26 +407,46 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                   <Plus className="h-4 w-4" />
                 </Button>
               </div>
-              {isLowStock && (
-                <Badge variant="outline" className="text-orange-600 border-orange-600">
-                  Plus que {currentStock} en stock
+              {/* Alerte stock - Affichage uniquement si rupture ou moins de 5 en stock */}
+              {isOutOfStock ? (
+                <Badge variant="outline" className="text-red-600 border-red-600 font-semibold">
+                  ❌ Rupture de stock
                 </Badge>
-              )}
+              ) : isLowStock ? (
+                <div className="space-y-2">
+                  <Badge variant="outline" className="text-orange-600 border-orange-600 font-semibold animate-pulse">
+                    ⚠️ Plus que {currentStock} en stock !
+                  </Badge>
+                  <p className="text-xs text-orange-700">
+                    Commandez vite, stock limité
+                  </p>
+                </div>
+              ) : null}
             </div>
 
             <Button
               onClick={handleAddToCart}
-              disabled={!isInStock}
-              className="w-full h-12 text-lg font-semibold"
+              disabled={!isInStock || quantity > currentStock}
+              className={cn(
+                "w-full h-12 text-lg font-semibold transition-all shadow-lg",
+                isOutOfStock ? "opacity-50 cursor-not-allowed bg-gray-400" :
+                isLowStock ? "bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white animate-pulse" :
+                "bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white transform hover:scale-[1.02] hover:shadow-xl"
+              )}
               size="lg"
             >
-              {isInStock ? (
+              {isOutOfStock ? (
+                <>❌ Rupture de stock</>
+              ) : isLowStock ? (
+                <>
+                  <Package className="mr-2 h-5 w-5" />
+                  Commander vite - Stock limité !
+                </>
+              ) : (
                 <>
                   <Package className="mr-2 h-5 w-5" />
                   Ajouter au panier
                 </>
-              ) : (
-                'Rupture de stock'
               )}
             </Button>
 
@@ -492,15 +520,12 @@ export default function ProductDetail({ product }: ProductDetailProps) {
       {/* Tabs avec description, spécifications, avis */}
       <div className="mt-16 bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
         <Tabs defaultValue="description" className="space-y-8">
-          <TabsList className="grid grid-cols-4 w-full max-w-2xl mx-auto bg-gray-50 p-1 rounded-xl">
+          <TabsList className="grid grid-cols-3 w-full max-w-2xl mx-auto bg-gray-50 p-1 rounded-xl">
             <TabsTrigger value="description" className="data-[state=active]:bg-white data-[state=active]:shadow-sm rounded-lg font-medium">
               Description
             </TabsTrigger>
-            <TabsTrigger value="specifications" className="data-[state=active]:bg-white data-[state=active]:shadow-sm rounded-lg font-medium">
-              Caractéristiques
-            </TabsTrigger>
             <TabsTrigger value="reviews" className="data-[state=active]:bg-white data-[state=active]:shadow-sm rounded-lg font-medium">
-              Avis ({product.rating?.reviews?.length || product.rating?.count || 0})
+              Avis ({product.rating?.count || 0})
             </TabsTrigger>
             <TabsTrigger value="shipping" className="data-[state=active]:bg-white data-[state=active]:shadow-sm rounded-lg font-medium">
               Livraison
@@ -509,24 +534,29 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
           <TabsContent value="description" className="space-y-6">
             <div className="max-w-4xl mx-auto">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
-                <span className="w-1 h-8 bg-red-500 rounded-full"></span>
-                Découvrez le {product.name}
-              </h3>
               
-              {/* Description structurée en paragraphes courts */}
-              <div className="space-y-4 text-gray-700 leading-relaxed">
-                {product.description && product.description.split('. ').map((sentence, index) => {
-                  // Afficher toutes les phrases, même courtes
-                  if (sentence.trim()) {
-                    return (
-                      <p key={index} className="text-base">
-                        {sentence.trim()}{!sentence.endsWith('.') && '.'}
-                      </p>
-                    );
-                  }
-                  return null;
-                })}
+              {/* Description avec rendu HTML */}
+              <div className="prose prose-gray max-w-none">
+                {product.description && (
+                  product.description.startsWith('<') ? (
+                    // Si la description commence par une balise HTML, la rendre directement
+                    <div dangerouslySetInnerHTML={{ __html: product.description }} />
+                  ) : (
+                    // Sinon, afficher comme du texte simple en paragraphes
+                    <div className="space-y-4 text-gray-700 leading-relaxed">
+                      {product.description.split('. ').map((sentence, index) => {
+                        if (sentence.trim()) {
+                          return (
+                            <p key={index} className="text-base">
+                              {sentence.trim()}{!sentence.endsWith('.') && '.'}
+                            </p>
+                          );
+                        }
+                        return null;
+                      })}
+                    </div>
+                  )
+                )}
               </div>
             
 
@@ -556,29 +586,39 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                   </div>
                 </div>
               )}
+
+              {/* Valeurs DAS (Débit d'Absorption Spécifique) */}
+              {(product.dasHead || product.dasBody || product.dasLimb) && (
+                <div className="bg-blue-50 rounded-xl p-6 mt-6 border border-blue-200">
+                  <div className="flex items-center gap-2 mb-4">
+                    <Phone className="h-6 w-6 text-blue-600" />
+                    <span className="font-bold text-gray-900">Débit d'absorption spécifique (DAS)</span>
+                  </div>
+                  <div className="grid grid-cols-3 gap-4">
+                    {product.dasHead && (
+                      <div className="bg-white rounded-lg p-3 text-center">
+                        <p className="text-sm text-gray-600 mb-1">Tête</p>
+                        <p className="text-lg font-bold text-blue-700">{product.dasHead} W/kg</p>
+                      </div>
+                    )}
+                    {product.dasBody && (
+                      <div className="bg-white rounded-lg p-3 text-center">
+                        <p className="text-sm text-gray-600 mb-1">Corps</p>
+                        <p className="text-lg font-bold text-blue-700">{product.dasBody} W/kg</p>
+                      </div>
+                    )}
+                    {product.dasLimb && (
+                      <div className="bg-white rounded-lg p-3 text-center">
+                        <p className="text-sm text-gray-600 mb-1">Membres</p>
+                        <p className="text-lg font-bold text-blue-700">{product.dasLimb} W/kg</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
           </TabsContent>
 
-        <TabsContent value="specifications" className="mt-6">
-          <h3 className="text-xl font-bold mb-4">Caractéristiques techniques</h3>
-          {product.specifications && product.specifications.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {product.specifications.map((spec, index) => (
-                <div key={index} className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
-                  {spec.icon && (
-                    <span className="text-2xl flex-shrink-0">{spec.icon}</span>
-                  )}
-                  <div className="flex-1">
-                    <p className="font-semibold text-sm">{spec.label}</p>
-                    <p className="text-gray-600">{spec.value}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <p className="text-gray-600">Aucune spécification technique disponible.</p>
-          )}
-        </TabsContent>
 
         <TabsContent value="reviews" className="mt-6">
           <div className="space-y-6">
@@ -594,7 +634,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                   <div className="flex items-center gap-6">
                     <div className="text-center">
                       <p className="text-4xl font-bold">
-                        {product.rating.average.toFixed(1)}
+                        {product.rating?.average?.toFixed(1) || "0.0"}
                       </p>
                       <div className="flex items-center mt-2">
                         {Array.from({ length: 5 }).map((_, i) => (
@@ -602,7 +642,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                             key={i}
                             className={cn(
                               "h-4 w-4",
-                              i < Math.floor(product.rating.average)
+                              i < Math.floor(product.rating?.average || 0)
                                 ? "text-yellow-400 fill-current"
                                 : "text-gray-300"
                             )}
@@ -610,14 +650,14 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                         ))}
                       </div>
                       <p className="text-sm text-gray-600 mt-1">
-                        {product.rating.count} avis vérifiés
+                        {product.rating?.count || 0} avis vérifiés
                       </p>
                     </div>
                     
                     <div className="flex-1 space-y-2">
                       {[5, 4, 3, 2, 1].map((stars) => {
-                        const count = product.rating.distribution[stars] || 0;
-                        const percentage = (count / product.rating.count) * 100;
+                        const count = product.rating?.distribution?.[stars as keyof typeof product.rating.distribution] || 0;
+                        const percentage = product.rating?.count ? (count / product.rating.count) * 100 : 0;
                         return (
                           <div key={stars} className="flex items-center gap-2">
                             <span className="text-sm w-4">{stars}</span>
@@ -640,7 +680,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
                 {/* Liste des avis */}
                 <div className="space-y-4 max-h-96 overflow-y-auto">
-                  {product.rating.reviews.slice(0, 10).map((review) => (
+                  {(product.rating?.reviews || []).slice(0, 10).map((review) => (
                     <div key={review.id} className="border-b pb-4">
                       <div className="flex items-start justify-between mb-2">
                         <div>
@@ -675,7 +715,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                         <h4 className="font-semibold text-gray-900 mb-1">{review.title}</h4>
                       )}
                       <p className="text-gray-700">{review.comment}</p>
-                      {review.helpful > 0 && (
+                      {(review.helpful || 0) > 0 && (
                         <div className="mt-2 text-xs text-gray-500">
                           {review.helpful} personne(s) ont trouvé cet avis utile
                         </div>
@@ -684,9 +724,9 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                   ))}
                 </div>
 
-                {product.rating.reviews.length > 10 && (
+                {(product.rating?.reviews?.length || 0) > 10 && (
                   <Button variant="outline" className="w-full">
-                    Voir tous les {product.rating.reviews.length} avis
+                    Voir tous les {product.rating?.reviews?.length || 0} avis
                   </Button>
                 )}
               </>
