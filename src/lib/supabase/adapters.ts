@@ -10,6 +10,13 @@ import type { Product, ProductVariant as LegacyVariant, Review, ProductSpecifica
  * Convertir un ProductFullView Supabase vers le type Product legacy
  */
 export function supabaseProductToLegacy(product: ProductFullView): Product {
+  // Débogage pour vérifier brand_name
+  if (product.name?.toLowerCase().includes('monster')) {
+    console.log(`🔍 Produit Monster détecté: ${product.name}`);
+    console.log(`   - brand_name dans ProductFullView: ${product.brand_name}`);
+    console.log(`   - brand_id: ${product.brand_id}`);
+  }
+  
   // Construire les variants legacy depuis product_variants
   const variants: LegacyVariant[] = product.product_variants?.map(v => ({
     id: v.id,
@@ -57,10 +64,39 @@ export function supabaseProductToLegacy(product: ProductFullView): Product {
     distribution: calculateRatingDistribution(reviews)
   };
 
+  // Utiliser brand_name de la vue products_full, ou extraire depuis le nom du produit
+  let brandName = product.brand_name;
+  
+  // Toujours vérifier dans le nom du produit pour Monster, même si brand_name existe
+  // car il semble y avoir un problème avec brand_name qui n'est pas toujours défini
+  if (product.name) {
+    const nameLower = product.name.toLowerCase();
+    
+    // Forcer la détection pour Monster
+    if (nameLower.includes('monster')) {
+      brandName = 'Monster';
+    } else if (!brandName) {
+      // Pour les autres marques, détecter seulement si brand_name n'est pas défini
+      if (nameLower.includes('muvit')) {
+        brandName = 'MUVIT';
+      } else if (nameLower.includes('samsung')) {
+        brandName = 'Samsung';
+      } else if (nameLower.includes('apple') || nameLower.includes('iphone')) {
+        brandName = 'Apple';
+      } else if (nameLower.includes('xiaomi')) {
+        brandName = 'Xiaomi';
+      } else if (nameLower.includes('honor')) {
+        brandName = 'Honor';
+      } else if (nameLower.includes('my way')) {
+        brandName = 'MY WAY';
+      }
+    }
+  }
+  
   return {
     id: product.id,
     name: product.name,
-    brand: product.brand_name || 'Sans marque',
+    brand: brandName || 'Sans marque',
     category: mapCategoryToLegacy(product.category_slug || ''),
     subcategory: mapSubcategoryToLegacy(product.subcategory_slug),
     price: product.price,
@@ -126,6 +162,7 @@ function mapSubcategoryToLegacy(supabaseSubcategory?: string): string | undefine
     // Tablettes
     'tablettes-premium': 'Premium',
     // Audio
+    'audio-écouteurs': 'Écouteurs',
     'audio-ecouteurs': 'Écouteurs',
     'audio-casques': 'Casques',
     'audio-enceintes': 'Enceintes',
@@ -360,7 +397,7 @@ export function generateMenuStructureFromProducts(products: Product[]): Category
   // Créer une Map pour organiser les produits par catégorie
   const categoryProductsMap = new Map<string, Product[]>();
 
-  // Mapper les catégories normalisées
+  // Mapper les catégories normalisées - SEULEMENT 6 CATÉGORIES AUTORISÉES
   const categoryNormalizer: Record<string, string> = {
     'smartphones': 'smartphones',
     'smartphone': 'smartphones',
@@ -377,7 +414,15 @@ export function generateMenuStructureFromProducts(products: Product[]): Category
     'éclairage led': 'led',
     'accessoires': 'accessoires',
     'accessoire': 'accessoires',
-    'autres': 'accessoires'
+    'autres': 'accessoires',
+    // Mapper toutes les autres catégories vers accessoires
+    'câbles': 'accessoires',
+    'appareils photo': 'accessoires',
+    'appareil photo': 'accessoires',
+    'batteries': 'accessoires',
+    'chargeurs': 'accessoires',
+    'supports': 'accessoires',
+    'protection': 'accessoires'
   };
 
   // Icônes par catégorie
@@ -404,9 +449,14 @@ export function generateMenuStructureFromProducts(products: Product[]): Category
   products.forEach(product => {
     if (!product.category) return;
 
-    // Normaliser la catégorie
-    const normalizedCategory = categoryNormalizer[product.category.toLowerCase()] || 
-                              product.category.toLowerCase();
+    // Normaliser la catégorie - mapper vers accessoires si non reconnu
+    let normalizedCategory = categoryNormalizer[product.category.toLowerCase()];
+    
+    // Si la catégorie n'est pas reconnue, la mapper vers accessoires
+    if (!normalizedCategory) {
+      console.log(`Catégorie non reconnue "${product.category}" mappée vers accessoires`);
+      normalizedCategory = 'accessoires';
+    }
     
     if (!categoryProductsMap.has(normalizedCategory)) {
       categoryProductsMap.set(normalizedCategory, []);
@@ -418,8 +468,8 @@ export function generateMenuStructureFromProducts(products: Product[]): Category
   // Construire la structure du menu
   const menuStructure: CategoryStructure[] = [];
 
-  // Ordre préféré des catégories
-  const categoryOrder = ['smartphones', 'tablettes', 'audio', 'montres', 'led', 'accessoires'];
+  // Ordre préféré des catégories - ORDRE EXACT DEMANDÉ PAR LE CLIENT
+  const categoryOrder = ['smartphones', 'tablettes', 'montres', 'audio', 'led', 'accessoires'];
 
   categoryOrder.forEach(categoryKey => {
     const products = categoryProductsMap.get(categoryKey);
@@ -445,27 +495,78 @@ export function generateMenuStructureFromProducts(products: Product[]): Category
       if (product.subcategory && !excludeSubcategory) {
         let displaySubcategory = product.subcategory;
         
-        // Regroupement des sous-catégories LED pour simplifier le menu
-        if (categoryKey === 'led' || categoryKey === 'eclairage-led') {
+        // Utiliser les nouvelles sous-catégories Audio
+        if (categoryKey === 'audio') {
           const subcatLower = product.subcategory.toLowerCase();
           
-          // Regrouper Ampoules et Ampoules smart sous "Ampoules"
+          // Mapper vers les sous-catégories Audio
+          if (subcatLower === 'écouteurs' || subcatLower === 'ecouteurs' || subcatLower === 'earbuds' || subcatLower === 'airpods') {
+            displaySubcategory = 'Écouteurs';
+          }
+          else if (subcatLower === 'casques' || subcatLower === 'casques-audio' || subcatLower === 'headphones') {
+            displaySubcategory = 'Casques';
+          }
+          else if (subcatLower === 'enceintes' || subcatLower === 'speakers' || subcatLower === 'haut-parleurs') {
+            displaySubcategory = 'Enceintes';
+          }
+          else if (subcatLower === 'gaming-audio' || subcatLower === 'gaming audio' || subcatLower === 'gaming') {
+            displaySubcategory = 'Gaming Audio';
+          }
+        }
+        
+        // Utiliser les nouvelles sous-catégories LED créées dans la base
+        else if (categoryKey === 'led' || categoryKey === 'eclairage-led') {
+          const subcatLower = product.subcategory.toLowerCase();
+          
+          // Mapper vers les nouvelles sous-catégories
           if (subcatLower === 'ampoules' || subcatLower === 'ampoules smart') {
             displaySubcategory = 'Ampoules';
           }
-          // Regrouper Bandeaux LED, Bandes LED et Barres LED sous "Bandes & Barres LED"
-          else if (subcatLower === 'bandeaux led' || subcatLower === 'bandes led' || subcatLower === 'barres led') {
-            displaySubcategory = 'Bandes & Barres LED';
+          else if (subcatLower === 'bandeaux led' || subcatLower === 'bandes led' || subcatLower === 'barres led' || subcatLower === 'barre led') {
+            displaySubcategory = 'Barre LED';
           }
-          // Regrouper Kits éclairage, Lampes LED, Lampes Écran, Light Bars, Néon LED, Projecteurs et Éclairage Studio sous "Éclairage Studio"
           else if (subcatLower === 'kits éclairage' || subcatLower === 'lampes led' || 
                    subcatLower === 'lampes écran' || subcatLower === 'light bars' || 
-                   subcatLower === 'néon led' || subcatLower === 'projecteurs' ||
-                   subcatLower === 'éclairage studio') {
-            displaySubcategory = 'Éclairage Studio';
+                   subcatLower === 'projecteurs' || subcatLower === 'éclairage studio') {
+            displaySubcategory = 'Kits Éclairage';
           }
-          // Les autres sous-catégories LED restent telles quelles
-          // Déco LED, Panneaux LED, Rétroéclairage TV
+          else if (subcatLower === 'néon led' || subcatLower === 'néon') {
+            displaySubcategory = 'Néon';
+          }
+          else if (subcatLower === 'déco led' || subcatLower === 'panneaux led' || 
+                   subcatLower === 'rétroéclairage tv' || subcatLower === 'rgb') {
+            displaySubcategory = 'RGB';
+          }
+          else if (subcatLower === 'cables-lumineux' || subcatLower === 'câbles lumineux' || 
+                   product.name.toLowerCase().includes('câble lumineux') || 
+                   product.name.toLowerCase().includes('cable lumineux')) {
+            displaySubcategory = 'Cables Lumineux';
+          }
+        }
+        
+        // Utiliser les nouvelles sous-catégories Accessoires
+        else if (categoryKey === 'accessoires') {
+          const subcatLower = product.subcategory.toLowerCase();
+          
+          // Mapper vers les sous-catégories Accessoires
+          if (subcatLower === 'batteries-externes' || subcatLower === 'batteries externes' || 
+              subcatLower === 'powerbank' || product.name.toLowerCase().includes('powerbank')) {
+            displaySubcategory = 'Batteries externes';
+          }
+          else if (subcatLower === 'chargeurs' || subcatLower === 'chargers' || 
+                   product.name.toLowerCase().includes('chargeur')) {
+            displaySubcategory = 'Chargeurs';
+          }
+          else if (subcatLower === 'câbles' || subcatLower === 'cables' || 
+                   product.name.toLowerCase().includes('câble') || 
+                   product.name.toLowerCase().includes('cable')) {
+            displaySubcategory = 'Câbles';
+          }
+          else if (subcatLower === 'accessoires-photo' || subcatLower === 'photo' || 
+                   product.name.toLowerCase().includes('photo') || 
+                   product.name.toLowerCase().includes('appareil')) {
+            displaySubcategory = 'Accessoires Photo';
+          }
         }
         
         if (!subcategoryMap.has(displaySubcategory)) {
@@ -480,19 +581,79 @@ export function generateMenuStructureFromProducts(products: Product[]): Category
     // Construire les sous-catégories pour le menu
     const subcategories = [];
 
-    // Si on a des sous-catégories, les ajouter
-    if (subcategoryMap.size > 0) {
-      subcategoryMap.forEach((brands, subcatName) => {
-        subcategories.push({
-          name: subcatName,
-          slug: subcatName.toLowerCase().replace(/\s+/g, '-'),
-          brands: Array.from(brands).sort()
-        });
+    // Pour LED, toujours afficher toutes les sous-catégories
+    if (categoryKey === 'led' || categoryKey === 'eclairage-led') {
+      const ledSubcategories = [
+        { name: 'Barre LED', slug: 'barre-led', brands: [] as string[] },
+        { name: 'Néon', slug: 'neon', brands: [] as string[] },
+        { name: 'Kits Éclairage', slug: 'kits-eclairage', brands: [] as string[] },
+        { name: 'Ampoules', slug: 'ampoules', brands: [] as string[] },
+        { name: 'RGB', slug: 'rgb', brands: [] as string[] },
+        { name: 'Cables Lumineux', slug: 'cables-lumineux', brands: [] as string[] }
+      ];
+
+      // Ajouter les marques des produits existants
+      ledSubcategories.forEach(subcat => {
+        if (subcategoryMap.has(subcat.name)) {
+          subcat.brands = Array.from(subcategoryMap.get(subcat.name)!).sort();
+        }
       });
+
+      subcategories.push(...ledSubcategories);
+    } 
+    // Pour Audio, afficher toutes les sous-catégories définies
+    else if (categoryKey === 'audio') {
+      const audioSubcategories = [
+        { name: 'Écouteurs', slug: 'ecouteurs', brands: [] as string[] },
+        { name: 'Casques', slug: 'casques-audio', brands: [] as string[] },
+        { name: 'Enceintes', slug: 'enceintes', brands: [] as string[] },
+        { name: 'Gaming Audio', slug: 'gaming-audio', brands: [] as string[] }
+      ];
+
+      // Ajouter les marques des produits existants pour chaque sous-catégorie
+      audioSubcategories.forEach(subcat => {
+        if (subcategoryMap.has(subcat.name)) {
+          subcat.brands = Array.from(subcategoryMap.get(subcat.name)!).sort();
+        }
+      });
+
+      // Afficher toutes les sous-catégories Audio qui ont des produits
+      subcategories.push(...audioSubcategories.filter(s => subcategoryMap.has(s.name)));
+    }
+    // Pour Accessoires, afficher toutes les sous-catégories définies
+    else if (categoryKey === 'accessoires') {
+      const accessoiresSubcategories = [
+        { name: 'Batteries externes', slug: 'batteries-externes', brands: [] as string[] },
+        { name: 'Chargeurs', slug: 'chargeurs', brands: [] as string[] },
+        { name: 'Câbles', slug: 'cables', brands: [] as string[] },
+        { name: 'Accessoires Photo', slug: 'accessoires-photo', brands: [] as string[] }
+      ];
+
+      // Ajouter les marques des produits existants pour chaque sous-catégorie
+      accessoiresSubcategories.forEach(subcat => {
+        if (subcategoryMap.has(subcat.name)) {
+          subcat.brands = Array.from(subcategoryMap.get(subcat.name)!).sort();
+        }
+      });
+
+      // Afficher toutes les sous-catégories Accessoires qui ont des produits
+      subcategories.push(...accessoiresSubcategories.filter(s => subcategoryMap.has(s.name)));
+    } else {
+      // Pour les autres catégories, n'ajouter que les sous-catégories avec des produits
+      if (subcategoryMap.size > 0) {
+        subcategoryMap.forEach((brands, subcatName) => {
+          subcategories.push({
+            name: subcatName,
+            slug: subcatName.toLowerCase().replace(/\s+/g, '-'),
+            brands: Array.from(brands).sort()
+          });
+        });
+      }
     }
 
     // Ajouter une entrée "Tous nos produits" avec toutes les marques de la catégorie
-    if (brandsInCategory.size > 0) {
+    // Sauf pour Audio, LED et Accessoires qui ont leur propre structure
+    if (brandsInCategory.size > 0 && categoryKey !== 'audio' && categoryKey !== 'led' && categoryKey !== 'eclairage-led' && categoryKey !== 'accessoires') {
       subcategories.unshift({
         name: 'Tous nos produits',
         slug: 'toutes-les-marques',
@@ -520,90 +681,8 @@ export function generateMenuStructureFromProducts(products: Product[]): Category
     console.log(`Catégorie ${categoryKey}: ${products.length} produits, ${brandsInCategory.size} marques`);
   });
 
-  // Ajouter les catégories qui n'étaient pas dans l'ordre préféré
-  categoryProductsMap.forEach((products, categoryKey) => {
-    if (!categoryOrder.includes(categoryKey) && products.length > 0) {
-      const subcategoryMap = new Map<string, Set<string>>();
-      const brandsInCategory = new Set<string>();
-
-      products.forEach(product => {
-        if (product.brand) brandsInCategory.add(product.brand);
-        
-        // Organiser par sous-catégorie uniquement si elle existe
-        // Exclure "Premium" pour les tablettes
-        // Exclure toutes les sous-catégories pour les smartphones
-        const excludeSubcategory = 
-          (categoryKey === 'tablettes' && product.subcategory?.toLowerCase() === 'premium') ||
-          (categoryKey === 'smartphones' && product.subcategory);
-          
-        if (product.subcategory && !excludeSubcategory) {
-          let displaySubcategory = product.subcategory;
-          
-          // Regroupement des sous-catégories LED pour simplifier le menu
-          if (categoryKey === 'led' || categoryKey === 'eclairage-led') {
-            const subcatLower = product.subcategory.toLowerCase();
-            
-            // Regrouper Ampoules et Ampoules smart sous "Ampoules"
-            if (subcatLower === 'ampoules' || subcatLower === 'ampoules smart') {
-              displaySubcategory = 'Ampoules';
-            }
-            // Regrouper Bandeaux LED, Bandes LED et Barres LED sous "Bandes & Barres LED"
-            else if (subcatLower === 'bandeaux led' || subcatLower === 'bandes led' || subcatLower === 'barres led') {
-              displaySubcategory = 'Bandes & Barres LED';
-            }
-            // Regrouper Kits éclairage, Lampes LED, Lampes Écran, Light Bars, Néon LED, Projecteurs et Éclairage Studio sous "Éclairage Studio"
-            else if (subcatLower === 'kits éclairage' || subcatLower === 'lampes led' || 
-                     subcatLower === 'lampes écran' || subcatLower === 'light bars' || 
-                     subcatLower === 'néon led' || subcatLower === 'projecteurs' ||
-                     subcatLower === 'éclairage studio') {
-              displaySubcategory = 'Éclairage Studio';
-            }
-            // Les autres sous-catégories LED restent telles quelles
-            // Déco LED, Panneaux LED, Rétroéclairage TV
-          }
-          
-          if (!subcategoryMap.has(displaySubcategory)) {
-            subcategoryMap.set(displaySubcategory, new Set());
-          }
-          if (product.brand) {
-            subcategoryMap.get(displaySubcategory)!.add(product.brand);
-          }
-        }
-      });
-
-      const subcategories = [];
-      subcategoryMap.forEach((brands, subcatName) => {
-        subcategories.push({
-          name: subcatName,
-          slug: subcatName.toLowerCase().replace(/\s+/g, '-'),
-          brands: Array.from(brands).sort()
-        });
-      });
-
-      if (brandsInCategory.size > 0) {
-        subcategories.unshift({
-          name: 'Tous nos produits',
-          slug: 'toutes-les-marques',
-          brands: Array.from(brandsInCategory).sort()
-        });
-      }
-
-      const icon = categoryIcons[categoryKey] || '📦';
-      const categoryName = categoryKey.charAt(0).toUpperCase() + categoryKey.slice(1);
-      
-      menuStructure.push({
-        name: `${icon} ${categoryName}`,
-        slug: categoryKey,
-        subcategories: subcategories.sort((a, b) => {
-          if (a.name === 'Tous nos produits') return -1;
-          if (b.name === 'Tous nos produits') return 1;
-          return a.name.localeCompare(b.name);
-        })
-      });
-
-      console.log(`Catégorie ${categoryKey}: ${products.length} produits, ${brandsInCategory.size} marques`);
-    }
-  });
+  // NE PAS ajouter les catégories qui ne sont pas dans l'ordre préféré
+  // Toutes les autres catégories ont déjà été mappées vers "accessoires"
 
   console.log(`Menu généré: ${menuStructure.length} catégories avec ${products.length} produits au total`);
   

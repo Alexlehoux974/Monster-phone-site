@@ -76,12 +76,12 @@ export const MENU_STRUCTURE: MenuCategory[] = [
       {
         name: 'Écouteurs',
         slug: 'ecouteurs',
-        brands: ['Apple AirPods', 'Samsung Galaxy Buds', 'Sony', 'JBL', 'Beats', 'Nothing Ear']
+        brands: ['Monster', 'Apple AirPods', 'Samsung Galaxy Buds', 'Sony', 'JBL', 'Beats', 'Nothing Ear']
       },
       {
         name: 'Casques',
-        slug: 'casques',
-        brands: ['Sony', 'Bose', 'JBL', 'Marshall', 'Beats', 'HyperX']
+        slug: 'casques-audio',
+        brands: ['Monster', 'MUVIT', 'Sony', 'Bose', 'JBL', 'Marshall', 'Beats', 'HyperX']
       },
       {
         name: 'Enceintes',
@@ -91,7 +91,7 @@ export const MENU_STRUCTURE: MenuCategory[] = [
       {
         name: 'Gaming Audio',
         slug: 'gaming-audio',
-        brands: ['HyperX', 'Razer', 'SteelSeries', 'Logitech G', 'ASUS ROG']
+        brands: ['Monster', 'HyperX', 'Razer', 'SteelSeries', 'Logitech G', 'ASUS ROG']
       }
     ]
   },
@@ -126,24 +126,34 @@ export const MENU_STRUCTURE: MenuCategory[] = [
     slug: 'led',
     subcategories: [
       {
-        name: 'Gaming LED',
-        slug: 'gaming-led',
-        brands: ['Philips Hue', 'Razer Chroma', 'LIFX', 'Govee', 'Nanoleaf']
+        name: 'Barre LED',
+        slug: 'barre-led',
+        brands: ['Philips Hue', 'Govee', 'Monster LED', 'LIFX']
       },
       {
-        name: 'Éclairage intelligent',
-        slug: 'eclairage-intelligent',
+        name: 'Néon',
+        slug: 'neon',
+        brands: ['Govee', 'Nanoleaf', 'Monster LED', 'Twinkly']
+      },
+      {
+        name: 'Kits Éclairage',
+        slug: 'kits-eclairage',
+        brands: ['Philips Hue', 'LIFX', 'Razer Chroma', 'Elgato']
+      },
+      {
+        name: 'Ampoules',
+        slug: 'ampoules',
         brands: ['Philips Hue', 'LIFX', 'TP-Link Kasa', 'Yeelight']
       },
       {
-        name: 'LED décoratives',
-        slug: 'decoratives',
-        brands: ['Govee', 'Nanoleaf', 'Twinkly', 'Monster LED']
+        name: 'RGB',
+        slug: 'rgb',
+        brands: ['MY WAY', 'Monster LED', 'Razer Chroma', 'Govee']
       },
       {
-        name: 'Accessoires LED',
-        slug: 'accessoires-led',
-        brands: ['Contrôleurs', 'Hubs', 'Capteurs', 'Télécommandes']
+        name: 'Cables Lumineux',
+        slug: 'cables-lumineux',
+        brands: ['MY WAY', 'Monster LED', 'Baseus', 'UGREEN']
       }
     ]
   },

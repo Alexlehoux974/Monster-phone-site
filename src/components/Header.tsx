@@ -1137,7 +1137,7 @@ export default function Header() {
       >
         <div className="max-w-7xl mx-auto px-2 sm:px-3 lg:px-4">
           {/* Header principal */}
-          <div className="flex items-center gap-2 h-20 overflow-visible">
+          <div className="flex items-center justify-between gap-4 h-20">
             {/* Logo */}
             <Link href="/" className="flex-shrink-0 hover:opacity-90 transition-opacity">
               <Image 
@@ -1151,7 +1151,7 @@ export default function Header() {
             </Link>
 
             {/* Navigation centrale */}
-            <nav className="hidden xl:flex items-center gap-0.5 flex-1 overflow-visible" ref={menuRef}>
+            <nav className="hidden xl:flex items-center gap-0.5 overflow-visible" ref={menuRef}>
               {/* Génération dynamique des menus à partir de menuStructure */}
               {menuStructure.map((category) => {
                 // Extraire l'emoji et le nom du menu
@@ -1199,7 +1199,7 @@ export default function Header() {
             </nav>
             
             {/* Barre de recherche desktop */}
-            <div className="relative hidden xl:flex ml-auto mr-4" ref={searchRef}>
+            <div className="relative hidden xl:flex" ref={searchRef}>
               <form onSubmit={handleSearchSubmit} className="relative">
                 <input
                   type="text"
@@ -1277,7 +1277,7 @@ export default function Header() {
             </nav>
 
             {/* Actions */}
-            <div className="flex items-center gap-1 flex-shrink-0">
+            <div className="flex items-center gap-2 flex-shrink-0">
               {/* Recherche mobile */}
               <button className="lg:hidden p-1 text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
                 <Search className="h-4 w-4" />

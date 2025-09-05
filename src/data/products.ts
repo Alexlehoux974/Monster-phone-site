@@ -7410,9 +7410,24 @@ export const menuStructure: CategoryStructure[] = [
     slug: 'smartphones',
     subcategories: [
       {
-        name: 'Smartphone',
-        slug: 'smartphone',
-        brands: ['HONOR']
+        name: 'Gaming Phones',
+        slug: 'gaming-phones',
+        brands: ['INFINIX', 'HONOR', 'TECNO', 'DOOGEE']
+      },
+      {
+        name: 'Smartphones 5G',
+        slug: 'smartphones-5g',
+        brands: ['INFINIX', 'HONOR', 'TECNO']
+      },
+      {
+        name: 'Smartphones Pro',
+        slug: 'smartphones-pro',
+        brands: ['INFINIX', 'HONOR']
+      },
+      {
+        name: 'Téléphones Classiques',
+        slug: 'telephones-classiques',
+        brands: ['NOKIA']
       }
     ]
   },
@@ -7421,9 +7436,30 @@ export const menuStructure: CategoryStructure[] = [
     slug: 'tablettes',
     subcategories: [
       {
-        name: 'Tablette',
-        slug: 'tablette',
+        name: 'Tablettes Android',
+        slug: 'tablettes-android',
         brands: ['HONOR']
+      },
+      {
+        name: 'Tablettes Gaming',
+        slug: 'tablettes-gaming',
+        brands: ['HONOR']
+      }
+    ]
+  },
+  {
+    name: '⌚ Montres',
+    slug: 'montres',
+    subcategories: [
+      {
+        name: 'Montres connectées',
+        slug: 'montres-connectees',
+        brands: ['HIFUTURE']
+      },
+      {
+        name: 'Montres sport',
+        slug: 'montres-sport',
+        brands: ['HIFUTURE']
       }
     ]
   },
@@ -7445,22 +7481,6 @@ export const menuStructure: CategoryStructure[] = [
         name: 'Casques',
         slug: 'casques',
         brands: ['HIFUTURE', 'MONSTER', 'MUVIT']
-      }
-    ]
-  },
-  {
-    name: '⌚ Montres',
-    slug: 'montres',
-    subcategories: [
-      {
-        name: 'Montres connectées',
-        slug: 'montres-connectees',
-        brands: ['HIFUTURE']
-      },
-      {
-        name: 'Montres sport',
-        slug: 'montres-sport',
-        brands: ['HIFUTURE']
       }
     ]
   },
@@ -7487,21 +7507,36 @@ export const menuStructure: CategoryStructure[] = [
       {
         name: 'Batteries & Chargeurs',
         slug: 'batteries-chargeurs',
-        brands: ['MY WAY']
+        brands: ['MY WAY', 'ABYX']
       },
       {
         name: 'Câbles & Connectiques',
         slug: 'cables-connectiques',
-        brands: ['MONSTER', 'MY WAY']
+        brands: ['MONSTER', 'MY WAY', 'TIGER POWER']
       },
       {
-        name: 'Appareil Photo',
-        slug: 'appareil-photo',
+        name: 'Appareils Photo',
+        slug: 'appareils-photo',
+        brands: ['MUVIT']
+      },
+      {
+        name: 'Accessoires Photo',
+        slug: 'accessoires-photo',
         brands: ['MUVIT']
       },
       {
         name: 'Gaming & PC',
         slug: 'gaming-pc',
+        brands: []
+      },
+      {
+        name: 'Protection & Étuis',
+        slug: 'protection-etuis',
+        brands: []
+      },
+      {
+        name: 'Supports & Fixations',
+        slug: 'supports-fixations',
         brands: []
       }
     ]
