@@ -6,7 +6,6 @@ import FeaturedProductsSupabase from '@/components/FeaturedProductsSupabase';
 import FeaturesSection from '@/components/FeaturesSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import Footer from '@/components/Footer';
-import SupabaseMenu from '@/components/SupabaseMenu';
 import type { Metadata } from 'next';
 import { getBestSellers } from '@/lib/supabase/api';
 import { supabaseProductToLegacy } from '@/lib/supabase/adapters';
@@ -61,7 +60,7 @@ export default async function Home() {
   const featuredProducts = supabaseProducts.map(supabaseProductToLegacy);
 
   return (
-    <div className="min-h-screen overflow-x-hidden">
+    <div className="min-h-screen">
       <Header />
       <div className="pt-[110px]">
         <MonsterPhoneHero />
@@ -72,7 +71,6 @@ export default async function Home() {
         <TestimonialsSection />
         <Footer />
       </div>
-      <SupabaseMenu />
     </div>
   );
 }

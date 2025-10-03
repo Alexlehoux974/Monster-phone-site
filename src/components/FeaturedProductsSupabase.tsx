@@ -22,7 +22,7 @@ export default function FeaturedProductsSupabase({ products, title }: FeaturedPr
 
   return (
     <section className="py-16 bg-gray-50">
-      <div className="container mx-auto px-4">
+      <div className="w-full px-6">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
             {title || 'Nos Produits Phares'}
@@ -35,7 +35,7 @@ export default function FeaturedProductsSupabase({ products, title }: FeaturedPr
 
         {/* Première rangée de produits */}
         <div className="relative mb-6">
-          <div className="flex overflow-x-auto scrollbar-hide gap-6 pb-4">
+          <div className="flex overflow-x-auto scrollbar-hide gap-6 pb-4 px-2">
             {firstRow.map((product) => (
               <div key={product.id} className="flex-shrink-0 w-80">
                 <ProductCard product={product} />
@@ -47,7 +47,7 @@ export default function FeaturedProductsSupabase({ products, title }: FeaturedPr
         {/* Deuxième rangée de produits */}
         {secondRow.length > 0 && (
           <div className="relative">
-            <div className="flex overflow-x-auto scrollbar-hide gap-6 pb-4">
+            <div className="flex overflow-x-auto scrollbar-hide gap-6 pb-4 px-2">
               {secondRow.map((product) => (
                 <div key={product.id} className="flex-shrink-0 w-80">
                   <ProductCard product={product} />

@@ -912,12 +912,12 @@ export default function Header() {
       {/* Barre promotionnelle */}
       <PromoBar />
       
-      <header 
-        className="bg-white backdrop-blur-md shadow-lg border-b border-gray-200 transition-all duration-300 overflow-visible"
+      <header
+        className="bg-white backdrop-blur-md shadow-lg border-b border-gray-200 transition-all duration-300"
       >
-        <div className="max-w-7xl mx-auto px-2 sm:px-3 lg:px-4">
+        <div className="w-full px-6">
           {/* Header principal */}
-          <div className="flex items-center justify-between gap-4 h-20">
+          <div className="flex items-center justify-between gap-3 h-20">
             {/* Logo */}
             <Link href="/" className="flex-shrink-0 hover:opacity-90 transition-opacity">
               <Image 
@@ -931,7 +931,7 @@ export default function Header() {
             </Link>
 
             {/* Navigation centrale */}
-            <nav className="hidden xl:flex items-center gap-0.5 overflow-visible" ref={menuRef}>
+            <nav className="hidden xl:flex items-center gap-1 overflow-visible flex-1" ref={menuRef}>
               {/* Génération dynamique des menus à partir de menuStructure */}
               {menuStructure.map((category) => {
                 // Extraire l'emoji et le nom du menu
@@ -979,7 +979,7 @@ export default function Header() {
             </nav>
             
             {/* Barre de recherche desktop */}
-            <div className="relative hidden xl:flex" ref={searchRef}>
+            <div className="relative hidden xl:flex flex-shrink-0" ref={searchRef}>
               <form onSubmit={handleSearchSubmit} className="relative">
                 <input
                   type="text"
@@ -1062,7 +1062,7 @@ export default function Header() {
               <button className="lg:hidden p-1 text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
                 <Search className="h-4 w-4" />
               </button>
-              
+
               {/* Panier avec aperçu */}
               <div className="relative" ref={cartRef}>
                 <button 
@@ -1216,8 +1216,8 @@ export default function Header() {
               </Link>
 
               {/* CTA */}
-              <Link href="/nos-produits" className="hidden lg:block ml-3">
-                <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-3 py-1.5 rounded-lg font-medium text-xs shadow-md hover:shadow-lg transition-shadow">
+              <Link href="/nos-produits" className="hidden lg:flex ml-2 mr-1">
+                <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-1.5 rounded-lg font-medium text-xs shadow-md hover:shadow-lg transition-shadow whitespace-nowrap">
                   Découvrir
                 </button>
               </Link>
