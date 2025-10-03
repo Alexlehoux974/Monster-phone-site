@@ -57,7 +57,7 @@ export function supabaseProductToLegacy(product: ProductFullView): Product {
   const rating = {
     average: product.average_rating || 4.5,
     count: product.total_reviews || 0,
-    distribution: product.total_reviews > 0
+    distribution: (product.total_reviews ?? 0) > 0
       ? calculateRatingDistribution(reviews)
       : { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 }
   };

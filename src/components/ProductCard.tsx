@@ -21,7 +21,7 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
   const [showSuccess, setShowSuccess] = useState(false);
   const [selectedVariant, setSelectedVariant] = useState(product.variants?.[0]);
 
-  const mainImage = product.images[0] || '/placeholder-product.svg';
+  const mainImage = product.images[0] || '';
   const hasDiscount = product.discount && product.discount > 0;
   const isInStock = selectedVariant ? selectedVariant.stock > 0 : true;
 

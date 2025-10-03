@@ -54,8 +54,8 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  // Récupérer les meilleures ventes depuis Supabase (6 produits)
-  const supabaseProducts = await getBestSellers(6);
+  // Récupérer les meilleures ventes depuis Supabase (12 produits pour 2 rangées)
+  const supabaseProducts = await getBestSellers(12);
 
   // Convertir les produits Supabase vers le format legacy pour ProductCard
   const featuredProducts = supabaseProducts.map(supabaseProductToLegacy);

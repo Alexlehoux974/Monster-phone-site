@@ -183,7 +183,7 @@ function ProductsClientContent({
   }, [addToCart, brands, categories]);
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 pt-32 pb-8">
       {/* Header Section */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-4">Nos Produits</h1>

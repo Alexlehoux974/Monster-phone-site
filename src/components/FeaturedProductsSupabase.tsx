@@ -10,8 +10,15 @@ interface FeaturedProductsSupabaseProps {
 }
 
 export default function FeaturedProductsSupabase({ products, title }: FeaturedProductsSupabaseProps) {
-  // Limiter à 6 produits maximum
-  const featuredProducts = products.slice(0, 6);
+  // Forcer le placeholder pour tous les produits phares
+  const productsWithPlaceholder = products.map(product => ({
+    ...product,
+    images: [] // Force l'utilisation du placeholder
+  }));
+
+  // Séparer les produits en 2 rangées de 6 produits
+  const firstRow = productsWithPlaceholder.slice(0, 6);
+  const secondRow = productsWithPlaceholder.slice(6, 12);
 
   return (
     <section className="py-16 bg-gray-50">
@@ -26,15 +33,29 @@ export default function FeaturedProductsSupabase({ products, title }: FeaturedPr
           </p>
         </div>
 
-        <div className="relative">
+        {/* Première rangée de produits */}
+        <div className="relative mb-6">
           <div className="flex overflow-x-auto scrollbar-hide gap-6 pb-4">
-            {featuredProducts.map((product) => (
+            {firstRow.map((product) => (
               <div key={product.id} className="flex-shrink-0 w-80">
                 <ProductCard product={product} />
               </div>
             ))}
           </div>
         </div>
+
+        {/* Deuxième rangée de produits */}
+        {secondRow.length > 0 && (
+          <div className="relative">
+            <div className="flex overflow-x-auto scrollbar-hide gap-6 pb-4">
+              {secondRow.map((product) => (
+                <div key={product.id} className="flex-shrink-0 w-80">
+                  <ProductCard product={product} />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* CTA vers catalogue complet */}
         <div className="text-center mt-12">
