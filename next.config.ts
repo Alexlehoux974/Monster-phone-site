@@ -14,9 +14,10 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  // Allow Cloudflare tunnel dev origins
+  // Allow Cloudflare tunnel and direct IP dev origins
   allowedDevOrigins: [
     'tomorrow-travelling-tap-round.trycloudflare.com',
+    '193.203.191.71',
   ],
 };
 
