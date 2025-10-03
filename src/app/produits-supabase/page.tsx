@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useEffect, useCallback } from 'react';
+import { useState, useMemo, useEffect, useCallback, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -14,6 +14,7 @@ import { Filter, X, Search, Package } from 'lucide-react';
 import ProductCardSkeleton from '@/components/ProductCardSkeleton';
 import ProductCard from '@/components/ProductCard';
 import { supabase } from '@/lib/supabase/client';
+import { supabaseProductToLegacy } from '@/lib/supabase/adapters';
 import { formatPrice } from '@/lib/utils';
 
 interface SupabaseProduct {
@@ -59,7 +60,7 @@ interface SupabaseProduct {
   }>;
 }
 
-export default function ProduitsSupabasePage() {
+function ProduitsSupabasePageContent() {
   const searchParams = useSearchParams();
   
   // State management
@@ -138,14 +139,7 @@ export default function ProduitsSupabasePage() {
           product_variants: variantsMap.get(product.id) || []
         }));
 
-        const error = null;
-
-        if (error) {
-          console.error('Erreur Supabase:', error);
-          setError(error.message);
-        } else {
-          setProducts(data || []);
-        }
+        setProducts(data || []);
       } catch (err) {
         console.error('Erreur:', err);
         setError('Erreur lors du chargement des produits');
@@ -190,60 +184,21 @@ export default function ProduitsSupabasePage() {
   // Transformer les produits Supabase au format attendu par ProductCard
   const transformedProducts = useMemo(() => {
     return products.map(product => {
-      // Calculer le stock total depuis les variantes
-      const totalStock = product.product_variants?.reduce((sum, v) => sum + (v.stock || 0), 0) || product.stock_quantity || 0;
-      
-      // Construire l'objet images
-      const productImages = product.images && product.images.length > 0 
-        ? product.images 
-        : product.image_url 
-          ? [product.image_url]
-          : ['/images/placeholder.jpg'];
-
-      return {
-        id: product.id,
-        sku: product.sku,
-        name: product.name,
-        slug: product.url_slug,
-        urlSlug: product.url_slug,
-        brand: product.brands?.name || 'Unknown',
-        brandSlug: product.brands?.slug || '',
-        category: product.categories?.name || 'Unknown',
-        categorySlug: product.categories?.slug || '',
-        price: product.price,
-        originalPrice: product.original_price,
-        discount: product.discount,
-        images: productImages,
-        inStock: totalStock > 0,
-        stockQuantity: totalStock,
+      // Créer un ProductFullView partiel pour l'adaptateur
+      const fullViewProduct = {
+        ...product,
+        brand_name: product.brands?.name || '',
+        brand_slug: product.brands?.slug || '',
+        category_name: product.categories?.name || '',
+        category_slug: product.categories?.slug || '',
+        product_variants: product.product_variants || [],
+        reviews: [],
         rating: product.average_rating ? {
           average: product.average_rating,
-          count: product.total_reviews || 0,
-          distribution: { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 }
-        } : undefined,
-        reviews: [],
-        badges: [],
-        features: [],
-        specifications: {
-          repairabilityIndex: product.repairability_index,
-          dasHead: product.das_head,
-          dasBody: product.das_body,
-          dasLimb: product.das_limb,
-          energyClass: product.energy_class,
-        },
-        description: product.description || product.short_description || '',
-        shortDescription: product.short_description || '',
-        variants: product.product_variants?.map(v => ({
-          id: v.id,
-          color: v.color || '',
-          colorCode: '',
-          storage: v.storage,
-          ram: v.ram,
-          stock: v.stock,
-          ean: v.ean,
-          images: []
-        }))
+          count: product.total_reviews || 0
+        } : undefined
       };
+      return supabaseProductToLegacy(fullViewProduct as any);
     });
   }, [products]);
 
@@ -268,9 +223,9 @@ export default function ProduitsSupabasePage() {
       const matchesRating = !filters.minRating || 
                            (product.rating && product.rating.average >= filters.minRating);
       
-      // Stock
-      const matchesStock = !filters.inStock || 
-                          (product.inStock && product.stockQuantity > 0);
+      // Stock - vérifier via les variantes ou le statut
+      const hasStock = product.variants?.some(v => v.stock > 0) || product.status !== 'out-of-stock';
+      const matchesStock = !filters.inStock || hasStock;
       
       // Marques
       const matchesBrand = filters.brands.length === 0 || 
@@ -302,13 +257,11 @@ export default function ProduitsSupabasePage() {
       case 'name-desc':
         sorted.sort((a, b) => b.name.localeCompare(a.name));
         break;
-      case 'rating':
+      case 'rating-desc':
         sorted.sort((a, b) => (b.rating?.average || 0) - (a.rating?.average || 0));
         break;
-      case 'discount':
-        sorted.sort((a, b) => (b.discount || 0) - (a.discount || 0));
-        break;
       case 'newest':
+      case 'bestseller':
         // Garder l'ordre original (plus récent en premier)
         break;
       case 'relevance':
@@ -434,23 +387,26 @@ export default function ProduitsSupabasePage() {
             ) : paginatedProducts.length > 0 ? (
               <>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {paginatedProducts.map((product) => (
-                    <div key={product.id} className="relative">
-                      <ProductCard product={product} />
-                      {/* Badge stock en temps réel */}
-                      <div className="absolute top-2 right-2 z-10">
-                        {product.stockQuantity > 0 ? (
-                          <span className="bg-green-500 text-white text-xs px-2 py-1 rounded-full">
-                            {product.stockQuantity} en stock
-                          </span>
-                        ) : (
-                          <span className="bg-red-500 text-white text-xs px-2 py-1 rounded-full">
-                            Rupture
-                          </span>
-                        )}
+                  {paginatedProducts.map((product) => {
+                    const totalStock = product.variants?.reduce((sum, v) => sum + (v.stock || 0), 0) || 0;
+                    return (
+                      <div key={product.id} className="relative">
+                        <ProductCard product={product} />
+                        {/* Badge stock en temps réel */}
+                        <div className="absolute top-2 right-2 z-10">
+                          {totalStock > 0 ? (
+                            <span className="bg-green-500 text-white text-xs px-2 py-1 rounded-full">
+                              {totalStock} en stock
+                            </span>
+                          ) : (
+                            <span className="bg-red-500 text-white text-xs px-2 py-1 rounded-full">
+                              Rupture
+                            </span>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
 
                 {/* Pagination */}
@@ -496,5 +452,20 @@ export default function ProduitsSupabasePage() {
 
       <Footer />
     </div>
+  );
+}
+
+export default function ProduitsSupabasePage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500 mx-auto mb-4"></div>
+          <p className="text-gray-600">Chargement des produits...</p>
+        </div>
+      </div>
+    }>
+      <ProduitsSupabasePageContent />
+    </Suspense>
   );
 }

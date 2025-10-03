@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
-import { allProducts } from '@/data/products';
+import { supabase } from '@/lib/supabase/client';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://monsterphone.re';
   
   // Pages statiques principales
@@ -87,10 +87,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.3,
   }));
 
-  // Pages produits dynamiques
-  const productPages = allProducts.map((product) => ({
-    url: `${baseUrl}/produit/${product.urlSlug || product.id}`,
-    lastModified: new Date(),
+  // Pages produits dynamiques depuis Supabase
+  const { data: products } = await supabase
+    .from('products')
+    .select('url_slug, updated_at')
+    .eq('status', 'active');
+
+  const productPages = (products || []).map((product) => ({
+    url: `${baseUrl}/produit/${product.url_slug}`,
+    lastModified: product.updated_at ? new Date(product.updated_at) : new Date(),
     changeFrequency: 'weekly' as const,
     priority: 0.7,
   }));

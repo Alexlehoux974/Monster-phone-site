@@ -29,77 +29,52 @@ async function getProductBySlug(slug: string) {
 
   if (error || !data) return null;
 
-  // Créer l'objet product avec les variants
+  // Construire un ProductFullView à partir des données Supabase
   const product: ProductFullView = {
     id: data.id,
-    name: data.name,
-    slug: data.url_slug,
-    url_slug: data.url_slug,
-    description: data.description || '',
-    short_description: data.short_description || '',
-    price: parseFloat(data.price || '0'),
-    unit_price_ttc: parseFloat(data.price || '0'),
-    unit_price_ht: parseFloat(data.unit_price_ht || '0'),
-    pvc: data.pvc,
-    discount_percentage: data.discount_percentage || 0,
-    images: data.images || [],
-    brand_id: data.brand_id,
-    brand_name: data.brand?.name || '',
-    brand_slug: data.brand?.slug || '',
-    category_id: data.category_id,
-    category_name: data.category?.name || '',
-    category_slug: data.category?.slug || '',
-    subcategory: data.subcategory || '',
-    specifications: data.specifications || {},
-    stock: data.stock_quantity || 0,
     sku: data.sku,
-    ean: data.ean,
-    has_variants: data.has_variants || false,
-    variant_type: data.variant_type,
-    base_name: data.base_name,
-    base_sku: data.base_sku,
-    product_variants: data.product_variants?.map((v: any) => ({
-      id: v.id,
-      product_id: v.product_id,
-      color: v.color,
-      size: v.size,
-      capacity: v.capacity,
-      stock: v.stock,
-      ean: v.ean,
-      supplier_reference: v.supplier_reference,
-      images: v.images || [],
-      is_default: v.is_default
-    })) || [],
-    rating: {
-      average: 4.5,
-      count: 89
-    },
-    das: data.das,
-    tete: data.tete,
-    corps: data.corps,
-    membre: data.membre,
-    tax_d3e: data.tax_d3e || 0,
-    tva: data.tva || 8.5,
+    name: data.name,
+    url_slug: data.url_slug,
+    brand_name: data.brand?.name || '',
+    category_name: data.category?.name || '',
+    subcategory_name: data.subcategory || undefined,
+    description: data.description || undefined,
+    short_description: data.short_description || undefined,
+    price: typeof data.price === 'string' ? parseFloat(data.price) : data.price,
+    original_price: data.original_price || undefined,
+    discount_percentage: data.discount_percentage || undefined,
     status: data.status,
-    created_at: data.created_at,
-    updated_at: data.updated_at
+    warranty: data.warranty || undefined,
+    delivery_time: data.delivery_time || undefined,
+    repairability_index: data.repairability_index || undefined,
+    das_head: data.das_head || undefined,
+    das_body: data.das_body || undefined,
+    average_rating: data.average_rating || undefined,
+    total_reviews: data.total_reviews || undefined,
+    variants: data.product_variants || undefined,
+    images: data.images || undefined,
+    specifications: data.specifications || undefined,
+    highlights: data.highlights || undefined,
+    badges: data.badges || undefined,
+    videos: data.videos || undefined,
+    reviews: []
   };
 
-  // Utiliser l'adaptateur pour convertir au format legacy avec reviews générées
-  return supabaseProductToLegacy(product as ProductFullView);
+  // Utiliser l'adaptateur pour convertir au format legacy
+  return supabaseProductToLegacy(product);
 }
 
 // Récupérer des produits similaires de la même marque
-async function getRelatedProducts(brandId: string, currentProductId: string) {
+async function getRelatedProducts(brandName: string, currentProductId: string) {
   const { data } = await supabase
     .from('products')
     .select(`
       *,
-      brand:brands(*),
+      brand:brands!inner(*),
       category:categories!products_category_id_fkey(*),
       product_variants(*)
     `)
-    .eq('brand_id', brandId)
+    .eq('brand.name', brandName)
     .neq('id', currentProductId)
     .limit(4);
 
@@ -109,59 +84,34 @@ async function getRelatedProducts(brandId: string, currentProductId: string) {
   return data.map(item => {
     const product: ProductFullView = {
       id: item.id,
-      name: item.name,
-      slug: item.url_slug,
-      url_slug: item.url_slug,
-      description: item.description || '',
-      short_description: item.short_description || '',
-      price: parseFloat(item.price || '0'),
-      unit_price_ttc: parseFloat(item.price || '0'),
-      unit_price_ht: parseFloat(item.unit_price_ht || '0'),
-      pvc: item.pvc,
-      discount_percentage: item.discount_percentage || 0,
-      images: item.images || [],
-      brand_id: item.brand_id,
-      brand_name: item.brand?.name || '',
-      brand_slug: item.brand?.slug || '',
-      category_id: item.category_id,
-      category_name: item.category?.name || '',
-      category_slug: item.category?.slug || '',
-      subcategory: item.subcategory || '',
-      specifications: item.specifications || {},
-      stock: item.stock_quantity || 0,
       sku: item.sku,
-      ean: item.ean,
-      has_variants: item.has_variants || false,
-      variant_type: item.variant_type,
-      base_name: item.base_name,
-      base_sku: item.base_sku,
-      product_variants: item.product_variants?.map((v: any) => ({
-        id: v.id,
-        product_id: v.product_id,
-        color: v.color,
-        size: v.size,
-        capacity: v.capacity,
-        stock: v.stock,
-        ean: v.ean,
-        supplier_reference: v.supplier_reference,
-        images: v.images || [],
-        is_default: v.is_default
-      })) || [],
-      rating: {
-        average: 4.5,
-        count: 89
-      },
-      das: item.das,
-      tete: item.tete,
-      corps: item.corps,
-      membre: item.membre,
-      tax_d3e: item.tax_d3e || 0,
-      tva: item.tva || 8.5,
+      name: item.name,
+      url_slug: item.url_slug,
+      brand_name: item.brand?.name || '',
+      category_name: item.category?.name || '',
+      subcategory_name: item.subcategory || undefined,
+      description: item.description || undefined,
+      short_description: item.short_description || undefined,
+      price: typeof item.price === 'string' ? parseFloat(item.price) : item.price,
+      original_price: item.original_price || undefined,
+      discount_percentage: item.discount_percentage || undefined,
       status: item.status,
-      created_at: item.created_at,
-      updated_at: item.updated_at
+      warranty: item.warranty || undefined,
+      delivery_time: item.delivery_time || undefined,
+      repairability_index: item.repairability_index || undefined,
+      das_head: item.das_head || undefined,
+      das_body: item.das_body || undefined,
+      average_rating: item.average_rating || undefined,
+      total_reviews: item.total_reviews || undefined,
+      variants: item.product_variants || undefined,
+      images: item.images || undefined,
+      specifications: item.specifications || undefined,
+      highlights: item.highlights || undefined,
+      badges: item.badges || undefined,
+      videos: item.videos || undefined,
+      reviews: []
     };
-    return supabaseProductToLegacy(product as ProductFullView);
+    return supabaseProductToLegacy(product);
   });
 }
 
@@ -331,7 +281,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
   }
 
   // Produits similaires de la même marque
-  const relatedProducts = await getRelatedProducts(product.brand_id || product.brand, product.id);
+  const relatedProducts = await getRelatedProducts(product.brand, product.id);
 
   return (
     <div className="min-h-screen">

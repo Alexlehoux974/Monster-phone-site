@@ -69,10 +69,10 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   const hasDiscount = product.discount && product.discount > 0;
   const savings = hasDiscount ? originalPrice - currentPrice : 0;
 
-  // Stock de la variante sélectionnée ou stock du produit principal
-  const currentStock = product.hasVariants 
-    ? (selectedVariant?.stock || 0) 
-    : (product.stock || 0);
+  // Stock de la variante sélectionnée ou stock total des variantes
+  const currentStock = product.variants && product.variants.length > 0
+    ? (selectedVariant?.stock || 0)
+    : (product.variants?.reduce((sum, v) => sum + (v.stock || 0), 0) || 0);
   const isInStock = currentStock > 0;
   const isLowStock = currentStock > 0 && currentStock <= 5;
   const isOutOfStock = currentStock === 0;
@@ -588,13 +588,13 @@ export default function ProductDetail({ product }: ProductDetailProps) {
               )}
 
               {/* Valeurs DAS (Débit d'Absorption Spécifique) */}
-              {(product.dasHead || product.dasBody || product.dasLimb) && (
+              {(product.dasHead || product.dasBody) && (
                 <div className="bg-blue-50 rounded-xl p-6 mt-6 border border-blue-200">
                   <div className="flex items-center gap-2 mb-4">
                     <Phone className="h-6 w-6 text-blue-600" />
                     <span className="font-bold text-gray-900">Débit d'absorption spécifique (DAS)</span>
                   </div>
-                  <div className="grid grid-cols-3 gap-4">
+                  <div className="grid grid-cols-2 gap-4">
                     {product.dasHead && (
                       <div className="bg-white rounded-lg p-3 text-center">
                         <p className="text-sm text-gray-600 mb-1">Tête</p>
@@ -605,12 +605,6 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                       <div className="bg-white rounded-lg p-3 text-center">
                         <p className="text-sm text-gray-600 mb-1">Corps</p>
                         <p className="text-lg font-bold text-blue-700">{product.dasBody} W/kg</p>
-                      </div>
-                    )}
-                    {product.dasLimb && (
-                      <div className="bg-white rounded-lg p-3 text-center">
-                        <p className="text-sm text-gray-600 mb-1">Membres</p>
-                        <p className="text-lg font-bold text-blue-700">{product.dasLimb} W/kg</p>
                       </div>
                     )}
                   </div>

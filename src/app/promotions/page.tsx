@@ -8,7 +8,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import { cn, formatPrice } from '@/lib/utils';
 import { 
   Flame, 
   Clock, 
@@ -237,10 +237,9 @@ export default function PromotionsPage() {
     filtered.sort((a, b) => {
       switch (sortBy) {
         case 'discount':
-          return (b.promotion?.discount || 0) - (a.promotion?.discount || 0);
+          return (b.discount || 0) - (a.discount || 0);
         case 'price':
-          return parseFloat(a.promotion?.promoPrice?.replace('€', '') || '0') - 
-                 parseFloat(b.promotion?.promoPrice?.replace('€', '') || '0');
+          return a.price - b.price;
         case 'name':
           return a.name.localeCompare(b.name);
         default:
@@ -460,7 +459,7 @@ export default function PromotionsPage() {
                   <div className="absolute top-3 left-3 z-10">
                     <Badge className="bg-red-600 text-white px-2 py-1 text-xs font-bold">
                       <TrendingDown className="w-3 h-3 mr-1" />
-                      -{product.promotion?.discount}%
+                      -{product.discount}%
                     </Badge>
                   </div>
 
@@ -508,11 +507,13 @@ export default function PromotionsPage() {
                     {/* Prix */}
                     <div className="flex items-center gap-2 mb-3">
                       <span className="text-lg font-bold text-red-600">
-                        {product.promotion?.promoPrice}
+                        {formatPrice(product.price)}
                       </span>
-                      <span className="text-sm text-gray-700 line-through">
-                        {product.promotion?.originalPrice}
-                      </span>
+                      {product.originalPrice && (
+                        <span className="text-sm text-gray-700 line-through">
+                          {formatPrice(product.originalPrice)}
+                        </span>
+                      )}
                     </div>
 
                     {/* Description courte */}

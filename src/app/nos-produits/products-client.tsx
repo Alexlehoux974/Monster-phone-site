@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -14,6 +14,7 @@ import { useCart } from '@/contexts/CartContext';
 import { formatPrice } from '@/lib/utils';
 import type { Product } from '@/data/products';
 import type { DatabaseProduct, DatabaseBrand, DatabaseCategory } from '@/lib/supabase/client';
+import { supabaseProductToLegacy } from '@/lib/supabase/adapters';
 
 interface ProductsClientProps {
   initialProducts: DatabaseProduct[];
@@ -21,41 +22,41 @@ interface ProductsClientProps {
   brands: DatabaseBrand[];
 }
 
-export default function ProductsClient({ 
-  initialProducts, 
-  categories, 
-  brands 
+function ProductsClientContent({
+  initialProducts,
+  categories,
+  brands
 }: ProductsClientProps) {
   const searchParams = useSearchParams();
   const { addToCart } = useCart();
   
   // Transformer les DatabaseProduct en Product pour FilterPanel
   const legacyProducts: Product[] = useMemo(() => {
-    return initialProducts.map(p => ({
-      id: p.id,
-      sku: p.sku,
-      name: p.name,
-      urlSlug: p.url_slug,
-      price: p.price,
-      originalPrice: p.original_price || undefined,
-      category: categories.find(c => c.id === p.category_id)?.name || 'Autres',
-      brand: brands.find(b => b.id === p.brand_id)?.name || 'Autres',
-      images: p.images || [],
-      rating: p.average_rating ? {
-        average: p.average_rating,
-        count: p.total_reviews || 0,
-        distribution: { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 }
-      } : undefined,
-      inStock: (p.stock_quantity ?? 0) > 0
-    } as Product));
+    return initialProducts.map(p => {
+      // Créer un ProductFullView partiel pour l'adaptateur
+      const fullViewProduct = {
+        ...p,
+        brand_name: brands.find(b => b.id === p.brand_id)?.name || '',
+        brand_slug: brands.find(b => b.id === p.brand_id)?.slug || '',
+        category_name: categories.find(c => c.id === p.category_id)?.name || '',
+        category_slug: categories.find(c => c.id === p.category_id)?.slug || '',
+        product_variants: [],
+        reviews: [],
+        rating: p.average_rating ? {
+          average: p.average_rating,
+          count: p.total_reviews || 0
+        } : undefined
+      };
+      return supabaseProductToLegacy(fullViewProduct as any);
+    });
   }, [initialProducts, categories, brands]);
   
   // State management
   const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-  
-  // Filtres
+
+  // Filtres - utiliser les noms depuis les paramètres d'URL
   const [filters, setFilters] = useState<FilterState>({
     priceRange: [0, 2000],
     hasPromo: false,
@@ -107,13 +108,15 @@ export default function ProductsClient({
       const inStock = product.stock_quantity && product.stock_quantity > 0;
       const matchesStock = !filters.inStock || inStock;
       
-      // Marques
-      const matchesBrand = filters.brands.length === 0 || 
-                          filters.brands.includes(product.brand_id);
-      
-      // Catégories
-      const matchesCategory = filters.categories.length === 0 || 
-                             filters.categories.includes(product.category_id);
+      // Marques - comparer par nom
+      const productBrand = brands.find(b => b.id === product.brand_id)?.name;
+      const matchesBrand = filters.brands.length === 0 ||
+                          (productBrand && filters.brands.includes(productBrand));
+
+      // Catégories - comparer par nom
+      const productCategory = categories.find(c => c.id === product.category_id)?.name;
+      const matchesCategory = filters.categories.length === 0 ||
+                             (productCategory && filters.categories.includes(productCategory));
       
       return matchesSearch && matchesPrice && matchesPromo && 
              matchesRating && matchesStock && matchesBrand && matchesCategory;
@@ -137,16 +140,14 @@ export default function ProductsClient({
       case 'name-desc':
         sorted.sort((a, b) => b.name.localeCompare(a.name));
         break;
-      case 'rating':
+      case 'rating-desc':
         sorted.sort((a, b) => (b.average_rating || 0) - (a.average_rating || 0));
         break;
       case 'newest':
-        sorted.sort((a, b) => 
-          new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-        );
-        break;
+      case 'bestseller':
+      case 'relevance':
       default:
-        // 'relevance' - keep original order
+        // Keep original order
         break;
     }
     
@@ -164,15 +165,22 @@ export default function ProductsClient({
 
   // Ajouter au panier
   const handleAddToCart = useCallback((product: DatabaseProduct) => {
-    addToCart({
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      quantity: 1,
-      image: '/images/placeholder-product.jpg', // We'll need to handle images
-      urlSlug: product.url_slug
-    });
-  }, [addToCart]);
+    // Créer un ProductFullView pour le panier
+    const fullViewProduct = {
+      ...product,
+      brand_name: brands.find(b => b.id === product.brand_id)?.name || '',
+      brand_slug: brands.find(b => b.id === product.brand_id)?.slug || '',
+      category_name: categories.find(c => c.id === product.category_id)?.name || '',
+      category_slug: categories.find(c => c.id === product.category_id)?.slug || '',
+      product_variants: [],
+      reviews: [],
+      rating: product.average_rating ? {
+        average: product.average_rating,
+        count: product.total_reviews || 0
+      } : undefined
+    };
+    addToCart(fullViewProduct as any);
+  }, [addToCart, brands, categories]);
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -248,11 +256,10 @@ export default function ProductsClient({
                   <X className="w-6 h-6" />
                 </button>
               </div>
-              <FilterPanel 
-                filters={filters}
+              <FilterPanel
+                products={legacyProducts}
                 onFiltersChange={handleFiltersChange}
-                availableBrands={brands.map(b => ({ value: b.id, label: b.name }))}
-                availableCategories={categories.map(c => ({ value: c.id, label: c.name }))}
+                initialFilters={filters}
               />
             </div>
           </div>
@@ -377,5 +384,20 @@ export default function ProductsClient({
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ProductsClient(props: ProductsClientProps) {
+  return (
+    <Suspense fallback={
+      <div className="container mx-auto px-4 py-8">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-monster-green mx-auto mb-4"></div>
+          <p className="text-gray-600">Chargement des produits...</p>
+        </div>
+      </div>
+    }>
+      <ProductsClientContent {...props} />
+    </Suspense>
   );
 }

@@ -59,8 +59,8 @@ export function CartProvider({ children, initialItems }: { children: ReactNode; 
     
     // Vérifier le stock disponible
     let availableStock = 0;
-    
-    if (productToAdd.hasVariants && variant) {
+
+    if (productToAdd.variants && productToAdd.variants.length > 0 && variant) {
       // Si le produit a des variants, vérifier le stock du variant spécifique
       const selectedVariant = productToAdd.variants?.find(v => v.color === variant);
       if (!selectedVariant) {
@@ -69,8 +69,8 @@ export function CartProvider({ children, initialItems }: { children: ReactNode; 
       }
       availableStock = selectedVariant.stock || 0;
     } else {
-      // Sinon, utiliser le stock du produit principal
-      availableStock = productToAdd.stock || 0;
+      // Sinon, utiliser le stock total des variantes
+      availableStock = productToAdd.variants?.reduce((sum, v) => sum + (v.stock || 0), 0) || 0;
     }
     
     // Vérifier si le stock est suffisant
@@ -130,12 +130,12 @@ export function CartProvider({ children, initialItems }: { children: ReactNode; 
             (variant ? item.variant === variant : !item.variant)) {
           // Vérifier le stock disponible
           let availableStock = 0;
-          
-          if (item.product.hasVariants && item.variant) {
+
+          if (item.product.variants && item.product.variants.length > 0 && item.variant) {
             const selectedVariant = item.product.variants?.find(v => v.color === item.variant);
             availableStock = selectedVariant?.stock || 0;
           } else {
-            availableStock = item.product.stock || 0;
+            availableStock = item.product.variants?.reduce((sum, v) => sum + (v.stock || 0), 0) || 0;
           }
           
           // Limiter la quantité au stock disponible

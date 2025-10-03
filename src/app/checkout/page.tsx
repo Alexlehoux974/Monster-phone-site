@@ -8,13 +8,15 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ProductSuggestions from '@/components/ProductSuggestions';
 import { useProductSuggestions } from '@/hooks/useProductSuggestions';
+import { useProducts } from '@/lib/supabase/hooks';
+import { supabaseProductToLegacy } from '@/lib/supabase/adapters';
 import Image from 'next/image';
-import { 
-  CreditCard, 
-  Truck, 
-  Shield, 
-  Package, 
-  Check, 
+import {
+  CreditCard,
+  Truck,
+  Shield,
+  Package,
+  Check,
   ChevronRight,
   MapPin,
   Phone,
@@ -30,9 +32,13 @@ export default function CheckoutPage() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [orderComplete, setOrderComplete] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
-  
+
+  // Récupérer tous les produits actifs depuis Supabase
+  const { products: supabaseProducts } = useProducts();
+  const availableProducts = supabaseProducts.map(p => supabaseProductToLegacy(p));
+
   // Suggestions de produits basées sur le panier
-  const suggestions = useProductSuggestions(items, 4);
+  const suggestions = useProductSuggestions(items, availableProducts, 4);
 
   // État du formulaire
   const [formData, setFormData] = useState({

@@ -544,7 +544,7 @@ async function migrateAllData() {
       const promoCollection = collectionsData.find(c => c.slug === 'promotions');
       if (promoCollection) {
         const promoProducts = productsData
-          .filter(p => p.discount && p.discount > 0)
+          .filter(p => p.discount_percentage && p.discount_percentage > 0)
           .slice(0, 10);
         
         promoProducts.forEach((product, index) => {

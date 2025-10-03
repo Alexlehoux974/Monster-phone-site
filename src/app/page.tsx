@@ -2,12 +2,14 @@ import Header from '@/components/Header';
 import MonsterPhoneHero from '@/components/MonsterPhoneHero';
 import SmartphonePackBanner from '@/components/SmartphonePackBanner';
 import TrustSection from '@/components/TrustSection';
-import FeaturedProducts from '@/components/FeaturedProducts';
+import FeaturedProductsSupabase from '@/components/FeaturedProductsSupabase';
 import FeaturesSection from '@/components/FeaturesSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import Footer from '@/components/Footer';
 import SupabaseMenu from '@/components/SupabaseMenu';
 import type { Metadata } from 'next';
+import { getBestSellers } from '@/lib/supabase/api';
+import { supabaseProductToLegacy } from '@/lib/supabase/adapters';
 
 export const metadata: Metadata = {
   title: 'Monster Phone Boutique | Accessoires Gaming à La Réunion',
@@ -51,14 +53,20 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Home() {
+export default async function Home() {
+  // Récupérer les meilleures ventes depuis Supabase (6 produits)
+  const supabaseProducts = await getBestSellers(6);
+
+  // Convertir les produits Supabase vers le format legacy pour ProductCard
+  const featuredProducts = supabaseProducts.map(supabaseProductToLegacy);
+
   return (
     <div className="min-h-screen overflow-x-hidden">
       <Header />
       <div className="pt-[110px]">
         <MonsterPhoneHero />
         <SmartphonePackBanner />
-        <FeaturedProducts />
+        <FeaturedProductsSupabase products={featuredProducts} />
         <TrustSection />
         <FeaturesSection />
         <TestimonialsSection />

@@ -1,8 +1,12 @@
 import { useMemo } from 'react';
-import { allProducts } from '@/data/products';
+import { Product } from '@/data/products';
 import { CartItem } from '@/contexts/CartContext';
 
-export function useProductSuggestions(cartItems: CartItem[], limit: number = 4) {
+export function useProductSuggestions(
+  cartItems: CartItem[],
+  availableProducts: Product[],
+  limit: number = 4
+) {
   const suggestions = useMemo(() => {
     // Extraire les catégories et marques des produits dans le panier
     const cartCategories = new Set(cartItems.map(item => item.product.category));
@@ -10,7 +14,7 @@ export function useProductSuggestions(cartItems: CartItem[], limit: number = 4) 
     const cartProductIds = new Set(cartItems.map(item => item.product.id));
 
     // Calculer un score pour chaque produit
-    const scoredProducts = allProducts
+    const scoredProducts = availableProducts
       .filter(product => !cartProductIds.has(product.id)) // Exclure les produits déjà dans le panier
       .map(product => {
         let score = 0;
@@ -43,18 +47,18 @@ export function useProductSuggestions(cartItems: CartItem[], limit: number = 4) 
     // Si pas assez de suggestions, compléter avec des produits populaires
     if (scoredProducts.length < limit) {
       const remaining = limit - scoredProducts.length;
-      const popular = allProducts
-        .filter(product => 
-          !cartProductIds.has(product.id) && 
+      const popular = availableProducts
+        .filter(product =>
+          !cartProductIds.has(product.id) &&
           !scoredProducts.some(p => p.id === product.id)
         )
         .slice(0, remaining);
-      
+
       return [...scoredProducts, ...popular];
     }
 
     return scoredProducts;
-  }, [cartItems, limit]);
+  }, [cartItems, availableProducts, limit]);
 
   return suggestions;
 }

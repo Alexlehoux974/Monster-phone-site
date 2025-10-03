@@ -280,8 +280,12 @@ export async function searchProducts(query: string) {
 export async function getCategories() {
   const { data, error } = await supabase
     .from('categories')
-    .select('*')
-    .order('name', { ascending: true });
+    .select(`
+      *,
+      parent:parent_id(id, name, slug),
+      subcategories:categories!parent_id(id, name, slug)
+    `)
+    .order('display_order', { ascending: true });
 
   if (error) {
     console.error('Error fetching categories:', error);

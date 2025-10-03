@@ -4,14 +4,14 @@ import Link from 'next/link';
 import { Product } from '@/data/products';
 import ProductCard from './ProductCard';
 
-interface FeaturedProductsProps {
+interface FeaturedProductsSupabaseProps {
   products: Product[];
   title?: string;
 }
 
-export default function FeaturedProducts({ products, title }: FeaturedProductsProps) {
-  // Utiliser uniquement les produits fournis (provenant de Supabase)
-  const featuredProducts = products;
+export default function FeaturedProductsSupabase({ products, title }: FeaturedProductsSupabaseProps) {
+  // Limiter à 6 produits maximum
+  const featuredProducts = products.slice(0, 6);
 
   return (
     <section className="py-16 bg-gray-50">
@@ -21,7 +21,7 @@ export default function FeaturedProducts({ products, title }: FeaturedProductsPr
             {title || 'Nos Produits Phares'}
           </h2>
           <p className="text-xl text-gray-800 max-w-2xl mx-auto">
-            Découvrez notre sélection d&apos;accessoires et smartphones gaming, 
+            Découvrez notre sélection d&apos;accessoires et smartphones gaming,
             choisis pour leur innovation et leur qualité exceptionnelle.
           </p>
         </div>
@@ -38,7 +38,7 @@ export default function FeaturedProducts({ products, title }: FeaturedProductsPr
 
         {/* CTA vers catalogue complet */}
         <div className="text-center mt-12">
-          <Link 
+          <Link
             href="/nos-produits"
             className="inline-flex items-center bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105"
           >

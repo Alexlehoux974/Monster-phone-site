@@ -10,7 +10,7 @@ import { useCart } from '@/contexts/CartContext';
 import { useRouter } from 'next/navigation';
 import debounce from 'lodash.debounce';
 import ImageWithFallback from '@/components/ImageWithFallback';
-import { useSupabaseProducts } from '@/hooks/useSupabaseData';
+import { useSupabaseProducts, useSupabaseCategories } from '@/hooks/useSupabaseData';
 import { supabaseProductToLegacy, generateMenuStructureFromProducts } from '@/lib/supabase/adapters';
 
 // Composant pour la barre d'urgence promotionnelle
@@ -632,14 +632,18 @@ const DropdownMenu = ({
 };
 
 // Composant pour le menu mobile avec navigation complète
-const MobileMenu = ({ 
-  onClose, 
-  searchQuery, 
-  setSearchQuery 
-}: { 
+const MobileMenu = ({
+  onClose,
+  searchQuery,
+  setSearchQuery,
+  menuStructure,
+  allProducts
+}: {
   onClose: () => void;
   searchQuery: string;
   setSearchQuery: (query: string) => void;
+  menuStructure: CategoryStructure[];
+  allProducts: Product[];
 }) => {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [activeBrand, setActiveBrand] = useState<string | null>(null);
@@ -651,6 +655,20 @@ const MobileMenu = ({
       document.body.style.overflow = 'unset';
     };
   }, []);
+
+  // Helper pour obtenir les produits d'une catégorie
+  const getProductsByCategory = (categoryName: string): Product[] => {
+    return allProducts.filter(p =>
+      p.category.toLowerCase() === categoryName.toLowerCase()
+    );
+  };
+
+  // Helper pour obtenir les produits d'une marque
+  const getProductsByBrand = (brandName: string): Product[] => {
+    return allProducts.filter(p =>
+      p.brand.toLowerCase() === brandName.toLowerCase()
+    );
+  };
 
   // Utiliser menuStructure directement depuis products.ts
   const getCategoryIcon = (categoryName: string) => {
@@ -920,20 +938,22 @@ export default function Header() {
   const { items, removeFromCart, updateQuantity, getCartTotal, getItemCount } = useCart();
   // const { isAuthenticated } = useAuth();
   const { products: supabaseProducts } = useSupabaseProducts({ limit: 1000 });
+  const { categories: supabaseCategories } = useSupabaseCategories();
   
   // Charger tous les produits depuis Supabase et générer la structure du menu dynamiquement
   useEffect(() => {
-    if (supabaseProducts && supabaseProducts.length > 0) {
+    if (supabaseProducts && supabaseProducts.length > 0 && supabaseCategories && supabaseCategories.length > 0) {
       // Convertir les produits Supabase en format legacy
       const legacyProducts = supabaseProducts.map(supabaseProductToLegacy);
-      
+
       console.log(`✅ Total produits Supabase: ${legacyProducts.length}`);
-      
+      console.log(`✅ Total catégories Supabase: ${supabaseCategories.length}`);
+
       // Utiliser TOUS les produits Supabase sans filtrage
       setAllProducts(legacyProducts);
-      
-      // Générer dynamiquement la structure du menu depuis TOUS les produits Supabase
-      const dynamicMenuStructure = generateMenuStructureFromProducts(legacyProducts);
+
+      // Générer dynamiquement la structure du menu depuis TOUS les produits Supabase avec les catégories
+      const dynamicMenuStructure = generateMenuStructureFromProducts(legacyProducts, supabaseCategories);
       
       // Log détaillé de la structure du menu
       console.log('📋 Structure du menu générée:');
@@ -943,9 +963,9 @@ export default function Header() {
           const normalizedProdCat = p.category.toLowerCase();
           return normalizedProdCat === normalizedCat;
         }).length;
-        console.log(`  📂 ${cat.name}: ${totalProducts} produits, ${cat.subcategories.length} sous-catégories`);
-        cat.subcategories.forEach(subcat => {
-          console.log(`    └─ ${subcat.name}: ${subcat.brands.length} marques`);
+        console.log(`  📂 ${cat.name}: ${totalProducts} produits, ${cat.subcategories?.length || 0} sous-catégories`);
+        cat.subcategories?.forEach(subcat => {
+          console.log(`    └─ ${subcat.name}: ${subcat.brands?.length || 0} marques`);
         });
       });
       setMenuStructure(dynamicMenuStructure);
@@ -956,7 +976,7 @@ export default function Header() {
         products: legacyProducts.filter(p => p.category.toLowerCase() === cat.slug.toLowerCase()).length
       })));
     }
-  }, [supabaseProducts]);
+  }, [supabaseProducts, supabaseCategories]);
   
   // Fonctions utilitaires pour obtenir les produits
   const getProductsByCategory = (category: string) => {
@@ -1454,10 +1474,12 @@ export default function Header() {
 
           {/* Menu mobile */}
           {isMenuOpen && (
-            <MobileMenu 
+            <MobileMenu
               onClose={() => setIsMenuOpen(false)}
               searchQuery={searchQuery}
               setSearchQuery={setSearchQuery}
+              menuStructure={menuStructure}
+              allProducts={allProducts}
             />
           )}
         </div>

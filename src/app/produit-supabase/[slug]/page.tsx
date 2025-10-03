@@ -158,9 +158,9 @@ export default function ProduitSupabasePage() {
     
     // Préparer les images
     const allImages = [];
-    if (data.product_images?.length > 0) {
+    if (data.product_images?.length) {
       allImages.push(...data.product_images.map(img => img.url));
-    } else if (data.images?.length > 0) {
+    } else if (data.images && data.images.length > 0) {
       allImages.push(...data.images);
     } else if (data.image_url) {
       allImages.push(data.image_url);

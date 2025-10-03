@@ -3,7 +3,7 @@
  * Facilite la migration progressive des composants
  */
 
-import type { ProductFullView } from './client';
+import type { ProductFullView, DatabaseCategory } from './client';
 import type { Product, ProductVariant as LegacyVariant, Review, ProductSpecification, CategoryStructure } from '@/data/products';
 
 /**
@@ -14,19 +14,15 @@ export function supabaseProductToLegacy(product: ProductFullView): Product {
   if (product.name?.toLowerCase().includes('monster')) {
     console.log(`🔍 Produit Monster détecté: ${product.name}`);
     console.log(`   - brand_name dans ProductFullView: ${product.brand_name}`);
-    console.log(`   - brand_id: ${product.brand_id}`);
   }
   
-  // Construire les variants legacy depuis product_variants
-  const variants: LegacyVariant[] = product.product_variants?.map(v => ({
-    id: v.id,
-    color: v.color,
-    colorHex: v.color_code,
-    price: product.price, // Les variants n'ont pas de prix séparé pour l'instant
-    originalPrice: undefined,
-    images: v.images || [],
+  // Construire les variants legacy depuis variants
+  const variants: LegacyVariant[] = product.variants?.map(v => ({
+    color: v.color || '',
+    colorCode: v.color_code || '',
+    ean: v.ean || '',
     stock: v.stock || 0,
-    sku: v.ean, // Utiliser l'EAN comme SKU pour les variants
+    images: v.images || [],
     is_default: v.is_default
   })) || [];
 
@@ -95,14 +91,16 @@ export function supabaseProductToLegacy(product: ProductFullView): Product {
   
   return {
     id: product.id,
+    airtableId: product.id, // Utiliser l'ID Supabase comme airtableId pour compatibilité
+    sku: product.sku,
     name: product.name,
     brand: brandName || 'Sans marque',
-    category: mapCategoryToLegacy(product.category_slug || ''),
-    subcategory: mapSubcategoryToLegacy(product.subcategory_slug),
+    category: mapCategoryToLegacy(product.category_name || ''),
+    subcategory: mapSubcategoryToLegacy(product.subcategory_name),
     price: product.price,
     originalPrice: product.original_price,
     discount: product.discount_percentage,
-    promo: product.is_promo || false,
+    promo: product.discount_percentage ? `${product.discount_percentage}% de réduction` : undefined,
     description: product.description || '',
     shortDescription: product.short_description || product.description?.substring(0, 150) || '',
     urlSlug: product.url_slug,
@@ -111,8 +109,6 @@ export function supabaseProductToLegacy(product: ProductFullView): Product {
     highlights: product.highlights || generateHighlights(product),
     badges: product.badges || [],
     variants,
-    hasVariants: product.has_variants || (variants.length > 0),
-    stock: product.stock || product.stock_quantity || 0,
     rating,
     reviews,
     warranty: product.warranty || '2 ans constructeur',
@@ -120,10 +116,10 @@ export function supabaseProductToLegacy(product: ProductFullView): Product {
     repairabilityIndex: product.repairability_index,
     dasHead: product.das_head,
     dasBody: product.das_body,
-    dasLimb: product.das_limb,
-    keywords: product.keywords || [],
-    metaTitle: product.meta_title,
-    metaDescription: product.meta_description
+    keywords: [],
+    metaTitle: `${product.name} | Monster Phone 974`,
+    metaDescription: product.short_description || product.description?.substring(0, 160) || `${product.name} disponible chez Monster Phone La Réunion`,
+    status: (product.status as 'active' | 'draft' | 'out-of-stock') || 'active'
   };
 }
 
@@ -242,12 +238,15 @@ function generateHighlights(product: ProductFullView): string[] {
     highlights.push(`Livraison ${product.delivery_time}`);
   }
   
-  if (product.is_promo) {
+  if (product.discount_percentage) {
     highlights.push(`Promotion -${product.discount_percentage}%`);
   }
   
-  if (product.stock && product.stock > 0) {
-    highlights.push('En stock');
+  if (product.variants && product.variants.length > 0) {
+    const totalStock = product.variants.reduce((sum: number, v: any) => sum + (v.stock || 0), 0);
+    if (totalStock > 0) {
+      highlights.push('En stock');
+    }
   }
   
   return highlights.slice(0, 4);
@@ -256,15 +255,15 @@ function generateHighlights(product: ProductFullView): string[] {
 /**
  * Calculer la distribution des ratings
  */
-function calculateRatingDistribution(reviews: Review[]): Record<number, number> {
-  const distribution: Record<number, number> = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
-  
+function calculateRatingDistribution(reviews: Review[]): { 5: number; 4: number; 3: number; 2: number; 1: number } {
+  const distribution = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
+
   reviews.forEach(review => {
     if (review.rating >= 1 && review.rating <= 5) {
-      distribution[review.rating]++;
+      distribution[review.rating as 1 | 2 | 3 | 4 | 5]++;
     }
   });
-  
+
   // Si pas assez d'avis, générer une distribution réaliste
   if (reviews.length < 10) {
     return {
@@ -275,7 +274,7 @@ function calculateRatingDistribution(reviews: Review[]): Record<number, number> 
       1: Math.floor(reviews.length * 0.02)
     };
   }
-  
+
   return distribution;
 }
 
@@ -391,41 +390,24 @@ export function getProductsBySubcategory(products: Product[], subcategory: strin
 
 /**
  * Génère dynamiquement la structure du menu depuis les produits Supabase
- * Remplace le menuStructure statique par une structure basée sur les données réelles
+ * Utilise la structure parent-enfant des catégories de la base de données
  */
-export function generateMenuStructureFromProducts(products: Product[]): CategoryStructure[] {
+export function generateMenuStructureFromProducts(
+  products: Product[],
+  categories?: DatabaseCategory[]
+): CategoryStructure[] {
   // Créer une Map pour organiser les produits par catégorie
   const categoryProductsMap = new Map<string, Product[]>();
+  const categoryInfo = new Map<string, DatabaseCategory>();
 
-  // Mapper les catégories normalisées - SEULEMENT 6 CATÉGORIES AUTORISÉES
-  const categoryNormalizer: Record<string, string> = {
-    'smartphones': 'smartphones',
-    'smartphone': 'smartphones',
-    'tablettes': 'tablettes',
-    'tablette': 'tablettes',
-    'audio': 'audio',
-    'chargement & audio': 'audio',
-    'montres': 'montres',
-    'montres connectées': 'montres',
-    'montre': 'montres',
-    'led': 'led',
-    'créativité & led': 'led',
-    'eclairage led': 'led',
-    'éclairage led': 'led',
-    'accessoires': 'accessoires',
-    'accessoire': 'accessoires',
-    'autres': 'accessoires',
-    // Mapper toutes les autres catégories vers accessoires
-    'câbles': 'accessoires',
-    'appareils photo': 'accessoires',
-    'appareil photo': 'accessoires',
-    'batteries': 'accessoires',
-    'chargeurs': 'accessoires',
-    'supports': 'accessoires',
-    'protection': 'accessoires'
-  };
+  // Si on a les catégories, les utiliser pour créer la hiérarchie
+  if (categories && categories.length > 0) {
+    categories.forEach(cat => {
+      categoryInfo.set(cat.id, cat);
+    });
+  }
 
-  // Icônes par catégorie
+  // Icônes par slug de catégorie
   const categoryIcons: Record<string, string> = {
     'smartphones': '📱',
     'tablettes': '📱',
@@ -435,44 +417,28 @@ export function generateMenuStructureFromProducts(products: Product[]): Category
     'accessoires': '🔧'
   };
 
-  // Noms d'affichage par catégorie
-  const categoryDisplayNames: Record<string, string> = {
-    'smartphones': 'Smartphones',
-    'tablettes': 'Tablettes',
-    'audio': 'Audio',
-    'montres': 'Montres',
-    'led': 'LED', 
-    'accessoires': 'Accessoires'
-  };
-
-  // Parcourir tous les produits et les organiser par catégorie normalisée
+  // Organiser les produits par catégorie principale
   products.forEach(product => {
     if (!product.category) return;
 
-    // Normaliser la catégorie - mapper vers accessoires si non reconnu
-    let normalizedCategory = categoryNormalizer[product.category.toLowerCase()];
-    
-    // Si la catégorie n'est pas reconnue, la mapper vers accessoires
-    if (!normalizedCategory) {
-      console.log(`Catégorie non reconnue "${product.category}" mappée vers accessoires`);
-      normalizedCategory = 'accessoires';
+    // Utiliser le nom de la catégorie tel quel
+    const categoryKey = product.category;
+
+    if (!categoryProductsMap.has(categoryKey)) {
+      categoryProductsMap.set(categoryKey, []);
     }
-    
-    if (!categoryProductsMap.has(normalizedCategory)) {
-      categoryProductsMap.set(normalizedCategory, []);
-    }
-    
-    categoryProductsMap.get(normalizedCategory)!.push(product);
+
+    categoryProductsMap.get(categoryKey)!.push(product);
   });
 
   // Construire la structure du menu
   const menuStructure: CategoryStructure[] = [];
 
-  // Ordre préféré des catégories - ORDRE EXACT DEMANDÉ PAR LE CLIENT
-  const categoryOrder = ['smartphones', 'tablettes', 'montres', 'audio', 'led', 'accessoires'];
+  // Ordre préféré des catégories par nom
+  const categoryOrder = ['Smartphones', 'Tablettes', 'Montres', 'Audio', 'LED', 'Accessoires'];
 
-  categoryOrder.forEach(categoryKey => {
-    const products = categoryProductsMap.get(categoryKey);
+  categoryOrder.forEach(categoryName => {
+    const products = categoryProductsMap.get(categoryName);
     if (!products || products.length === 0) return;
 
     // Créer une structure par sous-catégories et marques
@@ -488,15 +454,15 @@ export function generateMenuStructureFromProducts(products: Product[]): Category
       // Organiser par sous-catégorie uniquement si elle existe
       // Exclure "Premium" pour les tablettes
       // Exclure toutes les sous-catégories pour les smartphones
-      const excludeSubcategory = 
-        (categoryKey === 'tablettes' && product.subcategory?.toLowerCase() === 'premium') ||
-        (categoryKey === 'smartphones' && product.subcategory);
+      const excludeSubcategory =
+        (categoryName === 'Tablettes' && product.subcategory?.toLowerCase() === 'premium') ||
+        (categoryName === 'Smartphones' && product.subcategory);
         
       if (product.subcategory && !excludeSubcategory) {
         let displaySubcategory = product.subcategory;
         
         // Utiliser les nouvelles sous-catégories Audio
-        if (categoryKey === 'audio') {
+        if (categoryName === 'Audio') {
           const subcatLower = product.subcategory.toLowerCase();
           
           // Mapper vers les sous-catégories Audio
@@ -515,7 +481,7 @@ export function generateMenuStructureFromProducts(products: Product[]): Category
         }
         
         // Utiliser les nouvelles sous-catégories LED créées dans la base
-        else if (categoryKey === 'led' || categoryKey === 'eclairage-led') {
+        else if (categoryName === 'Éclairage LED') {
           const subcatLower = product.subcategory.toLowerCase();
           
           // Mapper vers les nouvelles sous-catégories
@@ -545,7 +511,7 @@ export function generateMenuStructureFromProducts(products: Product[]): Category
         }
         
         // Utiliser les nouvelles sous-catégories Accessoires
-        else if (categoryKey === 'accessoires') {
+        else if (categoryName === 'Accessoires') {
           const subcatLower = product.subcategory.toLowerCase();
           
           // Mapper vers les sous-catégories Accessoires
@@ -582,7 +548,7 @@ export function generateMenuStructureFromProducts(products: Product[]): Category
     const subcategories = [];
 
     // Pour LED, toujours afficher toutes les sous-catégories
-    if (categoryKey === 'led' || categoryKey === 'eclairage-led') {
+    if (categoryName === 'Éclairage LED') {
       const ledSubcategories = [
         { name: 'Barre LED', slug: 'barre-led', brands: [] as string[] },
         { name: 'Néon', slug: 'neon', brands: [] as string[] },
@@ -602,7 +568,7 @@ export function generateMenuStructureFromProducts(products: Product[]): Category
       subcategories.push(...ledSubcategories);
     } 
     // Pour Audio, afficher toutes les sous-catégories définies
-    else if (categoryKey === 'audio') {
+    else if (categoryName === 'Audio') {
       const audioSubcategories = [
         { name: 'Écouteurs', slug: 'ecouteurs', brands: [] as string[] },
         { name: 'Casques', slug: 'casques-audio', brands: [] as string[] },
@@ -621,7 +587,7 @@ export function generateMenuStructureFromProducts(products: Product[]): Category
       subcategories.push(...audioSubcategories.filter(s => subcategoryMap.has(s.name)));
     }
     // Pour Accessoires, afficher toutes les sous-catégories définies
-    else if (categoryKey === 'accessoires') {
+    else if (categoryName === 'Accessoires') {
       const accessoiresSubcategories = [
         { name: 'Batteries externes', slug: 'batteries-externes', brands: [] as string[] },
         { name: 'Chargeurs', slug: 'chargeurs', brands: [] as string[] },
@@ -653,7 +619,7 @@ export function generateMenuStructureFromProducts(products: Product[]): Category
 
     // Ajouter une entrée "Tous nos produits" avec toutes les marques de la catégorie
     // Sauf pour Audio, LED et Accessoires qui ont leur propre structure
-    if (brandsInCategory.size > 0 && categoryKey !== 'audio' && categoryKey !== 'led' && categoryKey !== 'eclairage-led' && categoryKey !== 'accessoires') {
+    if (brandsInCategory.size > 0 && categoryName !== 'Audio' && categoryName !== 'Éclairage LED' && categoryName !== 'Accessoires') {
       subcategories.unshift({
         name: 'Tous nos produits',
         slug: 'toutes-les-marques',
@@ -661,14 +627,17 @@ export function generateMenuStructureFromProducts(products: Product[]): Category
       });
     }
 
+    // Générer le slug à partir du nom de la catégorie
+    const categorySlug = categoryName.toLowerCase()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // Enlever les accents
+      .replace(/\s+/g, '-'); // Remplacer les espaces par des tirets
+
     // Ajouter la catégorie au menu avec son icône
-    const icon = categoryIcons[categoryKey] || '📦';
-    const displayName = categoryDisplayNames[categoryKey] || 
-                       categoryKey.charAt(0).toUpperCase() + categoryKey.slice(1);
+    const icon = categoryIcons[categorySlug] || '📦';
 
     menuStructure.push({
-      name: `${icon} ${displayName}`,
-      slug: categoryKey,
+      name: `${icon} ${categoryName}`,
+      slug: categorySlug,
       subcategories: subcategories.sort((a, b) => {
         // Mettre "Tous nos produits" en premier
         if (a.name === 'Tous nos produits') return -1;
@@ -678,7 +647,7 @@ export function generateMenuStructureFromProducts(products: Product[]): Category
     });
 
     // Log pour debug
-    console.log(`Catégorie ${categoryKey}: ${products.length} produits, ${brandsInCategory.size} marques`);
+    console.log(`Catégorie ${categoryName}: ${products.length} produits, ${brandsInCategory.size} marques`);
   });
 
   // NE PAS ajouter les catégories qui ne sont pas dans l'ordre préféré

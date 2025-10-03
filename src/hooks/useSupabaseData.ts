@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { 
-  getActiveProducts, 
-  getProductsByCategory, 
+import {
+  getActiveProducts,
+  getProductsByCategory,
   getProductsByBrand,
   getAllBrands,
   getAllCategories,
@@ -156,6 +156,32 @@ export function useSupabaseBrands() {
 }
 
 /**
+ * Hook pour récupérer toutes les catégories
+ */
+export function useSupabaseCategories() {
+  const [categories, setCategories] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchCategories() {
+      try {
+        const data = await getAllCategories();
+        setCategories(data || []);
+      } catch (error) {
+        console.error('Erreur récupération catégories:', error);
+        setCategories([]);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchCategories();
+  }, []);
+
+  return { categories, loading };
+}
+
+/**
  * Hook pour récupérer les meilleures ventes
  */
 export function useBestSellers(limit: number = 10) {
@@ -265,27 +291,26 @@ export function useProductSearch(query: string, options?: {
         let finalResults = filtered;
         
         if (options?.category) {
-          const supabaseSlug = getSupabaseSlug(options.category);
-          finalResults = finalResults.filter(p => 
-            p.category_slug === supabaseSlug
+          finalResults = finalResults.filter(p =>
+            p.category_name?.toLowerCase() === options.category?.toLowerCase()
           );
         }
-        
+
         if (options?.brand) {
-          finalResults = finalResults.filter(p => 
-            p.brand_slug === options.brand
+          finalResults = finalResults.filter(p =>
+            p.brand_name?.toLowerCase() === options.brand?.toLowerCase()
           );
         }
-        
+
         if (options?.minPrice) {
-          finalResults = finalResults.filter(p => 
-            p.price >= options.minPrice
+          finalResults = finalResults.filter(p =>
+            p.price >= (options.minPrice ?? 0)
           );
         }
-        
+
         if (options?.maxPrice) {
-          finalResults = finalResults.filter(p => 
-            p.price <= options.maxPrice
+          finalResults = finalResults.filter(p =>
+            p.price <= (options.maxPrice ?? Infinity)
           );
         }
         
@@ -336,56 +361,32 @@ export function useProductWithVariants(slug: string) {
           // Transform to ProductFullView format
           const transformedProduct: ProductFullView = {
             id: data.id,
-            name: data.name,
-            slug: data.url_slug,
-            url_slug: data.url_slug,
-            description: data.description || '',
-            short_description: data.short_description || '',
-            price: parseFloat(data.price || '0'),
-            unit_price_ttc: parseFloat(data.price || '0'),
-            unit_price_ht: parseFloat(data.unit_price_ht || '0'),
-            pvc: data.pvc,
-            discount_percentage: data.discount_percentage || 0,
-            images: data.images || [],
-            brand_id: data.brand_id,
-            brand_name: data.brand?.name || '',
-            brand_slug: data.brand?.slug || '',
-            category_id: data.category_id,
-            category_name: data.category?.name || '',
-            category_slug: data.category?.slug || '',
-            subcategory: data.subcategory || '',
-            specifications: data.specifications || {},
-            stock: data.stock_quantity || 0,
             sku: data.sku,
-            ean: data.ean,
-            has_variants: data.has_variants || false,
-            variant_type: data.variant_type,
-            base_name: data.base_name,
-            base_sku: data.base_sku,
-            product_variants: data.product_variants?.map((v: any) => ({
-              id: v.id,
-              product_id: v.product_id,
-              color: v.color,
-              size: v.size,
-              capacity: v.capacity,
-              stock: v.stock,
-              ean: v.ean,
-              supplier_reference: v.supplier_reference,
-              images: v.images || []
-            })) || [],
-            rating: {
-              average: 4.5,
-              count: 89
-            },
-            das: data.das,
-            tete: data.tete,
-            corps: data.corps,
-            membre: data.membre,
-            tax_d3e: data.tax_d3e || 0,
-            tva: data.tva || 8.5,
+            name: data.name,
+            url_slug: data.url_slug,
+            brand_name: data.brand?.name || '',
+            category_name: data.category?.name || '',
+            subcategory_name: data.subcategory,
+            description: data.description,
+            short_description: data.short_description,
+            price: parseFloat(data.price || '0'),
+            original_price: data.original_price,
+            discount_percentage: data.discount_percentage,
             status: data.status,
-            created_at: data.created_at,
-            updated_at: data.updated_at
+            warranty: data.warranty,
+            delivery_time: data.delivery_time,
+            repairability_index: data.repairability_index,
+            das_head: data.das_head,
+            das_body: data.das_body,
+            average_rating: data.average_rating,
+            total_reviews: data.total_reviews,
+            variants: data.product_variants,
+            images: data.images,
+            specifications: data.specifications,
+            highlights: data.highlights,
+            badges: data.badges,
+            videos: data.videos,
+            reviews: data.reviews
           };
           
           setProduct(transformedProduct);

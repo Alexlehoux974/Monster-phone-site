@@ -289,7 +289,19 @@ export default function Footer() {
                 <Link href="/nos-produits?category=Smartphones" className="text-gray-100 hover:text-white transition-colors">Smartphones</Link>
               </motion.li>
               <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
-                <Link href="/accessoires" className="text-gray-100 hover:text-white transition-colors">Accessoires</Link>
+                <Link href="/nos-produits?category=Tablettes" className="text-gray-100 hover:text-white transition-colors">Tablettes</Link>
+              </motion.li>
+              <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
+                <Link href="/nos-produits?category=Montres" className="text-gray-100 hover:text-white transition-colors">Montres</Link>
+              </motion.li>
+              <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
+                <Link href="/nos-produits?category=Audio" className="text-gray-100 hover:text-white transition-colors">Audio</Link>
+              </motion.li>
+              <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
+                <Link href="/nos-produits?category=LED" className="text-gray-100 hover:text-white transition-colors">LED</Link>
+              </motion.li>
+              <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
+                <Link href="/nos-produits?category=Accessoires" className="text-gray-100 hover:text-white transition-colors">Accessoires</Link>
               </motion.li>
               <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
                 <Link href="/promotions" className="text-gray-100 hover:text-white transition-colors">Promotions</Link>

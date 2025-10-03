@@ -1,246 +1,44 @@
-'use client';
+import { Metadata } from 'next';
+import ProductsClient from '@/app/nos-produits/products-client';
+import { getProducts, getBrands, getCategories } from '@/lib/supabase/client';
 
-import { useState, useMemo, useEffect } from 'react';
-import Image from 'next/image';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import Sidebar from '@/components/Sidebar';
-import { Button } from '@/components/ui/button';
-import { Filter, X } from 'lucide-react';
-import { useSupabaseProducts } from '@/hooks/useSupabaseData';
-import { supabaseProductToLegacy } from '@/lib/supabase/adapters';
-import type { Product } from '@/data/products';
+export const metadata: Metadata = {
+  title: 'Accessoires | Monster Phone Boutique',
+  description: 'Découvrez notre gamme complète d\'accessoires pour smartphones et gaming : coques, protections, câbles, chargeurs et plus encore.',
+};
 
-export default function AccessoiresPage() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedBrand, setSelectedBrand] = useState<string>('');
-  const [selectedCategory, setSelectedCategory] = useState<string>('');
-  const [selectedProduct, setSelectedProduct] = useState<string>('');
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [products, setProducts] = useState<Product[]>([]);
+export default async function AccessoiresPage() {
+  // Récupérer les catégories pour trouver l'ID de "Accessoires"
+  const categories = await getCategories();
+  const accessoiresCategory = categories.find(cat => cat.name === 'Accessoires');
 
-  // Charger tous les produits depuis Supabase
-  const { products: supabaseProducts, loading } = useSupabaseProducts({ 
-    limit: 1000,
-    sortBy: 'name',
-    sortOrder: 'asc'
-  });
+  // Récupérer tous les produits
+  const allProducts = await getProducts();
 
-  useEffect(() => {
-    if (supabaseProducts && supabaseProducts.length > 0) {
-      // Convertir et filtrer uniquement les accessoires (pas les smartphones)
-      const legacyProducts = supabaseProducts
-        .map(supabaseProductToLegacy)
-        .filter(product => product.category !== 'Smartphones');
-      setProducts(legacyProducts);
-    }
-  }, [supabaseProducts]);
+  // Filtrer uniquement les produits de la catégorie Accessoires
+  const accessoiresProducts = accessoiresCategory
+    ? allProducts.filter(product => product.category_id === accessoiresCategory.id)
+    : [];
 
-  const filteredProducts = useMemo(() => {
-    return products.filter(product => {
-      const matchesSearch = searchQuery === '' || 
-        product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.brand.toLowerCase().includes(searchQuery.toLowerCase());
-      
-      const matchesBrand = selectedBrand === '' || product.brand === selectedBrand;
-      const matchesCategory = selectedCategory === '' || product.category === selectedCategory;
-      const matchesProduct = selectedProduct === '' || product.name === selectedProduct;
-      
-      return matchesSearch && matchesBrand && matchesCategory && matchesProduct;
-    });
-  }, [products, searchQuery, selectedBrand, selectedCategory, selectedProduct]);
-
-  // Filtres rapides pour les accessoires
-  const quickFilters = [
-    { name: 'Coques', category: 'Coques & Protection', icon: '📱' },
-    { name: 'Audio', category: 'Audio', icon: '🎧' },
-    { name: 'Batteries', category: 'Batteries', icon: '🔋' },
-  ];
+  // Récupérer les marques
+  const brands = await getBrands();
 
   return (
-    <div className="min-h-screen bg-gray-50 overflow-x-hidden">
-      <Header />
-      <div className="pt-[110px] min-h-screen flex flex-col">
-        {/* Layout principal avec Grid CSS */}
-        <div className="flex-1 grid grid-cols-1 lg:grid-cols-[260px_1fr]">
-          {/* Sidebar - Desktop */}
-          <div className="hidden lg:block">
-            <div className="sticky top-[110px] h-[calc(100vh-110px)] overflow-hidden">
-              <Sidebar
-                products={products}
-                selectedCategory={selectedCategory}
-                setSelectedCategory={setSelectedCategory}
-                selectedBrand={selectedBrand}
-                setSelectedBrand={setSelectedBrand}
-                selectedProduct={selectedProduct}
-                setSelectedProduct={setSelectedProduct}
-              />
-            </div>
-          </div>
-
-          {/* Sidebar Mobile - Overlay */}
-          {sidebarOpen && (
-            <div className="lg:hidden fixed inset-0 z-50">
-              <div className="absolute inset-0 bg-black/50" onClick={() => setSidebarOpen(false)} />
-              <div className="absolute left-0 top-0 bottom-0 w-[280px] bg-white shadow-lg">
-                <div className="flex items-center justify-between p-4 border-b">
-                  <h2 className="font-semibold">Filtres</h2>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => setSidebarOpen(false)}
-                  >
-                    <X className="w-5 h-5" />
-                  </Button>
-                </div>
-                <div className="h-[calc(100vh-64px)] overflow-hidden">
-                  <Sidebar
-                    products={products}
-                    selectedCategory={selectedCategory}
-                    setSelectedCategory={setSelectedCategory}
-                    selectedBrand={selectedBrand}
-                    setSelectedBrand={setSelectedBrand}
-                    selectedProduct={selectedProduct}
-                    setSelectedProduct={setSelectedProduct}
-                  />
-                </div>
-              </div>
-            </div>
-          )}
-        
-          {/* Contenu principal */}
-          <main className="px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
-            <div className="max-w-[1600px] mx-auto">
-              {/* Header avec recherche et bouton filtres mobile */}
-              <div className="mb-6">
-                <div className="flex items-center justify-between mb-4">
-                  <h1 className="text-3xl lg:text-4xl font-bold text-gray-900">Accessoires</h1>
-                  
-                  {/* Bouton filtres mobile */}
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="lg:hidden"
-                    onClick={() => setSidebarOpen(true)}
-                  >
-                    <Filter className="w-4 h-4 mr-2" />
-                    Filtres
-                  </Button>
-                </div>
-                
-                {/* Filtres rapides */}
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {quickFilters.map((filter) => (
-                    <button
-                      key={filter.name}
-                      onClick={() => setSelectedCategory(filter.category)}
-                      className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                        selectedCategory === filter.category
-                          ? 'bg-blue-600 text-white'
-                          : 'bg-white text-gray-800 hover:bg-gray-100 border border-gray-200'
-                      }`}
-                    >
-                      {filter.icon} {filter.name}
-                    </button>
-                  ))}
-                  <button
-                    onClick={() => setSelectedCategory('')}
-                    className="px-4 py-2 rounded-full text-sm font-medium bg-gray-200 text-gray-800 hover:bg-gray-300 transition-colors"
-                  >
-                    Tous les accessoires
-                  </button>
-                </div>
-
-                <div className="relative">
-                  <input
-                    type="text"
-                    placeholder="Rechercher un accessoire..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  />
-                </div>
-                
-                {/* Résultats */}
-                <div className="mt-4 flex items-center justify-between">
-                  <p className="text-sm text-gray-600">
-                    {filteredProducts.length} accessoire{filteredProducts.length > 1 ? 's' : ''} trouvé{filteredProducts.length > 1 ? 's' : ''}
-                  </p>
-                </div>
-              </div>
-
-              {/* Grille de produits optimisée */}
-              {loading ? (
-                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 gap-4 lg:gap-5">
-                  {[...Array(12)].map((_, index) => (
-                    <div key={index} className="bg-white rounded-lg shadow-sm">
-                      <div className="aspect-square bg-gray-200 rounded-t-lg animate-pulse" />
-                      <div className="p-3 lg:p-4 space-y-2">
-                        <div className="h-4 bg-gray-200 rounded animate-pulse" />
-                        <div className="h-3 bg-gray-200 rounded animate-pulse w-2/3" />
-                        <div className="h-5 bg-gray-200 rounded animate-pulse w-1/2" />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 gap-4 lg:gap-5">
-                {filteredProducts.map((product) => (
-                  <div 
-                    key={product.id} 
-                    className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-200 group cursor-pointer"
-                  >
-                    <div className="aspect-square bg-gray-100 rounded-t-lg overflow-hidden relative">
-                      <Image
-                        src={product.images?.[0] || '/placeholder.jpg'}
-                        alt={product.name}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-200"
-                      />
-                    </div>
-                    <div className="p-3 lg:p-4">
-                      <h3 className="font-semibold text-sm lg:text-base text-gray-900 mb-1 line-clamp-2">
-                        {product.name}
-                      </h3>
-                      <p className="text-xs lg:text-sm text-gray-600 mb-1">{product.brand}</p>
-                      <p className="text-xs lg:text-sm text-blue-600 mb-2">{product.category}</p>
-                      <div className="flex items-center justify-between">
-                        <p className="text-lg lg:text-xl font-bold text-blue-600">
-                          {product.price ? `${product.price}€` : 'Prix sur demande'}
-                        </p>
-                        <Button size="sm" className="text-xs lg:text-sm">
-                          Voir
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              )}
-
-              {/* Message si aucun produit */}
-              {filteredProducts.length === 0 && (
-                <div className="text-center py-16">
-                  <p className="text-lg text-gray-600 mb-4">Aucun accessoire trouvé</p>
-                  <Button
-                    variant="outline"
-                    onClick={() => {
-                      setSearchQuery('');
-                      setSelectedCategory('');
-                      setSelectedBrand('');
-                      setSelectedProduct('');
-                    }}
-                  >
-                    Réinitialiser les filtres
-                  </Button>
-                </div>
-              )}
-            </div>
-          </main>
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+      <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white py-12">
+        <div className="container mx-auto px-4">
+          <h1 className="text-4xl font-bold mb-4">Accessoires</h1>
+          <p className="text-xl opacity-90">
+            Protégez et personnalisez vos appareils avec nos accessoires de qualité
+          </p>
         </div>
-        
-        <Footer />
       </div>
+
+      <ProductsClient
+        initialProducts={accessoiresProducts}
+        categories={categories}
+        brands={brands}
+      />
     </div>
   );
 }

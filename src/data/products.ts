@@ -19,7 +19,7 @@ export interface ProductSpecification {
 export interface ProductRating {
   average: number;
   count: number;
-  distribution: {
+  distribution?: {
     5: number;
     4: number;
     3: number;
@@ -30,7 +30,7 @@ export interface ProductRating {
 }
 
 export interface Review {
-  id: string;
+  id?: string;
   author: string;
   rating: number;
   date: string;
@@ -7287,10 +7287,9 @@ export const allProducts: Product[] = [
   },
   {
     id: 'mon-ill-smart-flow',
-    urlSlug: 'monster-illuminescence-led-strip-smart-flow',
     sku: 'MON-ILL-SMART-FLOW',
     name: 'MONSTER Illuminescence Smart Light Strip Multicolor Flow',
-    slug: 'mon-ill-smart-flow',
+    urlSlug: 'mon-ill-smart-flow',
     brand: 'MONSTER',
     category: 'LED',
     subcategory: 'Bandes LED',
@@ -7324,10 +7323,9 @@ export const allProducts: Product[] = [
   },
   {
     id: 'mon-ill-beam-kit',
-    urlSlug: 'monster-illuminescence-led-beam-kit',
     sku: 'MON-ILL-BEAM-KIT',
     name: 'MONSTER Illuminescence Smart Beam + 2X Bars Kit',
-    slug: 'mon-ill-beam-kit',
+    urlSlug: 'mon-ill-beam-kit',
     brand: 'MONSTER',
     category: 'LED',
     subcategory: 'Light Bars',
@@ -7360,10 +7358,9 @@ export const allProducts: Product[] = [
   },
   {
     id: 'mon-ill-a19',
-    urlSlug: 'monster-illuminescence-basic-ampoule-a19',
     sku: 'MON-ILL-A19',
     name: 'MONSTER Illuminescence Basic Ampoule A19',
-    slug: 'mon-ill-a19',
+    urlSlug: 'mon-ill-a19',
     brand: 'MONSTER',
     category: 'LED',
     subcategory: 'Ampoules',
@@ -7388,7 +7385,11 @@ export const allProducts: Product[] = [
       { label: 'Type', value: 'LED', icon: 'lightbulb' },
       { label: 'Connectivité', value: 'WiFi/App', icon: 'wifi' },
       { label: 'Usage', value: 'Intérieur', icon: 'home' }
-    ]
+    ],
+    metaTitle: "MONSTER Illuminescence Basic Ampoule A19",
+    metaDescription: "Ampoule LED économique avec température de couleur blanc chaud",
+    keywords: ["led", "ampoule", "a19", "monster"],
+    status: "active"
   }
 ];
 

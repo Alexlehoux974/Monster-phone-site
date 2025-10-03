@@ -28,9 +28,9 @@ async function testProductsIntegration() {
   
   products.forEach((product: ProductFullView) => {
     // Count by category
-    const category = product.category_slug || 'uncategorized';
+    const category = product.category_name || 'uncategorized';
     categoryCounts[category] = (categoryCounts[category] || 0) + 1;
-    
+
     // Count by brand
     const brand = product.brand_name || 'unknown';
     brandCounts[brand] = (brandCounts[brand] || 0) + 1;
