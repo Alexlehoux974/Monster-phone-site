@@ -51,13 +51,15 @@ export function supabaseProductToLegacy(product: ProductFullView): Product {
     comment: r.comment || '',
     verified: r.is_verified || false,
     helpful: r.helpful_count || 0
-  })) || generateDefaultReviews(product.name);
+  })) || []; // Ne plus générer d'avis par défaut
 
-  // Calculer le rating
+  // Calculer le rating avec les notes de Supabase
   const rating = {
     average: product.average_rating || 4.5,
-    count: product.total_reviews || reviews.length,
-    distribution: calculateRatingDistribution(reviews)
+    count: product.total_reviews || 0,
+    distribution: product.total_reviews > 0
+      ? calculateRatingDistribution(reviews)
+      : { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 }
   };
 
   // Utiliser brand_name de la vue products_full, ou extraire depuis le nom du produit

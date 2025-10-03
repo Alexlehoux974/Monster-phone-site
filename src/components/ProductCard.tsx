@@ -85,7 +85,7 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
             </p>
             
             {/* Note */}
-            {product.rating && (
+            {product.rating && product.rating.average > 0 && (
               <div className="flex items-center gap-1 mb-3">
                 {[...Array(5)].map((_, i) => (
                   <Star
@@ -99,7 +99,7 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
                   />
                 ))}
                 <span className="text-sm text-gray-600 ml-1">
-                  ({product.rating?.average || 0}) • {product.rating?.count || 0} avis
+                  ({product.rating.average}) • {product.rating.count || 0} avis
                 </span>
               </div>
             )}
@@ -226,7 +226,7 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
         </div>
 
         {/* Note et avis */}
-        {product.rating && (
+        {product.rating && product.rating.average > 0 && (
           <div className="flex items-center gap-1 mb-3">
             {[...Array(5)].map((_, i) => (
               <Star
@@ -240,7 +240,7 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
               />
             ))}
             <span className="text-sm text-gray-600 ml-1">
-              ({product.rating?.average || 0})
+              ({product.rating.average})
             </span>
           </div>
         )}

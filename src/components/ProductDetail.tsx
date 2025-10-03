@@ -616,117 +616,58 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
         <TabsContent value="reviews" className="mt-6">
           <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <h3 className="text-xl font-bold">Avis clients</h3>
-              <Button variant="outline">Écrire un avis</Button>
-            </div>
-
-            {product.rating?.reviews && product.rating.reviews.length > 0 ? (
-              <>
-                {/* Résumé des avis */}
-                <div className="bg-gray-50 rounded-lg p-6">
-                  <div className="flex items-center gap-6">
-                    <div className="text-center">
-                      <p className="text-4xl font-bold">
-                        {product.rating?.average?.toFixed(1) || "0.0"}
-                      </p>
-                      <div className="flex items-center mt-2">
-                        {Array.from({ length: 5 }).map((_, i) => (
-                          <Star
-                            key={i}
-                            className={cn(
-                              "h-4 w-4",
-                              i < Math.floor(product.rating?.average || 0)
-                                ? "text-yellow-400 fill-current"
-                                : "text-gray-300"
-                            )}
-                          />
-                        ))}
-                      </div>
-                      <p className="text-sm text-gray-600 mt-1">
-                        {product.rating?.count || 0} avis vérifiés
-                      </p>
+            {/* Afficher les étoiles même sans avis rédigés */}
+            {product.rating && product.rating.count > 0 && (
+              <div className="bg-gray-50 rounded-lg p-6">
+                <div className="flex items-center gap-6">
+                  <div className="text-center">
+                    <p className="text-4xl font-bold">
+                      {product.rating.average.toFixed(1)}
+                    </p>
+                    <div className="flex items-center mt-2">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <Star
+                          key={i}
+                          className={cn(
+                            "h-4 w-4",
+                            i < Math.floor(product.rating?.average || 0)
+                              ? "text-yellow-400 fill-current"
+                              : "text-gray-300"
+                          )}
+                        />
+                      ))}
                     </div>
-                    
-                    <div className="flex-1 space-y-2">
-                      {[5, 4, 3, 2, 1].map((stars) => {
-                        const count = product.rating?.distribution?.[stars as keyof typeof product.rating.distribution] || 0;
-                        const percentage = product.rating?.count ? (count / product.rating.count) * 100 : 0;
-                        return (
-                          <div key={stars} className="flex items-center gap-2">
-                            <span className="text-sm w-4">{stars}</span>
-                            <Star className="h-4 w-4 text-yellow-400 fill-current" />
-                            <div className="flex-1 bg-gray-200 rounded-full h-2">
-                              <div 
-                                className="bg-yellow-400 h-2 rounded-full"
-                                style={{ width: `${percentage}%` }}
-                              />
-                            </div>
-                            <span className="text-sm text-gray-600 w-10 text-right">
-                              {Math.round(percentage)}%
-                            </span>
-                          </div>
-                        );
-                      })}
-                    </div>
+                    <p className="text-sm text-gray-600 mt-1">
+                      {product.rating.count} évaluations
+                    </p>
                   </div>
                 </div>
-
-                {/* Liste des avis */}
-                <div className="space-y-4 max-h-96 overflow-y-auto">
-                  {(product.rating?.reviews || []).slice(0, 10).map((review) => (
-                    <div key={review.id} className="border-b pb-4">
-                      <div className="flex items-start justify-between mb-2">
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <span className="font-semibold">{review.author}</span>
-                            {review.verified && (
-                              <Badge variant="secondary" className="text-xs">
-                                <Check className="h-3 w-3 mr-1" />
-                                Achat vérifié
-                              </Badge>
-                            )}
-                          </div>
-                          <div className="flex items-center gap-2 mt-1">
-                            <div className="flex">
-                              {Array.from({ length: 5 }).map((_, i) => (
-                                <Star
-                                  key={i}
-                                  className={cn(
-                                    "h-3 w-3",
-                                    i < review.rating
-                                      ? "text-yellow-400 fill-current"
-                                      : "text-gray-300"
-                                  )}
-                                />
-                              ))}
-                            </div>
-                            <span className="text-sm text-gray-500">{review.date}</span>
-                          </div>
-                        </div>
-                      </div>
-                      {review.title && (
-                        <h4 className="font-semibold text-gray-900 mb-1">{review.title}</h4>
-                      )}
-                      <p className="text-gray-700">{review.comment}</p>
-                      {(review.helpful || 0) > 0 && (
-                        <div className="mt-2 text-xs text-gray-500">
-                          {review.helpful} personne(s) ont trouvé cet avis utile
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-
-                {(product.rating?.reviews?.length || 0) > 10 && (
-                  <Button variant="outline" className="w-full">
-                    Voir tous les {product.rating?.reviews?.length || 0} avis
-                  </Button>
-                )}
-              </>
-            ) : (
-              <p className="text-gray-600">Aucun avis pour le moment. Soyez le premier à donner votre avis !</p>
+              </div>
             )}
+
+            {/* Message pour laisser un avis */}
+            <div className="border-2 border-dashed border-gray-200 rounded-lg p-8 text-center">
+              <div className="max-w-md mx-auto space-y-4">
+                <div className="flex justify-center">
+                  <div className="bg-gray-100 rounded-full p-4">
+                    <Star className="h-8 w-8 text-gray-400" />
+                  </div>
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900">
+                  Partagez votre expérience
+                </h3>
+                <p className="text-gray-600">
+                  Vous avez acheté ce produit ? Aidez les autres clients en partageant votre avis !
+                </p>
+                <Button variant="default" className="mt-4" disabled>
+                  <Star className="h-4 w-4 mr-2" />
+                  Laisser un avis
+                </Button>
+                <p className="text-xs text-gray-500 mt-2">
+                  *Disponible après achat du produit
+                </p>
+              </div>
+            </div>
           </div>
         </TabsContent>
 
