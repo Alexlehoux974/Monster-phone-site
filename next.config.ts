@@ -14,6 +14,10 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // Allow Cloudflare tunnel dev origins
+  allowedDevOrigins: [
+    'tomorrow-travelling-tap-round.trycloudflare.com',
+  ],
 };
 
 export default nextConfig;
