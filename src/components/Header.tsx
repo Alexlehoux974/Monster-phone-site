@@ -474,240 +474,52 @@ const MobileMenu = ({
         onClick={onClose}
       />
       
-      {/* Menu sliding */}
-      <div className="lg:hidden fixed inset-y-0 right-0 w-full max-w-sm bg-white z-[200] transform transition-transform duration-300 ease-out shadow-2xl animate-slide-in-right flex flex-col">
-        {/* Header du menu mobile */}
-        <div className="flex-shrink-0 bg-white border-b border-gray-200">
-          <div className="flex items-center justify-between p-4">
-            <h2 className="text-lg font-bold text-gray-900">Menu</h2>
-            <button
-              onClick={onClose}
-              className="p-3 text-gray-500 hover:text-gray-700 rounded-lg hover:bg-gray-100"
-            >
-              <X className="w-6 h-6" />
-            </button>
-          </div>
-
-          {/* Fil d'ariane */}
-          {(activeCategory || activeBrand) && (
-            <div className="px-4 pb-3 flex items-center gap-2 text-sm overflow-x-auto">
-              <button
-                onClick={resetNavigation}
-                className="text-blue-600 hover:text-blue-800 whitespace-nowrap"
-              >
-                Menu
-              </button>
-              {activeCategory && (
-                <>
-                  <ChevronRight className="w-4 h-4 text-gray-400 flex-shrink-0" />
-                  <button
-                    onClick={() => setActiveBrand(null)}
-                    className={cn(
-                      "whitespace-nowrap",
-                      activeBrand ? "text-blue-600 hover:text-blue-800" : "text-gray-900"
-                    )}
-                  >
-                    {activeCategory}
-                  </button>
-                </>
-              )}
-              {activeBrand && (
-                <>
-                  <ChevronRight className="w-4 h-4 text-gray-400 flex-shrink-0" />
-                  <span className="text-gray-900 whitespace-nowrap">{activeBrand}</span>
-                </>
-              )}
-            </div>
-          )}
-        </div>
-
-      {/* Contenu scrollable */}
-      <div className="flex-1 overflow-y-auto bg-white min-h-0">
-        {/* DEBUG: Indicateur visuel */}
-        <div className="p-2 bg-yellow-100 text-xs text-center font-bold">
-          📍 MENU CHARGÉ - {displayCategories.length} CATÉGORIES
-        </div>
-
-        {/* Vue principale - Catégories */}
-        {!activeCategory && (
-          <div className="p-4 space-y-2">
-            {/* Recherche mobile */}
-            <div className="mb-6">
-              <div className="relative">
-                <input
-                  type="text"
-                  placeholder="Rechercher un produit..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full px-4 py-3 pl-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                />
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
-              </div>
-            </div>
-
-            {/* Catégories principales */}
-            <div className="space-y-2">
-              {displayCategories.map((category) => (
-                <button
-                  key={category.name}
-                  onClick={() => setActiveCategory(category.name)}
-                  className="w-full flex items-center justify-between p-4 text-left bg-white border-2 border-blue-500 active:bg-blue-50 rounded-lg transition-colors shadow-sm"
-                >
-                  <div className="flex items-center gap-3">
-                    {getCategoryIcon(category.name)}
-                    <span className="font-medium text-gray-900">{category.name}</span>
-                  </div>
-                  <ChevronRight className="w-5 h-5 text-gray-400" />
-                </button>
-              ))}
-            </div>
-
-            {/* Liens rapides */}
-            <div className="mt-6 pt-6 border-t border-gray-200">
-              <h3 className="text-sm font-medium text-gray-500 mb-3">Liens rapides</h3>
-              <Link
-                href="/promotions"
-                onClick={onClose}
-                className="block p-4 bg-red-50 active:bg-red-200 rounded-lg transition-colors"
-              >
-                <div className="flex items-center gap-3">
-                  <Flame className="w-5 h-5 text-red-600" />
-                  <span className="font-medium text-red-900">Promotions</span>
-                </div>
-              </Link>
-            </div>
-          </div>
-        )}
-
-        {/* Vue des marques */}
-        {activeCategory && !activeBrand && (
-          <div className="p-4 space-y-2">
-            {(() => {
-              // Obtenir toutes les marques pour cette catégorie
-              const products = getProductsByCategory(activeCategory);
-              const brands = new Set<string>();
-              products.forEach(p => {
-                if (p.brand) brands.add(p.brand);
-              });
-              const uniqueBrands = Array.from(brands).sort();
-              
-              if (uniqueBrands.length === 0) return null;
-
-              return (
-                <>
-                  {/* Lien vers toute la catégorie */}
-                  <Link
-                    href={`/nos-produits?category=${encodeURIComponent(activeCategory)}`}
-                    onClick={onClose}
-                    className="block p-4 bg-blue-50 active:bg-blue-200 rounded-lg transition-colors mb-4"
-                  >
-                    <div className="flex items-center justify-between">
-                      <span className="font-medium text-blue-900">Voir tous les {activeCategory}</span>
-                      <ArrowRight className="w-5 h-5 text-blue-600" />
-                    </div>
-                  </Link>
-
-                  {/* Liste des marques */}
-                  {uniqueBrands.map((brand) => {
-                    const brandProducts = getProductsByBrand(brand).filter(p => {
-                      const cleanCategory = (cat: string) => cat.replace(/[📱🎧⌚💡🔧📦]/g, '').trim().toLowerCase();
-                      return cleanCategory(p.category) === cleanCategory(activeCategory);
-                    });
-                    return (
-                      <button
-                        key={brand}
-                        onClick={() => setActiveBrand(brand)}
-                        className="w-full flex items-center justify-between p-4 text-left bg-gray-50 active:bg-gray-200 rounded-lg transition-colors"
-                      >
-                        <div>
-                          <span className="font-medium text-gray-900">{brand}</span>
-                          <span className="block text-sm text-gray-600 mt-1">
-                            {brandProducts.length} produit{brandProducts.length > 1 ? 's' : ''}
-                          </span>
-                        </div>
-                        <ChevronRight className="w-5 h-5 text-gray-400" />
-                      </button>
-                    );
-                  })}
-                </>
-              );
-            })()}
-          </div>
-        )}
-
-        {/* Vue des produits */}
-        {activeCategory && activeBrand && (
-          <div className="p-4 space-y-3">
-            {(() => {
-              const cleanCategory = (cat: string) => cat.replace(/[📱🎧⌚💡🔧📦]/g, '').trim().toLowerCase();
-              const products = getProductsByBrand(activeBrand)
-                .filter(p => cleanCategory(p.category) === cleanCategory(activeCategory))
-                .sort((a, b) => (b.price || 0) - (a.price || 0)); // Tri du plus cher au moins cher
-
-              return (
-                <>
-                  {/* Lien vers tous les produits de la marque dans cette catégorie */}
-                  <Link
-                    href={`/nos-produits?category=${encodeURIComponent(activeCategory)}&brand=${encodeURIComponent(activeBrand)}`}
-                    onClick={onClose}
-                    className="block p-4 bg-green-50 active:bg-green-200 rounded-lg transition-colors mb-4"
-                  >
-                    <div className="flex items-center justify-between">
-                      <span className="font-medium text-green-900">
-                        Voir tous les produits {activeBrand}
-                      </span>
-                      <ArrowRight className="w-5 h-5 text-green-600" />
-                    </div>
-                  </Link>
-
-                  {/* Liste des produits */}
-                  {products && products.length > 0 && products.map((product) => (
-                    <Link
-                      key={product.id}
-                      href={`/produit/${product.urlSlug || product.id}`}
-                      onClick={onClose}
-                      className="block p-4 bg-white border border-gray-200 active:border-blue-500 active:bg-gray-50 rounded-lg transition-all"
-                    >
-                      <div className="flex items-start gap-2">
-                        {product.images && product.images.length > 0 && (
-                          <div className="w-16 h-16 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
-                            <Image
-                              src={product.images[0]}
-                              alt={product.name}
-                              width={64}
-                              height={64}
-                              className="w-full h-full object-contain"
-                            />
-                          </div>
-                        )}
-                        <div className="flex-1 min-w-0">
-                          <h4 className="font-medium text-gray-900">
-                            {product.name}
-                          </h4>
-                          {product.price && (
-                            <p className="text-lg font-bold text-blue-600 mt-1">
-                              {product.price}
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
-                </>
-              );
-            })()}
-          </div>
-        )}
-      </div>
-
-      {/* CTA fixe en bas */}
-      <div className="flex-shrink-0 bg-white border-t border-gray-200 p-4">
-        <Link href="/nos-produits" onClick={onClose}>
-          <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-1.5 rounded-lg font-bold text-base shadow-lg hover:shadow-xl transition-all">
-            🎮 Découvrir tous nos produits
+      {/* Menu sliding - VERSION ULTRA SIMPLIFIÉE */}
+      <div className="lg:hidden fixed top-0 right-0 bottom-0 w-full max-w-sm bg-white z-[200] shadow-2xl">
+        {/* Header FIXE avec hauteur définie */}
+        <div className="h-20 bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-between px-6 shadow-lg">
+          <h2 className="text-2xl font-bold text-white">MENU</h2>
+          <button onClick={onClose} className="p-2 text-white hover:bg-white/20 rounded-lg">
+            <X className="w-7 h-7" />
           </button>
-        </Link>
-      </div>
+        </div>
+
+        {/* Contenu avec hauteur CALCULÉE */}
+        <div style={{ height: 'calc(100vh - 10rem)' }} className="overflow-y-auto p-4">
+          {/* MEGA DEBUG VISIBLE */}
+          <div className="bg-red-600 text-white p-6 mb-4 rounded-lg text-center">
+            <p className="text-2xl font-bold">🚨 MENU TEST</p>
+            <p className="text-lg mt-2">{displayCategories.length} CATÉGORIES</p>
+          </div>
+
+          {/* Catégories ULTRA VISIBLES */}
+          <div className="space-y-3">
+            {displayCategories.map((category, index) => (
+              <button
+                key={category.name}
+                onClick={() => setActiveCategory(category.name)}
+                className="w-full p-6 text-left bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-xl shadow-lg active:scale-95 transition-transform"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-4">
+                    {getCategoryIcon(category.name)}
+                    <span className="text-xl font-bold">{category.name}</span>
+                  </div>
+                  <ChevronRight className="w-6 h-6" />
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* CTA fixe en bas */}
+        <div className="h-20 bg-white border-t border-gray-200 flex items-center px-4">
+          <Link href="/nos-produits" onClick={onClose} className="w-full">
+            <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-lg font-bold text-base shadow-lg hover:shadow-xl transition-all">
+              🎮 Découvrir tous nos produits
+            </button>
+          </Link>
+        </div>
       </div>
     </>
   );
