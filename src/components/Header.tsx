@@ -530,19 +530,34 @@ const MobileMenu = ({
 
             {/* Catégories principales */}
             <div className="space-y-2">
-              {menuStructure && menuStructure.length > 0 && menuStructure.map((category) => (
-              <button
-                key={category.name}
-                onClick={() => setActiveCategory(category.name)}
-                className="w-full flex items-center justify-between p-4 text-left bg-gray-50 active:bg-gray-200 rounded-lg transition-colors"
-              >
-                <div className="flex items-center gap-3">
-                  {getCategoryIcon(category.name)}
-                  <span className="font-medium text-gray-900">{category.name}</span>
+              {menuStructure && menuStructure.length > 0 ? (
+                menuStructure.map((category) => (
+                  <button
+                    key={category.name}
+                    onClick={() => setActiveCategory(category.name)}
+                    className="w-full flex items-center justify-between p-4 text-left bg-gray-50 active:bg-gray-200 rounded-lg transition-colors"
+                  >
+                    <div className="flex items-center gap-3">
+                      {getCategoryIcon(category.name)}
+                      <span className="font-medium text-gray-900">{category.name}</span>
+                    </div>
+                    <ChevronRight className="w-5 h-5 text-gray-400" />
+                  </button>
+                ))
+              ) : (
+                <div className="text-center py-8 text-gray-500">
+                  <p className="mb-4">Chargement des catégories...</p>
+                  {/* Fallback: afficher des liens directs */}
+                  <div className="space-y-2">
+                    <Link href="/nos-produits" onClick={onClose} className="block p-4 bg-gray-50 rounded-lg">
+                      Tous nos produits
+                    </Link>
+                    <Link href="/promotions" onClick={onClose} className="block p-4 bg-red-50 rounded-lg">
+                      Promotions
+                    </Link>
+                  </div>
                 </div>
-                <ChevronRight className="w-5 h-5 text-gray-400" />
-              </button>
-              ))}
+              )}
             </div>
 
             {/* Liens rapides */}
@@ -714,6 +729,9 @@ export default function Header() {
   
   // Charger tous les produits depuis Supabase et générer la structure du menu dynamiquement
   useEffect(() => {
+    console.log('🔍 Debug Header - Produits:', supabaseProducts?.length || 0);
+    console.log('🔍 Debug Header - Catégories:', supabaseCategories?.length || 0);
+
     if (supabaseProducts && supabaseProducts.length > 0 && supabaseCategories && supabaseCategories.length > 0) {
       // Convertir les produits Supabase en format legacy
       const legacyProducts = supabaseProducts.map(supabaseProductToLegacy);
@@ -747,6 +765,30 @@ export default function Header() {
         name: cat.name,
         products: legacyProducts.filter(p => p.category.toLowerCase() === cat.slug.toLowerCase()).length
       })));
+    } else {
+      // Fallback: créer des catégories basiques à partir des produits seuls
+      if (supabaseProducts && supabaseProducts.length > 0) {
+        const legacyProducts = supabaseProducts.map(supabaseProductToLegacy);
+        setAllProducts(legacyProducts);
+
+        // Créer des catégories simples depuis les produits
+        const categoryMap = new Map<string, CategoryStructure>();
+
+        legacyProducts.forEach(product => {
+          const catName = product.category;
+          if (!categoryMap.has(catName)) {
+            categoryMap.set(catName, {
+              name: catName,
+              slug: catName.toLowerCase().replace(/\s+/g, '-'),
+              subcategories: []
+            });
+          }
+        });
+
+        const fallbackStructure = Array.from(categoryMap.values());
+        console.log('⚠️ Fallback - Catégories créées depuis produits:', fallbackStructure.length);
+        setMenuStructure(fallbackStructure);
+      }
     }
   }, [supabaseProducts, supabaseCategories]);
   
