@@ -4,7 +4,7 @@ import ProductDetail from '@/components/ProductDetail';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FeaturedProducts from '@/components/FeaturedProducts';
-import { supabase } from '@/lib/supabase/client';
+import { createClient } from '@/lib/supabase/client';
 import { supabaseProductToLegacy } from '@/lib/supabase/adapters';
 import type { ProductFullView } from '@/lib/supabase/client';
 
@@ -16,6 +16,7 @@ interface ProductPageProps {
 
 // Récupérer un produit par son slug depuis Supabase avec ses variants
 async function getProductBySlug(slug: string) {
+  const supabase = createClient();
   const { data, error } = await supabase
     .from('products')
     .select(`
@@ -70,6 +71,7 @@ async function getProductBySlug(slug: string) {
 
 // Récupérer des produits similaires de la même marque
 async function getRelatedProducts(brandName: string, currentProductId: string) {
+  const supabase = createClient();
   const { data } = await supabase
     .from('products')
     .select(`
@@ -266,6 +268,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
 
 // Générer les pages statiques pour tous les produits
 export async function generateStaticParams() {
+  const supabase = createClient();
   const { data: products } = await supabase
     .from('products')
     .select('url_slug')

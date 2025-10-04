@@ -3,13 +3,13 @@
  * Fonctions pour interagir avec la base de données
  */
 
-import { supabase } from './client';
-import type { 
-  DatabaseProduct, 
-  DatabaseBrand, 
-  DatabaseCategory, 
+import { createClient } from './client';
+import type {
+  DatabaseProduct,
+  DatabaseBrand,
+  DatabaseCategory,
   DatabaseCollection,
-  ProductFullView 
+  ProductFullView
 } from './client';
 
 // ========================================
@@ -25,6 +25,7 @@ export async function getActiveProducts(options?: {
   sortBy?: 'price' | 'name' | 'created_at' | 'rating';
   sortOrder?: 'asc' | 'desc';
 }) {
+  const supabase = createClient();
   let query = supabase
     .from('products_full')
     .select('*')
@@ -56,6 +57,7 @@ export async function getActiveProducts(options?: {
  * Récupérer un produit par son slug
  */
 export async function getProductBySlug(slug: string) {
+  const supabase = createClient();
   const { data, error } = await supabase
     .from('products_full')
     .select('*')
@@ -74,6 +76,7 @@ export async function getProductBySlug(slug: string) {
  * Récupérer un produit par son ID
  */
 export async function getProductById(id: string) {
+  const supabase = createClient();
   const { data, error } = await supabase
     .from('products_full')
     .select('*')
@@ -98,6 +101,7 @@ export async function searchProducts(query: string, options?: {
   minPrice?: number;
   maxPrice?: number;
 }) {
+  const supabase = createClient();
   let dbQuery = supabase
     .from('products')
     .select(`
@@ -146,6 +150,7 @@ export async function getProductsByCategory(categorySlug: string, options?: {
   offset?: number;
   includeSubcategories?: boolean;
 }) {
+  const supabase = createClient();
   // D'abord récupérer la catégorie
   const { data: category } = await supabase
     .from('categories')
@@ -198,6 +203,7 @@ export async function getProductsByBrand(brandSlug: string, options?: {
   limit?: number;
   offset?: number;
 }) {
+  const supabase = createClient();
   const { data, error } = await supabase
     .from('products_full')
     .select('*')
@@ -220,6 +226,7 @@ export async function getProductsByBrand(brandSlug: string, options?: {
  * Récupérer les produits d'une collection
  */
 export async function getProductsByCollection(collectionSlug: string) {
+  const supabase = createClient();
   const { data, error } = await supabase
     .from('collections')
     .select(`
@@ -251,6 +258,7 @@ export async function getProductsByCollection(collectionSlug: string) {
  * Récupérer les produits en promotion
  */
 export async function getDiscountedProducts(minDiscount: number = 10) {
+  const supabase = createClient();
   const { data, error } = await supabase
     .from('products_full')
     .select('*')
@@ -270,6 +278,7 @@ export async function getDiscountedProducts(minDiscount: number = 10) {
  * Récupérer les nouveautés
  */
 export async function getNewProducts(days: number = 30, limit: number = 10) {
+  const supabase = createClient();
   const date = new Date();
   date.setDate(date.getDate() - days);
 
@@ -293,6 +302,7 @@ export async function getNewProducts(days: number = 30, limit: number = 10) {
  * Récupérer les meilleures ventes
  */
 export async function getBestSellers(limit: number = 10) {
+  const supabase = createClient();
   const { data, error } = await supabase
     .from('products_full')
     .select('*')
@@ -313,6 +323,7 @@ export async function getBestSellers(limit: number = 10) {
  * Récupérer les produits similaires
  */
 export async function getSimilarProducts(productId: string, limit: number = 4) {
+  const supabase = createClient();
   // D'abord récupérer le produit actuel
   const { data: currentProduct } = await supabase
     .from('products')
@@ -349,6 +360,7 @@ export async function getSimilarProducts(productId: string, limit: number = 4) {
  * Récupérer toutes les marques
  */
 export async function getAllBrands() {
+  const supabase = createClient();
   const { data, error } = await supabase
     .from('brands')
     .select('*')
@@ -366,6 +378,7 @@ export async function getAllBrands() {
  * Récupérer une marque par son slug
  */
 export async function getBrandBySlug(slug: string) {
+  const supabase = createClient();
   const { data, error } = await supabase
     .from('brands')
     .select('*')
@@ -388,6 +401,7 @@ export async function getBrandBySlug(slug: string) {
  * Récupérer toutes les catégories avec leurs sous-catégories
  */
 export async function getAllCategories() {
+  const supabase = createClient();
   const { data, error } = await supabase
     .from('categories')
     .select(`
@@ -409,6 +423,7 @@ export async function getAllCategories() {
  * Récupérer une catégorie par son slug
  */
 export async function getCategoryBySlug(slug: string) {
+  const supabase = createClient();
   const { data, error } = await supabase
     .from('categories')
     .select(`
@@ -435,6 +450,7 @@ export async function getCategoryBySlug(slug: string) {
  * Récupérer toutes les collections actives
  */
 export async function getActiveCollections() {
+  const supabase = createClient();
   const { data, error } = await supabase
     .from('collections')
     .select('*')
@@ -453,6 +469,7 @@ export async function getActiveCollections() {
  * Récupérer une collection par son slug
  */
 export async function getCollectionBySlug(slug: string) {
+  const supabase = createClient();
   const { data, error } = await supabase
     .from('collections')
     .select('*')
@@ -480,6 +497,7 @@ export async function getProductReviews(productId: string, options?: {
   offset?: number;
   sortBy?: 'recent' | 'helpful' | 'rating_high' | 'rating_low';
 }) {
+  const supabase = createClient();
   let query = supabase
     .from('product_reviews')
     .select('*')
@@ -529,6 +547,7 @@ export async function addProductReview(review: {
   title?: string;
   comment?: string;
 }) {
+  const supabase = createClient();
   const { data, error } = await supabase
     .from('product_reviews')
     .insert(review)
@@ -547,6 +566,7 @@ export async function addProductReview(review: {
  * Marquer un avis comme utile
  */
 export async function markReviewHelpful(reviewId: string) {
+  const supabase = createClient();
   const { error } = await supabase.rpc('increment_review_helpful_count', {
     review_id: reviewId
   });
@@ -567,6 +587,7 @@ export async function markReviewHelpful(reviewId: string) {
  * Récupérer les statistiques des produits
  */
 export async function getProductStats() {
+  const supabase = createClient();
   const { data, error } = await supabase
     .from('products')
     .select('status, count:id')
@@ -589,6 +610,7 @@ export async function getProductStats() {
  * Récupérer les tendances de recherche
  */
 export async function getSearchTrends(limit: number = 10) {
+  const supabase = createClient();
   const { data, error } = await supabase
     .from('search_queries')
     .select('query, count')
@@ -611,6 +633,7 @@ export async function getSearchTrends(limit: number = 10) {
  * Enregistrer une recherche
  */
 export async function recordSearch(query: string, resultsCount: number) {
+  const supabase = createClient();
   await supabase.rpc('record_search_query', {
     search_query: query,
     results_count: resultsCount
@@ -621,6 +644,7 @@ export async function recordSearch(query: string, resultsCount: number) {
  * Enregistrer une vue produit
  */
 export async function recordProductView(productId: string) {
+  const supabase = createClient();
   await supabase.rpc('increment_product_view_count', {
     product_id: productId
   });
@@ -630,6 +654,7 @@ export async function recordProductView(productId: string) {
  * Rafraîchir les vues matérialisées
  */
 export async function refreshMaterializedViews() {
+  const supabase = createClient();
   const { error } = await supabase.rpc('refresh_materialized_views');
   
   if (error) {

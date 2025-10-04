@@ -18,6 +18,7 @@ export function supabaseProductToLegacy(product: ProductFullView): Product {
   
   // Construire les variants legacy depuis variants
   const variants: LegacyVariant[] = product.variants?.map(v => ({
+    id: v.id, // ID Supabase pour mise à jour stock
     color: v.color || '',
     colorCode: v.color_code || '',
     ean: v.ean || '',
@@ -111,6 +112,7 @@ export function supabaseProductToLegacy(product: ProductFullView): Product {
     highlights: product.highlights || generateHighlights(product),
     badges: product.badges || [],
     variants,
+    stockQuantity: product.stock_quantity, // Stock pour produits sans variants
     rating,
     reviews,
     warranty: product.warranty || '2 ans constructeur',

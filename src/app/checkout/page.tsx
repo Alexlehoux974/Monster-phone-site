@@ -26,7 +26,7 @@ import {
 } from 'lucide-react';
 
 export default function CheckoutPage() {
-  const { items, getCartTotal, clearCart } = useCart();
+  const { items, getCartTotal, clearCart, createOrder } = useCart();
   const { user } = useAuth();
   const router = useRouter();
   const [isProcessing, setIsProcessing] = useState(false);
@@ -151,25 +151,39 @@ export default function CheckoutPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateStep(3)) {
       return;
     }
 
     setIsProcessing(true);
 
-    // Simuler le traitement du paiement
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    try {
+      // Créer la commande réelle dans Supabase
+      const result = await createOrder({
+        name: `${formData.firstName} ${formData.lastName}`,
+        email: formData.email,
+        phone: formData.phone,
+        address: `${formData.address}, ${formData.postalCode} ${formData.city}`,
+      });
 
-    // Simuler la réussite de la commande
-    setOrderComplete(true);
-    setIsProcessing(false);
+      if (result.success && result.order) {
+        // Commande créée avec succès
+        setOrderComplete(true);
+        window.scrollTo(0, 0);
 
-    // Vider le panier
-    clearCart();
-
-    // Scroller en haut
-    window.scrollTo(0, 0);
+        console.log('✅ Commande créée:', result.order);
+      } else {
+        // Erreur lors de la création de la commande
+        console.error('❌ Erreur création commande:', result.error);
+        setErrors({ ...errors, submit: result.error || 'Erreur lors de la création de la commande' });
+      }
+    } catch (error) {
+      console.error('❌ Erreur inattendue:', error);
+      setErrors({ ...errors, submit: 'Erreur réseau. Veuillez réessayer.' });
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   const subtotal = getCartTotal();

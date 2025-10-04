@@ -23,7 +23,11 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
 
   const mainImage = product.images[0] || '';
   const hasDiscount = product.discount && product.discount > 0;
-  const isInStock = selectedVariant ? selectedVariant.stock > 0 : true;
+
+  // Vérifier le stock: pour variants OU pour produits directs
+  const isInStock = selectedVariant
+    ? selectedVariant.stock > 0
+    : (product.stockQuantity !== undefined ? product.stockQuantity > 0 : true);
 
   const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault();

@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { supabase } from '@/lib/supabase/client';
+import { createClient } from '@/lib/supabase/client';
 import SearchBar from '@/components/admin/SearchBar';
 import LoadingSpinner from '@/components/admin/LoadingSpinner';
 import Toast from '@/components/admin/Toast';
@@ -62,6 +62,8 @@ interface Category {
 
 export default function StockManagementPage() {
   console.log('[ADMIN STOCK] Component rendering...');
+
+  const supabase = createClient();
 
   const [products, setProducts] = useState<Product[]>([]);
   const [variantRows, setVariantRows] = useState<VariantRow[]>([]);

@@ -2,6 +2,7 @@
 // Données importées depuis Airtable - E-Commerce - Catalogue Produits Unifié
 
 export interface ProductVariant {
+  id?: string; // ID Supabase du variant (pour mise à jour stock)
   color: string;
   colorCode: string;
   ean: string;
@@ -69,6 +70,9 @@ export interface Product {
   // Variantes de produit
   variants: ProductVariant[];
   defaultVariant?: string;
+
+  // Stock (pour produits sans variants)
+  stockQuantity?: number;
   
   // Spécifications techniques
   specifications: ProductSpecification[];

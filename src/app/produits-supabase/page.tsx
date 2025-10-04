@@ -149,6 +149,57 @@ function ProduitsSupabasePageContent() {
     };
 
     fetchProducts();
+
+    // Setup realtime subscription for stock updates
+    const channel = supabase
+      .channel('products-stock-realtime')
+      .on(
+        'postgres_changes',
+        {
+          event: 'UPDATE',
+          schema: 'public',
+          table: 'product_variants',
+        },
+        (payload) => {
+          console.log('🔄 [REALTIME] Variant stock updated:', payload.new);
+          // Update the specific variant in products
+          setProducts((prevProducts) =>
+            prevProducts.map((product) => ({
+              ...product,
+              product_variants: product.product_variants.map((variant) =>
+                variant.id === payload.new.id
+                  ? { ...variant, stock: payload.new.stock }
+                  : variant
+              ),
+            }))
+          );
+        }
+      )
+      .on(
+        'postgres_changes',
+        {
+          event: 'UPDATE',
+          schema: 'public',
+          table: 'products',
+        },
+        (payload) => {
+          console.log('🔄 [REALTIME] Product stock updated:', payload.new);
+          // Update the product stock_quantity
+          setProducts((prevProducts) =>
+            prevProducts.map((product) =>
+              product.id === payload.new.id
+                ? { ...product, stock_quantity: payload.new.stock_quantity }
+                : product
+            )
+          );
+        }
+      )
+      .subscribe();
+
+    // Cleanup subscription on unmount
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, []);
 
   // Read URL parameters on mount and when they change

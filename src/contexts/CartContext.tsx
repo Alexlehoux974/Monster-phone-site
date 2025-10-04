@@ -11,6 +11,13 @@ export interface CartItem {
   variant?: string;
 }
 
+interface CustomerInfo {
+  name: string;
+  email: string;
+  phone?: string;
+  address?: string;
+}
+
 interface CartContextType {
   items: CartItem[];
   addToCart: (product: Product | ProductFullView, quantity?: number, variant?: string) => void;
@@ -20,6 +27,8 @@ interface CartContextType {
   getCartTotal: () => number;
   getItemCount: () => number;
   isInCart: (productId: string) => boolean;
+  prepareOrderItems: () => { productId: string; variantId?: string; quantity: number }[];
+  createOrder: (customerInfo: CustomerInfo) => Promise<{ success: boolean; order?: any; error?: string }>;
 }
 
 export const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -68,8 +77,11 @@ export function CartProvider({ children, initialItems }: { children: ReactNode; 
         return;
       }
       availableStock = selectedVariant.stock || 0;
+    } else if (productToAdd.stockQuantity !== undefined) {
+      // Produit sans variants: utiliser stockQuantity
+      availableStock = productToAdd.stockQuantity;
     } else {
-      // Sinon, utiliser le stock total des variantes
+      // Fallback: utiliser le stock total des variantes
       availableStock = productToAdd.variants?.reduce((sum, v) => sum + (v.stock || 0), 0) || 0;
     }
     
@@ -134,6 +146,9 @@ export function CartProvider({ children, initialItems }: { children: ReactNode; 
           if (item.product.variants && item.product.variants.length > 0 && item.variant) {
             const selectedVariant = item.product.variants?.find(v => v.color === item.variant);
             availableStock = selectedVariant?.stock || 0;
+          } else if (item.product.stockQuantity !== undefined) {
+            // Produit sans variants: utiliser stockQuantity
+            availableStock = item.product.stockQuantity;
           } else {
             availableStock = item.product.variants?.reduce((sum, v) => sum + (v.stock || 0), 0) || 0;
           }
@@ -175,6 +190,100 @@ export function CartProvider({ children, initialItems }: { children: ReactNode; 
     return items.some(item => item.product.id === productId);
   };
 
+  /**
+   * Prépare les données du panier pour deductStockAfterOrder()
+   * Retourne un tableau avec productId, variantId (si applicable), et quantity
+   */
+  const prepareOrderItems = () => {
+    return items.map(item => {
+      // Trouver le variantId si un variant color est spécifié
+      let variantId: string | undefined;
+
+      if (item.variant && item.product.variants) {
+        const selectedVariant = item.product.variants.find(v => v.color === item.variant);
+        variantId = selectedVariant?.id; // ID Supabase du variant
+      }
+
+      return {
+        productId: item.product.id,
+        variantId,
+        quantity: item.quantity
+      };
+    });
+  };
+
+  /**
+   * Crée une commande avec les articles du panier
+   * Appelle l'API /api/orders/create qui:
+   * 1. Crée la commande dans Supabase
+   * 2. Crée les order_items
+   * 3. Déduit le stock automatiquement
+   */
+  const createOrder = async (customerInfo: CustomerInfo) => {
+    try {
+      // Préparer les données de la commande
+      const orderItems = items.map(item => {
+        let variantId: string | undefined;
+
+        if (item.variant && item.product.variants) {
+          const selectedVariant = item.product.variants.find(v => v.color === item.variant);
+          variantId = selectedVariant?.id;
+        }
+
+        const price = typeof item.product.price === 'string'
+          ? parseFloat(item.product.price)
+          : item.product.price;
+
+        return {
+          productId: item.product.id,
+          variantId,
+          quantity: item.quantity,
+          price,
+          productName: item.product.name,
+          variantColor: item.variant,
+        };
+      });
+
+      const totalAmount = getCartTotal();
+
+      // Appeler l'API de création de commande
+      const response = await fetch('/api/orders/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          customerInfo,
+          items: orderItems,
+          totalAmount,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        return {
+          success: false,
+          error: data.error || 'Erreur lors de la création de la commande',
+        };
+      }
+
+      // Commande créée avec succès, vider le panier
+      clearCart();
+
+      return {
+        success: true,
+        order: data.order,
+      };
+    } catch (error) {
+      console.error('Erreur createOrder:', error);
+      return {
+        success: false,
+        error: 'Erreur réseau lors de la création de la commande',
+      };
+    }
+  };
+
   const value: CartContextType = {
     items,
     addToCart,
@@ -184,6 +293,8 @@ export function CartProvider({ children, initialItems }: { children: ReactNode; 
     getCartTotal,
     getItemCount,
     isInCart,
+    prepareOrderItems,
+    createOrder,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

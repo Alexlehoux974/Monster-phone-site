@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { getDashboardStats } from '@/lib/supabase/admin';
-import { supabase } from '@/lib/supabase/client';
+import { createClient } from '@/lib/supabase/client';
 import {
   Package,
   CheckCircle,
@@ -36,6 +36,7 @@ export default function AdminDashboard() {
       // Wait a tiny bit for session to be available
       await new Promise(resolve => setTimeout(resolve, 100));
 
+      const supabase = createClient();
       const { data: { session } } = await supabase.auth.getSession();
 
       console.log('🔵 Dashboard: Session found?', !!session);

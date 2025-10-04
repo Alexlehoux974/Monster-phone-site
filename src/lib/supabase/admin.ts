@@ -1,4 +1,4 @@
-import { supabase } from './client';
+import { createClient } from './client';
 
 // ========================================
 // Types
@@ -45,6 +45,7 @@ export interface PromoBanner {
 // ========================================
 
 export async function signInAdmin(email: string, password: string) {
+  const supabase = createClient();
 
   try {
     console.log('🔵 Step 1: Verifying admin status...');
@@ -104,11 +105,13 @@ export async function signInAdmin(email: string, password: string) {
 }
 
 export async function signOutAdmin() {
+  const supabase = createClient();
   const { error } = await supabase.auth.signOut();
   return { error };
 }
 
 export async function getAdminSession() {
+  const supabase = createClient();
   const { data: { session }, error } = await supabase.auth.getSession();
 
   if (error || !session) {
@@ -159,6 +162,7 @@ export async function updateProductStock(
   newStock: number,
   reason: string = 'Mise à jour manuelle'
 ) {
+  const supabase = createClient();
 
   const { error } = await supabase.rpc('update_product_stock', {
     p_product_id: productId,
@@ -175,6 +179,7 @@ export async function updateProductStock(
 }
 
 export async function getStockHistory(productId: string) {
+  const supabase = createClient();
 
   const { data, error } = await supabase
     .from('product_stock_history')
@@ -186,11 +191,93 @@ export async function getStockHistory(productId: string) {
   return { data, error };
 }
 
+/**
+ * Déduire le stock après une commande validée
+ * Gère les produits avec variants ET sans variants
+ */
+export async function deductStockAfterOrder(orderItems: {
+  productId: string;
+  variantId?: string;
+  quantity: number;
+}[]) {
+  const supabase = createClient();
+  const results = [];
+
+  for (const item of orderItems) {
+    try {
+      if (item.variantId) {
+        // Produit avec variant: mettre à jour product_variants.stock
+        const { data: variant, error: fetchError } = await supabase
+          .from('product_variants')
+          .select('stock')
+          .eq('id', item.variantId)
+          .single();
+
+        if (fetchError) {
+          console.error(`❌ Erreur récupération variant ${item.variantId}:`, fetchError);
+          results.push({ productId: item.productId, variantId: item.variantId, success: false, error: fetchError });
+          continue;
+        }
+
+        const newStock = Math.max(0, (variant.stock || 0) - item.quantity);
+
+        const { error: updateError } = await supabase
+          .from('product_variants')
+          .update({ stock: newStock })
+          .eq('id', item.variantId);
+
+        if (updateError) {
+          console.error(`❌ Erreur mise à jour stock variant ${item.variantId}:`, updateError);
+          results.push({ productId: item.productId, variantId: item.variantId, success: false, error: updateError });
+        } else {
+          console.log(`✅ Stock variant ${item.variantId} mis à jour: ${variant.stock} → ${newStock}`);
+          results.push({ productId: item.productId, variantId: item.variantId, success: true, oldStock: variant.stock, newStock });
+        }
+      } else {
+        // Produit sans variant: mettre à jour products.stock_quantity
+        const { data: product, error: fetchError } = await supabase
+          .from('products')
+          .select('stock_quantity')
+          .eq('id', item.productId)
+          .single();
+
+        if (fetchError) {
+          console.error(`❌ Erreur récupération produit ${item.productId}:`, fetchError);
+          results.push({ productId: item.productId, success: false, error: fetchError });
+          continue;
+        }
+
+        const newStock = Math.max(0, (product.stock_quantity || 0) - item.quantity);
+
+        const { error: updateError } = await supabase
+          .from('products')
+          .update({ stock_quantity: newStock })
+          .eq('id', item.productId);
+
+        if (updateError) {
+          console.error(`❌ Erreur mise à jour stock produit ${item.productId}:`, updateError);
+          results.push({ productId: item.productId, success: false, error: updateError });
+        } else {
+          console.log(`✅ Stock produit ${item.productId} mis à jour: ${product.stock_quantity} → ${newStock}`);
+          results.push({ productId: item.productId, success: true, oldStock: product.stock_quantity, newStock });
+        }
+      }
+    } catch (error) {
+      console.error(`❌ Erreur inattendue pour l'article:`, item, error);
+      results.push({ productId: item.productId, variantId: item.variantId, success: false, error });
+    }
+  }
+
+  const allSuccess = results.every(r => r.success);
+  return { success: allSuccess, results };
+}
+
 // ========================================
 // Promo Banners Management
 // ========================================
 
 export async function getActiveBanners() {
+  const supabase = createClient();
 
   const { data, error } = await supabase
     .from('promo_banners')
@@ -204,6 +291,7 @@ export async function getActiveBanners() {
 }
 
 export async function getAllBanners() {
+  const supabase = createClient();
 
   const { data, error } = await supabase
     .from('promo_banners')
@@ -214,6 +302,7 @@ export async function getAllBanners() {
 }
 
 export async function createBanner(banner: Omit<PromoBanner, 'id' | 'created_at' | 'updated_at'>) {
+  const supabase = createClient();
 
   const { data, error } = await supabase
     .from('promo_banners')
@@ -225,6 +314,7 @@ export async function createBanner(banner: Omit<PromoBanner, 'id' | 'created_at'
 }
 
 export async function updateBanner(id: string, updates: Partial<PromoBanner>) {
+  const supabase = createClient();
 
   const { data, error } = await supabase
     .from('promo_banners')
@@ -237,6 +327,7 @@ export async function updateBanner(id: string, updates: Partial<PromoBanner>) {
 }
 
 export async function deleteBanner(id: string) {
+  const supabase = createClient();
 
   const { error } = await supabase
     .from('promo_banners')
@@ -251,6 +342,7 @@ export async function deleteBanner(id: string) {
 // ========================================
 
 export async function addProductToCollection(collectionId: string, productId: string, displayOrder: number = 0) {
+  const supabase = createClient();
 
   const { data, error } = await supabase
     .from('collection_products')
@@ -266,6 +358,7 @@ export async function addProductToCollection(collectionId: string, productId: st
 }
 
 export async function removeProductFromCollection(collectionId: string, productId: string) {
+  const supabase = createClient();
 
   const { error } = await supabase
     .from('collection_products')
@@ -277,6 +370,7 @@ export async function removeProductFromCollection(collectionId: string, productI
 }
 
 export async function getCollectionProducts(collectionId: string) {
+  const supabase = createClient();
 
   const { data, error } = await supabase
     .from('collection_products')
@@ -291,6 +385,7 @@ export async function getCollectionProducts(collectionId: string) {
 }
 
 export async function updateCollectionProductOrder(id: string, newOrder: number) {
+  const supabase = createClient();
 
   const { error } = await supabase
     .from('collection_products')
@@ -310,6 +405,7 @@ export async function updateProductPrice(
   originalPrice?: number,
   discount?: number
 ) {
+  const supabase = createClient();
 
   const updates: any = {
     price,
@@ -330,6 +426,7 @@ export async function updateProductPrice(
 }
 
 export async function updateProductStatus(productId: string, status: 'active' | 'draft' | 'out-of-stock') {
+  const supabase = createClient();
 
   const { data, error } = await supabase
     .from('products')
@@ -346,6 +443,7 @@ export async function updateProductStatus(productId: string, status: 'active' | 
 // ========================================
 
 export async function getDashboardStats() {
+  const supabase = createClient();
 
   // Total products
   const { count: totalProducts } = await supabase
