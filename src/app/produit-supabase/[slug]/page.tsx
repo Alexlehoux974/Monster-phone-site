@@ -5,7 +5,8 @@ import { useParams } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ProductDetail from '@/components/ProductDetail';
-import { supabase } from '@/lib/supabase/client';
+import { createClient } from '@/lib/supabase/client';
+const supabase = createClient();
 import { Loader2, AlertCircle, Package } from 'lucide-react';
 
 interface SupabaseProduct {

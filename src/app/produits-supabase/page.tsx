@@ -13,7 +13,7 @@ import { Button } from '@/components/ui/button';
 import { Filter, X, Search, Package } from 'lucide-react';
 import ProductCardSkeleton from '@/components/ProductCardSkeleton';
 import ProductCard from '@/components/ProductCard';
-import { supabase } from '@/lib/supabase/client';
+import { createClient } from '@/lib/supabase/client';
 import { supabaseProductToLegacy } from '@/lib/supabase/adapters';
 import { formatPrice } from '@/lib/utils';
 
@@ -87,10 +87,12 @@ function ProduitsSupabasePageContent() {
 
   // Charger les produits depuis Supabase
   useEffect(() => {
+    const supabase = createClient();
+
     const fetchProducts = async () => {
       try {
         setIsLoading(true);
-        
+
         // Récupérer d'abord les produits de base
         const { data: productsData, error: productsError } = await supabase
           .from('products')
@@ -183,12 +185,18 @@ function ProduitsSupabasePageContent() {
           table: 'products',
         },
         (payload) => {
-          console.log('🔄 [REALTIME] Product stock updated:', payload.new);
-          // Update the product stock_quantity
+          console.log('🔄 [REALTIME] Product updated:', payload.new);
+          // Update product stock and pricing
           setProducts((prevProducts) =>
             prevProducts.map((product) =>
               product.id === payload.new.id
-                ? { ...product, stock_quantity: payload.new.stock_quantity }
+                ? {
+                    ...product,
+                    stock_quantity: payload.new.stock_quantity,
+                    price: payload.new.price,
+                    original_price: payload.new.original_price,
+                    discount: payload.new.discount,
+                  }
                 : product
             )
           );

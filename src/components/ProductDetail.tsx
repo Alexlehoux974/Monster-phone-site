@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Star, Shield, Truck, RefreshCw, Clock, Award, ChevronRight, ChevronLeft, Check, Package, Phone, CreditCard, Lock, Heart, Share2, Minus, Plus, ZoomIn } from 'lucide-react';
 import { Product, ProductVariant } from '@/data/products';
@@ -13,6 +13,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
+import { createClient } from '@/lib/supabase/client';
 
 interface ProductDetailProps {
   product: Product;
@@ -21,14 +22,57 @@ interface ProductDetailProps {
 export default function ProductDetail({ product }: ProductDetailProps) {
   const { addToCart } = useCart();
   // Sélectionner le variant par défaut ou le premier disponible avec du stock
-  const defaultVariant = product.variants?.find(v => v.is_default) || 
-                        product.variants?.find(v => v.stock > 0) || 
+  const defaultVariant = product.variants?.find(v => v.is_default) ||
+                        product.variants?.find(v => v.stock > 0) ||
                         product.variants?.[0];
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | undefined>(defaultVariant);
+  const [variants, setVariants] = useState<ProductVariant[]>(product.variants || []);
+  const [productPrice, setProductPrice] = useState(product.price);
+  const [productStockQuantity, setProductStockQuantity] = useState(product.stockQuantity || 0);
   const [quantity, setQuantity] = useState(1);
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false);
+
+  // Setup real-time subscription for stock and price updates
+  useEffect(() => {
+    const supabase = createClient();
+
+    // Subscribe to variant stock changes
+    const channel = supabase
+      .channel('product-detail-realtime')
+      .on('postgres_changes', {
+        event: 'UPDATE',
+        schema: 'public',
+        table: 'product_variants',
+        filter: `product_id=eq.${product.id}`
+      }, (payload) => {
+        console.log('🔄 [REALTIME] Variant stock updated:', payload.new);
+        // Update variants state
+        setVariants(prev => prev.map(v =>
+          v.id === payload.new.id ? { ...v, stock: payload.new.stock } : v
+        ));
+        // Update selected variant if it's the one that changed
+        if (selectedVariant?.id === payload.new.id) {
+          setSelectedVariant(prev => prev ? { ...prev, stock: payload.new.stock } : prev);
+        }
+      })
+      .on('postgres_changes', {
+        event: 'UPDATE',
+        schema: 'public',
+        table: 'products',
+        filter: `id=eq.${product.id}`
+      }, (payload) => {
+        console.log('🔄 [REALTIME] Product updated:', payload.new);
+        setProductPrice(payload.new.price);
+        setProductStockQuantity(payload.new.stock_quantity || 0);
+      })
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [product.id, selectedVariant?.id]);
 
   // Combiner toutes les images : produit principal + images de toutes les variantes
   const getAllImages = () => {
@@ -63,16 +107,16 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   const allImages = getAllImages();
   const mainImage = allImages[selectedImageIndex]?.src || product.images[0];
 
-  // Prix avec réduction
-  const currentPrice = product.price;
-  const originalPrice = product.originalPrice || product.price;
+  // Prix avec réduction (utiliser productPrice pour le temps réel)
+  const currentPrice = productPrice;
+  const originalPrice = product.originalPrice || productPrice;
   const hasDiscount = product.discount && product.discount > 0;
   const savings = hasDiscount ? originalPrice - currentPrice : 0;
 
-  // Stock de la variante sélectionnée ou stock total des variantes
-  const currentStock = product.variants && product.variants.length > 0
+  // Stock de la variante sélectionnée ou stock du produit principal (utiliser productStockQuantity pour le temps réel)
+  const currentStock = variants && variants.length > 0
     ? (selectedVariant?.stock || 0)
-    : (product.variants?.reduce((sum, v) => sum + (v.stock || 0), 0) || 0);
+    : productStockQuantity;
   const isInStock = currentStock > 0;
   const isLowStock = currentStock > 0 && currentStock <= 5;
   const isOutOfStock = currentStock === 0;
@@ -330,7 +374,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           </div>
 
           {/* Sélecteur de variantes */}
-          {product.variants && product.variants.length > 0 && (
+          {variants && variants.length > 0 && (
             <div>
               <Label className="text-base font-semibold mb-3 block">
                 Couleur : <span className="font-normal">{selectedVariant?.color}</span>
@@ -338,14 +382,14 @@ export default function ProductDetail({ product }: ProductDetailProps) {
               <RadioGroup
                 value={selectedVariant?.color}
                 onValueChange={(value) => {
-                  const variant = product.variants?.find(v => v.color === value);
+                  const variant = variants?.find(v => v.color === value);
                   setSelectedVariant(variant);
                   setSelectedImageIndex(0);
                   setQuantity(1);
                 }}
                 className="flex flex-wrap gap-2"
               >
-                {product.variants.map((variant) => (
+                {variants.map((variant) => (
                   <div key={variant.color} className="relative">
                     <RadioGroupItem
                       value={variant.color}

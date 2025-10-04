@@ -1,7 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { supabase } from '@/lib/supabase/client';
+import { createClient } from '@/lib/supabase/client';
+const supabase = createClient();
 import SearchBar from '@/components/admin/SearchBar';
 import LoadingSpinner from '@/components/admin/LoadingSpinner';
 import Toast from '@/components/admin/Toast';
@@ -117,13 +118,22 @@ export default function PricingManagementPage() {
         discount: editingData.discount,
       };
 
-      // @ts-ignore - Supabase type issue
-      const { error } = await supabase
-        .from('products')
-        .update(updates)
-        .eq('id', productId);
+      // Update via API route (uses service_role to bypass RLS)
+      const response = await fetch('/api/admin/supabase', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          operation: 'update',
+          table: 'products',
+          data: updates,
+          filters: [{ column: 'id', value: productId }],
+        }),
+      });
 
-      if (error) throw error;
+      const result = await response.json();
+      if (!response.ok || result.error) {
+        throw new Error(result.error || 'Failed to update pricing');
+      }
 
       setProducts((prev) =>
         prev.map((p) => (p.id === productId ? { ...p, ...updates } : p))

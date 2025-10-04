@@ -74,6 +74,7 @@ export default function StockManagementPage() {
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editingStock, setEditingStock] = useState<number>(0);
+  const [editingPrice, setEditingPrice] = useState<number>(0);
   const [toast, setToast] = useState<{
     message: string;
     type: 'success' | 'error' | 'warning' | 'info';
@@ -215,11 +216,13 @@ export default function StockManagementPage() {
   const startEditing = (row: VariantRow) => {
     setEditingId(row.id);
     setEditingStock(row.stock);
+    setEditingPrice(row.price);
   };
 
   const cancelEditing = () => {
     setEditingId(null);
     setEditingStock(0);
+    setEditingPrice(0);
   };
 
   const saveStock = async (rowId: string) => {
@@ -228,37 +231,74 @@ export default function StockManagementPage() {
       if (!row) return;
 
       if (row.isVariant) {
-        // Update variant stock
-        const { error } = await supabase
-          .from('product_variants')
-          .update({ stock: editingStock })
-          .eq('id', row.variantId);
+        // Update variant stock via API route (uses service_role to bypass RLS)
+        const stockResponse = await fetch('/api/admin/update-stock', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            variantId: row.variantId,
+            stock: editingStock
+          })
+        });
 
-        if (error) throw error;
+        const stockResult = await stockResponse.json();
+        if (!stockResponse.ok || stockResult.error) {
+          throw new Error(stockResult.error || 'Failed to update stock');
+        }
 
         console.log(`Stock updated for ${row.productName} - ${row.color}: ${editingStock}`);
+
+        // Update product price via generic API route
+        const priceResponse = await fetch('/api/admin/supabase', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            operation: 'update',
+            table: 'products',
+            data: { price: editingPrice },
+            filters: [{ column: 'id', value: row.productId }]
+          })
+        });
+
+        const priceResult = await priceResponse.json();
+        if (!priceResponse.ok || priceResult.error) {
+          throw new Error(priceResult.error || 'Failed to update price');
+        }
+
+        console.log(`Price updated for ${row.productName}: ${editingPrice}€`);
 
         // Update the row in state
         setVariantRows((prev) =>
           prev.map((r) =>
-            r.id === rowId ? { ...r, stock: editingStock } : r
+            r.id === rowId ? { ...r, stock: editingStock, price: editingPrice } : r
           )
         );
       } else {
         // Fallback for products without variants (backward compatibility)
-        const { error } = await supabase
-          .from('products')
-          .update({
-            stock_quantity: editingStock,
-            status: editingStock === 0 ? 'out-of-stock' : 'active',
+        // Update both stock and price via API route
+        const response = await fetch('/api/admin/supabase', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            operation: 'update',
+            table: 'products',
+            data: {
+              stock_quantity: editingStock,
+              price: editingPrice,
+              status: editingStock === 0 ? 'out-of-stock' : 'active',
+            },
+            filters: [{ column: 'id', value: row.productId }]
           })
-          .eq('id', row.productId);
+        });
 
-        if (error) throw error;
+        const result = await response.json();
+        if (!response.ok || result.error) {
+          throw new Error(result.error || 'Failed to update product');
+        }
 
         setVariantRows((prev) =>
           prev.map((r) =>
-            r.id === rowId ? { ...r, stock: editingStock } : r
+            r.id === rowId ? { ...r, stock: editingStock, price: editingPrice } : r
           )
         );
       }
@@ -280,11 +320,11 @@ export default function StockManagementPage() {
         console.error('Revalidation error:', revalidateError);
       }
 
-      showToast('Stock mis à jour et site rafraîchi', 'success');
+      showToast('Stock et prix mis à jour avec succès', 'success');
       cancelEditing();
     } catch (error) {
-      console.error('Error updating stock:', error);
-      showToast('Erreur lors de la mise à jour du stock', 'error');
+      console.error('Error updating stock/price:', error);
+      showToast('Erreur lors de la mise à jour', 'error');
     }
   };
 
@@ -497,9 +537,25 @@ export default function StockManagementPage() {
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-white">
-                      {row.price?.toFixed(2)} €
-                    </div>
+                    {editingId === row.id ? (
+                      <div className="flex items-center gap-1">
+                        <input
+                          type="number"
+                          value={editingPrice}
+                          onChange={(e) =>
+                            setEditingPrice(parseFloat(e.target.value) || 0)
+                          }
+                          min="0"
+                          step="0.01"
+                          className="w-24 px-3 py-1 bg-gray-700 border border-gray-600 rounded text-white focus:outline-none focus:ring-2 focus:ring-red-500"
+                        />
+                        <span className="text-sm text-gray-400">€</span>
+                      </div>
+                    ) : (
+                      <div className="text-sm text-white">
+                        {row.price?.toFixed(2)} €
+                      </div>
+                    )}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     {editingId === row.id ? (

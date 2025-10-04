@@ -11,7 +11,8 @@ import {
   getDiscountedProducts,
   getNewProducts
 } from '@/lib/supabase/api';
-import { ProductFullView, supabase } from '@/lib/supabase/client';
+import { ProductFullView, createClient } from '@/lib/supabase/client';
+const supabase = createClient();
 import { MENU_STRUCTURE, getSupabaseSlug } from '@/lib/supabase/menu-structure';
 
 /**
