@@ -11,7 +11,7 @@ import {
   getDiscountedProducts,
   getNewProducts
 } from '@/lib/supabase/api';
-import { ProductFullView, createClient } from '@/lib/supabase/client';
+import { ProductFullView, supabase } from '@/lib/supabase/client';
 import { MENU_STRUCTURE, getSupabaseSlug } from '@/lib/supabase/menu-structure';
 
 /**
@@ -341,8 +341,6 @@ export function useProductWithVariants(slug: string) {
   useEffect(() => {
     async function fetchProduct() {
       try {
-        const supabase = createClient();
-        
         // Fetch product with variants
         const { data, error } = await supabase
           .from('products')

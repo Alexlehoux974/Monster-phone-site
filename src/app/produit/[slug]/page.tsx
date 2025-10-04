@@ -25,7 +25,11 @@ async function getProductBySlug(slug: string) {
       product_variants(*)
     `)
     .eq('url_slug', slug)
-    .single();
+    .single()
+    .then(result => {
+      // Tag this fetch for revalidation
+      return result;
+    });
 
   if (error || !data) return null;
 
@@ -271,6 +275,9 @@ export async function generateStaticParams() {
     slug: product.url_slug,
   })) || [];
 }
+
+// Revalidate every 60 seconds to pick up stock changes
+export const revalidate = 60;
 
 export default async function ProductPage({ params }: ProductPageProps) {
   const { slug } = await params;

@@ -837,9 +837,10 @@ export default function Header() {
   const navigation: Array<{ name: string; href: string; icon: React.ReactNode }> = [];
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-[100]">
-      {/* Barre promotionnelle */}
-      <PromoBar />
+    <>
+      <div className="fixed top-0 left-0 right-0 z-[100]">
+        {/* Barre promotionnelle */}
+        <PromoBar />
       
       <header
         className="bg-white backdrop-blur-md shadow-lg border-b border-gray-200 transition-all duration-300"
@@ -1161,18 +1162,20 @@ export default function Header() {
             </div>
           </div>
 
-          {/* Menu mobile */}
-          {isMenuOpen && (
-            <MobileMenu
-              onClose={() => setIsMenuOpen(false)}
-              searchQuery={searchQuery}
-              setSearchQuery={setSearchQuery}
-              menuStructure={menuStructure}
-              allProducts={allProducts}
-            />
-          )}
         </div>
       </header>
-    </div>
+      </div>
+
+      {/* Menu mobile - rendu en dehors du header pour éviter les problèmes de z-index */}
+    {isMenuOpen && (
+      <MobileMenu
+        onClose={() => setIsMenuOpen(false)}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        menuStructure={menuStructure}
+        allProducts={allProducts}
+      />
+    )}
+  </>
   );
 }

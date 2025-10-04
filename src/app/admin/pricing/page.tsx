@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { createClient } from '@/lib/supabase/client';
+import { supabase } from '@/lib/supabase/client';
 import SearchBar from '@/components/admin/SearchBar';
 import LoadingSpinner from '@/components/admin/LoadingSpinner';
 import Toast from '@/components/admin/Toast';
@@ -41,7 +41,6 @@ export default function PricingManagementPage() {
     type: 'success' | 'error' | 'warning' | 'info';
   } | null>(null);
 
-  const supabase = createClient();
 
   useEffect(() => {
     loadProducts();
@@ -118,6 +117,7 @@ export default function PricingManagementPage() {
         discount: editingData.discount,
       };
 
+      // @ts-ignore - Supabase type issue
       const { error } = await supabase
         .from('products')
         .update(updates)

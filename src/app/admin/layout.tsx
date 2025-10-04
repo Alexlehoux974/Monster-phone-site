@@ -42,13 +42,17 @@ export default function AdminLayout({
 
   useEffect(() => {
     const checkAdmin = async () => {
+      console.log('[ADMIN LAYOUT] Checking admin session...');
       const { session, admin: adminData } = await getAdminSession();
+      console.log('[ADMIN LAYOUT] Session result:', { hasSession: !!session, hasAdmin: !!adminData, admin: adminData });
 
       if (!adminData || !session) {
+        console.log('[ADMIN LAYOUT] No admin or session, redirecting to login');
         router.push('/admin/login');
         return;
       }
 
+      console.log('[ADMIN LAYOUT] Admin authenticated, setting state');
       setAdmin(adminData);
       setLoading(false);
     };

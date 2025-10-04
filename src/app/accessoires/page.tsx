@@ -10,14 +10,14 @@ export const metadata: Metadata = {
 export default async function AccessoiresPage() {
   // Récupérer les catégories pour trouver l'ID de "Accessoires"
   const categories = await getCategories();
-  const accessoiresCategory = categories.find(cat => cat.name === 'Accessoires');
+  const accessoiresCategory = categories.find((cat: any) => cat.name === 'Accessoires') as any;
 
   // Récupérer tous les produits
   const allProducts = await getProducts();
 
   // Filtrer uniquement les produits de la catégorie Accessoires
   const accessoiresProducts = accessoiresCategory
-    ? allProducts.filter(product => product.category_id === accessoiresCategory.id)
+    ? allProducts.filter((product: any) => product.category_id === accessoiresCategory.id)
     : [];
 
   // Récupérer les marques

@@ -1,4 +1,4 @@
-import { createClient } from './client';
+import { supabase } from './client';
 
 // ========================================
 // Types
@@ -45,7 +45,6 @@ export interface PromoBanner {
 // ========================================
 
 export async function signInAdmin(email: string, password: string) {
-  const supabase = createClient();
 
   try {
     console.log('🔵 Step 1: Verifying admin status...');
@@ -105,13 +104,11 @@ export async function signInAdmin(email: string, password: string) {
 }
 
 export async function signOutAdmin() {
-  const supabase = createClient();
   const { error } = await supabase.auth.signOut();
   return { error };
 }
 
 export async function getAdminSession() {
-  const supabase = createClient();
   const { data: { session }, error } = await supabase.auth.getSession();
 
   if (error || !session) {
@@ -162,7 +159,6 @@ export async function updateProductStock(
   newStock: number,
   reason: string = 'Mise à jour manuelle'
 ) {
-  const supabase = createClient();
 
   const { error } = await supabase.rpc('update_product_stock', {
     p_product_id: productId,
@@ -179,7 +175,6 @@ export async function updateProductStock(
 }
 
 export async function getStockHistory(productId: string) {
-  const supabase = createClient();
 
   const { data, error } = await supabase
     .from('product_stock_history')
@@ -196,7 +191,6 @@ export async function getStockHistory(productId: string) {
 // ========================================
 
 export async function getActiveBanners() {
-  const supabase = createClient();
 
   const { data, error } = await supabase
     .from('promo_banners')
@@ -210,7 +204,6 @@ export async function getActiveBanners() {
 }
 
 export async function getAllBanners() {
-  const supabase = createClient();
 
   const { data, error } = await supabase
     .from('promo_banners')
@@ -221,7 +214,6 @@ export async function getAllBanners() {
 }
 
 export async function createBanner(banner: Omit<PromoBanner, 'id' | 'created_at' | 'updated_at'>) {
-  const supabase = createClient();
 
   const { data, error } = await supabase
     .from('promo_banners')
@@ -233,7 +225,6 @@ export async function createBanner(banner: Omit<PromoBanner, 'id' | 'created_at'
 }
 
 export async function updateBanner(id: string, updates: Partial<PromoBanner>) {
-  const supabase = createClient();
 
   const { data, error } = await supabase
     .from('promo_banners')
@@ -246,7 +237,6 @@ export async function updateBanner(id: string, updates: Partial<PromoBanner>) {
 }
 
 export async function deleteBanner(id: string) {
-  const supabase = createClient();
 
   const { error } = await supabase
     .from('promo_banners')
@@ -261,7 +251,6 @@ export async function deleteBanner(id: string) {
 // ========================================
 
 export async function addProductToCollection(collectionId: string, productId: string, displayOrder: number = 0) {
-  const supabase = createClient();
 
   const { data, error } = await supabase
     .from('collection_products')
@@ -277,7 +266,6 @@ export async function addProductToCollection(collectionId: string, productId: st
 }
 
 export async function removeProductFromCollection(collectionId: string, productId: string) {
-  const supabase = createClient();
 
   const { error } = await supabase
     .from('collection_products')
@@ -289,7 +277,6 @@ export async function removeProductFromCollection(collectionId: string, productI
 }
 
 export async function getCollectionProducts(collectionId: string) {
-  const supabase = createClient();
 
   const { data, error } = await supabase
     .from('collection_products')
@@ -304,7 +291,6 @@ export async function getCollectionProducts(collectionId: string) {
 }
 
 export async function updateCollectionProductOrder(id: string, newOrder: number) {
-  const supabase = createClient();
 
   const { error } = await supabase
     .from('collection_products')
@@ -324,7 +310,6 @@ export async function updateProductPrice(
   originalPrice?: number,
   discount?: number
 ) {
-  const supabase = createClient();
 
   const updates: any = {
     price,
@@ -345,7 +330,6 @@ export async function updateProductPrice(
 }
 
 export async function updateProductStatus(productId: string, status: 'active' | 'draft' | 'out-of-stock') {
-  const supabase = createClient();
 
   const { data, error } = await supabase
     .from('products')
@@ -362,7 +346,6 @@ export async function updateProductStatus(productId: string, status: 'active' | 
 // ========================================
 
 export async function getDashboardStats() {
-  const supabase = createClient();
 
   // Total products
   const { count: totalProducts } = await supabase

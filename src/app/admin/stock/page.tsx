@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { createClient } from '@/lib/supabase/client';
+import { supabase } from '@/lib/supabase/client';
 import SearchBar from '@/components/admin/SearchBar';
 import LoadingSpinner from '@/components/admin/LoadingSpinner';
 import Toast from '@/components/admin/Toast';
@@ -16,6 +16,15 @@ import {
   TrendingDown,
 } from 'lucide-react';
 
+interface ProductVariant {
+  id: string;
+  product_id: string;
+  color: string;
+  color_code?: string;
+  stock: number;
+  is_default: boolean;
+}
+
 interface Product {
   id: string;
   name: string;
@@ -25,6 +34,20 @@ interface Product {
   price: number;
   category_id: string;
   brand_id: string;
+  product_variants?: ProductVariant[];
+}
+
+interface VariantRow {
+  id: string;
+  variantId: string;
+  productId: string;
+  productName: string;
+  sku: string;
+  color: string;
+  colorCode?: string;
+  stock: number;
+  price: number;
+  isVariant: boolean;
 }
 
 interface Brand {
@@ -38,7 +61,10 @@ interface Category {
 }
 
 export default function StockManagementPage() {
+  console.log('[ADMIN STOCK] Component rendering...');
+
   const [products, setProducts] = useState<Product[]>([]);
+  const [variantRows, setVariantRows] = useState<VariantRow[]>([]);
   const [brands, setBrands] = useState<Brand[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
@@ -51,8 +77,6 @@ export default function StockManagementPage() {
     type: 'success' | 'error' | 'warning' | 'info';
   } | null>(null);
 
-  const supabase = createClient();
-
   useEffect(() => {
     loadData();
     setupRealtime();
@@ -60,13 +84,24 @@ export default function StockManagementPage() {
 
   const loadData = async () => {
     try {
-      // Load products
+      console.log('[ADMIN] Starting data load...');
+
+      // Load products with variants
       const { data: productsData, error: productsError } = await supabase
         .from('products')
-        .select('*')
+        .select('*, product_variants(*)')
         .order('name');
 
-      if (productsError) throw productsError;
+      console.log('[ADMIN] Products query result:', {
+        count: productsData?.length,
+        error: productsError,
+        firstProduct: productsData?.[0]
+      });
+
+      if (productsError) {
+        console.error('[ADMIN] Products error:', productsError);
+        throw productsError;
+      }
 
       // Load brands
       const { data: brandsData } = await supabase
@@ -81,10 +116,57 @@ export default function StockManagementPage() {
         .order('name');
 
       setProducts(productsData || []);
+
+      // Transform products to variant rows
+      const rows: VariantRow[] = [];
+      (productsData || []).forEach((product) => {
+        console.log(`[ADMIN] Processing product: ${product.name}`, {
+          has_variants: !!product.product_variants,
+          variant_count: product.product_variants?.length || 0,
+          variants: product.product_variants
+        });
+
+        if (product.product_variants && product.product_variants.length > 0) {
+          // Create a row for each variant
+          product.product_variants.forEach((variant: any) => {
+            rows.push({
+              id: `variant-${variant.id}`,
+              variantId: variant.id,
+              productId: product.id,
+              productName: product.name,
+              sku: product.sku,
+              color: variant.color,
+              colorCode: variant.color_code,
+              stock: variant.stock,
+              price: product.price,
+              isVariant: true,
+            });
+          });
+        } else {
+          // Product without variants - keep old behavior for backward compatibility
+          rows.push({
+            id: `product-${product.id}`,
+            variantId: '',
+            productId: product.id,
+            productName: product.name,
+            sku: product.sku,
+            color: '',
+            colorCode: undefined,
+            stock: product.stock_quantity || 0,
+            price: product.price,
+            isVariant: false,
+          });
+        }
+      });
+
+      console.log('[ADMIN] Total variant rows created:', rows.length);
+      console.log('[ADMIN] First 3 rows:', rows.slice(0, 3));
+
+      setVariantRows(rows);
       setBrands(brandsData || []);
       setCategories(categoriesData || []);
     } catch (error) {
-      console.error('Error loading data:', error);
+      console.error('[ADMIN] Error loading data:', error);
       showToast('Erreur lors du chargement des données', 'error');
     } finally {
       setLoading(false);
@@ -93,22 +175,25 @@ export default function StockManagementPage() {
 
   const setupRealtime = () => {
     const channel = supabase
-      .channel('products-stock-changes')
+      .channel('product-variants-stock-changes')
       .on(
         'postgres_changes',
         {
           event: 'UPDATE',
           schema: 'public',
-          table: 'products',
+          table: 'product_variants',
         },
         (payload) => {
-          console.log('Stock updated:', payload);
-          setProducts((prev) =>
-            prev.map((p) =>
-              p.id === payload.new.id ? { ...p, ...payload.new } : p
+          console.log('Variant stock updated:', payload);
+          // Update the specific variant row
+          setVariantRows((prev) =>
+            prev.map((row) =>
+              row.variantId === payload.new.id
+                ? { ...row, stock: payload.new.stock }
+                : row
             )
           );
-          showToast('Stock mis à jour en temps réel', 'info');
+          showToast('Stock variant mis à jour en temps réel', 'info');
         }
       )
       .subscribe();
@@ -125,9 +210,9 @@ export default function StockManagementPage() {
     setToast({ message, type });
   };
 
-  const startEditing = (product: Product) => {
-    setEditingId(product.id);
-    setEditingStock(product.stock_quantity || 0);
+  const startEditing = (row: VariantRow) => {
+    setEditingId(row.id);
+    setEditingStock(row.stock);
   };
 
   const cancelEditing = () => {
@@ -135,47 +220,65 @@ export default function StockManagementPage() {
     setEditingStock(0);
   };
 
-  const saveStock = async (productId: string) => {
+  const saveStock = async (rowId: string) => {
     try {
-      const product = products.find((p) => p.id === productId);
-      if (!product) return;
+      const row = variantRows.find((r) => r.id === rowId);
+      if (!row) return;
 
-      const newStatus =
-        editingStock === 0
-          ? 'out-of-stock'
-          : editingStock > 0
-          ? 'active'
-          : product.status;
+      if (row.isVariant) {
+        // Update variant stock
+        const { error } = await supabase
+          .from('product_variants')
+          .update({ stock: editingStock })
+          .eq('id', row.variantId);
 
-      const { error } = await supabase
-        .from('products')
-        .update({
-          stock_quantity: editingStock,
-          status: newStatus,
-        })
-        .eq('id', productId);
+        if (error) throw error;
 
-      if (error) throw error;
+        console.log(`Stock updated for ${row.productName} - ${row.color}: ${editingStock}`);
 
-      // Log history
-      await supabase.from('product_stock_history').insert({
-        product_id: productId,
-        previous_stock: product.stock_quantity,
-        new_stock: editingStock,
-        change_amount: editingStock - (product.stock_quantity || 0),
-        change_reason: 'Mise à jour manuelle via admin',
-        admin_email: (await supabase.auth.getUser()).data.user?.email,
-      });
+        // Update the row in state
+        setVariantRows((prev) =>
+          prev.map((r) =>
+            r.id === rowId ? { ...r, stock: editingStock } : r
+          )
+        );
+      } else {
+        // Fallback for products without variants (backward compatibility)
+        const { error } = await supabase
+          .from('products')
+          .update({
+            stock_quantity: editingStock,
+            status: editingStock === 0 ? 'out-of-stock' : 'active',
+          })
+          .eq('id', row.productId);
 
-      setProducts((prev) =>
-        prev.map((p) =>
-          p.id === productId
-            ? { ...p, stock_quantity: editingStock, status: newStatus }
-            : p
-        )
-      );
+        if (error) throw error;
 
-      showToast('Stock mis à jour avec succès', 'success');
+        setVariantRows((prev) =>
+          prev.map((r) =>
+            r.id === rowId ? { ...r, stock: editingStock } : r
+          )
+        );
+      }
+
+      // Revalidate the main site to update stock display
+      try {
+        await fetch('/api/revalidate', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            path: `/produit/${row.sku}`,
+            tag: 'products'
+          }),
+        });
+        console.log('Site revalidated successfully');
+      } catch (revalidateError) {
+        console.error('Revalidation error:', revalidateError);
+      }
+
+      showToast('Stock mis à jour et site rafraîchi', 'success');
       cancelEditing();
     } catch (error) {
       console.error('Error updating stock:', error);
@@ -183,31 +286,27 @@ export default function StockManagementPage() {
     }
   };
 
-  const filteredProducts = products.filter((product) => {
+  const filteredVariantRows = variantRows.filter((row) => {
     const matchesSearch =
       searchQuery === '' ||
-      product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      product.sku?.toLowerCase().includes(searchQuery.toLowerCase());
+      row.productName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      row.sku?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      row.color.toLowerCase().includes(searchQuery.toLowerCase());
 
     const matchesStatus =
       statusFilter === 'all' ||
-      (statusFilter === 'in-stock' && (product.stock_quantity || 0) > 0) ||
-      (statusFilter === 'out-of-stock' &&
-        (product.stock_quantity || 0) === 0) ||
-      (statusFilter === 'low-stock' &&
-        (product.stock_quantity || 0) > 0 &&
-        (product.stock_quantity || 0) < 10);
+      (statusFilter === 'in-stock' && row.stock > 0) ||
+      (statusFilter === 'out-of-stock' && row.stock === 0) ||
+      (statusFilter === 'low-stock' && row.stock > 0 && row.stock < 10);
 
     return matchesSearch && matchesStatus;
   });
 
   const stats = {
-    total: products.length,
-    inStock: products.filter((p) => (p.stock_quantity || 0) > 0).length,
-    outOfStock: products.filter((p) => (p.stock_quantity || 0) === 0).length,
-    lowStock: products.filter(
-      (p) => (p.stock_quantity || 0) > 0 && (p.stock_quantity || 0) < 10
-    ).length,
+    total: variantRows.length,
+    inStock: variantRows.filter((r) => r.stock > 0).length,
+    outOfStock: variantRows.filter((r) => r.stock === 0).length,
+    lowStock: variantRows.filter((r) => r.stock > 0 && r.stock < 10).length,
   };
 
   if (loading) {
@@ -328,21 +427,24 @@ export default function StockManagementPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-700">
-              {filteredProducts.map((product) => (
+              {filteredVariantRows.map((row) => (
                 <tr
-                  key={product.id}
+                  key={row.id}
                   className="hover:bg-gray-700/30 transition-colors"
                 >
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm font-medium text-white">
-                      {product.name}
+                      {row.productName}
+                      {row.isVariant && (
+                        <span className="ml-2 text-gray-400">- {row.color}</span>
+                      )}
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-400">{product.sku}</div>
+                    <div className="text-sm text-gray-400">{row.sku}</div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    {editingId === product.id ? (
+                    {editingId === row.id ? (
                       <input
                         type="number"
                         value={editingStock}
@@ -355,44 +457,53 @@ export default function StockManagementPage() {
                     ) : (
                       <div
                         className={`text-sm font-semibold ${
-                          (product.stock_quantity || 0) === 0
+                          row.stock === 0
                             ? 'text-red-500'
-                            : (product.stock_quantity || 0) < 10
+                            : row.stock < 10
                             ? 'text-orange-500'
                             : 'text-green-500'
                         }`}
                       >
-                        {product.stock_quantity || 0}
+                        {row.stock}
                       </div>
                     )}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <span
-                      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                        (product.stock_quantity || 0) === 0
-                          ? 'bg-red-500/10 text-red-500'
-                          : (product.stock_quantity || 0) < 10
-                          ? 'bg-orange-500/10 text-orange-500'
-                          : 'bg-green-500/10 text-green-500'
-                      }`}
-                    >
-                      {(product.stock_quantity || 0) === 0
-                        ? 'Rupture'
-                        : (product.stock_quantity || 0) < 10
-                        ? 'Stock faible'
-                        : 'En stock'}
-                    </span>
+                    <div className="flex items-center gap-2">
+                      {row.isVariant && row.colorCode && (
+                        <div
+                          className="w-4 h-4 rounded-full border border-gray-600"
+                          style={{ backgroundColor: row.colorCode }}
+                          title={row.color}
+                        />
+                      )}
+                      <span
+                        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                          row.stock === 0
+                            ? 'bg-red-500/10 text-red-500'
+                            : row.stock < 10
+                            ? 'bg-orange-500/10 text-orange-500'
+                            : 'bg-green-500/10 text-green-500'
+                        }`}
+                      >
+                        {row.stock === 0
+                          ? 'Rupture'
+                          : row.stock < 10
+                          ? 'Stock faible'
+                          : 'En stock'}
+                      </span>
+                    </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm text-white">
-                      {product.price?.toFixed(2)} €
+                      {row.price?.toFixed(2)} €
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    {editingId === product.id ? (
+                    {editingId === row.id ? (
                       <div className="flex items-center justify-end gap-2">
                         <button
-                          onClick={() => saveStock(product.id)}
+                          onClick={() => saveStock(row.id)}
                           className="p-2 text-green-500 hover:bg-green-500/10 rounded-lg transition-colors"
                           title="Sauvegarder"
                         >
@@ -408,7 +519,7 @@ export default function StockManagementPage() {
                       </div>
                     ) : (
                       <button
-                        onClick={() => startEditing(product)}
+                        onClick={() => startEditing(row)}
                         className="p-2 text-blue-500 hover:bg-blue-500/10 rounded-lg transition-colors"
                         title="Modifier"
                       >
@@ -421,7 +532,7 @@ export default function StockManagementPage() {
             </tbody>
           </table>
 
-          {filteredProducts.length === 0 && (
+          {filteredVariantRows.length === 0 && (
             <div className="text-center py-12">
               <Package className="w-12 h-12 text-gray-600 mx-auto mb-4" />
               <p className="text-gray-400">Aucun produit trouvé</p>
