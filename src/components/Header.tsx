@@ -418,9 +418,17 @@ const MobileMenu = ({
 
   // Helper pour obtenir les produits d'une catégorie
   const getProductsByCategory = (categoryName: string): Product[] => {
-    return allProducts.filter(p =>
-      p.category.toLowerCase() === categoryName.toLowerCase()
-    );
+    // Nettoyer la catégorie en retirant les emojis et normaliser
+    const cleanCategory = (cat: string) => {
+      return cat.replace(/[📱🎧⌚💡🔧📦]/g, '').trim().toLowerCase();
+    };
+
+    const searchCategory = cleanCategory(categoryName);
+
+    return allProducts.filter(p => {
+      const productCategory = cleanCategory(p.category);
+      return productCategory === searchCategory;
+    });
   };
 
   // Helper pour obtenir les produits d'une marque
@@ -584,7 +592,10 @@ const MobileMenu = ({
 
                   {/* Liste des marques */}
                   {uniqueBrands.map((brand) => {
-                    const brandProducts = getProductsByBrand(brand).filter(p => p.category === activeCategory);
+                    const brandProducts = getProductsByBrand(brand).filter(p => {
+                      const cleanCategory = (cat: string) => cat.replace(/[📱🎧⌚💡🔧📦]/g, '').trim().toLowerCase();
+                      return cleanCategory(p.category) === cleanCategory(activeCategory);
+                    });
                     return (
                       <button
                         key={brand}
@@ -611,8 +622,9 @@ const MobileMenu = ({
         {activeCategory && activeBrand && (
           <div className="p-4 space-y-3">
             {(() => {
+              const cleanCategory = (cat: string) => cat.replace(/[📱🎧⌚💡🔧📦]/g, '').trim().toLowerCase();
               const products = getProductsByBrand(activeBrand)
-                .filter(p => p.category === activeCategory)
+                .filter(p => cleanCategory(p.category) === cleanCategory(activeCategory))
                 .sort((a, b) => (b.price || 0) - (a.price || 0)); // Tri du plus cher au moins cher
 
               return (
