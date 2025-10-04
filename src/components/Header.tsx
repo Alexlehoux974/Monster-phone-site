@@ -463,9 +463,9 @@ const MobileMenu = ({
       />
       
       {/* Menu sliding */}
-      <div className="lg:hidden fixed inset-y-0 right-0 w-full max-w-sm bg-white z-[200] transform transition-transform duration-300 ease-out shadow-2xl animate-slide-in-right">
+      <div className="lg:hidden fixed inset-y-0 right-0 w-full max-w-sm bg-white z-[200] transform transition-transform duration-300 ease-out shadow-2xl animate-slide-in-right flex flex-col">
         {/* Header du menu mobile */}
-        <div className="sticky top-0 bg-white border-b border-gray-200 z-10">
+        <div className="flex-shrink-0 bg-white border-b border-gray-200 z-10">
         <div className="flex items-center justify-between p-4">
           <h2 className="text-lg font-bold text-gray-900">Menu</h2>
           <button
@@ -510,7 +510,7 @@ const MobileMenu = ({
       </div>
 
       {/* Contenu scrollable */}
-      <div className="h-full overflow-y-auto pb-20">
+      <div className="flex-1 overflow-y-auto">
         {/* Vue principale - Catégories */}
         {!activeCategory && (
           <div className="p-4 space-y-2">
@@ -699,7 +699,7 @@ const MobileMenu = ({
       </div>
 
       {/* CTA fixe en bas */}
-      <div className="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4">
+      <div className="flex-shrink-0 bg-white border-t border-gray-200 p-4">
         <Link href="/nos-produits" onClick={onClose}>
           <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-1.5 rounded-lg font-bold text-base shadow-lg hover:shadow-xl transition-all">
             🎮 Découvrir tous nos produits
