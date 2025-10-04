@@ -474,190 +474,106 @@ const MobileMenu = ({
         onClick={onClose}
       />
       
-      {/* Menu mobile moderne */}
+      {/* Menu mobile avec accordéon */}
       <div className="lg:hidden fixed top-0 right-0 bottom-0 w-full max-w-sm bg-white z-[200] shadow-2xl flex flex-col">
-        {/* Header avec design épuré */}
-        <div className="h-16 bg-gradient-to-r from-gray-900 to-gray-800 flex items-center justify-between px-6 shadow-lg flex-shrink-0">
-          <h2 className="text-xl font-bold text-white">Menu</h2>
-          <button onClick={onClose} className="p-2 text-gray-300 hover:text-white transition-colors">
-            <X className="w-6 h-6" />
+        {/* Header */}
+        <div className="h-14 bg-white border-b border-gray-200 flex items-center justify-between px-4 flex-shrink-0">
+          <h2 className="text-lg font-semibold text-gray-900">Menu</h2>
+          <button onClick={onClose} className="p-2 text-gray-500 hover:text-gray-700">
+            <X className="w-5 h-5" />
           </button>
         </div>
 
-        {/* Barre de recherche */}
-        <div className="p-4 bg-gray-50 border-b border-gray-200 flex-shrink-0">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-            <input
-              type="text"
-              placeholder="Rechercher un produit..."
-              className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
-          </div>
-        </div>
+        {/* Liste avec accordéon */}
+        <div className="flex-1 overflow-y-auto">
+          {displayCategories.map((category) => {
+            const cleanName = category.name.replace(/[📱🎧⌚💡🔧📦]/g, '').trim();
+            const isOpen = activeCategory === category.name;
+            const products = getProductsByCategory(category.name);
+            const brands = new Set<string>();
+            products.forEach(p => { if (p.brand) brands.add(p.brand); });
+            const uniqueBrands = Array.from(brands).sort();
 
-        {/* Contenu scrollable - Vue principale */}
-        {!activeCategory && (
-          <div className="flex-1 overflow-y-auto p-4">
-            <div className="space-y-2">
-              {displayCategories.map((category) => {
-                const cleanName = category.name.replace(/[📱🎧⌚💡🔧📦]/g, '').trim();
-                return (
-                  <button
-                    key={category.name}
-                    onClick={() => setActiveCategory(category.name)}
-                    className="w-full flex items-center justify-between p-4 text-left bg-white border border-gray-200 hover:border-blue-500 hover:bg-blue-50 rounded-lg transition-all active:scale-[0.98]"
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center flex-shrink-0">
-                        {getCategoryIcon(category.name)}
-                      </div>
-                      <span className="font-medium text-gray-900">{cleanName}</span>
-                    </div>
-                    <ChevronRight className="w-5 h-5 text-gray-400" />
-                  </button>
-                );
-              })}
-            </div>
+            return (
+              <div key={category.name} className="border-b border-gray-200">
+                {/* Catégorie - bouton accordéon */}
+                <button
+                  onClick={() => setActiveCategory(isOpen ? null : category.name)}
+                  className="w-full flex items-center justify-between p-4 text-left hover:bg-gray-50 transition-colors"
+                >
+                  <div className="flex items-center gap-3">
+                    {getCategoryIcon(category.name)}
+                    <span className="font-medium text-gray-900">{cleanName}</span>
+                  </div>
+                  <ChevronDown className={cn(
+                    "w-5 h-5 text-gray-400 transition-transform",
+                    isOpen && "rotate-180"
+                  )} />
+                </button>
 
-            <Link
-              href="/promotions"
-              onClick={onClose}
-              className="block mt-4 p-4 bg-gradient-to-r from-red-500 to-pink-500 rounded-lg text-white hover:shadow-lg transition-shadow"
-            >
-              <div className="flex items-center gap-3">
-                <Flame className="w-6 h-6" />
-                <span className="font-semibold">Promotions</span>
-              </div>
-            </Link>
-          </div>
-        )}
+                {/* Contenu de l'accordéon - marques et produits */}
+                {isOpen && (
+                  <div className="bg-gray-50 border-t border-gray-200">
+                    {uniqueBrands.map((brand) => {
+                      const isBrandOpen = activeBrand === brand;
+                      const brandProducts = getProductsByBrand(brand).filter(p => {
+                        const cleanCat = (cat: string) => cat.replace(/[📱🎧⌚💡🔧📦]/g, '').trim().toLowerCase();
+                        return cleanCat(p.category) === cleanCat(category.name);
+                      }).sort((a, b) => (b.price || 0) - (a.price || 0));
 
-        {/* Vue des marques */}
-        {activeCategory && !activeBrand && (
-          <div className="flex-1 overflow-y-auto">
-            <button
-              onClick={() => setActiveCategory(null)}
-              className="sticky top-0 w-full p-4 bg-gray-50 border-b border-gray-200 flex items-center gap-2 text-gray-700 hover:text-gray-900 transition-colors"
-            >
-              <ChevronRight className="w-5 h-5 rotate-180" />
-              <span className="font-medium">Retour aux catégories</span>
-            </button>
+                      return (
+                        <div key={brand}>
+                          {/* Marque */}
+                          <button
+                            onClick={() => setActiveBrand(isBrandOpen ? null : brand)}
+                            className="w-full flex items-center justify-between px-4 py-3 text-left hover:bg-gray-100 transition-colors"
+                          >
+                            <div className="flex items-center gap-2 ml-4">
+                              <Package className="w-4 h-4 text-gray-400" />
+                              <span className="text-sm font-medium text-gray-700">{brand}</span>
+                              <span className="text-xs text-gray-500">({brandProducts.length})</span>
+                            </div>
+                            <ChevronDown className={cn(
+                              "w-4 h-4 text-gray-400 transition-transform",
+                              isBrandOpen && "rotate-180"
+                            )} />
+                          </button>
 
-            <div className="p-4 space-y-2">
-              <Link
-                href={`/nos-produits?category=${encodeURIComponent(activeCategory)}`}
-                onClick={onClose}
-                className="block p-4 bg-blue-50 border border-blue-200 rounded-lg hover:bg-blue-100 transition-colors"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="font-medium text-blue-900">Voir tous les {activeCategory.replace(/[📱🎧⌚💡🔧📦]/g, '').trim()}</span>
-                  <ArrowRight className="w-5 h-5 text-blue-600" />
-                </div>
-              </Link>
-
-              {(() => {
-                const products = getProductsByCategory(activeCategory);
-                const brands = new Set<string>();
-                products.forEach(p => { if (p.brand) brands.add(p.brand); });
-                const uniqueBrands = Array.from(brands).sort();
-
-                return uniqueBrands.map((brand) => {
-                  const brandProducts = getProductsByBrand(brand).filter(p => {
-                    const cleanCategory = (cat: string) => cat.replace(/[📱🎧⌚💡🔧📦]/g, '').trim().toLowerCase();
-                    return cleanCategory(p.category) === cleanCategory(activeCategory);
-                  });
-
-                  return (
-                    <button
-                      key={brand}
-                      onClick={() => setActiveBrand(brand)}
-                      className="w-full flex items-center justify-between p-4 text-left bg-white border border-gray-200 hover:border-blue-500 hover:bg-blue-50 rounded-lg transition-all"
-                    >
-                      <div>
-                        <span className="font-medium text-gray-900">{brand}</span>
-                        <span className="block text-sm text-gray-600 mt-1">
-                          {brandProducts.length} produit{brandProducts.length > 1 ? 's' : ''}
-                        </span>
-                      </div>
-                      <ChevronRight className="w-5 h-5 text-gray-400" />
-                    </button>
-                  );
-                });
-              })()}
-            </div>
-          </div>
-        )}
-
-        {/* Vue des produits */}
-        {activeCategory && activeBrand && (
-          <div className="flex-1 overflow-y-auto">
-            <button
-              onClick={() => setActiveBrand(null)}
-              className="sticky top-0 w-full p-4 bg-gray-50 border-b border-gray-200 flex items-center gap-2 text-gray-700 hover:text-gray-900 transition-colors"
-            >
-              <ChevronRight className="w-5 h-5 rotate-180" />
-              <span className="font-medium">Retour aux marques</span>
-            </button>
-
-            <div className="p-4 space-y-3">
-              <Link
-                href={`/nos-produits?category=${encodeURIComponent(activeCategory)}&brand=${encodeURIComponent(activeBrand)}`}
-                onClick={onClose}
-                className="block p-4 bg-green-50 border border-green-200 rounded-lg hover:bg-green-100 transition-colors"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="font-medium text-green-900">Voir tous les produits {activeBrand}</span>
-                  <ArrowRight className="w-5 h-5 text-green-600" />
-                </div>
-              </Link>
-
-              {(() => {
-                const cleanCategory = (cat: string) => cat.replace(/[📱🎧⌚💡🔧📦]/g, '').trim().toLowerCase();
-                const products = getProductsByBrand(activeBrand)
-                  .filter(p => cleanCategory(p.category) === cleanCategory(activeCategory))
-                  .sort((a, b) => (b.price || 0) - (a.price || 0));
-
-                return products.map((product) => (
-                  <Link
-                    key={product.id}
-                    href={`/produit/${product.urlSlug || product.id}`}
-                    onClick={onClose}
-                    className="block p-3 bg-white border border-gray-200 hover:border-blue-500 hover:bg-gray-50 rounded-lg transition-all"
-                  >
-                    <div className="flex items-start gap-3">
-                      {product.images && product.images.length > 0 && (
-                        <div className="w-16 h-16 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
-                          <Image
-                            src={product.images[0]}
-                            alt={product.name}
-                            width={64}
-                            height={64}
-                            className="w-full h-full object-contain"
-                          />
+                          {/* Produits */}
+                          {isBrandOpen && brandProducts.map((product) => (
+                            <Link
+                              key={product.id}
+                              href={`/produit/${product.urlSlug || product.id}`}
+                              onClick={onClose}
+                              className="flex items-center gap-3 px-4 py-2 ml-8 hover:bg-white transition-colors"
+                            >
+                              {product.images && product.images.length > 0 && (
+                                <div className="w-12 h-12 bg-white rounded overflow-hidden flex-shrink-0">
+                                  <Image
+                                    src={product.images[0]}
+                                    alt={product.name}
+                                    width={48}
+                                    height={48}
+                                    className="w-full h-full object-contain"
+                                  />
+                                </div>
+                              )}
+                              <div className="flex-1 min-w-0">
+                                <p className="text-sm text-gray-900 line-clamp-1">{product.name}</p>
+                                {product.price && (
+                                  <p className="text-sm font-semibold text-blue-600">{product.price}</p>
+                                )}
+                              </div>
+                            </Link>
+                          ))}
                         </div>
-                      )}
-                      <div className="flex-1 min-w-0">
-                        <h4 className="font-medium text-gray-900 text-sm line-clamp-2">{product.name}</h4>
-                        {product.price && (
-                          <p className="text-lg font-bold text-blue-600 mt-1">{product.price}</p>
-                        )}
-                      </div>
-                    </div>
-                  </Link>
-                ));
-              })()}
-            </div>
-          </div>
-        )}
-
-        {/* CTA fixe en bas */}
-        <div className="h-20 bg-white border-t border-gray-200 flex items-center px-4 flex-shrink-0">
-          <Link href="/nos-produits" onClick={onClose} className="w-full">
-            <button className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 rounded-lg font-semibold shadow-md hover:shadow-lg transition-all active:scale-[0.98]">
-              Voir tous les produits
-            </button>
-          </Link>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </>
