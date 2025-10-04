@@ -477,55 +477,55 @@ const MobileMenu = ({
       {/* Menu sliding */}
       <div className="lg:hidden fixed inset-y-0 right-0 w-full max-w-sm bg-white z-[200] transform transition-transform duration-300 ease-out shadow-2xl animate-slide-in-right flex flex-col">
         {/* Header du menu mobile */}
-        <div className="flex-shrink-0 bg-white border-b border-gray-200 z-10">
-        <div className="flex items-center justify-between p-4">
-          <h2 className="text-lg font-bold text-gray-900">Menu</h2>
-          <button
-            onClick={onClose}
-            className="p-3 text-gray-500 hover:text-gray-700 rounded-lg hover:bg-gray-100"
-          >
-            <X className="w-6 h-6" />
-          </button>
-        </div>
-        
-        {/* Fil d'ariane */}
-        {(activeCategory || activeBrand) && (
-          <div className="px-2 pb-1.5 flex items-center gap-2 text-sm overflow-x-auto">
+        <div className="flex-shrink-0 bg-white border-b border-gray-200">
+          <div className="flex items-center justify-between p-4">
+            <h2 className="text-lg font-bold text-gray-900">Menu</h2>
             <button
-              onClick={resetNavigation}
-              className="text-blue-600 hover:text-blue-800 whitespace-nowrap"
+              onClick={onClose}
+              className="p-3 text-gray-500 hover:text-gray-700 rounded-lg hover:bg-gray-100"
             >
-              Menu
+              <X className="w-6 h-6" />
             </button>
-            {activeCategory && (
-              <>
-                <ChevronRight className="w-4 h-4 text-gray-400 flex-shrink-0" />
-                <button
-                  onClick={() => setActiveBrand(null)}
-                  className={cn(
-                    "whitespace-nowrap",
-                    activeBrand ? "text-blue-600 hover:text-blue-800" : "text-gray-900"
-                  )}
-                >
-                  {activeCategory}
-                </button>
-              </>
-            )}
-            {activeBrand && (
-              <>
-                <ChevronRight className="w-4 h-4 text-gray-400 flex-shrink-0" />
-                <span className="text-gray-900 whitespace-nowrap">{activeBrand}</span>
-              </>
-            )}
           </div>
-        )}
-      </div>
+
+          {/* Fil d'ariane */}
+          {(activeCategory || activeBrand) && (
+            <div className="px-4 pb-3 flex items-center gap-2 text-sm overflow-x-auto">
+              <button
+                onClick={resetNavigation}
+                className="text-blue-600 hover:text-blue-800 whitespace-nowrap"
+              >
+                Menu
+              </button>
+              {activeCategory && (
+                <>
+                  <ChevronRight className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                  <button
+                    onClick={() => setActiveBrand(null)}
+                    className={cn(
+                      "whitespace-nowrap",
+                      activeBrand ? "text-blue-600 hover:text-blue-800" : "text-gray-900"
+                    )}
+                  >
+                    {activeCategory}
+                  </button>
+                </>
+              )}
+              {activeBrand && (
+                <>
+                  <ChevronRight className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                  <span className="text-gray-900 whitespace-nowrap">{activeBrand}</span>
+                </>
+              )}
+            </div>
+          )}
+        </div>
 
       {/* Contenu scrollable */}
-      <div className="flex-1 overflow-y-auto bg-white">
+      <div className="flex-1 overflow-y-auto bg-white min-h-0">
         {/* DEBUG: Indicateur visuel */}
-        <div className="p-2 bg-yellow-100 text-xs text-center">
-          📍 Menu chargé - {displayCategories.length} catégories
+        <div className="p-2 bg-yellow-100 text-xs text-center font-bold">
+          📍 MENU CHARGÉ - {displayCategories.length} CATÉGORIES
         </div>
 
         {/* Vue principale - Catégories */}
