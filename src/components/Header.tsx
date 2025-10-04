@@ -475,7 +475,7 @@ const MobileMenu = ({
       />
       
       {/* Menu mobile avec accordéon */}
-      <div className="lg:hidden fixed top-0 right-0 bottom-0 w-full max-w-sm bg-white z-[200] shadow-2xl flex flex-col">
+      <div className="lg:hidden fixed inset-0 bg-white z-[200] flex flex-col">
         {/* Header */}
         <div className="h-14 bg-white border-b border-gray-200 flex items-center justify-between px-4 flex-shrink-0">
           <h2 className="text-lg font-semibold text-gray-900">Menu</h2>
