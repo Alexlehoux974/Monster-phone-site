@@ -466,16 +466,18 @@ const MobileMenu = ({
     setActiveBrand(null);
   };
 
+  console.log('🟢 MobileMenu RENDERING!');
+
   return (
     <>
       {/* Backdrop flouté - laisse voir le site en dessous */}
       <div
-        className="lg:hidden fixed inset-0 bg-black/30 backdrop-blur-sm z-[190]"
+        className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[190]"
         onClick={onClose}
       />
 
       {/* Menu mobile moderne - carte flottante avec marges */}
-      <div className="lg:hidden fixed top-[7.5rem] left-4 right-4 bottom-16 bg-white z-[200] flex flex-col rounded-2xl shadow-2xl overflow-hidden">
+      <div className="fixed top-[7.5rem] left-4 right-4 bottom-16 bg-white z-[200] flex flex-col rounded-2xl shadow-2xl overflow-hidden border-4 border-red-500">
         {/* Header */}
         <div className="h-14 bg-white border-b border-gray-200 flex items-center justify-between px-4 flex-shrink-0">
           <h2 className="text-lg font-semibold text-gray-900">Menu</h2>
@@ -1155,7 +1157,10 @@ export default function Header() {
               {/* Menu mobile */}
               <button
                 className="lg:hidden p-1 text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                onClick={() => {
+                  console.log('🔴 MENU CLICKED! Current state:', isMenuOpen);
+                  setIsMenuOpen(!isMenuOpen);
+                }}
               >
                 {isMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
               </button>

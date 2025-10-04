@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
     }
 
     const supabase = createAdminClient();
-    let query;
+    let query: any;
 
     switch (operation) {
       case 'insert':
