@@ -522,7 +522,12 @@ const MobileMenu = ({
       </div>
 
       {/* Contenu scrollable */}
-      <div className="flex-1 overflow-y-auto">
+      <div className="flex-1 overflow-y-auto bg-white">
+        {/* DEBUG: Indicateur visuel */}
+        <div className="p-2 bg-yellow-100 text-xs text-center">
+          📍 Menu chargé - {displayCategories.length} catégories
+        </div>
+
         {/* Vue principale - Catégories */}
         {!activeCategory && (
           <div className="p-4 space-y-2">
@@ -546,7 +551,7 @@ const MobileMenu = ({
                 <button
                   key={category.name}
                   onClick={() => setActiveCategory(category.name)}
-                  className="w-full flex items-center justify-between p-4 text-left bg-gray-50 active:bg-gray-200 rounded-lg transition-colors"
+                  className="w-full flex items-center justify-between p-4 text-left bg-white border-2 border-blue-500 active:bg-blue-50 rounded-lg transition-colors shadow-sm"
                 >
                   <div className="flex items-center gap-3">
                     {getCategoryIcon(category.name)}
