@@ -407,7 +407,7 @@ const MobileMenu = ({
 }) => {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [activeBrand, setActiveBrand] = useState<string | null>(null);
-  
+
   // Empêcher le scroll du body quand le menu est ouvert
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -415,6 +415,18 @@ const MobileMenu = ({
       document.body.style.overflow = 'unset';
     };
   }, []);
+
+  // Catégories statiques de secours si menuStructure est vide
+  const fallbackCategories: CategoryStructure[] = [
+    { name: '📱 Smartphones', slug: 'smartphones', subcategories: [] },
+    { name: '🎧 Audio & Chargement', slug: 'audio', subcategories: [] },
+    { name: '⌚ Montres Connectées', slug: 'montres', subcategories: [] },
+    { name: '💡 Créativité & LED', slug: 'led', subcategories: [] },
+    { name: '🔧 Accessoires', slug: 'accessoires', subcategories: [] },
+  ];
+
+  // Utiliser menuStructure ou fallback
+  const displayCategories = (menuStructure && menuStructure.length > 0) ? menuStructure : fallbackCategories;
 
   // Helper pour obtenir les produits d'une catégorie
   const getProductsByCategory = (categoryName: string): Product[] => {
@@ -530,34 +542,19 @@ const MobileMenu = ({
 
             {/* Catégories principales */}
             <div className="space-y-2">
-              {menuStructure && menuStructure.length > 0 ? (
-                menuStructure.map((category) => (
-                  <button
-                    key={category.name}
-                    onClick={() => setActiveCategory(category.name)}
-                    className="w-full flex items-center justify-between p-4 text-left bg-gray-50 active:bg-gray-200 rounded-lg transition-colors"
-                  >
-                    <div className="flex items-center gap-3">
-                      {getCategoryIcon(category.name)}
-                      <span className="font-medium text-gray-900">{category.name}</span>
-                    </div>
-                    <ChevronRight className="w-5 h-5 text-gray-400" />
-                  </button>
-                ))
-              ) : (
-                <div className="text-center py-8 text-gray-500">
-                  <p className="mb-4">Chargement des catégories...</p>
-                  {/* Fallback: afficher des liens directs */}
-                  <div className="space-y-2">
-                    <Link href="/nos-produits" onClick={onClose} className="block p-4 bg-gray-50 rounded-lg">
-                      Tous nos produits
-                    </Link>
-                    <Link href="/promotions" onClick={onClose} className="block p-4 bg-red-50 rounded-lg">
-                      Promotions
-                    </Link>
+              {displayCategories.map((category) => (
+                <button
+                  key={category.name}
+                  onClick={() => setActiveCategory(category.name)}
+                  className="w-full flex items-center justify-between p-4 text-left bg-gray-50 active:bg-gray-200 rounded-lg transition-colors"
+                >
+                  <div className="flex items-center gap-3">
+                    {getCategoryIcon(category.name)}
+                    <span className="font-medium text-gray-900">{category.name}</span>
                   </div>
-                </div>
-              )}
+                  <ChevronRight className="w-5 h-5 text-gray-400" />
+                </button>
+              ))}
             </div>
 
             {/* Liens rapides */}
