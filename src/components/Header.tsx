@@ -513,7 +513,7 @@ const MobileMenu = ({
 
                 {/* Contenu de l'accordéon - marques et produits */}
                 {isOpen && (
-                  <div className="bg-gray-50 border-t border-gray-200">
+                  <div className="bg-blue-50 border-t border-blue-200 py-2">
                     {uniqueBrands.map((brand) => {
                       const isBrandOpen = activeBrand === brand;
                       const brandProducts = getProductsByBrand(brand).filter(p => {
@@ -522,50 +522,56 @@ const MobileMenu = ({
                       }).sort((a, b) => (b.price || 0) - (a.price || 0));
 
                       return (
-                        <div key={brand}>
+                        <div key={brand} className="border-b border-blue-100 last:border-0">
                           {/* Marque */}
                           <button
                             onClick={() => setActiveBrand(isBrandOpen ? null : brand)}
-                            className="w-full flex items-center justify-between px-4 py-3 text-left hover:bg-gray-100 transition-colors"
+                            className="w-full flex items-center justify-between px-4 py-3 text-left hover:bg-blue-100 transition-colors"
                           >
                             <div className="flex items-center gap-2 ml-4">
-                              <Package className="w-4 h-4 text-gray-400" />
-                              <span className="text-sm font-medium text-gray-700">{brand}</span>
-                              <span className="text-xs text-gray-500">({brandProducts.length})</span>
+                              <Package className="w-4 h-4 text-blue-600" />
+                              <span className="text-sm font-semibold text-gray-900">{brand}</span>
+                              <span className="text-xs text-gray-600 bg-white px-2 py-0.5 rounded-full">
+                                {brandProducts.length}
+                              </span>
                             </div>
                             <ChevronDown className={cn(
-                              "w-4 h-4 text-gray-400 transition-transform",
+                              "w-4 h-4 text-blue-600 transition-transform",
                               isBrandOpen && "rotate-180"
                             )} />
                           </button>
 
                           {/* Produits */}
-                          {isBrandOpen && brandProducts.map((product) => (
-                            <Link
-                              key={product.id}
-                              href={`/produit/${product.urlSlug || product.id}`}
-                              onClick={onClose}
-                              className="flex items-center gap-3 px-4 py-2 ml-8 hover:bg-white transition-colors"
-                            >
-                              {product.images && product.images.length > 0 && (
-                                <div className="w-12 h-12 bg-white rounded overflow-hidden flex-shrink-0">
-                                  <Image
-                                    src={product.images[0]}
-                                    alt={product.name}
-                                    width={48}
-                                    height={48}
-                                    className="w-full h-full object-contain"
-                                  />
-                                </div>
-                              )}
-                              <div className="flex-1 min-w-0">
-                                <p className="text-sm text-gray-900 line-clamp-1">{product.name}</p>
-                                {product.price && (
-                                  <p className="text-sm font-semibold text-blue-600">{product.price}</p>
-                                )}
-                              </div>
-                            </Link>
-                          ))}
+                          {isBrandOpen && (
+                            <div className="bg-white mx-4 mb-2 rounded-lg border border-gray-200 divide-y divide-gray-100">
+                              {brandProducts.map((product) => (
+                                <Link
+                                  key={product.id}
+                                  href={`/produit/${product.urlSlug || product.id}`}
+                                  onClick={onClose}
+                                  className="flex items-center gap-3 p-3 hover:bg-gray-50 transition-colors"
+                                >
+                                  {product.images && product.images.length > 0 && (
+                                    <div className="w-14 h-14 bg-gray-50 rounded-lg overflow-hidden flex-shrink-0 border border-gray-200">
+                                      <Image
+                                        src={product.images[0]}
+                                        alt={product.name}
+                                        width={56}
+                                        height={56}
+                                        className="w-full h-full object-contain"
+                                      />
+                                    </div>
+                                  )}
+                                  <div className="flex-1 min-w-0">
+                                    <p className="text-sm font-medium text-gray-900 line-clamp-2">{product.name}</p>
+                                    {product.price && (
+                                      <p className="text-base font-bold text-blue-600 mt-1">{product.price}</p>
+                                    )}
+                                  </div>
+                                </Link>
+                              ))}
+                            </div>
+                          )}
                         </div>
                       );
                     })}
