@@ -477,10 +477,10 @@ const MobileMenu = ({
       />
 
       {/* Menu mobile moderne - carte flottante avec marges */}
-      <div className="fixed top-[7.5rem] left-4 right-4 bottom-16 bg-white z-[200] flex flex-col rounded-2xl shadow-2xl overflow-hidden border-4 border-red-500">
+      <div className="fixed top-[7.5rem] left-4 right-4 bottom-16 bg-white z-[200] flex flex-col rounded-2xl shadow-2xl overflow-hidden border-8 border-red-600">
         {/* Header */}
-        <div className="h-14 bg-white border-b border-gray-200 flex items-center justify-between px-4 flex-shrink-0">
-          <h2 className="text-lg font-semibold text-gray-900">Menu</h2>
+        <div className="h-14 bg-red-100 border-b border-gray-200 flex items-center justify-between px-4 flex-shrink-0">
+          <h2 className="text-lg font-semibold text-gray-900">Menu TEST VERSION</h2>
           <button onClick={onClose} className="p-2 text-gray-500 hover:text-gray-700">
             <X className="w-5 h-5" />
           </button>
