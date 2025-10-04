@@ -470,12 +470,12 @@ const MobileMenu = ({
     <>
       {/* Backdrop flouté - laisse voir le site en dessous */}
       <div
-        className="lg:hidden fixed top-[120px] left-0 right-0 bottom-0 bg-black/30 backdrop-blur-sm z-[190]"
+        className="lg:hidden fixed inset-0 bg-black/30 backdrop-blur-sm z-[190]"
         onClick={onClose}
       />
 
       {/* Menu mobile moderne - carte flottante avec marges */}
-      <div className="lg:hidden fixed top-[136px] left-4 right-4 bottom-20 bg-white z-[200] flex flex-col rounded-2xl shadow-2xl overflow-hidden">
+      <div className="lg:hidden fixed top-[7.5rem] left-4 right-4 bottom-16 bg-white z-[200] flex flex-col rounded-2xl shadow-2xl overflow-hidden">
         {/* Header */}
         <div className="h-14 bg-white border-b border-gray-200 flex items-center justify-between px-4 flex-shrink-0">
           <h2 className="text-lg font-semibold text-gray-900">Menu</h2>
