@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/client';
 import resend from '@/lib/email/resend';
 import { InvoiceEmail } from '@/lib/email/templates/invoice';
+import * as React from 'react';
 
 export async function POST(request: NextRequest) {
   try {
@@ -74,7 +75,7 @@ export async function POST(request: NextRequest) {
         total: parseFloat(order.amount_total),
         orderDate: order.created_at,
         paymentMethod: 'Carte bancaire',
-      }),
+      }) as React.ReactElement,
     });
 
     return NextResponse.json({
