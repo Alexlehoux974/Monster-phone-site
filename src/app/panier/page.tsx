@@ -55,8 +55,8 @@ export default function PanierPage() {
     return (
       <div className="min-h-screen bg-gray-50">
         <Header />
-        
-        <main className="container mx-auto px-4 py-16 mt-20">
+
+        <main className="container mx-auto px-4 py-16 pt-[150px]">
           <div className="max-w-4xl mx-auto text-center">
             <ShoppingBag className="w-24 h-24 text-gray-300 mx-auto mb-6" />
             <h1 className="text-3xl font-bold mb-4">Votre panier est vide</h1>
@@ -81,8 +81,8 @@ export default function PanierPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
-      
-      <main className="container mx-auto px-4 py-8 mt-20">
+
+      <main className="container mx-auto px-4 py-8 pt-[150px]">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-3xl font-bold mb-8">Mon Panier ({items.length} article{items.length > 1 ? 's' : ''})</h1>
 

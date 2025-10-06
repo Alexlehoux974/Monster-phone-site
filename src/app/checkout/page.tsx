@@ -200,8 +200,8 @@ export default function CheckoutPage() {
     return (
       <div className="min-h-screen bg-gray-50">
         <Header />
-        
-        <main className="container mx-auto px-4 py-16 mt-20">
+
+        <main className="container mx-auto px-4 py-16 pt-[150px]">
           <div className="max-w-3xl mx-auto">
             {/* Message de succès */}
             <div className="bg-white rounded-lg shadow-lg p-8 text-center">
@@ -262,8 +262,8 @@ export default function CheckoutPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
-      
-      <main className="container mx-auto px-4 py-8 mt-20">
+
+      <main className="container mx-auto px-4 py-8 pt-[150px]">
         <div className="max-w-6xl mx-auto">
           {/* En-tête avec étapes */}
           <div className="mb-8">

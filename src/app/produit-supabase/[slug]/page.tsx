@@ -298,7 +298,7 @@ export default function ProduitSupabasePage() {
     return (
       <div className="min-h-screen bg-gray-50">
         <Header />
-        <div className="flex items-center justify-center min-h-[60vh]">
+        <div className="flex items-center justify-center min-h-[60vh] pt-[110px]">
           <div className="text-center">
             <Loader2 className="w-12 h-12 animate-spin text-orange-500 mx-auto mb-4" />
             <p className="text-gray-600">Chargement du produit...</p>
@@ -313,7 +313,7 @@ export default function ProduitSupabasePage() {
     return (
       <div className="min-h-screen bg-gray-50">
         <Header />
-        <div className="flex items-center justify-center min-h-[60vh]">
+        <div className="flex items-center justify-center min-h-[60vh] pt-[110px]">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 text-red-500 mx-auto mb-4" />
             <h1 className="text-2xl font-bold text-gray-900 mb-2">Produit non trouvé</h1>
@@ -328,9 +328,9 @@ export default function ProduitSupabasePage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
-      
+
       {/* Bannière info Supabase */}
-      <div className="bg-green-50 border-b border-green-200">
+      <div className="bg-green-50 border-b border-green-200 pt-[110px]">
         <div className="container mx-auto px-4 py-2">
           <div className="flex items-center justify-between text-sm">
             <div className="flex items-center gap-2 text-green-700">
