@@ -397,18 +397,14 @@ const MonsterPhoneHero = () => {
             transition={{ duration: 0.8, delay: 0.5 }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
           >
-            <motion.div
-              style={{ border, boxShadow }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Link href="/nos-produits">
+            <Link href="/nos-produits">
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Button className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-4 text-lg shadow-lg">
                   <ShoppingCart className="w-5 h-5 mr-2" />
                   Découvrir la Collection
                 </Button>
-              </Link>
-            </motion.div>
+              </motion.div>
+            </Link>
             
             <motion.div
               className="relative"
