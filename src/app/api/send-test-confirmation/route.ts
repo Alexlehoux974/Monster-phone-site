@@ -3,6 +3,9 @@ import Stripe from 'stripe';
 import resend from '@/lib/email/resend';
 import { OrderConfirmationEmail } from '@/lib/email/templates/order-confirmation';
 
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2025-09-30.clover',
 });
