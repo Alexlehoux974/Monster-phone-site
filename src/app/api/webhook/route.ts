@@ -31,11 +31,20 @@ export async function POST(request: NextRequest) {
     case 'checkout.session.completed': {
       const session = event.data.object as Stripe.Checkout.Session;
 
-      // Récupérer les détails de la session avec line items
+      // Récupérer les détails de la session avec line items et customer
       const sessionWithLineItems = await stripe.checkout.sessions.retrieve(
         session.id,
-        { expand: ['line_items'] }
+        { expand: ['line_items', 'customer'] }
       );
+
+      // Récupérer l'adresse de livraison depuis le customer si disponible
+      let shippingAddress = {};
+      if (sessionWithLineItems.customer && typeof sessionWithLineItems.customer !== 'string') {
+        const customer = sessionWithLineItems.customer as Stripe.Customer;
+        if (customer.shipping?.address) {
+          shippingAddress = customer.shipping.address;
+        }
+      }
 
       // Enregistrer la commande dans Supabase
       try {
@@ -48,7 +57,7 @@ export async function POST(request: NextRequest) {
           customer_email: session.customer_details?.email || session.metadata?.customer_email || '',
           customer_name: session.customer_details?.name || session.metadata?.customer_name || '',
           customer_phone: session.customer_details?.phone || session.metadata?.customer_phone || '',
-          shipping_address: session.shipping_details?.address || {},
+          shipping_address: shippingAddress,
           billing_address: session.customer_details?.address || {},
           amount_total: session.amount_total ? session.amount_total / 100 : 0,
           amount_subtotal: session.amount_subtotal ? session.amount_subtotal / 100 : 0,
