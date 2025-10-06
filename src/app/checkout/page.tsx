@@ -100,7 +100,7 @@ export default function CheckoutPage() {
   // Pré-remplir avec les infos utilisateur si connecté (prioritaire sur localStorage)
   useEffect(() => {
     if (user) {
-      setFormData(prev => ({
+      setFormData((prev: typeof formData) => ({
         ...prev,
         email: user.email || prev.email,
         firstName: user.name.split(' ')[0] || prev.firstName,
