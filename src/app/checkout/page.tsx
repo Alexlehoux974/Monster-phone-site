@@ -136,7 +136,7 @@ export default function CheckoutPage() {
 
     const newValue = type === 'checkbox' ? checked : value;
 
-    setFormData(prev => ({
+    setFormData((prev: typeof formData) => ({
       ...prev,
       [name]: newValue,
     }));
