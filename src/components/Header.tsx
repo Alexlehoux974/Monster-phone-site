@@ -478,6 +478,36 @@ const MobileMenu = ({
 
         {/* Liste avec accordéon - EXACTEMENT comme desktop */}
         <div className="flex-1 overflow-y-auto">
+          {/* Liens directs - Tous nos produits et Promotions */}
+          <div className="border-b border-gray-200">
+            <Link
+              href="/nos-produits"
+              onClick={onClose}
+              className="w-full flex items-center justify-between p-4 text-left hover:bg-gradient-to-r hover:from-orange-50 hover:to-transparent transition-all duration-200"
+            >
+              <div className="flex items-center gap-3">
+                <Package className="w-5 h-5 text-orange-600" />
+                <span className="font-medium text-gray-900">Tous nos produits</span>
+              </div>
+              <ChevronRight className="w-5 h-5 text-gray-400" />
+            </Link>
+          </div>
+
+          <div className="border-b border-gray-200">
+            <Link
+              href="/promotions"
+              onClick={onClose}
+              className="w-full flex items-center justify-between p-4 text-left hover:bg-gradient-to-r hover:from-red-50 hover:to-transparent transition-all duration-200"
+            >
+              <div className="flex items-center gap-3">
+                <Flame className="w-5 h-5 text-red-600" />
+                <span className="font-medium text-gray-900">Promotions</span>
+              </div>
+              <ChevronRight className="w-5 h-5 text-gray-400" />
+            </Link>
+          </div>
+
+          {/* Catégories avec sous-menus */}
           {displayCategories.map((category) => {
             const cleanName = category.name.replace(/[📱🎧⌚💡🔧📦]/g, '').trim();
             const isOpen = activeCategory === category.name;
