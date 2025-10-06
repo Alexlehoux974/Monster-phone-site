@@ -1,150 +1,230 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase/client';
-import { deductStockAfterOrder } from '@/lib/supabase/admin';
+import Stripe from 'stripe';
+import { createClient } from '@/lib/supabase/server';
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+  apiVersion: '2024-12-18.acacia',
+});
 
 export const dynamic = 'force-dynamic';
 
 /**
- * API Route pour créer une commande et déduire le stock
+ * API Route pour créer une commande après paiement Stripe
  *
  * Body attendu:
  * {
- *   customerInfo: {
- *     name: string,
- *     email: string,
- *     phone?: string,
- *     address?: string
- *   },
- *   items: Array<{
- *     productId: string,
- *     variantId?: string,
- *     quantity: number,
- *     price: number,
- *     productName: string,
- *     variantColor?: string
- *   }>,
- *   totalAmount: number
+ *   sessionId: string // Stripe checkout session ID
  * }
  */
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    const { customerInfo, items, totalAmount } = body;
+    const { sessionId } = await request.json();
 
-    // Validation des données
-    if (!customerInfo || !customerInfo.name || !customerInfo.email) {
+    if (!sessionId) {
       return NextResponse.json(
-        { success: false, error: 'Informations client incomplètes' },
+        { error: 'Session ID is required' },
         { status: 400 }
       );
     }
 
-    if (!items || items.length === 0) {
+    // Récupérer la session Stripe avec les line items
+    const session = await stripe.checkout.sessions.retrieve(sessionId, {
+      expand: ['line_items.data.price.product', 'customer', 'payment_intent'],
+    });
+
+    if (session.payment_status !== 'paid') {
       return NextResponse.json(
-        { success: false, error: 'Panier vide' },
+        { error: 'Payment not completed' },
         { status: 400 }
       );
     }
 
-    if (!totalAmount || totalAmount <= 0) {
-      return NextResponse.json(
-        { success: false, error: 'Montant total invalide' },
-        { status: 400 }
-      );
-    }
+    // Récupérer les métadonnées de la session
+    const metadata = session.metadata || {};
+    const userId = metadata.userId;
+    const customerEmail = session.customer_details?.email || metadata.email || '';
+    const customerName = session.customer_details?.name || metadata.name || '';
+    const customerPhone = session.customer_details?.phone || metadata.phone || '';
 
-    const supabase = createClient();
+    // Récupérer l'adresse de livraison depuis les métadonnées
+    const shippingAddress = metadata.address || '';
+    const shippingCity = metadata.city || '';
+    const shippingPostalCode = metadata.postalCode || '';
 
-    // 1. Créer la commande dans la table orders
-    const { data: order, error: orderError } = await supabase
+    // Initialiser Supabase client
+    const supabase = await createClient();
+
+    // Récupérer les items directement depuis Stripe
+    const lineItems = session.line_items?.data || [];
+
+    const items = lineItems.map((item: any) => {
+      const product = item.price?.product;
+      const productName = typeof product === 'string' ? item.description : product?.name || item.description || 'Produit';
+
+      return {
+        id: item.price?.product?.id || item.id,
+        name: productName,
+        price: item.price?.unit_amount ? item.price.unit_amount / 100 : 0,
+        quantity: item.quantity || 1,
+        image_url: typeof product === 'object' ? product?.images?.[0] : null,
+        brand_name: typeof product === 'object' ? product?.metadata?.brand : null,
+        category_name: typeof product === 'object' ? product?.metadata?.category : null,
+      };
+    });
+
+
+    // Calculer les montants
+    const subtotal = session.amount_subtotal ? session.amount_subtotal / 100 : 0;
+    const shippingCost = session.total_details?.amount_shipping ? session.total_details.amount_shipping / 100 : 0;
+    const total = session.amount_total ? session.amount_total / 100 : 0;
+
+    // Générer un numéro de commande unique
+    const orderNumber = `CMD${Date.now().toString().slice(-8)}`;
+
+    // Créer la commande dans Supabase
+    const { data: order, error } = await supabase
       .from('orders')
       .insert({
-        customer_name: customerInfo.name,
-        customer_email: customerInfo.email,
-        customer_phone: customerInfo.phone || null,
-        customer_address: customerInfo.address || null,
-        total_amount: totalAmount,
-        status: 'pending', // pending, processing, shipped, delivered, cancelled
-        created_at: new Date().toISOString(),
+        user_id: userId || null,
+        order_number: orderNumber,
+        stripe_session_id: sessionId,
+        stripe_payment_intent_id: typeof session.payment_intent === 'string'
+          ? session.payment_intent
+          : session.payment_intent?.id,
+        customer_email: customerEmail,
+        customer_name: customerName,
+        customer_phone: customerPhone,
+        shipping_address: shippingAddress,
+        shipping_city: shippingCity,
+        shipping_postal_code: shippingPostalCode,
+        items: items,
+        subtotal: subtotal,
+        shipping_cost: shippingCost,
+        total: total,
+        total_amount: total,
+        amount_subtotal: subtotal,
+        status: 'processing',
+        payment_status: 'paid',
+        shipping_method: metadata.shippingMethod || 'standard',
       })
       .select()
       .single();
 
-    if (orderError || !order) {
-      console.error('❌ Erreur création commande:', orderError);
+    if (error) {
+      console.error('Error creating order:', error);
+
+      // Si l'erreur est due à une commande déjà existante (duplicate), on la retourne
+      if (error.code === '23505') { // Postgres unique violation
+        const { data: existingOrder } = await supabase
+          .from('orders')
+          .select('*')
+          .eq('stripe_session_id', sessionId)
+          .single();
+
+        if (existingOrder) {
+          // Récupérer les order_items pour la commande existante
+          const { data: existingOrderItems } = await supabase
+            .from('order_items')
+            .select('product_name, quantity, unit_price, total_price, product_metadata')
+            .eq('order_id', existingOrder.id);
+
+          const orderWithItems = {
+            ...existingOrder,
+            items: existingOrderItems || []
+          };
+
+          return NextResponse.json({ order: orderWithItems, alreadyExists: true });
+        }
+      }
+
       return NextResponse.json(
-        { success: false, error: 'Erreur lors de la création de la commande' },
+        { error: 'Failed to create order', details: error.message },
         { status: 500 }
       );
     }
 
-    console.log('✅ Commande créée:', order.id);
+    // Créer les order_items dans la table dédiée
+    if (items && items.length > 0) {
+      const orderItems = items.map((item: any) => ({
+        order_id: order.id,
+        product_id: item.id,
+        product_name: item.name || 'Produit',
+        quantity: item.quantity || 1,
+        unit_price: item.price || 0,
+        total_price: (item.price || 0) * (item.quantity || 1),
+        product_metadata: {
+          product_id: item.id,
+          brand: item.brand_name || null,
+          category: item.category_name || null,
+          image_url: item.image_url || null,
+        },
+      }));
 
-    // 2. Créer les items de commande dans order_items
-    const orderItems = items.map((item: any) => ({
-      order_id: order.id,
-      product_id: item.productId,
-      variant_id: item.variantId || null,
-      quantity: item.quantity,
-      unit_price: item.price,
-      total_price: item.price * item.quantity, // Prix total de la ligne
-      product_name: item.productName,
-      product_variant: item.variantColor || null, // Colonne existante
-      variant_color: item.variantColor || null, // Nouvelle colonne
-    }));
+      const { error: itemsError } = await supabase
+        .from('order_items')
+        .insert(orderItems);
 
-    const { error: itemsError } = await supabase
+      if (itemsError) {
+        console.error('Error creating order_items:', itemsError);
+      } else {
+        // Mettre à jour le stock pour chaque produit commandé
+        for (const item of items) {
+          // Trouver le produit par nom (normaliser les espaces et la casse)
+          const productName = item.name?.trim();
+
+          if (productName) {
+            // Chercher le produit par nom exact
+            const { data: product, error: productError } = await supabase
+              .from('products')
+              .select('id, stock_quantity')
+              .ilike('name', productName)
+              .single();
+
+            if (!productError && product) {
+              const newStock = Math.max(0, product.stock_quantity - (item.quantity || 1));
+
+              const { error: stockError } = await supabase
+                .from('products')
+                .update({
+                  stock_quantity: newStock,
+                  updated_at: new Date().toISOString()
+                })
+                .eq('id', product.id);
+
+              if (stockError) {
+                console.error('Error updating stock for product:', product.id, stockError);
+              } else {
+                console.log(`✅ Stock updated: ${productName} - ${product.stock_quantity} → ${newStock}`);
+              }
+            } else {
+              console.warn(`⚠️ Product not found in database: ${productName}`);
+            }
+          }
+        }
+      }
+    }
+
+    // Récupérer les order_items depuis la table pour les retourner avec le bon format
+    const { data: orderItemsData, error: fetchItemsError } = await supabase
       .from('order_items')
-      .insert(orderItems);
+      .select('product_name, quantity, unit_price, total_price, product_metadata')
+      .eq('order_id', order.id);
 
-    if (itemsError) {
-      console.error('❌ Erreur création order_items:', itemsError);
-      // Rollback: supprimer la commande
-      await supabase.from('orders').delete().eq('id', order.id);
-      return NextResponse.json(
-        { success: false, error: 'Erreur lors de la création des articles de commande' },
-        { status: 500 }
-      );
+    if (fetchItemsError) {
+      console.error('Error fetching order_items:', fetchItemsError);
     }
 
-    console.log('✅ Order items créés:', orderItems.length);
+    // Retourner la commande avec les items au bon format
+    const orderWithItems = {
+      ...order,
+      items: orderItemsData || []
+    };
 
-    // 3. Déduire le stock
-    const stockUpdateData = items.map((item: any) => ({
-      productId: item.productId,
-      variantId: item.variantId,
-      quantity: item.quantity,
-    }));
-
-    const stockResult = await deductStockAfterOrder(stockUpdateData);
-
-    if (!stockResult.success) {
-      console.warn('⚠️ Certaines mises à jour de stock ont échoué:', stockResult.results);
-      // On ne fait pas de rollback car la commande est quand même valide
-      // L'admin devra corriger manuellement le stock si nécessaire
-    } else {
-      console.log('✅ Stock mis à jour avec succès pour tous les articles');
-    }
-
-    // 4. Retourner la commande créée
-    return NextResponse.json({
-      success: true,
-      order: {
-        id: order.id,
-        orderNumber: order.id.substring(0, 8).toUpperCase(),
-        customerName: order.customer_name,
-        customerEmail: order.customer_email,
-        totalAmount: order.total_amount,
-        status: order.status,
-        createdAt: order.created_at,
-      },
-      stockUpdateResult: stockResult,
-    });
-
+    return NextResponse.json({ order: orderWithItems, success: true });
   } catch (error) {
-    console.error('❌ Erreur inattendue:', error);
+    console.error('Error in create order:', error);
     return NextResponse.json(
-      { success: false, error: 'Erreur serveur inattendue' },
+      { error: 'Internal server error', details: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     );
   }

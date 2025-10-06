@@ -31,7 +31,7 @@ export default function CheckoutPage() {
   const router = useRouter();
   const [isProcessing, setIsProcessing] = useState(false);
   const [orderComplete, setOrderComplete] = useState(false);
-  const [currentStep, setCurrentStep] = useState(1);
+  // Suppression du système d'étapes pour un checkout en 1 seule page
 
   // Récupérer tous les produits actifs depuis Supabase
   const { products: supabaseProducts } = useProducts();
@@ -40,32 +40,52 @@ export default function CheckoutPage() {
   // Suggestions de produits basées sur le panier
   const suggestions = useProductSuggestions(items, availableProducts, 4);
 
-  // État du formulaire
-  const [formData, setFormData] = useState({
-    // Informations de livraison
-    firstName: '',
-    lastName: '',
-    email: user?.email || '',
-    phone: '',
-    address: '',
-    city: '',
-    postalCode: '',
-    
-    // Mode de livraison
-    shippingMethod: 'standard',
-    
-    // Mode de paiement
-    paymentMethod: 'card',
-    
-    // Informations de paiement (simulées)
-    cardNumber: '',
-    cardName: '',
-    cardExpiry: '',
-    cardCvv: '',
-    
-    // Options
-    newsletter: false,
-    terms: false,
+  // État du formulaire avec récupération LocalStorage
+  const [formData, setFormData] = useState(() => {
+    // Essayer de récupérer depuis localStorage (pour utilisateurs non-connectés)
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('monsterphone-checkout-draft');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          return {
+            ...parsed,
+            // Ne pas sauvegarder terms (doit être coché à chaque fois)
+            terms: false,
+            newsletter: parsed.newsletter || false,
+          };
+        } catch (e) {
+          console.error('Erreur récupération draft:', e);
+        }
+      }
+    }
+
+    return {
+      // Informations de livraison
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      address: '',
+      city: '',
+      postalCode: '',
+
+      // Mode de livraison
+      shippingMethod: 'standard',
+
+      // Mode de paiement
+      paymentMethod: 'card',
+
+      // Informations de paiement (simulées)
+      cardNumber: '',
+      cardName: '',
+      cardExpiry: '',
+      cardCvv: '',
+
+      // Options
+      newsletter: false,
+      terms: false,
+    };
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -77,74 +97,89 @@ export default function CheckoutPage() {
     }
   }, [items, router, orderComplete]);
 
-  // Pré-remplir avec les infos utilisateur si connecté
+  // Pré-remplir avec les infos utilisateur si connecté (prioritaire sur localStorage)
   useEffect(() => {
     if (user) {
       setFormData(prev => ({
         ...prev,
-        email: user.email,
-        firstName: user.name.split(' ')[0] || '',
-        lastName: user.name.split(' ').slice(1).join(' ') || '',
-        phone: user.phone || '',
-        address: user.address?.street || '',
-        city: user.address?.city || '',
-        postalCode: user.address?.postalCode || '',
+        email: user.email || prev.email,
+        firstName: user.name.split(' ')[0] || prev.firstName,
+        lastName: user.name.split(' ').slice(1).join(' ') || prev.lastName,
+        phone: user.phone || prev.phone,
+        address: user.address?.street || prev.address,
+        city: user.address?.city || prev.city,
+        postalCode: user.address?.postalCode || prev.postalCode,
       }));
     }
   }, [user]);
 
+  // Sauvegarder le brouillon dans localStorage à chaque modification (pour utilisateurs non-connectés)
+  useEffect(() => {
+    if (typeof window !== 'undefined' && !user) {
+      // Sauvegarder uniquement si au moins un champ est rempli
+      const hasData = Object.values(formData).some(val =>
+        typeof val === 'string' ? val.trim() !== '' : val
+      );
+
+      if (hasData) {
+        localStorage.setItem('monsterphone-checkout-draft', JSON.stringify({
+          ...formData,
+          terms: false, // Ne jamais sauvegarder l'acceptation des CGV
+        }));
+      }
+    }
+  }, [formData, user]);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
     const checked = type === 'checkbox' ? (e.target as HTMLInputElement).checked : undefined;
-    
+
+    const newValue = type === 'checkbox' ? checked : value;
+
     setFormData(prev => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: newValue,
     }));
-    
-    // Effacer l'erreur quand l'utilisateur modifie le champ
+
+    // Validation en temps réel (débounce de 500ms) - Effacer l'erreur immédiatement
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
     }
+
+    // Validation positive immédiate pour les champs requis remplis
+    if (type !== 'checkbox' && value.trim() !== '') {
+      // Marquer le champ comme valide visuellement
+      setErrors(prev => {
+        const newErrors = { ...prev };
+        delete newErrors[name];
+        return newErrors;
+      });
+    }
   };
 
-  const validateStep = (step: number) => {
+  const validateForm = () => {
     const newErrors: Record<string, string> = {};
 
-    if (step >= 1) {
-      // Validation des informations de livraison
-      if (!formData.firstName) newErrors.firstName = 'Prénom requis';
-      if (!formData.lastName) newErrors.lastName = 'Nom requis';
-      if (!formData.email) newErrors.email = 'Email requis';
-      if (!formData.phone) newErrors.phone = 'Téléphone requis';
-      if (!formData.address) newErrors.address = 'Adresse requise';
-      if (!formData.city) newErrors.city = 'Ville requise';
-      if (!formData.postalCode) newErrors.postalCode = 'Code postal requis';
-    }
+    // Validation des informations de livraison
+    if (!formData.firstName) newErrors.firstName = 'Prénom requis';
+    if (!formData.lastName) newErrors.lastName = 'Nom requis';
+    if (!formData.email) newErrors.email = 'Email requis';
+    if (!formData.phone) newErrors.phone = 'Téléphone requis';
+    if (!formData.address) newErrors.address = 'Adresse requise';
+    if (!formData.city) newErrors.city = 'Ville requise';
+    if (!formData.postalCode) newErrors.postalCode = 'Code postal requis';
 
-    if (step >= 2) {
-      // Validation finale avant paiement Stripe
-      if (!formData.terms) newErrors.terms = 'Vous devez accepter les conditions';
-    }
+    // Validation finale avant paiement Stripe
+    if (!formData.terms) newErrors.terms = 'Vous devez accepter les conditions';
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleNextStep = () => {
-    if (validateStep(currentStep)) {
-      setCurrentStep(prev => Math.min(2, prev + 1));
-    }
-  };
-
-  const handlePreviousStep = () => {
-    setCurrentStep(prev => Math.max(1, prev - 1));
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!validateStep(2)) {
+    if (!validateForm()) {
       return;
     }
 
@@ -179,6 +214,7 @@ export default function CheckoutPage() {
             category_name: item.product.category,
           })),
           customerInfo,
+          userId: user?.id || null, // ID de l'utilisateur connecté
         }),
       });
 
@@ -205,10 +241,7 @@ export default function CheckoutPage() {
   const shipping = formData.shippingMethod === 'express' ? 9.99 : (subtotal >= 50 ? 0 : 4.99);
   const total = subtotal + shipping;
 
-  const steps = [
-    { number: 1, label: 'Livraison', icon: Truck },
-    { number: 2, label: 'Confirmation', icon: Check },
-  ];
+  // Plus de système d'étapes - checkout en page unique pour conversion optimale
 
   if (orderComplete) {
     return (
@@ -289,68 +322,22 @@ export default function CheckoutPage() {
               Retour au panier
             </button>
 
-            <h1 className="text-3xl font-bold mb-6">Finaliser ma commande</h1>
-
-            {/* Indicateur d&apos;étapes */}
-            <div className="flex items-center justify-between max-w-2xl">
-              {steps.map((step, index) => {
-                const Icon = step.icon;
-                const isActive = currentStep === step.number;
-                const isCompleted = currentStep > step.number;
-                
-                return (
-                  <div key={step.number} className="flex items-center flex-1">
-                    <div className="flex items-center">
-                      <div
-                        className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${
-                          isActive
-                            ? 'bg-blue-600 text-white'
-                            : isCompleted
-                            ? 'bg-green-600 text-white'
-                            : 'bg-gray-200 text-gray-500'
-                        }`}
-                      >
-                        {isCompleted ? (
-                          <Check className="w-5 h-5" />
-                        ) : (
-                          <Icon className="w-5 h-5" />
-                        )}
-                      </div>
-                      <span
-                        className={`ml-3 font-medium hidden sm:block ${
-                          isActive ? 'text-blue-600' : isCompleted ? 'text-green-600' : 'text-gray-500'
-                        }`}
-                      >
-                        {step.label}
-                      </span>
-                    </div>
-                    {index < steps.length - 1 && (
-                      <div className="flex-1 mx-4">
-                        <div
-                          className={`h-1 rounded transition-colors ${
-                            isCompleted ? 'bg-green-600' : 'bg-gray-200'
-                          }`}
-                        />
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
+            <h1 className="text-3xl font-bold mb-2">Finaliser ma commande</h1>
+            <p className="text-gray-600 mb-6">
+              Remplissez vos informations et procédez au paiement sécurisé
+            </p>
           </div>
 
           <form onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {/* Formulaire principal */}
-              <div className="lg:col-span-2">
+              <div className="lg:col-span-2 space-y-6">
+                {/* Informations de livraison */}
                 <div className="bg-white rounded-lg shadow-lg p-6">
-                  {/* Étape 1: Informations de livraison */}
-                  {currentStep === 1 && (
-                    <>
-                      <h2 className="text-xl font-bold mb-6 flex items-center">
-                        <MapPin className="w-5 h-5 mr-2" />
-                        Informations de livraison
-                      </h2>
+                  <h2 className="text-xl font-bold mb-6 flex items-center">
+                    <MapPin className="w-5 h-5 mr-2" />
+                    Informations de livraison
+                  </h2>
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
@@ -361,6 +348,7 @@ export default function CheckoutPage() {
                             id="firstName"
                             type="text"
                             name="firstName"
+                            autoComplete="given-name"
                             value={formData.firstName}
                             onChange={handleInputChange}
                             className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
@@ -380,6 +368,7 @@ export default function CheckoutPage() {
                             id="lastName"
                             type="text"
                             name="lastName"
+                            autoComplete="family-name"
                             value={formData.lastName}
                             onChange={handleInputChange}
                             className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
@@ -400,6 +389,7 @@ export default function CheckoutPage() {
                             id="email"
                             type="email"
                             name="email"
+                            autoComplete="email"
                             value={formData.email}
                             onChange={handleInputChange}
                             className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
@@ -420,6 +410,7 @@ export default function CheckoutPage() {
                             id="phone"
                             type="tel"
                             name="phone"
+                            autoComplete="tel"
                             value={formData.phone}
                             onChange={handleInputChange}
                             placeholder="+262 6 92 XX XX XX"
@@ -440,6 +431,7 @@ export default function CheckoutPage() {
                             id="address"
                             type="text"
                             name="address"
+                            autoComplete="street-address"
                             value={formData.address}
                             onChange={handleInputChange}
                             placeholder="123 Rue de la Paix"
@@ -460,6 +452,7 @@ export default function CheckoutPage() {
                             id="city"
                             type="text"
                             name="city"
+                            autoComplete="address-level2"
                             value={formData.city}
                             onChange={handleInputChange}
                             placeholder="Saint-Denis"
@@ -480,6 +473,7 @@ export default function CheckoutPage() {
                             id="postalCode"
                             type="text"
                             name="postalCode"
+                            autoComplete="postal-code"
                             value={formData.postalCode}
                             onChange={handleInputChange}
                             placeholder="97400"
@@ -493,183 +487,129 @@ export default function CheckoutPage() {
                         </div>
                       </div>
 
-                      {/* Mode de livraison */}
-                      <h3 className="text-lg font-semibold mt-8 mb-4 flex items-center">
-                        <Truck className="w-5 h-5 mr-2" />
-                        Mode de livraison
-                      </h3>
+                  {/* Mode de livraison */}
+                  <h3 className="text-lg font-semibold mt-8 mb-4 flex items-center">
+                    <Truck className="w-5 h-5 mr-2" />
+                    Mode de livraison
+                  </h3>
 
-                      <div className="space-y-3">
-                        <label className="border rounded-lg p-4 flex items-center cursor-pointer hover:bg-gray-50 transition-colors">
-                          <input
-                            type="radio"
-                            name="shippingMethod"
-                            value="standard"
-                            checked={formData.shippingMethod === 'standard'}
-                            onChange={handleInputChange}
-                            className="mr-3"
-                          />
-                          <div className="flex-1">
-                            <p className="font-medium">Livraison standard</p>
-                            <p className="text-sm text-gray-600">3-5 jours ouvrés</p>
-                          </div>
-                          <span className="font-medium">
-                            {subtotal >= 50 ? 'Gratuit' : '4,99 €'}
-                          </span>
-                        </label>
-
-                        <label className="border rounded-lg p-4 flex items-center cursor-pointer hover:bg-gray-50 transition-colors">
-                          <input
-                            type="radio"
-                            name="shippingMethod"
-                            value="express"
-                            checked={formData.shippingMethod === 'express'}
-                            onChange={handleInputChange}
-                            className="mr-3"
-                          />
-                          <div className="flex-1">
-                            <p className="font-medium">Livraison express</p>
-                            <p className="text-sm text-gray-600">24-48h</p>
-                          </div>
-                          <span className="font-medium">9,99 €</span>
-                        </label>
+                  <div className="space-y-3">
+                    <label className="border rounded-lg p-4 flex items-center cursor-pointer hover:bg-gray-50 transition-colors">
+                      <input
+                        type="radio"
+                        name="shippingMethod"
+                        value="standard"
+                        checked={formData.shippingMethod === 'standard'}
+                        onChange={handleInputChange}
+                        className="mr-3"
+                      />
+                      <div className="flex-1">
+                        <p className="font-medium">Livraison standard</p>
+                        <p className="text-sm text-gray-600">3-5 jours ouvrés</p>
                       </div>
-                    </>
-                  )}
+                      <span className="font-medium">
+                        {subtotal >= 50 ? 'Gratuit' : '4,99 €'}
+                      </span>
+                    </label>
 
-                  {/* Étape 2: Confirmation */}
-                  {currentStep === 2 && (
-                    <>
-                      <h2 className="text-xl font-bold mb-6 flex items-center">
-                        <Check className="w-5 h-5 mr-2" />
-                        Vérification et confirmation
-                      </h2>
-
-                      {/* Résumé de la commande */}
-                      <div className="space-y-6">
-                        {/* Adresse de livraison */}
-                        <div>
-                          <h3 className="font-semibold mb-2">Adresse de livraison</h3>
-                          <div className="bg-gray-50 p-4 rounded-lg text-sm">
-                            <p>{formData.firstName} {formData.lastName}</p>
-                            <p>{formData.address}</p>
-                            <p>{formData.postalCode} {formData.city}</p>
-                            <p className="mt-2">
-                              <strong>Email:</strong> {formData.email}<br />
-                              <strong>Téléphone:</strong> {formData.phone}
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Mode de livraison */}
-                        <div>
-                          <h3 className="font-semibold mb-2">Mode de livraison</h3>
-                          <div className="bg-gray-50 p-4 rounded-lg text-sm">
-                            <p className="font-medium">
-                              {formData.shippingMethod === 'express' ? 'Livraison express' : 'Livraison standard'}
-                            </p>
-                            <p className="text-gray-600">
-                              {formData.shippingMethod === 'express' ? '24-48h' : '3-5 jours ouvrés'}
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Mode de paiement */}
-                        <div>
-                          <h3 className="font-semibold mb-2">Mode de paiement</h3>
-                          <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-lg">
-                            <div className="flex items-center gap-3 mb-2">
-                              <Shield className="w-6 h-6 text-blue-600" />
-                              <p className="font-semibold text-blue-900">Paiement sécurisé par Stripe</p>
-                            </div>
-                            <p className="text-sm text-gray-700">
-                              Vous serez redirigé vers notre page de paiement sécurisée pour finaliser votre commande.
-                              Acceptation des cartes bancaires (Visa, Mastercard, American Express) et autres moyens de paiement.
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Options */}
-                        <div className="space-y-3">
-                          <label className="flex items-start">
-                            <input
-                              type="checkbox"
-                              name="newsletter"
-                              checked={formData.newsletter}
-                              onChange={handleInputChange}
-                              className="mt-1 mr-3"
-                            />
-                            <div>
-                              <p className="font-medium">S&apos;inscrire à la newsletter</p>
-                              <p className="text-sm text-gray-600">
-                                Recevez nos offres exclusives et nouveautés
-                              </p>
-                            </div>
-                          </label>
-
-                          <label className="flex items-start">
-                            <input
-                              type="checkbox"
-                              name="terms"
-                              checked={formData.terms}
-                              onChange={handleInputChange}
-                              className="mt-1 mr-3"
-                            />
-                            <div>
-                              <p className="font-medium">
-                                J&apos;accepte les conditions générales de vente *
-                              </p>
-                              {errors.terms && (
-                                <p className="text-red-500 text-xs mt-1">{errors.terms}</p>
-                              )}
-                            </div>
-                          </label>
-                        </div>
+                    <label className="border rounded-lg p-4 flex items-center cursor-pointer hover:bg-gray-50 transition-colors">
+                      <input
+                        type="radio"
+                        name="shippingMethod"
+                        value="express"
+                        checked={formData.shippingMethod === 'express'}
+                        onChange={handleInputChange}
+                        className="mr-3"
+                      />
+                      <div className="flex-1">
+                        <p className="font-medium">Livraison express</p>
+                        <p className="text-sm text-gray-600">24-48h</p>
                       </div>
-                    </>
-                  )}
-
-                  {/* Navigation entre étapes */}
-                  <div className="flex justify-between mt-8">
-                    {currentStep > 1 && (
-                      <button
-                        type="button"
-                        onClick={handlePreviousStep}
-                        className="px-6 py-3 border border-gray-300 rounded-lg font-medium hover:bg-gray-50 transition-colors"
-                      >
-                        Retour
-                      </button>
-                    )}
-
-                    {currentStep < 2 ? (
-                      <button
-                        type="button"
-                        onClick={handleNextStep}
-                        className="ml-auto px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center"
-                      >
-                        Continuer
-                        <ChevronRight className="w-5 h-5 ml-2" />
-                      </button>
-                    ) : (
-                      <button
-                        type="submit"
-                        disabled={isProcessing}
-                        className="ml-auto px-8 py-3 bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-lg font-medium hover:from-green-700 hover:to-blue-700 transition-colors disabled:bg-gray-400 flex items-center shadow-lg"
-                      >
-                        {isProcessing ? (
-                          <>
-                            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                            Redirection vers le paiement...
-                          </>
-                        ) : (
-                          <>
-                            <Shield className="w-5 h-5 mr-2" />
-                            Procéder au paiement sécurisé {total.toFixed(2)} €
-                          </>
-                        )}
-                      </button>
-                    )}
+                      <span className="font-medium">9,99 €</span>
+                    </label>
                   </div>
+                </div>
+
+                {/* Section confirmation et CGV */}
+                <div className="bg-white rounded-lg shadow-lg p-6">
+                  <h2 className="text-xl font-bold mb-6 flex items-center">
+                    <Shield className="w-5 h-5 mr-2" />
+                    Paiement sécurisé
+                  </h2>
+
+                  {/* Info paiement */}
+                  <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-lg mb-6">
+                    <div className="flex items-center gap-3 mb-2">
+                      <Shield className="w-6 h-6 text-blue-600" />
+                      <p className="font-semibold text-blue-900">Paiement 100% sécurisé par Stripe</p>
+                    </div>
+                    <p className="text-sm text-gray-700">
+                      Vous serez redirigé vers notre page de paiement sécurisée.
+                      Cartes bancaires (Visa, Mastercard, American Express) et autres moyens de paiement acceptés.
+                    </p>
+                  </div>
+
+                  {/* Options */}
+                  <div className="space-y-4">
+                    <label className="flex items-start">
+                      <input
+                        type="checkbox"
+                        name="newsletter"
+                        checked={formData.newsletter}
+                        onChange={handleInputChange}
+                        className="mt-1 mr-3"
+                      />
+                      <div>
+                        <p className="font-medium">S&apos;inscrire à la newsletter</p>
+                        <p className="text-sm text-gray-600">
+                          Recevez nos offres exclusives et nouveautés
+                        </p>
+                      </div>
+                    </label>
+
+                    <label className="flex items-start">
+                      <input
+                        type="checkbox"
+                        name="terms"
+                        checked={formData.terms}
+                        onChange={handleInputChange}
+                        className="mt-1 mr-3"
+                      />
+                      <div>
+                        <p className="font-medium">
+                          J&apos;accepte les conditions générales de vente *
+                        </p>
+                        {errors.terms && (
+                          <p className="text-red-500 text-xs mt-1">{errors.terms}</p>
+                        )}
+                      </div>
+                    </label>
+                  </div>
+
+                  {/* Bouton de paiement */}
+                  <button
+                    type="submit"
+                    disabled={isProcessing}
+                    className="w-full mt-6 px-8 py-4 bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-lg font-bold text-lg hover:from-green-700 hover:to-blue-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center shadow-lg"
+                  >
+                    {isProcessing ? (
+                      <>
+                        <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white mr-3"></div>
+                        Redirection vers le paiement...
+                      </>
+                    ) : (
+                      <>
+                        <Shield className="w-6 h-6 mr-3" />
+                        Payer {total.toFixed(2)} € en toute sécurité
+                      </>
+                    )}
+                  </button>
+
+                  {errors.submit && (
+                    <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+                      {errors.submit}
+                    </div>
+                  )}
                 </div>
               </div>
 

@@ -27,6 +27,8 @@ export default function ComptePage() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [orders, setOrders] = useState<any[]>([]);
+  const [loadingOrders, setLoadingOrders] = useState(true);
 
   // Rediriger si non connecté (optionnel - on peut aussi afficher le formulaire de connexion)
   useEffect(() => {
@@ -120,22 +122,27 @@ export default function ComptePage() {
     { id: 'security', label: 'Sécurité', icon: Shield },
   ];
 
-  const mockOrders = [
-    {
-      id: 'CMD001',
-      date: '2024-01-15',
-      status: 'Livrée',
-      total: 859.00,
-      items: 2,
-    },
-    {
-      id: 'CMD002',
-      date: '2024-01-20',
-      status: 'En cours',
-      total: 45.99,
-      items: 1,
-    },
-  ];
+  // Charger les commandes de l'utilisateur depuis Supabase
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      const fetchOrders = async () => {
+        try {
+          const response = await fetch(`/api/orders/list?userId=${user.id}`);
+          if (response.ok) {
+            const data = await response.json();
+            setOrders(data.orders || []);
+          }
+        } catch (error) {
+          console.error('Erreur chargement commandes:', error);
+        } finally {
+          setLoadingOrders(false);
+        }
+      };
+      fetchOrders();
+    } else {
+      setLoadingOrders(false);
+    }
+  }, [isAuthenticated, user]);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -459,52 +466,88 @@ export default function ComptePage() {
 
                   {activeTab === 'orders' && (
                     <>
-                      <h2 className="text-2xl font-bold mb-6">Historique des Commandes</h2>
-                      
-                      {mockOrders.length > 0 ? (
+                      <h2 className="text-2xl font-bold mb-6"><span className="font-medium">Mes Commandes</span></h2>
+
+                      {loadingOrders ? (
+                        <div className="text-center py-12">
+                          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+                          <p className="text-gray-600">Chargement de vos commandes...</p>
+                        </div>
+                      ) : orders.length > 0 ? (
                         <div className="space-y-4">
-                          {mockOrders.map((order) => (
-                            <div
-                              key={order.id}
-                              className="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow"
-                            >
-                              <div className="flex justify-between items-start mb-4">
-                                <div>
-                                  <h3 className="font-semibold text-lg">Commande #{order.id}</h3>
-                                  <p className="text-sm text-gray-600">
-                                    {new Date(order.date).toLocaleDateString('fr-FR', {
-                                      day: 'numeric',
-                                      month: 'long',
-                                      year: 'numeric',
-                                    })}
+                          {orders.map((order) => {
+                            const statusLabels: { [key: string]: string } = {
+                              pending: 'En attente',
+                              processing: 'En préparation',
+                              shipped: 'Expédiée',
+                              delivered: 'Livrée',
+                              cancelled: 'Annulée',
+                              refunded: 'Remboursée',
+                            };
+
+                            const statusColors: { [key: string]: string } = {
+                              pending: 'bg-gray-100 text-gray-800',
+                              processing: 'bg-blue-100 text-blue-800',
+                              shipped: 'bg-purple-100 text-purple-800',
+                              delivered: 'bg-green-100 text-green-800',
+                              cancelled: 'bg-red-100 text-red-800',
+                              refunded: 'bg-orange-100 text-orange-800',
+                            };
+
+                            const itemCount = Array.isArray(order.order_items) ? order.order_items.length : 0;
+
+                            return (
+                              <div
+                                key={order.id}
+                                className="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow"
+                              >
+                                <div className="flex justify-between items-start mb-4">
+                                  <div>
+                                    <h3 className="font-semibold text-lg">
+                                      Commande #{order.id.substring(0, 8).toUpperCase()}
+                                    </h3>
+                                    <p className="text-sm text-gray-600">
+                                      {new Date(order.created_at).toLocaleDateString('fr-FR', {
+                                        day: 'numeric',
+                                        month: 'long',
+                                        year: 'numeric',
+                                        hour: '2-digit',
+                                        minute: '2-digit',
+                                      })}
+                                    </p>
+                                  </div>
+                                  <span
+                                    className={`px-3 py-1 rounded-full text-sm font-medium ${
+                                      statusColors[order.status] || 'bg-gray-100 text-gray-800'
+                                    }`}
+                                  >
+                                    {statusLabels[order.status] || order.status}
+                                  </span>
+                                </div>
+
+                                <div className="flex justify-end items-center">
+                                  <p className="font-semibold text-lg">
+                                    {order.total?.toFixed(2)} €
                                   </p>
                                 </div>
-                                <span
-                                  className={`px-3 py-1 rounded-full text-sm font-medium ${
-                                    order.status === 'Livrée'
-                                      ? 'bg-green-100 text-green-800'
-                                      : 'bg-yellow-100 text-yellow-800'
-                                  }`}
+
+                                {order.tracking_number && (
+                                  <div className="mt-3 text-sm text-gray-600">
+                                    <span className="font-medium">Suivi : </span>
+                                    <span className="text-blue-600">{order.tracking_number}</span>
+                                  </div>
+                                )}
+
+                                <button
+                                  onClick={() => router.push(`/compte/commandes/${order.id}`)}
+                                  className="mt-4 text-blue-600 hover:text-blue-800 font-medium text-sm flex items-center"
                                 >
-                                  {order.status}
-                                </span>
+                                  Voir les détails
+                                  <ChevronRight className="w-4 h-4 ml-1" />
+                                </button>
                               </div>
-
-                              <div className="flex justify-between items-center">
-                                <p className="text-sm text-gray-600">
-                                  {order.items} article{order.items > 1 ? 's' : ''}
-                                </p>
-                                <p className="font-semibold text-lg">
-                                  {order.total.toFixed(2)} €
-                                </p>
-                              </div>
-
-                              <button className="mt-4 text-blue-600 hover:text-blue-800 font-medium text-sm flex items-center">
-                                Voir les détails
-                                <ChevronRight className="w-4 h-4 ml-1" />
-                              </button>
-                            </div>
-                          ))}
+                            );
+                          })}
                         </div>
                       ) : (
                         <div className="text-center py-12">

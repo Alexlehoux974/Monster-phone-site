@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
+import { createClient } from '@/lib/supabase/server';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2024-12-18.acacia',
@@ -8,13 +9,36 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { items, customerInfo } = body;
+    const { items, customerInfo, userId } = body;
 
     if (!items || items.length === 0) {
       return NextResponse.json(
         { error: 'Panier vide' },
         { status: 400 }
       );
+    }
+
+    console.log('💳 Création session checkout pour userId:', userId || 'guest');
+
+    // Générer un ID unique pour cette session de panier
+    const cartSessionId = `cart_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+
+    // Stocker les items dans Supabase (contournement de la limite Stripe de 500 caractères)
+    const supabase = await createClient();
+    const { error: cartError } = await supabase
+      .from('pending_carts')
+      .insert({
+        session_id: cartSessionId,
+        items: items,
+        user_id: userId || null,
+        created_at: new Date().toISOString(),
+      });
+
+    if (cartError) {
+      console.error('❌ Erreur stockage panier:', cartError);
+      // On continue quand même, les line_items Stripe contiennent l'essentiel
+    } else {
+      console.log('✅ Panier stocké:', cartSessionId);
     }
 
     // Préparer les line items pour Stripe
@@ -47,12 +71,15 @@ export async function POST(request: NextRequest) {
       shipping_address_collection: {
         allowed_countries: ['RE', 'FR'], // La Réunion + France métropolitaine
       },
+      client_reference_id: cartSessionId, // Référence pour récupérer les items
       metadata: {
+        user_id: userId || '',
         customer_name: customerInfo?.name || '',
         customer_phone: customerInfo?.phone || '',
         customer_address: customerInfo?.address || '',
         customer_city: customerInfo?.city || '',
         customer_postal_code: customerInfo?.postalCode || '',
+        cart_session_id: cartSessionId, // ID pour retrouver le panier
       },
       allow_promotion_codes: true, // Permettre les codes promo
       billing_address_collection: 'required',

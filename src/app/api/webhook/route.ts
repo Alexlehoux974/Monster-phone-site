@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { createClient } from '@/lib/supabase/client';
+import resend from '@/lib/email/resend';
+import { OrderConfirmationEmail } from '@/lib/email/templates/order-confirmation';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2024-12-18.acacia',
@@ -40,6 +42,7 @@ export async function POST(request: NextRequest) {
         const supabase = createClient();
 
         const orderData = {
+          user_id: session.metadata?.user_id || null, // Lien avec le compte utilisateur
           stripe_session_id: session.id,
           stripe_payment_intent_id: session.payment_intent as string,
           customer_email: session.customer_details?.email || session.metadata?.customer_email || '',
@@ -53,6 +56,8 @@ export async function POST(request: NextRequest) {
           payment_status: session.payment_status,
           status: 'pending',
         };
+
+        console.log('📝 Création commande pour user_id:', orderData.user_id || 'guest');
 
         const { data: order, error: orderError } = await supabase
           .from('orders')
@@ -86,6 +91,39 @@ export async function POST(request: NextRequest) {
         }
 
         console.log('✅ Commande créée:', order.id);
+
+        // Récupérer les items de la commande pour l'email
+        const { data: orderItems } = await supabase
+          .from('order_items')
+          .select('*')
+          .eq('order_id', order.id);
+
+        // Envoyer l'email de confirmation
+        try {
+          await resend.emails.send({
+            from: 'Monster Phone Boutique <no-reply@digiqo.fr>',
+            to: order.customer_email,
+            subject: `Commande confirmée #${order.order_number} - Monster Phone 🎉`,
+            react: OrderConfirmationEmail({
+              orderNumber: order.order_number,
+              customerName: order.customer_name,
+              customerEmail: order.customer_email,
+              items: orderItems?.map(item => ({
+                product_name: item.product_name,
+                quantity: item.quantity,
+                unit_price: parseFloat(item.unit_price),
+                total_price: parseFloat(item.total_price),
+              })) || [],
+              subtotal: parseFloat(order.amount_subtotal),
+              total: parseFloat(order.amount_total),
+              orderDate: order.created_at,
+            }),
+          });
+          console.log('✅ Email de confirmation envoyé à:', order.customer_email);
+        } catch (emailError) {
+          console.error('❌ Erreur envoi email:', emailError);
+          // Ne pas bloquer le webhook si l'email échoue
+        }
       } catch (dbError) {
         console.error('Erreur base de données:', dbError);
       }

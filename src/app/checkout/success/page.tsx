@@ -47,32 +47,58 @@ function CheckoutSuccessContent() {
       return;
     }
 
-    const fetchOrderDetails = async () => {
+    const createAndFetchOrder = async () => {
       try {
-        const response = await fetch(`/api/order-details?session_id=${sessionId}`);
+        // 1. Créer la commande dans Supabase à partir de la session Stripe
+        const createResponse = await fetch('/api/orders/create', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ sessionId }),
+        });
 
-        if (!response.ok) {
-          throw new Error('Impossible de récupérer la commande');
+        if (!createResponse.ok) {
+          const errorData = await createResponse.json();
+          throw new Error(errorData.error || 'Impossible de créer la commande');
         }
 
-        const data = await response.json();
-        setOrder(data);
+        const { order: createdOrder, alreadyExists } = await createResponse.json();
+
+        if (alreadyExists) {
+          console.log('✅ Commande déjà existante, récupération...');
+        } else {
+          console.log('✅ Commande créée avec succès:', createdOrder.id);
+        }
+
+        // 2. Formater les données pour l'affichage
+        setOrder({
+          id: createdOrder.id,
+          order_number: createdOrder.id.substring(0, 8).toUpperCase(),
+          customer_name: createdOrder.customer_name,
+          customer_email: createdOrder.customer_email,
+          amount_total: createdOrder.total,
+          payment_status: createdOrder.payment_status,
+          status: createdOrder.status,
+          created_at: createdOrder.created_at,
+          items: createdOrder.items || [],
+        });
+
+        // 3. Nettoyer le panier et le draft checkout
+        setTimeout(() => {
+          if (typeof window !== 'undefined') {
+            localStorage.removeItem('monster-phone-cart');
+            localStorage.removeItem('monsterphone-checkout-draft');
+          }
+        }, 2000);
+
       } catch (err: any) {
-        console.error('Erreur récupération commande:', err);
+        console.error('Erreur création/récupération commande:', err);
         setError(err.message);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchOrderDetails();
-
-    // Nettoyer le panier
-    setTimeout(() => {
-      if (typeof window !== 'undefined') {
-        localStorage.removeItem('monster-phone-cart');
-      }
-    }, 2000);
+    createAndFetchOrder();
   }, [searchParams]);
 
   if (loading) {
@@ -186,8 +212,8 @@ function CheckoutSuccessContent() {
                   </p>
                 </div>
                 <div className="text-right">
-                  <p className="font-bold text-gray-900 text-lg">{item.total_price.toFixed(2)} €</p>
-                  <p className="text-sm text-gray-500">{item.unit_price.toFixed(2)} € / unité</p>
+                  <p className="font-bold text-gray-900 text-lg">{(item.total_price || 0).toFixed(2)} €</p>
+                  <p className="text-sm text-gray-500">{(item.unit_price || 0).toFixed(2)} € / unité</p>
                 </div>
               </div>
             ))}
@@ -196,7 +222,7 @@ function CheckoutSuccessContent() {
           <div className="flex justify-between items-center pt-6 border-t-2 border-gray-300">
             <span className="text-xl font-bold text-gray-900">Total payé</span>
             <span className="text-3xl font-bold text-green-600">
-              {order.amount_total.toFixed(2)} €
+              {(order.amount_total || 0).toFixed(2)} €
             </span>
           </div>
         </div>
@@ -270,7 +296,7 @@ function CheckoutSuccessContent() {
             Suivez l'état de vos commandes, consultez votre historique et gérez vos informations personnelles
           </p>
           <Link
-            href="/account"
+            href="/compte"
             className="inline-flex items-center gap-2 bg-white text-blue-600 px-8 py-3 rounded-lg hover:bg-blue-50 transition-all hover:shadow-lg font-bold"
           >
             Accéder à mon espace
@@ -288,7 +314,7 @@ function CheckoutSuccessContent() {
           </Link>
 
           <Link
-            href="/collections"
+            href="/nos-produits"
             className="flex-1 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-4 rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all font-bold shadow-lg hover:shadow-xl"
           >
             Continuer mes achats
