@@ -477,11 +477,14 @@ const MobileMenu = ({
       />
 
       {/* Menu mobile moderne - carte flottante avec marges */}
-      <div className="fixed top-[7.5rem] left-4 right-4 bottom-16 bg-white z-[200] flex flex-col rounded-2xl shadow-2xl overflow-hidden border-8 border-red-600">
-        {/* Header */}
-        <div className="h-14 bg-red-100 border-b border-gray-200 flex items-center justify-between px-4 flex-shrink-0">
-          <h2 className="text-lg font-semibold text-gray-900">Menu TEST VERSION</h2>
-          <button onClick={onClose} className="p-2 text-gray-500 hover:text-gray-700">
+      <div className="fixed top-[7.5rem] left-4 right-4 bottom-16 bg-white z-[200] flex flex-col rounded-2xl shadow-2xl overflow-hidden">
+        {/* Header moderne avec gradient */}
+        <div className="bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-4 flex items-center justify-between flex-shrink-0">
+          <h2 className="text-lg font-bold text-white">Nos Produits</h2>
+          <button
+            onClick={onClose}
+            className="p-2 text-white/90 hover:text-white hover:bg-white/20 rounded-lg transition-colors"
+          >
             <X className="w-5 h-5" />
           </button>
         </div>
@@ -501,21 +504,27 @@ const MobileMenu = ({
                 {/* Catégorie - bouton accordéon */}
                 <button
                   onClick={() => setActiveCategory(isOpen ? null : category.name)}
-                  className="w-full flex items-center justify-between p-4 text-left hover:bg-gray-50 transition-colors"
+                  className={cn(
+                    "w-full flex items-center justify-between p-4 text-left transition-all duration-200",
+                    isOpen ? "bg-gradient-to-r from-blue-50 to-purple-50" : "hover:bg-gray-50"
+                  )}
                 >
                   <div className="flex items-center gap-3">
                     {getCategoryIcon(category.name)}
-                    <span className="font-medium text-gray-900">{cleanName}</span>
+                    <div>
+                      <span className="font-semibold text-gray-900 block">{cleanName}</span>
+                      <span className="text-xs text-gray-500">{products.length} produits</span>
+                    </div>
                   </div>
                   <ChevronDown className={cn(
-                    "w-5 h-5 text-gray-400 transition-transform",
-                    isOpen && "rotate-180"
+                    "w-5 h-5 text-gray-400 transition-transform duration-200",
+                    isOpen && "rotate-180 text-blue-600"
                   )} />
                 </button>
 
                 {/* Contenu de l'accordéon - marques et produits */}
                 {isOpen && (
-                  <div className="bg-blue-50 border-t border-blue-200 py-2">
+                  <div className="bg-gradient-to-b from-gray-50 to-white py-2">
                     {uniqueBrands.map((brand) => {
                       const isBrandOpen = activeBrand === brand;
                       const brandProducts = getProductsByBrand(brand).filter(p => {
@@ -524,51 +533,99 @@ const MobileMenu = ({
                       }).sort((a, b) => (b.price || 0) - (a.price || 0));
 
                       return (
-                        <div key={brand} className="border-b border-blue-100 last:border-0">
-                          {/* Marque */}
+                        <div key={brand} className="border-b border-gray-100 last:border-0">
+                          {/* Marque avec design amélioré */}
                           <button
                             onClick={() => setActiveBrand(isBrandOpen ? null : brand)}
-                            className="w-full flex items-center justify-between px-4 py-3 text-left hover:bg-blue-100 transition-colors"
+                            className={cn(
+                              "w-full flex items-center justify-between px-6 py-3 text-left transition-all duration-200",
+                              isBrandOpen ? "bg-blue-100/50" : "hover:bg-gray-100"
+                            )}
                           >
-                            <div className="flex items-center gap-2 ml-4">
-                              <Package className="w-4 h-4 text-blue-600" />
-                              <span className="text-sm font-semibold text-gray-900">{brand}</span>
-                              <span className="text-xs text-gray-600 bg-white px-2 py-0.5 rounded-full">
-                                {brandProducts.length}
-                              </span>
+                            <div className="flex items-center gap-3">
+                              <div className={cn(
+                                "w-8 h-8 rounded-lg flex items-center justify-center",
+                                isBrandOpen ? "bg-blue-600" : "bg-gray-200"
+                              )}>
+                                <Package className={cn(
+                                  "w-4 h-4",
+                                  isBrandOpen ? "text-white" : "text-gray-600"
+                                )} />
+                              </div>
+                              <div>
+                                <span className="text-sm font-bold text-gray-900 block">{brand}</span>
+                                <span className="text-xs text-gray-500">{brandProducts.length} produit{brandProducts.length > 1 ? 's' : ''}</span>
+                              </div>
                             </div>
                             <ChevronDown className={cn(
-                              "w-4 h-4 text-blue-600 transition-transform",
-                              isBrandOpen && "rotate-180"
+                              "w-4 h-4 transition-transform duration-200",
+                              isBrandOpen ? "rotate-180 text-blue-600" : "text-gray-400"
                             )} />
                           </button>
 
-                          {/* Produits */}
+                          {/* Produits avec cartes modernes */}
                           {isBrandOpen && (
-                            <div className="bg-white mx-4 mb-2 rounded-lg border border-gray-200 divide-y divide-gray-100">
+                            <div className="px-4 pb-3 space-y-2">
                               {brandProducts.map((product) => (
                                 <Link
                                   key={product.id}
                                   href={`/produit/${product.urlSlug || product.id}`}
                                   onClick={onClose}
-                                  className="flex items-center gap-3 p-3 hover:bg-gray-50 transition-colors"
+                                  className="block group"
                                 >
-                                  {product.images && product.images.length > 0 && (
-                                    <div className="w-14 h-14 bg-gray-50 rounded-lg overflow-hidden flex-shrink-0 border border-gray-200">
-                                      <Image
-                                        src={product.images[0]}
-                                        alt={product.name}
-                                        width={56}
-                                        height={56}
-                                        className="w-full h-full object-contain"
-                                      />
+                                  <div className="bg-white rounded-xl border border-gray-200 p-3 hover:border-blue-300 hover:shadow-lg transition-all duration-200">
+                                    <div className="flex gap-3">
+                                      {/* Image du produit avec placeholder amélioré */}
+                                      <div className="w-20 h-20 bg-gradient-to-br from-gray-900 to-gray-800 rounded-lg overflow-hidden flex-shrink-0 border border-gray-700">
+                                        {product.images && product.images.length > 0 && !product.images[0].includes('placeholder') ? (
+                                          <ImageWithFallback
+                                            src={product.images[0]}
+                                            alt={product.name}
+                                            width={80}
+                                            height={80}
+                                            className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-200"
+                                            productCategory={product.category}
+                                          />
+                                        ) : (
+                                          <div className="w-full h-full flex items-center justify-center relative">
+                                            <div className="absolute inset-0 bg-gradient-to-br from-orange-500/20 via-pink-500/25 to-purple-600/20"></div>
+                                            <svg width="48" height="48" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="relative z-10">
+                                              <rect x="10" y="6" width="12" height="20" rx="2" fill="#1A1A1A" stroke="#F72585" strokeWidth="1.5"/>
+                                              <rect x="11.5" y="8" width="9" height="14" rx="1" fill="#0A0A0A"/>
+                                              <rect x="8.5" y="12" width="1.5" height="8" fill="#FF6B35" opacity="0.8"/>
+                                              <rect x="22" y="12" width="1.5" height="8" fill="#7209B7" opacity="0.8"/>
+                                              <circle cx="16" cy="23.5" r="1.5" fill="#F72585" opacity="0.6"/>
+                                            </svg>
+                                          </div>
+                                        )}
+                                      </div>
+
+                                      {/* Informations produit */}
+                                      <div className="flex-1 min-w-0">
+                                        <h4 className="text-sm font-semibold text-gray-900 line-clamp-2 group-hover:text-blue-600 transition-colors">
+                                          {product.name}
+                                        </h4>
+
+                                        {product.shortDescription && (
+                                          <p className="text-xs text-gray-500 mt-1 line-clamp-1">
+                                            {product.shortDescription}
+                                          </p>
+                                        )}
+
+                                        <div className="flex items-center justify-between mt-2">
+                                          {product.price && (
+                                            <p className="text-lg font-bold text-blue-600">
+                                              {typeof product.price === 'number'
+                                                ? `${product.price.toFixed(2)} €`
+                                                : product.price}
+                                            </p>
+                                          )}
+                                          <span className="text-xs text-blue-600 font-medium group-hover:underline">
+                                            Voir →
+                                          </span>
+                                        </div>
+                                      </div>
                                     </div>
-                                  )}
-                                  <div className="flex-1 min-w-0">
-                                    <p className="text-sm font-medium text-gray-900 line-clamp-2">{product.name}</p>
-                                    {product.price && (
-                                      <p className="text-base font-bold text-blue-600 mt-1">{product.price}</p>
-                                    )}
                                   </div>
                                 </Link>
                               ))}
