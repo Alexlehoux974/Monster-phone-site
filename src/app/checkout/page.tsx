@@ -122,16 +122,8 @@ export default function CheckoutPage() {
       if (!formData.postalCode) newErrors.postalCode = 'Code postal requis';
     }
 
-    if (step >= 2 && formData.paymentMethod === 'card') {
-      // Validation des informations de paiement
-      if (!formData.cardNumber) newErrors.cardNumber = 'Numéro de carte requis';
-      if (!formData.cardName) newErrors.cardName = 'Nom sur la carte requis';
-      if (!formData.cardExpiry) newErrors.cardExpiry = 'Date d\'expiration requise';
-      if (!formData.cardCvv) newErrors.cardCvv = 'CVV requis';
-    }
-
-    if (step >= 3) {
-      // Validation finale
+    if (step >= 2) {
+      // Validation finale avant paiement Stripe
       if (!formData.terms) newErrors.terms = 'Vous devez accepter les conditions';
     }
 
@@ -141,7 +133,7 @@ export default function CheckoutPage() {
 
   const handleNextStep = () => {
     if (validateStep(currentStep)) {
-      setCurrentStep(prev => Math.min(3, prev + 1));
+      setCurrentStep(prev => Math.min(2, prev + 1));
     }
   };
 
@@ -152,36 +144,59 @@ export default function CheckoutPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!validateStep(3)) {
+    if (!validateStep(2)) {
       return;
     }
 
     setIsProcessing(true);
 
     try {
-      // Créer la commande réelle dans Supabase
-      const result = await createOrder({
+      // Préparer les données pour Stripe
+      const customerInfo = {
         name: `${formData.firstName} ${formData.lastName}`,
         email: formData.email,
         phone: formData.phone,
-        address: `${formData.address}, ${formData.postalCode} ${formData.city}`,
+        address: formData.address,
+        city: formData.city,
+        postalCode: formData.postalCode,
+      };
+
+      // Créer une session Stripe Checkout
+      const response = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          items: items.map(item => ({
+            id: item.product.id,
+            name: item.product.name,
+            description: item.product.description,
+            price: typeof item.product.price === 'string' ? parseFloat(item.product.price) : item.product.price,
+            quantity: item.quantity,
+            image_url: item.product.images[0],
+            brand_name: item.product.brand,
+            category_name: item.product.category,
+          })),
+          customerInfo,
+        }),
       });
 
-      if (result.success && result.order) {
-        // Commande créée avec succès
-        setOrderComplete(true);
-        window.scrollTo(0, 0);
+      const data = await response.json();
 
-        console.log('✅ Commande créée:', result.order);
-      } else {
-        // Erreur lors de la création de la commande
-        console.error('❌ Erreur création commande:', result.error);
-        setErrors({ ...errors, submit: result.error || 'Erreur lors de la création de la commande' });
+      if (!response.ok) {
+        throw new Error(data.error || 'Erreur lors de la création de la session de paiement');
       }
-    } catch (error) {
-      console.error('❌ Erreur inattendue:', error);
-      setErrors({ ...errors, submit: 'Erreur réseau. Veuillez réessayer.' });
-    } finally {
+
+      // Rediriger vers Stripe Checkout
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error('URL de paiement manquante');
+      }
+    } catch (error: any) {
+      console.error('❌ Erreur paiement:', error);
+      setErrors({ ...errors, submit: error.message || 'Erreur réseau. Veuillez réessayer.' });
       setIsProcessing(false);
     }
   };
@@ -192,8 +207,7 @@ export default function CheckoutPage() {
 
   const steps = [
     { number: 1, label: 'Livraison', icon: Truck },
-    { number: 2, label: 'Paiement', icon: CreditCard },
-    { number: 3, label: 'Confirmation', icon: Check },
+    { number: 2, label: 'Confirmation', icon: Check },
   ];
 
   if (orderComplete) {
@@ -523,161 +537,8 @@ export default function CheckoutPage() {
                     </>
                   )}
 
-                  {/* Étape 2: Paiement */}
+                  {/* Étape 2: Confirmation */}
                   {currentStep === 2 && (
-                    <>
-                      <h2 className="text-xl font-bold mb-6 flex items-center">
-                        <CreditCard className="w-5 h-5 mr-2" />
-                        Informations de paiement
-                      </h2>
-
-                      {/* Mode de paiement */}
-                      <div className="space-y-3 mb-6">
-                        <label className="border rounded-lg p-4 flex items-center cursor-pointer hover:bg-gray-50 transition-colors">
-                          <input
-                            type="radio"
-                            name="paymentMethod"
-                            value="card"
-                            checked={formData.paymentMethod === 'card'}
-                            onChange={handleInputChange}
-                            className="mr-3"
-                          />
-                          <CreditCard className="w-5 h-5 mr-3 text-gray-600" />
-                          <span className="font-medium">Carte bancaire</span>
-                        </label>
-
-                        <label className="border rounded-lg p-4 flex items-center cursor-pointer hover:bg-gray-50 transition-colors">
-                          <input
-                            type="radio"
-                            name="paymentMethod"
-                            value="paypal"
-                            checked={formData.paymentMethod === 'paypal'}
-                            onChange={handleInputChange}
-                            className="mr-3"
-                          />
-                          <div className="w-5 h-5 mr-3 bg-blue-600 rounded flex items-center justify-center text-white text-xs font-bold">
-                            P
-                          </div>
-                          <span className="font-medium">PayPal</span>
-                        </label>
-                      </div>
-
-                      {/* Formulaire de carte bancaire */}
-                      {formData.paymentMethod === 'card' && (
-                        <div className="space-y-4">
-                          <div>
-                            <label htmlFor="cardNumber" className="block text-sm font-medium text-gray-700 mb-1">
-                              Numéro de carte *
-                            </label>
-                            <input
-                              id="cardNumber"
-                              type="text"
-                              name="cardNumber"
-                              value={formData.cardNumber}
-                              onChange={handleInputChange}
-                              placeholder="1234 5678 9012 3456"
-                              maxLength={19}
-                              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-                                errors.cardNumber ? 'border-red-500' : 'border-gray-300'
-                              }`}
-                            />
-                            {errors.cardNumber && (
-                              <p className="text-red-500 text-xs mt-1">{errors.cardNumber}</p>
-                            )}
-                          </div>
-
-                          <div>
-                            <label htmlFor="cardName" className="block text-sm font-medium text-gray-700 mb-1">
-                              Nom sur la carte *
-                            </label>
-                            <input
-                              id="cardName"
-                              type="text"
-                              name="cardName"
-                              value={formData.cardName}
-                              onChange={handleInputChange}
-                              placeholder="JEAN DUPONT"
-                              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-                                errors.cardName ? 'border-red-500' : 'border-gray-300'
-                              }`}
-                            />
-                            {errors.cardName && (
-                              <p className="text-red-500 text-xs mt-1">{errors.cardName}</p>
-                            )}
-                          </div>
-
-                          <div className="grid grid-cols-2 gap-4">
-                            <div>
-                              <label htmlFor="cardExpiry" className="block text-sm font-medium text-gray-700 mb-1">
-                                Date d&apos;expiration *
-                              </label>
-                              <input
-                                id="cardExpiry"
-                                type="text"
-                                name="cardExpiry"
-                                value={formData.cardExpiry}
-                                onChange={handleInputChange}
-                                placeholder="MM/AA"
-                                maxLength={5}
-                                className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-                                  errors.cardExpiry ? 'border-red-500' : 'border-gray-300'
-                                }`}
-                              />
-                              {errors.cardExpiry && (
-                                <p className="text-red-500 text-xs mt-1">{errors.cardExpiry}</p>
-                              )}
-                            </div>
-
-                            <div>
-                              <label htmlFor="cardCvv" className="block text-sm font-medium text-gray-700 mb-1">
-                                CVV *
-                              </label>
-                              <input
-                                id="cardCvv"
-                                type="text"
-                                name="cardCvv"
-                                value={formData.cardCvv}
-                                onChange={handleInputChange}
-                                placeholder="123"
-                                maxLength={4}
-                                className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-                                  errors.cardCvv ? 'border-red-500' : 'border-gray-300'
-                                }`}
-                              />
-                              {errors.cardCvv && (
-                                <p className="text-red-500 text-xs mt-1">{errors.cardCvv}</p>
-                              )}
-                            </div>
-                          </div>
-
-                          <div className="bg-blue-50 p-4 rounded-lg flex items-start space-x-3">
-                            <Shield className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
-                            <div className="text-sm">
-                              <p className="font-medium text-blue-900">Paiement 100% sécurisé</p>
-                              <p className="text-blue-700">
-                                Vos informations de paiement sont cryptées et sécurisées.
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      )}
-
-                      {/* PayPal */}
-                      {formData.paymentMethod === 'paypal' && (
-                        <div className="bg-gray-50 p-6 rounded-lg text-center">
-                          <div className="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 text-white text-3xl font-bold">
-                            P
-                          </div>
-                          <p className="text-gray-600">
-                            Vous serez redirigé vers PayPal pour finaliser votre paiement en toute sécurité.
-                          </p>
-                        </div>
-                      )}
-                    </>
-                  )}
-
-                  {/* Étape 3: Confirmation */}
-                  {currentStep === 3 && (
                     <>
                       <h2 className="text-xl font-bold mb-6 flex items-center">
                         <Check className="w-5 h-5 mr-2" />
@@ -716,15 +577,15 @@ export default function CheckoutPage() {
                         {/* Mode de paiement */}
                         <div>
                           <h3 className="font-semibold mb-2">Mode de paiement</h3>
-                          <div className="bg-gray-50 p-4 rounded-lg text-sm">
-                            <p className="font-medium">
-                              {formData.paymentMethod === 'card' ? 'Carte bancaire' : 'PayPal'}
+                          <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-lg">
+                            <div className="flex items-center gap-3 mb-2">
+                              <Shield className="w-6 h-6 text-blue-600" />
+                              <p className="font-semibold text-blue-900">Paiement sécurisé par Stripe</p>
+                            </div>
+                            <p className="text-sm text-gray-700">
+                              Vous serez redirigé vers notre page de paiement sécurisée pour finaliser votre commande.
+                              Acceptation des cartes bancaires (Visa, Mastercard, American Express) et autres moyens de paiement.
                             </p>
-                            {formData.paymentMethod === 'card' && formData.cardNumber && (
-                              <p className="text-gray-600">
-                                **** **** **** {formData.cardNumber.slice(-4)}
-                              </p>
-                            )}
                           </div>
                         </div>
 
@@ -780,7 +641,7 @@ export default function CheckoutPage() {
                       </button>
                     )}
 
-                    {currentStep < 3 ? (
+                    {currentStep < 2 ? (
                       <button
                         type="button"
                         onClick={handleNextStep}
@@ -793,17 +654,17 @@ export default function CheckoutPage() {
                       <button
                         type="submit"
                         disabled={isProcessing}
-                        className="ml-auto px-8 py-3 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors disabled:bg-gray-400 flex items-center"
+                        className="ml-auto px-8 py-3 bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-lg font-medium hover:from-green-700 hover:to-blue-700 transition-colors disabled:bg-gray-400 flex items-center shadow-lg"
                       >
                         {isProcessing ? (
                           <>
                             <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                            Traitement...
+                            Redirection vers le paiement...
                           </>
                         ) : (
                           <>
-                            <CreditCard className="w-5 h-5 mr-2" />
-                            Confirmer et payer {total.toFixed(2)} €
+                            <Shield className="w-5 h-5 mr-2" />
+                            Procéder au paiement sécurisé {total.toFixed(2)} €
                           </>
                         )}
                       </button>
