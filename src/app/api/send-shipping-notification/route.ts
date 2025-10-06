@@ -41,30 +41,33 @@ export async function POST(request: NextRequest) {
       })
       .eq('id', orderId);
 
+    // TODO: Réactiver l'envoi d'email plus tard
     // Envoyer l'email de notification d'expédition
-    await resend.emails.send({
-      from: 'Monster Phone Boutique <no-reply@digiqo.fr>',
-      to: order.customer_email,
-      subject: `📦 Votre commande #${order.order_number} est en route !`,
-      react: ShippingNotificationEmail({
-        orderNumber: order.order_number,
-        customerName: order.customer_name,
-        trackingNumber,
-        trackingUrl,
-        carrier,
-        estimatedDelivery: estimatedDelivery || new Date(Date.now() + 5 * 24 * 60 * 60 * 1000).toISOString(),
-        shippingAddress: {
-          street: order.shipping_address?.line1 || '',
-          city: order.shipping_address?.city || '',
-          postalCode: order.shipping_address?.postal_code || '',
-          country: order.shipping_address?.country || 'France',
-        },
-      }),
-    });
+    // await resend.emails.send({
+    //   from: 'Monster Phone Boutique <no-reply@digiqo.fr>',
+    //   to: order.customer_email,
+    //   subject: `📦 Votre commande #${order.order_number} est en route !`,
+    //   react: ShippingNotificationEmail({
+    //     orderNumber: order.order_number,
+    //     customerName: order.customer_name,
+    //     trackingNumber,
+    //     trackingUrl,
+    //     carrier,
+    //     estimatedDelivery: estimatedDelivery || new Date(Date.now() + 5 * 24 * 60 * 60 * 1000).toISOString(),
+    //     shippingAddress: {
+    //       street: order.shipping_address?.line1 || '',
+    //       city: order.shipping_address?.city || '',
+    //       postalCode: order.shipping_address?.postal_code || '',
+    //       country: order.shipping_address?.country || 'France',
+    //     },
+    //   }),
+    // });
+
+    console.log('📧 Email de notification d\'expédition désactivé temporairement');
 
     return NextResponse.json({
       success: true,
-      message: 'Email de notification d\'expédition envoyé',
+      message: 'Commande mise à jour (envoi email désactivé temporairement)',
     });
   } catch (error: any) {
     console.error('Erreur envoi notification expédition:', error);

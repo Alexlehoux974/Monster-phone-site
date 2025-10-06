@@ -34,33 +34,33 @@ export async function POST(request: NextRequest) {
     const customerEmail = session.customer_details?.email || '';
     const customerName = session.customer_details?.name || 'Client';
 
+    // TODO: Réactiver l'envoi d'email plus tard
     // Envoyer l'email de confirmation
-    const emailResponse = await resend.emails.send({
-      from: 'Monster Phone Boutique <no-reply@digiqo.fr>',
-      to: customerEmail,
-      subject: `✅ Test - Commande confirmée #${orderNumber} - Monster Phone 🎉`,
-      react: OrderConfirmationEmail({
-        orderNumber,
-        customerName,
-        customerEmail,
-        items: session.line_items?.data.map(item => ({
-          product_name: item.description || '',
-          quantity: item.quantity || 1,
-          unit_price: item.price?.unit_amount ? item.price.unit_amount / 100 : 0,
-          total_price: item.amount_total ? item.amount_total / 100 : 0,
-        })) || [],
-        subtotal: session.amount_subtotal ? session.amount_subtotal / 100 : 0,
-        total: session.amount_total ? session.amount_total / 100 : 0,
-        orderDate: new Date(session.created * 1000).toISOString(),
-      }),
-    });
+    // const emailResponse = await resend.emails.send({
+    //   from: 'Monster Phone Boutique <no-reply@digiqo.fr>',
+    //   to: customerEmail,
+    //   subject: `✅ Test - Commande confirmée #${orderNumber} - Monster Phone 🎉`,
+    //   react: OrderConfirmationEmail({
+    //     orderNumber,
+    //     customerName,
+    //     customerEmail,
+    //     items: session.line_items?.data.map(item => ({
+    //       product_name: item.description || '',
+    //       quantity: item.quantity || 1,
+    //       unit_price: item.price?.unit_amount ? item.price.unit_amount / 100 : 0,
+    //       total_price: item.amount_total ? item.amount_total / 100 : 0,
+    //     })) || [],
+    //     subtotal: session.amount_subtotal ? session.amount_subtotal / 100 : 0,
+    //     total: session.amount_total ? session.amount_total / 100 : 0,
+    //     orderDate: new Date(session.created * 1000).toISOString(),
+    //   }),
+    // });
 
-    console.log('✅ Email de test envoyé:', emailResponse);
+    console.log('📧 Email de test désactivé temporairement');
 
     return NextResponse.json({
       success: true,
-      message: 'Email de confirmation envoyé',
-      emailId: emailResponse.data?.id,
+      message: 'Email de confirmation désactivé temporairement',
       to: customerEmail,
     });
   } catch (error: any) {
