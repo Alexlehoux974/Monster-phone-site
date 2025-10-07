@@ -7,7 +7,7 @@ import FeaturesSection from '@/components/FeaturesSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import Footer from '@/components/Footer';
 import type { Metadata } from 'next';
-import { getBestSellers } from '@/lib/supabase/api';
+import { getActiveProducts } from '@/lib/supabase/api';
 import { supabaseProductToLegacy } from '@/lib/supabase/adapters';
 import { sortProductsByPriority } from '@/lib/utils';
 
@@ -54,14 +54,15 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  // Récupérer les meilleures ventes depuis Supabase (12 produits pour 2 rangées)
-  const supabaseProducts = await getBestSellers(12);
+  // Récupérer TOUS les produits actifs depuis Supabase
+  const supabaseProducts = await getActiveProducts();
 
   // Convertir les produits Supabase vers le format legacy pour ProductCard
   const convertedProducts = supabaseProducts.map(supabaseProductToLegacy);
 
   // Trier les produits par priorité (en stock > phares > prix décroissant)
-  const featuredProducts = sortProductsByPriority(convertedProducts);
+  // puis prendre les 12 premiers pour affichage (2 rangées de 6)
+  const featuredProducts = sortProductsByPriority(convertedProducts).slice(0, 12);
 
   return (
     <div className="min-h-screen">
