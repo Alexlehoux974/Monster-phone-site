@@ -23,7 +23,13 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
 
   const mainImage = product.images[0] || '';
   const hasDiscount = product.discount && product.discount > 0;
+  const hasAdminDiscount = product.adminDiscountPercent && product.adminDiscountPercent > 0;
   const outOfStock = isCompletelyOutOfStock(product);
+
+  // Calculer le prix final avec la réduction admin
+  const finalPrice = hasAdminDiscount
+    ? product.price * (1 - product.adminDiscountPercent! / 100)
+    : product.price;
 
   // Vérifier le stock: pour variants OU pour produits directs
   const isInStock = selectedVariant
@@ -61,7 +67,12 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
             <Link href={`/produit/${product.urlSlug}`}>
               <div className="relative h-full">
                 <div className="absolute top-0 left-0 z-10 flex flex-col gap-1">
-                  {hasDiscount && (
+                  {hasAdminDiscount && (
+                    <Badge className="bg-red-500 text-white">
+                      -{product.adminDiscountPercent}%
+                    </Badge>
+                  )}
+                  {!hasAdminDiscount && hasDiscount && (
                     <Badge className="bg-red-500 text-white">
                       -{product.discount}%
                     </Badge>
@@ -119,11 +130,11 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <span className="text-2xl font-bold text-blue-600">
-                  {formatPrice(product.price)}
+                  {formatPrice(finalPrice)}
                 </span>
-                {hasDiscount && (
+                {(hasAdminDiscount || hasDiscount) && (
                   <span className="text-lg text-gray-400 line-through">
-                    {formatPrice(product.originalPrice!)}
+                    {formatPrice(product.price)}
                   </span>
                 )}
                 {product.variants && product.variants.length > 1 && (
@@ -185,7 +196,12 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
         <div className="relative aspect-square overflow-hidden rounded-t-lg bg-gray-50">
           {/* Badges */}
           <div className="absolute top-2 left-2 z-10 flex flex-col gap-1">
-            {hasDiscount && (
+            {hasAdminDiscount && (
+              <Badge className="bg-red-500 text-white">
+                -{product.adminDiscountPercent}%
+              </Badge>
+            )}
+            {!hasAdminDiscount && hasDiscount && (
               <Badge className="bg-red-500 text-white">
                 -{product.discount}%
               </Badge>
@@ -267,11 +283,11 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
           <div>
             <div className="flex items-center gap-2">
               <span className="text-2xl font-bold text-blue-600">
-                {formatPrice(product.price)}
+                {formatPrice(finalPrice)}
               </span>
-              {hasDiscount && (
+              {(hasAdminDiscount || hasDiscount) && (
                 <span className="text-sm text-gray-400 line-through">
-                  {formatPrice(product.originalPrice!)}
+                  {formatPrice(product.price)}
                 </span>
               )}
             </div>

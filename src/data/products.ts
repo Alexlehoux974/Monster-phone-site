@@ -58,6 +58,7 @@ export interface Product {
   originalPrice?: number;
   discount?: number;
   promo?: string;
+  adminDiscountPercent?: number; // Pourcentage de réduction admin (0-100)
   
   // Descriptions et SEO
   description: string;
@@ -84,6 +85,7 @@ export interface Product {
   
   // Données additionnelles
   status: 'active' | 'draft' | 'out-of-stock';
+  isVisible?: boolean; // Contrôle la visibilité dans le catalogue
   rating?: ProductRating;
   reviews?: Review[];
   warranty?: string;
