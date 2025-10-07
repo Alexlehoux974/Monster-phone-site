@@ -428,7 +428,7 @@ export default function PromotionsPage() {
                     onChange={(e) => setSortBy(e.target.value as 'priority' | 'discount' | 'price' | 'name')}
                     className="border border-gray-300 rounded-md px-3 py-1 text-sm"
                   >
-                    <option value="priority">Priorité (en stock > phares)</option>
+                    <option value="priority">Priorité (en stock puis phares)</option>
                     <option value="discount">Remise max</option>
                     <option value="price">Prix croissant</option>
                     <option value="name">Nom A-Z</option>
