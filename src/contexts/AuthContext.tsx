@@ -1,6 +1,7 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
+import { toast } from 'sonner';
 
 export interface User {
   id: string;
@@ -28,9 +29,15 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+// Durée d'inactivité avant déconnexion (15 minutes en millisecondes)
+const INACTIVITY_TIMEOUT = 15 * 60 * 1000;
+// Avertissement à 14 minutes (1 minute avant déconnexion)
+const WARNING_TIMEOUT = 14 * 60 * 1000;
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [lastActivity, setLastActivity] = useState<number>(Date.now());
 
   // Charger l'utilisateur depuis localStorage au montage
   useEffect(() => {
@@ -112,9 +119,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(newUser);
   };
 
-  const logout = () => {
+  const logout = useCallback(() => {
     setUser(null);
-  };
+    toast.info('Vous avez été déconnecté');
+  }, []);
 
   const updateProfile = async (updates: Partial<User>) => {
     if (!user) {
@@ -127,6 +135,61 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const updatedUser = { ...user, ...updates };
     setUser(updatedUser);
   };
+
+  // Mettre à jour l'activité utilisateur
+  const updateActivity = useCallback(() => {
+    setLastActivity(Date.now());
+  }, []);
+
+  // Détecter l'activité utilisateur (desktop et mobile)
+  useEffect(() => {
+    // Ne tracker l'activité que si l'utilisateur est connecté
+    if (!user) return;
+
+    const events = ['mousemove', 'keydown', 'scroll', 'click', 'touchstart', 'touchmove'];
+
+    // Ajouter les event listeners
+    events.forEach(event => {
+      window.addEventListener(event, updateActivity, { passive: true });
+    });
+
+    // Nettoyer les event listeners
+    return () => {
+      events.forEach(event => {
+        window.removeEventListener(event, updateActivity);
+      });
+    };
+  }, [user, updateActivity]);
+
+  // Vérifier l'inactivité et déconnecter automatiquement
+  useEffect(() => {
+    // Ne vérifier que si l'utilisateur est connecté
+    if (!user) return;
+
+    let hasWarned = false;
+
+    const checkInactivity = setInterval(() => {
+      const inactiveTime = Date.now() - lastActivity;
+
+      // Avertissement à 14 minutes (1 minute avant déconnexion)
+      if (inactiveTime >= WARNING_TIMEOUT && !hasWarned) {
+        hasWarned = true;
+        toast.warning('Vous serez déconnecté dans 1 minute pour inactivité', {
+          duration: 10000,
+        });
+      }
+
+      // Déconnexion à 15 minutes
+      if (inactiveTime >= INACTIVITY_TIMEOUT) {
+        logout();
+        toast.error('Vous avez été déconnecté pour inactivité', {
+          duration: 5000,
+        });
+      }
+    }, 1000); // Vérifier toutes les secondes
+
+    return () => clearInterval(checkInactivity);
+  }, [user, lastActivity, logout]);
 
   const value: AuthContextType = {
     user,

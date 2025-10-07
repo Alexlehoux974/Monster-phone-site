@@ -1049,8 +1049,13 @@ export default function Header() {
               </button>
 
               {/* Panier avec aperçu */}
-              <div className="relative" ref={cartRef}>
-                <button 
+              <div
+                className="relative"
+                ref={cartRef}
+                onMouseEnter={() => setIsCartOpen(true)}
+                onMouseLeave={() => setIsCartOpen(false)}
+              >
+                <button
                   onClick={() => setIsCartOpen(!isCartOpen)}
                   className="relative p-1.5 text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                 >
