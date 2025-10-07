@@ -14,6 +14,9 @@ import {
   X,
   TrendingUp,
   TrendingDown,
+  Eye,
+  EyeOff,
+  Percent,
 } from 'lucide-react';
 
 interface ProductVariant {
@@ -34,6 +37,8 @@ interface Product {
   price: number;
   category_id: string;
   brand_id: string;
+  is_visible: boolean;
+  admin_discount_percent: number;
   product_variants?: ProductVariant[];
 }
 
@@ -48,6 +53,8 @@ interface VariantRow {
   stock: number;
   price: number;
   isVariant: boolean;
+  isVisible: boolean;
+  adminDiscountPercent: number;
 }
 
 interface Brand {
@@ -75,6 +82,8 @@ export default function StockManagementPage() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editingStock, setEditingStock] = useState<number>(0);
   const [editingPrice, setEditingPrice] = useState<number>(0);
+  const [editingVisible, setEditingVisible] = useState<boolean>(true);
+  const [editingDiscount, setEditingDiscount] = useState<number>(0);
   const [toast, setToast] = useState<{
     message: string;
     type: 'success' | 'error' | 'warning' | 'info';
@@ -143,6 +152,8 @@ export default function StockManagementPage() {
               stock: variant.stock,
               price: product.price,
               isVariant: true,
+              isVisible: product.is_visible !== undefined ? product.is_visible : true,
+              adminDiscountPercent: product.admin_discount_percent || 0,
             });
           });
         } else {
@@ -158,6 +169,8 @@ export default function StockManagementPage() {
             stock: product.stock_quantity || 0,
             price: product.price,
             isVariant: false,
+            isVisible: product.is_visible !== undefined ? product.is_visible : true,
+            adminDiscountPercent: product.admin_discount_percent || 0,
           });
         }
       });
@@ -217,12 +230,16 @@ export default function StockManagementPage() {
     setEditingId(row.id);
     setEditingStock(row.stock);
     setEditingPrice(row.price);
+    setEditingVisible(row.isVisible);
+    setEditingDiscount(row.adminDiscountPercent);
   };
 
   const cancelEditing = () => {
     setEditingId(null);
     setEditingStock(0);
     setEditingPrice(0);
+    setEditingVisible(true);
+    setEditingDiscount(0);
   };
 
   const saveStock = async (rowId: string) => {
@@ -248,34 +265,44 @@ export default function StockManagementPage() {
 
         console.log(`Stock updated for ${row.productName} - ${row.color}: ${editingStock}`);
 
-        // Update product price via generic API route
-        const priceResponse = await fetch('/api/admin/supabase', {
+        // Update product price, visibility and discount via generic API route
+        const productResponse = await fetch('/api/admin/supabase', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             operation: 'update',
             table: 'products',
-            data: { price: editingPrice },
+            data: {
+              price: editingPrice,
+              is_visible: editingVisible,
+              admin_discount_percent: editingDiscount
+            },
             filters: [{ column: 'id', value: row.productId }]
           })
         });
 
-        const priceResult = await priceResponse.json();
-        if (!priceResponse.ok || priceResult.error) {
-          throw new Error(priceResult.error || 'Failed to update price');
+        const productResult = await productResponse.json();
+        if (!productResponse.ok || productResult.error) {
+          throw new Error(productResult.error || 'Failed to update product');
         }
 
-        console.log(`Price updated for ${row.productName}: ${editingPrice}€`);
+        console.log(`Product updated for ${row.productName}: price=${editingPrice}€, visible=${editingVisible}, discount=${editingDiscount}%`);
 
         // Update the row in state
         setVariantRows((prev) =>
           prev.map((r) =>
-            r.id === rowId ? { ...r, stock: editingStock, price: editingPrice } : r
+            r.id === rowId ? {
+              ...r,
+              stock: editingStock,
+              price: editingPrice,
+              isVisible: editingVisible,
+              adminDiscountPercent: editingDiscount
+            } : r
           )
         );
       } else {
         // Fallback for products without variants (backward compatibility)
-        // Update both stock and price via API route
+        // Update stock, price, visibility and discount via API route
         const response = await fetch('/api/admin/supabase', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -286,6 +313,8 @@ export default function StockManagementPage() {
               stock_quantity: editingStock,
               price: editingPrice,
               status: editingStock === 0 ? 'out-of-stock' : 'active',
+              is_visible: editingVisible,
+              admin_discount_percent: editingDiscount
             },
             filters: [{ column: 'id', value: row.productId }]
           })
@@ -298,7 +327,13 @@ export default function StockManagementPage() {
 
         setVariantRows((prev) =>
           prev.map((r) =>
-            r.id === rowId ? { ...r, stock: editingStock, price: editingPrice } : r
+            r.id === rowId ? {
+              ...r,
+              stock: editingStock,
+              price: editingPrice,
+              isVisible: editingVisible,
+              adminDiscountPercent: editingDiscount
+            } : r
           )
         );
       }
@@ -320,7 +355,7 @@ export default function StockManagementPage() {
         console.error('Revalidation error:', revalidateError);
       }
 
-      showToast('Stock et prix mis à jour avec succès', 'success');
+      showToast('Produit mis à jour avec succès', 'success');
       cancelEditing();
     } catch (error) {
       console.error('Error updating stock/price:', error);
@@ -463,6 +498,12 @@ export default function StockManagementPage() {
                 <th className="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                   Prix
                 </th>
+                <th className="px-6 py-4 text-center text-xs font-medium text-gray-400 uppercase tracking-wider">
+                  Visible
+                </th>
+                <th className="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
+                  Promo %
+                </th>
                 <th className="px-6 py-4 text-right text-xs font-medium text-gray-400 uppercase tracking-wider">
                   Actions
                 </th>
@@ -557,6 +598,62 @@ export default function StockManagementPage() {
                       </div>
                     )}
                   </td>
+                  {/* Visible Column */}
+                  <td className="px-6 py-4 whitespace-nowrap text-center">
+                    {editingId === row.id ? (
+                      <label className="inline-flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={editingVisible}
+                          onChange={(e) => setEditingVisible(e.target.checked)}
+                          className="sr-only peer"
+                        />
+                        <div className="relative w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-red-800 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600"></div>
+                      </label>
+                    ) : (
+                      <div className="flex items-center justify-center">
+                        {row.isVisible ? (
+                          <Eye className="w-5 h-5 text-green-500" title="Visible" />
+                        ) : (
+                          <EyeOff className="w-5 h-5 text-gray-500" title="Masqué" />
+                        )}
+                      </div>
+                    )}
+                  </td>
+                  {/* Discount Column */}
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {editingId === row.id ? (
+                      <div className="flex items-center gap-1">
+                        <input
+                          type="number"
+                          value={editingDiscount}
+                          onChange={(e) =>
+                            setEditingDiscount(Math.min(100, Math.max(0, parseInt(e.target.value) || 0)))
+                          }
+                          min="0"
+                          max="100"
+                          className="w-16 px-3 py-1 bg-gray-700 border border-gray-600 rounded text-white focus:outline-none focus:ring-2 focus:ring-red-500"
+                        />
+                        <Percent className="w-4 h-4 text-gray-400" />
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-1">
+                        {row.adminDiscountPercent > 0 ? (
+                          <>
+                            <span className="text-sm font-semibold text-red-500">
+                              -{row.adminDiscountPercent}%
+                            </span>
+                            <span className="text-xs text-gray-500">
+                              ({(row.price * (1 - row.adminDiscountPercent / 100)).toFixed(2)}€)
+                            </span>
+                          </>
+                        ) : (
+                          <span className="text-sm text-gray-400">-</span>
+                        )}
+                      </div>
+                    )}
+                  </td>
+                  {/* Actions Column */}
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     {editingId === row.id ? (
                       <div className="flex items-center justify-end gap-2">

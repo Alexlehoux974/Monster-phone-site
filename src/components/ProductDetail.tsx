@@ -29,6 +29,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   const [variants, setVariants] = useState<ProductVariant[]>(product.variants || []);
   const [productPrice, setProductPrice] = useState(product.price);
   const [productStockQuantity, setProductStockQuantity] = useState(product.stockQuantity || 0);
+  const [adminDiscountPercent, setAdminDiscountPercent] = useState(product.adminDiscountPercent || 0);
   const [quantity, setQuantity] = useState(1);
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -66,6 +67,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
         console.log('🔄 [REALTIME] Product updated:', payload.new);
         setProductPrice(payload.new.price);
         setProductStockQuantity(payload.new.stock_quantity || 0);
+        setAdminDiscountPercent(payload.new.admin_discount_percent || 0);
       })
       .subscribe();
 
@@ -108,9 +110,14 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   const mainImage = allImages[selectedImageIndex]?.src || product.images[0];
 
   // Prix avec réduction (utiliser productPrice pour le temps réel)
-  const currentPrice = productPrice;
-  const originalPrice = product.originalPrice || productPrice;
-  const hasDiscount = product.discount && product.discount > 0;
+  const hasAdminDiscount = adminDiscountPercent > 0;
+  const finalPrice = hasAdminDiscount
+    ? productPrice * (1 - adminDiscountPercent / 100)
+    : productPrice;
+  const currentPrice = finalPrice;
+  const originalPrice = hasAdminDiscount ? productPrice : (product.originalPrice || productPrice);
+  const hasDiscount = hasAdminDiscount || (product.discount && product.discount > 0);
+  const displayDiscount = hasAdminDiscount ? adminDiscountPercent : product.discount;
   const savings = hasDiscount ? originalPrice - currentPrice : 0;
 
   // Stock de la variante sélectionnée ou stock du produit principal (utiliser productStockQuantity pour le temps réel)
@@ -181,7 +188,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
             >
               {hasDiscount && (
                 <Badge className="absolute top-4 left-4 z-10 bg-gradient-to-r from-red-500 to-red-600 text-white border-0 px-3 py-1.5 font-bold shadow-lg">
-                  -{product.discount}%
+                  -{displayDiscount}%
                 </Badge>
               )}
               {product.badges?.includes('Nouveau') && (
