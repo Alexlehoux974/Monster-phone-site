@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { allProducts } from '@/data/products';
 import ProductCard from '@/components/ProductCard';
-import { cn } from '@/lib/utils';
+import { cn, sortProductsByPriority } from '@/lib/utils';
 
 interface Collection {
   id: string;
@@ -21,7 +21,7 @@ const ProductCollections = () => {
   const [activeCollection, setActiveCollection] = useState<string>('gaming');
   const scrollRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
-  // Filtrer les produits par collection
+  // Filtrer et trier les produits par collection avec priorité
   const collections: Collection[] = [
     {
       id: 'gaming',
@@ -29,17 +29,21 @@ const ProductCollections = () => {
       icon: Flame,
       emoji: '🔥',
       description: 'Pack complet inclus : écouteurs, chargeur, protection, coque',
-      products: allProducts.filter(p => p.category === 'Smartphones').slice(0, 10),
+      products: sortProductsByPriority(
+        allProducts.filter(p => p.category === 'Smartphones')
+      ).slice(0, 10),
     },
     {
       id: 'accessories',
       title: 'Accessoires Gaming Essentiels',
       icon: Gamepad2,
       emoji: '🎮',
-      products: allProducts.filter(p => 
-        p.category === 'LED' || 
-        p.category === 'Accessoires' || 
-        p.category === 'Supports gaming'
+      products: sortProductsByPriority(
+        allProducts.filter(p =>
+          p.category === 'LED' ||
+          p.category === 'Accessoires' ||
+          p.category === 'Supports gaming'
+        )
       ).slice(0, 10),
     },
     {
@@ -47,11 +51,13 @@ const ProductCollections = () => {
       title: 'Audio Premium',
       icon: Headphones,
       emoji: '🎧',
-      products: allProducts.filter(p => 
-        p.category === 'Audio' || 
-        p.category === 'Écouteurs' || 
-        p.category === 'Casques' || 
-        p.category === 'Enceintes'
+      products: sortProductsByPriority(
+        allProducts.filter(p =>
+          p.category === 'Audio' ||
+          p.category === 'Écouteurs' ||
+          p.category === 'Casques' ||
+          p.category === 'Enceintes'
+        )
       ).slice(0, 10),
     },
     {
@@ -59,9 +65,11 @@ const ProductCollections = () => {
       title: 'Montres Connectées',
       icon: Watch,
       emoji: '⌚',
-      products: allProducts.filter(p => 
-        p.category === 'Montres' || 
-        p.category === 'Montres connectées'
+      products: sortProductsByPriority(
+        allProducts.filter(p =>
+          p.category === 'Montres' ||
+          p.category === 'Montres connectées'
+        )
       ).slice(0, 10),
     },
   ];

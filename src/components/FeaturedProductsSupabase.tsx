@@ -10,15 +10,9 @@ interface FeaturedProductsSupabaseProps {
 }
 
 export default function FeaturedProductsSupabase({ products, title }: FeaturedProductsSupabaseProps) {
-  // Forcer le placeholder pour tous les produits phares
-  const productsWithPlaceholder = products.map(product => ({
-    ...product,
-    images: [] // Force l'utilisation du placeholder
-  }));
-
   // Séparer les produits en 2 rangées de 6 produits
-  const firstRow = productsWithPlaceholder.slice(0, 6);
-  const secondRow = productsWithPlaceholder.slice(6, 12);
+  const firstRow = products.slice(0, 6);
+  const secondRow = products.slice(6, 12);
 
   return (
     <section className="py-16 bg-gray-50">
