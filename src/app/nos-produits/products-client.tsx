@@ -40,7 +40,7 @@ function ProductsClientContent({
         brand_slug: brands.find(b => b.id === p.brand_id)?.slug || '',
         category_name: categories.find(c => c.id === p.category_id)?.name || '',
         category_slug: categories.find(c => c.id === p.category_id)?.slug || '',
-        product_variants: [],
+        product_variants: (p as any).product_variants || [],
         reviews: [],
         rating: p.average_rating ? {
           average: p.average_rating,
@@ -133,7 +133,7 @@ function ProductsClientContent({
         brand_slug: brands.find(b => b.id === p.brand_id)?.slug || '',
         category_name: categories.find(c => c.id === p.category_id)?.name || '',
         category_slug: categories.find(c => c.id === p.category_id)?.slug || '',
-        product_variants: [],
+        product_variants: (p as any).product_variants || [],
         reviews: [],
         rating: p.average_rating ? {
           average: p.average_rating,
@@ -194,7 +194,7 @@ function ProductsClientContent({
       brand_slug: brands.find(b => b.id === product.brand_id)?.slug || '',
       category_name: categories.find(c => c.id === product.category_id)?.name || '',
       category_slug: categories.find(c => c.id === product.category_id)?.slug || '',
-      product_variants: [],
+      product_variants: (product as any).product_variants || [],
       reviews: [],
       rating: product.average_rating ? {
         average: product.average_rating,

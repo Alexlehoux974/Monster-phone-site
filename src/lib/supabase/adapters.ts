@@ -7,6 +7,20 @@ import type { ProductFullView, DatabaseCategory } from './client';
 import type { Product, ProductVariant as LegacyVariant, Review, ProductSpecification, CategoryStructure } from '@/data/products';
 
 /**
+ * Extraire le texte pur depuis une chaîne HTML
+ * Enlève toutes les balises HTML et ne garde que le contenu textuel
+ */
+function stripHtmlTags(html: string): string {
+  if (!html) return '';
+
+  // Remplacer les balises HTML par des espaces pour éviter la concaténation de mots
+  return html
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+/**
  * Convertir un ProductFullView Supabase vers le type Product legacy
  */
 export function supabaseProductToLegacy(product: ProductFullView): Product {
@@ -105,7 +119,8 @@ export function supabaseProductToLegacy(product: ProductFullView): Product {
     discount: product.discount_percentage,
     promo: product.discount_percentage ? `${product.discount_percentage}% de réduction` : undefined,
     description: product.description || '',
-    shortDescription: product.short_description || product.description?.substring(0, 150) || '',
+    shortDescription: product.short_description ||
+                     (product.description ? stripHtmlTags(product.description).substring(0, 150) + '...' : ''),
     urlSlug: product.url_slug,
     images: product.images || [],
     specifications,

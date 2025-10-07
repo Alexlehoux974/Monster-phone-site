@@ -178,7 +178,17 @@ export async function getProducts() {
     .select(`
       *,
       brand:brands(name, slug),
-      category:categories!products_category_id_fkey(name, slug)
+      category:categories!products_category_id_fkey(name, slug),
+      product_variants (
+        id,
+        color,
+        color_code,
+        size,
+        ean,
+        stock,
+        price_adjustment,
+        is_default
+      )
     `)
     .neq('status', 'discontinued')
     .order('created_at', { ascending: false });
