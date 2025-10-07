@@ -6,7 +6,7 @@ import { Product } from '@/data/products';
 import { useCart } from '@/contexts/CartContext';
 import { useState } from 'react';
 import ImageWithFallback from './ImageWithFallback';
-import { formatPrice, cn } from '@/lib/utils';
+import { formatPrice, cn, isCompletelyOutOfStock } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
 
 interface ProductCardProps {
@@ -59,11 +59,18 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
           <div className="flex-shrink-0 w-32 h-32 relative">
             <Link href={`/produit/${product.urlSlug}`}>
               <div className="relative h-full">
-                {hasDiscount && (
-                  <Badge className="absolute top-0 left-0 z-10 bg-red-500 text-white">
-                    -{product.discount}%
-                  </Badge>
-                )}
+                <div className="absolute top-0 left-0 z-10 flex flex-col gap-1">
+                  {hasDiscount && (
+                    <Badge className="bg-red-500 text-white">
+                      -{product.discount}%
+                    </Badge>
+                  )}
+                  {isCompletelyOutOfStock(product) && (
+                    <Badge className="bg-gray-500 text-white">
+                      Rupture de stock
+                    </Badge>
+                  )}
+                </div>
                 <ImageWithFallback
                   src={mainImage}
                   alt={product.name}
@@ -191,6 +198,11 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
               <Badge className="bg-orange-500 text-white">
                 <Zap className="w-3 h-3 mr-1" />
                 Best-seller
+              </Badge>
+            )}
+            {isCompletelyOutOfStock(product) && (
+              <Badge className="bg-gray-500 text-white">
+                Rupture de stock
               </Badge>
             )}
           </div>

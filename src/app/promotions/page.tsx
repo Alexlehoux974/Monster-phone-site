@@ -8,7 +8,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { cn, formatPrice } from '@/lib/utils';
+import { cn, formatPrice, sortProductsByPriority } from '@/lib/utils';
 import { 
   Flame, 
   Clock, 
@@ -187,7 +187,7 @@ const TextShimmer = ({ children, className, duration = 2 }: { children: string; 
 
 export default function PromotionsPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [sortBy, setSortBy] = useState<'discount' | 'price' | 'name'>('discount');
+  const [sortBy, setSortBy] = useState<'priority' | 'discount' | 'price' | 'name'>('priority');
   const [productsWithPromotions, setProductsWithPromotions] = useState<Product[]>([]);
 
   // Charger les produits en promotion depuis Supabase
@@ -234,18 +234,23 @@ export default function PromotionsPage() {
     }
 
     // Trier par critère sélectionné
-    filtered.sort((a, b) => {
-      switch (sortBy) {
-        case 'discount':
-          return (b.discount || 0) - (a.discount || 0);
-        case 'price':
-          return a.price - b.price;
-        case 'name':
-          return a.name.localeCompare(b.name);
-        default:
-          return 0;
-      }
-    });
+    if (sortBy === 'priority') {
+      // Appliquer le tri par priorité (en stock > phares > prix décroissant)
+      filtered = sortProductsByPriority(filtered);
+    } else {
+      filtered.sort((a, b) => {
+        switch (sortBy) {
+          case 'discount':
+            return (b.discount || 0) - (a.discount || 0);
+          case 'price':
+            return a.price - b.price;
+          case 'name':
+            return a.name.localeCompare(b.name);
+          default:
+            return 0;
+        }
+      });
+    }
 
     return filtered;
   }, [productsWithPromotions, selectedCategory, sortBy]);
@@ -420,9 +425,10 @@ export default function PromotionsPage() {
                   <span className="text-sm text-gray-700">Trier par:</span>
                   <select
                     value={sortBy}
-                    onChange={(e) => setSortBy(e.target.value as 'discount' | 'price' | 'name')}
+                    onChange={(e) => setSortBy(e.target.value as 'priority' | 'discount' | 'price' | 'name')}
                     className="border border-gray-300 rounded-md px-3 py-1 text-sm"
                   >
+                    <option value="priority">Priorité (en stock > phares)</option>
                     <option value="discount">Remise max</option>
                     <option value="price">Prix croissant</option>
                     <option value="name">Nom A-Z</option>

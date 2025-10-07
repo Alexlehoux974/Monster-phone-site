@@ -11,7 +11,7 @@ import Pagination from '@/components/Pagination';
 import SortDropdown, { SortOption } from '@/components/SortDropdown';
 import ImageWithFallback from '@/components/ImageWithFallback';
 import { useCart } from '@/contexts/CartContext';
-import { formatPrice } from '@/lib/utils';
+import { formatPrice, sortProductsByPriority } from '@/lib/utils';
 import type { Product } from '@/data/products';
 import type { DatabaseProduct, DatabaseBrand, DatabaseCategory } from '@/lib/supabase/client';
 import { supabaseProductToLegacy } from '@/lib/supabase/adapters';
@@ -125,8 +125,26 @@ function ProductsClientContent({
 
   // Tri des produits
   const sortedProducts = useMemo(() => {
-    const sorted = [...filteredProducts];
-    
+    // Convertir les DatabaseProduct filtrés en format Product pour le tri
+    const convertedFiltered = filteredProducts.map(p => {
+      const fullViewProduct = {
+        ...p,
+        brand_name: brands.find(b => b.id === p.brand_id)?.name || '',
+        brand_slug: brands.find(b => b.id === p.brand_id)?.slug || '',
+        category_name: categories.find(c => c.id === p.category_id)?.name || '',
+        category_slug: categories.find(c => c.id === p.category_id)?.slug || '',
+        product_variants: [],
+        reviews: [],
+        rating: p.average_rating ? {
+          average: p.average_rating,
+          count: p.total_reviews || 0
+        } : undefined
+      };
+      return supabaseProductToLegacy(fullViewProduct as any);
+    });
+
+    let sorted = [...filteredProducts];
+
     switch (sortOption) {
       case 'price-asc':
         sorted.sort((a, b) => a.price - b.price);
@@ -147,12 +165,16 @@ function ProductsClientContent({
       case 'bestseller':
       case 'relevance':
       default:
-        // Keep original order
+        // Appliquer le tri par priorité (en stock > phares > prix décroissant)
+        const sortedByPriority = sortProductsByPriority(convertedFiltered);
+        // Mapper de retour vers DatabaseProduct en gardant l'ordre
+        const productIdMap = new Map(filteredProducts.map(p => [p.id, p]));
+        sorted = sortedByPriority.map(p => productIdMap.get(p.id)!).filter(Boolean);
         break;
     }
-    
+
     return sorted;
-  }, [filteredProducts, sortOption]);
+  }, [filteredProducts, sortOption, brands, categories]);
 
   // Pagination
   const paginatedProducts = useMemo(() => {

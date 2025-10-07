@@ -9,6 +9,7 @@ import Footer from '@/components/Footer';
 import type { Metadata } from 'next';
 import { getBestSellers } from '@/lib/supabase/api';
 import { supabaseProductToLegacy } from '@/lib/supabase/adapters';
+import { sortProductsByPriority } from '@/lib/utils';
 
 export const metadata: Metadata = {
   title: 'Monster Phone Boutique | Accessoires Gaming à La Réunion',
@@ -57,7 +58,10 @@ export default async function Home() {
   const supabaseProducts = await getBestSellers(12);
 
   // Convertir les produits Supabase vers le format legacy pour ProductCard
-  const featuredProducts = supabaseProducts.map(supabaseProductToLegacy);
+  const convertedProducts = supabaseProducts.map(supabaseProductToLegacy);
+
+  // Trier les produits par priorité (en stock > phares > prix décroissant)
+  const featuredProducts = sortProductsByPriority(convertedProducts);
 
   return (
     <div className="min-h-screen">
