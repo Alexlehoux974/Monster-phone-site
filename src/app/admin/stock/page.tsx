@@ -613,9 +613,13 @@ export default function StockManagementPage() {
                     ) : (
                       <div className="flex items-center justify-center">
                         {row.isVisible ? (
-                          <Eye className="w-5 h-5 text-green-500" title="Visible" />
+                          <span title="Visible">
+                            <Eye className="w-5 h-5 text-green-500" />
+                          </span>
                         ) : (
-                          <EyeOff className="w-5 h-5 text-gray-500" title="Masqué" />
+                          <span title="Masqué">
+                            <EyeOff className="w-5 h-5 text-gray-500" />
+                          </span>
                         )}
                       </div>
                     )}
