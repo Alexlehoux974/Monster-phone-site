@@ -52,16 +52,16 @@ export function truncateText(text: string, maxLength: number): string {
 /**
  * Vérifier si un produit est complètement en rupture de stock
  * Pour les produits avec variants: TOUS les variants doivent être en rupture
- * Pour les produits sans variants: stockQuantity doit être 0
+ * Pour les produits sans variants: stockQuantity doit être 0, null ou undefined
  */
 export function isCompletelyOutOfStock(product: { variants?: { stock: number }[]; stockQuantity?: number }): boolean {
   // Produit avec variants: vérifier si TOUS sont en rupture
   if (product.variants && product.variants.length > 0) {
-    return product.variants.every(variant => variant.stock === 0);
+    return product.variants.every(variant => (variant.stock ?? 0) === 0);
   }
 
-  // Produit sans variants: vérifier stockQuantity
-  return product.stockQuantity === 0;
+  // Produit sans variants: vérifier stockQuantity (traiter null/undefined comme 0)
+  return (product.stockQuantity ?? 0) === 0;
 }
 
 /**

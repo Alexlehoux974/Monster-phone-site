@@ -113,7 +113,7 @@ export function supabaseProductToLegacy(product: ProductFullView): Product {
     badges: product.badges || [],
     variants,
     // @ts-ignore - stock_quantity type issue
-    stockQuantity: product.stock_quantity, // Stock pour produits sans variants
+    stockQuantity: product.stock_quantity ?? 0, // Stock pour produits sans variants (null/undefined = 0)
     rating,
     reviews,
     warranty: product.warranty || '2 ans constructeur',

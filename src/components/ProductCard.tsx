@@ -24,6 +24,18 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
   const mainImage = product.images[0] || '';
   const hasDiscount = product.discount && product.discount > 0;
 
+  // DEBUG: Afficher l'état du stock
+  const outOfStock = isCompletelyOutOfStock(product);
+  if (outOfStock) {
+    console.log('🔴 PRODUIT HORS STOCK:', {
+      name: product.name,
+      stockQuantity: product.stockQuantity,
+      hasVariants: !!product.variants?.length,
+      variants: product.variants?.map(v => ({ color: v.color, stock: v.stock })),
+      outOfStock
+    });
+  }
+
   // Vérifier le stock: pour variants OU pour produits directs
   const isInStock = selectedVariant
     ? selectedVariant.stock > 0
@@ -65,7 +77,7 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
                       -{product.discount}%
                     </Badge>
                   )}
-                  {isCompletelyOutOfStock(product) && (
+                  {outOfStock && (
                     <Badge className="bg-gray-500 text-white">
                       Rupture de stock
                     </Badge>
@@ -200,7 +212,7 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
                 Best-seller
               </Badge>
             )}
-            {isCompletelyOutOfStock(product) && (
+            {outOfStock && (
               <Badge className="bg-gray-500 text-white">
                 Rupture de stock
               </Badge>
