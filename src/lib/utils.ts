@@ -55,13 +55,13 @@ export function truncateText(text: string, maxLength: number): string {
  * Pour les produits sans variants: stockQuantity doit être 0
  */
 export function isCompletelyOutOfStock(product: { variants?: { stock: number }[]; stockQuantity?: number }): boolean {
-  // Produit sans variants
-  if (!product.variants || product.variants.length === 0) {
-    return product.stockQuantity === 0;
+  // Produit avec variants: vérifier si TOUS sont en rupture
+  if (product.variants && product.variants.length > 0) {
+    return product.variants.every(variant => variant.stock === 0);
   }
 
-  // Produit avec variants: vérifier si TOUS sont en rupture
-  return product.variants.every(variant => variant.stock === 0);
+  // Produit sans variants: vérifier stockQuantity
+  return product.stockQuantity === 0;
 }
 
 /**
