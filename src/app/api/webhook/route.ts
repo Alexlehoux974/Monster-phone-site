@@ -3,6 +3,7 @@ import Stripe from 'stripe';
 import { createClient } from '@/lib/supabase/client';
 import resend from '@/lib/email/resend';
 import { OrderConfirmationEmail } from '@/lib/email/templates/order-confirmation';
+import * as React from 'react';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
@@ -112,35 +113,32 @@ export async function POST(request: NextRequest) {
           .select('*')
           .eq('order_id', order.id);
 
-        // TODO: Réactiver l'envoi d'email plus tard
         // Envoyer l'email de confirmation
-        // try {
-        //   await resend.emails.send({
-        //     from: 'Monster Phone Boutique <no-reply@digiqo.fr>',
-        //     to: order.customer_email,
-        //     subject: `Commande confirmée #${order.order_number} - Monster Phone 🎉`,
-        //     react: OrderConfirmationEmail({
-        //       orderNumber: order.order_number,
-        //       customerName: order.customer_name,
-        //       customerEmail: order.customer_email,
-        //       items: orderItems?.map(item => ({
-        //         product_name: item.product_name,
-        //         quantity: item.quantity,
-        //         unit_price: parseFloat(item.unit_price),
-        //         total_price: parseFloat(item.total_price),
-        //       })) || [],
-        //       subtotal: parseFloat(order.amount_subtotal),
-        //       total: parseFloat(order.amount_total),
-        //       orderDate: order.created_at,
-        //     }),
-        //   });
-        //   console.log('✅ Email de confirmation envoyé à:', order.customer_email);
-        // } catch (emailError) {
-        //   console.error('❌ Erreur envoi email:', emailError);
-        //   // Ne pas bloquer le webhook si l'email échoue
-        // }
-
-        console.log('📧 Email de confirmation désactivé temporairement pour:', order.customer_email);
+        try {
+          await resend.emails.send({
+            from: 'Monster Phone Boutique <contact@monster-phone.re>',
+            to: order.customer_email,
+            subject: `Commande confirmée #${order.order_number} - Monster Phone 🎉`,
+            react: OrderConfirmationEmail({
+              orderNumber: order.order_number,
+              customerName: order.customer_name,
+              customerEmail: order.customer_email,
+              items: orderItems?.map(item => ({
+                product_name: item.product_name,
+                quantity: item.quantity,
+                unit_price: parseFloat(item.unit_price),
+                total_price: parseFloat(item.total_price),
+              })) || [],
+              subtotal: parseFloat(order.amount_subtotal),
+              total: parseFloat(order.amount_total),
+              orderDate: order.created_at,
+            }) as React.ReactElement,
+          });
+          console.log('✅ Email de confirmation envoyé à:', order.customer_email);
+        } catch (emailError) {
+          console.error('❌ Erreur envoi email:', emailError);
+          // Ne pas bloquer le webhook si l'email échoue
+        }
       } catch (dbError) {
         console.error('Erreur base de données:', dbError);
       }
