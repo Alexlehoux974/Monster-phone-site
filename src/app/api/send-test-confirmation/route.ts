@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import resend from '@/lib/email/resend';
 import { OrderConfirmationEmail } from '@/lib/email/templates/order-confirmation';
+import * as React from 'react';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
@@ -40,34 +41,34 @@ export async function POST(request: NextRequest) {
     const customerEmail = session.customer_details?.email || '';
     const customerName = session.customer_details?.name || 'Client';
 
-    // TODO: Réactiver l'envoi d'email plus tard
     // Envoyer l'email de confirmation
-    // const emailResponse = await resend.emails.send({
-    //   from: 'Monster Phone Boutique <no-reply@digiqo.fr>',
-    //   to: customerEmail,
-    //   subject: `✅ Test - Commande confirmée #${orderNumber} - Monster Phone 🎉`,
-    //   react: OrderConfirmationEmail({
-    //     orderNumber,
-    //     customerName,
-    //     customerEmail,
-    //     items: session.line_items?.data.map(item => ({
-    //       product_name: item.description || '',
-    //       quantity: item.quantity || 1,
-    //       unit_price: item.price?.unit_amount ? item.price.unit_amount / 100 : 0,
-    //       total_price: item.amount_total ? item.amount_total / 100 : 0,
-    //     })) || [],
-    //     subtotal: session.amount_subtotal ? session.amount_subtotal / 100 : 0,
-    //     total: session.amount_total ? session.amount_total / 100 : 0,
-    //     orderDate: new Date(session.created * 1000).toISOString(),
-    //   }),
-    // });
+    const emailResponse = await resend.emails.send({
+      from: 'Monster Phone Boutique <contact@monster-phone.re>',
+      to: customerEmail,
+      subject: `✅ Test - Commande confirmée #${orderNumber} - Monster Phone 🎉`,
+      react: OrderConfirmationEmail({
+        orderNumber,
+        customerName,
+        customerEmail,
+        items: session.line_items?.data.map(item => ({
+          product_name: item.description || '',
+          quantity: item.quantity || 1,
+          unit_price: item.price?.unit_amount ? item.price.unit_amount / 100 : 0,
+          total_price: item.amount_total ? item.amount_total / 100 : 0,
+        })) || [],
+        subtotal: session.amount_subtotal ? session.amount_subtotal / 100 : 0,
+        total: session.amount_total ? session.amount_total / 100 : 0,
+        orderDate: new Date(session.created * 1000).toISOString(),
+      }) as React.ReactElement,
+    });
 
-    console.log('📧 Email de test désactivé temporairement');
+    console.log('📧 Email de test envoyé:', emailResponse);
 
     return NextResponse.json({
       success: true,
-      message: 'Email de confirmation désactivé temporairement',
+      message: 'Email de confirmation envoyé avec succès',
       to: customerEmail,
+      emailId: emailResponse.data?.id,
     });
   } catch (error: any) {
     console.error('❌ Erreur envoi email test:', error);
