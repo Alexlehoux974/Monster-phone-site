@@ -31,10 +31,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Vérifier que le panier n'a pas déjà été relancé
-    if (cart.reminder_sent) {
+    // Vérifier que le panier n'a pas atteint la limite de 3 relances
+    if (cart.reminder_count >= 3) {
       return NextResponse.json(
-        { error: 'Email de relance déjà envoyé pour ce panier' },
+        { error: 'Limite de 3 relances atteinte pour ce panier' },
         { status: 400 }
       );
     }
@@ -71,20 +71,32 @@ export async function POST(request: NextRequest) {
       }) as React.ReactElement,
     });
 
-    // Marquer comme relancé
+    // Incrémenter le compteur et mettre à jour le timestamp approprié
+    const newCount = cart.reminder_count + 1;
+    const updateData: any = {
+      reminder_count: newCount,
+      reminder_sent: true,
+      reminder_sent_at: new Date().toISOString(),
+    };
+
+    if (newCount === 1) {
+      updateData.first_reminder_sent_at = new Date().toISOString();
+    } else if (newCount === 2) {
+      updateData.second_reminder_sent_at = new Date().toISOString();
+    } else if (newCount === 3) {
+      updateData.third_reminder_sent_at = new Date().toISOString();
+    }
+
     await supabase
       .from('abandoned_carts')
-      .update({
-        reminder_sent: true,
-        reminder_sent_at: new Date().toISOString(),
-      })
+      .update(updateData)
       .eq('id', cartId);
 
-    console.log('✅ Email de relance panier envoyé à:', cart.customer_email);
+    console.log(`✅ Email de relance #${newCount} envoyé à:`, cart.customer_email);
 
     return NextResponse.json({
       success: true,
-      message: 'Email de relance envoyé avec succès',
+      message: `Email de relance #${newCount} envoyé avec succès`,
     });
   } catch (error: any) {
     console.error('Erreur envoi relance panier:', error);
@@ -99,26 +111,54 @@ export async function POST(request: NextRequest) {
 export async function GET(request: NextRequest) {
   try {
     const supabase = createClient();
+    const now = new Date();
 
-    // Récupérer les paniers abandonnés non relancés
-    // qui ont été créés il y a 1-24h et qui n'ont pas expiré
-    const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
-    const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
+    // 1ère relance : 3h après création
+    const threeHoursAgo = new Date(now.getTime() - 3 * 60 * 60 * 1000);
+    const fourHoursAgo = new Date(now.getTime() - 4 * 60 * 60 * 1000);
 
-    const { data: carts, error } = await supabase
+    const { data: firstReminders } = await supabase
       .from('abandoned_carts')
       .select('*')
-      .eq('reminder_sent', false)
+      .eq('reminder_count', 0)
       .eq('converted', false)
-      .gte('created_at', oneDayAgo.toISOString())
-      .lte('created_at', oneHourAgo.toISOString())
-      .gt('expires_at', new Date().toISOString());
+      .lte('created_at', threeHoursAgo.toISOString())
+      .gte('created_at', fourHoursAgo.toISOString())
+      .gt('expires_at', now.toISOString());
 
-    if (error) {
-      throw error;
-    }
+    // 2ème relance : 24h après création
+    const twentyFourHoursAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+    const twentyFiveHoursAgo = new Date(now.getTime() - 25 * 60 * 60 * 1000);
 
-    if (!carts || carts.length === 0) {
+    const { data: secondReminders } = await supabase
+      .from('abandoned_carts')
+      .select('*')
+      .eq('reminder_count', 1)
+      .eq('converted', false)
+      .lte('created_at', twentyFourHoursAgo.toISOString())
+      .gte('created_at', twentyFiveHoursAgo.toISOString())
+      .gt('expires_at', now.toISOString());
+
+    // 3ème relance : 48h après création
+    const fortyEightHoursAgo = new Date(now.getTime() - 48 * 60 * 60 * 1000);
+    const fortyNineHoursAgo = new Date(now.getTime() - 49 * 60 * 60 * 1000);
+
+    const { data: thirdReminders } = await supabase
+      .from('abandoned_carts')
+      .select('*')
+      .eq('reminder_count', 2)
+      .eq('converted', false)
+      .lte('created_at', fortyEightHoursAgo.toISOString())
+      .gte('created_at', fortyNineHoursAgo.toISOString())
+      .gt('expires_at', now.toISOString());
+
+    const allCarts = [
+      ...(firstReminders || []),
+      ...(secondReminders || []),
+      ...(thirdReminders || []),
+    ];
+
+    if (allCarts.length === 0) {
       return NextResponse.json({
         success: true,
         message: 'Aucun panier à relancer',
@@ -128,7 +168,7 @@ export async function GET(request: NextRequest) {
 
     // Envoyer les emails de relance
     const results = await Promise.allSettled(
-      carts.map(async (cart) => {
+      allCarts.map(async (cart) => {
         await resend.emails.send({
           from: 'Monster Phone Boutique <contact@monster-phone.re>',
           to: cart.customer_email,
@@ -144,16 +184,28 @@ export async function GET(request: NextRequest) {
           }) as React.ReactElement,
         });
 
-        // Marquer comme relancé
+        // Incrémenter le compteur et mettre à jour le timestamp approprié
+        const newCount = cart.reminder_count + 1;
+        const updateData: any = {
+          reminder_count: newCount,
+          reminder_sent: true,
+          reminder_sent_at: new Date().toISOString(),
+        };
+
+        if (newCount === 1) {
+          updateData.first_reminder_sent_at = new Date().toISOString();
+        } else if (newCount === 2) {
+          updateData.second_reminder_sent_at = new Date().toISOString();
+        } else if (newCount === 3) {
+          updateData.third_reminder_sent_at = new Date().toISOString();
+        }
+
         await supabase
           .from('abandoned_carts')
-          .update({
-            reminder_sent: true,
-            reminder_sent_at: new Date().toISOString(),
-          })
+          .update(updateData)
           .eq('id', cart.id);
 
-        return { email: cart.customer_email, success: true };
+        return { email: cart.customer_email, reminderNumber: newCount, success: true };
       })
     );
 
@@ -161,13 +213,21 @@ export async function GET(request: NextRequest) {
     const failureCount = results.filter((r) => r.status === 'rejected').length;
 
     console.log(`📧 Relances envoyées: ${successCount} succès, ${failureCount} échecs`);
+    console.log(`   - 1ère relance (3h): ${firstReminders?.length || 0}`);
+    console.log(`   - 2ème relance (24h): ${secondReminders?.length || 0}`);
+    console.log(`   - 3ème relance (48h): ${thirdReminders?.length || 0}`);
 
     return NextResponse.json({
       success: true,
       message: `Relances envoyées avec succès`,
-      total: carts.length,
+      total: allCarts.length,
       sent: successCount,
       failed: failureCount,
+      breakdown: {
+        first: firstReminders?.length || 0,
+        second: secondReminders?.length || 0,
+        third: thirdReminders?.length || 0,
+      },
     });
   } catch (error: any) {
     console.error('Erreur envoi relances automatiques:', error);
