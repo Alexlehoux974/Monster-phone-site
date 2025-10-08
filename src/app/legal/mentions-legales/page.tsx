@@ -46,7 +46,7 @@ export default function MentionsLegalesPage() {
                 Mentions Légales
               </h1>
               <p className="text-xl text-gray-800 max-w-3xl mx-auto">
-                Informations légales relatives au site www.Monster-Phone.com
+                Informations légales relatives au site www.Monster-phone.re
               </p>
               <div className="mt-4 text-sm text-gray-700">
                 <Calendar className="w-4 h-4 inline mr-1" />
@@ -70,7 +70,7 @@ export default function MentionsLegalesPage() {
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
                   <p className="text-blue-800 mb-4">
                     En vertu de l&apos;article 6 de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l&apos;économie numérique,
-                    il est précisé aux utilisateurs du site <strong>www.Monster-Phone.com</strong> l&apos;identité des différents
+                    il est précisé aux utilisateurs du site <strong>www.Monster-phone.re</strong> l&apos;identité des différents
                     intervenants dans le cadre de sa réalisation et de son suivi :
                   </p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -116,7 +116,7 @@ export default function MentionsLegalesPage() {
                 </h2>
                 
                 <p className="mb-4">
-                  L&apos;utilisation du site <strong>www.Monster-Phone.com</strong> implique l&apos;acceptation pleine et entière des conditions 
+                  L&apos;utilisation du site <strong>www.Monster-phone.re</strong> implique l&apos;acceptation pleine et entière des conditions 
                   générales d&apos;utilisation ci-après décrites. Ces conditions d&apos;utilisation sont susceptibles d&apos;être modifiées 
                   ou complétées à tout moment. Les utilisateurs du site sont donc invités à les consulter régulièrement.
                 </p>
@@ -138,7 +138,7 @@ export default function MentionsLegalesPage() {
                 </h2>
                 
                 <p className="mb-4">
-                  Le site <strong>www.Monster-Phone.com</strong> a pour objet de fournir une information concernant l&apos;ensemble 
+                  Le site <strong>www.Monster-phone.re</strong> a pour objet de fournir une information concernant l&apos;ensemble 
                   des activités de la société.
                 </p>
                 
@@ -197,7 +197,7 @@ export default function MentionsLegalesPage() {
                 
                 <p className="mb-4">
                   ZR INDIAN OCEAN ne pourra être tenue responsable des dommages directs et indirects causés au matériel 
-                  de l&apos;utilisateur lors de l&apos;accès au site www.Monster-Phone.com, et résultant soit de l&apos;utilisation 
+                  de l&apos;utilisateur lors de l&apos;accès au site www.Monster-phone.re, et résultant soit de l&apos;utilisation 
                   d&apos;un matériel ne répondant pas aux spécifications mentionnées au point 4, soit de l&apos;apparition d&apos;un 
                   bug ou d&apos;une incompatibilité.
                 </p>
@@ -232,7 +232,7 @@ export default function MentionsLegalesPage() {
                   </ul>
                   
                   <p className="text-green-800 mb-4">
-                    Lors de l&apos;utilisation du site www.Monster-Phone.com, peuvent être recueillies :
+                    Lors de l&apos;utilisation du site www.Monster-phone.re, peuvent être recueillies :
                   </p>
                   <ul className="list-disc pl-6 space-y-1 text-green-800">
                     <li>l&apos;URL des liens par lesquels l&apos;utilisateur a accédé au site</li>
@@ -301,7 +301,7 @@ export default function MentionsLegalesPage() {
                 </h2>
                 
                 <p className="mb-4">
-                  Tout litige en relation avec l&apos;utilisation du site www.Monster-Phone.com est soumis au droit français. 
+                  Tout litige en relation avec l&apos;utilisation du site www.Monster-phone.re est soumis au droit français. 
                   Il est fait attribution exclusive de juridiction aux tribunaux compétents de Paris.
                 </p>
 
