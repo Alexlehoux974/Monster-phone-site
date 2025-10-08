@@ -179,6 +179,53 @@ export async function POST(request: NextRequest) {
       break;
     }
 
+    case 'checkout.session.expired': {
+      const session = event.data.object as Stripe.Checkout.Session;
+      console.log('⏰ Session checkout expirée:', session.id);
+
+      // Créer un panier abandonné pour relance
+      try {
+        const supabase = createClient();
+
+        // Récupérer les détails de la session avec line items
+        const sessionWithLineItems = await stripe.checkout.sessions.retrieve(
+          session.id,
+          { expand: ['line_items'] }
+        );
+
+        // Créer l'enregistrement panier abandonné
+        const cartData = {
+          stripe_session_id: session.id,
+          customer_email: session.customer_details?.email || session.metadata?.customer_email || '',
+          customer_name: session.customer_details?.name || session.metadata?.customer_name || 'Cher client',
+          items: sessionWithLineItems.line_items?.data.map(item => ({
+            product_name: item.description || '',
+            product_image: null, // TODO: Ajouter images produits
+            quantity: item.quantity || 1,
+            unit_price: item.price?.unit_amount ? item.price.unit_amount / 100 : 0,
+            total_price: item.amount_total ? item.amount_total / 100 : 0,
+          })) || [],
+          subtotal: session.amount_subtotal ? session.amount_subtotal / 100 : 0,
+          total: session.amount_total ? session.amount_total / 100 : 0,
+          checkout_url: session.url || '',
+          expires_at: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(), // Expire dans 24h
+        };
+
+        const { error: cartError } = await supabase
+          .from('abandoned_carts')
+          .insert([cartData]);
+
+        if (cartError) {
+          console.error('Erreur création panier abandonné:', cartError);
+        } else {
+          console.log('✅ Panier abandonné enregistré pour:', cartData.customer_email);
+        }
+      } catch (dbError) {
+        console.error('Erreur enregistrement panier abandonné:', dbError);
+      }
+      break;
+    }
+
     default:
       console.log(`Événement non géré: ${event.type}`);
   }
