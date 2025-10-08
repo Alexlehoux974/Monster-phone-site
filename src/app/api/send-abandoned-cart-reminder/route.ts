@@ -113,9 +113,9 @@ export async function GET(request: NextRequest) {
     const supabase = createClient();
     const now = new Date();
 
-    // 1ère relance : 3h après création
+    // 1ère relance : 3h ±30min après création (fenêtre 2h30-3h30)
     const threeHoursAgo = new Date(now.getTime() - 3 * 60 * 60 * 1000);
-    const fourHoursAgo = new Date(now.getTime() - 4 * 60 * 60 * 1000);
+    const threeHoursThirtyAgo = new Date(now.getTime() - 3.5 * 60 * 60 * 1000);
 
     const { data: firstReminders } = await supabase
       .from('abandoned_carts')
@@ -123,12 +123,12 @@ export async function GET(request: NextRequest) {
       .eq('reminder_count', 0)
       .eq('converted', false)
       .lte('created_at', threeHoursAgo.toISOString())
-      .gte('created_at', fourHoursAgo.toISOString())
+      .gte('created_at', threeHoursThirtyAgo.toISOString())
       .gt('expires_at', now.toISOString());
 
-    // 2ème relance : 24h après création
+    // 2ème relance : 24h ±2h après création (fenêtre 22h-26h)
     const twentyFourHoursAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000);
-    const twentyFiveHoursAgo = new Date(now.getTime() - 25 * 60 * 60 * 1000);
+    const twentySixHoursAgo = new Date(now.getTime() - 26 * 60 * 60 * 1000);
 
     const { data: secondReminders } = await supabase
       .from('abandoned_carts')
@@ -136,12 +136,12 @@ export async function GET(request: NextRequest) {
       .eq('reminder_count', 1)
       .eq('converted', false)
       .lte('created_at', twentyFourHoursAgo.toISOString())
-      .gte('created_at', twentyFiveHoursAgo.toISOString())
+      .gte('created_at', twentySixHoursAgo.toISOString())
       .gt('expires_at', now.toISOString());
 
-    // 3ème relance : 48h après création
+    // 3ème relance : 48h ±2h après création (fenêtre 46h-50h)
     const fortyEightHoursAgo = new Date(now.getTime() - 48 * 60 * 60 * 1000);
-    const fortyNineHoursAgo = new Date(now.getTime() - 49 * 60 * 60 * 1000);
+    const fiftyHoursAgo = new Date(now.getTime() - 50 * 60 * 60 * 1000);
 
     const { data: thirdReminders } = await supabase
       .from('abandoned_carts')
@@ -149,7 +149,7 @@ export async function GET(request: NextRequest) {
       .eq('reminder_count', 2)
       .eq('converted', false)
       .lte('created_at', fortyEightHoursAgo.toISOString())
-      .gte('created_at', fortyNineHoursAgo.toISOString())
+      .gte('created_at', fiftyHoursAgo.toISOString())
       .gt('expires_at', now.toISOString());
 
     const allCarts = [
@@ -213,9 +213,9 @@ export async function GET(request: NextRequest) {
     const failureCount = results.filter((r) => r.status === 'rejected').length;
 
     console.log(`📧 Relances envoyées: ${successCount} succès, ${failureCount} échecs`);
-    console.log(`   - 1ère relance (3h): ${firstReminders?.length || 0}`);
-    console.log(`   - 2ème relance (24h): ${secondReminders?.length || 0}`);
-    console.log(`   - 3ème relance (48h): ${thirdReminders?.length || 0}`);
+    console.log(`   - 1ère relance (3h ±30min): ${firstReminders?.length || 0}`);
+    console.log(`   - 2ème relance (24h ±2h): ${secondReminders?.length || 0}`);
+    console.log(`   - 3ème relance (48h ±2h): ${thirdReminders?.length || 0}`);
 
     return NextResponse.json({
       success: true,
