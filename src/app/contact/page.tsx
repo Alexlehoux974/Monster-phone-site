@@ -58,11 +58,11 @@ export default function ContactPage() {
     // Ajouter les métadonnées SEO
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute('content', 'Contactez Monster Phone Boutique à La Réunion. Spécialiste smartphones gaming HONOR, accessoires MUVIT. Zone Industrielle Sainte-Marie 97438. Tel: 0262 XX XX XX');
+      metaDescription.setAttribute('content', 'Contactez Monster Phone Boutique à La Réunion. Spécialiste smartphones gaming HONOR, accessoires MUVIT. 16 Rue Claude Chappe, ZAE 2000, 97290 Le Port. Tel: 02 62 02 51 02');
     } else {
       const meta = document.createElement('meta');
       meta.name = 'description';
-      meta.content = 'Contactez Monster Phone Boutique à La Réunion. Spécialiste smartphones gaming HONOR, accessoires MUVIT. Zone Industrielle Sainte-Marie 97438. Tel: 0262 XX XX XX';
+      meta.content = 'Contactez Monster Phone Boutique à La Réunion. Spécialiste smartphones gaming HONOR, accessoires MUVIT. 16 Rue Claude Chappe, ZAE 2000, 97290 Le Port. Tel: 02 62 02 51 02';
       document.head.appendChild(meta);
     }
 
@@ -260,18 +260,19 @@ export default function ContactPage() {
                       <div>
                         <p className="font-medium text-gray-900">Adresse</p>
                         <p className="text-gray-900">
-                          Zone Industrielle<br />
-                          97438 Sainte-Marie<br />
+                          16 Rue Claude Chappe<br />
+                          ZAE 2000<br />
+                          97290 Le Port Cedex<br />
                           La Réunion
                         </p>
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center gap-3">
                       <Phone className="w-5 h-5 text-green-600 flex-shrink-0" />
                       <div>
                         <p className="font-medium text-gray-900">Téléphone</p>
-                        <p className="text-gray-900">0262 XX XX XX</p>
+                        <p className="text-gray-900">02 62 02 51 02</p>
                       </div>
                     </div>
                     

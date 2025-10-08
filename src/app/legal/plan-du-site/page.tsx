@@ -351,7 +351,7 @@ export default function PlanDuSitePage() {
                 </div>
                 <div className="flex items-center gap-1">
                   <Phone className="w-4 h-4" />
-                  0262 XX XX XX
+                  02 62 02 51 02
                 </div>
               </div>
             </motion.div>

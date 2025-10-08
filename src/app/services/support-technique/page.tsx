@@ -410,7 +410,7 @@ export default function SupportTechniquePage() {
                 <div className="bg-white/10 rounded-lg p-4">
                   <Phone className="w-6 h-6 mx-auto mb-2" />
                   <div className="font-semibold">Hotline technique</div>
-                  <div>0262 XX XX XX<br />Lun-Sam 8h-20h</div>
+                  <div>02 62 02 51 02<br />Lun-Sam 8h-20h</div>
                 </div>
                 
                 <div className="bg-white/10 rounded-lg p-4">

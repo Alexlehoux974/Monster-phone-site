@@ -55,7 +55,7 @@ export default function ServiceApresVentePage() {
                 </ul>
                 <div className="bg-green-50 p-3 rounded-lg">
                   <p className="text-sm font-medium text-green-800">
-                    📞 0262 XX XX XX<br/>
+                    📞 02 62 02 51 02<br/>
                     Lun-Ven: 8h-17h, Sam: 8h-12h
                   </p>
                 </div>
@@ -126,7 +126,7 @@ export default function ServiceApresVentePage() {
                       <MapPin className="w-5 h-5 text-green-600 mt-0.5" />
                       <div>
                         <p className="font-medium">Adresse</p>
-                        <p className="text-sm">Zone Industrielle Sainte-Marie<br/>97438 Sainte-Marie</p>
+                        <p className="text-sm">16 Rue Claude Chappe, ZAE 2000, Le Port<br/>97290 Le Port Cedex</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-2">

@@ -50,7 +50,7 @@ export default function RetoursPolitiquePage() {
     {
       step: 3,
       title: "Retour en magasin",
-      description: "Apportez directement à notre boutique de Sainte-Marie",
+      description: "Apportez directement à notre boutique du Port",
       icon: MapPin,
       color: "purple"
     },
@@ -369,13 +369,13 @@ export default function RetoursPolitiquePage() {
                 <div className="bg-white/10 rounded-lg p-4">
                   <MapPin className="w-6 h-6 mx-auto mb-2" />
                   <div className="font-semibold">En magasin</div>
-                  <div className="opacity-80">Zone Industrielle<br />Sainte-Marie</div>
+                  <div className="opacity-80">16 Rue Claude Chappe, ZAE 2000<br />Le Port Cedex</div>
                 </div>
                 
                 <div className="bg-white/10 rounded-lg p-4">
                   <div className="w-6 h-6 mx-auto mb-2 flex items-center justify-center">📞</div>
                   <div className="font-semibold">Par téléphone</div>
-                  <div className="opacity-80">0262 XX XX XX<br />Lun-Sam 9h-18h</div>
+                  <div className="opacity-80">02 62 02 51 02<br />Lun-Sam 9h-18h</div>
                 </div>
                 
                 <div className="bg-white/10 rounded-lg p-4">

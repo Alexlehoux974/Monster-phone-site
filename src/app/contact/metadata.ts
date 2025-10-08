@@ -2,12 +2,12 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Contact Monster Phone Boutique La Réunion | Téléphones Gaming 974',
-  description: 'Contactez Monster Phone Boutique à La Réunion. Spécialiste smartphones gaming HONOR, accessoires MUVIT. Zone Industrielle Sainte-Marie 97438. Tel: 0262 XX XX XX',
+  description: 'Contactez Monster Phone Boutique à La Réunion. Spécialiste smartphones gaming HONOR, accessoires MUVIT. 16 Rue Claude Chappe, ZAE 2000, 97290 Le Port. Tel: 02 62 02 51 02',
   keywords: [
     'contact monster phone',
     'téléphone gaming réunion',
     'boutique smartphone 974',
-    'sainte marie réunion',
+    'le port réunion',
     'honor réunion',
     'réparation téléphone réunion',
     'accessoires gaming réunion'
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   publisher: 'Monster Phone Boutique',
   openGraph: {
     title: 'Contact Monster Phone Boutique La Réunion',
-    description: 'Contactez votre spécialiste en téléphones gaming à La Réunion. Showroom à Sainte-Marie, livraison 48h dans toute l\'île.',
+    description: 'Contactez votre spécialiste en téléphones gaming à La Réunion. Showroom au Port, livraison 48h dans toute l\'île.',
     url: 'https://monster-phone-boutique.fr/contact',
     siteName: 'Monster Phone Boutique',
     locale: 'fr_FR',
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Contact Monster Phone Boutique La Réunion',
-    description: 'Contactez votre spécialiste en téléphones gaming à La Réunion. Showroom à Sainte-Marie.',
+    description: 'Contactez votre spécialiste en téléphones gaming à La Réunion. Showroom au Port.',
     images: ['/LOGO-MONSTER-PHONE.png']
   },
   robots: {
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
   },
   other: {
     'geo.region': 'RE',
-    'geo.placename': 'Sainte-Marie, La Réunion',
-    'geo.position': '-20.9;55.5'
+    'geo.placename': 'Le Port, La Réunion',
+    'geo.position': '-20.94;55.29'
   }
 };

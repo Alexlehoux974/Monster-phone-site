@@ -12,11 +12,11 @@ export default function MentionsLegalesPage() {
     
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute('content', 'Mentions légales de Monster Phone - ZR INDIAN OCEAN SAS. Informations entreprise, hébergement OVH. 16 Rue Claude Chappe, 97420 Le Port, La Réunion.');
+      metaDescription.setAttribute('content', 'Mentions légales de Monster Phone - ZR INDIAN OCEAN SARL. SIRET 512 455 726 RCS Saint-Denis de La Réunion. 16 Rue Claude Chappe, ZAE 2000, 97290 Le Port Cedex, La Réunion.');
     } else {
       const meta = document.createElement('meta');
       meta.name = 'description';
-      meta.content = 'Mentions légales de Monster Phone - ZR INDIAN OCEAN SAS. Informations entreprise, hébergement OVH. 16 Rue Claude Chappe, 97420 Le Port, La Réunion.';
+      meta.content = 'Mentions légales de Monster Phone - ZR INDIAN OCEAN SARL. SIRET 512 455 726 RCS Saint-Denis de La Réunion. 16 Rue Claude Chappe, ZAE 2000, 97290 Le Port Cedex, La Réunion.';
       document.head.appendChild(meta);
     }
   }, []);
@@ -69,20 +69,26 @@ export default function MentionsLegalesPage() {
                 
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
                   <p className="text-blue-800 mb-4">
-                    En vertu de l&apos;article 6 de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l&apos;économie numérique, 
-                    il est précisé aux utilisateurs du site <strong>www.Monster-Phone.com</strong> l&apos;identité des différents 
+                    En vertu de l&apos;article 6 de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l&apos;économie numérique,
+                    il est précisé aux utilisateurs du site <strong>www.Monster-Phone.com</strong> l&apos;identité des différents
                     intervenants dans le cadre de sa réalisation et de son suivi :
                   </p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <h3 className="font-semibold text-blue-900 mb-2">Propriétaire</h3>
-                      <p className="text-blue-800">ZR INDIAN OCEAN – SAS<br/>
-                      16 Rue Claude Chappe<br/>
-                      97420 Le Port, ZAC 2000</p>
+                      <p className="text-blue-800">
+                        <strong>ZR INDIAN OCEAN</strong><br/>
+                        Société à responsabilité limitée (SARL)<br/>
+                        Capital social : 3 000 €<br/>
+                        SIRET : 512 455 726 00012<br/>
+                        RCS Saint-Denis de La Réunion<br/>
+                        16 Rue Claude Chappe, ZAE 2000<br/>
+                        97290 Le Port Cedex
+                      </p>
                     </div>
                     <div>
-                      <h3 className="font-semibold text-blue-900 mb-2">Créateur</h3>
-                      <p className="text-blue-800">Tymothé LE COQ</p>
+                      <h3 className="font-semibold text-blue-900 mb-2">Gérant</h3>
+                      <p className="text-blue-800">Cyril LE COQ</p>
                     </div>
                     <div>
                       <h3 className="font-semibold text-blue-900 mb-2">Responsable publication</h3>

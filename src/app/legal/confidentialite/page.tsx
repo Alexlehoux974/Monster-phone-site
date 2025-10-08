@@ -72,9 +72,9 @@ export default function ConfidentialitePage() {
                 <div className="bg-blue-50 p-4 rounded-lg mt-4">
                   <p className="text-blue-900 mb-0">
                     <strong>Coordonnées :</strong><br />
-                    Zone Industrielle, 97438 Sainte-Marie, La Réunion<br />
+                    16 Rue Claude Chappe, ZAE 2000, 97290 Le Port Cedex, La Réunion<br />
                     Email : contact@monster-phone-reunion.com<br />
-                    Téléphone : 0262 XX XX XX
+                    Téléphone : 02 62 02 51 02
                   </p>
                 </div>
 
@@ -228,8 +228,8 @@ export default function ConfidentialitePage() {
                 </p>
                 <ul className="list-disc pl-6 space-y-1 mt-2">
                   <li>Email : contact@monster-phone-reunion.com</li>
-                  <li>Courrier : Monster Phone Boutique - Zone Industrielle - 97438 Sainte-Marie</li>
-                  <li>Téléphone : 0262 XX XX XX</li>
+                  <li>Courrier : Monster Phone Boutique - 16 Rue Claude Chappe, ZAE 2000 - 97290 Le Port Cedex</li>
+                  <li>Téléphone : 02 62 02 51 02</li>
                 </ul>
                 <p className="text-sm text-gray-900 mt-2">
                   Nous vous répondrons dans un délai d&apos;un mois. Une pièce d&apos;identité pourra être demandée.
@@ -273,7 +273,7 @@ export default function ConfidentialitePage() {
                     <strong>Délégué à la Protection des Données</strong><br />
                     Monster Phone Boutique<br />
                     Email : dpo@monster-phone-reunion.com<br />
-                    Téléphone : 0262 XX XX XX
+                    Téléphone : 02 62 02 51 02
                   </p>
                 </div>
               </div>

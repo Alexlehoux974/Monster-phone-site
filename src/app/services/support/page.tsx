@@ -154,7 +154,7 @@ export default function SupportTechniquePage() {
                   </div>
                   <h3 className="font-semibold text-gray-900 mb-2">Atelier sur site</h3>
                   <p className="text-sm text-gray-600 mb-3">
-                    Rendez-vous dans notre centre à Sainte-Marie
+                    Rendez-vous dans notre centre au Port
                   </p>
                   <Button size="sm" variant="outline">Réserver</Button>
                 </div>
@@ -245,7 +245,7 @@ export default function SupportTechniquePage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button className="bg-purple-600 hover:bg-purple-700">
-                  📞 Appeler le support : 0262 XX XX XX
+                  📞 Appeler le support : 02 62 02 51 02
                 </Button>
                 <Button variant="outline">
                   📧 support@monster-phone-reunion.com

@@ -2,12 +2,12 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Mentions Légales | Monster Phone Boutique SARL La Réunion 974',
-  description: 'Mentions légales de Monster Phone Boutique SARL. Informations entreprise, SIRET, hébergement Vercel. Zone Industrielle Sainte-Marie 97438 La Réunion.',
+  description: 'Mentions légales de Monster Phone Boutique SARL. SIRET 512 455 726 RCS Saint-Denis. 16 Rue Claude Chappe, ZAE 2000, 97290 Le Port, La Réunion.',
   keywords: [
     'mentions légales monster phone',
     'sarl réunion 974',
     'siret monster phone',
-    'entreprise sainte marie réunion',
+    'entreprise le port réunion',
     'boutique téléphone légal',
     'informations juridiques'
   ],
@@ -38,6 +38,6 @@ export const metadata: Metadata = {
   },
   other: {
     'geo.region': 'RE',
-    'geo.placename': 'Sainte-Marie, La Réunion'
+    'geo.placename': 'Le Port, La Réunion'
   }
 };

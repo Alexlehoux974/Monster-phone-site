@@ -110,7 +110,7 @@ export default function ConditionsGeneralesPage() {
                 <ul className="list-disc pl-6 space-y-2">
                   <li><strong>Express (24h)</strong> : Nord et Ouest de l&apos;île - 10€</li>
                   <li><strong>Standard (48h)</strong> : Toute l&apos;île - Gratuit dès 50€</li>
-                  <li><strong>Retrait en boutique</strong> : Gratuit, sur RDV à Sainte-Marie</li>
+                  <li><strong>Retrait en boutique</strong> : Gratuit, sur RDV au Port</li>
                   <li><strong>Zones difficiles d&apos;accès</strong> : 72h maximum + 5€</li>
                 </ul>
 
@@ -129,7 +129,7 @@ export default function ConditionsGeneralesPage() {
                   <li><strong>Garantie constructeur</strong> : 24 mois sur tous les smartphones</li>
                   <li><strong>Garantie commerciale</strong> : 6 mois Monster Phone Boutique</li>
                   <li><strong>Garantie légale</strong> : 2 ans conformité + 2 ans vices cachés</li>
-                  <li><strong>Réparations</strong> : Atelier agréé sur site à Sainte-Marie</li>
+                  <li><strong>Réparations</strong> : Atelier agréé sur site au Port</li>
                 </ul>
 
                 <h3 className="text-lg font-semibold text-gray-800 mb-2 mt-4">4.3 Conditions de retour</h3>
@@ -182,8 +182,8 @@ export default function ConditionsGeneralesPage() {
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">Contact</h3>
                   <p className="text-gray-800">
                     <strong className="text-gray-900">Monster Phone Boutique</strong><br />
-                    Zone Industrielle, 97438 Sainte-Marie, La Réunion<br />
-                    Téléphone : 0262 XX XX XX<br />
+                    16 Rue Claude Chappe, ZAE 2000, 97290 Le Port Cedex, La Réunion<br />
+                    Téléphone : 02 62 02 51 02<br />
                     Email : contact@monster-phone-reunion.com
                   </p>
                 </div>

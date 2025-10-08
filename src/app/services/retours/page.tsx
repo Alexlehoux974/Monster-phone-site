@@ -193,7 +193,7 @@ export default function RetoursPage() {
                   Formulaire de retour
                 </Button>
                 <Button variant="outline">
-                  Nous contacter : 0262 XX XX XX
+                  Nous contacter : 02 62 02 51 02
                 </Button>
               </div>
             </motion.div>

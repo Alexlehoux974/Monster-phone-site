@@ -403,7 +403,7 @@ export default function ServiceApresVentePage() {
                 <div className="bg-white/10 rounded-lg p-4">
                   <Phone className="w-6 h-6 mx-auto mb-2" />
                   <div className="font-semibold">Hotline SAV</div>
-                  <div>0262 XX XX XX<br />Lun-Sam 9h-18h</div>
+                  <div>02 62 02 51 02<br />Lun-Sam 9h-18h</div>
                 </div>
                 
                 <div className="bg-white/10 rounded-lg p-4">
@@ -415,7 +415,7 @@ export default function ServiceApresVentePage() {
                 <div className="bg-white/10 rounded-lg p-4">
                   <MapPin className="w-6 h-6 mx-auto mb-2" />
                   <div className="font-semibold">Atelier</div>
-                  <div>Zone Industrielle<br />Sainte-Marie</div>
+                  <div>16 Rue Claude Chappe, ZAE 2000<br />Le Port Cedex</div>
                 </div>
               </div>
               

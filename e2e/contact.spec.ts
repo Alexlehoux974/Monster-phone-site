@@ -21,11 +21,11 @@ test.describe('Contact Page', () => {
 
   test('should display contact information', async ({ page }) => {
     // Check contact details
-    await expect(page.getByText(/contact@monsterphone.re/i)).toBeVisible();
-    await expect(page.getByText(/0262/)).toBeVisible();
-    
+    await expect(page.getByText(/contact@monster-phone-reunion.com/i)).toBeVisible();
+    await expect(page.getByText(/02 62 02 51 02/)).toBeVisible();
+
     // Check address
-    await expect(page.getByText(/Saint-Denis/i)).toBeVisible();
+    await expect(page.getByText(/Le Port/i)).toBeVisible();
     await expect(page.getByText(/La Réunion/i)).toBeVisible();
   });
 

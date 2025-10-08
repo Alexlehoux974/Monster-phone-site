@@ -187,9 +187,9 @@ export default function GarantiePage() {
               <div className="bg-white p-6 rounded-lg shadow-sm border">
                 <h3 className="text-xl font-bold text-gray-900 mb-4">Centre de service La Réunion</h3>
                 <div className="space-y-3 text-gray-600">
-                  <p><strong>Adresse :</strong> Zone Industrielle Sainte-Marie</p>
+                  <p><strong>Adresse :</strong> 16 Rue Claude Chappe, ZAE 2000, Le Port</p>
                   <p><strong>Horaires :</strong> Lun-Ven 8h-17h, Sam 8h-12h</p>
-                  <p><strong>Téléphone :</strong> 0262 XX XX XX</p>
+                  <p><strong>Téléphone :</strong> 02 62 02 51 02</p>
                   <p><strong>Email :</strong> garantie@monster-phone-reunion.com</p>
                 </div>
               </div>
