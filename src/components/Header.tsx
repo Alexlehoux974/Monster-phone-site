@@ -1055,10 +1055,9 @@ export default function Header() {
               <div
                 className="relative"
                 ref={cartRef}
-                onMouseEnter={() => setIsCartOpen(true)}
-                onMouseLeave={() => setIsCartOpen(false)}
               >
                 <button
+                  onMouseEnter={() => setIsCartOpen(true)}
                   onClick={() => setIsCartOpen(!isCartOpen)}
                   className="relative p-1.5 text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                 >
@@ -1072,7 +1071,11 @@ export default function Header() {
 
                 {/* Dropdown du panier */}
                 {isCartOpen && (
-                  <div className="absolute right-0 mt-2 w-96 bg-white rounded-lg shadow-2xl border border-gray-200 z-50">
+                  <div
+                    className="absolute right-0 mt-2 w-96 bg-white rounded-lg shadow-2xl border border-gray-200 z-50"
+                    onMouseEnter={() => setIsCartOpen(true)}
+                    onMouseLeave={() => setIsCartOpen(false)}
+                  >
                     <div className="p-4 border-b border-gray-200">
                       <h3 className="font-semibold text-lg flex items-center justify-between">
                         Mon Panier ({getItemCount()} article{getItemCount() > 1 ? 's' : ''})

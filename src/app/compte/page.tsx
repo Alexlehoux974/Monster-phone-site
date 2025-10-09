@@ -70,9 +70,23 @@ export default function ComptePage() {
       if (isLoginMode) {
         await login(formData.email, formData.password);
         setSuccess('Connexion réussie !');
+
+        // Vérifier s'il y a une redirection en attente
+        const redirectPath = sessionStorage.getItem('redirectAfterLogin');
+        if (redirectPath) {
+          sessionStorage.removeItem('redirectAfterLogin');
+          router.push(redirectPath);
+        }
       } else {
         await register(formData.email, formData.password, formData.name);
         setSuccess('Inscription réussie !');
+
+        // Vérifier s'il y a une redirection en attente
+        const redirectPath = sessionStorage.getItem('redirectAfterLogin');
+        if (redirectPath) {
+          sessionStorage.removeItem('redirectAfterLogin');
+          router.push(redirectPath);
+        }
       }
       // Réinitialiser le formulaire
       setFormData(prev => ({ ...prev, email: '', password: '' }));
