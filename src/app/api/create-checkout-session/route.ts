@@ -12,9 +12,8 @@ function getStripe() {
     throw new Error('STRIPE_SECRET_KEY is not configured in environment variables');
   }
 
-  return new Stripe(apiKey, {
-    apiVersion: '2025-09-30.clover',
-  });
+  // Utiliser la version par défaut du package Stripe
+  return new Stripe(apiKey);
 }
 
 export async function POST(request: NextRequest) {
