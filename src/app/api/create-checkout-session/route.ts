@@ -36,23 +36,22 @@ export async function POST(request: NextRequest) {
     const cartSessionId = `cart_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
     // Stocker les items dans Supabase (contournement de la limite Stripe de 500 caractères)
-    // Temporairement désactivé pour debugging
-    // const supabase = await createClient();
-    // const { error: cartError } = await supabase
-    //   .from('pending_carts')
-    //   .insert({
-    //     session_id: cartSessionId,
-    //     items: items,
-    //     user_id: userId || null,
-    //     created_at: new Date().toISOString(),
-    //   });
+    const supabase = await createClient();
+    const { error: cartError } = await supabase
+      .from('pending_carts')
+      .insert({
+        session_id: cartSessionId,
+        items: items,
+        user_id: userId || null,
+        created_at: new Date().toISOString(),
+      });
 
-    // if (cartError) {
-    //   console.error('❌ Erreur stockage panier:', cartError);
-    //   // On continue quand même, les line_items Stripe contiennent l'essentiel
-    // } else {
-    //   console.log('✅ Panier stocké:', cartSessionId);
-    // }
+    if (cartError) {
+      console.error('❌ Erreur stockage panier:', cartError);
+      // On continue quand même, les line_items Stripe contiennent l'essentiel
+    } else {
+      console.log('✅ Panier stocké:', cartSessionId);
+    }
 
     // Préparer les line items pour Stripe
     const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = items.map((item: any) => ({
