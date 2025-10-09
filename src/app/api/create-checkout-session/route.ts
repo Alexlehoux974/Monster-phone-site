@@ -13,7 +13,7 @@ function getStripe() {
   }
 
   return new Stripe(apiKey, {
-    apiVersion: '2025-09-30.clover',
+    apiVersion: '2024-12-18.acacia',
   });
 }
 
