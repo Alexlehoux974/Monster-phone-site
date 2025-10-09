@@ -6,7 +6,13 @@ export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
 
 function getStripe() {
-  return new Stripe(process.env.STRIPE_SECRET_KEY!, {
+  const apiKey = process.env.STRIPE_SECRET_KEY;
+
+  if (!apiKey) {
+    throw new Error('STRIPE_SECRET_KEY is not configured in environment variables');
+  }
+
+  return new Stripe(apiKey, {
     apiVersion: '2025-09-30.clover',
   });
 }
