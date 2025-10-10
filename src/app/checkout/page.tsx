@@ -212,6 +212,7 @@ export default function CheckoutPage() {
             console.log('🔍 DEBUG Cart item:', {
               fullProduct: item.product,
               productId: item.product.id,
+              variant: item.variant,
               typeofId: typeof item.product.id,
               isObject: typeof item.product.id === 'object',
               stringified: JSON.stringify(item.product.id),
@@ -227,6 +228,7 @@ export default function CheckoutPage() {
               image_url: item.product.images[0],
               brand_name: item.product.brand,
               category_name: item.product.category,
+              variant: item.variant || null, // ✅ Inclure le variant (peut être couleur, capacité, etc)
             };
           }),
           customerInfo,

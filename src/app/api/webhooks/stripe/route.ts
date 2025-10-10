@@ -115,14 +115,14 @@ export async function POST(request: NextRequest) {
         console.warn('⚠️ Failed to parse metadata from session');
       }
 
-      // Mapper les line items avec les product_id et variant colors
+      // Mapper les line items avec les product_id et variant strings
       const items = lineItems.data.map((item, index) => ({
         product_name: (item.description || 'Produit'),
         quantity: item.quantity || 1,
         unit_price: (item.price?.unit_amount || 0) / 100,
         total_price: (item.amount_total || 0) / 100,
         product_id: productIds[index] || '', // UUID Supabase du produit depuis métadonnées
-        variant_color: variantColors[index] || '', // ✅ Couleur du variant
+        variant: variantColors[index] || '', // ✅ Variant (peut être couleur, capacité, taille, etc.)
       }));
 
       // Créer la commande dans Supabase
@@ -176,17 +176,43 @@ export async function POST(request: NextRequest) {
 
       // Créer les order_items dans la table dédiée
       if (items && items.length > 0) {
-        const orderItems = items.map((item: any) => ({
-          order_id: order.id,
-          product_id: item.product_id || null,
-          product_name: item.product_name || 'Produit',
-          quantity: item.quantity || 1,
-          unit_price: item.unit_price || 0,
-          total_price: item.total_price || 0,
-          product_metadata: {
+        // ✅ Pour chaque item avec un variant, trouver son UUID dans product_variants
+        const orderItems = await Promise.all(items.map(async (item: any) => {
+          let variantId: string | null = null;
+
+          // Si l'item a un variant (couleur, capacité, taille, etc.), trouver son UUID
+          if (item.variant && item.product_id) {
+            try {
+              const { data: variant } = await supabase
+                .from('product_variants')
+                .select('id')
+                .eq('product_id', item.product_id)
+                .eq('color', item.variant) // Le champ "color" stocke TOUS les types de variants
+                .single();
+
+              if (variant) {
+                variantId = variant.id;
+                console.log(`✅ Found variant_id for "${item.variant}":`, variantId);
+              } else {
+                console.warn(`⚠️ No variant found for product ${item.product_id} with variant "${item.variant}"`);
+              }
+            } catch (err: any) {
+              console.error(`❌ Error finding variant for "${item.variant}":`, err.message);
+            }
+          }
+
+          return {
+            order_id: order.id,
             product_id: item.product_id || null,
-            color: item.variant_color || null, // ✅ Ajout de la couleur du variant
-          },
+            product_name: item.product_name || 'Produit',
+            quantity: item.quantity || 1,
+            unit_price: item.unit_price || 0,
+            total_price: item.total_price || 0,
+            product_metadata: {
+              product_id: item.product_id || null,
+              variant_id: variantId, // ✅ UUID du variant (universel pour tous types)
+            },
+          };
         }));
 
         const { error: itemsError } = await supabase
