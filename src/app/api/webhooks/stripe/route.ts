@@ -5,6 +5,7 @@ import { sendOrderConfirmation } from '@/lib/email/send-order-confirmation';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
+// Force redeploy: v2.0.0
 
 function getStripe() {
   const apiKey = process.env.STRIPE_SECRET_KEY;
