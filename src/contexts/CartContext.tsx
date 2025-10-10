@@ -9,6 +9,7 @@ export interface CartItem {
   product: Product;
   quantity: number;
   variant?: string;
+  addedAt?: number; // Timestamp d'ajout pour expiration
 }
 
 interface CustomerInfo {
@@ -44,7 +45,22 @@ export function CartProvider({ children, initialItems }: { children: ReactNode; 
       const savedCart = localStorage.getItem('monsterphone-cart');
       if (savedCart) {
         try {
-          setItems(JSON.parse(savedCart));
+          const parsedCart: CartItem[] = JSON.parse(savedCart);
+          const now = Date.now();
+          const tenDaysInMs = 10 * 24 * 60 * 60 * 1000; // 10 jours en millisecondes
+
+          // Filtrer les items expirés (plus de 10 jours)
+          const validItems = parsedCart.filter(item => {
+            if (!item.addedAt) return true; // Garde les items sans timestamp (ancien format)
+            return (now - item.addedAt) < tenDaysInMs;
+          });
+
+          setItems(validItems);
+
+          // Log si des items ont été supprimés
+          if (validItems.length < parsedCart.length) {
+            console.log(`🗑️ ${parsedCart.length - validItems.length} article(s) expiré(s) supprimé(s) du panier`);
+          }
         } catch (error) {
           console.error('Erreur lors du chargement du panier:', error);
         }
@@ -111,7 +127,8 @@ export function CartProvider({ children, initialItems }: { children: ReactNode; 
         const newItems = [...currentItems];
         newItems[existingItemIndex] = {
           ...newItems[existingItemIndex],
-          quantity: newQuantity
+          quantity: newQuantity,
+          addedAt: newItems[existingItemIndex].addedAt || Date.now() // Garde l'ancien timestamp ou crée un nouveau
         };
         return newItems;
       } else {
@@ -121,7 +138,12 @@ export function CartProvider({ children, initialItems }: { children: ReactNode; 
           console.warn(`Stock insuffisant pour ${productToAdd.name}`);
           return currentItems;
         }
-        return [...currentItems, { product: productToAdd, quantity: quantityToAdd, variant }];
+        return [...currentItems, {
+          product: productToAdd,
+          quantity: quantityToAdd,
+          variant,
+          addedAt: Date.now() // Timestamp d'ajout pour expiration 10 jours
+        }];
       }
     });
   };

@@ -82,13 +82,13 @@ function CheckoutSuccessContent() {
           items: createdOrder.items || [],
         });
 
-        // 3. Nettoyer le panier et le draft checkout
-        setTimeout(() => {
-          if (typeof window !== 'undefined') {
-            localStorage.removeItem('monster-phone-cart');
-            localStorage.removeItem('monsterphone-checkout-draft');
-          }
-        }, 2000);
+        // 3. Nettoyer le panier et le draft checkout IMMÉDIATEMENT
+        if (typeof window !== 'undefined') {
+          localStorage.removeItem('monsterphone-cart');
+          localStorage.removeItem('monsterphone-checkout-draft');
+          // Force reload du panier pour mettre à jour le header
+          window.dispatchEvent(new Event('storage'));
+        }
 
       } catch (err: any) {
         console.error('Erreur création/récupération commande:', err);
