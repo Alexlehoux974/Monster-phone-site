@@ -92,24 +92,43 @@ export async function POST(request: NextRequest) {
       const shippingCity = metadata.city || '';
       const shippingPostalCode = metadata.postalCode || '';
 
-      // Récupérer les line items avec les métadonnées des produits
-      const lineItems = await stripe.checkout.sessions.listLineItems(session.id, {
-        expand: ['data.price.product'],
-      });
+      // Récupérer le panier depuis pending_carts pour avoir les product_id Supabase
+      const cartSessionId = metadata.cart_session_id;
+      let items: any[] = [];
 
-      const items = lineItems.data.map((item) => {
-        // Extraire le product_id depuis les métadonnées Stripe du produit
-        const product = item.price?.product as Stripe.Product | undefined;
-        const productId = product?.metadata?.product_id || '';
+      if (cartSessionId) {
+        // Récupérer les items du panier Supabase (contient les vrais product_id)
+        const { data: cartData } = await supabase
+          .from('pending_carts')
+          .select('items')
+          .eq('session_id', cartSessionId)
+          .single();
 
-        return {
+        if (cartData && cartData.items) {
+          items = cartData.items.map((item: any) => ({
+            product_name: item.name || 'Produit',
+            quantity: item.quantity || 1,
+            unit_price: typeof item.price === 'string' ? parseFloat(item.price) : (item.price || 0),
+            total_price: (typeof item.price === 'string' ? parseFloat(item.price) : (item.price || 0)) * (item.quantity || 1),
+            product_id: item.id || '', // UUID Supabase du produit
+          }));
+        }
+      }
+
+      // Fallback: si pas de panier Supabase, utiliser les line items Stripe (sans product_id)
+      if (items.length === 0) {
+        const lineItems = await stripe.checkout.sessions.listLineItems(session.id, {
+          expand: ['data.price.product'],
+        });
+
+        items = lineItems.data.map((item) => ({
           product_name: (item.description || 'Produit'),
           quantity: item.quantity || 1,
           unit_price: (item.price?.unit_amount || 0) / 100,
           total_price: (item.amount_total || 0) / 100,
-          product_id: productId,
-        };
-      });
+          product_id: '', // Pas de product_id disponible
+        }));
+      }
 
       // Créer la commande dans Supabase
       const orderNumber = `ORDER-${Date.now()}`;
