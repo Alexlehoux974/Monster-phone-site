@@ -207,16 +207,28 @@ export default function CheckoutPage() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          items: items.map(item => ({
-            id: item.product.id,
-            name: item.product.name,
-            description: item.product.description,
-            price: typeof item.product.price === 'string' ? parseFloat(item.product.price) : item.product.price,
-            quantity: item.quantity,
-            image_url: item.product.images[0],
-            brand_name: item.product.brand,
-            category_name: item.product.category,
-          })),
+          items: items.map(item => {
+            // Debug détaillé: vérifier la structure complète
+            console.log('🔍 DEBUG Cart item:', {
+              fullProduct: item.product,
+              productId: item.product.id,
+              typeofId: typeof item.product.id,
+              isObject: typeof item.product.id === 'object',
+              stringified: JSON.stringify(item.product.id),
+              afterString: String(item.product.id)
+            });
+
+            return {
+              id: String(item.product.id), // Forcer conversion en string
+              name: item.product.name,
+              description: item.product.description,
+              price: typeof item.product.price === 'string' ? parseFloat(item.product.price) : item.product.price,
+              quantity: item.quantity,
+              image_url: item.product.images[0],
+              brand_name: item.product.brand,
+              category_name: item.product.category,
+            };
+          }),
           customerInfo,
           userId: user?.id || null, // ID de l'utilisateur connecté
         }),
