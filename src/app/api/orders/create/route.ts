@@ -81,13 +81,19 @@ export async function POST(request: NextRequest) {
 
     // Récupérer les product_id depuis les métadonnées de session (comme le webhook)
     let productIds: string[] = [];
+    let variantColors: string[] = [];
     try {
       if (metadata.product_ids) {
         productIds = JSON.parse(metadata.product_ids);
         console.log('✅ Product IDs from session metadata:', productIds);
       }
+      // ✅ Récupérer les couleurs des variants
+      if (metadata.variant_colors) {
+        variantColors = JSON.parse(metadata.variant_colors);
+        console.log('✅ Variant colors from session metadata:', variantColors);
+      }
     } catch (e) {
-      console.warn('⚠️ Failed to parse product_ids from session metadata');
+      console.warn('⚠️ Failed to parse metadata from session');
     }
 
     // Récupérer les line items
@@ -101,6 +107,7 @@ export async function POST(request: NextRequest) {
       unit_price: (item.price?.unit_amount || 0) / 100,
       total_price: (item.amount_total || 0) / 100,
       product_id: productIds[index] || '', // UUID Supabase depuis metadata, pas l'ID Stripe
+      variant_color: variantColors[index] || '', // ✅ Couleur du variant
     }));
 
     // Créer la commande
@@ -190,6 +197,7 @@ export async function POST(request: NextRequest) {
         total_price: item.total_price || 0,
         product_metadata: {
           product_id: item.product_id || null,
+          color: item.variant_color || null, // ✅ Ajout de la couleur du variant
         },
       }));
 

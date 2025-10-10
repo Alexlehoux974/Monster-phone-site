@@ -84,10 +84,11 @@ export async function POST(request: NextRequest) {
 
     // Préparer les line items pour Stripe
     const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = items.map((item: any) => {
-      // Debug: Log chaque item
+      // Debug: Log chaque item avec variant
       console.log('🔍 DEBUG API - Processing item:', {
         name: item.name,
         id: item.id,
+        variant: item.variant,
         typeofId: typeof item.id,
         isObject: typeof item.id === 'object',
         stringified: JSON.stringify(item.id)
@@ -104,6 +105,7 @@ export async function POST(request: NextRequest) {
               product_id: item.id,
               brand: item.brand_name || '',
               category: item.category_name || '',
+              variant_color: item.variant || '', // ✅ Ajout de la couleur du variant
             },
           },
           unit_amount: Math.round(item.price * 100), // Convertir en centimes
@@ -139,6 +141,11 @@ export async function POST(request: NextRequest) {
           console.log('🔍 Product ID:', item.id, 'Type:', typeof item.id);
           // Forcer la conversion en string pour éviter [object Object]
           return String(item.id);
+        })),
+        // ✅ Stocker les couleurs des variants
+        variant_colors: JSON.stringify(items.map((item: any) => {
+          console.log('🔍 Variant color:', item.variant || 'none');
+          return item.variant || '';
         })),
       },
       allow_promotion_codes: true, // Permettre les codes promo

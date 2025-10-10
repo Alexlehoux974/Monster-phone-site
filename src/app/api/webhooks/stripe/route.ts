@@ -98,6 +98,7 @@ export async function POST(request: NextRequest) {
       // Récupérer les product_id depuis les métadonnées de session
       const cartSessionId = metadata.cart_session_id;
       let productIds: string[] = [];
+      let variantColors: string[] = [];
 
       try {
         // Essayer de récupérer depuis les métadonnées de session
@@ -105,17 +106,23 @@ export async function POST(request: NextRequest) {
           productIds = JSON.parse(metadata.product_ids);
           console.log('✅ Product IDs from session metadata:', productIds);
         }
+        // ✅ Récupérer les couleurs des variants
+        if (metadata.variant_colors) {
+          variantColors = JSON.parse(metadata.variant_colors);
+          console.log('✅ Variant colors from session metadata:', variantColors);
+        }
       } catch (e) {
-        console.warn('⚠️ Failed to parse product_ids from session metadata');
+        console.warn('⚠️ Failed to parse metadata from session');
       }
 
-      // Mapper les line items avec les product_id
+      // Mapper les line items avec les product_id et variant colors
       const items = lineItems.data.map((item, index) => ({
         product_name: (item.description || 'Produit'),
         quantity: item.quantity || 1,
         unit_price: (item.price?.unit_amount || 0) / 100,
         total_price: (item.amount_total || 0) / 100,
         product_id: productIds[index] || '', // UUID Supabase du produit depuis métadonnées
+        variant_color: variantColors[index] || '', // ✅ Couleur du variant
       }));
 
       // Créer la commande dans Supabase
@@ -178,6 +185,7 @@ export async function POST(request: NextRequest) {
           total_price: item.total_price || 0,
           product_metadata: {
             product_id: item.product_id || null,
+            color: item.variant_color || null, // ✅ Ajout de la couleur du variant
           },
         }));
 
