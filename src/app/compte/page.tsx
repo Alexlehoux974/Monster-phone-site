@@ -480,7 +480,7 @@ export default function ComptePage() {
 
                   {activeTab === 'orders' && (
                     <>
-                      <h2 className="text-2xl font-bold mb-6"><span className="font-medium">Mes Commandes</span></h2>
+                      <h2 className="text-2xl font-bold mb-6"><span className="font-medium">Commandes</span></h2>
 
                       {loadingOrders ? (
                         <div className="text-center py-12">
