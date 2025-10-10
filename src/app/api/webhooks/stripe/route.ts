@@ -91,18 +91,24 @@ export async function POST(request: NextRequest) {
       const shippingCity = metadata.city || '';
       const shippingPostalCode = metadata.postalCode || '';
 
-      // Récupérer les line items
+      // Récupérer les line items avec les métadonnées des produits
       const lineItems = await stripe.checkout.sessions.listLineItems(session.id, {
         expand: ['data.price.product'],
       });
 
-      const items = lineItems.data.map((item) => ({
-        product_name: (item.description || 'Produit'),
-        quantity: item.quantity || 1,
-        unit_price: (item.price?.unit_amount || 0) / 100,
-        total_price: (item.amount_total || 0) / 100,
-        product_id: item.price?.product?.toString() || '',
-      }));
+      const items = lineItems.data.map((item) => {
+        // Extraire le product_id depuis les métadonnées Stripe du produit
+        const product = item.price?.product as Stripe.Product | undefined;
+        const productId = product?.metadata?.product_id || '';
+
+        return {
+          product_name: (item.description || 'Produit'),
+          quantity: item.quantity || 1,
+          unit_price: (item.price?.unit_amount || 0) / 100,
+          total_price: (item.amount_total || 0) / 100,
+          product_id: productId,
+        };
+      });
 
       // Créer la commande dans Supabase
       const orderNumber = `ORDER-${Date.now()}`;
