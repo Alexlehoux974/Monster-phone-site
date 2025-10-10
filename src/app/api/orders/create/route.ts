@@ -172,6 +172,13 @@ export async function POST(request: NextRequest) {
 
     console.log('✅ Order created successfully (fallback):', order.id);
 
+    // Debug: Vérifier les items avant création
+    console.log('🔍 DEBUG items:', {
+      itemsExists: !!items,
+      itemsLength: items?.length,
+      firstItem: items?.[0],
+    });
+
     // Créer les order_items dans la table dédiée
     if (items && items.length > 0) {
       const orderItems = items.map((item: any) => ({
@@ -185,6 +192,8 @@ export async function POST(request: NextRequest) {
           product_id: item.product_id || null,
         },
       }));
+
+      console.log('🔍 DEBUG Inserting order_items:', orderItems);
 
       const { error: itemsError } = await supabase
         .from('order_items')
