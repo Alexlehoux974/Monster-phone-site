@@ -92,43 +92,31 @@ export async function POST(request: NextRequest) {
       const shippingCity = metadata.city || '';
       const shippingPostalCode = metadata.postalCode || '';
 
-      // Récupérer le panier depuis pending_carts pour avoir les product_id Supabase
+      // Récupérer les line items Stripe
+      const lineItems = await stripe.checkout.sessions.listLineItems(session.id);
+
+      // Récupérer les product_id depuis les métadonnées de session
       const cartSessionId = metadata.cart_session_id;
-      let items: any[] = [];
+      let productIds: string[] = [];
 
-      if (cartSessionId) {
-        // Récupérer les items du panier Supabase (contient les vrais product_id)
-        const { data: cartData } = await supabase
-          .from('pending_carts')
-          .select('items')
-          .eq('session_id', cartSessionId)
-          .single();
-
-        if (cartData && cartData.items) {
-          items = cartData.items.map((item: any) => ({
-            product_name: item.name || 'Produit',
-            quantity: item.quantity || 1,
-            unit_price: typeof item.price === 'string' ? parseFloat(item.price) : (item.price || 0),
-            total_price: (typeof item.price === 'string' ? parseFloat(item.price) : (item.price || 0)) * (item.quantity || 1),
-            product_id: item.id || '', // UUID Supabase du produit
-          }));
+      try {
+        // Essayer de récupérer depuis les métadonnées de session
+        if (metadata.product_ids) {
+          productIds = JSON.parse(metadata.product_ids);
+          console.log('✅ Product IDs from session metadata:', productIds);
         }
+      } catch (e) {
+        console.warn('⚠️ Failed to parse product_ids from session metadata');
       }
 
-      // Fallback: si pas de panier Supabase, utiliser les line items Stripe (sans product_id)
-      if (items.length === 0) {
-        const lineItems = await stripe.checkout.sessions.listLineItems(session.id, {
-          expand: ['data.price.product'],
-        });
-
-        items = lineItems.data.map((item) => ({
-          product_name: (item.description || 'Produit'),
-          quantity: item.quantity || 1,
-          unit_price: (item.price?.unit_amount || 0) / 100,
-          total_price: (item.amount_total || 0) / 100,
-          product_id: '', // Pas de product_id disponible
-        }));
-      }
+      // Mapper les line items avec les product_id
+      const items = lineItems.data.map((item, index) => ({
+        product_name: (item.description || 'Produit'),
+        quantity: item.quantity || 1,
+        unit_price: (item.price?.unit_amount || 0) / 100,
+        total_price: (item.amount_total || 0) / 100,
+        product_id: productIds[index] || '', // UUID Supabase du produit depuis métadonnées
+      }));
 
       // Créer la commande dans Supabase
       const orderNumber = `ORDER-${Date.now()}`;

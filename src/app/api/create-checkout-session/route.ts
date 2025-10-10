@@ -114,6 +114,8 @@ export async function POST(request: NextRequest) {
         city: customerInfo?.city || '',
         postalCode: customerInfo?.postalCode || '',
         cart_session_id: cartSessionId, // ID pour retrouver le panier
+        // Stocker les product_id dans les métadonnées (JSON stringifié)
+        product_ids: JSON.stringify(items.map((item: any) => item.id)),
       },
       allow_promotion_codes: true, // Permettre les codes promo
       billing_address_collection: 'required',
