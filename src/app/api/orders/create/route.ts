@@ -79,17 +79,28 @@ export async function POST(request: NextRequest) {
     const shippingCity = metadata.city || '';
     const shippingPostalCode = metadata.postalCode || '';
 
+    // Récupérer les product_id depuis les métadonnées de session (comme le webhook)
+    let productIds: string[] = [];
+    try {
+      if (metadata.product_ids) {
+        productIds = JSON.parse(metadata.product_ids);
+        console.log('✅ Product IDs from session metadata:', productIds);
+      }
+    } catch (e) {
+      console.warn('⚠️ Failed to parse product_ids from session metadata');
+    }
+
     // Récupérer les line items
     const lineItems = await stripe.checkout.sessions.listLineItems(sessionId, {
       expand: ['data.price.product'],
     });
 
-    const items = lineItems.data.map((item) => ({
+    const items = lineItems.data.map((item, index) => ({
       product_name: (item.description || 'Produit'),
       quantity: item.quantity || 1,
       unit_price: (item.price?.unit_amount || 0) / 100,
       total_price: (item.amount_total || 0) / 100,
-      product_id: item.price?.product?.toString() || '',
+      product_id: productIds[index] || '', // UUID Supabase depuis metadata, pas l'ID Stripe
     }));
 
     // Créer la commande
