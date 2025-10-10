@@ -1,6 +1,7 @@
-import { render } from '@react-email/render';
+import { renderAsync } from '@react-email/render';
 import resend from './resend';
 import { OrderConfirmationEmail } from './templates/order-confirmation';
+import React from 'react';
 
 interface OrderItem {
   product_name: string;
@@ -21,8 +22,8 @@ interface SendOrderConfirmationParams {
 
 export async function sendOrderConfirmation(params: SendOrderConfirmationParams) {
   try {
-    const emailHtml = render(
-      OrderConfirmationEmail({
+    const emailHtml = await renderAsync(
+      React.createElement(OrderConfirmationEmail, {
         orderNumber: params.orderNumber,
         customerName: params.customerName,
         customerEmail: params.customerEmail,
