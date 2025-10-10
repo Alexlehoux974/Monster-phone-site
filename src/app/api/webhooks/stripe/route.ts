@@ -220,7 +220,6 @@ export async function POST(request: NextRequest) {
       }
 
       // Nettoyer le panier temporaire si présent
-      const cartSessionId = metadata.cart_session_id;
       if (cartSessionId) {
         await supabase
           .from('pending_carts')
