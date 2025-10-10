@@ -1,102 +1,120 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { createClient } from '@/lib/supabase/server';
+import { sendOrderConfirmation } from '@/lib/email/send-order-confirmation';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
 
 function getStripe() {
-  return new Stripe(process.env.STRIPE_SECRET_KEY!, {
+  const apiKey = process.env.STRIPE_SECRET_KEY;
+
+  if (!apiKey) {
+    throw new Error('STRIPE_SECRET_KEY is not configured');
+  }
+
+  return new Stripe(apiKey, {
     apiVersion: '2025-09-30.clover',
+    httpClient: Stripe.createFetchHttpClient(),
+    timeout: 30000,
+    maxNetworkRetries: 3,
   });
 }
 
 /**
- * API Route pour créer une commande après paiement Stripe
- *
- * Body attendu:
- * {
- *   sessionId: string // Stripe checkout session ID
- * }
+ * API Route pour récupérer ou créer une commande
+ * Priorité : webhook Stripe > création manuelle en fallback
  */
 export async function POST(request: NextRequest) {
   try {
-    const stripe = getStripe();
     const { sessionId } = await request.json();
 
     if (!sessionId) {
       return NextResponse.json(
-        { error: 'Session ID is required' },
+        { error: 'Session ID manquant' },
         { status: 400 }
       );
     }
 
-    // Récupérer la session Stripe avec les line items
-    const session = await stripe.checkout.sessions.retrieve(sessionId, {
-      expand: ['line_items.data.price.product', 'customer', 'payment_intent'],
-    });
+    console.log('🔍 Checking order for session:', sessionId);
+
+    const supabase = await createClient();
+
+    // Vérifier si la commande existe déjà (créée par webhook)
+    const { data: existingOrder } = await supabase
+      .from('orders')
+      .select('*')
+      .eq('stripe_session_id', sessionId)
+      .single();
+
+    if (existingOrder) {
+      console.log('✅ Order found (created by webhook):', existingOrder.id);
+      return NextResponse.json({
+        order: existingOrder,
+        alreadyExists: true,
+      });
+    }
+
+    console.log('⚠️ Order not found, creating as fallback...');
+
+    // FALLBACK : Créer la commande manuellement si le webhook n'a pas fonctionné
+    const stripe = getStripe();
+    const session = await stripe.checkout.sessions.retrieve(sessionId);
 
     if (session.payment_status !== 'paid') {
       return NextResponse.json(
-        { error: 'Payment not completed' },
+        { error: 'Paiement non complété' },
         { status: 400 }
       );
     }
 
-    // Récupérer les métadonnées de la session
+    // Récupérer les métadonnées
     const metadata = session.metadata || {};
-    const userId = metadata.userId;
+    // user_id peut être null si non authentifié (UUID requis par Supabase)
+    const userId = null; // On ne stocke pas le user_id temporaire
     const customerEmail = session.customer_details?.email || metadata.email || '';
     const customerName = session.customer_details?.name || metadata.name || '';
     const customerPhone = session.customer_details?.phone || metadata.phone || '';
-
-    // Récupérer l'adresse de livraison depuis les métadonnées
     const shippingAddress = metadata.address || '';
     const shippingCity = metadata.city || '';
     const shippingPostalCode = metadata.postalCode || '';
 
-    // Initialiser Supabase client
-    const supabase = await createClient();
-
-    // Récupérer les items directement depuis Stripe
-    const lineItems = session.line_items?.data || [];
-
-    const items = lineItems.map((item: any) => {
-      const product = item.price?.product;
-      const productName = typeof product === 'string' ? item.description : product?.name || item.description || 'Produit';
-
-      return {
-        id: item.price?.product?.id || item.id,
-        name: productName,
-        price: item.price?.unit_amount ? item.price.unit_amount / 100 : 0,
-        quantity: item.quantity || 1,
-        image_url: typeof product === 'object' ? product?.images?.[0] : null,
-        brand_name: typeof product === 'object' ? product?.metadata?.brand : null,
-        category_name: typeof product === 'object' ? product?.metadata?.category : null,
-      };
+    // Récupérer les line items
+    const lineItems = await stripe.checkout.sessions.listLineItems(sessionId, {
+      expand: ['data.price.product'],
     });
 
+    const items = lineItems.data.map((item) => ({
+      product_name: (item.description || 'Produit'),
+      quantity: item.quantity || 1,
+      unit_price: (item.price?.unit_amount || 0) / 100,
+      total_price: (item.amount_total || 0) / 100,
+      product_id: item.price?.product?.toString() || '',
+    }));
+
+    // Créer la commande
+    const orderNumber = `ORDER-${Date.now()}`;
+    const total = (session.amount_total || 0) / 100;
+
+    console.log('💾 Creating order (fallback):', {
+      orderNumber,
+      sessionId,
+      customerEmail,
+      total,
+      itemsCount: items.length,
+    });
 
     // Calculer les montants
-    const subtotal = session.amount_subtotal ? session.amount_subtotal / 100 : 0;
-    const shippingCost = session.total_details?.amount_shipping ? session.total_details.amount_shipping / 100 : 0;
-    const total = session.amount_total ? session.amount_total / 100 : 0;
+    const subtotal = (session.amount_subtotal || session.amount_total || 0) / 100;
+    const shippingCost = 0; // Pas de frais de port dans la session
 
-    // Générer un numéro de commande unique
-    const orderNumber = `CMD${Date.now().toString().slice(-8)}`;
-
-    // Créer la commande dans Supabase
     const { data: order, error } = await supabase
       .from('orders')
       .insert({
-        user_id: userId || null,
         order_number: orderNumber,
-        stripe_session_id: sessionId,
-        stripe_payment_intent_id: typeof session.payment_intent === 'string'
-          ? session.payment_intent
-          : session.payment_intent?.id,
-        customer_email: customerEmail,
+        user_id: userId,
         customer_name: customerName,
+        customer_email: customerEmail,
         customer_phone: customerPhone,
         shipping_address: shippingAddress,
         shipping_city: shippingCity,
@@ -107,60 +125,53 @@ export async function POST(request: NextRequest) {
         total: total,
         total_amount: total,
         amount_subtotal: subtotal,
-        status: 'processing',
         payment_status: 'paid',
-        shipping_method: metadata.shippingMethod || 'standard',
+        status: 'processing',
+        stripe_session_id: sessionId,
+        stripe_payment_intent_id: typeof session.payment_intent === 'string'
+          ? session.payment_intent
+          : session.payment_intent?.id,
+        created_at: new Date().toISOString(),
       })
       .select()
       .single();
 
     if (error) {
-      console.error('Error creating order:', error);
+      console.error('❌ Error creating order:', error);
 
-      // Si l'erreur est due à une commande déjà existante (duplicate), on la retourne
-      if (error.code === '23505') { // Postgres unique violation
-        const { data: existingOrder } = await supabase
+      // Vérifier si c'est une erreur de duplication
+      if (error.code === '23505') {
+        const { data: retryOrder } = await supabase
           .from('orders')
           .select('*')
           .eq('stripe_session_id', sessionId)
           .single();
 
-        if (existingOrder) {
-          // Récupérer les order_items pour la commande existante
-          const { data: existingOrderItems } = await supabase
-            .from('order_items')
-            .select('product_name, quantity, unit_price, total_price, product_metadata')
-            .eq('order_id', existingOrder.id);
-
-          const orderWithItems = {
-            ...existingOrder,
-            items: existingOrderItems || []
-          };
-
-          return NextResponse.json({ order: orderWithItems, alreadyExists: true });
+        if (retryOrder) {
+          console.log('✅ Order found after race condition:', retryOrder.id);
+          return NextResponse.json({
+            order: retryOrder,
+            alreadyExists: true,
+          });
         }
       }
 
-      return NextResponse.json(
-        { error: 'Failed to create order', details: error.message },
-        { status: 500 }
-      );
+      throw error;
     }
+
+    console.log('✅ Order created successfully (fallback):', order.id);
 
     // Créer les order_items dans la table dédiée
     if (items && items.length > 0) {
       const orderItems = items.map((item: any) => ({
         order_id: order.id,
-        product_id: item.id,
-        product_name: item.name || 'Produit',
+        product_id: item.product_id || null,
+        product_name: item.product_name || 'Produit',
         quantity: item.quantity || 1,
-        unit_price: item.price || 0,
-        total_price: (item.price || 0) * (item.quantity || 1),
+        unit_price: item.unit_price || 0,
+        total_price: item.total_price || 0,
         product_metadata: {
-          product_id: item.id,
-          brand: item.brand_name || null,
-          category: item.category_name || null,
-          image_url: item.image_url || null,
+          product_id: item.product_id || null,
         },
       }));
 
@@ -169,66 +180,62 @@ export async function POST(request: NextRequest) {
         .insert(orderItems);
 
       if (itemsError) {
-        console.error('Error creating order_items:', itemsError);
+        console.error('⚠️ Error creating order_items:', itemsError);
       } else {
-        // Mettre à jour le stock pour chaque produit commandé
-        for (const item of items) {
-          // Trouver le produit par nom (normaliser les espaces et la casse)
-          const productName = item.name?.trim();
+        console.log('✅ Order items created:', orderItems.length);
 
-          if (productName) {
-            // Chercher le produit par nom exact
-            const { data: product, error: productError } = await supabase
-              .from('products')
-              .select('id, stock_quantity')
-              .ilike('name', productName)
-              .single();
+        // Décrémenter le stock après création de la commande
+        try {
+          const { data: stockResult, error: stockError } = await supabase
+            .rpc('process_order_stock_decrement', { p_order_id: order.id });
 
-            if (!productError && product) {
-              const newStock = Math.max(0, product.stock_quantity - (item.quantity || 1));
-
-              const { error: stockError } = await supabase
-                .from('products')
-                .update({
-                  stock_quantity: newStock,
-                  updated_at: new Date().toISOString()
-                })
-                .eq('id', product.id);
-
-              if (stockError) {
-                console.error('Error updating stock for product:', product.id, stockError);
-              } else {
-                console.log(`✅ Stock updated: ${productName} - ${product.stock_quantity} → ${newStock}`);
-              }
-            } else {
-              console.warn(`⚠️ Product not found in database: ${productName}`);
-            }
+          if (stockError) {
+            console.error('⚠️ Error decrementing stock:', stockError);
+          } else {
+            console.log('📦 Stock updated:', stockResult);
           }
+        } catch (stockErr: any) {
+          console.error('⚠️ Stock decrement failed:', stockErr.message);
+          // Continue anyway - order is created, stock can be adjusted manually if needed
         }
       }
     }
 
-    // Récupérer les order_items depuis la table pour les retourner avec le bon format
-    const { data: orderItemsData, error: fetchItemsError } = await supabase
-      .from('order_items')
-      .select('product_name, quantity, unit_price, total_price, product_metadata')
-      .eq('order_id', order.id);
-
-    if (fetchItemsError) {
-      console.error('Error fetching order_items:', fetchItemsError);
+    // Nettoyer le panier temporaire
+    const cartSessionId = metadata.cart_session_id;
+    if (cartSessionId) {
+      await supabase
+        .from('pending_carts')
+        .delete()
+        .eq('session_id', cartSessionId);
+      console.log('🗑️ Temporary cart cleaned:', cartSessionId);
     }
 
-    // Retourner la commande avec les items au bon format
-    const orderWithItems = {
-      ...order,
-      items: orderItemsData || []
-    };
+    // Envoyer l'email de confirmation
+    try {
+      await sendOrderConfirmation({
+        orderNumber: orderNumber,
+        customerName: customerName,
+        customerEmail: customerEmail,
+        items: items,
+        subtotal: subtotal,
+        total: total,
+        orderDate: new Date().toISOString(),
+      });
+      console.log('📧 Order confirmation email sent to:', customerEmail);
+    } catch (emailErr: any) {
+      console.error('⚠️ Email sending failed:', emailErr.message);
+      // Continue anyway - order is created, email can be resent manually if needed
+    }
 
-    return NextResponse.json({ order: orderWithItems, success: true });
-  } catch (error) {
-    console.error('Error in create order:', error);
+    return NextResponse.json({
+      order,
+      alreadyExists: false,
+    });
+  } catch (error: any) {
+    console.error('❌ Error in orders/create:', error);
     return NextResponse.json(
-      { error: 'Internal server error', details: error instanceof Error ? error.message : 'Unknown error' },
+      { error: error.message || 'Failed to create order' },
       { status: 500 }
     );
   }

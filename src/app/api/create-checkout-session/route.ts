@@ -12,8 +12,13 @@ function getStripe() {
     throw new Error('STRIPE_SECRET_KEY is not configured in environment variables');
   }
 
-  // Utiliser la version par défaut du package Stripe
-  return new Stripe(apiKey);
+  // Configuration explicite pour Vercel
+  return new Stripe(apiKey, {
+    apiVersion: '2025-09-30.clover',
+    httpClient: Stripe.createFetchHttpClient(),
+    timeout: 30000,
+    maxNetworkRetries: 3,
+  });
 }
 
 export async function POST(request: NextRequest) {
@@ -53,13 +58,28 @@ export async function POST(request: NextRequest) {
       console.log('✅ Panier stocké:', cartSessionId);
     }
 
+    // Fonction pour nettoyer la description pour Stripe
+    const cleanDescription = (desc: string | undefined): string => {
+      if (!desc) return '';
+
+      // Supprimer les balises HTML
+      let cleaned = desc.replace(/<[^>]*>/g, '');
+
+      // Limiter à 500 caractères (limite Stripe)
+      if (cleaned.length > 500) {
+        cleaned = cleaned.slice(0, 497) + '...';
+      }
+
+      return cleaned;
+    };
+
     // Préparer les line items pour Stripe
     const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = items.map((item: any) => ({
       price_data: {
         currency: 'eur',
         product_data: {
           name: item.name,
-          description: item.description || '',
+          description: cleanDescription(item.description),
           images: item.image_url ? [item.image_url] : [],
           metadata: {
             product_id: item.id,
@@ -87,11 +107,12 @@ export async function POST(request: NextRequest) {
       client_reference_id: cartSessionId, // Référence pour récupérer les items
       metadata: {
         user_id: userId || '',
-        customer_name: customerInfo?.name || '',
-        customer_phone: customerInfo?.phone || '',
-        customer_address: customerInfo?.address || '',
-        customer_city: customerInfo?.city || '',
-        customer_postal_code: customerInfo?.postalCode || '',
+        email: customerInfo?.email || '',
+        name: customerInfo?.name || '',
+        phone: customerInfo?.phone || '',
+        address: customerInfo?.address || '',
+        city: customerInfo?.city || '',
+        postalCode: customerInfo?.postalCode || '',
         cart_session_id: cartSessionId, // ID pour retrouver le panier
       },
       allow_promotion_codes: true, // Permettre les codes promo
