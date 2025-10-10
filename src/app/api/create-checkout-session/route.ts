@@ -73,24 +73,44 @@ export async function POST(request: NextRequest) {
       return cleaned;
     };
 
+    // Debug: Vérifier les items reçus
+    console.log('🔍 DEBUG API - Items reçus:', items.map((item: any) => ({
+      name: item.name,
+      id: item.id,
+      typeofId: typeof item.id,
+      isObject: typeof item.id === 'object',
+      stringified: JSON.stringify(item.id)
+    })));
+
     // Préparer les line items pour Stripe
-    const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = items.map((item: any) => ({
-      price_data: {
-        currency: 'eur',
-        product_data: {
-          name: item.name,
-          description: cleanDescription(item.description),
-          images: item.image_url ? [item.image_url] : [],
-          metadata: {
-            product_id: item.id,
-            brand: item.brand_name || '',
-            category: item.category_name || '',
+    const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = items.map((item: any) => {
+      // Debug: Log chaque item
+      console.log('🔍 DEBUG API - Processing item:', {
+        name: item.name,
+        id: item.id,
+        typeofId: typeof item.id,
+        isObject: typeof item.id === 'object',
+        stringified: JSON.stringify(item.id)
+      });
+
+      return {
+        price_data: {
+          currency: 'eur',
+          product_data: {
+            name: item.name,
+            description: cleanDescription(item.description),
+            images: item.image_url ? [item.image_url] : [],
+            metadata: {
+              product_id: item.id,
+              brand: item.brand_name || '',
+              category: item.category_name || '',
+            },
           },
+          unit_amount: Math.round(item.price * 100), // Convertir en centimes
         },
-        unit_amount: Math.round(item.price * 100), // Convertir en centimes
-      },
-      quantity: item.quantity,
-    }));
+        quantity: item.quantity,
+      };
+    });
 
     // Créer la session Stripe Checkout
     console.log('📝 Creating Stripe session with', lineItems.length, 'items');
