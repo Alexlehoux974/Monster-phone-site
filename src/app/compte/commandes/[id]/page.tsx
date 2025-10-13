@@ -33,6 +33,35 @@ export default async function OrderDetailsPage({ params }: OrderDetailsPageProps
     notFound();
   }
 
+  // ✅ Enrichir les items avec les informations des variants
+  if (order.order_items && order.order_items.length > 0) {
+    const enrichedItems = await Promise.all(
+      order.order_items.map(async (item: any) => {
+        let variantInfo = null;
+
+        // Si l'item a un variant_id dans les metadata, récupérer ses infos
+        if (item.product_metadata?.variant_id) {
+          const { data: variant } = await supabase
+            .from('product_variants')
+            .select('color')
+            .eq('id', item.product_metadata.variant_id)
+            .single();
+
+          if (variant) {
+            variantInfo = variant.color; // Le champ "color" stocke TOUS types de variants
+          }
+        }
+
+        return {
+          ...item,
+          variant: variantInfo,
+        };
+      })
+    );
+
+    order.order_items = enrichedItems;
+  }
+
   // Statut de la commande avec style
   const getStatusBadge = (status: string) => {
     const styles = {
@@ -139,6 +168,11 @@ export default async function OrderDetailsPage({ params }: OrderDetailsPageProps
                           <h3 className="text-sm font-medium text-gray-900">
                             {item.product_name}
                           </h3>
+                          {item.variant && (
+                            <p className="mt-1 text-sm text-gray-700 font-medium">
+                              Variant : <span className="text-blue-600">{item.variant}</span>
+                            </p>
+                          )}
                           <p className="mt-1 text-sm text-gray-500">
                             Quantité : {item.quantity}
                           </p>
