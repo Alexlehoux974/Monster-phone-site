@@ -27,7 +27,7 @@ import {
 
 export default function CheckoutPage() {
   const { items, getCartTotal, clearCart, createOrder } = useCart();
-  const { user, isAuthenticated } = useAuth();
+  const { user, isAuthenticated, isLoading } = useAuth();
   const router = useRouter();
   const [isProcessing, setIsProcessing] = useState(false);
   const [orderComplete, setOrderComplete] = useState(false);
@@ -92,6 +92,9 @@ export default function CheckoutPage() {
 
   // Rediriger si pas de produits dans le panier OU si non authentifié
   useEffect(() => {
+    // Ne pas rediriger pendant le chargement de l'auth
+    if (isLoading) return;
+
     if (items.length === 0 && !orderComplete) {
       router.push('/panier');
     } else if (items.length > 0 && !isAuthenticated) {
@@ -99,7 +102,7 @@ export default function CheckoutPage() {
       sessionStorage.setItem('redirectAfterLogin', '/checkout');
       router.push('/compte');
     }
-  }, [items, router, orderComplete, isAuthenticated]);
+  }, [items, router, orderComplete, isAuthenticated, isLoading]);
 
   // Pré-remplir avec les infos utilisateur si connecté (prioritaire sur localStorage)
   useEffect(() => {

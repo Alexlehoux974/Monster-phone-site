@@ -2,6 +2,8 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
 import { toast } from 'sonner';
+import { createClient } from '@/lib/supabase/client';
+import type { User as SupabaseUser } from '@supabase/supabase-js';
 
 export interface User {
   id: string;
@@ -38,61 +40,110 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [lastActivity, setLastActivity] = useState<number>(Date.now());
+  const supabase = createClient();
 
-  // Charger l'utilisateur depuis localStorage au montage
-  useEffect(() => {
-    const savedUser = localStorage.getItem('monsterphone-user');
-    if (savedUser) {
-      try {
-        setUser(JSON.parse(savedUser));
-      } catch (error) {
-        console.error('Erreur lors du chargement de l\'utilisateur:', error);
+  // Fonction pour charger le profil utilisateur depuis Supabase
+  const loadUserProfile = async (supabaseUser: SupabaseUser): Promise<User | null> => {
+    try {
+      const { data: profile, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', supabaseUser.id)
+        .single();
+
+      if (error && error.code !== 'PGRST116') { // PGRST116 = no rows returned
+        console.error('Erreur lors du chargement du profil:', error);
       }
+
+      // Mapper les données du profil vers notre interface User
+      const userData: User = {
+        id: supabaseUser.id,
+        email: supabaseUser.email || '',
+        name: profile?.full_name || supabaseUser.user_metadata?.name || supabaseUser.email?.split('@')[0] || '',
+        phone: profile?.phone || undefined,
+        address: profile?.address && profile?.city && profile?.postal_code ? {
+          street: profile.address,
+          city: profile.city,
+          postalCode: profile.postal_code,
+          country: 'France',
+        } : undefined,
+        createdAt: profile?.created_at || supabaseUser.created_at,
+      };
+
+      return userData;
+    } catch (error) {
+      console.error('Erreur lors du chargement du profil:', error);
+      return null;
     }
-    setIsLoading(false);
+  };
+
+  // Charger l'utilisateur au montage et écouter les changements d'auth
+  useEffect(() => {
+    const initAuth = async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+
+        if (session?.user) {
+          const userData = await loadUserProfile(session.user);
+          if (userData) {
+            setUser(userData);
+          }
+        }
+      } catch (error) {
+        console.error('Erreur lors de l\'initialisation de l\'authentification:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    initAuth();
+
+    // Écouter les changements d'authentification
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (event === 'SIGNED_IN' && session?.user) {
+        const userData = await loadUserProfile(session.user);
+        if (userData) {
+          setUser(userData);
+        }
+      } else if (event === 'SIGNED_OUT') {
+        setUser(null);
+      } else if (event === 'USER_UPDATED' && session?.user) {
+        const userData = await loadUserProfile(session.user);
+        if (userData) {
+          setUser(userData);
+        }
+      }
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
   }, []);
 
-  // Sauvegarder l'utilisateur dans localStorage à chaque changement
-  useEffect(() => {
-    if (user) {
-      localStorage.setItem('monsterphone-user', JSON.stringify(user));
-    } else {
-      localStorage.removeItem('monsterphone-user');
-    }
-  }, [user]);
-
   const login = async (email: string, password: string) => {
-    // Dans un cas réel, ceci ferait un appel API
-    // Pour cette démo, on simule une connexion réussie
-    
-    // Simuler un délai réseau
-    await new Promise(resolve => setTimeout(resolve, 1000));
-
     // Validation basique
     if (!email || !password) {
       throw new Error('Email et mot de passe requis');
     }
 
-    // Simuler la vérification des identifiants
-    if (password.length < 6) {
-      throw new Error('Mot de passe incorrect');
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      throw new Error(error.message);
     }
 
-    // Créer un utilisateur simulé
-    const newUser: User = {
-      id: `user_${Date.now()}`,
-      email,
-      name: email.split('@')[0],
-      createdAt: new Date().toISOString(),
-    };
-
-    setUser(newUser);
+    if (data.user) {
+      const userData = await loadUserProfile(data.user);
+      if (userData) {
+        setUser(userData);
+      }
+    }
   };
 
   const register = async (email: string, password: string, name: string) => {
-    // Simuler un délai réseau
-    await new Promise(resolve => setTimeout(resolve, 1000));
-
     // Validation
     if (!email || !password || !name) {
       throw new Error('Tous les champs sont requis');
@@ -108,18 +159,43 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       throw new Error('Email invalide');
     }
 
-    // Créer le nouvel utilisateur
-    const newUser: User = {
-      id: `user_${Date.now()}`,
+    const { data, error } = await supabase.auth.signUp({
       email,
-      name,
-      createdAt: new Date().toISOString(),
-    };
+      password,
+      options: {
+        data: {
+          name,
+        },
+      },
+    });
 
-    setUser(newUser);
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    if (data.user) {
+      // Créer le profil utilisateur dans la table profiles
+      const { error: profileError } = await supabase
+        .from('profiles')
+        .insert({
+          id: data.user.id,
+          email: data.user.email,
+          full_name: name,
+        });
+
+      if (profileError) {
+        console.error('Erreur lors de la création du profil:', profileError);
+      }
+
+      const userData = await loadUserProfile(data.user);
+      if (userData) {
+        setUser(userData);
+      }
+    }
   };
 
-  const logout = useCallback(() => {
+  const logout = useCallback(async () => {
+    await supabase.auth.signOut();
     setUser(null);
     toast.info('Vous avez été déconnecté');
   }, []);
@@ -129,9 +205,28 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       throw new Error('Utilisateur non connecté');
     }
 
-    // Simuler un délai réseau
-    await new Promise(resolve => setTimeout(resolve, 500));
+    // Préparer les données pour Supabase
+    const profileUpdates: any = {};
 
+    if (updates.name) profileUpdates.full_name = updates.name;
+    if (updates.phone !== undefined) profileUpdates.phone = updates.phone;
+    if (updates.address) {
+      profileUpdates.address = updates.address.street;
+      profileUpdates.city = updates.address.city;
+      profileUpdates.postal_code = updates.address.postalCode;
+    }
+
+    // Mettre à jour le profil dans Supabase
+    const { error } = await supabase
+      .from('profiles')
+      .update(profileUpdates)
+      .eq('id', user.id);
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    // Mettre à jour l'état local
     const updatedUser = { ...user, ...updates };
     setUser(updatedUser);
   };

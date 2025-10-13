@@ -1102,7 +1102,7 @@ export default function Header() {
                       </div>
                     ) : (
                       <>
-                        <div className="">
+                        <div className="max-h-[400px] overflow-y-auto">
                           {items && items.length > 0 && items.map((item) => {
                             // Price is already a number in the Product interface
                             const price = item.product.price;
