@@ -447,41 +447,63 @@ export async function updateProductStatus(productId: string, status: 'active' | 
 export async function getDashboardStats() {
   const supabase = createClient();
 
-  // Total products
-  const { count: totalProducts } = await supabase
-    .from('products')
-    .select('*', { count: 'exact', head: true })
-    .neq('status', 'discontinued');
+  try {
+    // Total products
+    const { count: totalProducts, error: totalError } = await supabase
+      .from('products')
+      .select('*', { count: 'exact', head: true })
+      .neq('status', 'discontinued');
 
-  // Active products
-  const { count: activeProducts } = await supabase
-    .from('products')
-    .select('*', { count: 'exact', head: true })
-    .eq('status', 'active');
+    if (totalError) throw totalError;
 
-  // Out of stock products
-  const { count: outOfStock } = await supabase
-    .from('products')
-    .select('*', { count: 'exact', head: true })
-    .or('status.eq.out-of-stock,stock_quantity.lte.0');
+    // Active products
+    const { count: activeProducts, error: activeError } = await supabase
+      .from('products')
+      .select('*', { count: 'exact', head: true })
+      .eq('status', 'active');
 
-  // Total collections
-  const { count: totalCollections } = await supabase
-    .from('collections')
-    .select('*', { count: 'exact', head: true })
-    .eq('is_active', true);
+    if (activeError) throw activeError;
 
-  // Active banners
-  const { count: activeBanners } = await supabase
-    .from('promo_banners')
-    .select('*', { count: 'exact', head: true })
-    .eq('is_active', true);
+    // Out of stock products
+    const { count: outOfStock, error: stockError } = await supabase
+      .from('products')
+      .select('*', { count: 'exact', head: true })
+      .or('status.eq.out-of-stock,stock_quantity.lte.0');
 
-  return {
-    totalProducts: totalProducts || 0,
-    activeProducts: activeProducts || 0,
-    outOfStock: outOfStock || 0,
-    totalCollections: totalCollections || 0,
-    activeBanners: activeBanners || 0,
-  };
+    if (stockError) throw stockError;
+
+    // Total collections
+    const { count: totalCollections, error: collectionsError } = await supabase
+      .from('collections')
+      .select('*', { count: 'exact', head: true })
+      .eq('is_active', true);
+
+    if (collectionsError) throw collectionsError;
+
+    // Active banners
+    const { count: activeBanners, error: bannersError } = await supabase
+      .from('promo_banners')
+      .select('*', { count: 'exact', head: true })
+      .eq('is_active', true);
+
+    if (bannersError) throw bannersError;
+
+    return {
+      totalProducts: totalProducts || 0,
+      activeProducts: activeProducts || 0,
+      outOfStock: outOfStock || 0,
+      totalCollections: totalCollections || 0,
+      activeBanners: activeBanners || 0,
+    };
+  } catch (error) {
+    console.error('Erreur getDashboardStats:', error);
+    // Retourner des valeurs par défaut en cas d'erreur
+    return {
+      totalProducts: 0,
+      activeProducts: 0,
+      outOfStock: 0,
+      totalCollections: 0,
+      activeBanners: 0,
+    };
+  }
 }

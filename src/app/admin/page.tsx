@@ -52,9 +52,23 @@ export default function AdminDashboard() {
     if (checking) return;
 
     const loadStats = async () => {
-      const data = await getDashboardStats();
-      setStats(data);
-      setLoading(false);
+      try {
+        const data = await getDashboardStats();
+        setStats(data);
+      } catch (error) {
+        console.error('Erreur chargement statistiques:', error);
+        // Afficher des stats vides en cas d'erreur
+        setStats({
+          totalProducts: 0,
+          activeProducts: 0,
+          outOfStock: 0,
+          totalCollections: 0,
+          activeBanners: 0,
+        });
+      } finally {
+        // Toujours arrêter le loading, même en cas d'erreur
+        setLoading(false);
+      }
     };
 
     loadStats();
