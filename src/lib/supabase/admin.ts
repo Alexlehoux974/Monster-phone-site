@@ -48,8 +48,6 @@ export async function signInAdmin(email: string, password: string) {
   const supabase = createClient();
 
   try {
-    console.log('🔵 Step 1: Verifying admin status...');
-
     // First, verify admin status via API
     const verifyResponse = await fetch('/api/admin/verify', {
       method: 'POST',
@@ -60,17 +58,12 @@ export async function signInAdmin(email: string, password: string) {
     });
 
     const verifyData = await verifyResponse.json();
-    console.log('🔵 Step 2: Admin verification result:', verifyData);
-
     if (!verifyResponse.ok || !verifyData.isAdmin) {
-      console.log('❌ Not an admin');
       return {
         data: null,
         error: new Error('Accès non autorisé. Seuls les administrateurs peuvent se connecter.')
       };
     }
-
-    console.log('🔵 Step 3: Signing in with Supabase...');
 
     // Then sign in with Supabase Auth directly on the client
     const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
@@ -79,14 +72,11 @@ export async function signInAdmin(email: string, password: string) {
     });
 
     if (authError) {
-      console.log('❌ Auth error:', authError);
       return {
         data: null,
         error: authError
       };
     }
-
-    console.log('✅ Login successful! Session:', authData.session);
 
     return {
       data: {
@@ -96,7 +86,6 @@ export async function signInAdmin(email: string, password: string) {
       error: null
     };
   } catch (error) {
-    console.log('❌ Exception:', error);
     return {
       data: null,
       error: new Error('Erreur lors de la connexion au serveur')
@@ -115,24 +104,39 @@ export async function getAdminSession() {
   const { data: { session }, error } = await supabase.auth.getSession();
 
   if (error || !session) {
+    console.log('[getAdminSession] No session:', error?.message);
     return { session: null, admin: null, error };
   }
 
-  // Verify admin status via API (uses service role key)
-  const verifyResponse = await fetch('/api/admin/verify', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ email: session.user.email }),
-  });
+  console.log('[getAdminSession] Session found, verifying admin for:', session.user.email);
 
-  if (!verifyResponse.ok) {
-    return { session, admin: null, error: null };
+  try {
+    // Verify admin status via API (uses service role key)
+    const verifyResponse = await fetch('/api/admin/verify', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email: session.user.email }),
+      // Add timeout to prevent infinite loading
+      signal: AbortSignal.timeout(10000), // 10 second timeout
+    });
+
+    console.log('[getAdminSession] Verify response status:', verifyResponse.status);
+
+    if (!verifyResponse.ok) {
+      const errorData = await verifyResponse.json().catch(() => ({ error: 'Unknown error' }));
+      console.error('[getAdminSession] Verify failed:', errorData);
+      return { session, admin: null, error: new Error(errorData.error || 'Admin verification failed') };
+    }
+
+    const verifyData = await verifyResponse.json();
+    console.log('[getAdminSession] Admin verified:', verifyData.admin?.email);
+    return { session, admin: verifyData.admin, error: null };
+  } catch (fetchError: any) {
+    console.error('[getAdminSession] Fetch error:', fetchError.message);
+    return { session, admin: null, error: fetchError };
   }
-
-  const verifyData = await verifyResponse.json();
-  return { session, admin: verifyData.admin, error: null };
 }
 
 export async function isAdmin(email: string): Promise<boolean> {
@@ -230,7 +234,6 @@ export async function deductStockAfterOrder(orderItems: {
           console.error(`❌ Erreur mise à jour stock variant ${item.variantId}:`, updateError);
           results.push({ productId: item.productId, variantId: item.variantId, success: false, error: updateError });
         } else {
-          console.log(`✅ Stock variant ${item.variantId} mis à jour: ${variant.stock} → ${newStock}`);
           results.push({ productId: item.productId, variantId: item.variantId, success: true, oldStock: variant.stock, newStock });
         }
       } else {
@@ -258,7 +261,6 @@ export async function deductStockAfterOrder(orderItems: {
           console.error(`❌ Erreur mise à jour stock produit ${item.productId}:`, updateError);
           results.push({ productId: item.productId, success: false, error: updateError });
         } else {
-          console.log(`✅ Stock produit ${item.productId} mis à jour: ${product.stock_quantity} → ${newStock}`);
           results.push({ productId: item.productId, success: true, oldStock: product.stock_quantity, newStock });
         }
       }

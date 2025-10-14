@@ -6,7 +6,10 @@ import LowStockNotification from '@/lib/email/templates/low-stock';
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Function to create Resend client on-demand
+function getResend() {
+  return new Resend(process.env.RESEND_API_KEY);
+}
 
 export async function GET(request: NextRequest) {
   try {
@@ -90,6 +93,7 @@ export async function GET(request: NextRequest) {
       ? process.env.ADMIN_EMAIL.split(',').map(email => email.trim())
       : ['Swann.icell4@gmail.com', 'commande@monster-phone.re'];
 
+    const resend = getResend();
     await resend.emails.send({
       from: 'Monster Phone <notifications@monster-phone.re>',
       to: adminEmails,

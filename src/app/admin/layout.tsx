@@ -43,8 +43,21 @@ export default function AdminLayout({
   useEffect(() => {
     const checkAdmin = async () => {
       console.log('[ADMIN LAYOUT] Checking admin session...');
-      const { session, admin: adminData } = await getAdminSession();
-      console.log('[ADMIN LAYOUT] Session result:', { hasSession: !!session, hasAdmin: !!adminData, admin: adminData });
+      const { session, admin: adminData, error } = await getAdminSession();
+
+      console.log('[ADMIN LAYOUT] Result:', {
+        hasSession: !!session,
+        hasAdmin: !!adminData,
+        error: error?.message
+      });
+
+      if (error) {
+        console.error('[ADMIN LAYOUT] Error verifying admin:', error);
+        // Show error instead of redirecting in case of network issues
+        alert(`Erreur de vérification admin: ${error.message}. Veuillez rafraîchir la page.`);
+        setLoading(false);
+        return;
+      }
 
       if (!adminData || !session) {
         console.log('[ADMIN LAYOUT] No admin or session, redirecting to login');
@@ -52,7 +65,7 @@ export default function AdminLayout({
         return;
       }
 
-      console.log('[ADMIN LAYOUT] Admin authenticated, setting state');
+      console.log('[ADMIN LAYOUT] Admin verified, showing dashboard');
       setAdmin(adminData);
       setLoading(false);
     };
