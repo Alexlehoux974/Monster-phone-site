@@ -23,7 +23,6 @@ function getStripe() {
 
 export async function POST(request: NextRequest) {
   try {
-    console.log('🔧 Initializing Stripe with API key:', process.env.STRIPE_SECRET_KEY ? 'SET ✓' : 'MISSING ✗');
     const stripe = getStripe();
     const body = await request.json();
     const { items, customerInfo, userId } = body;
@@ -35,13 +34,84 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    console.log('💳 Création session checkout pour userId:', userId || 'guest');
+    // ✅ VALIDATION DU STOCK CÔTÉ SERVEUR (Sécurité)
+    const supabase = await createClient();
+
+    for (const item of items) {
+      // Récupérer le produit depuis Supabase pour vérifier le stock en temps réel
+      const { data: product, error: productError } = await supabase
+        .from('products_full')
+        .select('id, name, stock_quantity, variants')
+        .eq('id', item.id)
+        .single();
+
+      if (productError || !product) {
+        return NextResponse.json(
+          {
+            error: `Produit introuvable: ${item.name}`,
+            productId: item.id
+          },
+          { status: 404 }
+        );
+      }
+
+      let availableStock = 0;
+
+      // Vérifier le stock selon le type de produit (avec ou sans variant)
+      if (item.variant && product.variants && product.variants.length > 0) {
+        // Produit avec variant - trouver le variant correspondant
+        const selectedVariant = product.variants.find(
+          (v: any) => v.color === item.variant
+        );
+
+        if (!selectedVariant) {
+          return NextResponse.json(
+            {
+              error: `Variant "${item.variant}" introuvable pour ${product.name}`,
+              productId: item.id,
+              variant: item.variant
+            },
+            { status: 400 }
+          );
+        }
+
+        availableStock = selectedVariant.stock || 0;
+      } else {
+        // Produit sans variant - utiliser stockQuantity
+        availableStock = product.stock_quantity || 0;
+      }
+
+      // Vérifier si le stock est suffisant
+      if (availableStock === 0) {
+        return NextResponse.json(
+          {
+            error: `Produit en rupture de stock: ${product.name}${item.variant ? ` (${item.variant})` : ''}`,
+            productId: item.id,
+            variant: item.variant || null,
+            availableStock: 0
+          },
+          { status: 400 }
+        );
+      }
+
+      if (item.quantity > availableStock) {
+        return NextResponse.json(
+          {
+            error: `Stock insuffisant pour ${product.name}${item.variant ? ` (${item.variant})` : ''}`,
+            productId: item.id,
+            variant: item.variant || null,
+            requestedQuantity: item.quantity,
+            availableStock: availableStock
+          },
+          { status: 400 }
+        );
+      }
+    }
 
     // Générer un ID unique pour cette session de panier
     const cartSessionId = `cart_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
     // Stocker les items dans Supabase (contournement de la limite Stripe de 500 caractères)
-    const supabase = await createClient();
     const { error: cartError } = await supabase
       .from('pending_carts')
       .insert({
@@ -55,8 +125,7 @@ export async function POST(request: NextRequest) {
       console.error('❌ Erreur stockage panier:', cartError);
       // On continue quand même, les line_items Stripe contiennent l'essentiel
     } else {
-      console.log('✅ Panier stocké:', cartSessionId);
-    }
+      }
 
     // Fonction pour nettoyer la description pour Stripe
     const cleanDescription = (desc: string | undefined): string => {
@@ -73,27 +142,9 @@ export async function POST(request: NextRequest) {
       return cleaned;
     };
 
-    // Debug: Vérifier les items reçus
-    console.log('🔍 DEBUG API - Items reçus:', items.map((item: any) => ({
-      name: item.name,
-      id: item.id,
-      typeofId: typeof item.id,
-      isObject: typeof item.id === 'object',
-      stringified: JSON.stringify(item.id)
-    })));
 
     // Préparer les line items pour Stripe
     const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = items.map((item: any) => {
-      // Debug: Log chaque item avec variant
-      console.log('🔍 DEBUG API - Processing item:', {
-        name: item.name,
-        id: item.id,
-        variant: item.variant,
-        typeofId: typeof item.id,
-        isObject: typeof item.id === 'object',
-        stringified: JSON.stringify(item.id)
-      });
-
       return {
         price_data: {
           currency: 'eur',
@@ -115,7 +166,6 @@ export async function POST(request: NextRequest) {
     });
 
     // Créer la session Stripe Checkout
-    console.log('📝 Creating Stripe session with', lineItems.length, 'items');
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: lineItems,
@@ -138,13 +188,11 @@ export async function POST(request: NextRequest) {
         cart_session_id: cartSessionId, // ID pour retrouver le panier
         // Stocker les product_id dans les métadonnées (JSON stringifié)
         product_ids: JSON.stringify(items.map((item: any) => {
-          console.log('🔍 Product ID:', item.id, 'Type:', typeof item.id);
           // Forcer la conversion en string pour éviter [object Object]
           return String(item.id);
         })),
         // ✅ Stocker les couleurs des variants
         variant_colors: JSON.stringify(items.map((item: any) => {
-          console.log('🔍 Variant color:', item.variant || 'none');
           return item.variant || '';
         })),
       },

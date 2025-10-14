@@ -7,13 +7,13 @@ export default function PaymentLogos() {
   const paymentMethods = [
     {
       name: 'Visa',
-      image: '/payment-logos/visa.png',
+      image: '/payment-logos/visa.webp', // Optimisé WebP (-87%)
       width: 60,
       height: 40,
     },
     {
       name: 'Mastercard',
-      image: '/payment-logos/mastercard.png',
+      image: '/payment-logos/mastercard.webp', // Optimisé WebP (-87%)
       width: 60,
       height: 40,
     },
@@ -80,7 +80,7 @@ export default function PaymentLogos() {
                 height={method.height}
                 className="object-contain"
                 style={{ width: 'auto', height: 'auto', maxHeight: '30px' }}
-                priority
+                loading="lazy"
               />
             ) : null}
           </motion.div>

@@ -3,6 +3,10 @@
     {
       "path": "/api/send-abandoned-cart-reminder",
       "schedule": "0 9 * * *"
+    },
+    {
+      "path": "/api/admin/check-low-stock",
+      "schedule": "0 8 * * *"
     }
   ]
 }
