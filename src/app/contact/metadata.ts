@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Contact Monster Phone Boutique La Réunion',
     description: 'Contactez votre spécialiste en téléphones gaming à La Réunion. Showroom au Port, livraison 48h dans toute l\'île.',
-    url: 'https://monster-phone-boutique.fr/contact',
+    url: 'https://monster-phone.re/contact',
     siteName: 'Monster Phone Boutique',
     locale: 'fr_FR',
     type: 'website',
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: 'https://monster-phone-boutique.fr/contact'
+    canonical: 'https://monster-phone.re/contact'
   },
   other: {
     'geo.region': 'RE',

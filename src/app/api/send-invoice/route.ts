@@ -78,8 +78,6 @@ export async function POST(request: NextRequest) {
       }) as React.ReactElement,
     });
 
-    console.log('📧 Email de facture envoyé à', order.customer_email);
-
     return NextResponse.json({
       success: true,
       message: 'Facture envoyée avec succès',

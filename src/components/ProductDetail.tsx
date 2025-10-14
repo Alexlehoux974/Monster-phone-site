@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Star, Shield, Truck, RefreshCw, Clock, Award, ChevronRight, ChevronLeft, Check, Package, Phone, CreditCard, Lock, Heart, Share2, Minus, Plus, ZoomIn } from 'lucide-react';
 import { Product, ProductVariant } from '@/data/products';
 import { formatPrice, cn } from '@/lib/utils';
@@ -21,6 +22,7 @@ interface ProductDetailProps {
 
 export default function ProductDetail({ product }: ProductDetailProps) {
   const { addToCart } = useCart();
+  const router = useRouter();
   // Sélectionner le variant par défaut ou le premier disponible avec du stock
   const defaultVariant = product.variants?.find(v => v.is_default) ||
                         product.variants?.find(v => v.stock > 0) ||
@@ -48,7 +50,6 @@ export default function ProductDetail({ product }: ProductDetailProps) {
         table: 'product_variants',
         filter: `product_id=eq.${product.id}`
       }, (payload) => {
-        console.log('🔄 [REALTIME] Variant stock updated:', payload.new);
         // Update variants state
         setVariants(prev => prev.map(v =>
           v.id === payload.new.id ? { ...v, stock: payload.new.stock } : v
@@ -64,7 +65,6 @@ export default function ProductDetail({ product }: ProductDetailProps) {
         table: 'products',
         filter: `id=eq.${product.id}`
       }, (payload) => {
-        console.log('🔄 [REALTIME] Product updated:', payload.new);
         setProductPrice(payload.new.price);
         setProductStockQuantity(payload.new.stock_quantity || 0);
         setAdminDiscountPercent(payload.new.admin_discount_percent || 0);
@@ -158,6 +158,15 @@ export default function ProductDetail({ product }: ProductDetailProps) {
       navigator.clipboard.writeText(window.location.href);
       toast.success('Lien copié dans le presse-papier');
     }
+  };
+
+  const handleBuyNow = () => {
+    if (!isInStock || quantity > currentStock) {
+      toast.error('Produit indisponible');
+      return;
+    }
+    handleAddToCart();
+    router.push('/panier');
   };
 
   return (
@@ -499,6 +508,23 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                   Ajouter au panier
                 </>
               )}
+            </Button>
+
+            {/* Bouton Procéder au paiement */}
+            <Button
+              onClick={handleBuyNow}
+              disabled={!isInStock || quantity > currentStock}
+              variant="outline"
+              className={cn(
+                "w-full h-12 text-lg font-semibold transition-all duration-300 group",
+                "hover:bg-red-600 hover:text-white hover:border-red-600 hover:shadow-lg hover:scale-[1.02]",
+                "active:scale-[0.98]",
+                !isInStock && "opacity-50 cursor-not-allowed hover:bg-transparent hover:text-current hover:scale-100"
+              )}
+              size="lg"
+            >
+              <CreditCard className="mr-2 h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
+              Procéder au paiement
             </Button>
 
             {/* Badges de confiance */}

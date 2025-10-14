@@ -62,8 +62,6 @@ export async function POST(request: NextRequest) {
       }) as React.ReactElement,
     });
 
-    console.log('📧 Email de test envoyé:', emailResponse);
-
     return NextResponse.json({
       success: true,
       message: 'Email de confirmation envoyé avec succès',

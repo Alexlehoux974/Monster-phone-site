@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'CGV Monster Phone Boutique La Réunion',
     description: 'Conditions générales de vente de votre spécialiste en téléphones gaming à La Réunion.',
-    url: 'https://monster-phone-boutique.fr/legal/conditions-generales',
+    url: 'https://monster-phone.re/legal/conditions-generales',
     siteName: 'Monster Phone Boutique',
     locale: 'fr_FR',
     type: 'website'
@@ -34,6 +34,6 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: 'https://monster-phone-boutique.fr/legal/conditions-generales'
+    canonical: 'https://monster-phone.re/legal/conditions-generales'
   }
 };

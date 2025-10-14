@@ -68,8 +68,6 @@ interface Category {
 }
 
 export default function StockManagementPage() {
-  console.log('[ADMIN STOCK] Component rendering...');
-
   const supabase = createClient();
 
   const [products, setProducts] = useState<Product[]>([]);
@@ -96,19 +94,11 @@ export default function StockManagementPage() {
 
   const loadData = async () => {
     try {
-      console.log('[ADMIN] Starting data load...');
-
       // Load products with variants
       const { data: productsData, error: productsError } = await supabase
         .from('products')
         .select('*, product_variants(*)')
         .order('name');
-
-      console.log('[ADMIN] Products query result:', {
-        count: productsData?.length,
-        error: productsError,
-        firstProduct: productsData?.[0]
-      });
 
       if (productsError) {
         console.error('[ADMIN] Products error:', productsError);
@@ -132,12 +122,6 @@ export default function StockManagementPage() {
       // Transform products to variant rows
       const rows: VariantRow[] = [];
       (productsData || []).forEach((product) => {
-        console.log(`[ADMIN] Processing product: ${product.name}`, {
-          has_variants: !!product.product_variants,
-          variant_count: product.product_variants?.length || 0,
-          variants: product.product_variants
-        });
-
         if (product.product_variants && product.product_variants.length > 0) {
           // Create a row for each variant
           product.product_variants.forEach((variant: any) => {
@@ -175,9 +159,6 @@ export default function StockManagementPage() {
         }
       });
 
-      console.log('[ADMIN] Total variant rows created:', rows.length);
-      console.log('[ADMIN] First 3 rows:', rows.slice(0, 3));
-
       setVariantRows(rows);
       setBrands(brandsData || []);
       setCategories(categoriesData || []);
@@ -200,7 +181,6 @@ export default function StockManagementPage() {
           table: 'product_variants',
         },
         (payload) => {
-          console.log('Variant stock updated:', payload);
           // Update the specific variant row
           setVariantRows((prev) =>
             prev.map((row) =>
@@ -263,8 +243,6 @@ export default function StockManagementPage() {
           throw new Error(stockResult.error || 'Failed to update stock');
         }
 
-        console.log(`Stock updated for ${row.productName} - ${row.color}: ${editingStock}`);
-
         // Update product price, visibility and discount via generic API route
         const productResponse = await fetch('/api/admin/supabase', {
           method: 'POST',
@@ -285,8 +263,6 @@ export default function StockManagementPage() {
         if (!productResponse.ok || productResult.error) {
           throw new Error(productResult.error || 'Failed to update product');
         }
-
-        console.log(`Product updated for ${row.productName}: price=${editingPrice}€, visible=${editingVisible}, discount=${editingDiscount}%`);
 
         // Update the row in state
         setVariantRows((prev) =>
@@ -350,8 +326,7 @@ export default function StockManagementPage() {
             tag: 'products'
           }),
         });
-        console.log('Site revalidated successfully');
-      } catch (revalidateError) {
+        } catch (revalidateError) {
         console.error('Revalidation error:', revalidateError);
       }
 

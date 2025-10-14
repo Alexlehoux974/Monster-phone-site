@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Plan du Site | Monster Phone Boutique',
     description: 'Navigation complète du site Monster Phone Boutique pour retrouver facilement tous nos produits et services.',
-    url: 'https://monster-phone-boutique.fr/legal/plan-du-site',
+    url: 'https://monster-phone.re/legal/plan-du-site',
     siteName: 'Monster Phone Boutique',
     locale: 'fr_FR',
     type: 'website'
@@ -34,6 +34,6 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: 'https://monster-phone-boutique.fr/legal/plan-du-site'
+    canonical: 'https://monster-phone.re/legal/plan-du-site'
   }
 };

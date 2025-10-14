@@ -211,17 +211,6 @@ export default function CheckoutPage() {
         },
         body: JSON.stringify({
           items: items.map(item => {
-            // Debug détaillé: vérifier la structure complète
-            console.log('🔍 DEBUG Cart item:', {
-              fullProduct: item.product,
-              productId: item.product.id,
-              variant: item.variant,
-              typeofId: typeof item.product.id,
-              isObject: typeof item.product.id === 'object',
-              stringified: JSON.stringify(item.product.id),
-              afterString: String(item.product.id)
-            });
-
             return {
               id: String(item.product.id), // Forcer conversion en string
               name: item.product.name,

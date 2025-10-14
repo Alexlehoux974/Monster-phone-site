@@ -92,8 +92,6 @@ export async function POST(request: NextRequest) {
       .update(updateData)
       .eq('id', cartId);
 
-    console.log(`✅ Email de relance #${newCount} envoyé à:`, cart.customer_email);
-
     return NextResponse.json({
       success: true,
       message: `Email de relance #${newCount} envoyé avec succès`,
@@ -211,11 +209,6 @@ export async function GET(request: NextRequest) {
 
     const successCount = results.filter((r) => r.status === 'fulfilled').length;
     const failureCount = results.filter((r) => r.status === 'rejected').length;
-
-    console.log(`📧 Relances envoyées: ${successCount} succès, ${failureCount} échecs`);
-    console.log(`   - 1ère relance (3h ±30min): ${firstReminders?.length || 0}`);
-    console.log(`   - 2ème relance (24h ±2h): ${secondReminders?.length || 0}`);
-    console.log(`   - 3ème relance (48h ±2h): ${thirdReminders?.length || 0}`);
 
     return NextResponse.json({
       success: true,

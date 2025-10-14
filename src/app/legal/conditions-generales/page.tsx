@@ -67,8 +67,8 @@ export default function ConditionsGeneralesPage() {
                   Article 1 - Objet et champ d&apos;application
                 </h2>
                 <p>
-                  Les présentes conditions générales de vente s&apos;appliquent à toutes les commandes passées sur le site 
-                  monster-phone-boutique.fr exploité par Monster Phone Boutique, société située à La Réunion.
+                  Les présentes conditions générales de vente s&apos;appliquent à toutes les commandes passées sur le site
+                  monster-phone.re exploité par Monster Phone Boutique, société située à La Réunion.
                 </p>
                 <p>
                   Monster Phone Boutique est spécialisée dans la vente de smartphones gaming, accessoires high-tech, 
@@ -149,8 +149,8 @@ export default function ConditionsGeneralesPage() {
 
                 <h2 className="text-2xl font-bold text-gray-900 mb-4 mt-8">Article 6 - Propriété intellectuelle</h2>
                 <p>
-                  Tous les éléments du site monster-phone-boutique.fr sont et restent la propriété 
-                  intellectuelle exclusive de Monster Phone Boutique. Toute reproduction, même partielle, 
+                  Tous les éléments du site monster-phone.re sont et restent la propriété
+                  intellectuelle exclusive de Monster Phone Boutique. Toute reproduction, même partielle,
                   est interdite sans autorisation préalable.
                 </p>
 

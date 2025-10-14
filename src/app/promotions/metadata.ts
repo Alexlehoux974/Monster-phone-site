@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Promotions Smartphones Gaming | Monster Phone Boutique Réunion',
     description: 'Profitez de nos promotions exceptionnelles sur les smartphones gaming et accessoires. Jusqu\'à -20% sur une sélection de produits.',
-    url: 'https://monster-phone-boutique.fr/promotions',
+    url: 'https://monster-phone.re/promotions',
     siteName: 'Monster Phone Boutique',
     locale: 'fr_FR',
     type: 'website',
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: 'https://monster-phone-boutique.fr/promotions'
+    canonical: 'https://monster-phone.re/promotions'
   },
   other: {
     'geo.region': 'RE',

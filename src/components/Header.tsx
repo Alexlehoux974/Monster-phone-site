@@ -1,4 +1,5 @@
 'use client';
+// Force rebuild: 2025-10-13-18h15
 
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
@@ -651,53 +652,59 @@ export default function Header() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [allProducts, setAllProducts] = useState<Product[]>([]);
   const [menuStructure, setMenuStructure] = useState<CategoryStructure[]>([]);
-  
+
   const { items, removeFromCart, updateQuantity, getCartTotal, getItemCount } = useCart();
   // const { isAuthenticated } = useAuth();
-  const { products: supabaseProducts } = useSupabaseProducts({ limit: 1000 });
-  const { categories: supabaseCategories } = useSupabaseCategories();
+  const { products: supabaseProducts, loading: productsLoading } = useSupabaseProducts({ limit: 1000 });
+  const { categories: supabaseCategories, loading: categoriesLoading } = useSupabaseCategories();
+
+  // 🔍 Debug logs pour comprendre pourquoi les menus ne se chargent pas
+  useEffect(() => {
+    console.log('[HEADER DEBUG] État des données:', {
+      productsCount: supabaseProducts?.length || 0,
+      categoriesCount: supabaseCategories?.length || 0,
+      productsLoading,
+      categoriesLoading,
+      menuStructureCount: menuStructure.length
+    });
+  }, [supabaseProducts, supabaseCategories, productsLoading, categoriesLoading, menuStructure]);
   
   // Charger tous les produits depuis Supabase et générer la structure du menu dynamiquement
   useEffect(() => {
-    console.log('🔍 Debug Header - Produits:', supabaseProducts?.length || 0);
-    console.log('🔍 Debug Header - Catégories:', supabaseCategories?.length || 0);
+    console.log('[HEADER] useEffect menu déclenché', {
+      hasProducts: !!(supabaseProducts && supabaseProducts.length > 0),
+      hasCategories: !!(supabaseCategories && supabaseCategories.length > 0)
+    });
 
     if (supabaseProducts && supabaseProducts.length > 0 && supabaseCategories && supabaseCategories.length > 0) {
+      console.log('[HEADER] ✅ Branche principale: produits ET catégories disponibles');
       // Convertir les produits Supabase en format legacy
       const legacyProducts = supabaseProducts.map(supabaseProductToLegacy);
-
-      console.log(`✅ Total produits Supabase: ${legacyProducts.length}`);
-      console.log(`✅ Total catégories Supabase: ${supabaseCategories.length}`);
 
       // Utiliser TOUS les produits Supabase sans filtrage
       setAllProducts(legacyProducts);
 
       // Générer dynamiquement la structure du menu depuis TOUS les produits Supabase avec les catégories
       const dynamicMenuStructure = generateMenuStructureFromProducts(legacyProducts, supabaseCategories);
-      
+
+      console.log('[HEADER] Structure menu générée:', dynamicMenuStructure.length, 'catégories');
+
       // Log détaillé de la structure du menu
-      console.log('📋 Structure du menu générée:');
       dynamicMenuStructure.forEach(cat => {
         const totalProducts = legacyProducts.filter(p => {
           const normalizedCat = cat.slug.toLowerCase();
           const normalizedProdCat = p.category.toLowerCase();
           return normalizedProdCat === normalizedCat;
         }).length;
-        console.log(`  📂 ${cat.name}: ${totalProducts} produits, ${cat.subcategories?.length || 0} sous-catégories`);
         cat.subcategories?.forEach(subcat => {
-          console.log(`    └─ ${subcat.name}: ${subcat.brands?.length || 0} marques`);
-        });
+          });
       });
       setMenuStructure(dynamicMenuStructure);
-      
-      // Logger les catégories générées pour debug
-      console.log('📂 Catégories générées:', dynamicMenuStructure.map(cat => ({
-        name: cat.name,
-        products: legacyProducts.filter(p => p.category.toLowerCase() === cat.slug.toLowerCase()).length
-      })));
     } else {
+      console.log('[HEADER] ⚠️  Branche fallback activée');
       // Fallback: créer des catégories basiques à partir des produits seuls
       if (supabaseProducts && supabaseProducts.length > 0) {
+        console.log('[HEADER] Création catégories depuis produits uniquement');
         const legacyProducts = supabaseProducts.map(supabaseProductToLegacy);
         setAllProducts(legacyProducts);
 
@@ -716,8 +723,10 @@ export default function Header() {
         });
 
         const fallbackStructure = Array.from(categoryMap.values());
-        console.log('⚠️ Fallback - Catégories créées depuis produits:', fallbackStructure.length);
+        console.log('[HEADER] Fallback structure:', fallbackStructure.length, 'catégories');
         setMenuStructure(fallbackStructure);
+      } else {
+        console.log('[HEADER] ❌ Aucune donnée disponible pour créer les menus');
       }
     }
   }, [supabaseProducts, supabaseCategories]);
@@ -1222,7 +1231,6 @@ export default function Header() {
               <button
                 className="lg:hidden p-1 text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                 onClick={() => {
-                  console.log('🔴 MENU CLICKED! Current state:', isMenuOpen);
                   setIsMenuOpen(!isMenuOpen);
                 }}
               >

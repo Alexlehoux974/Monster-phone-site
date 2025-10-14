@@ -57,13 +57,9 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  console.log('✅ Webhook event received:', event.type);
-
   // Traiter uniquement les paiements réussis
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object as Stripe.Checkout.Session;
-
-    console.log('💳 Processing checkout.session.completed:', session.id);
 
     try {
       // Vérifier si la commande existe déjà
@@ -75,7 +71,6 @@ export async function POST(request: NextRequest) {
         .single();
 
       if (existingOrder) {
-        console.log('✅ Order already exists:', existingOrder.id);
         return NextResponse.json({ received: true, orderId: existingOrder.id });
       }
 
@@ -104,13 +99,11 @@ export async function POST(request: NextRequest) {
         // Essayer de récupérer depuis les métadonnées de session
         if (metadata.product_ids) {
           productIds = JSON.parse(metadata.product_ids);
-          console.log('✅ Product IDs from session metadata:', productIds);
-        }
+          }
         // ✅ Récupérer les couleurs des variants
         if (metadata.variant_colors) {
           variantColors = JSON.parse(metadata.variant_colors);
-          console.log('✅ Variant colors from session metadata:', variantColors);
-        }
+          }
       } catch (e) {
         console.warn('⚠️ Failed to parse metadata from session');
       }
@@ -130,14 +123,6 @@ export async function POST(request: NextRequest) {
       const subtotal = (session.amount_subtotal || session.amount_total || 0) / 100;
       const shippingCost = 0;
       const total = (session.amount_total || 0) / 100;
-
-      console.log('💾 Creating order:', {
-        orderNumber,
-        sessionId: session.id,
-        customerEmail,
-        total,
-        itemsCount: items.length,
-      });
 
       const { data: order, error } = await supabase
         .from('orders')
@@ -172,8 +157,6 @@ export async function POST(request: NextRequest) {
         throw error;
       }
 
-      console.log('✅ Order created successfully:', order.id);
-
       // Créer les order_items dans la table dédiée
       if (items && items.length > 0) {
         // ✅ Pour chaque item avec un variant, trouver son UUID dans product_variants
@@ -192,8 +175,7 @@ export async function POST(request: NextRequest) {
 
               if (variant) {
                 variantId = variant.id;
-                console.log(`✅ Found variant_id for "${item.variant}":`, variantId);
-              } else {
+                } else {
                 console.warn(`⚠️ No variant found for product ${item.product_id} with variant "${item.variant}"`);
               }
             } catch (err: any) {
@@ -222,8 +204,6 @@ export async function POST(request: NextRequest) {
         if (itemsError) {
           console.error('⚠️ Error creating order_items:', itemsError);
         } else {
-          console.log('✅ Order items created:', orderItems.length);
-
           // Décrémenter le stock après création de la commande
           try {
             const { data: stockResult, error: stockError } = await supabase
@@ -232,8 +212,7 @@ export async function POST(request: NextRequest) {
             if (stockError) {
               console.error('⚠️ Error decrementing stock:', stockError);
             } else {
-              console.log('📦 Stock updated:', stockResult);
-            }
+              }
           } catch (stockErr: any) {
             console.error('⚠️ Stock decrement failed:', stockErr.message);
             // Continue anyway - order is created, stock can be adjusted manually if needed
@@ -247,8 +226,7 @@ export async function POST(request: NextRequest) {
           .from('pending_carts')
           .delete()
           .eq('session_id', cartSessionId);
-        console.log('🗑️ Temporary cart cleaned:', cartSessionId);
-      }
+        }
 
       // Envoyer l'email de confirmation
       try {
@@ -261,8 +239,7 @@ export async function POST(request: NextRequest) {
           total: total,
           orderDate: new Date().toISOString(),
         });
-        console.log('📧 Order confirmation email sent to:', customerEmail);
-      } catch (emailErr: any) {
+        } catch (emailErr: any) {
         console.error('⚠️ Email sending failed:', emailErr.message);
         // Continue anyway - order is created, email can be resent manually if needed
       }

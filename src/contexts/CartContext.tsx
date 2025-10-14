@@ -56,11 +56,6 @@ export function CartProvider({ children, initialItems }: { children: ReactNode; 
           });
 
           setItems(validItems);
-
-          // Log si des items ont été supprimés
-          if (validItems.length < parsedCart.length) {
-            console.log(`🗑️ ${parsedCart.length - validItems.length} article(s) expiré(s) supprimé(s) du panier`);
-          }
         } catch (error) {
           console.error('Erreur lors du chargement du panier:', error);
         }
@@ -72,42 +67,15 @@ export function CartProvider({ children, initialItems }: { children: ReactNode; 
   // Sauvegarder le panier dans localStorage à chaque changement
   useEffect(() => {
     if (isLoaded) {
-      // Debug: vérifier ce qui est sauvegardé dans localStorage
-      console.log('💾 DEBUG Saving to localStorage:', items.map(item => ({
-        productName: item.product.name,
-        productId: item.product.id,
-        typeofId: typeof item.product.id,
-        isObject: typeof item.product.id === 'object',
-        quantity: item.quantity
-      })));
       localStorage.setItem('monsterphone-cart', JSON.stringify(items));
     }
   }, [items, isLoaded]);
 
   const addToCart = (product: Product | ProductFullView, quantity = 1, variant?: string) => {
-    // Debug: vérifier le type de product.id AVANT conversion
-    console.log('🔍 DEBUG addToCart - BEFORE conversion:', {
-      productName: product.name,
-      productId: product.id,
-      typeofId: typeof product.id,
-      isObject: typeof product.id === 'object',
-      stringified: JSON.stringify(product.id),
-      isProductFullView: 'category_id' in product
-    });
-
     // Convertir ProductFullView en Product si nécessaire
     const productToAdd: Product = 'category_id' in product
       ? supabaseProductToLegacy(product as ProductFullView)
       : product as Product;
-
-    // Debug: vérifier le type de productToAdd.id AFTER conversion
-    console.log('🔍 DEBUG addToCart - AFTER conversion:', {
-      productName: productToAdd.name,
-      productId: productToAdd.id,
-      typeofId: typeof productToAdd.id,
-      isObject: typeof productToAdd.id === 'object',
-      stringified: JSON.stringify(productToAdd.id)
-    });
     
     // Vérifier le stock disponible
     let availableStock = 0;

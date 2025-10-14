@@ -27,8 +27,15 @@ export async function getActiveProducts(options?: {
 }) {
   const supabase = createClient();
   let query = supabase
-    .from('products_full')
-    .select('*')
+    .from('products')
+    .select(`
+      *,
+      brand:brands(id, name, slug, logo_url),
+      category:categories!products_category_id_fkey(id, name, slug),
+      subcategory:categories!products_subcategory_id_fkey(id, name, slug),
+      product_variants(*),
+      product_images(*)
+    `)
     .eq('status', 'active');
 
   // Tri
@@ -50,7 +57,17 @@ export async function getActiveProducts(options?: {
     return [];
   }
 
-  return data as ProductFullView[];
+  // Transform to ProductFullView format
+  return (data || []).map(product => ({
+    ...product,
+    brand_name: product.brand?.name || '',
+    brand_slug: product.brand?.slug || '',
+    category_name: product.category?.name || '',
+    category_slug: product.category?.slug || '',
+    subcategory_name: product.subcategory?.name || '',
+    variants: product.product_variants || [],
+    images: product.product_images || []
+  })) as ProductFullView[];
 }
 
 /**
@@ -59,8 +76,15 @@ export async function getActiveProducts(options?: {
 export async function getProductBySlug(slug: string) {
   const supabase = createClient();
   const { data, error } = await supabase
-    .from('products_full')
-    .select('*')
+    .from('products')
+    .select(`
+      *,
+      brand:brands(id, name, slug, logo_url),
+      category:categories!products_category_id_fkey(id, name, slug),
+      subcategory:categories!products_subcategory_id_fkey(id, name, slug),
+      product_variants(*),
+      product_images(*)
+    `)
     .eq('url_slug', slug)
     .single();
 
@@ -69,7 +93,16 @@ export async function getProductBySlug(slug: string) {
     return null;
   }
 
-  return data as ProductFullView;
+  return {
+    ...data,
+    brand_name: data.brand?.name || '',
+    brand_slug: data.brand?.slug || '',
+    category_name: data.category?.name || '',
+    category_slug: data.category?.slug || '',
+    subcategory_name: data.subcategory?.name || '',
+    variants: data.product_variants || [],
+    images: data.product_images || []
+  } as ProductFullView;
 }
 
 /**
@@ -78,8 +111,15 @@ export async function getProductBySlug(slug: string) {
 export async function getProductById(id: string) {
   const supabase = createClient();
   const { data, error } = await supabase
-    .from('products_full')
-    .select('*')
+    .from('products')
+    .select(`
+      *,
+      brand:brands(id, name, slug, logo_url),
+      category:categories!products_category_id_fkey(id, name, slug),
+      subcategory:categories!products_subcategory_id_fkey(id, name, slug),
+      product_variants(*),
+      product_images(*)
+    `)
     .eq('id', id)
     .single();
 
@@ -88,7 +128,16 @@ export async function getProductById(id: string) {
     return null;
   }
 
-  return data as ProductFullView;
+  return {
+    ...data,
+    brand_name: data.brand?.name || '',
+    brand_slug: data.brand?.slug || '',
+    category_name: data.category?.name || '',
+    category_slug: data.category?.slug || '',
+    subcategory_name: data.subcategory?.name || '',
+    variants: data.product_variants || [],
+    images: data.product_images || []
+  } as ProductFullView;
 }
 
 /**
@@ -161,8 +210,15 @@ export async function getProductsByCategory(categorySlug: string, options?: {
   if (!category) return [];
 
   let query = supabase
-    .from('products_full')
-    .select('*')
+    .from('products')
+    .select(`
+      *,
+      brand:brands(id, name, slug, logo_url),
+      category:categories!products_category_id_fkey(id, name, slug),
+      subcategory:categories!products_subcategory_id_fkey(id, name, slug),
+      product_variants(*),
+      product_images(*)
+    `)
     .eq('status', 'active');
 
   if (options?.includeSubcategories) {
@@ -193,7 +249,17 @@ export async function getProductsByCategory(categorySlug: string, options?: {
     return [];
   }
 
-  return data as ProductFullView[];
+  // Transform to ProductFullView format
+  return (data || []).map(product => ({
+    ...product,
+    brand_name: product.brand?.name || '',
+    brand_slug: product.brand?.slug || '',
+    category_name: product.category?.name || '',
+    category_slug: product.category?.slug || '',
+    subcategory_name: product.subcategory?.name || '',
+    variants: product.product_variants || [],
+    images: product.product_images || []
+  })) as ProductFullView[];
 }
 
 /**
@@ -204,11 +270,28 @@ export async function getProductsByBrand(brandSlug: string, options?: {
   offset?: number;
 }) {
   const supabase = createClient();
+
+  // D'abord récupérer la marque
+  const { data: brand } = await supabase
+    .from('brands')
+    .select('id')
+    .eq('slug', brandSlug)
+    .single();
+
+  if (!brand) return [];
+
   const { data, error } = await supabase
-    .from('products_full')
-    .select('*')
+    .from('products')
+    .select(`
+      *,
+      brand:brands(id, name, slug, logo_url),
+      category:categories!products_category_id_fkey(id, name, slug),
+      subcategory:categories!products_subcategory_id_fkey(id, name, slug),
+      product_variants(*),
+      product_images(*)
+    `)
     .eq('status', 'active')
-    .eq('brand_slug', brandSlug)
+    .eq('brand_id', brand.id)
     .range(
       options?.offset || 0,
       (options?.offset || 0) + (options?.limit || 50) - 1
@@ -219,7 +302,17 @@ export async function getProductsByBrand(brandSlug: string, options?: {
     return [];
   }
 
-  return data as ProductFullView[];
+  // Transform to ProductFullView format
+  return (data || []).map(product => ({
+    ...product,
+    brand_name: product.brand?.name || '',
+    brand_slug: product.brand?.slug || '',
+    category_name: product.category?.name || '',
+    category_slug: product.category?.slug || '',
+    subcategory_name: product.subcategory?.name || '',
+    variants: product.product_variants || [],
+    images: product.product_images || []
+  })) as ProductFullView[];
 }
 
 /**
@@ -233,7 +326,14 @@ export async function getProductsByCollection(collectionSlug: string) {
       *,
       product_collections(
         display_order,
-        products_full(*)
+        product:products(
+          *,
+          brand:brands(id, name, slug, logo_url),
+          category:categories!products_category_id_fkey(id, name, slug),
+          subcategory:categories!products_subcategory_id_fkey(id, name, slug),
+          product_variants(*),
+          product_images(*)
+        )
       )
     `)
     .eq('slug', collectionSlug)
@@ -248,7 +348,16 @@ export async function getProductsByCollection(collectionSlug: string) {
   // Extraire et trier les produits
   const products = data?.product_collections
     ?.sort((a: any, b: any) => a.display_order - b.display_order)
-    ?.map((pc: any) => pc.products_full)
+    ?.map((pc: any) => pc.product ? {
+      ...pc.product,
+      brand_name: pc.product.brand?.name || '',
+      brand_slug: pc.product.brand?.slug || '',
+      category_name: pc.product.category?.name || '',
+      category_slug: pc.product.category?.slug || '',
+      subcategory_name: pc.product.subcategory?.name || '',
+      variants: pc.product.product_variants || [],
+      images: pc.product.product_images || []
+    } : null)
     ?.filter(Boolean) || [];
 
   return products as ProductFullView[];
@@ -260,18 +369,37 @@ export async function getProductsByCollection(collectionSlug: string) {
 export async function getDiscountedProducts(minDiscount: number = 10) {
   const supabase = createClient();
   const { data, error } = await supabase
-    .from('products_full')
-    .select('*')
+    .from('products')
+    .select(`
+      *,
+      brand:brands(id, name, slug, logo_url),
+      category:categories!products_category_id_fkey(id, name, slug),
+      subcategory:categories!products_subcategory_id_fkey(id, name, slug),
+      product_variants(*),
+      product_images(*)
+    `)
     .eq('status', 'active')
-    .gte('discount_percentage', minDiscount)
-    .order('discount_percentage', { ascending: false });
+    .not('discount', 'is', null)
+    .gte('discount', minDiscount)
+    .order('discount', { ascending: false });
 
   if (error) {
     console.error('Erreur récupération promotions:', error);
     return [];
   }
 
-  return data as ProductFullView[];
+  // Transform to ProductFullView format
+  return (data || []).map(product => ({
+    ...product,
+    brand_name: product.brand?.name || '',
+    brand_slug: product.brand?.slug || '',
+    category_name: product.category?.name || '',
+    category_slug: product.category?.slug || '',
+    subcategory_name: product.subcategory?.name || '',
+    discount_percentage: product.discount,
+    variants: product.product_variants || [],
+    images: product.product_images || []
+  })) as ProductFullView[];
 }
 
 /**
@@ -283,8 +411,15 @@ export async function getNewProducts(days: number = 30, limit: number = 10) {
   date.setDate(date.getDate() - days);
 
   const { data, error } = await supabase
-    .from('products_full')
-    .select('*')
+    .from('products')
+    .select(`
+      *,
+      brand:brands(id, name, slug, logo_url),
+      category:categories!products_category_id_fkey(id, name, slug),
+      subcategory:categories!products_subcategory_id_fkey(id, name, slug),
+      product_variants(*),
+      product_images(*)
+    `)
     .eq('status', 'active')
     .gte('created_at', date.toISOString())
     .order('created_at', { ascending: false })
@@ -295,7 +430,17 @@ export async function getNewProducts(days: number = 30, limit: number = 10) {
     return [];
   }
 
-  return data as ProductFullView[];
+  // Transform to ProductFullView format
+  return (data || []).map(product => ({
+    ...product,
+    brand_name: product.brand?.name || '',
+    brand_slug: product.brand?.slug || '',
+    category_name: product.category?.name || '',
+    category_slug: product.category?.slug || '',
+    subcategory_name: product.subcategory?.name || '',
+    variants: product.product_variants || [],
+    images: product.product_images || []
+  })) as ProductFullView[];
 }
 
 /**
@@ -304,8 +449,15 @@ export async function getNewProducts(days: number = 30, limit: number = 10) {
 export async function getBestSellers(limit: number = 10) {
   const supabase = createClient();
   const { data, error } = await supabase
-    .from('products_full')
-    .select('*')
+    .from('products')
+    .select(`
+      *,
+      brand:brands(id, name, slug, logo_url),
+      category:categories!products_category_id_fkey(id, name, slug),
+      subcategory:categories!products_subcategory_id_fkey(id, name, slug),
+      product_variants(*),
+      product_images(*)
+    `)
     .eq('status', 'active')
     .order('total_reviews', { ascending: false })
     .order('average_rating', { ascending: false })
@@ -316,7 +468,17 @@ export async function getBestSellers(limit: number = 10) {
     return [];
   }
 
-  return data as ProductFullView[];
+  // Transform to ProductFullView format
+  return (data || []).map(product => ({
+    ...product,
+    brand_name: product.brand?.name || '',
+    brand_slug: product.brand?.slug || '',
+    category_name: product.category?.name || '',
+    category_slug: product.category?.slug || '',
+    subcategory_name: product.subcategory?.name || '',
+    variants: product.product_variants || [],
+    images: product.product_images || []
+  })) as ProductFullView[];
 }
 
 /**
@@ -335,8 +497,15 @@ export async function getSimilarProducts(productId: string, limit: number = 4) {
 
   // Récupérer des produits similaires
   const { data, error } = await supabase
-    .from('products_full')
-    .select('*')
+    .from('products')
+    .select(`
+      *,
+      brand:brands(id, name, slug, logo_url),
+      category:categories!products_category_id_fkey(id, name, slug),
+      subcategory:categories!products_subcategory_id_fkey(id, name, slug),
+      product_variants(*),
+      product_images(*)
+    `)
     .eq('status', 'active')
     .neq('id', productId)
     .or(`category_id.eq.${currentProduct.category_id},brand_id.eq.${currentProduct.brand_id}`)
@@ -349,7 +518,17 @@ export async function getSimilarProducts(productId: string, limit: number = 4) {
     return [];
   }
 
-  return data as ProductFullView[];
+  // Transform to ProductFullView format
+  return (data || []).map(product => ({
+    ...product,
+    brand_name: product.brand?.name || '',
+    brand_slug: product.brand?.slug || '',
+    category_name: product.category?.name || '',
+    category_slug: product.category?.slug || '',
+    subcategory_name: product.subcategory?.name || '',
+    variants: product.product_variants || [],
+    images: product.product_images || []
+  })) as ProductFullView[];
 }
 
 // ========================================

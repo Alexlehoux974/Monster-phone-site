@@ -47,8 +47,7 @@ export async function GET(request: NextRequest) {
       } else {
         // Si userId n'est pas un UUID et pas d'email, retourner toutes les commandes
         // (temporaire pour le développement - à sécuriser en production)
-        console.log('⚠️ Invalid userId format, returning all orders');
-      }
+        }
     } else if (email) {
       // Si pas de userId mais un email, filtrer par email
       query = query.eq('customer_email', email);

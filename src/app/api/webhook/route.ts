@@ -72,8 +72,6 @@ export async function POST(request: NextRequest) {
           status: 'pending',
         };
 
-        console.log('📝 Création commande pour user_id:', orderData.user_id || 'guest');
-
         const { data: order, error: orderError } = await supabase
           .from('orders')
           .insert([orderData])
@@ -105,8 +103,6 @@ export async function POST(request: NextRequest) {
           }
         }
 
-        console.log('✅ Commande créée:', order.id);
-
         // Récupérer les items de la commande pour l'email
         const { data: orderItems } = await supabase
           .from('order_items')
@@ -134,8 +130,7 @@ export async function POST(request: NextRequest) {
               orderDate: order.created_at,
             }) as React.ReactElement,
           });
-          console.log('✅ Email de confirmation envoyé à:', order.customer_email);
-        } catch (emailError) {
+          } catch (emailError) {
           console.error('❌ Erreur envoi email:', emailError);
           // Ne pas bloquer le webhook si l'email échoue
         }
@@ -147,8 +142,6 @@ export async function POST(request: NextRequest) {
 
     case 'payment_intent.succeeded': {
       const paymentIntent = event.data.object as Stripe.PaymentIntent;
-      console.log('✅ Paiement réussi:', paymentIntent.id);
-
       // Mettre à jour le statut de la commande si nécessaire
       try {
         const supabase = createClient();
@@ -164,8 +157,6 @@ export async function POST(request: NextRequest) {
 
     case 'payment_intent.payment_failed': {
       const paymentIntent = event.data.object as Stripe.PaymentIntent;
-      console.log('❌ Paiement échoué:', paymentIntent.id);
-
       // Mettre à jour le statut de la commande
       try {
         const supabase = createClient();
@@ -181,8 +172,6 @@ export async function POST(request: NextRequest) {
 
     case 'checkout.session.expired': {
       const session = event.data.object as Stripe.Checkout.Session;
-      console.log('⏰ Session checkout expirée:', session.id);
-
       // Créer un panier abandonné pour relance
       try {
         const supabase = createClient();
@@ -218,8 +207,7 @@ export async function POST(request: NextRequest) {
         if (cartError) {
           console.error('Erreur création panier abandonné:', cartError);
         } else {
-          console.log('✅ Panier abandonné enregistré pour:', cartData.customer_email);
-        }
+          }
       } catch (dbError) {
         console.error('Erreur enregistrement panier abandonné:', dbError);
       }
@@ -227,8 +215,7 @@ export async function POST(request: NextRequest) {
     }
 
     default:
-      console.log(`Événement non géré: ${event.type}`);
-  }
+      }
 
   return NextResponse.json({ received: true });
 }

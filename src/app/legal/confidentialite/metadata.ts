@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Politique de Confidentialité | Monster Phone Boutique',
     description: 'Notre engagement pour la protection de vos données personnelles selon le RGPD.',
-    url: 'https://monster-phone-boutique.fr/legal/confidentialite',
+    url: 'https://monster-phone.re/legal/confidentialite',
     siteName: 'Monster Phone Boutique',
     locale: 'fr_FR',
     type: 'website'
@@ -34,6 +34,6 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: 'https://monster-phone-boutique.fr/legal/confidentialite'
+    canonical: 'https://monster-phone.re/legal/confidentialite'
   }
 };

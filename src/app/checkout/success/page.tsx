@@ -63,12 +63,6 @@ function CheckoutSuccessContent() {
 
         const { order: createdOrder, alreadyExists } = await createResponse.json();
 
-        if (alreadyExists) {
-          console.log('✅ Commande déjà existante, récupération...');
-        } else {
-          console.log('✅ Commande créée avec succès:', createdOrder.id);
-        }
-
         // 2. Formater les données pour l'affichage
         setOrder({
           id: createdOrder.id,

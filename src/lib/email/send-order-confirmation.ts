@@ -46,7 +46,6 @@ export async function sendOrderConfirmation(params: SendOrderConfirmationParams)
       return { success: false, error };
     }
 
-    console.log('✅ Order confirmation email sent:', data);
     return { success: true, data };
   } catch (error) {
     console.error('❌ Failed to send order confirmation email:', error);

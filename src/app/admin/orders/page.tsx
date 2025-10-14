@@ -141,8 +141,7 @@ export default function AdminOrdersPage() {
         )
       );
 
-      console.log('✅ Statut mis à jour:', orderId, newStatus);
-    } catch (error) {
+      } catch (error) {
       console.error('Erreur update status:', error);
     }
   };

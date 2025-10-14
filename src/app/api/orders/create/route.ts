@@ -36,8 +36,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    console.log('🔍 Checking order for session:', sessionId);
-
     const supabase = await createClient();
 
     // Vérifier si la commande existe déjà (créée par webhook)
@@ -48,14 +46,11 @@ export async function POST(request: NextRequest) {
       .single();
 
     if (existingOrder) {
-      console.log('✅ Order found (created by webhook):', existingOrder.id);
       return NextResponse.json({
         order: existingOrder,
         alreadyExists: true,
       });
     }
-
-    console.log('⚠️ Order not found, creating as fallback...');
 
     // FALLBACK : Créer la commande manuellement si le webhook n'a pas fonctionné
     const stripe = getStripe();
@@ -85,13 +80,11 @@ export async function POST(request: NextRequest) {
     try {
       if (metadata.product_ids) {
         productIds = JSON.parse(metadata.product_ids);
-        console.log('✅ Product IDs from session metadata:', productIds);
-      }
+        }
       // ✅ Récupérer les couleurs des variants
       if (metadata.variant_colors) {
         variantColors = JSON.parse(metadata.variant_colors);
-        console.log('✅ Variant colors from session metadata:', variantColors);
-      }
+        }
     } catch (e) {
       console.warn('⚠️ Failed to parse metadata from session');
     }
@@ -113,14 +106,6 @@ export async function POST(request: NextRequest) {
     // Créer la commande
     const orderNumber = `ORDER-${Date.now()}`;
     const total = (session.amount_total || 0) / 100;
-
-    console.log('💾 Creating order (fallback):', {
-      orderNumber,
-      sessionId,
-      customerEmail,
-      total,
-      itemsCount: items.length,
-    });
 
     // Calculer les montants
     const subtotal = (session.amount_subtotal || session.amount_total || 0) / 100;
@@ -166,7 +151,6 @@ export async function POST(request: NextRequest) {
           .single();
 
         if (retryOrder) {
-          console.log('✅ Order found after race condition:', retryOrder.id);
           return NextResponse.json({
             order: retryOrder,
             alreadyExists: true,
@@ -176,15 +160,6 @@ export async function POST(request: NextRequest) {
 
       throw error;
     }
-
-    console.log('✅ Order created successfully (fallback):', order.id);
-
-    // Debug: Vérifier les items avant création
-    console.log('🔍 DEBUG items:', {
-      itemsExists: !!items,
-      itemsLength: items?.length,
-      firstItem: items?.[0],
-    });
 
     // Créer les order_items dans la table dédiée
     if (items && items.length > 0) {
@@ -204,7 +179,6 @@ export async function POST(request: NextRequest) {
 
             if (variant) {
               variantId = variant.id;
-              console.log(`✅ Found variant_id for "${item.variant}":`, variantId);
             } else {
               console.warn(`⚠️ No variant found for product ${item.product_id} with variant "${item.variant}"`);
             }
@@ -227,8 +201,6 @@ export async function POST(request: NextRequest) {
         };
       }));
 
-      console.log('🔍 DEBUG Inserting order_items:', orderItems);
-
       const { error: itemsError } = await supabase
         .from('order_items')
         .insert(orderItems);
@@ -236,8 +208,6 @@ export async function POST(request: NextRequest) {
       if (itemsError) {
         console.error('⚠️ Error creating order_items:', itemsError);
       } else {
-        console.log('✅ Order items created:', orderItems.length);
-
         // Décrémenter le stock après création de la commande
         try {
           const { data: stockResult, error: stockError } = await supabase
@@ -245,8 +215,6 @@ export async function POST(request: NextRequest) {
 
           if (stockError) {
             console.error('⚠️ Error decrementing stock:', stockError);
-          } else {
-            console.log('📦 Stock updated:', stockResult);
           }
         } catch (stockErr: any) {
           console.error('⚠️ Stock decrement failed:', stockErr.message);
@@ -262,7 +230,6 @@ export async function POST(request: NextRequest) {
         .from('pending_carts')
         .delete()
         .eq('session_id', cartSessionId);
-      console.log('🗑️ Temporary cart cleaned:', cartSessionId);
     }
 
     // Envoyer l'email de confirmation
@@ -276,7 +243,6 @@ export async function POST(request: NextRequest) {
         total: total,
         orderDate: new Date().toISOString(),
       });
-      console.log('📧 Order confirmation email sent to:', customerEmail);
     } catch (emailErr: any) {
       console.error('⚠️ Email sending failed:', emailErr.message);
       // Continue anyway - order is created, email can be resent manually if needed

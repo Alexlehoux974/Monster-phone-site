@@ -63,8 +63,6 @@ export async function POST(request: NextRequest) {
       }) as React.ReactElement,
     });
 
-    console.log('📧 Notification expédition envoyée à', order.customer_email);
-
     return NextResponse.json({
       success: true,
       message: 'Notification d\'expédition envoyée avec succès',

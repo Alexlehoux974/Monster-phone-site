@@ -163,7 +163,6 @@ function ProduitsSupabasePageContent() {
           table: 'product_variants',
         },
         (payload) => {
-          console.log('🔄 [REALTIME] Variant stock updated:', payload.new);
           // Update the specific variant in products
           setProducts((prevProducts) =>
             prevProducts.map((product) => ({
@@ -185,7 +184,6 @@ function ProduitsSupabasePageContent() {
           table: 'products',
         },
         (payload) => {
-          console.log('🔄 [REALTIME] Product updated:', payload.new);
           // Update product stock and pricing
           setProducts((prevProducts) =>
             prevProducts.map((product) =>

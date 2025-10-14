@@ -14,10 +14,6 @@ export default async function ProductsPage() {
     getBrands()
   ]);
 
-  console.log('Products fetched:', products?.length || 0, 'products');
-  console.log('Categories fetched:', categories?.length || 0, 'categories');
-  console.log('Brands fetched:', brands?.length || 0, 'brands');
-
   return (
     <>
       <Header />

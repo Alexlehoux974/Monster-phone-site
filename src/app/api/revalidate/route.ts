@@ -9,14 +9,12 @@ export async function POST(request: NextRequest) {
     // Revalidate specific path if provided
     if (path) {
       revalidatePath(path);
-      console.log(`Revalidated path: ${path}`);
-    }
+      }
 
     // Revalidate specific tag if provided
     if (tag) {
       revalidateTag(tag);
-      console.log(`Revalidated tag: ${tag}`);
-    }
+      }
 
     // Always revalidate the main products page
     revalidatePath('/');

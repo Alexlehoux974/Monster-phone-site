@@ -31,23 +31,17 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     const checkAuth = async () => {
-      console.log('🔵 Dashboard: Checking auth...');
-
       // Wait a tiny bit for session to be available
       await new Promise(resolve => setTimeout(resolve, 100));
 
       const supabase = createClient();
       const { data: { session } } = await supabase.auth.getSession();
 
-      console.log('🔵 Dashboard: Session found?', !!session);
-
       if (!session) {
-        console.log('❌ Dashboard: No session, redirecting to login');
         router.push('/admin/login');
         return;
       }
 
-      console.log('✅ Dashboard: Session OK, loading dashboard');
       setChecking(false);
     };
 

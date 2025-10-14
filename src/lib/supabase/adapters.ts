@@ -24,12 +24,6 @@ function stripHtmlTags(html: string): string {
  * Convertir un ProductFullView Supabase vers le type Product legacy
  */
 export function supabaseProductToLegacy(product: ProductFullView): Product {
-  // Débogage pour vérifier brand_name
-  if (product.name?.toLowerCase().includes('monster')) {
-    console.log(`🔍 Produit Monster détecté: ${product.name}`);
-    console.log(`   - brand_name dans ProductFullView: ${product.brand_name}`);
-  }
-  
   // Construire les variants legacy depuis variants
   const variants: LegacyVariant[] = product.variants?.map(v => ({
     id: v.id, // ID Supabase pour mise à jour stock
@@ -667,15 +661,10 @@ export function generateMenuStructureFromProducts(
         return a.name.localeCompare(b.name);
       })
     });
-
-    // Log pour debug
-    console.log(`Catégorie ${categoryName}: ${products.length} produits, ${brandsInCategory.size} marques`);
-  });
+  }); // Close the categoryOrder.forEach loop
 
   // NE PAS ajouter les catégories qui ne sont pas dans l'ordre préféré
   // Toutes les autres catégories ont déjà été mappées vers "accessoires"
 
-  console.log(`Menu généré: ${menuStructure.length} catégories avec ${products.length} produits au total`);
-  
   return menuStructure;
 }
