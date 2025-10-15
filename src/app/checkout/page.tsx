@@ -203,12 +203,16 @@ export default function CheckoutPage() {
         postalCode: formData.postalCode,
       };
 
-      // 🔍 DEBUG: Vérifier l'état d'authentification avant checkout
+      // 🔍 DEBUG: Capturer userId dans une variable AVANT toute opération
+      const capturedUserId = user?.id || null;
+      const capturedUserEmail = user?.email || null;
+
       console.log('🔍 [Checkout Debug]', {
         isAuthenticated,
         hasUser: !!user,
-        userId: user?.id,
-        userEmail: user?.email,
+        userId: capturedUserId,
+        userEmail: capturedUserEmail,
+        userIdType: typeof capturedUserId,
         timestamp: new Date().toISOString()
       });
 
@@ -233,7 +237,7 @@ export default function CheckoutPage() {
             };
           }),
           customerInfo,
-          userId: user?.id || null, // ID de l'utilisateur connecté
+          userId: capturedUserId, // ✅ Utiliser la variable capturée
         }),
       });
 

@@ -186,6 +186,27 @@ export async function POST(request: NextRequest) {
       };
     });
 
+    // 🔍 DEBUG: Log avant création session Stripe
+    const metadataToSend = {
+      user_id: userId || '',
+      email: customerInfo?.email || '',
+      name: customerInfo?.name || '',
+      phone: customerInfo?.phone || '',
+      address: customerInfo?.address || '',
+      city: customerInfo?.city || '',
+      postalCode: customerInfo?.postalCode || '',
+      cart_session_id: cartSessionId,
+      product_ids: JSON.stringify(items.map((item: any) => String(item.id))),
+      variant_colors: JSON.stringify(items.map((item: any) => item.variant || '')),
+    };
+
+    console.log('🔍 [API avant envoi Stripe]', {
+      userId: userId,
+      userIdInMetadata: metadataToSend.user_id,
+      metadataKeys: Object.keys(metadataToSend),
+      timestamp: new Date().toISOString()
+    });
+
     // Créer la session Stripe Checkout
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -198,25 +219,7 @@ export async function POST(request: NextRequest) {
         allowed_countries: ['RE', 'FR'], // La Réunion + France métropolitaine
       },
       client_reference_id: cartSessionId, // Référence pour récupérer les items
-      metadata: {
-        user_id: userId || '',
-        email: customerInfo?.email || '',
-        name: customerInfo?.name || '',
-        phone: customerInfo?.phone || '',
-        address: customerInfo?.address || '',
-        city: customerInfo?.city || '',
-        postalCode: customerInfo?.postalCode || '',
-        cart_session_id: cartSessionId, // ID pour retrouver le panier
-        // Stocker les product_id dans les métadonnées (JSON stringifié)
-        product_ids: JSON.stringify(items.map((item: any) => {
-          // Forcer la conversion en string pour éviter [object Object]
-          return String(item.id);
-        })),
-        // ✅ Stocker les couleurs des variants
-        variant_colors: JSON.stringify(items.map((item: any) => {
-          return item.variant || '';
-        })),
-      },
+      metadata: metadataToSend,
       allow_promotion_codes: true, // Permettre les codes promo
       billing_address_collection: 'required',
       phone_number_collection: {
