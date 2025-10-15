@@ -65,19 +65,10 @@ export async function signInAdmin(email: string, password: string) {
       };
     }
 
-    console.log('[signInAdmin] Admin verified, attempting Supabase Auth sign in...');
-
     // Then sign in with Supabase Auth directly on the client
     const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
       email,
       password,
-    });
-
-    console.log('[signInAdmin] Sign in result:', {
-      success: !authError,
-      hasSession: !!authData?.session,
-      hasUser: !!authData?.user,
-      error: authError?.message
     });
 
     if (authError) {
@@ -85,16 +76,6 @@ export async function signInAdmin(email: string, password: string) {
         data: null,
         error: authError
       };
-    }
-
-    // Vérifier si la session est dans localStorage
-    if (typeof window !== 'undefined') {
-      const storageKey = 'supabase.auth.token';
-      const storedSession = localStorage.getItem(storageKey);
-      console.log('[signInAdmin] localStorage after signIn:', {
-        hasSession: !!storedSession,
-        preview: storedSession ? storedSession.substring(0, 50) + '...' : 'null'
-      });
     }
 
     return {
@@ -122,22 +103,11 @@ export async function signOutAdmin() {
 export async function getAdminSession() {
   const supabase = createClient();
 
-  console.log('[getAdminSession] Checking localStorage for session...');
-  const storageKey = 'supabase.auth.token';
-  const storedSession = typeof window !== 'undefined' ? localStorage.getItem(storageKey) : null;
-  console.log('[getAdminSession] localStorage session exists:', !!storedSession);
-
   const { data: { session }, error } = await supabase.auth.getSession();
 
   if (error || !session) {
-    console.log('[getAdminSession] No session from getSession():', {
-      error: error?.message,
-      hasStorageSession: !!storedSession
-    });
     return { session: null, admin: null, error };
   }
-
-  console.log('[getAdminSession] Session found, verifying admin for:', session.user.email);
 
   try {
     // Verify admin status via API (uses service role key)
@@ -154,19 +124,15 @@ export async function getAdminSession() {
     });
 
     clearTimeout(timeoutId);
-    console.log('[getAdminSession] Verify response status:', verifyResponse.status);
 
     if (!verifyResponse.ok) {
       const errorData = await verifyResponse.json().catch(() => ({ error: 'Unknown error' }));
-      console.error('[getAdminSession] Verify failed:', errorData);
       return { session, admin: null, error: new Error(errorData.error || 'Admin verification failed') };
     }
 
     const verifyData = await verifyResponse.json();
-    console.log('[getAdminSession] Admin verified:', verifyData.admin?.email);
     return { session, admin: verifyData.admin, error: null };
   } catch (fetchError: any) {
-    console.error('[getAdminSession] Fetch error:', fetchError.message);
     // En cas de timeout ou erreur réseau, retourner une erreur claire
     if (fetchError.name === 'AbortError') {
       return { session, admin: null, error: new Error('Timeout: impossible de vérifier le statut admin') };

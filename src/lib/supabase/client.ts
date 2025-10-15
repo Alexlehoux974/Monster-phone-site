@@ -1,47 +1,43 @@
-import { createClient as createSupabaseClient, SupabaseClient } from '@supabase/supabase-js';
+import { createClient as createSupabaseClient } from '@supabase/supabase-js';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://nswlznqoadjffpxkagoz.supabase.co';
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5zd2x6bnFvYWRqZmZweGthZ296Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUwNzk5MzksImV4cCI6MjA3MDY1NTkzOX0.8hrzs5L0Q6Br0O1X9jG2AUHJmB2hsrLm3zuDfLIypdg';
 
-// Global singleton stored on window object to truly share across all components
-// This ensures that even after page navigation, we get the same instance with session
-declare global {
-  interface Window {
-    __supabaseClient: SupabaseClient | undefined;
-  }
-}
+// Module-level singleton - shared across all imports in the same JavaScript context
+// This is the CORRECT way to share Supabase client in Next.js App Router
+let browserClient: ReturnType<typeof createSupabaseClient> | null = null;
 
-export function createClient(): SupabaseClient {
-  // In browser, use global window object for true singleton
-  if (typeof window !== 'undefined') {
-    if (window.__supabaseClient) {
-      return window.__supabaseClient;
-    }
-
-    window.__supabaseClient = createSupabaseClient(supabaseUrl, supabaseAnonKey, {
+export function createClient() {
+  // Server-side: always create new instance (no persistence)
+  if (typeof window === 'undefined') {
+    return createSupabaseClient(supabaseUrl, supabaseAnonKey, {
       auth: {
-        persistSession: true,
-        autoRefreshToken: true,
-        storage: window.localStorage,
-        storageKey: 'supabase.auth.token',
-      },
-      realtime: {
-        params: {
-          eventsPerSecond: 10
-        }
+        persistSession: false,
+        autoRefreshToken: false,
       }
     });
-
-    return window.__supabaseClient;
   }
 
-  // Server-side: create new instance (won't have session anyway)
-  return createSupabaseClient(supabaseUrl, supabaseAnonKey, {
+  // Browser-side: use singleton with proper cleanup
+  if (browserClient) {
+    return browserClient;
+  }
+
+  browserClient = createSupabaseClient(supabaseUrl, supabaseAnonKey, {
     auth: {
-      persistSession: false,
-      autoRefreshToken: false,
+      persistSession: true,
+      autoRefreshToken: true,
+      storage: window.localStorage,
+      storageKey: 'supabase.auth.token',
+    },
+    realtime: {
+      params: {
+        eventsPerSecond: 10
+      }
     }
   });
+
+  return browserClient;
 }
 
 // Types basés sur la structure de la base de données
