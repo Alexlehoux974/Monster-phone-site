@@ -75,7 +75,12 @@ export default function ComptePage() {
         const redirectPath = sessionStorage.getItem('redirectAfterLogin');
         if (redirectPath) {
           sessionStorage.removeItem('redirectAfterLogin');
-          router.push(redirectPath);
+          // ✅ Marquer qu'on vient de se connecter pour éviter boucle infinie
+          sessionStorage.setItem('justLoggedIn', 'true');
+          // ✅ Attendre un cycle de rendu pour que isAuthenticated soit mis à jour
+          setTimeout(() => {
+            router.push(redirectPath);
+          }, 100);
         }
       } else {
         await register(formData.email, formData.password, formData.name);
@@ -85,7 +90,12 @@ export default function ComptePage() {
         const redirectPath = sessionStorage.getItem('redirectAfterLogin');
         if (redirectPath) {
           sessionStorage.removeItem('redirectAfterLogin');
-          router.push(redirectPath);
+          // ✅ Marquer qu'on vient de se connecter pour éviter boucle infinie
+          sessionStorage.setItem('justLoggedIn', 'true');
+          // ✅ Attendre un cycle de rendu pour que isAuthenticated soit mis à jour
+          setTimeout(() => {
+            router.push(redirectPath);
+          }, 100);
         }
       }
       // Réinitialiser le formulaire

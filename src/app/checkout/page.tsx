@@ -98,6 +98,14 @@ export default function CheckoutPage() {
     if (items.length === 0 && !orderComplete) {
       router.push('/panier');
     } else if (items.length > 0 && !isAuthenticated) {
+      // ✅ Vérifier si on vient juste de se connecter (éviter boucle infinie)
+      const justLoggedIn = sessionStorage.getItem('justLoggedIn');
+      if (justLoggedIn) {
+        sessionStorage.removeItem('justLoggedIn');
+        // Attendre que isAuthenticated se mette à jour
+        return;
+      }
+
       // Sauvegarder l'intention de checkout dans sessionStorage
       sessionStorage.setItem('redirectAfterLogin', '/checkout');
       router.push('/compte');
