@@ -112,16 +112,19 @@ export async function getAdminSession() {
 
   try {
     // Verify admin status via API (uses service role key)
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+
     const verifyResponse = await fetch('/api/admin/verify', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ email: session.user.email }),
-      // Add timeout to prevent infinite loading
-      signal: AbortSignal.timeout(10000), // 10 second timeout
+      signal: controller.signal,
     });
 
+    clearTimeout(timeoutId);
     console.log('[getAdminSession] Verify response status:', verifyResponse.status);
 
     if (!verifyResponse.ok) {
@@ -135,6 +138,10 @@ export async function getAdminSession() {
     return { session, admin: verifyData.admin, error: null };
   } catch (fetchError: any) {
     console.error('[getAdminSession] Fetch error:', fetchError.message);
+    // En cas de timeout ou erreur réseau, retourner une erreur claire
+    if (fetchError.name === 'AbortError') {
+      return { session, admin: null, error: new Error('Timeout: impossible de vérifier le statut admin') };
+    }
     return { session, admin: null, error: fetchError };
   }
 }
