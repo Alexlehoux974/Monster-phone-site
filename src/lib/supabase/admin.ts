@@ -101,10 +101,19 @@ export async function signOutAdmin() {
 
 export async function getAdminSession() {
   const supabase = createClient();
+
+  console.log('[getAdminSession] Checking localStorage for session...');
+  const storageKey = 'supabase.auth.token';
+  const storedSession = typeof window !== 'undefined' ? localStorage.getItem(storageKey) : null;
+  console.log('[getAdminSession] localStorage session exists:', !!storedSession);
+
   const { data: { session }, error } = await supabase.auth.getSession();
 
   if (error || !session) {
-    console.log('[getAdminSession] No session:', error?.message);
+    console.log('[getAdminSession] No session from getSession():', {
+      error: error?.message,
+      hasStorageSession: !!storedSession
+    });
     return { session: null, admin: null, error };
   }
 

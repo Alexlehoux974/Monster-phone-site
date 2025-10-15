@@ -27,9 +27,17 @@ export default function AdminLoginPage() {
       }
 
       if (data) {
-        // Wait for session to be fully persisted in cookies (SSR requires proper cookie setting time)
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        // Use Next.js router for client-side navigation to preserve session cookies
+        console.log('[LOGIN] Login successful, session data:', {
+          hasSession: !!data.auth.session,
+          hasUser: !!data.auth.user,
+          userId: data.auth.user?.id
+        });
+
+        // Wait for session to be fully persisted in localStorage
+        await new Promise(resolve => setTimeout(resolve, 2000));
+
+        console.log('[LOGIN] Redirecting to /admin after 2s delay');
+        // Use Next.js router for client-side navigation to preserve session
         router.push('/admin');
       }
     } catch (err) {
