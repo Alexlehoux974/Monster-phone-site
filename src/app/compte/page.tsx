@@ -138,24 +138,51 @@ export default function ComptePage() {
 
   // Charger les commandes de l'utilisateur depuis Supabase
   useEffect(() => {
+    let isMounted = true;
+    let timeoutId: NodeJS.Timeout | null = null;
+
     if (isAuthenticated && user) {
       const fetchOrders = async () => {
         try {
-          const response = await fetch(`/api/orders/list?userId=${user.id}`);
+          // Protection timeout 10 secondes
+          const controller = new AbortController();
+          timeoutId = setTimeout(() => controller.abort(), 10000);
+
+          const response = await fetch(`/api/orders/list?userId=${user.id}`, {
+            signal: controller.signal
+          });
+
+          if (timeoutId) clearTimeout(timeoutId);
+
           if (response.ok) {
             const data = await response.json();
-            setOrders(data.orders || []);
+            if (isMounted) {
+              setOrders(data.orders || []);
+            }
+          } else {
+            console.error('Erreur API orders:', response.status);
           }
-        } catch (error) {
-          console.error('Erreur chargement commandes:', error);
+        } catch (error: any) {
+          if (error.name === 'AbortError') {
+            console.error('⏱️ Timeout: impossible de charger les commandes');
+          } else {
+            console.error('Erreur chargement commandes:', error);
+          }
         } finally {
-          setLoadingOrders(false);
+          if (isMounted) {
+            setLoadingOrders(false);
+          }
         }
       };
       fetchOrders();
     } else {
       setLoadingOrders(false);
     }
+
+    return () => {
+      isMounted = false;
+      if (timeoutId) clearTimeout(timeoutId);
+    };
   }, [isAuthenticated, user]);
 
   return (
