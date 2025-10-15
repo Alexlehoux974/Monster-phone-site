@@ -25,9 +25,7 @@ export async function getActiveProducts(options?: {
   sortBy?: 'price' | 'name' | 'created_at' | 'rating';
   sortOrder?: 'asc' | 'desc';
 }) {
-  console.log('🔍 DEBUG getActiveProducts - DÉBUT, options:', options);
   const supabase = createClient();
-  console.log('🔍 DEBUG getActiveProducts - Client Supabase créé:', !!supabase);
 
   let query = supabase
     .from('products')
@@ -53,16 +51,13 @@ export async function getActiveProducts(options?: {
     );
   }
 
-  console.log('🔍 DEBUG getActiveProducts - Avant query.execute()');
   const { data, error } = await query;
-  console.log('🔍 DEBUG getActiveProducts - Après query.execute(), data:', data?.length || 0, 'error:', error);
 
   if (error) {
-    console.error('❌ ERREUR getActiveProducts - Détails:', error);
+    console.error('Error fetching active products:', error);
     return [];
   }
 
-  console.log('🔍 DEBUG getActiveProducts - FIN, retourne', data?.length || 0, 'produits');
   // Transform to ProductFullView format
   return (data || []).map(product => ({
     ...product,
@@ -586,11 +581,8 @@ export async function getBrandBySlug(slug: string) {
  * Récupérer toutes les catégories avec leurs sous-catégories
  */
 export async function getAllCategories() {
-  console.log('🔍 DEBUG getAllCategories - DÉBUT');
   const supabase = createClient();
-  console.log('🔍 DEBUG getAllCategories - Client Supabase créé:', !!supabase);
 
-  console.log('🔍 DEBUG getAllCategories - Avant query.execute()');
   const { data, error } = await supabase
     .from('categories')
     .select(`
@@ -600,10 +592,8 @@ export async function getAllCategories() {
     .is('parent_id', null)
     .order('display_order');
 
-  console.log('🔍 DEBUG getAllCategories - Après query.execute(), data:', data?.length || 0, 'error:', error);
-
   if (error) {
-    console.error('❌ ERREUR getAllCategories - Détails:', error);
+    console.error('Error fetching categories:', error);
     return [];
   }
 
