@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { getAdminSession, signOutAdmin } from '@/lib/supabase/admin';
@@ -41,47 +42,34 @@ export default function AdminLayout({
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
-    const checkAdmin = async () => {
-      console.log('[ADMIN LAYOUT] Checking admin session...');
+    // Skip auth check on login page
+    if (pathname === '/admin/login') {
+      setLoading(false);
+      return;
+    }
 
+    const checkAdmin = async () => {
       try {
         const { session, admin: adminData, error } = await getAdminSession();
 
-        console.log('[ADMIN LAYOUT] Result:', {
-          hasSession: !!session,
-          hasAdmin: !!adminData,
-          error: error?.message
-        });
-
-        if (error) {
-          console.error('[ADMIN LAYOUT] Error verifying admin:', error);
-          // En cas d'erreur API, rediriger vers login au lieu de bloquer
-          console.log('[ADMIN LAYOUT] API error, redirecting to login');
+        if (error || !adminData || !session) {
           router.push('/admin/login');
-          setLoading(false);
           return;
         }
 
-        if (!adminData || !session) {
-          console.log('[ADMIN LAYOUT] No admin or session, redirecting to login');
-          router.push('/admin/login');
-          setLoading(false);
-          return;
-        }
-
-        console.log('[ADMIN LAYOUT] Admin verified, showing dashboard');
         setAdmin(adminData);
-        setLoading(false);
       } catch (err) {
         console.error('[ADMIN LAYOUT] Unexpected error:', err);
-        // En cas d'erreur inattendue, rediriger vers login
         router.push('/admin/login');
+      } finally {
         setLoading(false);
       }
     };
 
     checkAdmin();
-  }, [router]);
+    // Only run once on mount - not on every pathname change
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleSignOut = async () => {
     await signOutAdmin();
@@ -139,7 +127,7 @@ export default function AdminLayout({
             const Icon = item.icon;
 
             return (
-              <a
+              <Link
                 key={item.name}
                 href={item.href}
                 className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
@@ -150,7 +138,7 @@ export default function AdminLayout({
               >
                 <Icon className="w-5 h-5" />
                 <span className="font-medium">{item.name}</span>
-              </a>
+              </Link>
             );
           })}
         </nav>
