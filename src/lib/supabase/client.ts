@@ -1,10 +1,22 @@
 import { createClient as createSupabaseClient } from '@supabase/supabase-js';
+import type { SupabaseClient } from '@supabase/supabase-js';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://nswlznqoadjffpxkagoz.supabase.co';
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5zd2x6bnFvYWRqZmZweGthZ296Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUwNzk5MzksImV4cCI6MjA3MDY1NTkzOX0.8hrzs5L0Q6Br0O1X9jG2AUHJmB2hsrLm3zuDfLIypdg';
 
+// 🔧 FIX: Instance unique (singleton) du client Supabase
+// Élimine l'erreur "Multiple GoTrueClient instances detected"
+// et garantit un seul client réutilisé partout dans l'application
+let supabaseInstance: SupabaseClient | null = null;
+
 export function createClient() {
-  return createSupabaseClient(supabaseUrl, supabaseAnonKey, {
+  // Si une instance existe déjà, la retourner
+  if (supabaseInstance) {
+    return supabaseInstance;
+  }
+
+  // Sinon, créer une nouvelle instance et la mémoriser
+  supabaseInstance = createSupabaseClient(supabaseUrl, supabaseAnonKey, {
     auth: {
       persistSession: true,
       autoRefreshToken: true,
@@ -15,6 +27,8 @@ export function createClient() {
       }
     }
   });
+
+  return supabaseInstance;
 }
 
 // Types basés sur la structure de la base de données
