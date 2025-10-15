@@ -27,10 +27,10 @@ export default function AdminLoginPage() {
       }
 
       if (data) {
-        // Wait a bit for session to be fully set before redirecting
-        await new Promise(resolve => setTimeout(resolve, 500));
-        // Force hard redirect to bypass any middleware issues
-        window.location.href = '/admin';
+        // Wait for session to be fully persisted in cookies (SSR requires proper cookie setting time)
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        // Use Next.js router for client-side navigation to preserve session cookies
+        router.push('/admin');
       }
     } catch (err) {
       setError('Une erreur est survenue. Veuillez réessayer.');

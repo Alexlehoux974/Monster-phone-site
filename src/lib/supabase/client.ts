@@ -1,28 +1,47 @@
-import { createBrowserClient } from '@supabase/ssr';
-import type { SupabaseClient } from '@supabase/supabase-js';
+import { createClient as createSupabaseClient, SupabaseClient } from '@supabase/supabase-js';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://nswlznqoadjffpxkagoz.supabase.co';
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5zd2x6bnFvYWRqZmZweGthZ296Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUwNzk5MzksImV4cCI6MjA3MDY1NTkzOX0.8hrzs5L0Q6Br0O1X9jG2AUHJmB2hsrLm3zuDfLIypdg';
 
-// Singleton instance to share session state across the app
-let supabaseInstance: SupabaseClient | null = null;
+// Global singleton stored on window object to truly share across all components
+// This ensures that even after page navigation, we get the same instance with session
+declare global {
+  interface Window {
+    __supabaseClient: SupabaseClient | undefined;
+  }
+}
 
-export function createClient() {
-  // Return existing instance if it exists (singleton pattern)
-  if (supabaseInstance) {
-    return supabaseInstance;
+export function createClient(): SupabaseClient {
+  // In browser, use global window object for true singleton
+  if (typeof window !== 'undefined') {
+    if (window.__supabaseClient) {
+      return window.__supabaseClient;
+    }
+
+    window.__supabaseClient = createSupabaseClient(supabaseUrl, supabaseAnonKey, {
+      auth: {
+        persistSession: true,
+        autoRefreshToken: true,
+        storage: window.localStorage,
+        storageKey: 'supabase.auth.token',
+      },
+      realtime: {
+        params: {
+          eventsPerSecond: 10
+        }
+      }
+    });
+
+    return window.__supabaseClient;
   }
 
-  // Create new instance using @supabase/ssr for proper session management
-  supabaseInstance = createBrowserClient(supabaseUrl, supabaseAnonKey, {
-    realtime: {
-      params: {
-        eventsPerSecond: 10
-      }
+  // Server-side: create new instance (won't have session anyway)
+  return createSupabaseClient(supabaseUrl, supabaseAnonKey, {
+    auth: {
+      persistSession: false,
+      autoRefreshToken: false,
     }
   });
-
-  return supabaseInstance;
 }
 
 // Types basés sur la structure de la base de données
