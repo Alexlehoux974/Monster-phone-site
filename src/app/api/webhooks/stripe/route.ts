@@ -76,8 +76,8 @@ export async function POST(request: NextRequest) {
 
       // Récupérer les métadonnées de la session
       const metadata = session.metadata || {};
-      // user_id peut être null si non authentifié (UUID requis par Supabase)
-      const userId = null; // On ne stocke pas le user_id temporaire
+      // Récupérer le user_id depuis les metadata Stripe (peut être null si non authentifié)
+      const userId = metadata.user_id && metadata.user_id !== '' ? metadata.user_id : null;
       const customerEmail = session.customer_details?.email || metadata.email || '';
       const customerName = session.customer_details?.name || metadata.name || '';
       const customerPhone = session.customer_details?.phone || metadata.phone || '';
