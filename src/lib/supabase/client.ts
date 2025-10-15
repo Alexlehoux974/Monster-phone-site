@@ -1,27 +1,13 @@
 import { createClient as createSupabaseClient } from '@supabase/supabase-js';
-import type { SupabaseClient } from '@supabase/supabase-js';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://nswlznqoadjffpxkagoz.supabase.co';
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5zd2x6bnFvYWRqZmZweGthZ296Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUwNzk5MzksImV4cCI6MjA3MDY1NTkzOX0.8hrzs5L0Q6Br0O1X9jG2AUHJmB2hsrLm3zuDfLIypdg';
 
-// 🐛 DEBUG: Vérifier les variables d'environnement
-console.log('🔍 DEBUG client.ts - NEXT_PUBLIC_SUPABASE_URL:', process.env.NEXT_PUBLIC_SUPABASE_URL ? 'SET' : 'USING FALLBACK');
-console.log('🔍 DEBUG client.ts - NEXT_PUBLIC_SUPABASE_ANON_KEY:', process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ? 'SET' : 'USING FALLBACK');
-console.log('🔍 DEBUG client.ts - supabaseUrl:', supabaseUrl);
-console.log('🔍 DEBUG client.ts - supabaseAnonKey:', supabaseAnonKey?.substring(0, 20) + '...');
-console.log('🔍 DEBUG client.ts - Environnement:', typeof window !== 'undefined' ? 'CLIENT (browser)' : 'SERVER (SSR)');
-
-// 🔧 FIX: PAS de singleton - créer une NOUVELLE instance à chaque fois
-// Le singleton empêche les requêtes côté client de fonctionner
-// Car l'instance SSR n'est pas compatible avec le navigateur
 export function createClient() {
-  console.log('🔍 DEBUG createClient - Création instance, env:', typeof window !== 'undefined' ? 'CLIENT' : 'SERVER');
-
-  const client = createSupabaseClient(supabaseUrl, supabaseAnonKey, {
+  return createSupabaseClient(supabaseUrl, supabaseAnonKey, {
     auth: {
-      persistSession: typeof window !== 'undefined', // Seulement côté client
-      autoRefreshToken: typeof window !== 'undefined', // Seulement côté client
-      detectSessionInUrl: typeof window !== 'undefined', // Seulement côté client
+      persistSession: true,
+      autoRefreshToken: true,
     },
     realtime: {
       params: {
@@ -29,9 +15,6 @@ export function createClient() {
       }
     }
   });
-
-  console.log('🔍 DEBUG createClient - Instance créée:', !!client, 'pour env:', typeof window !== 'undefined' ? 'CLIENT' : 'SERVER');
-  return client;
 }
 
 // Types basés sur la structure de la base de données
