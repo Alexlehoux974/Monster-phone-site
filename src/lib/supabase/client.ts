@@ -1,20 +1,43 @@
-import { createClient as createSupabaseClient } from '@supabase/supabase-js';
+import { createClient as createSupabaseClient, SupabaseClient } from '@supabase/supabase-js';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://nswlznqoadjffpxkagoz.supabase.co';
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5zd2x6bnFvYWRqZmZweGthZ296Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUwNzk5MzksImV4cCI6MjA3MDY1NTkzOX0.8hrzs5L0Q6Br0O1X9jG2AUHJmB2hsrLm3zuDfLIypdg';
 
+// Singleton UNIQUEMENT côté client (browser)
+let browserClient: SupabaseClient | null = null;
+
 export function createClient() {
-  return createSupabaseClient(supabaseUrl, supabaseAnonKey, {
-    auth: {
-      persistSession: true,
-      autoRefreshToken: true,
-    },
-    realtime: {
-      params: {
-        eventsPerSecond: 10
+  // Côté serveur (SSR): toujours créer une nouvelle instance
+  if (typeof window === 'undefined') {
+    return createSupabaseClient(supabaseUrl, supabaseAnonKey, {
+      auth: {
+        persistSession: false, // Pas de session côté serveur
+        autoRefreshToken: false,
+      },
+      realtime: {
+        params: {
+          eventsPerSecond: 10
+        }
       }
-    }
-  });
+    });
+  }
+
+  // Côté client (browser): réutiliser l'instance singleton
+  if (!browserClient) {
+    browserClient = createSupabaseClient(supabaseUrl, supabaseAnonKey, {
+      auth: {
+        persistSession: true,
+        autoRefreshToken: true,
+      },
+      realtime: {
+        params: {
+          eventsPerSecond: 10
+        }
+      }
+    });
+  }
+
+  return browserClient;
 }
 
 // Types basés sur la structure de la base de données
