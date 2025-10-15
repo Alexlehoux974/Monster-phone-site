@@ -65,10 +65,19 @@ export async function signInAdmin(email: string, password: string) {
       };
     }
 
+    console.log('[signInAdmin] Admin verified, attempting Supabase Auth sign in...');
+
     // Then sign in with Supabase Auth directly on the client
     const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
       email,
       password,
+    });
+
+    console.log('[signInAdmin] Sign in result:', {
+      success: !authError,
+      hasSession: !!authData?.session,
+      hasUser: !!authData?.user,
+      error: authError?.message
     });
 
     if (authError) {
@@ -76,6 +85,16 @@ export async function signInAdmin(email: string, password: string) {
         data: null,
         error: authError
       };
+    }
+
+    // Vérifier si la session est dans localStorage
+    if (typeof window !== 'undefined') {
+      const storageKey = 'supabase.auth.token';
+      const storedSession = localStorage.getItem(storageKey);
+      console.log('[signInAdmin] localStorage after signIn:', {
+        hasSession: !!storedSession,
+        preview: storedSession ? storedSession.substring(0, 50) + '...' : 'null'
+      });
     }
 
     return {
@@ -86,6 +105,7 @@ export async function signInAdmin(email: string, password: string) {
       error: null
     };
   } catch (error) {
+    console.error('[signInAdmin] Unexpected error:', error);
     return {
       data: null,
       error: new Error('Erreur lors de la connexion au serveur')
