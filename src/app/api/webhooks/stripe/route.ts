@@ -76,6 +76,16 @@ export async function POST(request: NextRequest) {
 
       // Récupérer les métadonnées de la session
       const metadata = session.metadata || {};
+
+      // 🔍 DEBUG: Log metadata reçues depuis Stripe
+      console.log('🔍 [Webhook Stripe checkout.session.completed]', {
+        sessionId: session.id,
+        metadata: metadata,
+        metadataUserId: metadata.user_id,
+        customerEmail: session.customer_details?.email,
+        timestamp: new Date().toISOString()
+      });
+
       // Récupérer le user_id depuis les metadata Stripe (peut être null si non authentifié)
       const userId = metadata.user_id && metadata.user_id !== '' ? metadata.user_id : null;
       const customerEmail = session.customer_details?.email || metadata.email || '';

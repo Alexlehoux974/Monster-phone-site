@@ -203,6 +203,15 @@ export default function CheckoutPage() {
         postalCode: formData.postalCode,
       };
 
+      // 🔍 DEBUG: Vérifier l'état d'authentification avant checkout
+      console.log('🔍 [Checkout Debug]', {
+        isAuthenticated,
+        hasUser: !!user,
+        userId: user?.id,
+        userEmail: user?.email,
+        timestamp: new Date().toISOString()
+      });
+
       // Créer une session Stripe Checkout
       const response = await fetch('/api/create-checkout-session', {
         method: 'POST',

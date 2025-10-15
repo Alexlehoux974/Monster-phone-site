@@ -27,6 +27,15 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { items, customerInfo, userId } = body;
 
+    // 🔍 DEBUG: Log userId reçu par l'API
+    console.log('🔍 [API create-checkout-session]', {
+      receivedUserId: userId,
+      userIdType: typeof userId,
+      hasCustomerInfo: !!customerInfo,
+      customerEmail: customerInfo?.email,
+      timestamp: new Date().toISOString()
+    });
+
     if (!items || items.length === 0) {
       return NextResponse.json(
         { error: 'Panier vide' },
