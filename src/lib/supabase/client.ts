@@ -9,25 +9,19 @@ console.log('🔍 DEBUG client.ts - NEXT_PUBLIC_SUPABASE_URL:', process.env.NEXT
 console.log('🔍 DEBUG client.ts - NEXT_PUBLIC_SUPABASE_ANON_KEY:', process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ? 'SET' : 'USING FALLBACK');
 console.log('🔍 DEBUG client.ts - supabaseUrl:', supabaseUrl);
 console.log('🔍 DEBUG client.ts - supabaseAnonKey:', supabaseAnonKey?.substring(0, 20) + '...');
+console.log('🔍 DEBUG client.ts - Environnement:', typeof window !== 'undefined' ? 'CLIENT (browser)' : 'SERVER (SSR)');
 
-// 🔧 FIX: Instance unique (singleton) du client Supabase
-// Élimine l'erreur "Multiple GoTrueClient instances detected"
-// et garantit un seul client réutilisé partout dans l'application
-let supabaseInstance: SupabaseClient | null = null;
-
+// 🔧 FIX: PAS de singleton - créer une NOUVELLE instance à chaque fois
+// Le singleton empêche les requêtes côté client de fonctionner
+// Car l'instance SSR n'est pas compatible avec le navigateur
 export function createClient() {
-  // Si une instance existe déjà, la retourner
-  if (supabaseInstance) {
-    console.log('🔍 DEBUG createClient - Retourne instance existante');
-    return supabaseInstance;
-  }
+  console.log('🔍 DEBUG createClient - Création instance, env:', typeof window !== 'undefined' ? 'CLIENT' : 'SERVER');
 
-  // Sinon, créer une nouvelle instance et la mémoriser
-  console.log('🔍 DEBUG createClient - Création NOUVELLE instance avec URL:', supabaseUrl);
-  supabaseInstance = createSupabaseClient(supabaseUrl, supabaseAnonKey, {
+  const client = createSupabaseClient(supabaseUrl, supabaseAnonKey, {
     auth: {
-      persistSession: true,
-      autoRefreshToken: true,
+      persistSession: typeof window !== 'undefined', // Seulement côté client
+      autoRefreshToken: typeof window !== 'undefined', // Seulement côté client
+      detectSessionInUrl: typeof window !== 'undefined', // Seulement côté client
     },
     realtime: {
       params: {
@@ -36,8 +30,8 @@ export function createClient() {
     }
   });
 
-  console.log('🔍 DEBUG createClient - Instance créée:', !!supabaseInstance);
-  return supabaseInstance;
+  console.log('🔍 DEBUG createClient - Instance créée:', !!client, 'pour env:', typeof window !== 'undefined' ? 'CLIENT' : 'SERVER');
+  return client;
 }
 
 // Types basés sur la structure de la base de données
