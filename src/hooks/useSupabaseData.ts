@@ -31,32 +31,39 @@ export function useSupabaseProducts(options?: {
 
   useEffect(() => {
     async function fetchProducts() {
+      console.log('🔍 DEBUG useSupabaseProducts - DÉBUT fetch, options:', options);
       try {
         setLoading(true);
         let data: ProductFullView[] = [];
-        
+
         if (options?.category) {
+          console.log('🔍 DEBUG useSupabaseProducts - Fetching by category:', options.category);
           const supabaseSlug = getSupabaseSlug(options.category);
           data = await getProductsByCategory(supabaseSlug, {
             limit: options.limit,
             includeSubcategories: true
           });
         } else if (options?.brand) {
+          console.log('🔍 DEBUG useSupabaseProducts - Fetching by brand:', options.brand);
           data = await getProductsByBrand(options.brand, {
             limit: options.limit
           });
         } else {
+          console.log('🔍 DEBUG useSupabaseProducts - Fetching active products avec options:', options);
           data = await getActiveProducts(options);
+          console.log('🔍 DEBUG useSupabaseProducts - getActiveProducts retourné:', data?.length || 0, 'produits');
         }
-        
+
+        console.log('🔍 DEBUG useSupabaseProducts - setProducts avec', data?.length || 0, 'produits');
         setProducts(data);
         setError(null);
       } catch (err) {
-        console.error('Erreur récupération produits:', err);
+        console.error('❌ ERREUR useSupabaseProducts - Détails complets:', err);
         setError('Impossible de charger les produits');
         setProducts([]);
       } finally {
         setLoading(false);
+        console.log('🔍 DEBUG useSupabaseProducts - FIN fetch, loading=false');
       }
     }
 
@@ -165,14 +172,17 @@ export function useSupabaseCategories() {
 
   useEffect(() => {
     async function fetchCategories() {
+      console.log('🔍 DEBUG useSupabaseCategories - DÉBUT fetch');
       try {
         const data = await getAllCategories();
+        console.log('🔍 DEBUG useSupabaseCategories - getAllCategories retourné:', data?.length || 0, 'catégories');
         setCategories(data || []);
       } catch (error) {
-        console.error('Erreur récupération catégories:', error);
+        console.error('❌ ERREUR useSupabaseCategories - Détails complets:', error);
         setCategories([]);
       } finally {
         setLoading(false);
+        console.log('🔍 DEBUG useSupabaseCategories - FIN fetch, loading=false');
       }
     }
 
