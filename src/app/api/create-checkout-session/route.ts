@@ -39,9 +39,20 @@ export async function POST(request: NextRequest) {
 
     for (const item of items) {
       // Récupérer le produit depuis Supabase pour vérifier le stock en temps réel
+      // Note: Utiliser 'products' au lieu de 'products_full' car products_full n'a pas stock_quantity
       const { data: product, error: productError } = await supabase
-        .from('products_full')
-        .select('id, name, stock_quantity, variants')
+        .from('products')
+        .select(`
+          id,
+          name,
+          stock_quantity,
+          product_variants (
+            id,
+            color,
+            stock,
+            ean
+          )
+        `)
         .eq('id', item.id)
         .single();
 
@@ -58,9 +69,9 @@ export async function POST(request: NextRequest) {
       let availableStock = 0;
 
       // Vérifier le stock selon le type de produit (avec ou sans variant)
-      if (item.variant && product.variants && product.variants.length > 0) {
+      if (item.variant && product.product_variants && product.product_variants.length > 0) {
         // Produit avec variant - trouver le variant correspondant
-        const selectedVariant = product.variants.find(
+        const selectedVariant = product.product_variants.find(
           (v: any) => v.color === item.variant
         );
 
@@ -69,7 +80,8 @@ export async function POST(request: NextRequest) {
             {
               error: `Variant "${item.variant}" introuvable pour ${product.name}`,
               productId: item.id,
-              variant: item.variant
+              variant: item.variant,
+              availableVariants: product.product_variants.map((v: any) => v.color).join(', ')
             },
             { status: 400 }
           );
@@ -77,7 +89,7 @@ export async function POST(request: NextRequest) {
 
         availableStock = selectedVariant.stock || 0;
       } else {
-        // Produit sans variant - utiliser stockQuantity
+        // Produit sans variant - utiliser stock_quantity
         availableStock = product.stock_quantity || 0;
       }
 
