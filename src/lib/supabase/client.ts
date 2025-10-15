@@ -1,20 +1,28 @@
-import { createClient as createSupabaseClient } from '@supabase/supabase-js';
+import { createBrowserClient } from '@supabase/ssr';
+import type { SupabaseClient } from '@supabase/supabase-js';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://nswlznqoadjffpxkagoz.supabase.co';
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5zd2x6bnFvYWRqZmZweGthZ296Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUwNzk5MzksImV4cCI6MjA3MDY1NTkzOX0.8hrzs5L0Q6Br0O1X9jG2AUHJmB2hsrLm3zuDfLIypdg';
 
+// Singleton instance to share session state across the app
+let supabaseInstance: SupabaseClient | null = null;
+
 export function createClient() {
-  return createSupabaseClient(supabaseUrl, supabaseAnonKey, {
-    auth: {
-      persistSession: true,
-      autoRefreshToken: true,
-    },
+  // Return existing instance if it exists (singleton pattern)
+  if (supabaseInstance) {
+    return supabaseInstance;
+  }
+
+  // Create new instance using @supabase/ssr for proper session management
+  supabaseInstance = createBrowserClient(supabaseUrl, supabaseAnonKey, {
     realtime: {
       params: {
         eventsPerSecond: 10
       }
     }
   });
+
+  return supabaseInstance;
 }
 
 // Types basés sur la structure de la base de données
