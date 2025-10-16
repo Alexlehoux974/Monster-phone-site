@@ -227,12 +227,21 @@ export default function StockManagementPage() {
       const row = variantRows.find((r) => r.id === rowId);
       if (!row) return;
 
+      // Récupérer le token d'authentification Supabase
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session?.access_token) {
+        showToast('Session expirée, veuillez vous reconnecter', 'error');
+        return;
+      }
+
       if (row.isVariant) {
         // Update variant stock via API route (uses service_role to bypass RLS)
         const stockResponse = await fetch('/api/admin/update-stock', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'same-origin', // IMPORTANT: Envoie les cookies de session
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${session.access_token}` // Token explicite
+          },
           body: JSON.stringify({
             variantId: row.variantId,
             stock: editingStock
@@ -247,8 +256,10 @@ export default function StockManagementPage() {
         // Update product price, visibility and discount via generic API route
         const productResponse = await fetch('/api/admin/supabase', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'same-origin', // IMPORTANT: Envoie les cookies de session
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${session.access_token}` // Token explicite
+          },
           body: JSON.stringify({
             operation: 'update',
             table: 'products',
@@ -283,8 +294,10 @@ export default function StockManagementPage() {
         // Update stock, price, visibility and discount via API route
         const response = await fetch('/api/admin/supabase', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'same-origin', // IMPORTANT: Envoie les cookies de session
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${session.access_token}` // Token explicite
+          },
           body: JSON.stringify({
             operation: 'update',
             table: 'products',

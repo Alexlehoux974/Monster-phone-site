@@ -18,20 +18,32 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Vérifier l'authentification avec getSession()
+    // Récupérer le token depuis le header Authorization
+    const authHeader = request.headers.get('authorization');
+    const token = authHeader?.replace('Bearer ', '');
+
+    if (!token) {
+      console.error('❌ [Admin API] No authorization token');
+      return NextResponse.json(
+        { error: 'Unauthorized - No token provided' },
+        { status: 401 }
+      );
+    }
+
+    // Vérifier l'authentification avec le token explicite
     const supabase = await createClient();
-    const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+    const { data: { user }, error: userError } = await supabase.auth.getUser(token);
 
     console.log('🔍 [Admin API] Auth check:', {
-      hasSession: !!session,
-      userEmail: session?.user?.email,
-      error: sessionError?.message
+      hasUser: !!user,
+      userEmail: user?.email,
+      error: userError?.message
     });
 
-    if (sessionError || !session) {
-      console.error('❌ [Admin API] Auth failed:', sessionError);
+    if (userError || !user) {
+      console.error('❌ [Admin API] Auth failed:', userError);
       return NextResponse.json(
-        { error: 'Unauthorized - Please log in' },
+        { error: 'Unauthorized - Invalid token' },
         { status: 401 }
       );
     }
@@ -40,7 +52,7 @@ export async function POST(request: NextRequest) {
     const { data: adminCheck, error: adminError } = await supabase
       .from('admin_users')
       .select('id')
-      .eq('email', session.user.email)
+      .eq('email', user.email)
       .eq('is_active', true)
       .single();
 
@@ -52,7 +64,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    console.log('✅ [Admin API] User is admin:', session.user.email);
+    console.log('✅ [Admin API] User is admin:', user.email);
 
     // Utiliser le client admin pour les opérations (bypass RLS)
     const adminClient = createAdminClient();
