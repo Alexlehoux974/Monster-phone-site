@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    console.log('✅ [Admin API] User is admin:', user.email);
+    console.log('✅ [Admin API] User is admin:', session.user.email);
 
     // Utiliser le client admin pour les opérations (bypass RLS)
     const adminClient = createAdminClient();
