@@ -16,11 +16,12 @@ export async function POST(request: NextRequest) {
 
     // Vérifier l'authentification admin
     const supabase = await createClient();
-    const { data: { session } } = await supabase.auth.getSession();
+    const { data: { user }, error: userError } = await supabase.auth.getUser();
 
-    if (!session) {
+    if (userError || !user) {
+      console.error('Auth error:', userError);
       return NextResponse.json(
-        { error: 'Unauthorized' },
+        { error: 'Unauthorized - Please log in' },
         { status: 401 }
       );
     }
@@ -29,7 +30,7 @@ export async function POST(request: NextRequest) {
     const { data: adminCheck, error: adminError } = await supabase
       .from('admin_users')
       .select('id')
-      .eq('email', session.user.email)
+      .eq('email', user.email)
       .eq('is_active', true)
       .single();
 
