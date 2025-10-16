@@ -232,6 +232,7 @@ export default function StockManagementPage() {
         const stockResponse = await fetch('/api/admin/update-stock', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
+          credentials: 'same-origin', // IMPORTANT: Envoie les cookies de session
           body: JSON.stringify({
             variantId: row.variantId,
             stock: editingStock
@@ -247,6 +248,7 @@ export default function StockManagementPage() {
         const productResponse = await fetch('/api/admin/supabase', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
+          credentials: 'same-origin', // IMPORTANT: Envoie les cookies de session
           body: JSON.stringify({
             operation: 'update',
             table: 'products',
@@ -282,6 +284,7 @@ export default function StockManagementPage() {
         const response = await fetch('/api/admin/supabase', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
+          credentials: 'same-origin', // IMPORTANT: Envoie les cookies de session
           body: JSON.stringify({
             operation: 'update',
             table: 'products',
