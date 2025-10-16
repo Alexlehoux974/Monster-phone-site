@@ -102,10 +102,18 @@ export default function PanierPage() {
                 <div className="divide-y divide-gray-200">
                   {items.map((item) => {
                     // Assurer la conversion en nombre pour éviter NaN
-                    const price = typeof item.product.price === 'string' 
-                      ? parseFloat(item.product.price) 
+                    const basePrice = typeof item.product.price === 'string'
+                      ? parseFloat(item.product.price)
                       : item.product.price;
+
+                    // Appliquer la réduction admin si elle existe
+                    const adminDiscount = item.product.adminDiscountPercent || 0;
+                    const price = adminDiscount > 0
+                      ? basePrice * (1 - adminDiscount / 100)
+                      : basePrice;
+
                     const itemTotal = price * item.quantity;
+                    const hasDiscount = adminDiscount > 0;
                     
                     return (
                       <div key={`${item.product.id}-${item.variant}`} className="py-4">
@@ -149,7 +157,21 @@ export default function PanierPage() {
                           {/* Prix */}
                           <div className="col-span-4 md:col-span-2 text-center">
                             <span className="md:hidden text-sm text-gray-600">Prix: </span>
-                            <span className="font-medium">{price.toFixed(2)} €</span>
+                            <div className="flex flex-col items-center">
+                              {hasDiscount && (
+                                <span className="text-xs text-gray-500 line-through">
+                                  {basePrice.toFixed(2)} €
+                                </span>
+                              )}
+                              <span className={`font-medium ${hasDiscount ? 'text-red-600' : ''}`}>
+                                {price.toFixed(2)} €
+                              </span>
+                              {hasDiscount && (
+                                <span className="text-xs font-medium text-green-600">
+                                  -{adminDiscount}%
+                                </span>
+                              )}
+                            </div>
                           </div>
 
                           {/* Quantité */}

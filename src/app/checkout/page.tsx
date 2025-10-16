@@ -232,11 +232,20 @@ export default function CheckoutPage() {
         },
         body: JSON.stringify({
           items: items.map(item => {
+            // Calculer le prix avec la réduction admin si elle existe
+            const basePrice = typeof item.product.price === 'string'
+              ? parseFloat(item.product.price)
+              : item.product.price;
+            const adminDiscount = item.product.adminDiscountPercent || 0;
+            const finalPrice = adminDiscount > 0
+              ? basePrice * (1 - adminDiscount / 100)
+              : basePrice;
+
             return {
               id: String(item.product.id), // Forcer conversion en string
               name: item.product.name,
               description: item.product.description,
-              price: typeof item.product.price === 'string' ? parseFloat(item.product.price) : item.product.price,
+              price: finalPrice, // ✅ Prix avec réduction admin appliquée
               quantity: item.quantity,
               image_url: item.product.images[0],
               brand_name: item.product.brand,
@@ -652,10 +661,14 @@ export default function CheckoutPage() {
                   {/* Articles */}
                   <div className="space-y-3 mb-4 max-h-64 overflow-y-auto">
                     {items.map((item) => {
-                      // Assurer la conversion en nombre pour éviter NaN
-                      const price = typeof item.product.price === 'string' 
-                        ? parseFloat(item.product.price) 
+                      // Calculer le prix avec la réduction admin si elle existe
+                      const basePrice = typeof item.product.price === 'string'
+                        ? parseFloat(item.product.price)
                         : item.product.price;
+                      const adminDiscount = item.product.adminDiscountPercent || 0;
+                      const price = adminDiscount > 0
+                        ? basePrice * (1 - adminDiscount / 100)
+                        : basePrice;
                       return (
                         <div key={`${item.product.id}-${item.variant}`} className="flex items-center space-x-3">
                           <div className="relative w-16 h-16 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">

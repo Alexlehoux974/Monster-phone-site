@@ -192,10 +192,17 @@ export function CartProvider({ children, initialItems }: { children: ReactNode; 
   const getCartTotal = () => {
     return items.reduce((total, item) => {
       // Assurer la conversion en nombre pour éviter NaN
-      const price = typeof item.product.price === 'string' 
-        ? parseFloat(item.product.price) 
+      const basePrice = typeof item.product.price === 'string'
+        ? parseFloat(item.product.price)
         : item.product.price;
-      return total + (price * item.quantity);
+
+      // Appliquer la réduction admin si elle existe
+      const adminDiscount = item.product.adminDiscountPercent || 0;
+      const finalPrice = adminDiscount > 0
+        ? basePrice * (1 - adminDiscount / 100)
+        : basePrice;
+
+      return total + (finalPrice * item.quantity);
     }, 0);
   };
 
