@@ -1,18 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { createAdminClient } from '@/lib/supabase/admin-client';
 import { createClient } from '@/lib/supabase/server';
 
 /**
  * Generic admin API route for Supabase operations
- * Uses authenticated client with admin verification
- *
- * Usage:
- * POST /api/admin/supabase
- * Body: {
- *   operation: 'update' | 'insert' | 'delete' | 'upsert',
- *   table: string,
- *   data: object | object[],
- *   filters?: { column: string, value: any }[]
- * }
+ * Uses admin client for operations, authenticated client for verification
  */
 export async function POST(request: NextRequest) {
   try {
@@ -26,19 +18,25 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Vérifier l'authentification admin
+    // Vérifier l'authentification
     const supabase = await createClient();
     const { data: { user }, error: userError } = await supabase.auth.getUser();
 
+    console.log('🔍 [Admin API] Auth check:', {
+      hasUser: !!user,
+      userEmail: user?.email,
+      error: userError?.message
+    });
+
     if (userError || !user) {
-      console.error('Auth error:', userError);
+      console.error('❌ [Admin API] Auth failed:', userError);
       return NextResponse.json(
         { error: 'Unauthorized - Please log in' },
         { status: 401 }
       );
     }
 
-    // Vérifier que l'utilisateur est admin via la table admin_users
+    // Vérifier que l'utilisateur est admin
     const { data: adminCheck, error: adminError } = await supabase
       .from('admin_users')
       .select('id')
@@ -47,17 +45,22 @@ export async function POST(request: NextRequest) {
       .single();
 
     if (adminError || !adminCheck) {
-      console.error('Admin check failed:', adminError);
+      console.error('❌ [Admin API] Admin check failed:', adminError);
       return NextResponse.json(
         { error: 'Access denied - Admin only' },
         { status: 403 }
       );
     }
+
+    console.log('✅ [Admin API] User is admin:', user.email);
+
+    // Utiliser le client admin pour les opérations (bypass RLS)
+    const adminClient = createAdminClient();
     let query: any;
 
     switch (operation) {
       case 'insert':
-        query = supabase.from(table).insert(data).select();
+        query = adminClient.from(table).insert(data).select();
         break;
 
       case 'update':
@@ -67,7 +70,7 @@ export async function POST(request: NextRequest) {
             { status: 400 }
           );
         }
-        query = supabase.from(table).update(data);
+        query = adminClient.from(table).update(data);
         filters.forEach((filter: { column: string; value: any }) => {
           query = query.eq(filter.column, filter.value);
         });
@@ -75,7 +78,7 @@ export async function POST(request: NextRequest) {
         break;
 
       case 'upsert':
-        query = supabase.from(table).upsert(data).select();
+        query = adminClient.from(table).upsert(data).select();
         break;
 
       case 'delete':
@@ -85,7 +88,7 @@ export async function POST(request: NextRequest) {
             { status: 400 }
           );
         }
-        query = supabase.from(table).delete();
+        query = adminClient.from(table).delete();
         filters.forEach((filter: { column: string; value: any }) => {
           query = query.eq(filter.column, filter.value);
         });
@@ -102,16 +105,17 @@ export async function POST(request: NextRequest) {
     const { data: result, error } = await query;
 
     if (error) {
-      console.error(`Admin ${operation} error on ${table}:`, error);
+      console.error(`❌ [Admin API] ${operation} error on ${table}:`, error);
       return NextResponse.json(
         { error: error.message },
         { status: 500 }
       );
     }
 
+    console.log(`✅ [Admin API] ${operation} success on ${table}`);
     return NextResponse.json({ success: true, data: result });
   } catch (error) {
-    console.error('Admin API error:', error);
+    console.error('❌ [Admin API] Error:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
