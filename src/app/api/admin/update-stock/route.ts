@@ -14,18 +14,18 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Vérifier l'authentification via le client server (lit les cookies)
+    // Vérifier l'authentification via getSession() qui lit mieux les cookies
     const supabase = await createClient();
-    const { data: { user }, error: userError } = await supabase.auth.getUser();
+    const { data: { session }, error: sessionError } = await supabase.auth.getSession();
 
     console.log('🔍 [Update Stock] Auth check:', {
-      hasUser: !!user,
-      userEmail: user?.email,
-      error: userError?.message
+      hasSession: !!session,
+      userEmail: session?.user?.email,
+      error: sessionError?.message
     });
 
-    if (userError || !user) {
-      console.error('❌ [Update Stock] Auth failed:', userError);
+    if (sessionError || !session) {
+      console.error('❌ [Update Stock] Auth failed:', sessionError);
       return NextResponse.json(
         { error: 'Unauthorized - Please log in' },
         { status: 401 }
@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
     const { data: adminCheck, error: adminError } = await supabase
       .from('admin_users')
       .select('id')
-      .eq('email', user.email)
+      .eq('email', session.user.email)
       .eq('is_active', true)
       .single();
 
@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    console.log('✅ [Update Stock] User is admin:', user.email);
+    console.log('✅ [Update Stock] User is admin:', session.user.email);
 
     // Utiliser le client admin pour faire l'update (bypass RLS)
     const adminClient = createAdminClient();

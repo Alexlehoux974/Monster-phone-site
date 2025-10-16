@@ -18,18 +18,18 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Vérifier l'authentification
+    // Vérifier l'authentification avec getSession()
     const supabase = await createClient();
-    const { data: { user }, error: userError } = await supabase.auth.getUser();
+    const { data: { session }, error: sessionError } = await supabase.auth.getSession();
 
     console.log('🔍 [Admin API] Auth check:', {
-      hasUser: !!user,
-      userEmail: user?.email,
-      error: userError?.message
+      hasSession: !!session,
+      userEmail: session?.user?.email,
+      error: sessionError?.message
     });
 
-    if (userError || !user) {
-      console.error('❌ [Admin API] Auth failed:', userError);
+    if (sessionError || !session) {
+      console.error('❌ [Admin API] Auth failed:', sessionError);
       return NextResponse.json(
         { error: 'Unauthorized - Please log in' },
         { status: 401 }
@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
     const { data: adminCheck, error: adminError } = await supabase
       .from('admin_users')
       .select('id')
-      .eq('email', user.email)
+      .eq('email', session.user.email)
       .eq('is_active', true)
       .single();
 
