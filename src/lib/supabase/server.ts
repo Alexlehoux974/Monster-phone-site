@@ -1,10 +1,10 @@
-import { createServerClient } from '@supabase/ssr'
+import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 
 /**
  * Create Supabase client for server-side operations (Route Handlers & Server Components)
  * Uses cookies to automatically retrieve the user's session from the request
- * This is the CORRECT pattern for Next.js App Router with Supabase
+ * Pattern officiel Supabase SSR avec getAll/setAll interface
  */
 export async function createClient() {
   const cookieStore = await cookies()
@@ -14,24 +14,20 @@ export async function createClient() {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
       cookies: {
-        get(name: string) {
-          return cookieStore.get(name)?.value
+        getAll() {
+          return cookieStore.getAll()
         },
-        set(name: string, value: string, options: any) {
+        setAll(cookiesToSet) {
           try {
-            cookieStore.set(name, value, options)
+            cookiesToSet.forEach(({ name, value, options }) =>
+              cookieStore.set(name, value, options)
+            )
           } catch {
-            // In Route Handlers, cookies().set() may fail if called after response is sent
-            // This is expected and can be safely ignored
+            // The `setAll` method was called from a Server Component.
+            // This can be ignored if you have middleware refreshing
+            // user sessions.
           }
         },
-        remove(name: string, options: any) {
-          try {
-            cookieStore.set(name, '', options)
-          } catch {
-            // Same as above
-          }
-        }
       },
     }
   )
