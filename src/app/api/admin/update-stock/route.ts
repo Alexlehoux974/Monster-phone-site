@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createAdminClient } from '@/lib/supabase/admin-client';
+import { createClient } from '@/lib/supabase/server';
+import { cookies } from 'next/headers';
 
 export async function POST(request: NextRequest) {
   try {
@@ -13,9 +14,36 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Update variant stock with admin client (bypasses RLS)
-    const supabaseAdmin = createAdminClient();
-    const { data, error } = await supabaseAdmin
+    // Vérifier l'authentification admin
+    const supabase = await createClient();
+    const { data: { session } } = await supabase.auth.getSession();
+
+    if (!session) {
+      return NextResponse.json(
+        { error: 'Unauthorized' },
+        { status: 401 }
+      );
+    }
+
+    // Vérifier que l'utilisateur est admin via la table admin_users
+    const { data: adminCheck, error: adminError } = await supabase
+      .from('admin_users')
+      .select('id')
+      .eq('email', session.user.email)
+      .eq('is_active', true)
+      .single();
+
+    if (adminError || !adminCheck) {
+      console.error('Admin check failed:', adminError);
+      return NextResponse.json(
+        { error: 'Access denied - Admin only' },
+        { status: 403 }
+      );
+    }
+
+    // Update variant stock avec le client authentifié
+    // Note: Les policies RLS doivent autoriser les admins à modifier
+    const { data, error } = await supabase
       .from('product_variants')
       .update({ stock, updated_at: new Date().toISOString() })
       .eq('id', variantId)

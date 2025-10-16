@@ -9,7 +9,18 @@ export function createAdminClient() {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
+  console.log('🔍 [Admin Client Debug]', {
+    hasUrl: !!supabaseUrl,
+    hasServiceKey: !!serviceRoleKey,
+    urlLength: supabaseUrl?.length,
+    keyLength: serviceRoleKey?.length
+  });
+
   if (!supabaseUrl || !serviceRoleKey) {
+    console.error('❌ Missing Supabase admin configuration', {
+      hasUrl: !!supabaseUrl,
+      hasServiceKey: !!serviceRoleKey
+    });
     throw new Error('Missing Supabase admin configuration');
   }
 
