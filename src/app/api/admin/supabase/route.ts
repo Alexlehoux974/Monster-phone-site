@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createAdminClient } from '@/lib/supabase/admin-client';
+import { createClient } from '@/lib/supabase/server';
 
 /**
  * Generic admin API route for Supabase operations
- * Bypasses RLS using service_role key
+ * Uses authenticated client with admin verification
  *
  * Usage:
  * POST /api/admin/supabase
@@ -26,7 +26,33 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const supabase = createAdminClient();
+    // Vérifier l'authentification admin
+    const supabase = await createClient();
+    const { data: { user }, error: userError } = await supabase.auth.getUser();
+
+    if (userError || !user) {
+      console.error('Auth error:', userError);
+      return NextResponse.json(
+        { error: 'Unauthorized - Please log in' },
+        { status: 401 }
+      );
+    }
+
+    // Vérifier que l'utilisateur est admin via la table admin_users
+    const { data: adminCheck, error: adminError } = await supabase
+      .from('admin_users')
+      .select('id')
+      .eq('email', user.email)
+      .eq('is_active', true)
+      .single();
+
+    if (adminError || !adminCheck) {
+      console.error('Admin check failed:', adminError);
+      return NextResponse.json(
+        { error: 'Access denied - Admin only' },
+        { status: 403 }
+      );
+    }
     let query: any;
 
     switch (operation) {
