@@ -18,25 +18,23 @@ export function createClient() {
     });
   }
 
-  // Browser-side: use singleton with proper cleanup
-  if (browserClient) {
-    return browserClient;
-  }
-
-  browserClient = createSupabaseClient(supabaseUrl, supabaseAnonKey, {
-    auth: {
-      persistSession: true,
-      autoRefreshToken: true,
-      storage: window.localStorage,
-      // Use default Supabase storage key format: sb-{project-ref}-auth-token
-      // storageKey: 'supabase.auth.token', // REMOVED - using default
-    },
-    realtime: {
-      params: {
-        eventsPerSecond: 10
+  // Browser-side: create singleton ONLY once
+  if (!browserClient) {
+    browserClient = createSupabaseClient(supabaseUrl, supabaseAnonKey, {
+      auth: {
+        persistSession: true,
+        autoRefreshToken: true,
+        storage: window.localStorage,
+        // Use default Supabase storage key format: sb-{project-ref}-auth-token
+        // storageKey: 'supabase.auth.token', // REMOVED - using default
+      },
+      realtime: {
+        params: {
+          eventsPerSecond: 10
+        }
       }
-    }
-  });
+    });
+  }
 
   return browserClient;
 }
