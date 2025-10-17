@@ -154,8 +154,10 @@ function mapCategoryToLegacy(supabaseCategory: string): string {
     'eclairage led': 'LED',  // Autre variation
     'accessoires': 'Accessoires'
   };
-  
-  return mapping[supabaseCategory] || supabaseCategory;
+
+  // ✅ FIX: Rendre insensible à la casse
+  const lowerCategory = supabaseCategory.toLowerCase();
+  return mapping[lowerCategory] || supabaseCategory;
 }
 
 /**
