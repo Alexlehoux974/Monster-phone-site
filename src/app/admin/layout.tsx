@@ -163,7 +163,7 @@ export default function AdminLayout({
               {admin?.email}
             </p>
             <p className="text-xs text-gray-500 mt-1">
-              Rôle: {admin?.role === 'super_admin' ? 'Super Admin' : admin?.role === 'admin' ? 'Admin' : 'Éditeur'}
+              Rôle: {admin?.role === 'super_admin' ? 'Super Admin' : admin?.role === 'admin' ? 'Admin' : `Éditeur (role=${admin?.role})`}
             </p>
           </div>
           <button
