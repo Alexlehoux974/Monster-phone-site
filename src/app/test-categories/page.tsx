@@ -1,7 +1,7 @@
 'use client';
 
 import { useSupabaseProducts, useSupabaseCategories } from '@/hooks/useSupabaseData';
-import { supabaseProductToLegacy, generateMenuStructureFromProducts } from '@/lib/supabase/adapters';
+import { generateMenuStructureFromProducts } from '@/lib/supabase/adapters';
 import { useEffect, useState } from 'react';
 
 export default function TestCategories() {
@@ -11,8 +11,8 @@ export default function TestCategories() {
 
   useEffect(() => {
     if (supabaseProducts?.length > 0 && supabaseCategories?.length > 0) {
-      const legacyProducts = supabaseProducts.map(supabaseProductToLegacy);
-      const structure = generateMenuStructureFromProducts(legacyProducts, supabaseCategories);
+      // Les produits sont déjà convertis par useSupabaseProducts
+      const structure = generateMenuStructureFromProducts(supabaseProducts, supabaseCategories);
       setMenuStructure(structure);
     }
   }, [supabaseProducts, supabaseCategories]);
