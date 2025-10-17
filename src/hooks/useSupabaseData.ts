@@ -14,6 +14,8 @@ import {
 import { ProductFullView, createClient } from '@/lib/supabase/client';
 const supabase = createClient();
 import { MENU_STRUCTURE, getSupabaseSlug } from '@/lib/supabase/menu-structure';
+import { convertProductsArray } from '@/lib/supabase/adapters';
+import type { Product } from '@/data/products';
 
 /**
  * Hook pour récupérer les produits depuis Supabase avec cache
@@ -25,7 +27,7 @@ export function useSupabaseProducts(options?: {
   sortBy?: 'price' | 'name' | 'created_at' | 'rating';
   sortOrder?: 'asc' | 'desc';
 }) {
-  const [products, setProducts] = useState<ProductFullView[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -49,7 +51,9 @@ export function useSupabaseProducts(options?: {
           data = await getActiveProducts(options);
         }
 
-        setProducts(data);
+        // ✅ FIX: Convertir ProductFullView vers Product avec adaptateur
+        const convertedProducts = convertProductsArray(data);
+        setProducts(convertedProducts);
         setError(null);
       } catch (err) {
         console.error('Error loading products:', err);
@@ -186,14 +190,16 @@ export function useSupabaseCategories() {
  * Hook pour récupérer les meilleures ventes
  */
 export function useBestSellers(limit: number = 10) {
-  const [products, setProducts] = useState<ProductFullView[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchBestSellers() {
       try {
         const data = await getBestSellers(limit);
-        setProducts(data);
+        // ✅ FIX: Convertir vers Product avec adaptateur
+        const convertedProducts = convertProductsArray(data);
+        setProducts(convertedProducts);
       } catch (error) {
         console.error('Erreur récupération meilleures ventes:', error);
         setProducts([]);
@@ -212,14 +218,16 @@ export function useBestSellers(limit: number = 10) {
  * Hook pour récupérer les produits en promotion
  */
 export function useDiscountedProducts(minDiscount: number = 10) {
-  const [products, setProducts] = useState<ProductFullView[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchDiscounted() {
       try {
         const data = await getDiscountedProducts(minDiscount);
-        setProducts(data);
+        // ✅ FIX: Convertir vers Product avec adaptateur
+        const convertedProducts = convertProductsArray(data);
+        setProducts(convertedProducts);
       } catch (error) {
         console.error('Erreur récupération promotions:', error);
         setProducts([]);
@@ -238,14 +246,16 @@ export function useDiscountedProducts(minDiscount: number = 10) {
  * Hook pour récupérer les nouveautés
  */
 export function useNewProducts(days: number = 30, limit: number = 10) {
-  const [products, setProducts] = useState<ProductFullView[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchNew() {
       try {
         const data = await getNewProducts(days, limit);
-        setProducts(data);
+        // ✅ FIX: Convertir vers Product avec adaptateur
+        const convertedProducts = convertProductsArray(data);
+        setProducts(convertedProducts);
       } catch (error) {
         console.error('Erreur récupération nouveautés:', error);
         setProducts([]);
@@ -269,7 +279,7 @@ export function useProductSearch(query: string, options?: {
   minPrice?: number;
   maxPrice?: number;
 }) {
-  const [results, setResults] = useState<ProductFullView[]>([]);
+  const [results, setResults] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -283,14 +293,14 @@ export function useProductSearch(query: string, options?: {
       try {
         // Pour l'instant, on fait une recherche simple sur le nom
         const allProducts = await getActiveProducts();
-        const filtered = allProducts.filter(p => 
+        const filtered = allProducts.filter(p =>
           p.name.toLowerCase().includes(query.toLowerCase()) ||
           p.brand_name?.toLowerCase().includes(query.toLowerCase())
         );
-        
+
         // Appliquer les filtres supplémentaires
         let finalResults = filtered;
-        
+
         if (options?.category) {
           finalResults = finalResults.filter(p =>
             p.category_name?.toLowerCase() === options.category?.toLowerCase()
@@ -314,8 +324,10 @@ export function useProductSearch(query: string, options?: {
             p.price <= (options.maxPrice ?? Infinity)
           );
         }
-        
-        setResults(finalResults.slice(0, 10)); // Limiter à 10 résultats
+
+        // ✅ FIX: Convertir vers Product avec adaptateur
+        const convertedResults = convertProductsArray(finalResults.slice(0, 10));
+        setResults(convertedResults);
       } catch (error) {
         console.error('Erreur recherche:', error);
         setResults([]);
@@ -335,7 +347,7 @@ export function useProductSearch(query: string, options?: {
  * Hook pour récupérer un produit avec ses variants depuis Supabase
  */
 export function useProductWithVariants(slug: string) {
-  const [product, setProduct] = useState<ProductFullView | null>(null);
+  const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -355,7 +367,7 @@ export function useProductWithVariants(slug: string) {
           .single();
 
         if (error) throw error;
-        
+
         if (data) {
           // Transform to ProductFullView format
           const transformedProduct: ProductFullView = {
@@ -371,6 +383,7 @@ export function useProductWithVariants(slug: string) {
             price: parseFloat(data.price || '0'),
             original_price: data.original_price,
             discount_percentage: data.discount_percentage,
+            admin_discount_percent: data.admin_discount_percent || 0,
             status: data.status,
             warranty: data.warranty,
             delivery_time: data.delivery_time,
@@ -387,8 +400,10 @@ export function useProductWithVariants(slug: string) {
             videos: data.videos,
             reviews: data.reviews
           };
-          
-          setProduct(transformedProduct);
+
+          // ✅ FIX: Convertir vers Product avec adaptateur
+          const convertedProduct = convertProductsArray([transformedProduct])[0];
+          setProduct(convertedProduct);
         }
       } catch (err: any) {
         console.error('Error fetching product:', err);
