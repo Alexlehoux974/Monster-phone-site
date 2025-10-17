@@ -7,18 +7,14 @@ import Link from 'next/link';
 import ProductCard from '@/components/ProductCard';
 import { cn } from '@/lib/utils';
 import { useBestSellers } from '@/hooks/useSupabaseData';
-import { supabaseProductToLegacy } from '@/lib/supabase/adapters';
 
 const BestSellers = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  
-  // Récupérer les meilleures ventes depuis Supabase
-  const { products: supabaseProducts, loading } = useBestSellers(8);
-  
-  // Convertir les produits Supabase vers le format legacy
-  const bestSellers = supabaseProducts.map(supabaseProductToLegacy);
+
+  // Récupérer les meilleures ventes depuis Supabase (déjà converties par le hook)
+  const { products: bestSellers, loading } = useBestSellers(8);
 
   // Fonction pour obtenir le badge de position
   const getPositionBadge = (index: number) => {

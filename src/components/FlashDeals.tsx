@@ -7,7 +7,6 @@ import Link from 'next/link';
 import ProductCard from '@/components/ProductCard';
 import { cn } from '@/lib/utils';
 import { useDiscountedProducts } from '@/hooks/useSupabaseData';
-import { supabaseProductToLegacy } from '@/lib/supabase/adapters';
 
 interface TimeLeft {
   hours: number;
@@ -21,11 +20,9 @@ const FlashDeals = () => {
 
   // Récupérer les produits en promotion depuis Supabase (minimum 15% de réduction)
   const { products: supabaseProducts, loading } = useDiscountedProducts(15);
-  
-  // Convertir et limiter à 6 produits
-  const flashProducts = supabaseProducts
-    .slice(0, 6)
-    .map(supabaseProductToLegacy);
+
+  // Limiter à 6 produits (déjà convertis par le hook)
+  const flashProducts = supabaseProducts.slice(0, 6);
 
   // Compte à rebours
   useEffect(() => {
