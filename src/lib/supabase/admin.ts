@@ -78,6 +78,18 @@ export async function signInAdmin(email: string, password: string) {
       };
     }
 
+    // Update last_login_at on successful login
+    try {
+      await fetch('/api/admin/update-last-login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+    } catch (err) {
+      console.warn('Failed to update last_login_at:', err);
+      // Non-blocking - don't fail login if this fails
+    }
+
     return {
       data: {
         auth: authData,
@@ -102,17 +114,24 @@ export async function signOutAdmin() {
 
 export async function getAdminSession() {
   const supabase = createClient();
+  console.log('🔐 [getAdminSession] Starting session check...');
 
   const { data: { session }, error } = await supabase.auth.getSession();
 
   if (error || !session) {
+    console.log('❌ [getAdminSession] No session found:', error?.message);
     return { session: null, admin: null, error };
   }
+
+  console.log('✅ [getAdminSession] Session found for:', session.user.email);
 
   try {
     // Verify admin status via API (uses service role key)
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+    const timeoutId = setTimeout(() => controller.abort(), 8000); // 8 second timeout (increased from 5)
+
+    console.log('📡 [getAdminSession] Calling /api/admin/verify...');
+    const startTime = Date.now();
 
     const verifyResponse = await fetch('/api/admin/verify', {
       method: 'POST',
@@ -123,20 +142,26 @@ export async function getAdminSession() {
       signal: controller.signal,
     });
 
+    const responseTime = Date.now() - startTime;
+    console.log(`⏱️ [getAdminSession] Verify response received in ${responseTime}ms, status:`, verifyResponse.status);
     clearTimeout(timeoutId);
 
     if (!verifyResponse.ok) {
       const errorData = await verifyResponse.json().catch(() => ({ error: 'Unknown error' }));
+      console.error('❌ [getAdminSession] Verify failed:', errorData.error);
       return { session, admin: null, error: new Error(errorData.error || 'Admin verification failed') };
     }
 
     const verifyData = await verifyResponse.json();
+    console.log('✅ [getAdminSession] Admin verified:', verifyData.admin?.email, 'Role:', verifyData.admin?.role);
     return { session, admin: verifyData.admin, error: null };
   } catch (fetchError: any) {
     // En cas de timeout ou erreur réseau, retourner une erreur claire
     if (fetchError.name === 'AbortError') {
+      console.error('⏱️ [getAdminSession] Timeout after 8 seconds');
       return { session, admin: null, error: new Error('Timeout: impossible de vérifier le statut admin') };
     }
+    console.error('❌ [getAdminSession] Unexpected error:', fetchError);
     return { session, admin: null, error: fetchError };
   }
 }

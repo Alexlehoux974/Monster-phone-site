@@ -223,18 +223,40 @@ export default function StockManagementPage() {
   };
 
   const saveStock = async (rowId: string) => {
+    console.log('💾 [SAVE STOCK] Function called for rowId:', rowId);
+
     try {
       const row = variantRows.find((r) => r.id === rowId);
-      if (!row) return;
-
-      // Récupérer le token d'authentification Supabase
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session?.access_token) {
-        showToast('Session expirée, veuillez vous reconnecter', 'error');
+      if (!row) {
+        console.error('❌ [SAVE STOCK] Row not found:', rowId);
         return;
       }
 
+      console.log('📋 [SAVE STOCK] Row data:', {
+        id: row.id,
+        isVariant: row.isVariant,
+        stock: editingStock,
+        price: editingPrice,
+        discount: editingDiscount
+      });
+
+      // Récupérer la session courante
+      const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+
+      if (sessionError || !session?.access_token) {
+        console.error('❌ [SAVE STOCK] Session error:', sessionError);
+        showToast('Session expirée, veuillez vous reconnecter', 'error');
+        setTimeout(() => {
+          window.location.href = '/admin/login';
+        }, 2000);
+        return;
+      }
+
+      console.log('✅ [SAVE STOCK] Session OK, access_token present');
+
       if (row.isVariant) {
+        console.log('📦 [SAVE STOCK] Updating variant stock...');
+
         // Update variant stock via API route (uses service_role to bypass RLS)
         const stockResponse = await fetch('/api/admin/update-stock', {
           method: 'POST',
@@ -248,10 +270,16 @@ export default function StockManagementPage() {
           })
         });
 
+        console.log('📡 [SAVE STOCK] Stock API response status:', stockResponse.status);
+
         const stockResult = await stockResponse.json();
+        console.log('📡 [SAVE STOCK] Stock API result:', stockResult);
+
         if (!stockResponse.ok || stockResult.error) {
           throw new Error(stockResult.error || 'Failed to update stock');
         }
+
+        console.log('🏷️ [SAVE STOCK] Updating product (price, visibility, discount)...');
 
         // Update product price, visibility and discount via generic API route
         const productResponse = await fetch('/api/admin/supabase', {
@@ -272,7 +300,11 @@ export default function StockManagementPage() {
           })
         });
 
+        console.log('📡 [SAVE STOCK] Product API response status:', productResponse.status);
+
         const productResult = await productResponse.json();
+        console.log('📡 [SAVE STOCK] Product API result:', productResult);
+
         if (!productResponse.ok || productResult.error) {
           throw new Error(productResult.error || 'Failed to update product');
         }
@@ -331,6 +363,7 @@ export default function StockManagementPage() {
       }
 
       // Revalidate the main site to update stock display
+      console.log('🔄 [SAVE STOCK] Revalidating site cache...');
       try {
         await fetch('/api/revalidate', {
           method: 'POST',
@@ -342,15 +375,21 @@ export default function StockManagementPage() {
             tag: 'products'
           }),
         });
+        console.log('✅ [SAVE STOCK] Site cache revalidated');
         } catch (revalidateError) {
-        console.error('Revalidation error:', revalidateError);
+        console.error('⚠️ [SAVE STOCK] Revalidation error (non-blocking):', revalidateError);
       }
 
+      console.log('🎉 [SAVE STOCK] All operations completed successfully');
       showToast('Produit mis à jour avec succès', 'success');
       cancelEditing();
     } catch (error) {
-      console.error('Error updating stock/price:', error);
-      showToast('Erreur lors de la mise à jour', 'error');
+      console.error('❌ [SAVE STOCK] Error during save:', error);
+      console.error('❌ [SAVE STOCK] Error details:', {
+        message: error instanceof Error ? error.message : String(error),
+        stack: error instanceof Error ? error.stack : undefined
+      });
+      showToast(error instanceof Error ? error.message : 'Erreur lors de la mise à jour', 'error');
     }
   };
 

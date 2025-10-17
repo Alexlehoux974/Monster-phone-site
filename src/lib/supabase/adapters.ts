@@ -112,7 +112,7 @@ export function supabaseProductToLegacy(product: ProductFullView): Product {
     originalPrice: product.original_price,
     discount: product.discount_percentage,
     promo: product.discount_percentage ? `${product.discount_percentage}% de réduction` : undefined,
-    adminDiscountPercent: (product as any).admin_discount_percent || 0, // Réduction admin
+    adminDiscountPercent: product.admin_discount_percent || 0, // Réduction admin
     description: product.description || '',
     shortDescription: product.short_description ||
                      (product.description ? stripHtmlTags(product.description).substring(0, 150) + '...' : ''),
@@ -124,7 +124,7 @@ export function supabaseProductToLegacy(product: ProductFullView): Product {
     variants,
     // @ts-ignore - stock_quantity type issue
     stockQuantity: product.stock_quantity ?? 0, // Stock pour produits sans variants (null/undefined = 0)
-    isVisible: (product as any).is_visible !== undefined ? (product as any).is_visible : true, // Visibilité
+    isVisible: product.is_visible !== undefined ? product.is_visible : true, // Visibilité
     rating,
     reviews,
     warranty: product.warranty || '2 ans constructeur',

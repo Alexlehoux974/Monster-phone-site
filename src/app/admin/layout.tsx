@@ -42,26 +42,38 @@ export default function AdminLayout({
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
+    console.log('🚀 [ADMIN LAYOUT] useEffect triggered, pathname:', pathname);
+
     // Skip auth check on login page
     if (pathname === '/admin/login') {
+      console.log('⏭️ [ADMIN LAYOUT] Skipping auth check on login page');
       setLoading(false);
       return;
     }
 
     const checkAdmin = async () => {
+      console.log('🔐 [ADMIN LAYOUT] Starting admin check...');
       try {
         const { session, admin: adminData, error } = await getAdminSession();
 
+        console.log('🔍 [ADMIN LAYOUT] Session:', !!session, 'Admin:', !!adminData, 'Error:', error?.message);
+        if (adminData) {
+          console.log('📧 Email:', adminData.email, '👤 Rôle:', adminData.role);
+        }
+
         if (error || !adminData || !session) {
+          console.log('❌ [ADMIN LAYOUT] Redirecting to login, reason:', error?.message || 'No admin data');
           router.push('/admin/login');
           return;
         }
 
+        console.log('✅ [ADMIN LAYOUT] Setting admin state');
         setAdmin(adminData);
       } catch (err) {
-        console.error('[ADMIN LAYOUT] Unexpected error:', err);
+        console.error('❌ [ADMIN LAYOUT] Unexpected error:', err);
         router.push('/admin/login');
       } finally {
+        console.log('🏁 [ADMIN LAYOUT] Setting loading to false');
         setLoading(false);
       }
     };

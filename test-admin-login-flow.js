@@ -1,224 +1,138 @@
-const { chromium } = require('playwright');
+/**
+ * Script pour tester le flux d'authentification admin complet
+ */
 
-(async () => {
-  console.log('🔐 TEST COMPLET DU FLUX DE CONNEXION ADMIN\n');
-  console.log('=' .repeat(70));
+const { createClient } = require('@supabase/supabase-js');
 
-  const browser = await chromium.launch({ headless: true }); // Mode headless pour environnement serveur
-  const page = await browser.newPage();
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-  // Capturer TOUS les événements réseau
-  const networkEvents = [];
-  page.on('request', request => {
-    if (request.url().includes('/api/') || request.url().includes('supabase')) {
-      networkEvents.push({
-        type: 'REQUEST',
-        timestamp: new Date().toISOString(),
-        url: request.url(),
-        method: request.method(),
-        postData: request.postData()
-      });
-    }
-  });
+if (!supabaseUrl || !supabaseServiceKey) {
+  console.error('❌ Variables d\'environnement manquantes');
+  process.exit(1);
+}
 
-  page.on('response', async response => {
-    const url = response.url();
-    if (url.includes('/api/') || url.includes('supabase')) {
-      let responseBody = null;
-      try {
-        const contentType = response.headers()['content-type'];
-        if (contentType && contentType.includes('application/json')) {
-          responseBody = await response.json();
-        }
-      } catch (e) {
-        // Ignore parsing errors
-      }
+const supabase = createClient(supabaseUrl, supabaseServiceKey, {
+  auth: {
+    autoRefreshToken: false,
+    persistSession: false
+  }
+});
 
-      networkEvents.push({
-        type: 'RESPONSE',
-        timestamp: new Date().toISOString(),
-        url: url,
-        status: response.status(),
-        statusText: response.statusText(),
-        body: responseBody
-      });
-    }
-  });
+async function testAuthFlow(email) {
+  console.log(`\n🧪 Test du flux d'authentification pour: ${email}`);
+  console.log('═'.repeat(60));
 
-  // Capturer les logs console
-  const consoleLogs = [];
-  page.on('console', msg => {
-    consoleLogs.push({
-      type: msg.type(),
-      timestamp: new Date().toISOString(),
-      text: msg.text()
-    });
-  });
+  // 1. Vérifier l'utilisateur dans auth.users
+  console.log('\n📋 Étape 1: Vérification dans auth.users');
+  const { data: authUsers, error: authError } = await supabase.auth.admin.listUsers();
 
-  // Aller sur la page de login
-  console.log('\n📍 ÉTAPE 1: Navigation vers /admin/login\n');
-  await page.goto('https://monster-phone.re/admin/login', {
-    waitUntil: 'networkidle',
-    timeout: 30000
-  });
-
-  await page.waitForTimeout(2000);
-  console.log('✅ Page chargée\n');
-
-  // Vérifier que le formulaire est présent
-  const hasForm = await page.evaluate(() => {
-    return {
-      hasEmailField: !!document.querySelector('input[type="email"]'),
-      hasPasswordField: !!document.querySelector('input[type="password"]')
-    };
-  });
-
-  if (!hasForm.hasEmailField || !hasForm.hasPasswordField) {
-    console.log('❌ ERREUR: Formulaire de login incomplet!');
-    await browser.close();
+  if (authError) {
+    console.error('   ❌ Erreur:', authError.message);
     return;
   }
 
-  console.log('📍 ÉTAPE 2: Remplissage du formulaire\n');
-
-  // Demander les identifiants réels à l'utilisateur
-  console.log('⚠️  UTILISATION DES IDENTIFIANTS DE TEST');
-  console.log('Email: admin@monsterphone.re');
-  console.log('Password: (mot de passe test)');
-
-  await page.fill('input[type="email"]', 'admin@monsterphone.re');
-  await page.fill('input[type="password"]', 'Admin123!'); // Mot de passe de test
-
-  console.log('\n📍 ÉTAPE 3: Soumission du formulaire et observation du spinner\n');
-
-  // Nettoyer les événements réseau avant soumission
-  networkEvents.length = 0;
-  consoleLogs.length = 0;
-
-  // Cliquer sur le bouton de connexion
-  const loginButton = await page.locator('button').filter({ hasText: 'Se connecter' }).first();
-  await loginButton.click();
-
-  console.log('⏳ Clic effectué, observation du spinner pendant 15 secondes...\n');
-
-  // Observer le spinner pendant 15 secondes
-  for (let i = 1; i <= 15; i++) {
-    await page.waitForTimeout(1000);
-
-    const pageState = await page.evaluate(() => {
-      // Chercher le spinner de plusieurs façons
-      const hasSpinner =
-        document.querySelector('[class*="spin"]') !== null ||
-        document.querySelector('[class*="loading"]') !== null ||
-        document.querySelector('[class*="loader"]') !== null ||
-        document.querySelector('svg[class*="animate-spin"]') !== null;
-
-      const hasError =
-        document.body.innerHTML.toLowerCase().includes('erreur') ||
-        document.body.innerHTML.toLowerCase().includes('error') ||
-        document.body.innerHTML.toLowerCase().includes('invalid');
-
-      const currentUrl = window.location.href;
-      const isDashboard = currentUrl.includes('/admin') && !currentUrl.includes('/login');
-
-      return {
-        hasSpinner,
-        hasError,
-        currentUrl,
-        isDashboard
-      };
-    });
-
-    const spinnerIcon = pageState.hasSpinner ? '🔄' : '✅';
-    const statusText = pageState.isDashboard ? '🎉 DASHBOARD' :
-                      pageState.hasError ? '❌ ERREUR' :
-                      pageState.hasSpinner ? '⏳ SPINNER' : '⏸️  ATTENTE';
-
-    console.log(`[${i}s] ${spinnerIcon} ${statusText} | URL: ${pageState.currentUrl.substring(30)}`);
-
-    // Si on arrive au dashboard, c'est gagné!
-    if (pageState.isDashboard) {
-      console.log('\n✅ ✅ ✅ SUCCÈS! Redirection vers le dashboard!\n');
-      break;
-    }
-
-    // Si erreur détectée, arrêter l'observation
-    if (pageState.hasError && !pageState.hasSpinner) {
-      console.log('\n❌ Erreur détectée, arrêt de l\'observation\n');
-      break;
-    }
-  }
-
-  // Analyser les événements réseau
-  console.log('\n' + '='.repeat(70));
-  console.log('📍 ÉTAPE 4: Analyse des appels réseau\n');
-
-  if (networkEvents.length > 0) {
-    console.log(`📡 ${networkEvents.length} événements réseau enregistrés:\n`);
-
-    networkEvents.forEach((event, index) => {
-      if (event.type === 'REQUEST') {
-        console.log(`\n[${index + 1}] 📤 REQUEST`);
-        console.log(`    URL: ${event.url}`);
-        console.log(`    Method: ${event.method}`);
-        if (event.postData) {
-          console.log(`    Data: ${event.postData.substring(0, 100)}`);
-        }
-      } else {
-        console.log(`\n[${index + 1}] 📥 RESPONSE`);
-        console.log(`    URL: ${event.url}`);
-        console.log(`    Status: ${event.status} ${event.statusText}`);
-        if (event.body) {
-          console.log(`    Body: ${JSON.stringify(event.body).substring(0, 150)}`);
-        }
-      }
-    });
+  const authUser = authUsers.users.find(u => u.email === email);
+  if (authUser) {
+    console.log('   ✅ Utilisateur trouvé dans auth.users');
+    console.log(`   ID: ${authUser.id}`);
+    console.log(`   Email: ${authUser.email}`);
+    console.log(`   Confirmé: ${authUser.email_confirmed_at ? 'Oui' : 'Non'}`);
+    console.log(`   Dernière connexion: ${authUser.last_sign_in_at || 'Jamais'}`);
   } else {
-    console.log('⚠️ AUCUN événement réseau capturé!');
-    console.log('   → Le bouton de connexion ne déclenche peut-être pas d\'appel API');
+    console.log('   ❌ Utilisateur NON trouvé dans auth.users');
+    return;
   }
 
-  // Analyser les logs console
-  console.log('\n' + '='.repeat(70));
-  console.log('📍 ÉTAPE 5: Logs console JavaScript\n');
+  // 2. Vérifier dans admin_users
+  console.log('\n📋 Étape 2: Vérification dans admin_users');
+  const { data: adminUser, error: adminError } = await supabase
+    .from('admin_users')
+    .select('*')
+    .eq('email', email)
+    .maybeSingle();
 
-  const errorLogs = consoleLogs.filter(log => log.type === 'error');
-  const warningLogs = consoleLogs.filter(log => log.type === 'warning');
-  const importantLogs = consoleLogs.filter(log =>
-    log.text.toLowerCase().includes('admin') ||
-    log.text.toLowerCase().includes('auth') ||
-    log.text.toLowerCase().includes('error')
-  );
+  if (!adminUser || adminError) {
+    console.log('   ❌ Utilisateur NON trouvé dans admin_users');
+    if (adminError) console.log(`   Erreur: ${adminError.message}`);
 
-  if (errorLogs.length > 0) {
-    console.log(`❌ ${errorLogs.length} erreurs JavaScript:\n`);
-    errorLogs.forEach((log, index) => {
-      console.log(`  [${index + 1}] ${log.text.substring(0, 200)}`);
-    });
+    // Créer l'entrée admin_users
+    console.log('\n🔧 Création de l\'entrée admin_users...');
+    const { data: newAdmin, error: createError } = await supabase
+      .from('admin_users')
+      .insert({
+        email: email,
+        role: 'super_admin',
+        is_active: true,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+      })
+      .select()
+      .single();
+
+    if (createError) {
+      console.error('   ❌ Erreur lors de la création:', createError.message);
+      return;
+    }
+
+    console.log('   ✅ Entrée admin_users créée avec succès!');
+    console.log(`   ID: ${newAdmin.id}`);
+    console.log(`   Rôle: ${newAdmin.role}`);
+  } else {
+    console.log('   ✅ Utilisateur trouvé dans admin_users');
+    console.log(`   ID: ${adminUser.id}`);
+    console.log(`   Rôle: ${adminUser.role}`);
+    console.log(`   Actif: ${adminUser.is_active}`);
+
+    // Vérifier si mise à jour nécessaire
+    if (adminUser.role !== 'super_admin' || !adminUser.is_active) {
+      console.log('\n🔧 Mise à jour du rôle et du statut...');
+      const { error: updateError } = await supabase
+        .from('admin_users')
+        .update({
+          role: 'super_admin',
+          is_active: true,
+          updated_at: new Date().toISOString()
+        })
+        .eq('id', adminUser.id);
+
+      if (updateError) {
+        console.error('   ❌ Erreur lors de la mise à jour:', updateError.message);
+      } else {
+        console.log('   ✅ Rôle et statut mis à jour!');
+      }
+    }
   }
 
-  if (warningLogs.length > 0) {
-    console.log(`\n⚠️  ${warningLogs.length} avertissements:\n`);
-    warningLogs.slice(0, 5).forEach((log, index) => {
-      console.log(`  [${index + 1}] ${log.text.substring(0, 200)}`);
-    });
-  }
+  console.log('\n✅ Diagnostic terminé pour ' + email);
+}
 
-  if (importantLogs.length > 0) {
-    console.log(`\nℹ️  Logs importants (auth/admin):\n`);
-    importantLogs.slice(0, 10).forEach((log, index) => {
-      console.log(`  [${index + 1}] ${log.text.substring(0, 200)}`);
-    });
-  }
+async function main() {
+  console.log('🔍 Test du système d\'authentification admin');
+  console.log('═'.repeat(60));
 
-  // Screenshot final
-  await page.screenshot({ path: '/tmp/diagnosis-login-flow.png', fullPage: true });
-  console.log('\n📸 Screenshot: /tmp/diagnosis-login-flow.png');
+  // Tester les deux emails existants
+  await testAuthFlow('alexandre@digiqo.fr');
+  await testAuthFlow('admin@monsterphone.re');
 
-  console.log('\n' + '='.repeat(70));
-  console.log('🏁 DIAGNOSTIC TERMINÉ\n');
+  console.log('\n\n📊 RÉSUMÉ');
+  console.log('═'.repeat(60));
+  console.log('');
+  console.log('🎯 Actions recommandées:');
+  console.log('   1. Déconnectez-vous du panel admin');
+  console.log('   2. Reconnectez-vous avec un des emails ci-dessus');
+  console.log('   3. Vérifiez que le rôle affiché est "Super Admin"');
+  console.log('   4. Testez l\'enregistrement des modifications');
+  console.log('');
+  console.log('💡 Si le problème persiste:');
+  console.log('   - Videz le cache du navigateur (Ctrl+Shift+Delete)');
+  console.log('   - Essayez en navigation privée');
+  console.log('   - Vérifiez les logs de la console navigateur (F12)');
+}
 
-  // Fermer le navigateur
-  await browser.close();
-  console.log('✅ Navigateur fermé');
-})();
+main()
+  .then(() => process.exit(0))
+  .catch((error) => {
+    console.error('❌ Erreur fatale:', error);
+    process.exit(1);
+  });

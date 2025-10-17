@@ -1,15 +1,57 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Product } from '@/data/products';
 import ProductCard from './ProductCard';
+import { createClient } from '@/lib/supabase/client';
+import { getActiveProducts } from '@/lib/supabase/api';
+import { supabaseProductToLegacy } from '@/lib/supabase/adapters';
+import { sortProductsByPriority } from '@/lib/utils';
 
 interface FeaturedProductsSupabaseProps {
   products: Product[];
   title?: string;
 }
 
-export default function FeaturedProductsSupabase({ products, title }: FeaturedProductsSupabaseProps) {
+export default function FeaturedProductsSupabase({ products: initialProducts, title }: FeaturedProductsSupabaseProps) {
+  const [products, setProducts] = useState<Product[]>(initialProducts);
+
+  useEffect(() => {
+    const supabase = createClient();
+
+    // S'abonner aux changements de la table products
+    const channel = supabase
+      .channel('products-realtime')
+      .on(
+        'postgres_changes',
+        {
+          event: '*', // Écouter tous les événements (INSERT, UPDATE, DELETE)
+          schema: 'public',
+          table: 'products'
+        },
+        async (payload) => {
+          console.log('🔄 Changement détecté sur products:', payload);
+
+          // Rafraîchir tous les produits quand il y a un changement
+          try {
+            const supabaseProducts = await getActiveProducts();
+            const convertedProducts = supabaseProducts.map(supabaseProductToLegacy);
+            const featuredProducts = sortProductsByPriority(convertedProducts).slice(0, 12);
+            setProducts(featuredProducts);
+          } catch (error) {
+            console.error('Erreur lors du rafraîchissement des produits:', error);
+          }
+        }
+      )
+      .subscribe();
+
+    // Cleanup: Se désabonner quand le composant est démonté
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
+
   // Séparer les produits en 2 rangées de 6 produits
   const firstRow = products.slice(0, 6);
   const secondRow = products.slice(6, 12);

@@ -42,12 +42,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Update last login
-    await supabaseAdmin
-      .from('admin_users')
-      .update({ last_login_at: new Date().toISOString() })
-      .eq('id', adminData.id);
-
+    // Return admin data (last_login_at is updated only on actual login, not on every verification)
     return NextResponse.json({
       isAdmin: true,
       admin: {

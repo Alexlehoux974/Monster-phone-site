@@ -176,6 +176,8 @@ export interface ProductFullView {
   price: number;
   original_price?: number;
   discount_percentage?: number;
+  admin_discount_percent?: number;
+  is_visible?: boolean;
   status: string;
   warranty?: string;
   delivery_time?: string;
