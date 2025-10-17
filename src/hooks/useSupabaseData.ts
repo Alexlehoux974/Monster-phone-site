@@ -76,32 +76,55 @@ export function useSupabaseProducts(options?: {
 export function useSupabaseMenu() {
   const [menuData, setMenuData] = useState(MENU_STRUCTURE);
   const [loading, setLoading] = useState(false);
+  const [productsCache, setProductsCache] = useState<Record<string, ProductFullView[]>>({});
 
   const getProductsForCategory = useCallback(async (categorySlug: string) => {
-    // CACHE DÉSACTIVÉ pour afficher les promotions en temps réel
+    // Utiliser le cache si disponible
+    if (productsCache[categorySlug]) {
+      return productsCache[categorySlug];
+    }
+
     try {
       const supabaseSlug = getSupabaseSlug(categorySlug);
       const products = await getProductsByCategory(supabaseSlug, {
         includeSubcategories: true
       });
-
+      
+      // Mettre en cache
+      setProductsCache(prev => ({
+        ...prev,
+        [categorySlug]: products
+      }));
+      
       return products;
     } catch (error) {
       console.error(`Erreur récupération produits pour ${categorySlug}:`, error);
       return [];
     }
-  }, []);
+  }, [productsCache]);
 
   const getProductsForBrand = useCallback(async (brandSlug: string) => {
-    // CACHE DÉSACTIVÉ pour afficher les promotions en temps réel
+    // Utiliser le cache si disponible
+    const cacheKey = `brand_${brandSlug}`;
+    if (productsCache[cacheKey]) {
+      return productsCache[cacheKey];
+    }
+
     try {
       const products = await getProductsByBrand(brandSlug);
+      
+      // Mettre en cache
+      setProductsCache(prev => ({
+        ...prev,
+        [cacheKey]: products
+      }));
+      
       return products;
     } catch (error) {
       console.error(`Erreur récupération produits pour ${brandSlug}:`, error);
       return [];
     }
-  }, []);
+  }, [productsCache]);
 
   return {
     menuStructure: menuData,
