@@ -1,16 +1,32 @@
+import { createClient } from '@/lib/supabase/client';
+
 /**
  * Hook for admin Supabase operations via API route
  * Bypasses RLS using service_role key
  */
 export function useAdminSupabase() {
+  const supabase = createClient();
+
+  const getAuthHeaders = async () => {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session?.access_token) {
+      throw new Error('Non authentifié');
+    }
+    return {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${session.access_token}`,
+    };
+  };
+
   const adminUpdate = async (
     table: string,
     data: object,
     filters: { column: string; value: any }[]
   ) => {
+    const headers = await getAuthHeaders();
     const response = await fetch('/api/admin/supabase', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers,
       body: JSON.stringify({
         operation: 'update',
         table,
@@ -28,9 +44,10 @@ export function useAdminSupabase() {
   };
 
   const adminInsert = async (table: string, data: object | object[]) => {
+    const headers = await getAuthHeaders();
     const response = await fetch('/api/admin/supabase', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers,
       body: JSON.stringify({
         operation: 'insert',
         table,
@@ -47,9 +64,10 @@ export function useAdminSupabase() {
   };
 
   const adminUpsert = async (table: string, data: object | object[]) => {
+    const headers = await getAuthHeaders();
     const response = await fetch('/api/admin/supabase', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers,
       body: JSON.stringify({
         operation: 'upsert',
         table,
@@ -69,9 +87,10 @@ export function useAdminSupabase() {
     table: string,
     filters: { column: string; value: any }[]
   ) => {
+    const headers = await getAuthHeaders();
     const response = await fetch('/api/admin/supabase', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers,
       body: JSON.stringify({
         operation: 'delete',
         table,

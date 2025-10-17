@@ -149,10 +149,12 @@ function mapCategoryToLegacy(supabaseCategory: string): string {
     'audio': 'Audio',
     'montres': 'Montres',
     'led': 'LED',
-    'eclairage-led': 'LED',  // Ajouter la vraie catégorie de la base
-    'éclairage-led': 'LED',  // Variation possible
-    'eclairage led': 'LED',  // Autre variation
-    'accessoires': 'Accessoires'
+    'eclairage-led': 'LED',
+    'éclairage-led': 'LED',
+    'eclairage led': 'LED',
+    'accessoires': 'Accessoires',
+    'appareils photo': 'Appareils Photo',
+    'appareils-photo': 'Appareils Photo'
   };
 
   // ✅ FIX: Rendre insensible à la casse

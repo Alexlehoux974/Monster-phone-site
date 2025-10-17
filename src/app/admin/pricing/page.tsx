@@ -118,10 +118,19 @@ export default function PricingManagementPage() {
         discount: editingData.discount,
       };
 
+      // Get the current session token
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session?.access_token) {
+        throw new Error('Non authentifié');
+      }
+
       // Update via API route (uses service_role to bypass RLS)
       const response = await fetch('/api/admin/supabase', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${session.access_token}`,
+        },
         body: JSON.stringify({
           operation: 'update',
           table: 'products',
