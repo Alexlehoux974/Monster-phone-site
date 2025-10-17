@@ -154,6 +154,8 @@ export async function getAdminSession() {
 
     const verifyData = await verifyResponse.json();
     console.log('✅ [getAdminSession] Admin verified:', verifyData.admin?.email, 'Role:', verifyData.admin?.role);
+    console.log('📦 [getAdminSession] Full verifyData:', JSON.stringify(verifyData, null, 2));
+    console.log('📦 [getAdminSession] Returning admin object:', JSON.stringify(verifyData.admin, null, 2));
     return { session, admin: verifyData.admin, error: null };
   } catch (fetchError: any) {
     // En cas de timeout ou erreur réseau, retourner une erreur claire
