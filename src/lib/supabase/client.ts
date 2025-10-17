@@ -28,7 +28,8 @@ export function createClient() {
       persistSession: true,
       autoRefreshToken: true,
       storage: window.localStorage,
-      storageKey: 'supabase.auth.token',
+      // Use default Supabase storage key format: sb-{project-ref}-auth-token
+      // storageKey: 'supabase.auth.token', // REMOVED - using default
     },
     realtime: {
       params: {
