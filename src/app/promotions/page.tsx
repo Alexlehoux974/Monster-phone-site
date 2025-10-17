@@ -21,7 +21,6 @@ import {
   Package
 } from 'lucide-react';
 import { useDiscountedProducts } from '@/hooks/useSupabaseData';
-import { supabaseProductToLegacy } from '@/lib/supabase/adapters';
 import type { Product } from '@/data/products';
 
 // Ces IDs seront utilisés pour filtrer les produits de Supabase
@@ -208,20 +207,18 @@ export default function PromotionsPage() {
   const border = useMotionTemplate`1px solid ${color}`;
   const boxShadow = useMotionTemplate`0px 4px 24px ${color}`;
 
-  // Convertir les produits Supabase et ajouter les infos de promotion
+  // Ajouter les infos de promotion aux produits (déjà convertis par le hook)
   useEffect(() => {
     if (supabaseProducts && supabaseProducts.length > 0) {
-      const legacyProducts = supabaseProducts
-        .map(supabaseProductToLegacy)
-        .map(product => ({
-          ...product,
-          promotion: {
-            discount: product.discount || 0,
-            originalPrice: product.originalPrice ? `${product.originalPrice}€` : '',
-            promoPrice: `${product.price}€`
-          }
-        }));
-      setProductsWithPromotions(legacyProducts);
+      const productsWithPromos = supabaseProducts.map(product => ({
+        ...product,
+        promotion: {
+          discount: product.discount || 0,
+          originalPrice: product.originalPrice ? `${product.originalPrice}€` : '',
+          promoPrice: `${product.price}€`
+        }
+      }));
+      setProductsWithPromotions(productsWithPromos);
     }
   }, [supabaseProducts]);
 
