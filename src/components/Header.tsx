@@ -12,7 +12,7 @@ import { useRouter } from 'next/navigation';
 import debounce from 'lodash.debounce';
 import ImageWithFallback from '@/components/ImageWithFallback';
 import { useSupabaseProducts, useSupabaseCategories } from '@/hooks/useSupabaseData';
-import { supabaseProductToLegacy, generateMenuStructureFromProducts } from '@/lib/supabase/adapters';
+import { generateMenuStructureFromProducts } from '@/lib/supabase/adapters';
 
 // Composant pour la barre d'urgence promotionnelle
 const PromoBar = () => (
@@ -664,26 +664,22 @@ export default function Header() {
   // Charger tous les produits depuis Supabase et générer la structure du menu dynamiquement
   useEffect(() => {
     if (supabaseProducts && supabaseProducts.length > 0 && supabaseCategories && supabaseCategories.length > 0) {
-      // Convertir les produits Supabase en format legacy
-      const legacyProducts = supabaseProducts.map(supabaseProductToLegacy);
-
-      // Utiliser TOUS les produits Supabase sans filtrage
-      setAllProducts(legacyProducts);
+      // Les produits sont déjà convertis par useSupabaseProducts
+      setAllProducts(supabaseProducts);
 
       // Générer dynamiquement la structure du menu depuis TOUS les produits Supabase avec les catégories
-      const dynamicMenuStructure = generateMenuStructureFromProducts(legacyProducts, supabaseCategories);
+      const dynamicMenuStructure = generateMenuStructureFromProducts(supabaseProducts, supabaseCategories);
 
       setMenuStructure(dynamicMenuStructure);
     } else {
       // Fallback: créer des catégories basiques à partir des produits seuls
       if (supabaseProducts && supabaseProducts.length > 0) {
-        const legacyProducts = supabaseProducts.map(supabaseProductToLegacy);
-        setAllProducts(legacyProducts);
+        setAllProducts(supabaseProducts);
 
         // Créer des catégories simples depuis les produits
         const categoryMap = new Map<string, CategoryStructure>();
 
-        legacyProducts.forEach(product => {
+        supabaseProducts.forEach(product => {
           const catName = product.category;
           if (!categoryMap.has(catName)) {
             categoryMap.set(catName, {
