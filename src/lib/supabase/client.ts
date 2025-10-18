@@ -10,7 +10,7 @@ declare global {
   }
 }
 
-export function createClient() {
+export function createClient(forceNew = false) {
   // Server-side: create new instance (no persistence needed)
   if (typeof window === 'undefined') {
     return createSupabaseClient(supabaseUrl, supabaseAnonKey, {
@@ -19,6 +19,12 @@ export function createClient() {
         autoRefreshToken: false,
       }
     });
+  }
+
+  // Browser-side: destroy and recreate if forceNew is true
+  if (forceNew && window.__supabaseClient) {
+    console.log('🔄 [createClient] Destroying old client instance...');
+    delete window.__supabaseClient;
   }
 
   // Browser-side: use global singleton to ensure same instance across all bundles

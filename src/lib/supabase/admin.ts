@@ -141,18 +141,12 @@ export async function signOutAdmin() {
 }
 
 export async function getAdminSession() {
-  const supabase = createClient();
+  // CRITICAL FIX: Force recreation of client to ensure fresh session from localStorage
+  // The singleton may have been created before login, so we destroy and recreate it
   console.log('🔐 [getAdminSession] Starting session check...');
+  console.log('🔄 [getAdminSession] Forcing fresh client creation from localStorage...');
 
-  // CRITICAL FIX: Force client to reload session from localStorage
-  // This is necessary because the singleton client may have been created before login
-  console.log('🔄 [getAdminSession] Refreshing session from localStorage...');
-  try {
-    // This will force the client to read the session from localStorage
-    await supabase.auth.refreshSession();
-  } catch (refreshError) {
-    console.log('⚠️ [getAdminSession] Refresh warning (may be normal):', refreshError);
-  }
+  const supabase = createClient(true); // forceNew = true
 
   console.log('🔍 [getAdminSession] Calling supabase.auth.getSession()...');
   const { data: { session }, error } = await supabase.auth.getSession();
