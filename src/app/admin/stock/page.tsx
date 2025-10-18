@@ -138,7 +138,7 @@ export default function StockManagementPage() {
               price: product.price,
               isVariant: true,
               isVisible: product.is_visible !== undefined ? product.is_visible : true,
-              adminDiscountPercent: product.admin_discount_percent || 0,
+              adminDiscountPercent: variant.admin_discount_percent || 0, // IMPORTANT: Utiliser la promo du variant, pas du produit parent
             });
           });
         } else {
