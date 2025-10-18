@@ -35,6 +35,16 @@ async function getProductBySlug(slug: string) {
   if (error || !data) return null;
 
   // Construire un ProductFullView à partir des données Supabase
+  const basePrice = typeof data.price === 'string' ? parseFloat(data.price) : data.price;
+  const adminDiscount = data.admin_discount_percent || 0;
+
+  // Calculer le prix final et le prix original si promotion admin active
+  const finalPrice = adminDiscount > 0
+    ? basePrice * (1 - adminDiscount / 100)
+    : basePrice;
+  const originalPrice = adminDiscount > 0 ? basePrice : (data.original_price || undefined);
+  const discountPercentage = adminDiscount > 0 ? adminDiscount : (data.discount_percentage || undefined);
+
   const product: ProductFullView = {
     id: data.id,
     sku: data.sku,
@@ -45,9 +55,9 @@ async function getProductBySlug(slug: string) {
     subcategory_name: data.subcategory || undefined,
     description: data.description || undefined,
     short_description: data.short_description || undefined,
-    price: typeof data.price === 'string' ? parseFloat(data.price) : data.price,
-    original_price: data.original_price || undefined,
-    discount_percentage: data.discount_percentage || undefined,
+    price: finalPrice,
+    original_price: originalPrice,
+    discount_percentage: discountPercentage,
     status: data.status,
     // @ts-ignore - stock_quantity type issue
     stock_quantity: data.stock_quantity || 0,
@@ -90,6 +100,16 @@ async function getRelatedProducts(brandName: string, currentProductId: string) {
 
   // Convertir tous les produits
   return data.map(item => {
+    const basePrice = typeof item.price === 'string' ? parseFloat(item.price) : item.price;
+    const adminDiscount = item.admin_discount_percent || 0;
+
+    // Calculer le prix final et le prix original si promotion admin active
+    const finalPrice = adminDiscount > 0
+      ? basePrice * (1 - adminDiscount / 100)
+      : basePrice;
+    const originalPrice = adminDiscount > 0 ? basePrice : (item.original_price || undefined);
+    const discountPercentage = adminDiscount > 0 ? adminDiscount : (item.discount_percentage || undefined);
+
     const product: ProductFullView = {
       id: item.id,
       sku: item.sku,
@@ -100,9 +120,9 @@ async function getRelatedProducts(brandName: string, currentProductId: string) {
       subcategory_name: item.subcategory || undefined,
       description: item.description || undefined,
       short_description: item.short_description || undefined,
-      price: typeof item.price === 'string' ? parseFloat(item.price) : item.price,
-      original_price: item.original_price || undefined,
-      discount_percentage: item.discount_percentage || undefined,
+      price: finalPrice,
+      original_price: originalPrice,
+      discount_percentage: discountPercentage,
       status: item.status,
       // @ts-ignore - stock_quantity type issue
       stock_quantity: item.stock_quantity || 0,

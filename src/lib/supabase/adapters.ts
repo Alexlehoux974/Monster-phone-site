@@ -37,7 +37,7 @@ export function supabaseProductToLegacy(product: ProductFullView): Product {
 
   // Construire les spécifications
   const specifications: ProductSpecification[] = [];
-  
+
   // Ajouter les spécifications depuis les données Supabase
   if (product.specifications) {
     Object.entries(product.specifications).forEach(([key, value]) => {
@@ -73,12 +73,12 @@ export function supabaseProductToLegacy(product: ProductFullView): Product {
 
   // Utiliser brand_name de la vue products_full, ou extraire depuis le nom du produit
   let brandName = product.brand_name;
-  
+
   // Toujours vérifier dans le nom du produit pour Monster, même si brand_name existe
   // car il semble y avoir un problème avec brand_name qui n'est pas toujours défini
   if (product.name) {
     const nameLower = product.name.toLowerCase();
-    
+
     // Forcer la détection pour Monster
     if (nameLower.includes('monster')) {
       brandName = 'Monster';
@@ -99,7 +99,16 @@ export function supabaseProductToLegacy(product: ProductFullView): Product {
       }
     }
   }
-  
+
+  // Calculer le prix final en tenant compte de la promotion admin
+  const adminDiscountPercent = product.admin_discount_percent || 0;
+  const basePrice = product.price;
+  const finalPrice = adminDiscountPercent > 0
+    ? basePrice * (1 - adminDiscountPercent / 100)
+    : basePrice;
+  const finalOriginalPrice = adminDiscountPercent > 0 ? basePrice : product.original_price;
+  const finalDiscountPercent = adminDiscountPercent > 0 ? adminDiscountPercent : product.discount_percentage;
+
   return {
     id: product.id,
     airtableId: product.id, // Utiliser l'ID Supabase comme airtableId pour compatibilité
@@ -108,11 +117,11 @@ export function supabaseProductToLegacy(product: ProductFullView): Product {
     brand: brandName || 'Sans marque',
     category: mapCategoryToLegacy(product.category_name || ''),
     subcategory: mapSubcategoryToLegacy(product.subcategory_name),
-    price: product.price,
-    originalPrice: product.original_price,
-    discount: product.discount_percentage,
-    promo: product.discount_percentage ? `${product.discount_percentage}% de réduction` : undefined,
-    adminDiscountPercent: product.admin_discount_percent || 0, // Réduction admin
+    price: finalPrice,
+    originalPrice: finalOriginalPrice,
+    discount: finalDiscountPercent,
+    promo: finalDiscountPercent ? `${finalDiscountPercent}% de réduction` : undefined,
+    adminDiscountPercent: adminDiscountPercent, // Réduction admin
     description: product.description || '',
     shortDescription: product.short_description ||
                      (product.description ? stripHtmlTags(product.description).substring(0, 150) + '...' : ''),
