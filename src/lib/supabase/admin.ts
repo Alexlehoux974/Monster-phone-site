@@ -160,23 +160,56 @@ export async function signOutAdmin() {
 }
 
 export async function getAdminSession() {
-  // CRITICAL FIX: Force recreation of client to ensure fresh session from localStorage
-  // The singleton may have been created before login, so we destroy and recreate it
   console.log('🔐 [getAdminSession] Starting session check...');
-  console.log('🔄 [getAdminSession] Forcing fresh client creation from localStorage...');
 
-  const supabase = createClient(true); // forceNew = true
+  // NOUVELLE APPROCHE: Lire directement depuis localStorage au lieu d'utiliser getSession()
+  // qui semble bloquer après une navigation
+  const storageKey = 'sb-nswlznqoadjffpxkagoz-auth-token';
 
-  console.log('🔍 [getAdminSession] Calling supabase.auth.getSession()...');
-  const { data: { session }, error } = await supabase.auth.getSession();
-  console.log('📦 [getAdminSession] getSession result:', { hasSession: !!session, error: error?.message });
+  let session = null;
+  let error = null;
+
+  try {
+    console.log('📦 [getAdminSession] Reading session directly from localStorage...');
+    const storedSession = localStorage.getItem(storageKey);
+
+    if (storedSession) {
+      const parsedData = JSON.parse(storedSession);
+      console.log('✅ [getAdminSession] Found session in localStorage');
+
+      // Vérifier que la session n'est pas expirée
+      const expiresAt = parsedData.expires_at;
+      const now = Math.floor(Date.now() / 1000);
+
+      if (expiresAt && expiresAt > now) {
+        session = {
+          access_token: parsedData.access_token,
+          refresh_token: parsedData.refresh_token,
+          expires_at: parsedData.expires_at,
+          expires_in: parsedData.expires_in,
+          token_type: parsedData.token_type,
+          user: parsedData.user
+        };
+        console.log('✅ [getAdminSession] Session valid, expires at:', new Date(expiresAt * 1000).toLocaleString());
+      } else {
+        console.log('❌ [getAdminSession] Session expired');
+        error = new Error('Session expirée');
+      }
+    } else {
+      console.log('❌ [getAdminSession] No session in localStorage');
+      error = new Error('No session found');
+    }
+  } catch (parseError) {
+    console.error('❌ [getAdminSession] Error reading localStorage:', parseError);
+    error = parseError as Error;
+  }
 
   if (error || !session) {
     console.log('❌ [getAdminSession] No session found:', error?.message);
     return { session: null, admin: null, error };
   }
 
-  console.log('✅ [getAdminSession] Session found for:', session.user.email);
+  console.log('✅ [getAdminSession] Session found for:', session.user?.email);
 
   try {
     // Verify admin status via API (uses service role key)
