@@ -241,17 +241,6 @@ export default function AdminDashboard() {
               <ArrowUp className="w-4 h-4 text-gray-500 group-hover:text-white transition-colors" />
             </a>
             <a
-              href="/admin/pricing"
-              className="flex items-center gap-3 p-3 rounded-lg bg-gray-700/50 hover:bg-gray-700 transition-colors group"
-            >
-              <TrendingUp className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
-              <div className="flex-1">
-                <p className="text-sm font-medium text-white">Prix & Promotions</p>
-                <p className="text-xs text-gray-400">Gérer les tarifs</p>
-              </div>
-              <ArrowUp className="w-4 h-4 text-gray-500 group-hover:text-white transition-colors" />
-            </a>
-            <a
               href="/admin/banners"
               className="flex items-center gap-3 p-3 rounded-lg bg-gray-700/50 hover:bg-gray-700 transition-colors group"
             >

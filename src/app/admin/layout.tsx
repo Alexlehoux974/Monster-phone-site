@@ -25,7 +25,6 @@ interface NavItem {
 const navigation: NavItem[] = [
   { name: 'Tableau de bord', href: '/admin', icon: LayoutDashboard },
   { name: 'Gestion Stock', href: '/admin/stock', icon: Package },
-  { name: 'Prix & Promotions', href: '/admin/pricing', icon: DollarSign },
   { name: 'Collections', href: '/admin/collections', icon: Tag },
   { name: 'Bannières', href: '/admin/banners', icon: Megaphone },
 ];
