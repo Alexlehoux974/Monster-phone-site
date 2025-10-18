@@ -144,7 +144,12 @@ export async function getAdminSession() {
   const supabase = createClient();
   console.log('🔐 [getAdminSession] Starting session check...');
 
+  // Wait a tiny bit to ensure localStorage is ready
+  await new Promise(resolve => setTimeout(resolve, 100));
+
+  console.log('🔍 [getAdminSession] Calling supabase.auth.getSession()...');
   const { data: { session }, error } = await supabase.auth.getSession();
+  console.log('📦 [getAdminSession] getSession result:', { hasSession: !!session, error: error?.message });
 
   if (error || !session) {
     console.log('❌ [getAdminSession] No session found:', error?.message);
