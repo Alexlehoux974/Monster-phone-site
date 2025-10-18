@@ -82,6 +82,7 @@ export default function StockManagementPage() {
   const [editingPrice, setEditingPrice] = useState<number>(0);
   const [editingVisible, setEditingVisible] = useState<boolean>(true);
   const [editingDiscount, setEditingDiscount] = useState<number>(0);
+  const [saving, setSaving] = useState(false); // État de sauvegarde en cours
   const [toast, setToast] = useState<{
     message: string;
     type: 'success' | 'error' | 'warning' | 'info';
@@ -225,10 +226,19 @@ export default function StockManagementPage() {
   const saveStock = async (rowId: string) => {
     console.log('💾 [SAVE STOCK] Function called for rowId:', rowId);
 
+    // Empêcher les doubles clics
+    if (saving) {
+      console.log('⚠️ [SAVE STOCK] Already saving, ignoring click');
+      return;
+    }
+
+    setSaving(true);
+
     try {
       const row = variantRows.find((r) => r.id === rowId);
       if (!row) {
         console.error('❌ [SAVE STOCK] Row not found:', rowId);
+        setSaving(false);
         return;
       }
 
@@ -246,6 +256,7 @@ export default function StockManagementPage() {
       if (sessionError || !session?.access_token) {
         console.error('❌ [SAVE STOCK] Session error:', sessionError);
         showToast('Session expirée, veuillez vous reconnecter', 'error');
+        setSaving(false); // Réinitialiser avant redirection
         setTimeout(() => {
           window.location.href = '/admin/login';
         }, 2000);
@@ -386,6 +397,11 @@ export default function StockManagementPage() {
 
       console.log('🎉 [SAVE STOCK] All operations completed successfully');
       showToast('Produit mis à jour avec succès', 'success');
+
+      // Force reload data from database to ensure consistency
+      console.log('🔄 [SAVE STOCK] Reloading data from database...');
+      await loadData();
+
       cancelEditing();
     } catch (error) {
       console.error('❌ [SAVE STOCK] Error during save:', error);
@@ -394,6 +410,9 @@ export default function StockManagementPage() {
         stack: error instanceof Error ? error.stack : undefined
       });
       showToast(error instanceof Error ? error.message : 'Erreur lors de la mise à jour', 'error');
+    } finally {
+      // Toujours réinitialiser l'état de sauvegarde
+      setSaving(false);
     }
   };
 
