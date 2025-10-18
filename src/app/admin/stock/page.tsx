@@ -255,33 +255,38 @@ export default function StockManagementPage() {
       console.log('✅ [SAVE STOCK] Session OK, access_token present');
 
       if (row.isVariant) {
-        console.log('📦 [SAVE STOCK] Updating variant stock...');
+        console.log('📦 [SAVE STOCK] Updating variant (stock + promo)...');
 
-        // Update variant stock via API route (uses service_role to bypass RLS)
-        const stockResponse = await fetch('/api/admin/update-stock', {
+        // Update variant stock AND discount via generic API route
+        const variantResponse = await fetch('/api/admin/supabase', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${session.access_token}` // Token explicite
           },
           body: JSON.stringify({
-            variantId: row.variantId,
-            stock: editingStock
+            operation: 'update',
+            table: 'product_variants',
+            data: {
+              stock: editingStock,
+              admin_discount_percent: editingDiscount
+            },
+            filters: [{ column: 'id', value: row.variantId }]
           })
         });
 
-        console.log('📡 [SAVE STOCK] Stock API response status:', stockResponse.status);
+        console.log('📡 [SAVE STOCK] Variant API response status:', variantResponse.status);
 
-        const stockResult = await stockResponse.json();
-        console.log('📡 [SAVE STOCK] Stock API result:', stockResult);
+        const variantResult = await variantResponse.json();
+        console.log('📡 [SAVE STOCK] Variant API result:', variantResult);
 
-        if (!stockResponse.ok || stockResult.error) {
-          throw new Error(stockResult.error || 'Failed to update stock');
+        if (!variantResponse.ok || variantResult.error) {
+          throw new Error(variantResult.error || 'Failed to update variant');
         }
 
-        console.log('🏷️ [SAVE STOCK] Updating product (price, visibility, discount)...');
+        console.log('🏷️ [SAVE STOCK] Updating product (price, visibility)...');
 
-        // Update product price, visibility and discount via generic API route
+        // Update product price and visibility (NOT discount - it's now per-variant)
         const productResponse = await fetch('/api/admin/supabase', {
           method: 'POST',
           headers: {
@@ -293,8 +298,7 @@ export default function StockManagementPage() {
             table: 'products',
             data: {
               price: editingPrice,
-              is_visible: editingVisible,
-              admin_discount_percent: editingDiscount
+              is_visible: editingVisible
             },
             filters: [{ column: 'id', value: row.productId }]
           })

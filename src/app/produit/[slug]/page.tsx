@@ -36,7 +36,11 @@ async function getProductBySlug(slug: string) {
 
   // Construire un ProductFullView à partir des données Supabase
   const basePrice = typeof data.price === 'string' ? parseFloat(data.price) : data.price;
-  const adminDiscount = data.admin_discount_percent || 0;
+
+  // IMPORTANT: Si le produit a des variants, la promo est gérée au niveau de chaque variant
+  // Si le produit n'a PAS de variants, la promo du produit parent s'applique
+  const hasVariants = data.product_variants && data.product_variants.length > 0;
+  const adminDiscount = hasVariants ? 0 : (data.admin_discount_percent || 0);
 
   // Calculer le prix final et le prix original si promotion admin active
   const finalPrice = adminDiscount > 0
@@ -101,7 +105,11 @@ async function getRelatedProducts(brandName: string, currentProductId: string) {
   // Convertir tous les produits
   return data.map(item => {
     const basePrice = typeof item.price === 'string' ? parseFloat(item.price) : item.price;
-    const adminDiscount = item.admin_discount_percent || 0;
+
+    // IMPORTANT: Si le produit a des variants, la promo est gérée au niveau de chaque variant
+    // Si le produit n'a PAS de variants, la promo du produit parent s'applique
+    const hasVariants = item.product_variants && item.product_variants.length > 0;
+    const adminDiscount = hasVariants ? 0 : (item.admin_discount_percent || 0);
 
     // Calculer le prix final et le prix original si promotion admin active
     const finalPrice = adminDiscount > 0

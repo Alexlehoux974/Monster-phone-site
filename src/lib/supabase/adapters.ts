@@ -32,7 +32,8 @@ export function supabaseProductToLegacy(product: ProductFullView): Product {
     ean: v.ean || '',
     stock: v.stock || 0,
     images: v.images || [],
-    is_default: v.is_default
+    is_default: v.is_default,
+    adminDiscountPercent: v.admin_discount_percent || 0 // Promotion admin spécifique au variant
   })) || [];
 
   // Construire les spécifications
@@ -101,7 +102,10 @@ export function supabaseProductToLegacy(product: ProductFullView): Product {
   }
 
   // Calculer le prix final en tenant compte de la promotion admin
-  const adminDiscountPercent = product.admin_discount_percent || 0;
+  // IMPORTANT: Si le produit a des variants, la promo est gérée au niveau de chaque variant
+  // Si le produit n'a PAS de variants, la promo du produit parent s'applique
+  const hasVariants = product.variants && product.variants.length > 0;
+  const adminDiscountPercent = hasVariants ? 0 : (product.admin_discount_percent || 0);
   const basePrice = product.price;
   const finalPrice = adminDiscountPercent > 0
     ? basePrice * (1 - adminDiscountPercent / 100)

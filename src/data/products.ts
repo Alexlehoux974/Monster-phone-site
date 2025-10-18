@@ -9,6 +9,7 @@ export interface ProductVariant {
   stock: number;
   images?: string[];
   is_default?: boolean;
+  adminDiscountPercent?: number; // Promotion admin spécifique à ce variant (0-100)
 }
 
 export interface ProductSpecification {
