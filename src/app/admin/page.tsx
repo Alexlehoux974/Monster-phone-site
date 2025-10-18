@@ -24,12 +24,14 @@ interface DashboardStats {
 }
 
 export default function AdminDashboard() {
+  console.log('🎯 [ADMIN DASHBOARD] Component rendering...');
   const router = useRouter();
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [checking, setChecking] = useState(true);
 
   useEffect(() => {
+    console.log('🔍 [ADMIN DASHBOARD] checkAuth useEffect triggered');
     const checkAuth = async () => {
       // Lire directement depuis localStorage au lieu d'utiliser getSession() qui bloque
       const storageKey = 'sb-nswlznqoadjffpxkagoz-auth-token';
@@ -63,14 +65,17 @@ export default function AdminDashboard() {
   }, [router]);
 
   useEffect(() => {
+    console.log('📊 [ADMIN DASHBOARD] loadStats useEffect triggered, checking=', checking);
     if (checking) return;
 
     const loadStats = async () => {
+      console.log('⏳ [ADMIN DASHBOARD] Loading stats...');
       try {
         const data = await getDashboardStats();
+        console.log('✅ [ADMIN DASHBOARD] Stats loaded:', data);
         setStats(data);
       } catch (error) {
-        console.error('Erreur chargement statistiques:', error);
+        console.error('❌ [ADMIN DASHBOARD] Erreur chargement statistiques:', error);
         // Afficher des stats vides en cas d'erreur
         setStats({
           totalProducts: 0,

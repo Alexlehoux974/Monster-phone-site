@@ -41,6 +41,47 @@ export interface PromoBanner {
 }
 
 // ========================================
+// Helper Functions - REST API Auth
+// ========================================
+
+/**
+ * Get authenticated fetch headers for Supabase REST API
+ * This bypasses the blocking getSession() and setSession() issues
+ */
+export function getAuthHeaders(): { headers: HeadersInit; url: string } | null {
+  try {
+    const storageKey = 'sb-nswlznqoadjffpxkagoz-auth-token';
+    const storedSession = localStorage.getItem(storageKey);
+
+    if (!storedSession) {
+      console.error('❌ [getAuthHeaders] No session found in localStorage');
+      return null;
+    }
+
+    const parsedData = JSON.parse(storedSession);
+    const accessToken = parsedData.access_token;
+
+    if (!accessToken) {
+      console.error('❌ [getAuthHeaders] No access token in session');
+      return null;
+    }
+
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+    const headers = {
+      'apikey': process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      'Authorization': `Bearer ${accessToken}`,
+      'Content-Type': 'application/json',
+      'Prefer': 'count=exact'
+    };
+
+    return { headers, url: supabaseUrl };
+  } catch (error) {
+    console.error('❌ [getAuthHeaders] Error getting auth headers:', error);
+    return null;
+  }
+}
+
+// ========================================
 // Admin Authentication
 // ========================================
 
@@ -550,58 +591,108 @@ export async function updateProductStatus(productId: string, status: 'active' | 
 // ========================================
 
 export async function getDashboardStats() {
-  const supabase = createClient();
+  console.log('🔧 [getDashboardStats] Starting stats fetch...');
 
   try {
-    // Total products
-    const { count: totalProducts, error: totalError } = await supabase
-      .from('products')
-      .select('*', { count: 'exact', head: true })
-      .neq('status', 'discontinued');
+    // Utiliser l'API REST directement au lieu de passer par Supabase client
+    // car getSession() et setSession() bloquent indéfiniment
+    console.log('🔐 [getDashboardStats] Reading session from localStorage...');
+    const storageKey = 'sb-nswlznqoadjffpxkagoz-auth-token';
+    const storedSession = localStorage.getItem(storageKey);
 
-    if (totalError) throw totalError;
+    if (!storedSession) {
+      console.error('❌ [getDashboardStats] No session found in localStorage');
+      throw new Error('Session non trouvée');
+    }
 
-    // Active products
-    const { count: activeProducts, error: activeError } = await supabase
-      .from('products')
-      .select('*', { count: 'exact', head: true })
-      .eq('status', 'active');
+    const parsedData = JSON.parse(storedSession);
+    const accessToken = parsedData.access_token;
+    console.log('✅ [getDashboardStats] Access token extracted');
 
-    if (activeError) throw activeError;
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+    const headers = {
+      'apikey': process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      'Authorization': `Bearer ${accessToken}`,
+      'Content-Type': 'application/json',
+      'Prefer': 'count=exact'
+    };
 
-    // Out of stock products
-    const { count: outOfStock, error: stockError } = await supabase
-      .from('products')
-      .select('*', { count: 'exact', head: true })
-      .or('status.eq.out-of-stock,stock_quantity.lte.0');
+    console.log('📊 [getDashboardStats] Fetching stats with direct API calls...');
 
-    if (stockError) throw stockError;
+    // IMPORTANT: Compter les VARIANTS individuellement pour synchroniser avec la page Gestion du Stock
+    // Récupérer tous les produits avec leurs variants
+    console.log('📊 [getDashboardStats] Fetching products with variants...');
+    const productsResponse = await fetch(
+      `${supabaseUrl}/rest/v1/products?select=id,status,stock_quantity,product_variants(id,stock)&order=name.asc`,
+      { headers }
+    );
+
+    if (!productsResponse.ok) {
+      throw new Error('Failed to fetch products');
+    }
+
+    const productsData = await productsResponse.json();
+    console.log('✅ [getDashboardStats] Products fetched:', productsData.length);
+
+    // Compter les variants comme dans la page stock
+    let totalVariants = 0;
+    let inStockVariants = 0;
+    let outOfStockVariants = 0;
+
+    productsData.forEach((product: any) => {
+      if (product.product_variants && product.product_variants.length > 0) {
+        // Produit avec variants - compter chaque variant
+        product.product_variants.forEach((variant: any) => {
+          totalVariants++;
+          if (variant.stock > 0) {
+            inStockVariants++;
+          } else {
+            outOfStockVariants++;
+          }
+        });
+      } else {
+        // Produit sans variant - compter comme 1 item
+        totalVariants++;
+        if (product.stock_quantity > 0) {
+          inStockVariants++;
+        } else {
+          outOfStockVariants++;
+        }
+      }
+    });
+
+    console.log('✅ [getDashboardStats] Variants counted - Total:', totalVariants, 'In stock:', inStockVariants, 'Out of stock:', outOfStockVariants);
 
     // Total collections
-    const { count: totalCollections, error: collectionsError } = await supabase
-      .from('collections')
-      .select('*', { count: 'exact', head: true })
-      .eq('is_active', true);
-
-    if (collectionsError) throw collectionsError;
+    console.log('📊 [getDashboardStats] Fetching total collections...');
+    const collectionsResponse = await fetch(
+      `${supabaseUrl}/rest/v1/collections?is_active=eq.true&select=*`,
+      { headers: { ...headers, 'Prefer': 'count=exact' }, method: 'HEAD' }
+    );
+    const totalCollections = parseInt(collectionsResponse.headers.get('content-range')?.split('/')[1] || '0');
+    console.log('✅ [getDashboardStats] Total collections:', totalCollections);
 
     // Active banners
-    const { count: activeBanners, error: bannersError } = await supabase
-      .from('promo_banners')
-      .select('*', { count: 'exact', head: true })
-      .eq('is_active', true);
+    console.log('📊 [getDashboardStats] Fetching active banners...');
+    const bannersResponse = await fetch(
+      `${supabaseUrl}/rest/v1/promo_banners?is_active=eq.true&select=*`,
+      { headers: { ...headers, 'Prefer': 'count=exact' }, method: 'HEAD' }
+    );
+    const activeBanners = parseInt(bannersResponse.headers.get('content-range')?.split('/')[1] || '0');
+    console.log('✅ [getDashboardStats] Active banners:', activeBanners);
 
-    if (bannersError) throw bannersError;
-
-    return {
-      totalProducts: totalProducts || 0,
-      activeProducts: activeProducts || 0,
-      outOfStock: outOfStock || 0,
+    const stats = {
+      totalProducts: totalVariants || 0,
+      activeProducts: inStockVariants || 0,
+      outOfStock: outOfStockVariants || 0,
       totalCollections: totalCollections || 0,
       activeBanners: activeBanners || 0,
     };
+
+    console.log('🎉 [getDashboardStats] All stats fetched successfully!', stats);
+    return stats;
   } catch (error) {
-    console.error('Erreur getDashboardStats:', error);
+    console.error('❌ [getDashboardStats] Error fetching stats:', error);
     // Retourner des valeurs par défaut en cas d'erreur
     return {
       totalProducts: 0,

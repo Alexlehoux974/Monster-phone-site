@@ -1,8 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { createClient } from '@/lib/supabase/client';
-const supabase = createClient();
+import { getAuthHeaders } from '@/lib/supabase/admin';
 import SearchBar from '@/components/admin/SearchBar';
 import LoadingSpinner from '@/components/admin/LoadingSpinner';
 import Toast from '@/components/admin/Toast';
@@ -49,12 +48,21 @@ export default function PricingManagementPage() {
 
   const loadProducts = async () => {
     try {
-      const { data, error } = await supabase
-        .from('products')
-        .select('id, name, sku, price, original_price, discount, promo, status')
-        .order('name');
+      const auth = getAuthHeaders();
+      if (!auth) {
+        showToast('Session expirée, veuillez vous reconnecter', 'error');
+        setLoading(false);
+        return;
+      }
 
-      if (error) throw error;
+      const response = await fetch(
+        `${auth.url}/rest/v1/products?select=id,name,sku,price,original_price,discount,promo,status&order=name.asc`,
+        { headers: auth.headers }
+      );
+
+      if (!response.ok) throw new Error('Erreur chargement produits');
+
+      const data = await response.json();
       setProducts(data || []);
     } catch (error) {
       console.error('Error loading products:', error);
@@ -112,37 +120,29 @@ export default function PricingManagementPage() {
 
   const savePricing = async (productId: string) => {
     try {
+      const auth = getAuthHeaders();
+      if (!auth) {
+        showToast('Session expirée, veuillez vous reconnecter', 'error');
+        return;
+      }
+
       const updates: any = {
         price: editingData.price,
         original_price: editingData.original_price,
         discount: editingData.discount,
       };
 
-      // Get the current session token
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session?.access_token) {
-        throw new Error('Non authentifié');
-      }
+      // Update directly via REST API
+      const response = await fetch(
+        `${auth.url}/rest/v1/products?id=eq.${productId}`,
+        {
+          method: 'PATCH',
+          headers: auth.headers,
+          body: JSON.stringify(updates),
+        }
+      );
 
-      // Update via API route (uses service_role to bypass RLS)
-      const response = await fetch('/api/admin/supabase', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${session.access_token}`,
-        },
-        body: JSON.stringify({
-          operation: 'update',
-          table: 'products',
-          data: updates,
-          filters: [{ column: 'id', value: productId }],
-        }),
-      });
-
-      const result = await response.json();
-      if (!response.ok || result.error) {
-        throw new Error(result.error || 'Failed to update pricing');
-      }
+      if (!response.ok) throw new Error('Erreur mise à jour prix');
 
       setProducts((prev) =>
         prev.map((p) => (p.id === productId ? { ...p, ...updates } : p))

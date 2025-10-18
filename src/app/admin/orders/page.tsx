@@ -2,8 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-// import { verifyAdmin } from '@/lib/auth';
-import { createClient } from '@/lib/supabase/client';
+import { getAuthHeaders } from '@/lib/supabase/admin';
 import { Package, Clock, Check, XCircle, Eye, Calendar, Search, Download, X } from 'lucide-react';
 
 interface OrderItem {
@@ -82,30 +81,44 @@ export default function AdminOrdersPage() {
   const fetchOrders = async () => {
     try {
       setLoading(true);
-      const supabase = createClient();
+      const auth = getAuthHeaders();
 
-      // Récupérer toutes les commandes avec le nombre d'items
-      const { data: ordersData, error: ordersError } = await supabase
-        .from('orders')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-      if (ordersError) {
-        console.error('Erreur récupération commandes:', ordersError);
+      if (!auth) {
+        console.error('Session expirée');
+        setLoading(false);
         return;
       }
 
+      // Récupérer toutes les commandes
+      const ordersResponse = await fetch(
+        `${auth.url}/rest/v1/orders?select=*&order=created_at.desc`,
+        { headers: auth.headers }
+      );
+
+      if (!ordersResponse.ok) {
+        console.error('Erreur récupération commandes');
+        setLoading(false);
+        return;
+      }
+
+      const ordersData = await ordersResponse.json();
+
       // Récupérer le nombre d'items pour chaque commande
       const ordersWithCounts = await Promise.all(
-        (ordersData || []).map(async (order) => {
-          const { count } = await supabase
-            .from('order_items')
-            .select('*', { count: 'exact', head: true })
-            .eq('order_id', order.id);
+        (ordersData || []).map(async (order: any) => {
+          const countResponse = await fetch(
+            `${auth.url}/rest/v1/order_items?select=*&order_id=eq.${order.id}`,
+            {
+              headers: { ...auth.headers, 'Prefer': 'count=exact' },
+              method: 'HEAD'
+            }
+          );
+
+          const count = countResponse.headers.get('content-range')?.split('/')[1] || '0';
 
           return {
             ...order,
-            items_count: count || 0,
+            items_count: parseInt(count),
           };
         })
       );
@@ -120,15 +133,26 @@ export default function AdminOrdersPage() {
 
   const updateOrderStatus = async (orderId: string, newStatus: Order['status']) => {
     try {
-      const supabase = createClient();
+      const auth = getAuthHeaders();
+      if (!auth) {
+        console.error('Session expirée');
+        return;
+      }
 
-      const { error } = await supabase
-        .from('orders')
-        .update({ status: newStatus, updated_at: new Date().toISOString() })
-        .eq('id', orderId);
+      const response = await fetch(
+        `${auth.url}/rest/v1/orders?id=eq.${orderId}`,
+        {
+          method: 'PATCH',
+          headers: auth.headers,
+          body: JSON.stringify({
+            status: newStatus,
+            updated_at: new Date().toISOString()
+          }),
+        }
+      );
 
-      if (error) {
-        console.error('Erreur mise à jour statut:', error);
+      if (!response.ok) {
+        console.error('Erreur mise à jour statut');
         return;
       }
 
@@ -148,29 +172,37 @@ export default function AdminOrdersPage() {
 
   const viewOrderDetails = async (orderId: string) => {
     try {
-      const supabase = createClient();
-
-      // Récupérer la commande complète avec les items
-      const { data: order, error: orderError } = await supabase
-        .from('orders')
-        .select('*')
-        .eq('id', orderId)
-        .single();
-
-      if (orderError) {
-        console.error('Erreur récupération commande:', orderError);
+      const auth = getAuthHeaders();
+      if (!auth) {
+        console.error('Session expirée');
         return;
       }
 
-      const { data: items, error: itemsError } = await supabase
-        .from('order_items')
-        .select('*')
-        .eq('order_id', orderId);
+      // Récupérer la commande complète
+      const orderResponse = await fetch(
+        `${auth.url}/rest/v1/orders?id=eq.${orderId}`,
+        { headers: auth.headers }
+      );
 
-      if (itemsError) {
-        console.error('Erreur récupération items:', itemsError);
+      if (!orderResponse.ok) {
+        console.error('Erreur récupération commande');
         return;
       }
+
+      const [order] = await orderResponse.json();
+
+      // Récupérer les items de la commande
+      const itemsResponse = await fetch(
+        `${auth.url}/rest/v1/order_items?order_id=eq.${orderId}`,
+        { headers: auth.headers }
+      );
+
+      if (!itemsResponse.ok) {
+        console.error('Erreur récupération items');
+        return;
+      }
+
+      const items = await itemsResponse.json();
 
       setSelectedOrder({ ...order, items });
     } catch (error) {

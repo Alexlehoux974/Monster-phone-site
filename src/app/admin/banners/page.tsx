@@ -1,8 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { createClient } from '@/lib/supabase/client';
-const supabase = createClient();
+import { getAuthHeaders } from '@/lib/supabase/admin';
 import SearchBar from '@/components/admin/SearchBar';
 import LoadingSpinner from '@/components/admin/LoadingSpinner';
 import Toast from '@/components/admin/Toast';
@@ -63,13 +62,21 @@ export default function BannersPage() {
 
   const loadData = async () => {
     try {
-      const { data: bannersData, error } = await supabase
-        .from('promo_banners')
-        .select('*')
-        .order('display_order', { ascending: true });
+      const auth = getAuthHeaders();
+      if (!auth) {
+        showToast('Session expirée, veuillez vous reconnecter', 'error');
+        setLoading(false);
+        return;
+      }
 
-      if (error) throw error;
+      const response = await fetch(
+        `${auth.url}/rest/v1/promo_banners?select=*&order=display_order.asc`,
+        { headers: auth.headers }
+      );
 
+      if (!response.ok) throw new Error('Erreur chargement bannières');
+
+      const bannersData = await response.json();
       setBanners(bannersData || []);
     } catch (error) {
       console.error('Error loading data:', error);
@@ -129,6 +136,12 @@ export default function BannersPage() {
     }
 
     try {
+      const auth = getAuthHeaders();
+      if (!auth) {
+        showToast('Session expirée, veuillez vous reconnecter', 'error');
+        return;
+      }
+
       const bannerData = {
         title: formData.title,
         message: formData.message,
@@ -142,23 +155,32 @@ export default function BannersPage() {
 
       if (editingBanner) {
         // Update existing banner
-        const { error } = await supabase
-          .from('promo_banners')
-          // @ts-ignore - Supabase type issue with update
-          .update(bannerData)
-          .eq('id', editingBanner.id);
+        const response = await fetch(
+          `${auth.url}/rest/v1/promo_banners?id=eq.${editingBanner.id}`,
+          {
+            method: 'PATCH',
+            headers: auth.headers,
+            body: JSON.stringify(bannerData),
+          }
+        );
 
-        if (error) throw error;
+        if (!response.ok) throw new Error('Erreur mise à jour bannière');
         showToast('Bannière mise à jour avec succès', 'success');
       } else {
         // Create new banner
-        // @ts-ignore - Supabase type issue with insert
-        const { error } = await supabase.from('promo_banners').insert({
-          ...bannerData,
-          display_order: banners.length,
-        });
+        const response = await fetch(
+          `${auth.url}/rest/v1/promo_banners`,
+          {
+            method: 'POST',
+            headers: auth.headers,
+            body: JSON.stringify({
+              ...bannerData,
+              display_order: banners.length,
+            }),
+          }
+        );
 
-        if (error) throw error;
+        if (!response.ok) throw new Error('Erreur création bannière');
         showToast('Bannière créée avec succès', 'success');
       }
 
@@ -172,13 +194,22 @@ export default function BannersPage() {
 
   const toggleActive = async (bannerId: string, currentStatus: boolean) => {
     try {
-      const { error } = await supabase
-        .from('promo_banners')
-        // @ts-ignore - Supabase type issue
-        .update({ is_active: !currentStatus })
-        .eq('id', bannerId);
+      const auth = getAuthHeaders();
+      if (!auth) {
+        showToast('Session expirée, veuillez vous reconnecter', 'error');
+        return;
+      }
 
-      if (error) throw error;
+      const response = await fetch(
+        `${auth.url}/rest/v1/promo_banners?id=eq.${bannerId}`,
+        {
+          method: 'PATCH',
+          headers: auth.headers,
+          body: JSON.stringify({ is_active: !currentStatus }),
+        }
+      );
+
+      if (!response.ok) throw new Error('Erreur toggle active');
 
       setBanners((prev) =>
         prev.map((b) =>
@@ -216,19 +247,28 @@ export default function BannersPage() {
 
     // Update display_order for both banners
     try {
+      const auth = getAuthHeaders();
+      if (!auth) {
+        showToast('Session expirée, veuillez vous reconnecter', 'error');
+        return;
+      }
+
       const updates = newBanners.map((banner, index) => ({
         id: banner.id,
         display_order: index,
       }));
 
       for (const update of updates) {
-        const { error } = await supabase
-          .from('promo_banners')
-          // @ts-ignore - Supabase type issue
-          .update({ display_order: update.display_order })
-          .eq('id', update.id);
+        const response = await fetch(
+          `${auth.url}/rest/v1/promo_banners?id=eq.${update.id}`,
+          {
+            method: 'PATCH',
+            headers: auth.headers,
+            body: JSON.stringify({ display_order: update.display_order }),
+          }
+        );
 
-        if (error) throw error;
+        if (!response.ok) throw new Error('Erreur mise à jour ordre');
       }
 
       setBanners(newBanners);
@@ -248,12 +288,21 @@ export default function BannersPage() {
     if (!bannerToDelete) return;
 
     try {
-      const { error } = await supabase
-        .from('promo_banners')
-        .delete()
-        .eq('id', bannerToDelete);
+      const auth = getAuthHeaders();
+      if (!auth) {
+        showToast('Session expirée, veuillez vous reconnecter', 'error');
+        return;
+      }
 
-      if (error) throw error;
+      const response = await fetch(
+        `${auth.url}/rest/v1/promo_banners?id=eq.${bannerToDelete}`,
+        {
+          method: 'DELETE',
+          headers: auth.headers,
+        }
+      );
+
+      if (!response.ok) throw new Error('Erreur suppression bannière');
 
       await loadData();
       showToast('Bannière supprimée avec succès', 'success');

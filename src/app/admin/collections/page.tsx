@@ -1,8 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { createClient } from '@/lib/supabase/client';
-const supabase = createClient();
+import { getAuthHeaders } from '@/lib/supabase/admin';
 import LoadingSpinner from '@/components/admin/LoadingSpinner';
 import Toast from '@/components/admin/Toast';
 import {
@@ -69,33 +68,47 @@ export default function CollectionsManagementPage() {
 
   const loadData = async () => {
     try {
-      // Load collections
-      const { data: collectionsData, error: collectionsError } = await supabase
-        .from('collections')
-        .select('*')
-        .order('display_order');
+      const auth = getAuthHeaders();
+      if (!auth) {
+        showToast('Session expirée, veuillez vous reconnecter', 'error');
+        setLoading(false);
+        return;
+      }
 
-      if (collectionsError) throw collectionsError;
+      // Load collections
+      const collectionsResponse = await fetch(
+        `${auth.url}/rest/v1/collections?select=*&order=display_order.asc`,
+        { headers: auth.headers }
+      );
+
+      if (!collectionsResponse.ok) throw new Error('Erreur chargement collections');
+
+      const collectionsData = await collectionsResponse.json();
 
       // Load products
-      const { data: productsData } = await supabase
-        .from('products')
-        .select('id, name, sku')
-        .order('name');
+      const productsResponse = await fetch(
+        `${auth.url}/rest/v1/products?select=id,name,sku&order=name.asc`,
+        { headers: auth.headers }
+      );
+
+      const productsData = await productsResponse.json();
 
       // Count products per collection
       const collectionsWithCounts = await Promise.all(
-        (collectionsData || []).map(async (collection) => {
-          const { count } = await supabase
-            .from('collection_products')
-            .select('*', { count: 'exact', head: true })
-            // @ts-ignore - Supabase type issue
-            .eq('collection_id', collection.id);
+        (collectionsData || []).map(async (collection: any) => {
+          const countResponse = await fetch(
+            `${auth.url}/rest/v1/collection_products?collection_id=eq.${collection.id}`,
+            {
+              headers: { ...auth.headers, 'Prefer': 'count=exact' },
+              method: 'HEAD'
+            }
+          );
+
+          const count = countResponse.headers.get('content-range')?.split('/')[1] || '0';
 
           return {
-            // @ts-ignore - Supabase type issue
             ...collection,
-            _count: { products: count || 0 },
+            _count: { products: parseInt(count) },
           };
         })
       );
@@ -112,22 +125,21 @@ export default function CollectionsManagementPage() {
 
   const loadCollectionProducts = async (collectionId: string) => {
     try {
-      // @ts-ignore - Supabase type issue
-      const { data, error } = await supabase
-        .from('collection_products')
-        .select(`
-          product_id,
-          products (
-            id,
-            name,
-            sku
-          )
-        `)
-        .eq('collection_id', collectionId)
-        .order('display_order');
+      const auth = getAuthHeaders();
+      if (!auth) {
+        showToast('Session expirée', 'error');
+        return;
+      }
 
-      if (error) throw error;
+      // Get collection products with embedded product data
+      const response = await fetch(
+        `${auth.url}/rest/v1/collection_products?collection_id=eq.${collectionId}&select=product_id,products(id,name,sku)&order=display_order.asc`,
+        { headers: auth.headers }
+      );
 
+      if (!response.ok) throw new Error('Erreur chargement produits collection');
+
+      const data = await response.json();
       const productsData = data.map((item: any) => item.products).filter(Boolean);
       setCollectionProducts(productsData);
     } catch (error) {
@@ -145,13 +157,22 @@ export default function CollectionsManagementPage() {
 
   const toggleCollectionStatus = async (collectionId: string, isActive: boolean) => {
     try {
-      const { error } = await supabase
-        .from('collections')
-        // @ts-ignore - Supabase type issue
-        .update({ is_active: !isActive })
-        .eq('id', collectionId);
+      const auth = getAuthHeaders();
+      if (!auth) {
+        showToast('Session expirée', 'error');
+        return;
+      }
 
-      if (error) throw error;
+      const response = await fetch(
+        `${auth.url}/rest/v1/collections?id=eq.${collectionId}`,
+        {
+          method: 'PATCH',
+          headers: auth.headers,
+          body: JSON.stringify({ is_active: !isActive }),
+        }
+      );
+
+      if (!response.ok) throw new Error('Erreur toggle collection');
 
       setCollections((prev) =>
         prev.map((c) => (c.id === collectionId ? { ...c, is_active: !isActive } : c))
@@ -171,14 +192,33 @@ export default function CollectionsManagementPage() {
     if (!selectedCollection) return;
 
     try {
-      // @ts-ignore - Supabase type issue
-      const { error } = await supabase.from('collection_products').insert({
-        collection_id: selectedCollection,
-        product_id: productId,
-        display_order: collectionProducts.length,
-      });
+      const auth = getAuthHeaders();
+      if (!auth) {
+        showToast('Session expirée', 'error');
+        return;
+      }
 
-      if (error) throw error;
+      const response = await fetch(
+        `${auth.url}/rest/v1/collection_products`,
+        {
+          method: 'POST',
+          headers: auth.headers,
+          body: JSON.stringify({
+            collection_id: selectedCollection,
+            product_id: productId,
+            display_order: collectionProducts.length,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        if (errorText.includes('23505') || errorText.includes('duplicate')) {
+          showToast('Ce produit est déjà dans la collection', 'warning');
+          return;
+        }
+        throw new Error('Erreur ajout produit');
+      }
 
       await loadCollectionProducts(selectedCollection);
       await loadData(); // Reload to update counts
@@ -186,11 +226,7 @@ export default function CollectionsManagementPage() {
       showToast('Produit ajouté à la collection', 'success');
     } catch (error: any) {
       console.error('Error adding product:', error);
-      if (error.code === '23505') {
-        showToast('Ce produit est déjà dans la collection', 'warning');
-      } else {
-        showToast('Erreur lors de l\'ajout du produit', 'error');
-      }
+      showToast('Erreur lors de l\'ajout du produit', 'error');
     }
   };
 
@@ -198,13 +234,21 @@ export default function CollectionsManagementPage() {
     if (!selectedCollection) return;
 
     try {
-      const { error } = await supabase
-        .from('collection_products')
-        .delete()
-        .eq('collection_id', selectedCollection)
-        .eq('product_id', productId);
+      const auth = getAuthHeaders();
+      if (!auth) {
+        showToast('Session expirée', 'error');
+        return;
+      }
 
-      if (error) throw error;
+      const response = await fetch(
+        `${auth.url}/rest/v1/collection_products?collection_id=eq.${selectedCollection}&product_id=eq.${productId}`,
+        {
+          method: 'DELETE',
+          headers: auth.headers,
+        }
+      );
+
+      if (!response.ok) throw new Error('Erreur retrait produit');
 
       await loadCollectionProducts(selectedCollection);
       await loadData();
@@ -222,21 +266,33 @@ export default function CollectionsManagementPage() {
     }
 
     try {
+      const auth = getAuthHeaders();
+      if (!auth) {
+        showToast('Session expirée', 'error');
+        return;
+      }
+
       const slug = newCollection.name
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, '-')
         .replace(/^-+|-+$/g, '');
 
-      // @ts-ignore - Supabase type issue
-      const { error } = await supabase.from('collections').insert({
-        name: newCollection.name,
-        slug,
-        description: newCollection.description,
-        emoji: newCollection.emoji,
-        display_order: collections.length,
-      });
+      const response = await fetch(
+        `${auth.url}/rest/v1/collections`,
+        {
+          method: 'POST',
+          headers: auth.headers,
+          body: JSON.stringify({
+            name: newCollection.name,
+            slug,
+            description: newCollection.description,
+            emoji: newCollection.emoji,
+            display_order: collections.length,
+          }),
+        }
+      );
 
-      if (error) throw error;
+      if (!response.ok) throw new Error('Erreur création collection');
 
       await loadData();
       setShowCreateModal(false);
