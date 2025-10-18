@@ -108,21 +108,11 @@ export async function signInAdmin(email: string, password: string) {
     console.log('✅ [signInAdmin] Auth successful, session created');
 
     // CRITICAL: Wait for session to be fully persisted in localStorage
+    // DO NOT call getSession() here - it causes the session to be destroyed!
+    console.log('⏳ [signInAdmin] Waiting for localStorage persistence...');
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    // Verify session is accessible
-    console.log('🔍 [signInAdmin] Verifying session persistence...');
-    const { data: { session: verifiedSession } } = await supabase.auth.getSession();
-
-    if (!verifiedSession) {
-      console.error('❌ [signInAdmin] Session not found after creation!');
-      return {
-        data: null,
-        error: new Error('Erreur: la session n\'a pas pu être créée')
-      };
-    }
-
-    console.log('✅ [signInAdmin] Session verified in localStorage');
+    console.log('✅ [signInAdmin] Session should be persisted in localStorage');
 
     // Update last_login_at on successful login
     try {

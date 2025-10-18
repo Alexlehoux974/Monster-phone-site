@@ -250,13 +250,51 @@ export default function StockManagementPage() {
         discount: editingDiscount
       });
 
-      // Récupérer la session courante
-      const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+      // Récupérer la session courante depuis localStorage (évite le blocage de getSession())
+      console.log('🔐 [SAVE STOCK] Reading session from localStorage...');
+      const storageKey = 'sb-nswlznqoadjffpxkagoz-auth-token';
+
+      let session = null;
+      let sessionError = null;
+
+      try {
+        const storedSession = localStorage.getItem(storageKey);
+
+        if (storedSession) {
+          const parsedData = JSON.parse(storedSession);
+          console.log('✅ [SAVE STOCK] Found session in localStorage');
+
+          // Vérifier que la session n'est pas expirée
+          const expiresAt = parsedData.expires_at;
+          const now = Math.floor(Date.now() / 1000);
+
+          if (expiresAt && expiresAt > now) {
+            session = {
+              access_token: parsedData.access_token,
+              refresh_token: parsedData.refresh_token,
+              expires_at: parsedData.expires_at,
+              expires_in: parsedData.expires_in,
+              token_type: parsedData.token_type,
+              user: parsedData.user
+            };
+            console.log('✅ [SAVE STOCK] Session valid, expires at:', new Date(expiresAt * 1000).toLocaleString());
+          } else {
+            console.log('❌ [SAVE STOCK] Session expired');
+            sessionError = new Error('Session expirée');
+          }
+        } else {
+          console.log('❌ [SAVE STOCK] No session in localStorage');
+          sessionError = new Error('No session found');
+        }
+      } catch (parseError) {
+        console.error('❌ [SAVE STOCK] Error reading localStorage:', parseError);
+        sessionError = parseError as Error;
+      }
 
       if (sessionError || !session?.access_token) {
         console.error('❌ [SAVE STOCK] Session error:', sessionError);
         showToast('Session expirée, veuillez vous reconnecter', 'error');
-        setSaving(false); // Réinitialiser avant redirection
+        setSaving(false);
         setTimeout(() => {
           window.location.href = '/admin/login';
         }, 2000);
