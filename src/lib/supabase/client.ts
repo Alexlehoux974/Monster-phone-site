@@ -3,8 +3,12 @@ import { createClient as createSupabaseClient } from '@supabase/supabase-js';
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://nswlznqoadjffpxkagoz.supabase.co';
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5zd2x6bnFvYWRqZmZweGthZ296Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUwNzk5MzksImV4cCI6MjA3MDY1NTkzOX0.8hrzs5L0Q6Br0O1X9jG2AUHJmB2hsrLm3zuDfLIypdg';
 
-// Browser-only singleton to prevent multiple instances
-let browserClient: ReturnType<typeof createSupabaseClient> | null = null;
+// Use global window object to ensure true singleton across all modules/bundles
+declare global {
+  interface Window {
+    __supabaseClient?: ReturnType<typeof createSupabaseClient>;
+  }
+}
 
 export function createClient() {
   // Server-side: create new instance (no persistence needed)
@@ -17,13 +21,13 @@ export function createClient() {
     });
   }
 
-  // Browser-side: reuse singleton to prevent multiple instances
-  if (browserClient) {
-    return browserClient;
+  // Browser-side: use global singleton to ensure same instance across all bundles
+  if (window.__supabaseClient) {
+    return window.__supabaseClient;
   }
 
   // Create browser client with proper session persistence
-  browserClient = createSupabaseClient(supabaseUrl, supabaseAnonKey, {
+  window.__supabaseClient = createSupabaseClient(supabaseUrl, supabaseAnonKey, {
     auth: {
       persistSession: true,
       autoRefreshToken: true,
@@ -39,7 +43,9 @@ export function createClient() {
     }
   });
 
-  return browserClient;
+  console.log('🔧 [createClient] Created new Supabase client instance');
+
+  return window.__supabaseClient;
 }
 
 // Types basés sur la structure de la base de données
