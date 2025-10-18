@@ -31,18 +31,32 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     const checkAuth = async () => {
-      // Wait a tiny bit for session to be available
-      await new Promise(resolve => setTimeout(resolve, 100));
+      // Lire directement depuis localStorage au lieu d'utiliser getSession() qui bloque
+      const storageKey = 'sb-nswlznqoadjffpxkagoz-auth-token';
+      const storedSession = localStorage.getItem(storageKey);
 
-      const supabase = createClient();
-      const { data: { session } } = await supabase.auth.getSession();
-
-      if (!session) {
+      if (!storedSession) {
         router.push('/admin/login');
         return;
       }
 
-      setChecking(false);
+      try {
+        const parsedData = JSON.parse(storedSession);
+        const expiresAt = parsedData.expires_at;
+        const now = Math.floor(Date.now() / 1000);
+
+        if (!expiresAt || expiresAt <= now) {
+          // Session expirée
+          router.push('/admin/login');
+          return;
+        }
+
+        // Session valide
+        setChecking(false);
+      } catch (error) {
+        console.error('Error parsing session:', error);
+        router.push('/admin/login');
+      }
     };
 
     checkAuth();
