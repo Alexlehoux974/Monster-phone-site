@@ -3,33 +3,18 @@ import { createClient as createSupabaseClient } from '@supabase/supabase-js';
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://nswlznqoadjffpxkagoz.supabase.co';
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5zd2x6bnFvYWRqZmZweGthZ296Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUwNzk5MzksImV4cCI6MjA3MDY1NTkzOX0.8hrzs5L0Q6Br0O1X9jG2AUHJmB2hsrLm3zuDfLIypdg';
 
-// Module-level singleton - shared across all imports in the same JavaScript context
-// This is the CORRECT way to share Supabase client in Next.js App Router
-let browserClient: ReturnType<typeof createSupabaseClient> | null = null;
-
 export function createClient() {
-  // Server-side: always create new instance (no persistence)
-  if (typeof window === 'undefined') {
-    return createSupabaseClient(supabaseUrl, supabaseAnonKey, {
-      auth: {
-        persistSession: false,
-        autoRefreshToken: false,
-      }
-    });
-  }
-
-  // Browser-side: use singleton with proper cleanup
-  if (browserClient) {
-    return browserClient;
-  }
-
-  browserClient = createSupabaseClient(supabaseUrl, supabaseAnonKey, {
+  // Always create a new client instance
+  // This ensures proper session handling in Next.js App Router
+  return createSupabaseClient(supabaseUrl, supabaseAnonKey, {
     auth: {
-      persistSession: true,
-      autoRefreshToken: true,
-      storage: window.localStorage,
-      // Use default Supabase storage key format: sb-{project-ref}-auth-token
-      // storageKey: 'supabase.auth.token', // REMOVED - using default
+      // Only persist session on client-side (browser)
+      persistSession: typeof window !== 'undefined',
+      autoRefreshToken: typeof window !== 'undefined',
+      detectSessionInUrl: typeof window !== 'undefined',
+      storage: typeof window !== 'undefined' ? window.localStorage : undefined,
+      storageKey: 'sb-nswlznqoadjffpxkagoz-auth-token', // Explicit storage key
+      flowType: 'pkce', // Use PKCE flow for better security
     },
     realtime: {
       params: {
@@ -37,8 +22,6 @@ export function createClient() {
       }
     }
   });
-
-  return browserClient;
 }
 
 // Types basés sur la structure de la base de données
