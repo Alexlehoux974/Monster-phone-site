@@ -73,10 +73,29 @@ export async function signInAdmin(email: string, password: string) {
 
     // Then sign in with Supabase Auth directly on the client
     console.log('🔑 [signInAdmin] Calling signInWithPassword...');
-    const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
+
+    // Add timeout to prevent infinite blocking
+    const timeoutPromise = new Promise<never>((_, reject) => {
+      setTimeout(() => reject(new Error('Login timeout après 10 secondes')), 10000);
+    });
+
+    const signInPromise = supabase.auth.signInWithPassword({
       email,
       password,
     });
+
+    console.log('⏳ [signInAdmin] Waiting for auth response (max 10s)...');
+    let authData: any = null;
+    let authError: any = null;
+
+    try {
+      const result: any = await Promise.race([signInPromise, timeoutPromise]);
+      authData = result.data;
+      authError = result.error;
+    } catch (error) {
+      console.error('❌ [signInAdmin] Timeout or error:', error);
+      authError = error;
+    }
 
     if (authError) {
       console.error('❌ [signInAdmin] Auth error:', authError);
