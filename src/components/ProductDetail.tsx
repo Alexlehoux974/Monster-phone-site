@@ -50,13 +50,23 @@ export default function ProductDetail({ product }: ProductDetailProps) {
         table: 'product_variants',
         filter: `product_id=eq.${product.id}`
       }, (payload) => {
-        // Update variants state
+        // Update variants state (stock + admin_discount_percent)
         setVariants(prev => prev.map(v =>
-          v.id === payload.new.id ? { ...v, stock: payload.new.stock } : v
+          v.id === payload.new.id
+            ? {
+                ...v,
+                stock: payload.new.stock,
+                adminDiscountPercent: payload.new.admin_discount_percent || 0
+              }
+            : v
         ));
         // Update selected variant if it's the one that changed
         if (selectedVariant?.id === payload.new.id) {
-          setSelectedVariant(prev => prev ? { ...prev, stock: payload.new.stock } : prev);
+          setSelectedVariant(prev => prev ? {
+            ...prev,
+            stock: payload.new.stock,
+            adminDiscountPercent: payload.new.admin_discount_percent || 0
+          } : prev);
         }
       })
       .on('postgres_changes', {
@@ -75,6 +85,17 @@ export default function ProductDetail({ product }: ProductDetailProps) {
       supabase.removeChannel(channel);
     };
   }, [product.id, selectedVariant?.id]);
+
+  // Mettre à jour le prix et la promotion lorsque le variant sélectionné change
+  useEffect(() => {
+    if (selectedVariant) {
+      // Si le produit a des variants, utiliser la promotion du variant sélectionné
+      setAdminDiscountPercent(selectedVariant.adminDiscountPercent || 0);
+    } else {
+      // Si pas de variant sélectionné, utiliser la promotion du produit parent
+      setAdminDiscountPercent(product.adminDiscountPercent || 0);
+    }
+  }, [selectedVariant, product.adminDiscountPercent]);
 
   // Combiner toutes les images : produit principal + images de toutes les variantes
   const getAllImages = () => {
