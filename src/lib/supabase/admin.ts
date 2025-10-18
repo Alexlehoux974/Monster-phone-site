@@ -48,7 +48,10 @@ export async function signInAdmin(email: string, password: string) {
   const supabase = createClient();
 
   try {
+    console.log('🔐 [signInAdmin] Starting login for:', email);
+
     // First, verify admin status via API
+    console.log('📡 [signInAdmin] Verifying admin status...');
     const verifyResponse = await fetch('/api/admin/verify', {
       method: 'POST',
       headers: {
@@ -58,7 +61,10 @@ export async function signInAdmin(email: string, password: string) {
     });
 
     const verifyData = await verifyResponse.json();
+    console.log('📦 [signInAdmin] Verify response:', verifyData);
+
     if (!verifyResponse.ok || !verifyData.isAdmin) {
+      console.log('❌ [signInAdmin] Not an admin');
       return {
         data: null,
         error: new Error('Accès non autorisé. Seuls les administrateurs peuvent se connecter.')
@@ -66,17 +72,38 @@ export async function signInAdmin(email: string, password: string) {
     }
 
     // Then sign in with Supabase Auth directly on the client
+    console.log('🔑 [signInAdmin] Calling signInWithPassword...');
     const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
 
     if (authError) {
+      console.error('❌ [signInAdmin] Auth error:', authError);
       return {
         data: null,
         error: authError
       };
     }
+
+    console.log('✅ [signInAdmin] Auth successful, session created');
+
+    // CRITICAL: Wait for session to be fully persisted in localStorage
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    // Verify session is accessible
+    console.log('🔍 [signInAdmin] Verifying session persistence...');
+    const { data: { session: verifiedSession } } = await supabase.auth.getSession();
+
+    if (!verifiedSession) {
+      console.error('❌ [signInAdmin] Session not found after creation!');
+      return {
+        data: null,
+        error: new Error('Erreur: la session n\'a pas pu être créée')
+      };
+    }
+
+    console.log('✅ [signInAdmin] Session verified in localStorage');
 
     // Update last_login_at on successful login
     try {
@@ -86,10 +113,11 @@ export async function signInAdmin(email: string, password: string) {
         body: JSON.stringify({ email }),
       });
     } catch (err) {
-      console.warn('Failed to update last_login_at:', err);
+      console.warn('⚠️ [signInAdmin] Failed to update last_login_at:', err);
       // Non-blocking - don't fail login if this fails
     }
 
+    console.log('✅ [signInAdmin] Login complete, returning data');
     return {
       data: {
         auth: authData,
@@ -98,7 +126,7 @@ export async function signInAdmin(email: string, password: string) {
       error: null
     };
   } catch (error) {
-    console.error('[signInAdmin] Unexpected error:', error);
+    console.error('❌ [signInAdmin] Unexpected error:', error);
     return {
       data: null,
       error: new Error('Erreur lors de la connexion au serveur')

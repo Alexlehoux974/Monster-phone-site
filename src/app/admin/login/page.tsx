@@ -18,22 +18,25 @@ export default function AdminLoginPage() {
     setLoading(true);
 
     try {
+      console.log('🔐 [LOGIN PAGE] Starting login...');
       const { data, error: signInError } = await signInAdmin(email, password);
 
       if (signInError) {
+        console.error('❌ [LOGIN PAGE] Sign in error:', signInError);
         setError(signInError.message);
         setLoading(false);
         return;
       }
 
       if (data) {
-        // Wait for session to be fully persisted in localStorage
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        console.log('✅ [LOGIN PAGE] Login successful, redirecting to /admin');
 
-        // Use Next.js router for client-side navigation to preserve session
-        router.push('/admin');
+        // Session is already verified in signInAdmin, redirect immediately
+        // Use window.location.href for hard navigation to ensure clean state
+        window.location.href = '/admin';
       }
     } catch (err) {
+      console.error('❌ [LOGIN PAGE] Unexpected error:', err);
       setError('Une erreur est survenue. Veuillez réessayer.');
       setLoading(false);
     }
