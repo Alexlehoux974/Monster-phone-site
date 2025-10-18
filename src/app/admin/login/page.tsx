@@ -29,9 +29,12 @@ export default function AdminLoginPage() {
       }
 
       if (data) {
-        console.log('✅ [LOGIN PAGE] Login successful, redirecting to /admin');
+        console.log('✅ [LOGIN PAGE] Login successful, waiting before redirect...');
 
-        // Session is already verified in signInAdmin, redirect immediately
+        // Wait a bit to ensure localStorage is fully synced
+        await new Promise(resolve => setTimeout(resolve, 500));
+
+        console.log('✅ [LOGIN PAGE] Redirecting to /admin');
         // Use window.location.href for hard navigation to ensure clean state
         window.location.href = '/admin';
       }

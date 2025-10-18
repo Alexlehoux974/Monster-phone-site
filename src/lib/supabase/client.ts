@@ -3,16 +3,32 @@ import { createClient as createSupabaseClient } from '@supabase/supabase-js';
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://nswlznqoadjffpxkagoz.supabase.co';
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5zd2x6bnFvYWRqZmZweGthZ296Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUwNzk5MzksImV4cCI6MjA3MDY1NTkzOX0.8hrzs5L0Q6Br0O1X9jG2AUHJmB2hsrLm3zuDfLIypdg';
 
+// Browser-only singleton to prevent multiple instances
+let browserClient: ReturnType<typeof createSupabaseClient> | null = null;
+
 export function createClient() {
-  // Always create a new client instance
-  // This ensures proper session handling in Next.js App Router
-  return createSupabaseClient(supabaseUrl, supabaseAnonKey, {
+  // Server-side: create new instance (no persistence needed)
+  if (typeof window === 'undefined') {
+    return createSupabaseClient(supabaseUrl, supabaseAnonKey, {
+      auth: {
+        persistSession: false,
+        autoRefreshToken: false,
+      }
+    });
+  }
+
+  // Browser-side: reuse singleton to prevent multiple instances
+  if (browserClient) {
+    return browserClient;
+  }
+
+  // Create browser client with proper session persistence
+  browserClient = createSupabaseClient(supabaseUrl, supabaseAnonKey, {
     auth: {
-      // Only persist session on client-side (browser)
-      persistSession: typeof window !== 'undefined',
-      autoRefreshToken: typeof window !== 'undefined',
-      detectSessionInUrl: typeof window !== 'undefined',
-      storage: typeof window !== 'undefined' ? window.localStorage : undefined,
+      persistSession: true,
+      autoRefreshToken: true,
+      detectSessionInUrl: true,
+      storage: window.localStorage,
       storageKey: 'sb-nswlznqoadjffpxkagoz-auth-token', // Explicit storage key
       flowType: 'pkce', // Use PKCE flow for better security
     },
@@ -22,6 +38,8 @@ export function createClient() {
       }
     }
   });
+
+  return browserClient;
 }
 
 // Types basés sur la structure de la base de données
