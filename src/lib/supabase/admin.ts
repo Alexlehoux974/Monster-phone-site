@@ -144,8 +144,15 @@ export async function getAdminSession() {
   const supabase = createClient();
   console.log('🔐 [getAdminSession] Starting session check...');
 
-  // Wait a tiny bit to ensure localStorage is ready
-  await new Promise(resolve => setTimeout(resolve, 100));
+  // CRITICAL FIX: Force client to reload session from localStorage
+  // This is necessary because the singleton client may have been created before login
+  console.log('🔄 [getAdminSession] Refreshing session from localStorage...');
+  try {
+    // This will force the client to read the session from localStorage
+    await supabase.auth.refreshSession();
+  } catch (refreshError) {
+    console.log('⚠️ [getAdminSession] Refresh warning (may be normal):', refreshError);
+  }
 
   console.log('🔍 [getAdminSession] Calling supabase.auth.getSession()...');
   const { data: { session }, error } = await supabase.auth.getSession();
