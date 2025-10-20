@@ -58,6 +58,10 @@ export default function AdminLayout({
     }
 
     const checkAdmin = async () => {
+      // Wait a bit for localStorage to be ready (race condition fix)
+      console.log('⏳ [ADMIN LAYOUT] Waiting 100ms for localStorage sync...');
+      await new Promise(resolve => setTimeout(resolve, 100));
+
       console.log('🔐 [ADMIN LAYOUT] Starting admin check...');
       try {
         const { session, admin: adminData, error } = await getAdminSession();
