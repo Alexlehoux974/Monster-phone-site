@@ -68,6 +68,8 @@ interface Category {
 }
 
 export default function StockManagementPage() {
+  console.log('🎯 [STOCK PAGE] Component rendering...');
+
   const supabase = createClient();
 
   const [products, setProducts] = useState<Product[]>([]);
@@ -89,22 +91,27 @@ export default function StockManagementPage() {
   } | null>(null);
 
   useEffect(() => {
+    console.log('🚀 [STOCK PAGE] useEffect triggered');
     loadData();
     setupRealtime();
   }, []);
 
   const loadData = async () => {
+    console.log('📦 [STOCK] Starting data load...');
     try {
       // Load products with variants
+      console.log('📦 [STOCK] Fetching products...');
       const { data: productsData, error: productsError } = await supabase
         .from('products')
         .select('*, product_variants(*)')
         .order('name');
 
       if (productsError) {
-        console.error('[ADMIN] Products error:', productsError);
+        console.error('❌ [STOCK] Products error:', productsError);
         throw productsError;
       }
+
+      console.log(`✅ [STOCK] Loaded ${productsData?.length || 0} products`);
 
       // Load brands
       const { data: brandsData } = await supabase
@@ -164,9 +171,10 @@ export default function StockManagementPage() {
       setBrands(brandsData || []);
       setCategories(categoriesData || []);
     } catch (error) {
-      console.error('[ADMIN] Error loading data:', error);
+      console.error('❌ [STOCK] Error loading data:', error);
       showToast('Erreur lors du chargement des données', 'error');
     } finally {
+      console.log('🏁 [STOCK] Setting loading to false');
       setLoading(false);
     }
   };
