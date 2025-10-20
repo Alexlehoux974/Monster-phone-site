@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { getAdminSession, signOutAdmin } from '@/lib/supabase/admin';
 import type { AdminUser } from '@/lib/supabase/admin';
 import {
@@ -39,9 +39,16 @@ export default function AdminLayout({
   const [admin, setAdmin] = useState<AdminUser | null>(null);
   const [loading, setLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const hasCheckedAuth = useRef(false);
 
   useEffect(() => {
-    console.log('🚀 [ADMIN LAYOUT] useEffect triggered, pathname:', pathname);
+    // Prevent re-checking auth on pathname changes
+    if (hasCheckedAuth.current) {
+      console.log('✅ [ADMIN LAYOUT] Auth already checked, skipping');
+      return;
+    }
+
+    console.log('🚀 [ADMIN LAYOUT] useEffect triggered on mount');
 
     // Skip auth check on login page
     if (pathname === '/admin/login') {
@@ -73,12 +80,13 @@ export default function AdminLayout({
         router.push('/admin/login');
       } finally {
         console.log('🏁 [ADMIN LAYOUT] Setting loading to false');
+        hasCheckedAuth.current = true;
         setLoading(false);
       }
     };
 
     checkAdmin();
-  }, [pathname, router]); // Re-run when pathname changes
+  }, [router]); // Only check auth once on mount, router is stable
 
   const handleSignOut = async () => {
     await signOutAdmin();
