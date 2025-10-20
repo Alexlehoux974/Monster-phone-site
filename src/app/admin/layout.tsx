@@ -78,7 +78,8 @@ export default function AdminLayout({
     };
 
     checkAdmin();
-  }, [pathname, router]); // Re-run when pathname changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Check auth only once on mount, not on every pathname change
 
   const handleSignOut = async () => {
     await signOutAdmin();
