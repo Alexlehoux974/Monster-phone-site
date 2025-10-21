@@ -99,31 +99,19 @@ export default function StockManagementPage() {
   const loadData = async () => {
     console.log('📦 [STOCK] Starting data load...');
     try {
-      // Load products with variants
-      console.log('📦 [STOCK] Fetching products...');
-      const { data: productsData, error: productsError } = await supabase
-        .from('products')
-        .select('*, product_variants(*)')
-        .order('name');
+      // Use REST API instead of Supabase JS client to avoid blocking
+      console.log('📡 [STOCK] Fetching data via REST API...');
+      const response = await fetch('/api/admin/stock', {
+        signal: AbortSignal.timeout(15000), // 15 second timeout
+      });
 
-      if (productsError) {
-        console.error('❌ [STOCK] Products error:', productsError);
-        throw productsError;
+      if (!response.ok) {
+        console.error('❌ [STOCK] API error:', response.status, response.statusText);
+        throw new Error('Failed to load stock data');
       }
 
-      console.log(`✅ [STOCK] Loaded ${productsData?.length || 0} products`);
-
-      // Load brands
-      const { data: brandsData } = await supabase
-        .from('brands')
-        .select('id, name')
-        .order('name');
-
-      // Load categories
-      const { data: categoriesData } = await supabase
-        .from('categories')
-        .select('id, name')
-        .order('name');
+      const { products: productsData, brands: brandsData, categories: categoriesData } = await response.json();
+      console.log(`✅ [STOCK] Loaded ${productsData?.length || 0} products via REST API`);
 
       setProducts(productsData || []);
 
