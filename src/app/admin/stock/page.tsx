@@ -158,7 +158,7 @@ export default function StockManagementPage() {
 
       // Transform products to variant rows
       const rows: VariantRow[] = [];
-      (productsData || []).forEach((product) => {
+      (productsData || []).forEach((product: Product) => {
         if (product.product_variants && product.product_variants.length > 0) {
           // Create a row for each variant
           product.product_variants.forEach((variant: any) => {
