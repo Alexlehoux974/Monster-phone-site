@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { createClient } from '@/lib/supabase/client';
 import SearchBar from '@/components/admin/SearchBar';
 import LoadingSpinner from '@/components/admin/LoadingSpinner';
 import Toast from '@/components/admin/Toast';
@@ -70,8 +69,6 @@ interface Category {
 export default function StockManagementPage() {
   console.log('🎯 [STOCK PAGE] Component rendering...');
 
-  const supabase = createClient();
-
   const [products, setProducts] = useState<Product[]>([]);
   const [variantRows, setVariantRows] = useState<VariantRow[]>([]);
   const [brands, setBrands] = useState<Brand[]>([]);
@@ -93,7 +90,8 @@ export default function StockManagementPage() {
   useEffect(() => {
     console.log('🚀 [STOCK PAGE] useEffect triggered');
     loadData();
-    setupRealtime();
+    // setupRealtime() supprimé - bloque dans Vercel avec supabase.channel().subscribe()
+    // Le reload manuel après sauvegarde (loadData()) est suffisant
   }, []);
 
   const loadData = async () => {
@@ -167,34 +165,9 @@ export default function StockManagementPage() {
     }
   };
 
-  const setupRealtime = () => {
-    const channel = supabase
-      .channel('product-variants-stock-changes')
-      .on(
-        'postgres_changes',
-        {
-          event: 'UPDATE',
-          schema: 'public',
-          table: 'product_variants',
-        },
-        (payload) => {
-          // Update the specific variant row
-          setVariantRows((prev) =>
-            prev.map((row) =>
-              row.variantId === payload.new.id
-                ? { ...row, stock: payload.new.stock }
-                : row
-            )
-          );
-          showToast('Stock variant mis à jour en temps réel', 'info');
-        }
-      )
-      .subscribe();
-
-    return () => {
-      supabase.removeChannel(channel);
-    };
-  };
+  // setupRealtime() SUPPRIMÉE - causait spinner infini
+  // Raison : supabase.channel().subscribe() bloque indéfiniment dans Vercel serverless
+  // Solution : reload manuel via loadData() après chaque sauvegarde (ligne 437)
 
   const showToast = (
     message: string,
