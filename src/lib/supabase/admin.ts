@@ -149,9 +149,16 @@ export async function signInAdmin(email: string, password: string) {
 }
 
 export async function signOutAdmin() {
-  const supabase = createClient();
-  const { error } = await supabase.auth.signOut();
-  return { error };
+  try {
+    console.log('🚪 [signOutAdmin] Signing out...');
+    const storageKey = 'sb-nswlznqoadjffpxkagoz-auth-token';
+    localStorage.removeItem(storageKey);
+    console.log('✅ [signOutAdmin] Session removed from localStorage');
+    return { error: null };
+  } catch (error) {
+    console.error('❌ [signOutAdmin] Error:', error);
+    return { error: error as Error };
+  }
 }
 
 export async function getAdminSession() {
@@ -171,12 +178,21 @@ export async function getAdminSession() {
     if (storedSession) {
       const parsedData = JSON.parse(storedSession);
       console.log('✅ [getAdminSession] Found session in localStorage');
+      console.log('🔍 [getAdminSession] Session data:', {
+        has_access_token: !!parsedData.access_token,
+        has_refresh_token: !!parsedData.refresh_token,
+        expires_at: parsedData.expires_at,
+        expires_in: parsedData.expires_in,
+        user_email: parsedData.user?.email
+      });
 
       // Vérifier que la session n'est pas expirée
       const expiresAt = parsedData.expires_at;
       const now = Math.floor(Date.now() / 1000);
 
-      if (expiresAt && expiresAt > now) {
+      if (!expiresAt) {
+        console.warn('⚠️ [getAdminSession] No expires_at found in session, allowing session with warning');
+        // Fallback: si pas d'expires_at, on accepte la session et on laisse Supabase gérer
         session = {
           access_token: parsedData.access_token,
           refresh_token: parsedData.refresh_token,
@@ -185,9 +201,21 @@ export async function getAdminSession() {
           token_type: parsedData.token_type,
           user: parsedData.user
         };
-        console.log('✅ [getAdminSession] Session valid, expires at:', new Date(expiresAt * 1000).toLocaleString());
+      } else if (expiresAt > now) {
+        session = {
+          access_token: parsedData.access_token,
+          refresh_token: parsedData.refresh_token,
+          expires_at: parsedData.expires_at,
+          expires_in: parsedData.expires_in,
+          token_type: parsedData.token_type,
+          user: parsedData.user
+        };
+        const expiresDate = new Date(expiresAt * 1000);
+        const timeLeft = Math.floor((expiresAt - now) / 60);
+        console.log('✅ [getAdminSession] Session valid, expires at:', expiresDate.toLocaleString(), `(${timeLeft} minutes left)`);
       } else {
-        console.log('❌ [getAdminSession] Session expired');
+        const expiresDate = new Date(expiresAt * 1000);
+        console.log('❌ [getAdminSession] Session expired at:', expiresDate.toLocaleString());
         error = new Error('Session expirée');
       }
     } else {

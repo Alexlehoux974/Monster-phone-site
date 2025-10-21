@@ -88,6 +88,11 @@ export async function POST(request: NextRequest) {
 
     const authData = await authResponse.json();
     console.log('✅ [LOGIN API] Authentication successful');
+    console.log('🔍 [LOGIN API] Auth data expires_in:', authData.expires_in, 'expires_at:', authData.expires_at);
+
+    // Calculate expires_at if not provided by Supabase Auth API
+    const expiresAt = authData.expires_at || (Math.floor(Date.now() / 1000) + (authData.expires_in || 3600));
+    console.log('📅 [LOGIN API] Calculated expires_at:', expiresAt, 'Date:', new Date(expiresAt * 1000).toLocaleString());
 
     // Step 3: Update last_login_at using REST API
     try {
@@ -121,7 +126,7 @@ export async function POST(request: NextRequest) {
       session: {
         access_token: authData.access_token,
         refresh_token: authData.refresh_token,
-        expires_at: authData.expires_at,
+        expires_at: expiresAt, // Use calculated expires_at
         expires_in: authData.expires_in,
         token_type: authData.token_type,
         user: authData.user
