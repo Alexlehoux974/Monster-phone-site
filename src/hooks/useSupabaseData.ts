@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+// ✅ UTILISER API REST au lieu du client Supabase qui bloque sur Vercel
 import {
   getActiveProducts,
   getProductsByCategory,
@@ -10,9 +11,8 @@ import {
   getBestSellers,
   getDiscountedProducts,
   getNewProducts
-} from '@/lib/supabase/api';
-import { ProductFullView, createClient } from '@/lib/supabase/client';
-const supabase = createClient();
+} from '@/lib/supabase/api-rest';
+import { ProductFullView } from '@/lib/supabase/client';
 import { MENU_STRUCTURE, getSupabaseSlug } from '@/lib/supabase/menu-structure';
 import { convertProductsArray } from '@/lib/supabase/adapters';
 import type { Product } from '@/data/products';
@@ -354,51 +354,60 @@ export function useProductWithVariants(slug: string) {
   useEffect(() => {
     async function fetchProduct() {
       try {
-        // Fetch product with variants
-        const { data, error } = await supabase
-          .from('products')
-          .select(`
-            *,
-            brand:brands(*),
-            category:categories!products_category_id_fkey(*),
-            product_variants(*)
-          `)
-          .eq('url_slug', slug)
-          .single();
+        // ✅ Utiliser REST API au lieu du client Supabase
+        const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+        const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
-        if (error) throw error;
+        const response = await fetch(
+          `${SUPABASE_URL}/rest/v1/products?select=*,brand:brands(*),category:categories!products_category_id_fkey(*),product_variants(*)&url_slug=eq.${slug}`,
+          {
+            headers: {
+              'apikey': SUPABASE_ANON_KEY,
+              'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+              'Content-Type': 'application/json',
+            },
+            signal: AbortSignal.timeout(10000),
+          }
+        );
 
-        if (data) {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (data && data.length > 0) {
+          const productData = data[0];
           // Transform to ProductFullView format
           const transformedProduct: ProductFullView = {
-            id: data.id,
-            sku: data.sku,
-            name: data.name,
-            url_slug: data.url_slug,
-            brand_name: data.brand?.name || '',
-            category_name: data.category?.name || '',
-            subcategory_name: data.subcategory,
-            description: data.description,
-            short_description: data.short_description,
-            price: parseFloat(data.price || '0'),
-            original_price: data.original_price,
-            discount_percentage: data.discount_percentage,
-            admin_discount_percent: data.admin_discount_percent || 0,
-            status: data.status,
-            warranty: data.warranty,
-            delivery_time: data.delivery_time,
-            repairability_index: data.repairability_index,
-            das_head: data.das_head,
-            das_body: data.das_body,
-            average_rating: data.average_rating,
-            total_reviews: data.total_reviews,
-            variants: data.product_variants,
-            images: data.images,
-            specifications: data.specifications,
-            highlights: data.highlights,
-            badges: data.badges,
-            videos: data.videos,
-            reviews: data.reviews
+            id: productData.id,
+            sku: productData.sku,
+            name: productData.name,
+            url_slug: productData.url_slug,
+            brand_name: productData.brand?.name || '',
+            category_name: productData.category?.name || '',
+            subcategory_name: productData.subcategory,
+            description: productData.description,
+            short_description: productData.short_description,
+            price: parseFloat(productData.price || '0'),
+            original_price: productData.original_price,
+            discount_percentage: productData.discount_percentage,
+            admin_discount_percent: productData.admin_discount_percent || 0,
+            status: productData.status,
+            warranty: productData.warranty,
+            delivery_time: productData.delivery_time,
+            repairability_index: productData.repairability_index,
+            das_head: productData.das_head,
+            das_body: productData.das_body,
+            average_rating: productData.average_rating,
+            total_reviews: productData.total_reviews,
+            variants: productData.product_variants,
+            images: productData.images,
+            specifications: productData.specifications,
+            highlights: productData.highlights,
+            badges: productData.badges,
+            videos: productData.videos,
+            reviews: productData.reviews
           };
 
           // ✅ FIX: Convertir vers Product avec adaptateur
