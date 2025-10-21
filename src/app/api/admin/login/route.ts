@@ -1,23 +1,6 @@
-import { createClient } from '@supabase/supabase-js';
 import { NextRequest, NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
-
-// Function to create admin client on-demand
-function getSupabaseAdmin() {
-  return createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!,
-    {
-      auth: {
-        autoRefreshToken: false,
-        persistSession: false
-      }
-    }
-  );
-}
 
 export async function POST(request: NextRequest) {
-  const supabaseAdmin = getSupabaseAdmin();
   try {
     const { email, password } = await request.json();
 
@@ -28,59 +11,130 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // First, check if user is an admin using service role (bypasses RLS)
-    const { data: adminData, error: adminError } = await supabaseAdmin
-      .from('admin_users')
-      .select('*')
-      .eq('email', email)
-      .eq('is_active', true)
-      .single();
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+    const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 
-    if (adminError || !adminData) {
+    if (!supabaseUrl || !supabaseAnonKey || !supabaseServiceKey) {
+      console.error('❌ [LOGIN API] Missing Supabase environment variables');
+      return NextResponse.json(
+        { error: 'Server configuration error' },
+        { status: 500 }
+      );
+    }
+
+    console.log('🔐 [LOGIN API] Attempting login for:', email);
+
+    // Step 1: Verify admin status via REST API (bypasses RLS with service role key)
+    console.log('📡 [LOGIN API] Verifying admin status...');
+    const verifyResponse = await fetch(
+      `${supabaseUrl}/rest/v1/admin_users?email=eq.${encodeURIComponent(email)}&is_active=eq.true&select=*`,
+      {
+        headers: {
+          'apikey': supabaseServiceKey,
+          'Authorization': `Bearer ${supabaseServiceKey}`,
+          'Content-Type': 'application/json',
+        },
+        signal: AbortSignal.timeout(5000),
+      }
+    );
+
+    if (!verifyResponse.ok) {
+      console.error('❌ [LOGIN API] Admin verification failed:', verifyResponse.status);
       return NextResponse.json(
         { error: 'Accès non autorisé. Seuls les administrateurs peuvent se connecter.' },
         { status: 403 }
       );
     }
 
-    // Create a regular Supabase client for auth
-    const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    const adminData = await verifyResponse.json();
+    if (!adminData || adminData.length === 0) {
+      console.error('❌ [LOGIN API] User is not an admin');
+      return NextResponse.json(
+        { error: 'Accès non autorisé. Seuls les administrateurs peuvent se connecter.' },
+        { status: 403 }
+      );
+    }
+
+    const admin = adminData[0];
+    console.log('✅ [LOGIN API] Admin verified:', admin.email);
+
+    // Step 2: Sign in with Supabase Auth API using REST
+    console.log('🔑 [LOGIN API] Calling Supabase Auth API...');
+    const authResponse = await fetch(
+      `${supabaseUrl}/auth/v1/token?grant_type=password`,
+      {
+        method: 'POST',
+        headers: {
+          'apikey': supabaseAnonKey,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+        signal: AbortSignal.timeout(10000), // 10 second timeout
+      }
     );
 
-    // Sign in with Supabase Auth
-    const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    if (authError) {
+    if (!authResponse.ok) {
+      const authError = await authResponse.json();
+      console.error('❌ [LOGIN API] Auth failed:', authError);
       return NextResponse.json(
-        { error: authError.message },
+        { error: authError.error_description || 'Authentification échouée' },
         { status: 401 }
       );
     }
 
-    // Update last login
-    await supabaseAdmin
-      .from('admin_users')
-      .update({ last_login_at: new Date().toISOString() })
-      .eq('id', adminData.id);
+    const authData = await authResponse.json();
+    console.log('✅ [LOGIN API] Authentication successful');
 
-    // Return session data so the client can handle it
+    // Step 3: Update last_login_at using REST API
+    try {
+      console.log('📅 [LOGIN API] Updating last_login_at...');
+      await fetch(
+        `${supabaseUrl}/rest/v1/admin_users?id=eq.${admin.id}`,
+        {
+          method: 'PATCH',
+          headers: {
+            'apikey': supabaseServiceKey,
+            'Authorization': `Bearer ${supabaseServiceKey}`,
+            'Content-Type': 'application/json',
+            'Prefer': 'return=minimal',
+          },
+          body: JSON.stringify({
+            last_login_at: new Date().toISOString()
+          }),
+        }
+      );
+      console.log('✅ [LOGIN API] last_login_at updated');
+    } catch (err) {
+      console.warn('⚠️ [LOGIN API] Failed to update last_login_at:', err);
+      // Non-blocking - don't fail login if this fails
+    }
+
+    console.log('✅ [LOGIN API] Login complete');
+
+    // Return session data that client can store
     return NextResponse.json({
       success: true,
-      session: authData.session,
+      session: {
+        access_token: authData.access_token,
+        refresh_token: authData.refresh_token,
+        expires_at: authData.expires_at,
+        expires_in: authData.expires_in,
+        token_type: authData.token_type,
+        user: authData.user
+      },
       user: authData.user,
       admin: {
-        id: adminData.id,
-        email: adminData.email,
-        role: adminData.role
+        id: admin.id,
+        email: admin.email,
+        role: admin.role
       }
     });
   } catch (error) {
-    console.error('Error during login:', error);
+    console.error('❌ [LOGIN API] Error during login:', error);
     return NextResponse.json(
       { error: 'Erreur lors de la connexion' },
       { status: 500 }

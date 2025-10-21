@@ -86,92 +86,56 @@ export function getAuthHeaders(): { headers: HeadersInit; url: string } | null {
 // ========================================
 
 export async function signInAdmin(email: string, password: string) {
-  const supabase = createClient();
-
   try {
     console.log('🔐 [signInAdmin] Starting login for:', email);
 
-    // First, verify admin status via API
-    console.log('📡 [signInAdmin] Verifying admin status...');
-    const verifyResponse = await fetch('/api/admin/verify', {
+    // Use the /api/admin/login endpoint which handles everything server-side with REST API
+    console.log('📡 [signInAdmin] Calling /api/admin/login...');
+    const loginResponse = await fetch('/api/admin/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email }),
+      body: JSON.stringify({ email, password }),
+      signal: AbortSignal.timeout(15000), // 15 second timeout
     });
 
-    const verifyData = await verifyResponse.json();
-    console.log('📦 [signInAdmin] Verify response:', verifyData);
-
-    if (!verifyResponse.ok || !verifyData.isAdmin) {
-      console.log('❌ [signInAdmin] Not an admin');
+    if (!loginResponse.ok) {
+      const errorData = await loginResponse.json();
+      console.error('❌ [signInAdmin] Login API failed:', errorData.error);
       return {
         data: null,
-        error: new Error('Accès non autorisé. Seuls les administrateurs peuvent se connecter.')
+        error: new Error(errorData.error || 'Erreur lors de la connexion')
       };
     }
 
-    // Then sign in with Supabase Auth directly on the client
-    console.log('🔑 [signInAdmin] Calling signInWithPassword...');
+    const loginData = await loginResponse.json();
+    console.log('✅ [signInAdmin] Login API successful');
 
-    // Add timeout to prevent infinite blocking
-    const timeoutPromise = new Promise<never>((_, reject) => {
-      setTimeout(() => reject(new Error('Login timeout après 10 secondes')), 10000);
-    });
+    // Store session in localStorage (Supabase client format)
+    console.log('💾 [signInAdmin] Storing session in localStorage...');
+    const storageKey = 'sb-nswlznqoadjffpxkagoz-auth-token';
+    const sessionData = {
+      access_token: loginData.session.access_token,
+      refresh_token: loginData.session.refresh_token,
+      expires_at: loginData.session.expires_at,
+      expires_in: loginData.session.expires_in,
+      token_type: loginData.session.token_type,
+      user: loginData.session.user
+    };
 
-    const signInPromise = supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    localStorage.setItem(storageKey, JSON.stringify(sessionData));
+    console.log('✅ [signInAdmin] Session stored in localStorage');
 
-    console.log('⏳ [signInAdmin] Waiting for auth response (max 10s)...');
-    let authData: any = null;
-    let authError: any = null;
+    // Wait a bit to ensure localStorage persistence
+    await new Promise(resolve => setTimeout(resolve, 500));
 
-    try {
-      const result: any = await Promise.race([signInPromise, timeoutPromise]);
-      authData = result.data;
-      authError = result.error;
-    } catch (error) {
-      console.error('❌ [signInAdmin] Timeout or error:', error);
-      authError = error;
-    }
-
-    if (authError) {
-      console.error('❌ [signInAdmin] Auth error:', authError);
-      return {
-        data: null,
-        error: authError
-      };
-    }
-
-    console.log('✅ [signInAdmin] Auth successful, session created');
-
-    // CRITICAL: Wait for session to be fully persisted in localStorage
-    // DO NOT call getSession() here - it causes the session to be destroyed!
-    console.log('⏳ [signInAdmin] Waiting for localStorage persistence...');
-    await new Promise(resolve => setTimeout(resolve, 1000));
-
-    console.log('✅ [signInAdmin] Session should be persisted in localStorage');
-
-    // Update last_login_at on successful login
-    try {
-      await fetch('/api/admin/update-last-login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-      });
-    } catch (err) {
-      console.warn('⚠️ [signInAdmin] Failed to update last_login_at:', err);
-      // Non-blocking - don't fail login if this fails
-    }
-
-    console.log('✅ [signInAdmin] Login complete, returning data');
+    console.log('✅ [signInAdmin] Login complete');
     return {
       data: {
-        auth: authData,
-        admin: verifyData.admin
+        session: loginData.session,
+        user: loginData.user,
+        admin: loginData.admin
       },
       error: null
     };
