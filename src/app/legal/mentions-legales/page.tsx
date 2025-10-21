@@ -50,7 +50,7 @@ export default function MentionsLegalesPage() {
               </p>
               <div className="mt-4 text-sm text-gray-700">
                 <Calendar className="w-4 h-4 inline mr-1" />
-                Dernière mise à jour : Décembre 2024
+                Dernière mise à jour : Juillet 2025
               </div>
             </motion.div>
 
@@ -93,7 +93,7 @@ export default function MentionsLegalesPage() {
                     <div>
                       <h3 className="font-semibold text-blue-900 mb-2">Responsable publication</h3>
                       <p className="text-blue-800">Tymothé LE COQ<br/>
-                      tymothe.icell4@gmail.com</p>
+                      contact@monster-phone.re</p>
                     </div>
                     <div>
                       <h3 className="font-semibold text-blue-900 mb-2">Webmaster</h3>

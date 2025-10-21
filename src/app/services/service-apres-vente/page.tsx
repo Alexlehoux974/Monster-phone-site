@@ -149,7 +149,7 @@ export default function ServiceApresVentePage() {
                 Service Après-Vente
               </h1>
               <p className="text-2xl text-gray-900 max-w-3xl mx-auto">
-                Un service client d&apos;excellence pour vous accompagner après votre achat
+                Un service client d&apos;excellence pour vous accompagner après votre achat et près de chez vous !
               </p>
               <div className="mt-4 text-sm text-gray-900">
                 <Calendar className="w-4 h-4 inline mr-1" />

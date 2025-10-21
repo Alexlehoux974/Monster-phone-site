@@ -190,7 +190,7 @@ export default function GarantiePage() {
                   <p><strong>Adresse :</strong> 16 Rue Claude Chappe, ZAE 2000, Le Port</p>
                   <p><strong>Horaires :</strong> Lun-Ven 8h-17h, Sam 8h-12h</p>
                   <p><strong>Téléphone :</strong> 02 62 02 51 02</p>
-                  <p><strong>Email :</strong> garantie@monster-phone-reunion.com</p>
+                  <p><strong>Email :</strong> support@monster-phone.re</p>
                 </div>
               </div>
 

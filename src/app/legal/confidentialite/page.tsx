@@ -73,7 +73,7 @@ export default function ConfidentialitePage() {
                   <p className="text-blue-900 mb-0">
                     <strong>Coordonnées :</strong><br />
                     16 Rue Claude Chappe, ZAE 2000, 97290 Le Port Cedex, La Réunion<br />
-                    Email : contact@monster-phone-reunion.com<br />
+                    Email : contact@monster-phone.re<br />
                     Téléphone : 02 62 02 51 02
                   </p>
                 </div>
@@ -227,7 +227,7 @@ export default function ConfidentialitePage() {
                   Pour exercer vos droits, contactez-nous :
                 </p>
                 <ul className="list-disc pl-6 space-y-1 mt-2">
-                  <li>Email : contact@monster-phone-reunion.com</li>
+                  <li>Email : contact@monster-phone.re</li>
                   <li>Courrier : Monster Phone Boutique - 16 Rue Claude Chappe, ZAE 2000 - 97290 Le Port Cedex</li>
                   <li>Téléphone : 02 62 02 51 02</li>
                 </ul>
@@ -272,7 +272,7 @@ export default function ConfidentialitePage() {
                   <p className="text-gray-900">
                     <strong>Délégué à la Protection des Données</strong><br />
                     Monster Phone Boutique<br />
-                    Email : dpo@monster-phone-reunion.com<br />
+                    Email : contact@monster-phone.re<br />
                     Téléphone : 02 62 02 51 02
                   </p>
                 </div>
