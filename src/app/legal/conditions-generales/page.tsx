@@ -84,7 +84,7 @@ export default function ConditionsGeneralesPage() {
                   <li>Les prix sont exprimés en euros toutes taxes comprises (TTC)</li>
                   <li>Les prix incluent la TVA au taux en vigueur à La Réunion</li>
                   <li>Les prix peuvent être modifiés à tout moment mais ne s&apos;appliquent qu&apos;aux commandes futures</li>
-                  <li>Frais de livraison : gratuits dès 50€ d&apos;achat, sinon forfait de 5€ sur toute l&apos;île</li>
+                  <li>Frais de livraison : gratuits dès 50€ d&apos;achat</li>
                 </ul>
 
                 <h3 className="text-lg font-semibold text-gray-800 mb-2 mt-4">2.2 Modalités de paiement</h3>
@@ -156,9 +156,9 @@ export default function ConditionsGeneralesPage() {
 
                 <h2 className="text-2xl font-bold text-gray-900 mb-4 mt-8">Article 7 - Protection des données</h2>
                 <p>
-                  Conformément à la loi &quot;Informatique et Libertés&quot; et au RGPD, vous disposez d&apos;un droit 
-                  d&apos;accès, de modification et de suppression des données vous concernant. 
-                  Pour exercer ce droit, contactez-nous à contact@monster-phone-reunion.com.
+                  Conformément à la loi &quot;Informatique et Libertés&quot; et au RGPD, vous disposez d&apos;un droit
+                  d&apos;accès, de modification et de suppression des données vous concernant.
+                  Pour exercer ce droit, contactez-nous à contact@monster-phone.re.
                 </p>
 
                 <h2 className="text-2xl font-bold text-gray-900 mb-4 mt-8">Article 8 - Droit applicable</h2>
@@ -184,7 +184,7 @@ export default function ConditionsGeneralesPage() {
                     <strong className="text-gray-900">Monster Phone Boutique</strong><br />
                     16 Rue Claude Chappe, ZAE 2000, 97290 Le Port Cedex, La Réunion<br />
                     Téléphone : 02 62 02 51 02<br />
-                    Email : contact@monster-phone-reunion.com
+                    Email : contact@monster-phone.re
                   </p>
                 </div>
               </div>

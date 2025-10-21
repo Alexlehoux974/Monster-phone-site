@@ -248,7 +248,7 @@ export default function SupportTechniquePage() {
                   📞 Appeler le support : 02 62 02 51 02
                 </Button>
                 <Button variant="outline">
-                  📧 support@monster-phone-reunion.com
+                  📧 support@monster-phone.re
                 </Button>
               </div>
             </motion.div>

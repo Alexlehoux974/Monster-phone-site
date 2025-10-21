@@ -1185,13 +1185,6 @@ export default function Header() {
                 <User className="h-5 w-5" />
               </Link>
 
-              {/* CTA */}
-              <Link href="/nos-produits" className="hidden lg:flex ml-2 mr-1">
-                <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-1.5 rounded-lg font-medium text-xs shadow-md hover:shadow-lg transition-shadow whitespace-nowrap">
-                  Découvrir
-                </button>
-              </Link>
-
               {/* Menu mobile */}
               <button
                 className="lg:hidden p-1 text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"

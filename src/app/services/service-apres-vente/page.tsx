@@ -56,7 +56,7 @@ export default function ServiceApresVentePage() {
       description: "Atelier agréé et techniciens certifiés",
       icon: Settings,
       color: "purple",
-      details: ["Diagnostic gratuit", "Devis transparent", "Pièces d&apos;origine"]
+      details: ["Diagnostic gratuit", "Devis transparent", "Pièces d'origine"]
     },
     {
       title: "Suivi personnalisé",
@@ -76,7 +76,7 @@ export default function ServiceApresVentePage() {
     },
     {
       category: "Accessoires",
-      duree: "1 an",
+      duree: "2 ans",
       fabricants: ["MUVIT", "MY WAY"],
       couverture: "Défauts matériaux, fonctionnement normal"
     },
@@ -409,7 +409,7 @@ export default function ServiceApresVentePage() {
                 <div className="bg-white/10 rounded-lg p-4">
                   <Mail className="w-6 h-6 mx-auto mb-2" />
                   <div className="font-semibold">Email SAV</div>
-                  <div>sav@<br />monster-phone-reunion.com</div>
+                  <div>support@monster-phone.re</div>
                 </div>
                 
                 <div className="bg-white/10 rounded-lg p-4">

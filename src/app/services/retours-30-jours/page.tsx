@@ -66,7 +66,7 @@ export default function RetoursPolitiquePage() {
   const excludedProducts = [
     "Produits personnalisés ou gravés",
     "Écouteurs et accessoires audio (hygiène)",
-    "Produits endommagés par l&apos;utilisateur",
+    "Produits endommagés par l'utilisateur",
     "Téléphones avec activation SIM"
   ];
 
@@ -381,7 +381,7 @@ export default function RetoursPolitiquePage() {
                 <div className="bg-white/10 rounded-lg p-4">
                   <div className="w-6 h-6 mx-auto mb-2 flex items-center justify-center">✉️</div>
                   <div className="font-semibold">Par email</div>
-                  <div className="opacity-80">retours@<br />monster-phone-reunion.com</div>
+                  <div className="opacity-80">commande@monster-phone.re</div>
                 </div>
               </div>
             </motion.div>

@@ -354,7 +354,7 @@ const MonsterPhoneHero = () => {
           >
             Libérez le{" "}
             <TextShimmer className="text-4xl md:text-6xl font-bold">
-              Monster
+              MONSTRE
             </TextShimmer>
             <br />
             qui sommeille en vous

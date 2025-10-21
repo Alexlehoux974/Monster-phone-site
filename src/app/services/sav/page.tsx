@@ -74,7 +74,7 @@ export default function ServiceApresVentePage() {
                 </ul>
                 <div className="bg-blue-50 p-3 rounded-lg">
                   <p className="text-sm font-medium text-blue-800">
-                    ✉️ sav@monster-phone-reunion.com<br/>
+                    ✉️ support@monster-phone.re<br/>
                     Réponse garantie sous 24h
                   </p>
                 </div>

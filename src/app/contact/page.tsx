@@ -36,13 +36,29 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simuler l'envoi (à remplacer par vraie logique)
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    setSubmitStatus('success');
-    setIsSubmitting(false);
-    setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+    setSubmitStatus('idle');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      console.error('Erreur lors de l\'envoi:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -135,6 +151,22 @@ export default function ContactPage() {
                     </div>
                     <p className="text-green-900 text-sm mt-1">
                       Nous vous répondrons dans les 24h ouvrées.
+                    </p>
+                  </motion.div>
+                )}
+
+                {submitStatus === 'error' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6"
+                  >
+                    <div className="flex items-center gap-2 text-red-900">
+                      <AlertCircle className="w-5 h-5" />
+                      <span className="font-medium">Erreur lors de l&apos;envoi</span>
+                    </div>
+                    <p className="text-red-900 text-sm mt-1">
+                      Une erreur est survenue. Veuillez réessayer ou nous contacter par téléphone.
                     </p>
                   </motion.div>
                 )}
@@ -280,7 +312,7 @@ export default function ContactPage() {
                       <Mail className="w-5 h-5 text-purple-600 flex-shrink-0" />
                       <div>
                         <p className="font-medium text-gray-900">Email</p>
-                        <p className="text-gray-900">contact@monster-phone-reunion.com</p>
+                        <p className="text-gray-900">contact@monster-phone.re</p>
                       </div>
                     </div>
                   </div>

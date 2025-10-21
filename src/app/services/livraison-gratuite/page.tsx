@@ -409,7 +409,7 @@ export default function LivraisonGratuitePage() {
                 <div className="bg-white/10 rounded-lg p-4">
                   <div className="w-6 h-6 mx-auto mb-2 flex items-center justify-center">✉️</div>
                   <div className="font-semibold">Email support</div>
-                  <div className="text-white">livraison@<br />monster-phone-reunion.com</div>
+                  <div className="text-white">commande@monster-phone.re</div>
                 </div>
                 
                 <div className="bg-white/10 rounded-lg p-4">

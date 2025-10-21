@@ -416,7 +416,7 @@ export default function SupportTechniquePage() {
                 <div className="bg-white/10 rounded-lg p-4">
                   <Mail className="w-6 h-6 mx-auto mb-2" />
                   <div className="font-semibold">Email support</div>
-                  <div>support@<br />monster-phone-reunion.com</div>
+                  <div>support@monster-phone.re</div>
                 </div>
                 
                 <div className="bg-white/10 rounded-lg p-4">
