@@ -97,19 +97,62 @@ export default function StockManagementPage() {
   const loadData = async () => {
     console.log('📦 [STOCK] Starting data load...');
     try {
-      // Use REST API instead of Supabase JS client to avoid blocking
-      console.log('📡 [STOCK] Fetching data via REST API...');
-      const response = await fetch('/api/admin/stock', {
-        signal: AbortSignal.timeout(15000), // 15 second timeout
-      });
+      // APPEL DIRECT à Supabase REST API (bypass Next.js API route qui bloque aussi)
+      console.log('📡 [STOCK] Fetching data DIRECTLY from Supabase REST API...');
 
-      if (!response.ok) {
-        console.error('❌ [STOCK] API error:', response.status, response.statusText);
-        throw new Error('Failed to load stock data');
+      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+      const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+
+      // Fetch products with variants
+      const productsResponse = await fetch(
+        `${supabaseUrl}/rest/v1/products?select=*,product_variants(*)&order=name`,
+        {
+          headers: {
+            'apikey': supabaseAnonKey,
+            'Authorization': `Bearer ${supabaseAnonKey}`,
+            'Content-Type': 'application/json',
+          },
+          signal: AbortSignal.timeout(10000),
+        }
+      );
+
+      if (!productsResponse.ok) {
+        console.error('❌ [STOCK] Products fetch error:', productsResponse.status);
+        throw new Error('Failed to fetch products');
       }
 
-      const { products: productsData, brands: brandsData, categories: categoriesData } = await response.json();
-      console.log(`✅ [STOCK] Loaded ${productsData?.length || 0} products via REST API`);
+      const productsData = await productsResponse.json();
+      console.log(`✅ [STOCK] Loaded ${productsData.length} products directly from Supabase`);
+
+      // Fetch brands
+      const brandsResponse = await fetch(
+        `${supabaseUrl}/rest/v1/brands?select=id,name&order=name`,
+        {
+          headers: {
+            'apikey': supabaseAnonKey,
+            'Authorization': `Bearer ${supabaseAnonKey}`,
+            'Content-Type': 'application/json',
+          },
+          signal: AbortSignal.timeout(5000),
+        }
+      );
+      const brandsData = brandsResponse.ok ? await brandsResponse.json() : [];
+
+      // Fetch categories
+      const categoriesResponse = await fetch(
+        `${supabaseUrl}/rest/v1/categories?select=id,name&order=name`,
+        {
+          headers: {
+            'apikey': supabaseAnonKey,
+            'Authorization': `Bearer ${supabaseAnonKey}`,
+            'Content-Type': 'application/json',
+          },
+          signal: AbortSignal.timeout(5000),
+        }
+      );
+      const categoriesData = categoriesResponse.ok ? await categoriesResponse.json() : [];
+
+      console.log(`✅ [STOCK] Loaded ${brandsData.length} brands, ${categoriesData.length} categories`);
 
       setProducts(productsData || []);
 
