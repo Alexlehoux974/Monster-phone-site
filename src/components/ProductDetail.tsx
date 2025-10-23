@@ -15,6 +15,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
 import { createClient } from '@/lib/supabase/client';
+import EnrichedProductSections from '@/components/EnrichedProductSections';
 
 interface ProductDetailProps {
   product: Product;
@@ -841,6 +842,9 @@ export default function ProductDetail({ product }: ProductDetailProps) {
       </Tabs>
     </div>
   </div>
+
+  {/* Enriched Product Sections - CMS-managed content */}
+  <EnrichedProductSections productId={product.id} />
   </div>
   );
 }
