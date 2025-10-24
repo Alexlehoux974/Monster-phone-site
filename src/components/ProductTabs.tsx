@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Star, Truck, Package, Clock, RefreshCw, Shield, Award } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import type { Product } from '@/types/product';
+import type { Product } from '@/data/products';
 
 interface ProductTabsProps {
   product: Product;

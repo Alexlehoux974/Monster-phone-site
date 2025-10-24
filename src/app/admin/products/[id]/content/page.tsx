@@ -39,7 +39,7 @@ export default function ProductContentManagement() {
       // Load product
       const { data: productData, error: productError } = await supabase
         .from('products')
-        .select('id, name, brand:brands(name)')
+        .select('id, name, brand:brands!inner(name)')
         .eq('id', productId)
         .single();
 
@@ -52,7 +52,7 @@ export default function ProductContentManagement() {
       setProduct({
         id: productData.id,
         name: productData.name,
-        brand: productData.brand?.name || '',
+        brand: Array.isArray(productData.brand) ? productData.brand[0]?.name || '' : (productData.brand as any)?.name || '',
       });
 
       // Load sections

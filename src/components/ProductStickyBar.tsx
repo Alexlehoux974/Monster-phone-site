@@ -24,10 +24,14 @@ export default function ProductStickyBar({ product }: ProductStickyBarProps) {
   const [quantity] = useState(1);
 
   // Calculer le prix final avec promotion variant ou produit
-  const finalPrice = selectedVariant?.promotion_price || selectedVariant?.price || product.price;
-  const originalPrice = selectedVariant?.promotion_price
-    ? (selectedVariant?.price || product.price)
-    : product.originalPrice;
+  const variantDiscount = selectedVariant?.adminDiscountPercent || 0;
+  const productDiscount = product.adminDiscountPercent || 0;
+  const activeDiscount = variantDiscount > 0 ? variantDiscount : productDiscount;
+
+  const finalPrice = activeDiscount > 0
+    ? product.price * (1 - activeDiscount / 100)
+    : product.price;
+  const originalPrice = activeDiscount > 0 ? product.price : product.originalPrice;
 
   // Déterminer le stock disponible
   const currentStock = selectedVariant?.stock ?? product.stockQuantity ?? 0;
@@ -41,27 +45,12 @@ export default function ProductStickyBar({ product }: ProductStickyBarProps) {
       return;
     }
 
-    addToCart({
-      id: selectedVariant ? `${product.id}-${selectedVariant.id}` : product.id,
-      name: product.name,
-      price: finalPrice,
-      image: product.images[0],
-      quantity: quantity,
-      variant: selectedVariant
-        ? {
-            id: selectedVariant.id,
-            name: selectedVariant.variant_name,
-            value: selectedVariant.variant_value,
-            price: selectedVariant.price,
-            promotion_price: selectedVariant.promotion_price,
-            stock: selectedVariant.stock,
-          }
-        : undefined,
-    });
+    // Appeler addToCart avec le produit complet et le variant color
+    addToCart(product, quantity, selectedVariant?.color);
 
     toast.success('Produit ajouté au panier', {
       description: selectedVariant
-        ? `${product.name} - ${selectedVariant.variant_value}`
+        ? `${product.name} - ${selectedVariant.color}`
         : product.name,
     });
   };
@@ -72,24 +61,8 @@ export default function ProductStickyBar({ product }: ProductStickyBarProps) {
       return;
     }
 
-    // Ajouter au panier
-    addToCart({
-      id: selectedVariant ? `${product.id}-${selectedVariant.id}` : product.id,
-      name: product.name,
-      price: finalPrice,
-      image: product.images[0],
-      quantity: quantity,
-      variant: selectedVariant
-        ? {
-            id: selectedVariant.id,
-            name: selectedVariant.variant_name,
-            value: selectedVariant.variant_value,
-            price: selectedVariant.price,
-            promotion_price: selectedVariant.promotion_price,
-            stock: selectedVariant.stock,
-          }
-        : undefined,
-    });
+    // Appeler addToCart avec le produit complet et le variant color
+    addToCart(product, quantity, selectedVariant?.color);
 
     // Rediriger vers le panier
     router.push('/panier');
@@ -114,7 +87,7 @@ export default function ProductStickyBar({ product }: ProductStickyBarProps) {
           {product.variants && product.variants.length > 0 && (
             <div className="flex items-center gap-3 bg-gray-50 px-4 py-2 rounded-xl border border-gray-200">
               <span className="text-sm font-semibold text-gray-900 hidden sm:block">
-                {product.variants[0].variant_name}:
+                Couleur:
               </span>
               <div className="flex gap-2">
                 {product.variants.map((variant) => (
@@ -131,7 +104,7 @@ export default function ProductStickyBar({ product }: ProductStickyBarProps) {
                         : 'bg-white text-gray-900 border-gray-300 hover:border-primary hover:bg-primary/5 hover:scale-105'
                     )}
                   >
-                    {variant.variant_value}
+                    {variant.color}
                     {variant.stock === 0 && (
                       <span className="ml-1.5 text-xs font-normal">(épuisé)</span>
                     )}
