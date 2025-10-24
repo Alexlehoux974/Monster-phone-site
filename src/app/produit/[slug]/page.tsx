@@ -1,6 +1,8 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import ProductDetail from '@/components/ProductDetail';
+import ProductTabs from '@/components/ProductTabs';
+import ProductStickyBar from '@/components/ProductStickyBar';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FeaturedProducts from '@/components/FeaturedProducts';
@@ -330,7 +332,15 @@ export default async function ProductPage({ params }: ProductPageProps) {
       <Header />
       <main className="pt-[110px]">
         <ProductDetail product={product} />
-        
+
+        {/* Tabs section - Description, Avis, Livraison */}
+        <div className="max-w-7xl mx-auto px-4">
+          <ProductTabs product={product} />
+        </div>
+
+        {/* Sticky CTA Section */}
+        <ProductStickyBar product={product} />
+
         {/* Section produits similaires */}
         {relatedProducts.length > 0 && (
           <section className="py-12 bg-gray-50">
