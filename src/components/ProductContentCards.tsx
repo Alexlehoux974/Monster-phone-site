@@ -123,7 +123,11 @@ export default function ProductContentCards({ productId, productCategory }: Prod
       {sections.map((section) => {
         switch (section.section_type) {
           case 'image_gallery':
-            return <ImageGallerySection key={section.id} section={section} productCategory={productCategory} />;
+            return (
+              <div key={section.id} className="hidden lg:block">
+                <ImageGallerySection section={section} productCategory={productCategory} />
+              </div>
+            );
           case 'description_card':
             return <DescriptionCardSection key={section.id} section={section} productCategory={productCategory} />;
           case 'specs_grid':

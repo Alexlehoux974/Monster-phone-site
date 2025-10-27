@@ -292,12 +292,55 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                   {allImages.length} images disponibles
                 </p>
                 {allImages.some(img => img.variant) && (
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-gray-500 hidden lg:block">
                     Cliquez pour voir les différentes couleurs
                   </p>
                 )}
               </div>
-              <div className="grid grid-cols-5 gap-2">
+              {/* Mobile: Scroll horizontal */}
+              <div className="flex lg:hidden gap-2 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-hide">
+                {allImages.map((image, index) => (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      setSelectedImageIndex(index);
+                      // Si l'image appartient à une variante, la sélectionner
+                      if (image.variant) {
+                        const variant = product.variants?.find(v => v.color === image.variant);
+                        if (variant) {
+                          setSelectedVariant(variant);
+                        }
+                      }
+                    }}
+                    className={cn(
+                      "relative flex-shrink-0 w-20 h-20 bg-gray-100 rounded-lg overflow-hidden border-2 transition-all snap-start",
+                      selectedImageIndex === index
+                        ? "border-primary ring-2 ring-primary/20 shadow-lg"
+                        : "border-gray-200"
+                    )}
+                  >
+                    <ImageWithFallback
+                      src={image.src}
+                      alt={`${product.name} - ${image.variant ? `Couleur ${image.variant}` : `Image ${index + 1}`}`}
+                      productCategory={product.category}
+                      fill
+                      className="object-contain"
+                    />
+                    {/* Badge de couleur si c'est une image de variante */}
+                    {image.variant && image.variantColor && (
+                      <div className="absolute bottom-1 right-1 p-0.5 bg-white/90 rounded-full shadow-sm">
+                        <div
+                          className="w-2 h-2 rounded-full border border-gray-300"
+                          style={{ backgroundColor: image.variantColor }}
+                          title={image.variant}
+                        />
+                      </div>
+                    )}
+                  </button>
+                ))}
+              </div>
+              {/* Desktop: Grille 5 colonnes */}
+              <div className="hidden lg:grid grid-cols-5 gap-2">
                 {allImages.map((image, index) => (
                   <button
                     key={index}
@@ -313,8 +356,8 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                     }}
                     className={cn(
                       "relative aspect-square bg-gray-100 rounded-lg overflow-hidden border-2 transition-all group",
-                      selectedImageIndex === index 
-                        ? "border-primary ring-2 ring-primary/20 shadow-lg" 
+                      selectedImageIndex === index
+                        ? "border-primary ring-2 ring-primary/20 shadow-lg"
                         : "border-gray-200 hover:border-primary/50 hover:shadow-md"
                     )}
                   >
@@ -328,7 +371,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                     {/* Badge de couleur si c'est une image de variante */}
                     {image.variant && image.variantColor && (
                       <div className="absolute bottom-1 right-1 p-1 bg-white/90 rounded-full shadow-sm">
-                        <div 
+                        <div
                           className="w-3 h-3 rounded-full border border-gray-300"
                           style={{ backgroundColor: image.variantColor }}
                           title={image.variant}
