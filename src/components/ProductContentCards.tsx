@@ -181,7 +181,7 @@ function ImageGallerySection({ section, productCategory }: { section: ProductCon
                 src="/placeholder-monster.svg"
                 alt={`Image ${i}`}
                 fill
-                className="object-contain p-8"
+                className="object-contain p-2 lg:p-8"
               />
             </div>
           ))
@@ -232,7 +232,7 @@ function DescriptionCardSection({ section, productCategory }: { section: Product
               src="/placeholder-monster.svg"
               alt="Image produit"
               fill
-              className="object-contain p-8"
+              className="object-contain p-2 lg:p-8"
             />
           )}
         </div>
@@ -320,7 +320,7 @@ function FeaturesListSection({ section, productCategory }: { section: ProductCon
               src="/placeholder-monster.svg"
               alt="Points forts"
               fill
-              className="object-contain p-8"
+              className="object-contain p-2 lg:p-8"
             />
           )}
         </div>
@@ -370,7 +370,7 @@ function EngagementCardSection({ section, productCategory }: { section: ProductC
               src="/placeholder-monster.svg"
               alt="Engagement"
               fill
-              className="object-contain p-8"
+              className="object-contain p-2 lg:p-8"
             />
           )}
         </div>
