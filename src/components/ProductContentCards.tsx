@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { createClient } from '@/lib/supabase/client';
 import { cn } from '@/lib/utils';
 import ImageWithFallback from '@/components/ImageWithFallback';
+import { FileText, BarChart3, Star, Lightbulb, CheckCircle2 } from 'lucide-react';
 
 interface ProductContentSection {
   id: string;
@@ -148,12 +149,12 @@ function ImageGallerySection({ section, productCategory }: { section: ProductCon
       {section.title && (
         <h2 className="text-2xl font-bold text-gray-900 mb-6">{section.title}</h2>
       )}
-      <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {hasImages ? (
           section.images!.map((image, index) => (
             <div
               key={index}
-              className="flex-shrink-0 w-64 h-64 bg-gray-100 rounded-xl overflow-hidden snap-center"
+              className="aspect-square bg-gray-100 rounded-xl overflow-hidden"
             >
               <ImageWithFallback
                 src={image}
@@ -161,7 +162,7 @@ function ImageGallerySection({ section, productCategory }: { section: ProductCon
                 productCategory={productCategory}
                 width={256}
                 height={256}
-                className="object-cover w-full h-full"
+                className="object-contain w-full h-full"
               />
             </div>
           ))
@@ -170,14 +171,14 @@ function ImageGallerySection({ section, productCategory }: { section: ProductCon
           [1, 2, 3, 4].map((i) => (
             <div
               key={i}
-              className="flex-shrink-0 w-64 h-64 bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl overflow-hidden snap-center flex items-center justify-center"
+              className="aspect-square bg-gray-100 rounded-xl overflow-hidden relative"
             >
-              <div className="text-center text-gray-400">
-                <svg className="w-16 h-16 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                <p className="text-sm">Image {i}</p>
-              </div>
+              <Image
+                src="/placeholder-monster.svg"
+                alt={`Image ${i}`}
+                fill
+                className="object-contain p-8"
+              />
             </div>
           ))
         )}
@@ -200,7 +201,7 @@ function DescriptionCardSection({ section, productCategory }: { section: Product
         <div className={cn("p-8 flex flex-col justify-center", isImageLeft ? "lg:col-start-2" : "lg:col-start-1")}>
           {section.title && (
             <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-              <span className="text-3xl">📝</span>
+              <FileText className="h-8 w-8 text-primary" />
               {section.title}
             </h2>
           )}
@@ -223,14 +224,12 @@ function DescriptionCardSection({ section, productCategory }: { section: Product
               className="object-cover"
             />
           ) : (
-            <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-              <div className="text-center text-gray-400">
-                <svg className="w-16 h-16 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                <p className="text-sm">Image produit</p>
-              </div>
-            </div>
+            <Image
+              src="/placeholder-monster.svg"
+              alt="Image produit"
+              fill
+              className="object-contain p-8"
+            />
           )}
         </div>
       </div>
@@ -248,7 +247,7 @@ function SpecsGridSection({ section }: { section: ProductContentSection }) {
     <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl shadow-lg p-8">
       {section.title && (
         <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-          <span className="text-3xl">📊</span>
+          <BarChart3 className="h-8 w-8 text-primary" />
           {section.title}
         </h2>
       )}
@@ -288,14 +287,14 @@ function FeaturesListSection({ section, productCategory }: { section: ProductCon
         <div className={cn("p-8 flex flex-col justify-center", isImageLeft ? "lg:col-start-2" : "lg:col-start-1")}>
           {section.title && (
             <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-              <span className="text-3xl">⭐</span>
+              <Star className="h-8 w-8 text-yellow-400 fill-current" />
               {section.title}
             </h2>
           )}
           <ul className="space-y-3">
             {features.map((feature, index) => (
               <li key={index} className="flex items-start gap-3">
-                <span className="text-green-500 text-xl flex-shrink-0 mt-0.5">{feature.icon}</span>
+                <CheckCircle2 className="h-6 w-6 text-green-500 flex-shrink-0 mt-0.5" />
                 <span className="text-gray-700 leading-relaxed">{feature.text}</span>
               </li>
             ))}
@@ -313,14 +312,12 @@ function FeaturesListSection({ section, productCategory }: { section: ProductCon
               className="object-cover"
             />
           ) : (
-            <div className="w-full h-full bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center">
-              <div className="text-center text-blue-400">
-                <svg className="w-16 h-16 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <p className="text-sm">Points forts</p>
-              </div>
-            </div>
+            <Image
+              src="/placeholder-monster.svg"
+              alt="Points forts"
+              fill
+              className="object-contain p-8"
+            />
           )}
         </div>
       </div>
@@ -342,7 +339,7 @@ function EngagementCardSection({ section, productCategory }: { section: ProductC
         <div className={cn("p-8 flex flex-col justify-center", isImageLeft ? "lg:col-start-2" : "lg:col-start-1")}>
           {section.title && (
             <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-              <span className="text-3xl">💡</span>
+              <Lightbulb className="h-8 w-8 text-yellow-500" />
               {section.title}
             </h2>
           )}
@@ -365,14 +362,12 @@ function EngagementCardSection({ section, productCategory }: { section: ProductC
               className="object-cover"
             />
           ) : (
-            <div className="w-full h-full bg-gradient-to-br from-green-50 to-green-100 flex items-center justify-center">
-              <div className="text-center text-green-400">
-                <svg className="w-16 h-16 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-                <p className="text-sm">Engagement</p>
-              </div>
-            </div>
+            <Image
+              src="/placeholder-monster.svg"
+              alt="Engagement"
+              fill
+              className="object-contain p-8"
+            />
           )}
         </div>
       </div>

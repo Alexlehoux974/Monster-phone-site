@@ -565,7 +565,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
               </div>
               <div className="flex items-center gap-2 text-sm text-gray-600">
                 <Clock className="h-4 w-4 text-orange-600" />
-                <span>Expédition {product.deliveryTime || '24-48h'}</span>
+                <span>Expédition en 24H</span>
               </div>
             </div>
           </div>

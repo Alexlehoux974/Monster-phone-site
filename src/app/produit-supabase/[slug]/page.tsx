@@ -2,12 +2,14 @@
 
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
+import { Loader2, AlertCircle, Package } from 'lucide-react';
+import { createClient } from '@/lib/supabase/client';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ProductDetail from '@/components/ProductDetail';
-import { createClient } from '@/lib/supabase/client';
+import SimilarProducts from '@/components/SimilarProducts';
+
 const supabase = createClient();
-import { Loader2, AlertCircle, Package } from 'lucide-react';
 
 interface SupabaseProduct {
   id: string;
@@ -329,66 +331,16 @@ export default function ProduitSupabasePage() {
     <div className="min-h-screen bg-gray-50">
       <Header />
 
-      {/* Bannière info Supabase */}
-      <div className="bg-green-50 border-b border-green-200 pt-[110px]">
-        <div className="container mx-auto px-4 py-2">
-          <div className="flex items-center justify-between text-sm">
-            <div className="flex items-center gap-2 text-green-700">
-              <Package className="w-4 h-4" />
-              <span className="font-medium">Données en temps réel depuis Supabase</span>
-            </div>
-            <div className="text-green-600">
-              Stock mis à jour : {stockUpdateTime.toLocaleTimeString('fr-FR')}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <main className="container mx-auto px-4 py-8">
-        {/* Badge stock en temps réel */}
-        <div className="mb-4">
-          {product.stockQuantity > 0 ? (
-            <div className="inline-flex items-center gap-2 bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm">
-              <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-              {product.stockQuantity} unités en stock
-            </div>
-          ) : (
-            <div className="inline-flex items-center gap-2 bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm">
-              <span className="w-2 h-2 bg-red-500 rounded-full"></span>
-              Rupture de stock
-            </div>
-          )}
-        </div>
-
+      <main className="container mx-auto px-4 py-8 pt-[110px]">
         {/* Composant ProductDetail existant */}
         <ProductDetail product={product} />
 
-        {/* Informations supplémentaires de Supabase */}
-        {(product.unitPriceHT || product.tvaRate || product.ecoTax) && (
-          <div className="mt-8 bg-white rounded-lg shadow-sm p-6">
-            <h3 className="text-lg font-semibold mb-4">Informations fiscales</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {product.unitPriceHT && (
-                <div>
-                  <span className="text-gray-600 text-sm">Prix HT</span>
-                  <p className="font-semibold">{product.unitPriceHT.toFixed(2)} €</p>
-                </div>
-              )}
-              {product.tvaRate && (
-                <div>
-                  <span className="text-gray-600 text-sm">TVA</span>
-                  <p className="font-semibold">{product.tvaRate}%</p>
-                </div>
-              )}
-              {product.ecoTax > 0 && (
-                <div>
-                  <span className="text-gray-600 text-sm">Éco-participation</span>
-                  <p className="font-semibold">{product.ecoTax.toFixed(2)} €</p>
-                </div>
-              )}
-            </div>
-          </div>
-        )}
+        {/* Produits similaires */}
+        <SimilarProducts
+          categorySlug={product.categorySlug}
+          brandSlug={product.brandSlug}
+          currentProductId={product.id}
+        />
       </main>
 
       <Footer />

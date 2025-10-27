@@ -73,7 +73,7 @@ export default function ProductStickyBar({ product }: ProductStickyBarProps) {
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
           {/* Product Info */}
-          <div className="flex-1 text-center sm:text-left">
+          <div className="flex-1 text-center sm:text-left min-w-0">
             <h3 className="text-lg font-bold text-gray-900 line-clamp-1">{product.name}</h3>
             <div className="flex items-center gap-2 justify-center sm:justify-start">
               <span className="text-xl font-bold text-primary">{finalPrice.toFixed(2)} €</span>
@@ -85,8 +85,8 @@ export default function ProductStickyBar({ product }: ProductStickyBarProps) {
 
           {/* Variant Selector */}
           {product.variants && product.variants.length > 0 && (
-            <div className="flex items-center gap-3 bg-gray-50 px-4 py-2 rounded-xl border border-gray-200">
-              <span className="text-sm font-semibold text-gray-900 hidden sm:block">
+            <div className="flex items-center gap-3 flex-shrink-0">
+              <span className="text-sm font-semibold text-gray-900 hidden sm:block whitespace-nowrap">
                 Couleur:
               </span>
               <div className="flex gap-2">
@@ -96,12 +96,12 @@ export default function ProductStickyBar({ product }: ProductStickyBarProps) {
                     onClick={() => setSelectedVariant(variant)}
                     disabled={variant.stock === 0}
                     className={cn(
-                      'px-5 py-2.5 rounded-lg font-semibold text-sm transition-all duration-200 border-2',
+                      'px-5 py-2.5 rounded-lg font-extrabold text-sm transition-all duration-200 border-2 whitespace-nowrap shadow-md',
                       selectedVariant?.id === variant.id
-                        ? 'bg-primary text-white shadow-lg border-primary scale-105'
+                        ? 'bg-primary border-primary text-white scale-105 shadow-lg ring-2 ring-primary/30'
                         : variant.stock === 0
-                        ? 'bg-white/60 text-gray-500 border-gray-300 cursor-not-allowed opacity-60'
-                        : 'bg-white text-gray-900 border-gray-300 hover:border-primary hover:bg-primary/5 hover:scale-105'
+                        ? 'bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed opacity-50'
+                        : 'bg-white text-gray-900 border-gray-300 hover:border-primary hover:shadow-lg'
                     )}
                   >
                     {variant.color}
