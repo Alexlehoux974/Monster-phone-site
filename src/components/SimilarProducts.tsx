@@ -126,7 +126,7 @@ export default function SimilarProducts({ categorySlug, brandSlug, currentProduc
             || '/placeholder-monster.svg';
 
           const hasDiscount = product.original_price && product.original_price > product.price;
-          const discountPercent = hasDiscount
+          const discountPercent = hasDiscount && product.original_price
             ? Math.round(((product.original_price - product.price) / product.original_price) * 100)
             : 0;
 
