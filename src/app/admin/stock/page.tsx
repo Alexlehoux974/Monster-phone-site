@@ -16,7 +16,9 @@ import {
   Eye,
   EyeOff,
   Percent,
+  FileText,
 } from 'lucide-react';
+import Link from 'next/link';
 
 interface ProductVariant {
   id: string;
@@ -780,13 +782,22 @@ export default function StockManagementPage() {
                         </button>
                       </div>
                     ) : (
-                      <button
-                        onClick={() => startEditing(row)}
-                        className="p-2 text-blue-500 hover:bg-blue-500/10 rounded-lg transition-colors"
-                        title="Modifier"
-                      >
-                        <Edit2 className="w-4 h-4" />
-                      </button>
+                      <div className="flex items-center justify-end gap-2">
+                        <Link
+                          href={`/admin/products/${row.productId}/content`}
+                          className="p-2 text-purple-500 hover:bg-purple-500/10 rounded-lg transition-colors"
+                          title="Gérer le contenu"
+                        >
+                          <FileText className="w-4 h-4" />
+                        </Link>
+                        <button
+                          onClick={() => startEditing(row)}
+                          className="p-2 text-blue-500 hover:bg-blue-500/10 rounded-lg transition-colors"
+                          title="Modifier le stock"
+                        >
+                          <Edit2 className="w-4 h-4" />
+                        </button>
+                      </div>
                     )}
                   </td>
                 </tr>

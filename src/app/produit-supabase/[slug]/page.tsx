@@ -90,57 +90,56 @@ export default function ProduitSupabasePage() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
+        console.log('🔍 [CLIENT] Fetching product with slug:', slug);
         setLoading(true);
-        
-        // Récupérer le produit de base
-        const { data: productData, error: productError } = await supabase
-          .from('products')
-          .select('*')
-          .eq('url_slug', slug)
-          .single();
 
-        if (productError) {
-          console.error('Erreur Supabase produit:', productError);
-          setError('Produit non trouvé');
+        // Appeler l'API route qui utilise le service role key
+        // cache: 'no-store' + timestamp pour forcer Chrome à bypasser son cache
+        const timestamp = new Date().getTime();
+        const response = await fetch(`/api/products/${slug}?t=${timestamp}`, {
+          cache: 'no-store',
+          headers: {
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            'Pragma': 'no-cache',
+            'Expires': '0'
+          }
+        });
+
+        console.log('📡 [CLIENT] API response status:', response.status);
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          console.error('❌ [CLIENT] API error:', errorData);
+          setError(errorData.error || 'Produit non trouvé');
+          setLoading(false);
           return;
         }
 
-        // Récupérer les données associées
-        const [
-          { data: brandData },
-          { data: categoryData },
-          { data: variantsData },
-          { data: imagesData },
-          { data: reviewsData }
-        ] = await Promise.all([
-          supabase.from('brands').select('*').eq('id', productData.brand_id).single(),
-          supabase.from('categories').select('*').eq('id', productData.category_id).single(),
-          supabase.from('product_variants').select('*').eq('product_id', productData.id),
-          supabase.from('product_images').select('*').eq('product_id', productData.id),
-          supabase.from('product_reviews').select('*').eq('product_id', productData.id)
-        ]);
+        const data = await response.json();
+        console.log('✅ [CLIENT] Product data received:', data.name);
 
-        // Combiner les données
-        const data = {
-          ...productData,
-          brands: brandData || { id: '', name: 'Unknown', slug: '' },
-          categories: categoryData || { id: '', name: 'Unknown', slug: '' },
-          product_variants: variantsData || [],
-          product_images: imagesData || [],
-          product_reviews: reviewsData || []
-        };
+        // Transformer les données au format attendu par ProductDetail
+        const transformedProduct = transformProduct(data);
 
-        const error = null;
+        // Log des données transformées pour debugging
+        console.log('📦 [TRANSFORM] Product:', {
+          name: transformedProduct.name,
+          price: transformedProduct.price,
+          originalPrice: transformedProduct.originalPrice,
+          discount: transformedProduct.discount,
+          variants: transformedProduct.variants?.map(v => ({
+            color: v.color,
+            price: v.price,
+            originalPrice: v.originalPrice,
+            discount: v.discount
+          }))
+        });
 
-        if (error) {
-          console.error('Erreur Supabase:', error);
-          setError('Produit non trouvé');
-        } else if (data) {
-          // Transformer les données au format attendu par ProductDetail
-          const transformedProduct = transformProduct(data);
-          setProduct(transformedProduct);
-          setStockUpdateTime(new Date());
-        }
+        console.log('✨ [BEFORE SET] About to set product state');
+        setProduct(transformedProduct);
+        console.log('✨ [AFTER SET] Product state updated');
+        setStockUpdateTime(new Date());
+        console.log('✨ [STOCK UPDATE] Stock update time set');
       } catch (err) {
         console.error('Erreur:', err);
         setError('Erreur lors du chargement du produit');
@@ -170,22 +169,37 @@ export default function ProduitSupabasePage() {
     }
     
     if (allImages.length === 0) {
-      allImages.push('/images/placeholder.jpg');
+      allImages.push('/placeholder-monster.svg');
     }
 
-    // Préparer les variantes
-    const variants = data.product_variants?.map(v => ({
-      id: v.id,
-      sku: v.sku,
-      color: v.color || 'Standard',
-      colorCode: '',
-      storage: v.storage,
-      ram: v.ram,
-      price: v.price || data.price,
-      stock: v.stock,
-      ean: v.ean,
-      images: v.images || []
-    })) || [];
+    // Préparer les variantes avec gestion des promotions admin
+    const variants = data.product_variants?.map(v => {
+      const basePrice = v.price || data.price;
+      const discount = v.admin_discount_percent || 0;
+      const finalPrice = discount > 0
+        ? basePrice * (1 - discount / 100)
+        : basePrice;
+
+      const variant = {
+        id: v.id,
+        sku: v.sku,
+        color: v.color || 'Standard',
+        colorCode: '',
+        storage: v.storage,
+        ram: v.ram,
+        price: finalPrice,
+        originalPrice: discount > 0 ? basePrice : null,
+        discount: discount > 0 ? discount : undefined,
+        adminDiscountPercent: discount > 0 ? discount : undefined,
+        stock: v.stock,
+        ean: v.ean,
+        images: v.images || []
+      };
+
+      console.log('🔧 [VARIANT]', v.color, '- Discount:', discount, '% | Base:', basePrice, '€ | Final:', finalPrice, '€');
+
+      return variant;
+    }) || [];
 
     // Préparer les avis
     const reviews = data.product_reviews?.map(r => ({
@@ -242,9 +256,13 @@ export default function ProduitSupabasePage() {
       category: data.categories?.name || 'Unknown',
       categorySlug: data.categories?.slug || '',
       subcategory: '',
-      price: data.price,
-      originalPrice: data.original_price,
-      discount: data.discount,
+      price: data.admin_discount_percent && data.admin_discount_percent > 0
+        ? data.price * (1 - data.admin_discount_percent / 100)
+        : data.price,
+      originalPrice: data.admin_discount_percent && data.admin_discount_percent > 0
+        ? data.price
+        : (data.original_price || null),
+      discount: data.admin_discount_percent || data.discount || undefined,
       images: allImages,
       inStock: totalStock > 0,
       stockQuantity: totalStock,

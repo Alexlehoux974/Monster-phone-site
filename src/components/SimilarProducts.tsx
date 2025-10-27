@@ -37,7 +37,15 @@ export default function SimilarProducts({ categorySlug, brandSlug, currentProduc
   useEffect(() => {
     const fetchSimilarProducts = async () => {
       try {
-        const response = await fetch(`/api/similar-products?productId=${currentProductId}`);
+        const timestamp = new Date().getTime();
+        const response = await fetch(`/api/similar-products?productId=${currentProductId}&t=${timestamp}`, {
+          cache: 'no-store',
+          headers: {
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            'Pragma': 'no-cache',
+            'Expires': '0'
+          }
+        });
         const data = await response.json();
 
         if (data.success && data.products) {

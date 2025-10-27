@@ -10,8 +10,34 @@ import { Textarea } from '@/components/ui/textarea';
 import { Switch } from '@/components/ui/switch';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { toast } from 'sonner';
-import { ArrowLeft, Plus, Save, Trash2, Eye, EyeOff, GripVertical, Copy } from 'lucide-react';
-import type { ProductContentSection } from '@/components/EnrichedProductSections';
+import { ArrowLeft, Plus, Save, Trash2, Eye, EyeOff, GripVertical, Copy, X } from 'lucide-react';
+
+// Interface EXACTE correspondant à ProductContentCards.tsx
+interface ProductContentSection {
+  id: string;
+  product_id: string;
+  section_type: 'image_gallery' | 'description_card' | 'specs_grid' | 'features_list' | 'engagement_card' | 'custom';
+  title: string | null;
+  content: string | null;
+  images: string[]; // Google Drive URLs
+  is_enabled: boolean;
+  display_order: number;
+  layout_variant: string; // 'image-left-text-right' or other string
+  metadata: {
+    specs?: Array<{
+      icon: string;      // Emoji like "🔋"
+      label: string;     // "Batterie"
+      value: string;     // "5000 mAh"
+      details?: string;  // "Charge rapide 67W"
+    }>;
+    features?: Array<{
+      icon: string;      // Emoji (not displayed, replaced by CheckCircle2)
+      text: string;      // "Écran AMOLED 120Hz ultra-fluide"
+    }>;
+  };
+  created_at: string;
+  updated_at: string;
+}
 
 interface Product {
   id: string;
@@ -78,13 +104,17 @@ export default function ProductContentManagement() {
     setEditingSection({
       id: crypto.randomUUID(),
       product_id: productId,
-      section_type: 'description',
+      section_type: 'description_card',
       title: '',
       content: '',
       images: [],
       is_enabled: true,
       display_order: sections.length,
-      layout_variant: 'text-left-image-right',
+      layout_variant: 'image-left-text-right',
+      metadata: {
+        specs: [],
+        features: []
+      },
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
     });
@@ -98,20 +128,23 @@ export default function ProductContentManagement() {
     const supabase = createClient();
 
     try {
+      const sectionData = {
+        product_id: productId,
+        section_type: editingSection.section_type,
+        title: editingSection.title,
+        content: editingSection.content,
+        images: editingSection.images,
+        is_enabled: editingSection.is_enabled,
+        display_order: editingSection.display_order,
+        layout_variant: editingSection.layout_variant,
+        metadata: editingSection.metadata,
+      };
+
       if (isNewSection) {
         // Insert new section
         const { data, error } = await supabase
           .from('product_content_sections')
-          .insert({
-            product_id: productId,
-            section_type: editingSection.section_type,
-            title: editingSection.title,
-            content: editingSection.content,
-            images: editingSection.images,
-            is_enabled: editingSection.is_enabled,
-            display_order: editingSection.display_order,
-            layout_variant: editingSection.layout_variant,
-          })
+          .insert(sectionData)
           .select()
           .single();
 
@@ -123,15 +156,7 @@ export default function ProductContentManagement() {
         // Update existing section
         const { error } = await supabase
           .from('product_content_sections')
-          .update({
-            section_type: editingSection.section_type,
-            title: editingSection.title,
-            content: editingSection.content,
-            images: editingSection.images,
-            is_enabled: editingSection.is_enabled,
-            display_order: editingSection.display_order,
-            layout_variant: editingSection.layout_variant,
-          })
+          .update(sectionData)
           .eq('id', editingSection.id);
 
         if (error) throw error;
@@ -247,6 +272,91 @@ export default function ProductContentManagement() {
     });
   };
 
+  // Metadata management functions
+  const handleAddSpec = () => {
+    if (!editingSection) return;
+
+    setEditingSection({
+      ...editingSection,
+      metadata: {
+        ...editingSection.metadata,
+        specs: [
+          ...(editingSection.metadata.specs || []),
+          { icon: '📱', label: '', value: '', details: '' }
+        ]
+      }
+    });
+  };
+
+  const handleUpdateSpec = (index: number, field: string, value: string) => {
+    if (!editingSection) return;
+
+    const updatedSpecs = [...(editingSection.metadata.specs || [])];
+    updatedSpecs[index] = { ...updatedSpecs[index], [field]: value };
+
+    setEditingSection({
+      ...editingSection,
+      metadata: {
+        ...editingSection.metadata,
+        specs: updatedSpecs
+      }
+    });
+  };
+
+  const handleRemoveSpec = (index: number) => {
+    if (!editingSection) return;
+
+    setEditingSection({
+      ...editingSection,
+      metadata: {
+        ...editingSection.metadata,
+        specs: (editingSection.metadata.specs || []).filter((_, i) => i !== index)
+      }
+    });
+  };
+
+  const handleAddFeature = () => {
+    if (!editingSection) return;
+
+    setEditingSection({
+      ...editingSection,
+      metadata: {
+        ...editingSection.metadata,
+        features: [
+          ...(editingSection.metadata.features || []),
+          { icon: '✓', text: '' }
+        ]
+      }
+    });
+  };
+
+  const handleUpdateFeature = (index: number, field: string, value: string) => {
+    if (!editingSection) return;
+
+    const updatedFeatures = [...(editingSection.metadata.features || [])];
+    updatedFeatures[index] = { ...updatedFeatures[index], [field]: value };
+
+    setEditingSection({
+      ...editingSection,
+      metadata: {
+        ...editingSection.metadata,
+        features: updatedFeatures
+      }
+    });
+  };
+
+  const handleRemoveFeature = (index: number) => {
+    if (!editingSection) return;
+
+    setEditingSection({
+      ...editingSection,
+      metadata: {
+        ...editingSection.metadata,
+        features: (editingSection.metadata.features || []).filter((_, i) => i !== index)
+      }
+    });
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -261,6 +371,15 @@ export default function ProductContentManagement() {
   if (!product) {
     return null;
   }
+
+  const sectionTypeLabels = {
+    'image_gallery': '📸 Galerie d\'images (4 colonnes, desktop only)',
+    'description_card': '📄 Description avec image',
+    'specs_grid': '📊 Grille de specs (4 colonnes)',
+    'features_list': '⭐ Liste de points forts',
+    'engagement_card': '💚 Encart engagement (fond vert)',
+    'custom': '🎨 Personnalisé'
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
@@ -279,6 +398,9 @@ export default function ProductContentManagement() {
             <h1 className="text-3xl font-bold">
               Gestion du contenu - {product.brand} {product.name}
             </h1>
+            <p className="text-sm text-gray-600 mt-2">
+              ⚠️ Les types et structure doivent correspondre exactement à ProductContentCards.tsx
+            </p>
           </div>
           <div className="flex gap-2">
             <Button onClick={handleDuplicateToProducts} variant="outline">
@@ -316,7 +438,7 @@ export default function ProductContentManagement() {
                         <div className="flex items-center gap-3 mb-2">
                           <h3 className="text-xl font-semibold">{section.title || 'Sans titre'}</h3>
                           <span className="px-2 py-1 text-xs bg-blue-100 text-blue-800 rounded">
-                            {section.section_type}
+                            {sectionTypeLabels[section.section_type]}
                           </span>
                           <span className="px-2 py-1 text-xs bg-purple-100 text-purple-800 rounded">
                             {section.layout_variant}
@@ -327,6 +449,8 @@ export default function ProductContentManagement() {
                         </p>
                         <p className="text-xs text-gray-500 mt-2">
                           {section.images.length} image(s) • Ordre: {section.display_order}
+                          {section.metadata?.specs && ` • ${section.metadata.specs.length} specs`}
+                          {section.metadata?.features && ` • ${section.metadata.features.length} features`}
                         </p>
                       </div>
                     </div>
@@ -378,7 +502,7 @@ export default function ProductContentManagement() {
             <div className="space-y-6">
               {/* Section Type */}
               <div>
-                <Label htmlFor="section_type">Type de section</Label>
+                <Label htmlFor="section_type">Type de section (EXACT selon ProductContentCards.tsx)</Label>
                 <RadioGroup
                   value={editingSection.section_type}
                   onValueChange={(value) =>
@@ -389,24 +513,28 @@ export default function ProductContentManagement() {
                   }
                 >
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="description" id="type_description" />
-                    <Label htmlFor="type_description">Description</Label>
+                    <RadioGroupItem value="image_gallery" id="type_image_gallery" />
+                    <Label htmlFor="type_image_gallery">{sectionTypeLabels['image_gallery']}</Label>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="features" id="type_features" />
-                    <Label htmlFor="type_features">Caractéristiques</Label>
+                    <RadioGroupItem value="description_card" id="type_description_card" />
+                    <Label htmlFor="type_description_card">{sectionTypeLabels['description_card']}</Label>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="specifications" id="type_specifications" />
-                    <Label htmlFor="type_specifications">Spécifications</Label>
+                    <RadioGroupItem value="specs_grid" id="type_specs_grid" />
+                    <Label htmlFor="type_specs_grid">{sectionTypeLabels['specs_grid']}</Label>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="engagement" id="type_engagement" />
-                    <Label htmlFor="type_engagement">Engagement</Label>
+                    <RadioGroupItem value="features_list" id="type_features_list" />
+                    <Label htmlFor="type_features_list">{sectionTypeLabels['features_list']}</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="engagement_card" id="type_engagement_card" />
+                    <Label htmlFor="type_engagement_card">{sectionTypeLabels['engagement_card']}</Label>
                   </div>
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="custom" id="type_custom" />
-                    <Label htmlFor="type_custom">Personnalisé</Label>
+                    <Label htmlFor="type_custom">{sectionTypeLabels['custom']}</Label>
                   </div>
                 </RadioGroup>
               </div>
@@ -441,29 +569,21 @@ export default function ProductContentManagement() {
 
               {/* Layout Variant */}
               <div>
-                <Label htmlFor="layout_variant">Disposition</Label>
-                <RadioGroup
+                <Label htmlFor="layout_variant">Disposition (image-left-text-right ou autre)</Label>
+                <Input
+                  id="layout_variant"
                   value={editingSection.layout_variant}
-                  onValueChange={(value) =>
+                  onChange={(e) =>
                     setEditingSection({
                       ...editingSection,
-                      layout_variant: value as ProductContentSection['layout_variant'],
+                      layout_variant: e.target.value,
                     })
                   }
-                >
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="text-left-image-right" id="layout_left" />
-                    <Label htmlFor="layout_left">Texte à gauche, image à droite</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="text-right-image-left" id="layout_right" />
-                    <Label htmlFor="layout_right">Image à gauche, texte à droite</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="full-width" id="layout_full" />
-                    <Label htmlFor="layout_full">Pleine largeur</Label>
-                  </div>
-                </RadioGroup>
+                  placeholder="image-left-text-right"
+                />
+                <p className="text-xs text-gray-500 mt-1">
+                  Utilisé par description_card, features_list, engagement_card. Exemple: "image-left-text-right"
+                </p>
               </div>
 
               {/* Images */}
@@ -489,6 +609,97 @@ export default function ProductContentManagement() {
                   </Button>
                 </div>
               </div>
+
+              {/* Metadata - Specs (for specs_grid) */}
+              {editingSection.section_type === 'specs_grid' && (
+                <div className="border-t pt-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <Label>Specs (pour grille 4 colonnes)</Label>
+                    <Button onClick={handleAddSpec} variant="outline" size="sm">
+                      <Plus className="h-4 w-4 mr-2" />
+                      Ajouter une spec
+                    </Button>
+                  </div>
+                  <div className="space-y-4">
+                    {(editingSection.metadata.specs || []).map((spec, index) => (
+                      <div key={index} className="p-4 border rounded-lg space-y-2">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="text-sm font-semibold">Spec #{index + 1}</span>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => handleRemoveSpec(index)}
+                            className="text-red-600"
+                          >
+                            <X className="h-4 w-4" />
+                          </Button>
+                        </div>
+                        <div className="grid grid-cols-2 gap-2">
+                          <Input
+                            placeholder="Icon (emoji: 🔋)"
+                            value={spec.icon}
+                            onChange={(e) => handleUpdateSpec(index, 'icon', e.target.value)}
+                          />
+                          <Input
+                            placeholder="Label (ex: Batterie)"
+                            value={spec.label}
+                            onChange={(e) => handleUpdateSpec(index, 'label', e.target.value)}
+                          />
+                          <Input
+                            placeholder="Value (ex: 5000 mAh)"
+                            value={spec.value}
+                            onChange={(e) => handleUpdateSpec(index, 'value', e.target.value)}
+                          />
+                          <Input
+                            placeholder="Details (optionnel)"
+                            value={spec.details || ''}
+                            onChange={(e) => handleUpdateSpec(index, 'details', e.target.value)}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Metadata - Features (for features_list) */}
+              {editingSection.section_type === 'features_list' && (
+                <div className="border-t pt-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <Label>Points forts (pour liste avec CheckCircle2)</Label>
+                    <Button onClick={handleAddFeature} variant="outline" size="sm">
+                      <Plus className="h-4 w-4 mr-2" />
+                      Ajouter un point fort
+                    </Button>
+                  </div>
+                  <div className="space-y-2">
+                    {(editingSection.metadata.features || []).map((feature, index) => (
+                      <div key={index} className="flex items-center gap-2">
+                        <Input
+                          placeholder="Icon (non affiché, CheckCircle2 utilisé)"
+                          value={feature.icon}
+                          onChange={(e) => handleUpdateFeature(index, 'icon', e.target.value)}
+                          className="w-24"
+                        />
+                        <Input
+                          placeholder="Texte du point fort"
+                          value={feature.text}
+                          onChange={(e) => handleUpdateFeature(index, 'text', e.target.value)}
+                          className="flex-1"
+                        />
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => handleRemoveFeature(index)}
+                          className="text-red-600"
+                        >
+                          <X className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               {/* Display Order */}
               <div>
