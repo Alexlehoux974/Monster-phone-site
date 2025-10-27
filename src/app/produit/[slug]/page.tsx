@@ -345,12 +345,12 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
         {/* Section produits similaires */}
         {relatedProducts.length > 0 && (
-          <section className="py-12 bg-gray-50">
-            <div className="max-w-7xl mx-auto px-4">
-              <h2 className="text-2xl font-bold mb-8">Autres produits {product.brand}</h2>
-              <FeaturedProducts products={relatedProducts} />
-            </div>
-          </section>
+          <FeaturedProducts
+            products={relatedProducts}
+            title={`Autres produits ${product.brand}`}
+            hideDescription={true}
+            hideCTA={true}
+          />
         )}
       </main>
       <Footer />
