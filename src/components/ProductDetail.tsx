@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Star, Shield, Truck, RefreshCw, Clock, Award, ChevronRight, ChevronLeft, Check, Package, Phone, CreditCard, Lock, Heart, Share2, Minus, Plus, ZoomIn } from 'lucide-react';
 import { Product, ProductVariant } from '@/data/products';
@@ -286,101 +287,123 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
           {/* Carrousel de miniatures avec toutes les images et variants */}
           <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <p className="text-sm font-medium text-gray-700">
-                {allImages.length} image{allImages.length > 1 ? 's' : ''} disponible{allImages.length > 1 ? 's' : ''}
-              </p>
-              {allImages.some(img => img.variant) && (
-                <p className="text-xs text-gray-500 hidden lg:block">
-                  Cliquez pour voir les différentes couleurs
-                </p>
-              )}
-            </div>
             {/* Mobile: Scroll horizontal - Toujours visible */}
             <div className="block lg:hidden">
               <div className="flex gap-2 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-hide">
-                {allImages.map((image, index) => (
-                  <button
-                    key={index}
-                    onClick={() => {
-                      setSelectedImageIndex(index);
-                      // Si l'image appartient à une variante, la sélectionner
-                      if (image.variant) {
-                        const variant = product.variants?.find(v => v.color === image.variant);
-                        if (variant) {
-                          setSelectedVariant(variant);
+                {allImages.length > 0 ? (
+                  // Images réelles disponibles
+                  allImages.map((image, index) => (
+                    <button
+                      key={index}
+                      onClick={() => {
+                        setSelectedImageIndex(index);
+                        if (image.variant) {
+                          const variant = product.variants?.find(v => v.color === image.variant);
+                          if (variant) {
+                            setSelectedVariant(variant);
+                          }
                         }
-                      }
-                    }}
-                    className={cn(
-                      "relative flex-shrink-0 w-20 h-20 bg-gray-100 rounded-lg overflow-hidden border-2 transition-all snap-start",
-                      selectedImageIndex === index
-                        ? "border-primary ring-2 ring-primary/20 shadow-lg"
-                        : "border-gray-200"
-                    )}
-                  >
-                    <ImageWithFallback
-                      src={image.src}
-                      alt={`${product.name} - ${image.variant ? `Couleur ${image.variant}` : `Image ${index + 1}`}`}
-                      productCategory={product.category}
-                      fill
-                      className="object-contain"
-                    />
-                    {/* Badge de couleur si c'est une image de variante */}
-                    {image.variant && image.variantColor && (
-                      <div className="absolute bottom-1 right-1 p-0.5 bg-white/90 rounded-full shadow-sm">
-                        <div
-                          className="w-2 h-2 rounded-full border border-gray-300"
-                          style={{ backgroundColor: image.variantColor }}
-                          title={image.variant}
-                        />
-                      </div>
-                    )}
-                  </button>
-                ))}
+                      }}
+                      className={cn(
+                        "relative flex-shrink-0 w-20 h-20 bg-gray-100 rounded-lg overflow-hidden border-2 transition-all snap-start",
+                        selectedImageIndex === index
+                          ? "border-primary ring-2 ring-primary/20 shadow-lg"
+                          : "border-gray-200"
+                      )}
+                    >
+                      <ImageWithFallback
+                        src={image.src}
+                        alt={`${product.name} - ${image.variant ? `Couleur ${image.variant}` : `Image ${index + 1}`}`}
+                        productCategory={product.category}
+                        fill
+                        className="object-contain"
+                      />
+                      {image.variant && image.variantColor && (
+                        <div className="absolute bottom-1 right-1 p-0.5 bg-white/90 rounded-full shadow-sm">
+                          <div
+                            className="w-2 h-2 rounded-full border border-gray-300"
+                            style={{ backgroundColor: image.variantColor }}
+                            title={image.variant}
+                          />
+                        </div>
+                      )}
+                    </button>
+                  ))
+                ) : (
+                  // Placeholders pour futures images (8 emplacements)
+                  Array.from({ length: 8 }).map((_, index) => (
+                    <div
+                      key={`placeholder-${index}`}
+                      className="relative flex-shrink-0 w-20 h-20 bg-gray-100 rounded-lg overflow-hidden border-2 border-gray-200 snap-start"
+                    >
+                      <Image
+                        src="/placeholder-monster.svg"
+                        alt={`Image ${index + 1}`}
+                        fill
+                        className="object-contain p-2"
+                      />
+                    </div>
+                  ))
+                )}
               </div>
             </div>
             {/* Desktop: Grille 5 colonnes */}
             <div className="hidden lg:grid grid-cols-5 gap-2">
-                {allImages.map((image, index) => (
-                  <button
-                    key={index}
-                    onClick={() => {
-                      setSelectedImageIndex(index);
-                      // Si l'image appartient à une variante, la sélectionner
-                      if (image.variant) {
-                        const variant = product.variants?.find(v => v.color === image.variant);
-                        if (variant) {
-                          setSelectedVariant(variant);
+                {allImages.length > 0 ? (
+                  // Images réelles disponibles
+                  allImages.map((image, index) => (
+                    <button
+                      key={index}
+                      onClick={() => {
+                        setSelectedImageIndex(index);
+                        if (image.variant) {
+                          const variant = product.variants?.find(v => v.color === image.variant);
+                          if (variant) {
+                            setSelectedVariant(variant);
+                          }
                         }
-                      }
-                    }}
-                    className={cn(
-                      "relative aspect-square bg-gray-100 rounded-lg overflow-hidden border-2 transition-all group",
-                      selectedImageIndex === index
-                        ? "border-primary ring-2 ring-primary/20 shadow-lg"
-                        : "border-gray-200 hover:border-primary/50 hover:shadow-md"
-                    )}
-                  >
-                    <ImageWithFallback
-                      src={image.src}
-                      alt={`${product.name} - ${image.variant ? `Couleur ${image.variant}` : `Image ${index + 1}`}`}
-                      productCategory={product.category}
-                      fill
-                      className="object-contain group-hover:scale-105 transition-transform"
-                    />
-                    {/* Badge de couleur si c'est une image de variante */}
-                    {image.variant && image.variantColor && (
-                      <div className="absolute bottom-1 right-1 p-1 bg-white/90 rounded-full shadow-sm">
-                        <div
-                          className="w-3 h-3 rounded-full border border-gray-300"
-                          style={{ backgroundColor: image.variantColor }}
-                          title={image.variant}
-                        />
-                      </div>
-                    )}
-                  </button>
-                ))}
+                      }}
+                      className={cn(
+                        "relative aspect-square bg-gray-100 rounded-lg overflow-hidden border-2 transition-all group",
+                        selectedImageIndex === index
+                          ? "border-primary ring-2 ring-primary/20 shadow-lg"
+                          : "border-gray-200 hover:border-primary/50 hover:shadow-md"
+                      )}
+                    >
+                      <ImageWithFallback
+                        src={image.src}
+                        alt={`${product.name} - ${image.variant ? `Couleur ${image.variant}` : `Image ${index + 1}`}`}
+                        productCategory={product.category}
+                        fill
+                        className="object-contain group-hover:scale-105 transition-transform"
+                      />
+                      {image.variant && image.variantColor && (
+                        <div className="absolute bottom-1 right-1 p-1 bg-white/90 rounded-full shadow-sm">
+                          <div
+                            className="w-3 h-3 rounded-full border border-gray-300"
+                            style={{ backgroundColor: image.variantColor }}
+                            title={image.variant}
+                          />
+                        </div>
+                      )}
+                    </button>
+                  ))
+                ) : (
+                  // Placeholders pour futures images (8 emplacements)
+                  Array.from({ length: 8 }).map((_, index) => (
+                    <div
+                      key={`placeholder-${index}`}
+                      className="relative aspect-square bg-gray-100 rounded-lg overflow-hidden border-2 border-gray-200"
+                    >
+                      <Image
+                        src="/placeholder-monster.svg"
+                        alt={`Image ${index + 1}`}
+                        fill
+                        className="object-contain p-4"
+                      />
+                    </div>
+                  ))
+                )}
             </div>
           </div>
         </div>
