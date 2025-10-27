@@ -16,10 +16,10 @@ import { generateMenuStructureFromProducts } from '@/lib/supabase/adapters';
 
 // Composant pour la barre d'urgence promotionnelle
 const PromoBar = () => (
-  <div className="bg-gradient-to-r from-red-600 via-orange-600 to-red-600 text-white py-2 px-3 relative overflow-hidden">
+  <div className="bg-gradient-to-r from-red-600 via-orange-600 to-red-600 text-white py-4 px-3 relative overflow-hidden">
     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer" />
     <div className="max-w-7xl mx-auto text-center relative z-10">
-      <div className="flex items-center justify-center gap-2 text-sm font-medium flex-wrap py-1">
+      <div className="flex items-center justify-center gap-2 text-sm font-medium flex-wrap">
         <div className="flex items-center gap-1.5">
           <Truck className="w-4 h-4" />
           <span>LIVRAISON EXPRESS 24H/48H À LA RÉUNION</span>
