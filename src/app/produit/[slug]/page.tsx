@@ -338,8 +338,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
           <ProductTabs product={product} />
         </div>
 
-        {/* Sticky CTA Section */}
-        <ProductStickyBar product={product} />
+        {/* Sticky CTA Section - Desktop uniquement */}
+        <div className="hidden lg:block">
+          <ProductStickyBar product={product} />
+        </div>
 
         {/* Section produits similaires */}
         {relatedProducts.length > 0 && (

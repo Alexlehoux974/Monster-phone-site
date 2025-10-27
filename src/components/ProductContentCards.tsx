@@ -306,7 +306,7 @@ function FeaturesListSection({ section, productCategory }: { section: ProductCon
         </div>
 
         {/* Image */}
-        <div className={cn("relative h-64 lg:h-auto lg:min-h-96", isImageLeft ? "lg:col-start-1" : "lg:col-start-2")}>
+        <div className={cn("relative h-64 lg:h-auto lg:min-h-96 hidden lg:block", isImageLeft ? "lg:col-start-1" : "lg:col-start-2")}>
           {section.images && section.images.length > 0 ? (
             <ImageWithFallback
               src={section.images[0]}
