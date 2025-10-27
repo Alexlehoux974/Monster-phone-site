@@ -285,20 +285,20 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           </div>
 
           {/* Carrousel de miniatures avec toutes les images et variants */}
-          {allImages.length > 1 && (
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <p className="text-sm font-medium text-gray-700">
-                  {allImages.length} images disponibles
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <p className="text-sm font-medium text-gray-700">
+                {allImages.length} image{allImages.length > 1 ? 's' : ''} disponible{allImages.length > 1 ? 's' : ''}
+              </p>
+              {allImages.some(img => img.variant) && (
+                <p className="text-xs text-gray-500 hidden lg:block">
+                  Cliquez pour voir les différentes couleurs
                 </p>
-                {allImages.some(img => img.variant) && (
-                  <p className="text-xs text-gray-500 hidden lg:block">
-                    Cliquez pour voir les différentes couleurs
-                  </p>
-                )}
-              </div>
-              {/* Mobile: Scroll horizontal */}
-              <div className="flex lg:hidden gap-2 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-hide">
+              )}
+            </div>
+            {/* Mobile: Scroll horizontal - Toujours visible */}
+            <div className="block lg:hidden">
+              <div className="flex gap-2 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-hide">
                 {allImages.map((image, index) => (
                   <button
                     key={index}
@@ -339,8 +339,9 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                   </button>
                 ))}
               </div>
-              {/* Desktop: Grille 5 colonnes */}
-              <div className="hidden lg:grid grid-cols-5 gap-2">
+            </div>
+            {/* Desktop: Grille 5 colonnes */}
+            <div className="hidden lg:grid grid-cols-5 gap-2">
                 {allImages.map((image, index) => (
                   <button
                     key={index}
@@ -380,9 +381,8 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                     )}
                   </button>
                 ))}
-              </div>
             </div>
-          )}
+          </div>
         </div>
 
         {/* Informations produit */}
