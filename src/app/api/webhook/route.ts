@@ -116,6 +116,7 @@ export async function POST(request: NextRequest) {
             to: order.customer_email,
             subject: `Commande confirmée #${order.order_number} - Monster Phone 🎉`,
             react: OrderConfirmationEmail({
+              orderId: order.id,
               orderNumber: order.order_number,
               customerName: order.customer_name,
               customerEmail: order.customer_email,

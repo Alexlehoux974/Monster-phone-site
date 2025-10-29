@@ -47,6 +47,7 @@ export async function POST(request: NextRequest) {
       to: customerEmail,
       subject: `✅ Test - Commande confirmée #${orderNumber} - Monster Phone 🎉`,
       react: OrderConfirmationEmail({
+        orderId: 'test-order-id', // ID de test pour l'email de démo
         orderNumber,
         customerName,
         customerEmail,
