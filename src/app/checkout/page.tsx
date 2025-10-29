@@ -90,27 +90,20 @@ export default function CheckoutPage() {
 
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  // Rediriger si pas de produits dans le panier OU si non authentifié
+  // Rediriger uniquement si pas de produits dans le panier
+  // ✅ Permettre le checkout invité (guest checkout)
   useEffect(() => {
     // Ne pas rediriger pendant le chargement de l'auth
     if (isLoading) return;
 
+    // Rediriger vers le panier uniquement si vide
     if (items.length === 0 && !orderComplete) {
       router.push('/panier');
-    } else if (items.length > 0 && !isAuthenticated) {
-      // ✅ Vérifier si on vient juste de se connecter (éviter boucle infinie)
-      const justLoggedIn = sessionStorage.getItem('justLoggedIn');
-      if (justLoggedIn) {
-        sessionStorage.removeItem('justLoggedIn');
-        // Attendre que isAuthenticated se mette à jour
-        return;
-      }
-
-      // Sauvegarder l'intention de checkout dans sessionStorage
-      sessionStorage.setItem('redirectAfterLogin', '/checkout');
-      router.push('/compte');
     }
-  }, [items, router, orderComplete, isAuthenticated, isLoading]);
+
+    // ✅ NE PLUS BLOQUER si non authentifié - permettre le checkout invité
+    // Les utilisateurs peuvent passer commande sans compte
+  }, [items, router, orderComplete, isLoading]);
 
   // Pré-remplir avec les infos utilisateur si connecté (prioritaire sur localStorage)
   useEffect(() => {

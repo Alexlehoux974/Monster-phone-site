@@ -43,12 +43,9 @@ export default function PanierPage() {
   };
 
   const handleCheckout = () => {
-    if (!isAuthenticated) {
-      // Rediriger vers la page de connexion puis vers le checkout
-      router.push('/compte?redirect=/checkout');
-    } else {
-      router.push('/checkout');
-    }
+    // ✅ Toujours rediriger vers le checkout, même si non authentifié
+    // Le checkout invité est maintenant permis
+    router.push('/checkout');
   };
 
   if (items.length === 0) {
