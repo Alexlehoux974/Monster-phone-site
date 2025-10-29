@@ -141,6 +141,47 @@ function ComptePageContent() {
     router.push('/');
   };
 
+  // Si le chargement est terminé et que l'utilisateur n'est pas authentifié
+  if (!isLoading && !isAuthenticated) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="max-w-md w-full mx-4 bg-white rounded-lg shadow-lg p-8 text-center">
+          <div className="mb-6">
+            <Shield className="w-16 h-16 text-blue-600 mx-auto mb-4" />
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">
+              Connexion requise
+            </h2>
+            <p className="text-gray-600">
+              Vous devez être connecté pour accéder à votre espace personnel et consulter vos commandes.
+            </p>
+          </div>
+
+          <div className="space-y-3">
+            <button
+              onClick={() => router.push('/auth/signin')}
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors font-medium"
+            >
+              Se connecter
+            </button>
+            <button
+              onClick={() => router.push('/auth/signup')}
+              className="w-full bg-white hover:bg-gray-50 text-blue-600 border-2 border-blue-600 px-6 py-3 rounded-lg transition-colors font-medium"
+            >
+              Créer un compte
+            </button>
+            <button
+              onClick={() => router.push('/')}
+              className="w-full text-gray-600 hover:text-gray-900 px-6 py-2 transition-colors"
+            >
+              Retour à l'accueil
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Afficher le spinner uniquement pendant le chargement initial
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
