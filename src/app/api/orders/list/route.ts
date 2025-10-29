@@ -1,13 +1,31 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase/server';
+import { createClient as createSupabaseClient } from '@supabase/supabase-js';
 
 export const dynamic = 'force-dynamic';
+
+// Créer client Supabase avec SERVICE_ROLE_KEY pour bypasser RLS
+function getSupabaseAdmin() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+  const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+
+  if (!supabaseUrl || !supabaseServiceKey) {
+    throw new Error('Missing Supabase environment variables');
+  }
+
+  return createSupabaseClient(supabaseUrl, supabaseServiceKey, {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false,
+    },
+  });
+}
 
 /**
  * API Route pour récupérer les commandes d'un utilisateur
  *
  * Query params:
- * - userId: ID de l'utilisateur (requis)
+ * - userId: ID de l'utilisateur (optionnel)
+ * - email: Email du client (optionnel, prioritaire si fourni)
  */
 export async function GET(request: NextRequest) {
   try {
@@ -15,7 +33,7 @@ export async function GET(request: NextRequest) {
     const userId = searchParams.get('userId');
     const email = searchParams.get('email');
 
-    const supabase = await createClient();
+    const supabase = getSupabaseAdmin();
 
     // Construire la requête en fonction des paramètres
     // Inclure les order_items via une relation

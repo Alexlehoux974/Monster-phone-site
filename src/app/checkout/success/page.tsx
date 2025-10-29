@@ -11,7 +11,6 @@ import {
   Truck,
   CreditCard,
   ShoppingBag,
-  User,
   Sparkles
 } from 'lucide-react';
 
@@ -282,18 +281,18 @@ function CheckoutSuccessContent() {
 
         {/* User Account CTA */}
         <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 mb-8 text-white text-center shadow-xl">
-          <User className="w-12 h-12 mx-auto mb-4" />
+          <Package className="w-12 h-12 mx-auto mb-4" />
           <h3 className="text-2xl font-bold mb-3">
-            Retrouvez vos commandes dans votre espace
+            Suivez vos commandes
           </h3>
           <p className="mb-6 text-blue-100">
-            Suivez l'état de vos commandes, consultez votre historique et gérez vos informations personnelles
+            Retrouvez toutes vos commandes passées avec votre adresse email
           </p>
           <Link
-            href="/compte"
+            href="/mes-commandes"
             className="inline-flex items-center gap-2 bg-white text-blue-600 px-8 py-3 rounded-lg hover:bg-blue-50 transition-all hover:shadow-lg font-bold"
           >
-            Accéder à mon espace
+            Voir mes commandes
             <ArrowRight className="w-5 h-5" />
           </Link>
         </div>
