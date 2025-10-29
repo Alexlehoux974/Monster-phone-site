@@ -11,6 +11,7 @@ interface OrderItem {
 }
 
 interface SendOrderConfirmationParams {
+  orderId: string;
   orderNumber: string;
   customerName: string;
   customerEmail: string;
@@ -24,6 +25,7 @@ export async function sendOrderConfirmation(params: SendOrderConfirmationParams)
   try {
     const emailHtml = await renderAsync(
       React.createElement(OrderConfirmationEmail, {
+        orderId: params.orderId,
         orderNumber: params.orderNumber,
         customerName: params.customerName,
         customerEmail: params.customerEmail,

@@ -8,6 +8,7 @@ interface OrderItem {
 }
 
 interface OrderConfirmationEmailProps {
+  orderId: string;
   orderNumber: string;
   customerName: string;
   customerEmail: string;
@@ -18,6 +19,7 @@ interface OrderConfirmationEmailProps {
 }
 
 export const OrderConfirmationEmail: React.FC<OrderConfirmationEmailProps> = ({
+  orderId,
   orderNumber,
   customerName,
   customerEmail,
@@ -240,8 +242,8 @@ export const OrderConfirmationEmail: React.FC<OrderConfirmationEmailProps> = ({
           </div>
 
           <div style={{ textAlign: 'center' }}>
-            <a href={`${process.env.NEXT_PUBLIC_BASE_URL}/account/orders`} className="cta-button">
-              Suivre ma commande
+            <a href={`${process.env.NEXT_PUBLIC_BASE_URL}/compte/commandes/${orderId}`} className="cta-button">
+              Voir le détail de ma commande
             </a>
           </div>
 
