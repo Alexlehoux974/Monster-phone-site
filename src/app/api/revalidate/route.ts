@@ -19,6 +19,11 @@ export async function POST(request: NextRequest) {
     // Always revalidate the main products page
     revalidatePath('/');
     revalidatePath('/produits');
+
+    // Revalidate all product detail pages
+    revalidatePath('/produit/[slug]', 'page');
+    revalidatePath('/produit-supabase/[slug]', 'page');
+
     revalidateTag('products');
 
     return NextResponse.json({

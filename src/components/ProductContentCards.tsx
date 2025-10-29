@@ -43,28 +43,32 @@ export default function ProductContentCards({ productId, productCategory }: Prod
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const supabase = createClient();
+    console.log('🔍 [ProductContentCards] Mounting with productId:', productId);
 
-    // Initial fetch
+    // Initial fetch via API (contourne les RLS Supabase)
     const fetchSections = async () => {
-      const { data, error } = await supabase
-        .from('product_content_sections')
-        .select('*')
-        .eq('product_id', productId)
-        .eq('is_enabled', true)
-        .order('display_order', { ascending: true });
+      console.log('📡 [ProductContentCards] Fetching sections via API for product:', productId);
+      try {
+        const response = await fetch(`/api/product-sections?productId=${productId}`);
+        const data = await response.json();
 
-      if (error) {
-        console.error('Error fetching product sections:', error);
+        if (!response.ok) {
+          console.error('❌ [ProductContentCards] API error:', data.error);
+          setLoading(false);
+          return;
+        }
+
+        console.log('✅ [ProductContentCards] Loaded', data.sections?.length || 0, 'sections');
+        setSections(data.sections || []);
         setLoading(false);
-        return;
+      } catch (error) {
+        console.error('❌ [ProductContentCards] Fetch error:', error);
+        setLoading(false);
       }
-
-      setSections(data || []);
-      setLoading(false);
     };
 
     fetchSections();
+    const supabase = createClient();
 
     // Real-time subscription
     const channel = supabase
@@ -107,6 +111,7 @@ export default function ProductContentCards({ productId, productCategory }: Prod
   }, [productId]);
 
   if (loading) {
+    console.log('⏳ [ProductContentCards] Still loading...');
     return (
       <div className="flex items-center justify-center py-12">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
@@ -115,8 +120,11 @@ export default function ProductContentCards({ productId, productCategory }: Prod
   }
 
   if (sections.length === 0) {
+    console.log('⚠️ [ProductContentCards] No sections found - returning null');
     return null;
   }
+
+  console.log('🎨 [ProductContentCards] Rendering', sections.length, 'sections');
 
   return (
     <div className="space-y-12 mt-12">

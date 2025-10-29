@@ -54,8 +54,8 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  // Récupérer TOUS les produits actifs depuis Supabase
-  const supabaseProducts = await getActiveProducts();
+  // Récupérer seulement 20 produits actifs (marge pour le tri)
+  const supabaseProducts = await getActiveProducts({ limit: 20, sortBy: 'created_at', sortOrder: 'desc' });
 
   // Convertir les produits Supabase vers le format legacy pour ProductCard
   const convertedProducts = supabaseProducts.map(supabaseProductToLegacy);

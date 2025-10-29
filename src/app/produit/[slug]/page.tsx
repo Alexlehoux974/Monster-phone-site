@@ -10,6 +10,11 @@ import { createClient } from '@/lib/supabase/client';
 import { supabaseProductToLegacy } from '@/lib/supabase/adapters';
 import type { ProductFullView } from '@/lib/supabase/client';
 
+// ⚡ DÉSACTIVER COMPLÈTEMENT LE CACHE Next.js 15
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+export const fetchCache = 'force-no-store';
+
 interface ProductPageProps {
   params: Promise<{
     slug: string;
@@ -312,9 +317,6 @@ export async function generateStaticParams() {
     slug: product.url_slug,
   })) || [];
 }
-
-// Revalidate every 60 seconds to pick up stock changes
-export const revalidate = 60;
 
 export default async function ProductPage({ params }: ProductPageProps) {
   const { slug } = await params;
