@@ -1,13 +1,16 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { Loader2, AlertCircle, Package } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ProductDetail from '@/components/ProductDetail';
 import SimilarProducts from '@/components/SimilarProducts';
+
+// ⚡ Next.js 15 - DÉSACTIVER COMPLÈTEMENT LE CACHE (Client Component)
+// Note: Ces exports sont ignorés pour les Client Components mais documentent l'intention
 
 const supabase = createClient();
 
@@ -19,6 +22,7 @@ interface SupabaseProduct {
   price: number;
   original_price?: number;
   discount?: number;
+  admin_discount_percent?: number;
   stock_quantity?: number;
   status: string;
   description?: string;
@@ -60,6 +64,7 @@ interface SupabaseProduct {
     ean?: string;
     price?: number;
     images?: string[];
+    admin_discount_percent?: number;
   }>;
   product_images: Array<{
     id: string;
@@ -80,12 +85,20 @@ interface SupabaseProduct {
 
 export default function ProduitSupabasePage() {
   const params = useParams();
+  const router = useRouter();
   const slug = params.slug as string;
-  
+
   const [product, setProduct] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [stockUpdateTime, setStockUpdateTime] = useState<Date>(new Date());
+  const [refreshKey, setRefreshKey] = useState(0);
+
+  // Force refresh on mount and on manual refresh (F5)
+  useEffect(() => {
+    console.log('🔄 [MOUNT] Component mounted or refreshed, incrementing refresh key');
+    setRefreshKey(prev => prev + 1);
+  }, []);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -127,6 +140,9 @@ export default function ProduitSupabasePage() {
           price: transformedProduct.price,
           originalPrice: transformedProduct.originalPrice,
           discount: transformedProduct.discount,
+          description: transformedProduct.description,
+          shortDescription: transformedProduct.shortDescription,
+          descriptionLength: transformedProduct.description?.length || 0,
           variants: transformedProduct.variants?.map(v => ({
             color: v.color,
             price: v.price,
@@ -138,6 +154,7 @@ export default function ProduitSupabasePage() {
         console.log('✨ [BEFORE SET] About to set product state');
         setProduct(transformedProduct);
         console.log('✨ [AFTER SET] Product state updated');
+        console.log('📝 [DESCRIPTION CHECK] Description dans state:', product?.description?.substring(0, 100));
         setStockUpdateTime(new Date());
         console.log('✨ [STOCK UPDATE] Stock update time set');
       } catch (err) {
@@ -149,9 +166,10 @@ export default function ProduitSupabasePage() {
     };
 
     if (slug) {
+      console.log('🚀 [FETCH TRIGGER] refreshKey changed to:', refreshKey);
       fetchProduct();
     }
-  }, [slug]);
+  }, [slug, refreshKey]);
 
   // Transformer les données Supabase au format attendu
   const transformProduct = (data: SupabaseProduct) => {
@@ -350,11 +368,15 @@ export default function ProduitSupabasePage() {
       <Header />
 
       <main className="container mx-auto px-4 py-8 pt-[110px]">
-        {/* Composant ProductDetail existant */}
-        <ProductDetail product={product} />
+        {/* Composant ProductDetail existant - key force le remount complet */}
+        <ProductDetail
+          key={`${product.id}-${product.price}-${product.stockQuantity}`}
+          product={product}
+        />
 
         {/* Produits similaires */}
         <SimilarProducts
+          key={`similar-${product.id}`}
           categorySlug={product.categorySlug}
           brandSlug={product.brandSlug}
           currentProductId={product.id}
