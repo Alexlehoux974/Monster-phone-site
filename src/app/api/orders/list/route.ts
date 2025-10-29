@@ -52,22 +52,26 @@ export async function GET(request: NextRequest) {
       `)
       .order('created_at', { ascending: false });
 
-    // Si userId est fourni et est un UUID valide, filtrer par user_id
-    if (userId) {
-      // Vérifier si c'est un UUID valide (format: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+    // Si userId ET email sont fournis, récupérer les commandes par userId OU par email
+    if (userId && email) {
+      const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+      if (uuidRegex.test(userId)) {
+        // Récupérer les commandes où user_id = userId OU customer_email = email
+        query = query.or(`user_id.eq.${userId},customer_email.eq.${email}`);
+      } else {
+        // userId invalide, utiliser seulement l'email
+        query = query.eq('customer_email', email);
+      }
+    } else if (userId) {
+      // Seulement userId fourni
       const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
       if (uuidRegex.test(userId)) {
         query = query.eq('user_id', userId);
-      } else if (email) {
-        // Si userId n'est pas un UUID mais qu'on a un email, filtrer par email
-        query = query.eq('customer_email', email);
-      } else {
-        // Si userId n'est pas un UUID et pas d'email, retourner toutes les commandes
-        // (temporaire pour le développement - à sécuriser en production)
-        }
+      }
     } else if (email) {
-      // Si pas de userId mais un email, filtrer par email
+      // Seulement email fourni
       query = query.eq('customer_email', email);
     }
     // Sinon, retourner toutes les commandes (temporaire pour le développement)

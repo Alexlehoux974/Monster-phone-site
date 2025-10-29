@@ -167,7 +167,8 @@ function ComptePageContent() {
           const controller = new AbortController();
           timeoutId = setTimeout(() => controller.abort(), 10000);
 
-          const response = await fetch(`/api/orders/list?userId=${user.id}`, {
+          // Récupérer les commandes par userId ET par email pour inclure les commandes passées en tant qu'invité
+          const response = await fetch(`/api/orders/list?userId=${user.id}&email=${encodeURIComponent(user.email || '')}`, {
             signal: controller.signal
           });
 
