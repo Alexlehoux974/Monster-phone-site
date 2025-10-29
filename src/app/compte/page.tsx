@@ -1,13 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { User, Mail, Phone, MapPin, Package, LogOut, ChevronRight, Shield, Calendar } from 'lucide-react';
 
-export default function ComptePage() {
+function ComptePageContent() {
   const { user, isAuthenticated, login, register, logout, updateProfile, isLoading } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -708,5 +708,17 @@ export default function ComptePage() {
 
       <Footer />
     </div>
+  );
+}
+
+export default function ComptePage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      </div>
+    }>
+      <ComptePageContent />
+    </Suspense>
   );
 }
