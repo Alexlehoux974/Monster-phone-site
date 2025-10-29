@@ -214,7 +214,7 @@ export default async function OrderDetailsPage({ params }: OrderDetailsPageProps
               </div>
             </div>
 
-            {/* Suivi de livraison */}
+            {/* Suivi de livraison avec Timeline */}
             <div className="bg-white rounded-lg shadow-sm overflow-hidden">
               <div className="px-6 py-4 border-b border-gray-200">
                 <h2 className="text-lg font-semibold text-gray-900 flex items-center">
@@ -223,45 +223,130 @@ export default async function OrderDetailsPage({ params }: OrderDetailsPageProps
                 </h2>
               </div>
 
-              <div className="px-6 py-4">
-                {order.tracking_number ? (
-                  <div className="space-y-4">
-                    <div>
-                      <p className="text-sm text-gray-600">Numéro de suivi</p>
-                      <p className="text-base font-medium text-gray-900 mt-1">
-                        {order.tracking_number}
+              <div className="px-6 py-6">
+                {/* Timeline de livraison à 3 étapes */}
+                <div className="relative">
+                  <div className="flex items-center justify-between mb-8">
+                    {/* Étape 1: Commande confirmée */}
+                    <div className="flex flex-col items-center flex-1">
+                      <div className={`w-12 h-12 rounded-full flex items-center justify-center mb-3 ${
+                        ['confirmed', 'processing', 'shipped', 'delivered'].includes(order.status)
+                          ? 'bg-green-500 text-white'
+                          : 'bg-gray-200 text-gray-500'
+                      }`}>
+                        <Package className="w-6 h-6" />
+                      </div>
+                      <p className="text-sm font-medium text-gray-900">Commande confirmée</p>
+                      <p className="text-xs text-gray-500 mt-1">
+                        {new Date(order.created_at).toLocaleDateString('fr-FR', { day: '2-digit', month: 'short' })}
                       </p>
                     </div>
 
-                    {order.carrier && (
+                    {/* Ligne de progression 1-2 */}
+                    <div className="flex-1 mx-4 relative" style={{ top: '-24px' }}>
+                      <div className="h-1 bg-gray-200 relative">
+                        <div
+                          className={`h-1 transition-all duration-500 ${
+                            ['shipped', 'delivered'].includes(order.status) ? 'bg-green-500 w-full' : 'bg-gray-200 w-0'
+                          }`}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Étape 2: En cours d'expédition */}
+                    <div className="flex flex-col items-center flex-1">
+                      <div className={`w-12 h-12 rounded-full flex items-center justify-center mb-3 ${
+                        order.status === 'delivered'
+                          ? 'bg-green-500 text-white'
+                          : order.status === 'shipped'
+                          ? 'bg-blue-500 text-white animate-pulse'
+                          : 'bg-gray-200 text-gray-500'
+                      }`}>
+                        <Truck className="w-6 h-6" />
+                      </div>
+                      <p className="text-sm font-medium text-gray-900">En cours d'expédition</p>
+                      {order.tracking_number && order.status === 'shipped' && (
+                        <p className="text-xs text-gray-500 mt-1">
+                          En transit
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Ligne de progression 2-3 */}
+                    <div className="flex-1 mx-4 relative" style={{ top: '-24px' }}>
+                      <div className="h-1 bg-gray-200 relative">
+                        <div
+                          className={`h-1 transition-all duration-500 ${
+                            order.status === 'delivered' ? 'bg-green-500 w-full' : 'bg-gray-200 w-0'
+                          }`}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Étape 3: Livrée */}
+                    <div className="flex flex-col items-center flex-1">
+                      <div className={`w-12 h-12 rounded-full flex items-center justify-center mb-3 ${
+                        order.status === 'delivered'
+                          ? 'bg-green-500 text-white'
+                          : 'bg-gray-200 text-gray-500'
+                      }`}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+                          <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                      </div>
+                      <p className="text-sm font-medium text-gray-900">Livrée</p>
+                      {order.estimated_delivery_date && order.status !== 'delivered' && (
+                        <p className="text-xs text-gray-500 mt-1">
+                          Estimée le {new Date(order.estimated_delivery_date).toLocaleDateString('fr-FR', { day: '2-digit', month: 'short' })}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Informations de suivi détaillées */}
+                  {order.tracking_number && (
+                    <div className="space-y-4 pt-6 border-t border-gray-200">
                       <div>
-                        <p className="text-sm text-gray-600">Transporteur</p>
+                        <p className="text-sm text-gray-600">Numéro de suivi</p>
                         <p className="text-base font-medium text-gray-900 mt-1">
-                          {order.carrier}
+                          {order.tracking_number}
                         </p>
                       </div>
-                    )}
 
-                    {order.tracking_url && (
-                      <a
-                        href={order.tracking_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center text-sm text-blue-600 hover:text-blue-700 font-medium"
-                      >
-                        Suivre ma livraison
-                        <ArrowLeft className="w-4 h-4 ml-1 rotate-180" />
-                      </a>
-                    )}
-                  </div>
-                ) : (
-                  <div className="text-center py-8">
-                    <Truck className="w-12 h-12 text-gray-300 mx-auto mb-3" />
-                    <p className="text-sm text-gray-500">
-                      Les informations de suivi seront disponibles une fois que votre commande aura été expédiée.
-                    </p>
-                  </div>
-                )}
+                      {order.carrier && (
+                        <div>
+                          <p className="text-sm text-gray-600">Transporteur</p>
+                          <p className="text-base font-medium text-gray-900 mt-1">
+                            {order.carrier}
+                          </p>
+                        </div>
+                      )}
+
+                      {order.tracking_url && (
+                        <a
+                          href={order.tracking_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center text-sm text-blue-600 hover:text-blue-700 font-medium"
+                        >
+                          Suivre ma livraison en détail
+                          <ArrowLeft className="w-4 h-4 ml-1 rotate-180" />
+                        </a>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Message si pas encore expédié */}
+                  {!order.tracking_number && order.status !== 'delivered' && (
+                    <div className="text-center py-4 bg-blue-50 rounded-lg border border-blue-100">
+                      <p className="text-sm text-blue-800">
+                        {order.status === 'confirmed' || order.status === 'processing'
+                          ? 'Votre commande est en préparation. Vous recevrez un email avec le numéro de suivi dès son expédition.'
+                          : 'Les informations de suivi seront bientôt disponibles.'}
+                      </p>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
