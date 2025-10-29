@@ -1,42 +1,24 @@
+import { createClient } from '@supabase/supabase-js';
 import { NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase/client';
+
+export const dynamic = 'force-dynamic';
 
 export async function GET() {
-  const supabase = createClient();
-
   try {
-    // Test getProducts function
-    const { data: products, error: productsError } = await supabase
-      .from('products')
-      .select(`
-        *,
-        brand:brands(name, slug),
-        category:categories!products_category_id_fkey(name, slug)
-      `)
-      .neq('status', 'discontinued')
-      .limit(5);
+    const start = Date.now();
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+    const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+    const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
-    // Test product_full_view
-    const { data: fullView, error: viewError } = await supabase
-      .from('product_full_view')
-      .select('*')
-      .limit(5);
+    const { data, error } = await supabase.from('products').select('id, name').limit(1);
+    const duration = Date.now() - start;
 
-    return NextResponse.json({
-      products: {
-        success: !productsError,
-        count: products?.length || 0,
-        error: productsError,
-        sample: products?.[0]
-      },
-      product_full_view: {
-        success: !viewError,
-        count: fullView?.length || 0,
-        error: viewError,
-        sample: fullView?.[0]
-      }
-    });
-  } catch (error) {
-    return NextResponse.json({ error: String(error) }, { status: 500 });
+    if (error) {
+      return NextResponse.json({ success: false, error: error.message, duration: `${duration}ms` });
+    }
+
+    return NextResponse.json({ success: true, product: data?.[0], duration: `${duration}ms` });
+  } catch (error: any) {
+    return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }
 }

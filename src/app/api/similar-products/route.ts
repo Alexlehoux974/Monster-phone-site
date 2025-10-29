@@ -1,6 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
+// ⚡ Next.js 15 - DÉSACTIVER COMPLÈTEMENT LE CACHE
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+export const fetchCache = 'force-no-store';
+
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 
@@ -141,9 +146,18 @@ export async function GET(request: NextRequest) {
     // Limiter à 12 produits
     const finalProducts = sortedProducts.slice(0, 12);
 
+    // ⚡ HEADERS DE CACHE CRITIQUES - forcer le no-cache complet
     return NextResponse.json({
       success: true,
       products: finalProducts
+    }, {
+      headers: {
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0',
+        'Pragma': 'no-cache',
+        'Expires': '0',
+        'CDN-Cache-Control': 'no-store',
+        'Vercel-CDN-Cache-Control': 'no-store'
+      }
     });
 
   } catch (error: any) {

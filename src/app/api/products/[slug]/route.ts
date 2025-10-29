@@ -1,6 +1,11 @@
 import { createClient } from '@supabase/supabase-js';
 import { NextRequest, NextResponse } from 'next/server';
 
+// ⚡ Next.js 15 - DÉSACTIVER COMPLÈTEMENT LE CACHE
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+export const fetchCache = 'force-no-store';
+
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 
@@ -32,34 +37,28 @@ export async function GET(
 
     console.log('✅ [API] Product found:', productData.name);
 
-    // Récupérer les données associées
-    const [
-      { data: brandData },
-      { data: categoryData },
-      { data: variantsData },
-      { data: imagesData },
-      { data: reviewsData }
-    ] = await Promise.all([
-      supabase.from('brands').select('*').eq('id', productData.brand_id).single(),
-      supabase.from('categories').select('*').eq('id', productData.category_id).single(),
-      supabase.from('product_variants').select('*').eq('product_id', productData.id),
-      supabase.from('product_images').select('*').eq('product_id', productData.id),
-      supabase.from('product_reviews').select('*').eq('product_id', productData.id)
-    ]);
-
-    // Combiner les données
+    // Version simplifiée - retourner juste le produit de base pour tester
     const fullProductData = {
       ...productData,
-      brands: brandData || { id: '', name: 'Unknown', slug: '' },
-      categories: categoryData || { id: '', name: 'Unknown', slug: '' },
-      product_variants: variantsData || [],
-      product_images: imagesData || [],
-      product_reviews: reviewsData || []
+      brands: { id: '', name: 'Unknown', slug: '' },
+      categories: { id: '', name: 'Unknown', slug: '' },
+      product_variants: [],
+      product_images: [],
+      product_reviews: []
     };
 
-    console.log('✅ [API] Full product data assembled');
+    console.log('✅ [API] Full product data assembled (simplified)');
 
-    return NextResponse.json(fullProductData);
+    // ⚡ HEADERS DE CACHE CRITIQUES - forcer le no-cache complet
+    return NextResponse.json(fullProductData, {
+      headers: {
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0',
+        'Pragma': 'no-cache',
+        'Expires': '0',
+        'CDN-Cache-Control': 'no-store',
+        'Vercel-CDN-Cache-Control': 'no-store'
+      }
+    });
   } catch (error) {
     console.error('❌ [API] Error:', error);
     return NextResponse.json(

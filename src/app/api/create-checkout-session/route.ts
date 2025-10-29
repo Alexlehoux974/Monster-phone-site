@@ -149,11 +149,14 @@ export async function POST(request: NextRequest) {
       }
 
     // Fonction pour nettoyer la description pour Stripe
-    const cleanDescription = (desc: string | undefined): string => {
-      if (!desc) return '';
+    const cleanDescription = (desc: string | undefined): string | undefined => {
+      if (!desc || desc.trim() === '') return undefined;
 
       // Supprimer les balises HTML
-      let cleaned = desc.replace(/<[^>]*>/g, '');
+      let cleaned = desc.replace(/<[^>]*>/g, '').trim();
+
+      // Si vide après nettoyage, retourner undefined
+      if (cleaned === '') return undefined;
 
       // Limiter à 500 caractères (limite Stripe)
       if (cleaned.length > 500) {
@@ -166,12 +169,14 @@ export async function POST(request: NextRequest) {
 
     // Préparer les line items pour Stripe
     const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = items.map((item: any) => {
+      const description = cleanDescription(item.description);
+
       return {
         price_data: {
           currency: 'eur',
           product_data: {
             name: item.name,
-            description: cleanDescription(item.description),
+            ...(description && { description }), // N'inclure que si description existe
             images: item.image_url ? [item.image_url] : [],
             metadata: {
               product_id: item.id,

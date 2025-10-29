@@ -19,6 +19,13 @@ const nextConfig: NextConfig = {
     'tomorrow-travelling-tap-round.trycloudflare.com',
     '193.203.191.71',
   ],
+  // Désactiver COMPLÈTEMENT le cache Next.js pour forcer les refreshes
+  experimental: {
+    staleTimes: {
+      dynamic: 0,
+      static: 0,
+    },
+  },
   // Headers pour contrôler le cache
   async headers() {
     return [
@@ -33,22 +40,38 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        // API routes produits - cache court avec revalidation
+        // API routes produits - AUCUN cache
         source: '/api/products/:slug',
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, s-maxage=60, stale-while-revalidate=120',
+            value: 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0',
+          },
+          {
+            key: 'Pragma',
+            value: 'no-cache',
+          },
+          {
+            key: 'Expires',
+            value: '0',
           },
         ],
       },
       {
-        // API similar products - cache court
+        // API similar products - AUCUN cache
         source: '/api/similar-products',
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, s-maxage=60, stale-while-revalidate=120',
+            value: 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0',
+          },
+          {
+            key: 'Pragma',
+            value: 'no-cache',
+          },
+          {
+            key: 'Expires',
+            value: '0',
           },
         ],
       },

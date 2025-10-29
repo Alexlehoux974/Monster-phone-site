@@ -39,6 +39,32 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false);
 
+  // 🔄 Synchroniser les états locaux quand les props changent (après refresh)
+  useEffect(() => {
+    console.log('🔄 [PRODUCT SYNC] Synchronisation des états avec nouvelles props');
+
+    // Réinitialiser tous les états avec les nouvelles données du produit
+    setProductPrice(product.price);
+    setProductStockQuantity(product.stockQuantity || 0);
+    setAdminDiscountPercent(product.adminDiscountPercent || 0);
+    setVariants(product.variants || []);
+
+    // Réinitialiser le variant sélectionné
+    const newDefaultVariant = product.variants?.find(v => v.is_default) ||
+                              product.variants?.find(v => v.stock > 0) ||
+                              product.variants?.[0];
+    setSelectedVariant(newDefaultVariant);
+    setSelectedImageIndex(0);
+    setQuantity(1);
+
+    console.log('✅ [PRODUCT SYNC] États synchronisés avec:', {
+      price: product.price,
+      stock: product.stockQuantity,
+      discount: product.adminDiscountPercent,
+      variants: product.variants?.length
+    });
+  }, [product]);
+
   // Setup real-time subscription for stock and price updates
   useEffect(() => {
     const supabase = createClient();
