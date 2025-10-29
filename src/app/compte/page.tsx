@@ -585,8 +585,58 @@ function ComptePageContent() {
                                   </span>
                                 </div>
 
-                                <div className="flex justify-end items-center">
-                                  <p className="font-semibold text-lg">
+                                {/* Liste des produits */}
+                                {order.order_items && order.order_items.length > 0 && (
+                                  <div className="mt-4 space-y-3 border-t border-gray-100 pt-4">
+                                    {order.order_items.map((item: any, index: number) => {
+                                      // Parser le metadata pour obtenir les variantes
+                                      let variantInfo = '';
+                                      if (item.product_metadata) {
+                                        try {
+                                          const metadata = typeof item.product_metadata === 'string'
+                                            ? JSON.parse(item.product_metadata)
+                                            : item.product_metadata;
+
+                                          if (metadata.color) {
+                                            variantInfo = `${metadata.color}`;
+                                          }
+                                          if (metadata.storage && metadata.color) {
+                                            variantInfo = `${metadata.color} - ${metadata.storage}`;
+                                          } else if (metadata.storage) {
+                                            variantInfo = metadata.storage;
+                                          }
+                                        } catch (e) {
+                                          console.error('Error parsing metadata:', e);
+                                        }
+                                      }
+
+                                      return (
+                                        <div key={index} className="flex justify-between items-start py-2">
+                                          <div className="flex-1">
+                                            <p className="font-medium text-gray-900">{item.product_name}</p>
+                                            {variantInfo && (
+                                              <p className="text-sm text-gray-600 mt-1">
+                                                Variante: {variantInfo}
+                                              </p>
+                                            )}
+                                            <p className="text-sm text-gray-500 mt-1">
+                                              Quantité: {item.quantity} × {item.unit_price?.toFixed(2)} €
+                                            </p>
+                                          </div>
+                                          <div className="text-right">
+                                            <p className="font-semibold text-gray-900">
+                                              {item.total_price?.toFixed(2)} €
+                                            </p>
+                                          </div>
+                                        </div>
+                                      );
+                                    })}
+                                  </div>
+                                )}
+
+                                <div className="flex justify-between items-center mt-4 pt-4 border-t border-gray-200">
+                                  <p className="font-semibold text-gray-700">Total</p>
+                                  <p className="font-bold text-lg text-gray-900">
                                     {order.total?.toFixed(2)} €
                                   </p>
                                 </div>
@@ -597,14 +647,6 @@ function ComptePageContent() {
                                     <span className="text-blue-600">{order.tracking_number}</span>
                                   </div>
                                 )}
-
-                                <button
-                                  onClick={() => router.push(`/compte/commandes/${order.id}`)}
-                                  className="mt-4 text-blue-600 hover:text-blue-800 font-medium text-sm flex items-center"
-                                >
-                                  Voir les détails
-                                  <ChevronRight className="w-4 h-4 ml-1" />
-                                </button>
                               </div>
                             );
                           })}
