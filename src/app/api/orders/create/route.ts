@@ -252,6 +252,7 @@ export async function POST(request: NextRequest) {
     // Envoyer l'email de confirmation
     try {
       await sendOrderConfirmation({
+        orderId: order.id,
         orderNumber: orderNumber,
         customerName: customerName,
         customerEmail: customerEmail,
