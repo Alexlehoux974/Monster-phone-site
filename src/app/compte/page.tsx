@@ -560,11 +560,12 @@ function ComptePageContent() {
                             return (
                               <div
                                 key={order.id}
-                                className="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow"
+                                className="border border-gray-200 rounded-lg p-6 hover:shadow-lg hover:border-blue-300 transition-all cursor-pointer"
+                                onClick={() => router.push(`/compte/commandes/${order.id}`)}
                               >
                                 <div className="flex justify-between items-start mb-4">
                                   <div>
-                                    <h3 className="font-semibold text-lg">
+                                    <h3 className="font-semibold text-lg text-blue-600 hover:text-blue-700">
                                       Commande #{order.id.substring(0, 8).toUpperCase()}
                                     </h3>
                                     <p className="text-sm text-gray-600">
@@ -648,6 +649,20 @@ function ComptePageContent() {
                                     <span className="text-blue-600">{order.tracking_number}</span>
                                   </div>
                                 )}
+
+                                {/* Bouton Voir les détails */}
+                                <div className="mt-4 pt-4 border-t border-gray-200">
+                                  <button
+                                    className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors font-medium"
+                                    onClick={(e) => {
+                                      e.stopPropagation(); // Empêcher le clic sur le div parent
+                                      router.push(`/compte/commandes/${order.id}`);
+                                    }}
+                                  >
+                                    <Package className="w-4 h-4" />
+                                    Voir les détails et le suivi
+                                  </button>
+                                </div>
                               </div>
                             );
                           })}
