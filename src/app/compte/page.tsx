@@ -30,6 +30,19 @@ function ComptePageContent() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [orders, setOrders] = useState<any[]>([]);
   const [loadingOrders, setLoadingOrders] = useState(true);
+  const [forceShowLogin, setForceShowLogin] = useState(false);
+
+  // Timeout de sécurité : si isLoading reste à true plus de 3 secondes, forcer l'affichage de la page de connexion
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (isLoading && !isAuthenticated) {
+        console.warn('⏱️ Timeout: forcing login page display');
+        setForceShowLogin(true);
+      }
+    }, 3000);
+
+    return () => clearTimeout(timeout);
+  }, [isLoading, isAuthenticated]);
 
   // Lire le paramètre tab depuis l'URL pour activer l'onglet correspondant
   useEffect(() => {
@@ -142,7 +155,8 @@ function ComptePageContent() {
   };
 
   // Si le chargement est terminé et que l'utilisateur n'est pas authentifié
-  if (!isLoading && !isAuthenticated) {
+  // OU si le timeout de sécurité a été déclenché
+  if ((!isLoading && !isAuthenticated) || forceShowLogin) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="max-w-md w-full mx-4 bg-white rounded-lg shadow-lg p-8 text-center">
@@ -181,8 +195,8 @@ function ComptePageContent() {
     );
   }
 
-  // Afficher le spinner uniquement pendant le chargement initial
-  if (isLoading) {
+  // Afficher le spinner uniquement pendant le chargement initial (max 3 secondes)
+  if (isLoading && !forceShowLogin) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
