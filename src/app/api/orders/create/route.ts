@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
-import { createClient } from '@/lib/supabase/server';
+import { createClient as createSupabaseClient } from '@supabase/supabase-js';
 import { sendOrderConfirmation } from '@/lib/email/send-order-confirmation';
 
 export const dynamic = 'force-dynamic';
@@ -21,6 +21,23 @@ function getStripe() {
   });
 }
 
+// Créer client Supabase avec SERVICE_ROLE_KEY pour bypasser RLS
+function getSupabaseAdmin() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+  const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+
+  if (!supabaseUrl || !supabaseServiceKey) {
+    throw new Error('Missing Supabase environment variables');
+  }
+
+  return createSupabaseClient(supabaseUrl, supabaseServiceKey, {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false,
+    },
+  });
+}
+
 /**
  * API Route pour récupérer ou créer une commande
  * Priorité : webhook Stripe > création manuelle en fallback
@@ -36,7 +53,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const supabase = await createClient();
+    const supabase = getSupabaseAdmin();
 
     // Vérifier si la commande existe déjà (créée par webhook)
     const { data: existingOrder } = await supabase
