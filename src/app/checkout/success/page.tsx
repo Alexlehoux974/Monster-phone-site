@@ -286,10 +286,10 @@ function CheckoutSuccessContent() {
             Suivez vos commandes
           </h3>
           <p className="mb-6 text-blue-100">
-            Retrouvez toutes vos commandes passées avec votre adresse email
+            Accédez à votre espace client pour suivre vos commandes
           </p>
           <Link
-            href="/mes-commandes"
+            href="/compte?tab=orders"
             className="inline-flex items-center gap-2 bg-white text-blue-600 px-8 py-3 rounded-lg hover:bg-blue-50 transition-all hover:shadow-lg font-bold"
           >
             Voir mes commandes
