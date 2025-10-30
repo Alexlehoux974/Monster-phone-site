@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode, useCallback, useMemo } from 'react';
 import { toast } from 'sonner';
 import { createClient } from '@/lib/supabase/client';
 import type { User as SupabaseUser } from '@supabase/supabase-js';
@@ -53,7 +53,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [lastActivity, setLastActivity] = useState<number>(Date.now());
-  const supabase = createClient();
+
+  // CRITIQUE: Créer le client UNE SEULE FOIS, pas à chaque render
+  const supabase = useMemo(() => createClient(), []);
 
   // Fonction pour charger le profil utilisateur depuis Supabase
   const loadUserProfile = async (supabaseUser: SupabaseUser): Promise<User | null> => {

@@ -39,17 +39,20 @@ function SignInFormContent() {
       await login(formData.email, formData.password);
       console.log('✅ [SignIn] Login completed successfully, waiting before redirect...');
 
-      // CRITIQUE: Attendre un peu plus pour être SÛR que la session est persistée
-      await new Promise(resolve => setTimeout(resolve, 200));
+      // CRITIQUE: Attendre que la session soit VRAIMENT sauvegardée
+      await new Promise(resolve => setTimeout(resolve, 300));
 
       console.log('🔄 [SignIn] Redirecting to:', redirectTo);
-      router.push(redirectTo);
+
+      // IMPORTANT: Utiliser window.location.href au lieu de router.push()
+      // pour forcer un reload complet et garantir que la session est chargée
+      window.location.href = redirectTo;
     } catch (err: any) {
       console.error('❌ [SignIn] Login failed:', err);
       setError(err.message || 'Erreur lors de la connexion');
-    } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false); // Seulement si erreur
     }
+    // Ne PAS mettre setIsSubmitting(false) ici car on va recharger la page
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
