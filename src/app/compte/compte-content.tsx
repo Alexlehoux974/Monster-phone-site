@@ -9,6 +9,9 @@ export default function ComptePageContent() {
   const { user, isAuthenticated, logout, updateProfile, isLoading } = useAuth();
   const router = useRouter();
 
+  // Logs pour debugging
+  console.log('🔍 ComptePageContent render:', { isLoading, isAuthenticated, hasUser: !!user });
+
   // Lire le tab depuis l'URL côté client uniquement
   const [activeTab, setActiveTab] = useState('profile');
   const [formData, setFormData] = useState({
@@ -36,11 +39,17 @@ export default function ComptePageContent() {
     }
   }, []);
 
-  // Redirection si non connecté
+  // Redirection si non connecté - AVEC DÉLAI pour éviter les redirections prématurées
   useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
-      router.push('/auth/signin?redirect=/compte?tab=' + activeTab);
-    }
+    // Attendre un peu plus longtemps pour être sûr que l'auth est chargée
+    const redirectTimer = setTimeout(() => {
+      if (!isLoading && !isAuthenticated) {
+        console.log('🔒 Not authenticated, redirecting to signin');
+        router.push('/auth/signin?redirect=/compte?tab=' + activeTab);
+      }
+    }, 500); // Attendre 500ms avant de rediriger
+
+    return () => clearTimeout(redirectTimer);
   }, [isLoading, isAuthenticated, router, activeTab]);
 
   // Charger les données utilisateur
@@ -126,16 +135,24 @@ export default function ComptePageContent() {
     router.push('/');
   };
 
+  // Afficher le loader pendant le chargement initial
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        <p className="mt-4 text-gray-600">Vérification de l'authentification...</p>
       </div>
     );
   }
 
+  // Si pas authentifié après le chargement, ne rien afficher (la redirection va se faire)
   if (!isAuthenticated) {
-    return null; // Redirection en cours
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        <p className="mt-4 text-gray-600">Redirection vers la page de connexion...</p>
+      </div>
+    );
   }
 
   return (
