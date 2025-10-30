@@ -94,17 +94,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const initAuth = async () => {
       try {
+        console.log('🔐 [AuthContext] Initializing auth...');
         const { data: { session } } = await supabase.auth.getSession();
+        console.log('🔐 [AuthContext] Session:', session ? 'Found' : 'Not found', session?.user?.email);
 
         if (session?.user) {
+          console.log('🔐 [AuthContext] Loading user profile...');
           const userData = await loadUserProfile(session.user);
           if (userData) {
+            console.log('🔐 [AuthContext] User loaded:', userData.email);
             setUser(userData);
+          } else {
+            console.log('❌ [AuthContext] Failed to load user profile');
           }
+        } else {
+          console.log('❌ [AuthContext] No session found');
         }
       } catch (error) {
-        console.error('Erreur lors de l\'initialisation de l\'authentification:', error);
+        console.error('❌ [AuthContext] Error during auth init:', error);
       } finally {
+        console.log('🔐 [AuthContext] Setting isLoading to false');
         setIsLoading(false);
       }
     };
