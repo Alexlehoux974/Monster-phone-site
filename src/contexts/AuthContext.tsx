@@ -162,6 +162,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (userData) {
         setUser(userData);
       }
+
+      // CRITIQUE: Attendre que Supabase persiste la session dans localStorage
+      // avant de continuer (évite les race conditions)
+      await new Promise(resolve => setTimeout(resolve, 100));
+      console.log('✅ [AuthContext] Session persisted, ready for redirect');
     }
   };
 
@@ -229,6 +234,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (userData) {
         setUser(userData);
       }
+
+      // CRITIQUE: Attendre que Supabase persiste la session dans localStorage
+      // avant de continuer (évite les race conditions)
+      await new Promise(resolve => setTimeout(resolve, 100));
+      console.log('✅ [AuthContext] Registration session persisted, ready for redirect');
     }
   };
 

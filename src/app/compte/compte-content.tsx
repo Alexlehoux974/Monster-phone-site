@@ -41,13 +41,14 @@ export default function ComptePageContent() {
 
   // Redirection si non connecté - AVEC DÉLAI pour éviter les redirections prématurées
   useEffect(() => {
-    // Attendre un peu plus longtemps pour être sûr que l'auth est chargée
+    // Attendre suffisamment longtemps pour être SÛR que l'auth est chargée
+    // et que la session Supabase a eu le temps de se restaurer depuis localStorage
     const redirectTimer = setTimeout(() => {
       if (!isLoading && !isAuthenticated) {
         console.log('🔒 Not authenticated, redirecting to signin');
         router.push('/auth/signin?redirect=/compte?tab=' + activeTab);
       }
-    }, 500); // Attendre 500ms avant de rediriger
+    }, 1000); // Attendre 1000ms (1 seconde) avant de rediriger
 
     return () => clearTimeout(redirectTimer);
   }, [isLoading, isAuthenticated, router, activeTab]);
