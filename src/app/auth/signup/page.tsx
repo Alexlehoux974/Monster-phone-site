@@ -17,6 +17,13 @@ export default function SignUpPage() {
     email: '',
     password: '',
     confirmPassword: '',
+    phone: '',
+    address: {
+      street: '',
+      city: '',
+      postalCode: '',
+      country: 'France',
+    },
   });
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -42,7 +49,14 @@ export default function SignUpPage() {
     setIsSubmitting(true);
 
     try {
-      await register(formData.email, formData.password, formData.name);
+      // Passer toutes les données à la fonction register
+      await register({
+        email: formData.email,
+        password: formData.password,
+        name: formData.name,
+        phone: formData.phone,
+        address: formData.address,
+      });
       // Redirection après inscription réussie
       router.push(redirectTo);
     } catch (err: any) {
@@ -53,10 +67,24 @@ export default function SignUpPage() {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    const { name, value } = e.target;
+
+    // Gérer les champs d'adresse imbriqués
+    if (name.startsWith('address.')) {
+      const addressField = name.split('.')[1];
+      setFormData(prev => ({
+        ...prev,
+        address: {
+          ...prev.address,
+          [addressField]: value,
+        },
+      }));
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
   };
 
   return (
@@ -185,6 +213,97 @@ export default function SignUpPage() {
                     <p className="text-xs text-green-600">Les mots de passe correspondent</p>
                   </div>
                 )}
+              </div>
+
+              {/* Séparateur */}
+              <div className="pt-4 border-t border-gray-200">
+                <h3 className="text-sm font-medium text-gray-700 mb-3">Informations de livraison</h3>
+              </div>
+
+              <div>
+                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                  Téléphone
+                </label>
+                <input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  autoComplete="tel"
+                  required
+                  value={formData.phone}
+                  onChange={handleChange}
+                  className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  placeholder="06 12 34 56 78"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="address.street" className="block text-sm font-medium text-gray-700 mb-1">
+                  Adresse
+                </label>
+                <input
+                  id="address.street"
+                  name="address.street"
+                  type="text"
+                  autoComplete="street-address"
+                  required
+                  value={formData.address.street}
+                  onChange={handleChange}
+                  className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  placeholder="12 Rue de la République"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label htmlFor="address.postalCode" className="block text-sm font-medium text-gray-700 mb-1">
+                    Code postal
+                  </label>
+                  <input
+                    id="address.postalCode"
+                    name="address.postalCode"
+                    type="text"
+                    autoComplete="postal-code"
+                    required
+                    value={formData.address.postalCode}
+                    onChange={handleChange}
+                    className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    placeholder="97400"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="address.city" className="block text-sm font-medium text-gray-700 mb-1">
+                    Ville
+                  </label>
+                  <input
+                    id="address.city"
+                    name="address.city"
+                    type="text"
+                    autoComplete="address-level2"
+                    required
+                    value={formData.address.city}
+                    onChange={handleChange}
+                    className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    placeholder="Saint-Denis"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label htmlFor="address.country" className="block text-sm font-medium text-gray-700 mb-1">
+                  Pays
+                </label>
+                <input
+                  id="address.country"
+                  name="address.country"
+                  type="text"
+                  autoComplete="country-name"
+                  disabled
+                  value={formData.address.country}
+                  className="appearance-none relative block w-full px-3 py-2 border border-gray-300 bg-gray-50 text-gray-500 rounded-lg sm:text-sm cursor-not-allowed"
+                />
+                <p className="mt-1 text-xs text-gray-500">Livraison disponible uniquement en France</p>
               </div>
             </div>
 

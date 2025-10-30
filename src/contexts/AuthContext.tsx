@@ -19,11 +19,24 @@ export interface User {
   createdAt: string;
 }
 
+export interface RegisterData {
+  email: string;
+  password: string;
+  name: string;
+  phone?: string;
+  address?: {
+    street: string;
+    city: string;
+    postalCode: string;
+    country: string;
+  };
+}
+
 interface AuthContextType {
   user: User | null;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<void>;
-  register: (email: string, password: string, name: string) => Promise<void>;
+  register: (data: RegisterData) => Promise<void>;
   logout: () => void;
   updateProfile: (updates: Partial<User>) => Promise<void>;
   isAuthenticated: boolean;
@@ -143,7 +156,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const register = async (email: string, password: string, name: string) => {
+  const register = async (registerData: RegisterData) => {
+    const { email, password, name, phone, address } = registerData;
+
     // Validation
     if (!email || !password || !name) {
       throw new Error('Tous les champs sont requis');
@@ -174,14 +189,28 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     if (data.user) {
-      // Créer le profil utilisateur dans la table profiles
+      // Créer le profil utilisateur dans la table profiles avec toutes les données
+      const profileData: any = {
+        id: data.user.id,
+        email: data.user.email,
+        full_name: name,
+      };
+
+      // Ajouter le téléphone si fourni
+      if (phone) {
+        profileData.phone = phone;
+      }
+
+      // Ajouter l'adresse si fournie
+      if (address) {
+        profileData.address = address.street;
+        profileData.city = address.city;
+        profileData.postal_code = address.postalCode;
+      }
+
       const { error: profileError } = await supabase
         .from('profiles')
-        .insert({
-          id: data.user.id,
-          email: data.user.email,
-          full_name: name,
-        });
+        .insert(profileData);
 
       if (profileError) {
         console.error('Erreur lors de la création du profil:', profileError);
