@@ -657,12 +657,12 @@ function ComptePageContent() {
                                             ? JSON.parse(item.product_metadata)
                                             : item.product_metadata;
 
-                                          if (metadata.color) {
+                                          if (metadata && metadata.color) {
                                             variantInfo = `${metadata.color}`;
                                           }
-                                          if (metadata.storage && metadata.color) {
+                                          if (metadata && metadata.storage && metadata.color) {
                                             variantInfo = `${metadata.color} - ${metadata.storage}`;
-                                          } else if (metadata.storage) {
+                                          } else if (metadata && metadata.storage) {
                                             variantInfo = metadata.storage;
                                           }
                                         } catch (e) {
@@ -680,12 +680,12 @@ function ComptePageContent() {
                                               </p>
                                             )}
                                             <p className="text-sm text-gray-500 mt-1">
-                                              Quantité: {item.quantity} × {item.unit_price?.toFixed(2)} €
+                                              Quantité: {item.quantity} × {typeof item.unit_price === 'number' ? item.unit_price.toFixed(2) : parseFloat(item.unit_price || 0).toFixed(2)} €
                                             </p>
                                           </div>
                                           <div className="text-right">
                                             <p className="font-semibold text-gray-900">
-                                              {item.total_price?.toFixed(2)} €
+                                              {typeof item.total_price === 'number' ? item.total_price.toFixed(2) : parseFloat(item.total_price || 0).toFixed(2)} €
                                             </p>
                                           </div>
                                         </div>
@@ -697,7 +697,7 @@ function ComptePageContent() {
                                 <div className="flex justify-between items-center mt-4 pt-4 border-t border-gray-200">
                                   <p className="font-semibold text-gray-700">Total</p>
                                   <p className="font-bold text-lg text-gray-900">
-                                    {order.total?.toFixed(2)} €
+                                    {typeof order.total === 'number' ? order.total.toFixed(2) : parseFloat(order.total || 0).toFixed(2)} €
                                   </p>
                                 </div>
 
