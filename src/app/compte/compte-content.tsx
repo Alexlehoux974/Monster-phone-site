@@ -9,8 +9,11 @@ export default function ComptePageContent() {
   const { user, isAuthenticated, logout, updateProfile, isLoading } = useAuth();
   const router = useRouter();
 
+  // État pour gérer le délai d'initialisation
+  const [authCheckComplete, setAuthCheckComplete] = useState(false);
+
   // Logs pour debugging
-  console.log('🔍 ComptePageContent render:', { isLoading, isAuthenticated, hasUser: !!user });
+  console.log('🔍 ComptePageContent render:', { isLoading, isAuthenticated, hasUser: !!user, authCheckComplete });
 
   // Lire le tab depuis l'URL côté client uniquement
   const [activeTab, setActiveTab] = useState('profile');
@@ -39,19 +42,26 @@ export default function ComptePageContent() {
     }
   }, []);
 
-  // Redirection si non connecté - AVEC DÉLAI pour éviter les redirections prématurées
+  // NOUVEAU: Attendre que l'auth soit vraiment initialisée
   useEffect(() => {
-    // Attendre suffisamment longtemps pour être SÛR que l'auth est chargée
-    // et que la session Supabase a eu le temps de se restaurer depuis localStorage
-    const redirectTimer = setTimeout(() => {
-      if (!isLoading && !isAuthenticated) {
-        console.log('🔒 Not authenticated, redirecting to signin');
-        router.push('/auth/signin?redirect=/compte?tab=' + activeTab);
-      }
-    }, 1000); // Attendre 1000ms (1 seconde) avant de rediriger
+    // Attendre que isLoading soit false ET qu'on ait attendu suffisamment
+    if (!isLoading) {
+      const timer = setTimeout(() => {
+        console.log('✅ Auth check complete after delay');
+        setAuthCheckComplete(true);
+      }, 1500); // Attendre 1.5 secondes APRÈS que isLoading soit false
 
-    return () => clearTimeout(redirectTimer);
-  }, [isLoading, isAuthenticated, router, activeTab]);
+      return () => clearTimeout(timer);
+    }
+  }, [isLoading]);
+
+  // Redirection si non connecté - SEULEMENT après que authCheckComplete soit true
+  useEffect(() => {
+    if (authCheckComplete && !isAuthenticated) {
+      console.log('🔒 Not authenticated after full check, redirecting to signin');
+      router.push('/auth/signin?redirect=/compte?tab=' + activeTab);
+    }
+  }, [authCheckComplete, isAuthenticated, router, activeTab]);
 
   // Charger les données utilisateur
   useEffect(() => {
@@ -141,21 +151,28 @@ export default function ComptePageContent() {
   };
 
   // Afficher le loader pendant le chargement initial
-  if (isLoading) {
+  // Afficher le loader pendant que l'auth est en cours de vérification
+  if (isLoading || !authCheckComplete) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-        <p className="mt-4 text-gray-600">Vérification de l'authentification...</p>
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">
+            {isLoading ? 'Vérification de l\'authentification...' : 'Chargement de votre session...'}
+          </p>
+        </div>
       </div>
     );
   }
 
-  // Si pas authentifié après le chargement, ne rien afficher (la redirection va se faire)
+  // Si pas authentifié après la vérification complète, afficher le loader de redirection
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-        <p className="mt-4 text-gray-600">Redirection vers la page de connexion...</p>
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Redirection vers la page de connexion...</p>
+        </div>
       </div>
     );
   }
