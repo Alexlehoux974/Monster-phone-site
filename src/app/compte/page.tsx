@@ -3,7 +3,7 @@
 import { useState, useEffect, Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import { useAuth } from '@/contexts/AuthContext';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { User, Mail, Phone, MapPin, Package, LogOut, ChevronRight, Shield, Calendar } from 'lucide-react';
@@ -11,8 +11,14 @@ import { User, Mail, Phone, MapPin, Package, LogOut, ChevronRight, Shield, Calen
 function ComptePageContent() {
   const { user, isAuthenticated, login, register, logout, updateProfile, isLoading } = useAuth();
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const [activeTab, setActiveTab] = useState('profile');
+  // Utiliser window.location au lieu de useSearchParams pour éviter l'erreur React #300
+  const [activeTab, setActiveTab] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('tab') || 'profile';
+    }
+    return 'profile';
+  });
   const [isLoginMode, setIsLoginMode] = useState(true);
   const [formData, setFormData] = useState({
     email: '',
@@ -45,13 +51,8 @@ function ComptePageContent() {
     return () => clearTimeout(timeout);
   }, [isLoading, isAuthenticated]);
 
-  // Lire le paramètre tab depuis l'URL pour activer l'onglet correspondant
-  useEffect(() => {
-    const tabParam = searchParams.get('tab');
-    if (tabParam && ['profile', 'orders', 'security'].includes(tabParam)) {
-      setActiveTab(tabParam);
-    }
-  }, [searchParams]);
+  // Lire le paramètre tab depuis l'URL au chargement (déjà fait dans useState initial)
+  // Plus besoin d'un useEffect car on lit window.location dans le useState
 
   // Rediriger si non connecté (optionnel - on peut aussi afficher le formulaire de connexion)
   useEffect(() => {
