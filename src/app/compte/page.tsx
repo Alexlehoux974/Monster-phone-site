@@ -267,10 +267,7 @@ function ComptePageContent() {
   }, [isAuthenticated, user]);
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Header />
-      
-      <main className="container mx-auto px-4 py-8 pt-[150px]">
+    <main className="container mx-auto px-4 py-8 pt-[150px]">
         <div className="max-w-6xl mx-auto">
           <h1 className="text-3xl font-bold mb-8">
             {isAuthenticated ? 'Mon Compte' : 'Connexion / Inscription'}
@@ -824,20 +821,21 @@ function ComptePageContent() {
           )}
         </div>
       </main>
-
-      <Footer />
-    </div>
   );
 }
 
 export default function ComptePage() {
   return (
-    <Suspense fallback={
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-      </div>
-    }>
-      <ComptePageContent />
-    </Suspense>
+    <div className="min-h-screen bg-gray-50">
+      <Header />
+      <Suspense fallback={
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        </div>
+      }>
+        <ComptePageContent />
+      </Suspense>
+      <Footer />
+    </div>
   );
 }
