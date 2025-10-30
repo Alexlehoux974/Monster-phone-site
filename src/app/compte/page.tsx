@@ -105,7 +105,13 @@ function ComptePageContent() {
           }, 100);
         }
       } else {
-        await register(formData.email, formData.password, formData.name);
+        await register({
+          email: formData.email,
+          password: formData.password,
+          name: formData.name,
+          phone: formData.phone,
+          address: formData.address,
+        });
         setSuccess('Inscription réussie !');
 
         // Vérifier s'il y a une redirection en attente
