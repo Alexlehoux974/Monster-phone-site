@@ -6,6 +6,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import ErrorBoundary from '@/components/ErrorBoundary';
 import { User, Mail, Phone, MapPin, Package, LogOut, ChevronRight, Shield, Calendar } from 'lucide-react';
 
 function ComptePageContent() {
@@ -858,10 +859,12 @@ const DynamicComptePageContent = dynamic(() => Promise.resolve(ComptePageContent
 
 export default function ComptePage() {
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Header />
-      <DynamicComptePageContent />
-      <Footer />
-    </div>
+    <ErrorBoundary>
+      <div className="min-h-screen bg-gray-50">
+        <Header />
+        <DynamicComptePageContent />
+        <Footer />
+      </div>
+    </ErrorBoundary>
   );
 }
