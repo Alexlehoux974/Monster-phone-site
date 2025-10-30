@@ -77,16 +77,20 @@ export default function ComptePageContent() {
           const response = await fetch('/api/orders/list');
           if (response.ok) {
             const data = await response.json();
-            console.log('📦 Orders fetched successfully:', data.length, 'orders');
-            if (data.length > 0) {
-              console.log('📦 First order sample:', data[0]);
+            // S'assurer que data est bien un tableau
+            const ordersArray = Array.isArray(data) ? data : [];
+            console.log('📦 Orders fetched successfully:', ordersArray.length, 'orders');
+            if (ordersArray.length > 0) {
+              console.log('📦 First order sample:', ordersArray[0]);
             }
-            setOrders(data);
+            setOrders(ordersArray);
           } else {
             console.error('❌ Failed to fetch orders:', response.status);
+            setOrders([]); // Mettre un tableau vide en cas d'erreur
           }
         } catch (error) {
           console.error('❌ Error fetching orders:', error);
+          setOrders([]); // Mettre un tableau vide en cas d'erreur
         } finally {
           setLoadingOrders(false);
         }
