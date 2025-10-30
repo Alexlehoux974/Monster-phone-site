@@ -237,6 +237,8 @@ function ComptePageContent() {
 
           if (response.ok) {
             const data = await response.json();
+            console.log('📦 Orders fetched successfully:', data.orders?.length || 0, 'orders');
+            console.log('📦 First order sample:', data.orders?.[0]);
             if (isMounted) {
               setOrders(data.orders || []);
             }
@@ -595,33 +597,34 @@ function ComptePageContent() {
                       ) : orders.length > 0 ? (
                         <div className="space-y-4">
                           {orders.map((order) => {
-                            const statusLabels: { [key: string]: string } = {
-                              pending: 'En attente',
-                              processing: 'En préparation',
-                              shipped: 'Expédiée',
-                              delivered: 'Livrée',
-                              cancelled: 'Annulée',
-                              refunded: 'Remboursée',
-                            };
+                            try {
+                              const statusLabels: { [key: string]: string } = {
+                                pending: 'En attente',
+                                processing: 'En préparation',
+                                shipped: 'Expédiée',
+                                delivered: 'Livrée',
+                                cancelled: 'Annulée',
+                                refunded: 'Remboursée',
+                              };
 
-                            const statusColors: { [key: string]: string } = {
-                              pending: 'bg-gray-100 text-gray-800',
-                              processing: 'bg-blue-100 text-blue-800',
-                              shipped: 'bg-purple-100 text-purple-800',
-                              delivered: 'bg-green-100 text-green-800',
-                              cancelled: 'bg-red-100 text-red-800',
-                              refunded: 'bg-orange-100 text-orange-800',
-                            };
+                              const statusColors: { [key: string]: string } = {
+                                pending: 'bg-gray-100 text-gray-800',
+                                processing: 'bg-blue-100 text-blue-800',
+                                shipped: 'bg-purple-100 text-purple-800',
+                                delivered: 'bg-green-100 text-green-800',
+                                cancelled: 'bg-red-100 text-red-800',
+                                refunded: 'bg-orange-100 text-orange-800',
+                              };
 
-                            const itemCount = Array.isArray(order.order_items) ? order.order_items.length : 0;
+                              const itemCount = Array.isArray(order.order_items) ? order.order_items.length : 0;
 
-                            // Protection : ignorer les commandes sans ID ou created_at
-                            if (!order.id || !order.created_at) {
-                              console.warn('Commande invalide (id ou created_at manquant):', order);
-                              return null;
-                            }
+                              // Protection : ignorer les commandes sans ID ou created_at
+                              if (!order.id || !order.created_at) {
+                                console.warn('Commande invalide (id ou created_at manquant):', order);
+                                return null;
+                              }
 
-                            return (
+                              return (
                               <div
                                 key={order.id}
                                 className="border border-gray-200 rounded-lg p-6 hover:shadow-lg hover:border-blue-300 transition-all cursor-pointer"
@@ -729,6 +732,17 @@ function ComptePageContent() {
                                 </div>
                               </div>
                             );
+                            } catch (error) {
+                              console.error('❌ Error rendering order:', order);
+                              console.error('❌ Error details:', error);
+                              console.error('❌ Order data:', JSON.stringify(order, null, 2));
+                              return (
+                                <div key={order?.id || Math.random()} className="border border-red-200 bg-red-50 rounded-lg p-4">
+                                  <p className="text-red-800">Erreur lors de l'affichage d'une commande</p>
+                                  <p className="text-sm text-red-600 mt-2">Voir la console pour plus de détails</p>
+                                </div>
+                              );
+                            }
                           })}
                         </div>
                       ) : (
