@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, Suspense } from 'react';
+import dynamic from 'next/dynamic';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Header from '@/components/Header';
@@ -844,17 +845,21 @@ function ComptePageContent() {
   );
 }
 
+// Import dynamique pour éviter le SSR et l'erreur React #300
+const DynamicComptePageContent = dynamic(() => Promise.resolve(ComptePageContent), {
+  ssr: false,
+  loading: () => (
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+    </div>
+  ),
+});
+
 export default function ComptePage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
-      <Suspense fallback={
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-        </div>
-      }>
-        <ComptePageContent />
-      </Suspense>
+      <DynamicComptePageContent />
       <Footer />
     </div>
   );
