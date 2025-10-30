@@ -2,7 +2,7 @@
 
 import { useState, Suspense } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -11,7 +11,17 @@ import { Mail, Lock, User, ArrowRight, AlertCircle, CheckCircle } from 'lucide-r
 function SignUpFormContent() {
   const { register } = useAuth();
   const router = useRouter();
-  const searchParams = useSearchParams();
+
+  // Récupérer l'URL de redirection depuis les paramètres (par défaut: /compte?tab=orders)
+  // Utiliser window.location au lieu de useSearchParams pour éviter l'erreur React #300
+  const [redirectTo] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('redirect') || '/compte?tab=orders';
+    }
+    return '/compte?tab=orders';
+  });
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -27,9 +37,6 @@ function SignUpFormContent() {
   });
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  // Récupérer l'URL de redirection depuis les paramètres (par défaut: /compte?tab=orders)
-  const redirectTo = searchParams.get('redirect') || '/compte?tab=orders';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
