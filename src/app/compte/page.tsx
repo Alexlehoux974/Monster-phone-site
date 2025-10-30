@@ -615,6 +615,12 @@ function ComptePageContent() {
 
                             const itemCount = Array.isArray(order.order_items) ? order.order_items.length : 0;
 
+                            // Protection : ignorer les commandes sans ID ou created_at
+                            if (!order.id || !order.created_at) {
+                              console.warn('Commande invalide (id ou created_at manquant):', order);
+                              return null;
+                            }
+
                             return (
                               <div
                                 key={order.id}
