@@ -51,6 +51,19 @@ export function createClient(forceNew = false) {
 
   console.log('🔧 [createClient] Created new Supabase client instance');
 
+  // Log auth state changes for debugging
+  window.__supabaseClient.auth.onAuthStateChange((event, session) => {
+    console.log('🔐 [Supabase] Auth state changed:', event, session ? `User: ${session.user.email}` : 'No session');
+
+    if (event === 'SIGNED_IN' && session) {
+      // Vérifier que la session est bien dans localStorage
+      setTimeout(() => {
+        const stored = window.localStorage.getItem('sb-nswlznqoadjffpxkagoz-auth-token');
+        console.log('💾 [Supabase] Session in localStorage:', stored ? 'YES ✅' : 'NO ❌');
+      }, 50);
+    }
+  });
+
   return window.__supabaseClient;
 }
 

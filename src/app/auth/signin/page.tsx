@@ -35,10 +35,17 @@ function SignInFormContent() {
     setIsSubmitting(true);
 
     try {
+      console.log('🔐 [SignIn] Starting login process...');
       await login(formData.email, formData.password);
-      // Redirection après connexion réussie
+      console.log('✅ [SignIn] Login completed successfully, waiting before redirect...');
+
+      // CRITIQUE: Attendre un peu plus pour être SÛR que la session est persistée
+      await new Promise(resolve => setTimeout(resolve, 200));
+
+      console.log('🔄 [SignIn] Redirecting to:', redirectTo);
       router.push(redirectTo);
     } catch (err: any) {
+      console.error('❌ [SignIn] Login failed:', err);
       setError(err.message || 'Erreur lors de la connexion');
     } finally {
       setIsSubmitting(false);
