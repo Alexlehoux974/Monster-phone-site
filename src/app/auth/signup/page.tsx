@@ -8,7 +8,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Mail, Lock, User, ArrowRight, AlertCircle, CheckCircle } from 'lucide-react';
 
-function SignUpForm() {
+function SignUpFormContent() {
   const { register } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -88,9 +88,7 @@ function SignUpForm() {
   };
 
   return (
-    <>
-      <Header />
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
           <div>
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
@@ -341,19 +339,21 @@ function SignUpForm() {
           </form>
         </div>
       </div>
-      <Footer />
-    </>
   );
 }
 
 export default function SignUpPage() {
   return (
-    <Suspense fallback={
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-      </div>
-    }>
-      <SignUpForm />
-    </Suspense>
+    <>
+      <Header />
+      <Suspense fallback={
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        </div>
+      }>
+        <SignUpFormContent />
+      </Suspense>
+      <Footer />
+    </>
   );
 }
