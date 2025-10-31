@@ -13,7 +13,7 @@ export default function ComptePageContent() {
   const [authCheckComplete, setAuthCheckComplete] = useState(false);
 
   // Logs pour debugging
-  console.log('🔍 ComptePageContent render:', { isLoading, isAuthenticated, hasUser: !!user, authCheckComplete });
+  console.log('🔍 [CompteContent] Render state:', { isLoading, isAuthenticated, hasUser: !!user, authCheckComplete });
 
   // Lire le tab depuis l'URL côté client uniquement
   const [activeTab, setActiveTab] = useState('profile');
