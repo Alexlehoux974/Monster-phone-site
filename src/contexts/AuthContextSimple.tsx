@@ -89,23 +89,25 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   // Initialiser l'auth avec TIMEOUT ABSOLU
   useEffect(() => {
     let mounted = true;
+    let hasCompleted = false;
 
-    // TIMEOUT GLOBAL de 8 secondes - RIEN ne peut bloquer plus longtemps
-    const globalTimeout = setTimeout(() => {
-      console.error('🚨 [AuthSimple] TIMEOUT 8s - Force isLoading=false');
-      if (mounted) {
+    // TIMEOUT GLOBAL ABSOLU de 5 secondes - FORCE la complétion
+    const absoluteTimeout = setTimeout(() => {
+      if (!hasCompleted && mounted) {
+        console.error('🚨🚨🚨 [AuthSimple] ABSOLUTE TIMEOUT 5s - FORCING isLoading=false');
+        hasCompleted = true;
         setIsLoading(false);
       }
-    }, 8000);
+    }, 5000);
 
     const initAuth = async () => {
       try {
         console.log('🔐 [AuthSimple] START auth init');
 
-        // getSession avec timeout 3s
+        // getSession avec timeout 2s
         const sessionPromise = supabase.auth.getSession();
         const sessionTimeout = new Promise<never>((_, reject) =>
-          setTimeout(() => reject(new Error('getSession timeout 3s')), 3000)
+          setTimeout(() => reject(new Error('getSession timeout 2s')), 2000)
         );
 
         const result = await Promise.race([sessionPromise, sessionTimeout]);
@@ -113,7 +115,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
         console.log('🔐 [AuthSimple] Session:', session ? 'YES' : 'NO');
 
-        if (session?.user && mounted) {
+        if (session?.user && mounted && !hasCompleted) {
           // User minimal direct - pas d'attente profile
           setUser({
             id: session.user.id,
@@ -126,9 +128,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       } catch (error) {
         console.error('❌ [AuthSimple] Error:', error);
       } finally {
-        clearTimeout(globalTimeout);
-        if (mounted) {
+        if (!hasCompleted && mounted) {
           console.log('✅ [AuthSimple] DONE - isLoading=false');
+          hasCompleted = true;
+          clearTimeout(absoluteTimeout);
           setIsLoading(false);
         }
       }
