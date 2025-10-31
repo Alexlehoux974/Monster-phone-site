@@ -86,41 +86,80 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, [supabase]);
 
-  // Initialiser l'auth UNE SEULE FOIS au montage - CODE ORIGINAL QUI MARCHAIT
+  // Initialiser l'auth UNE SEULE FOIS au montage avec TIMEOUT OBLIGATOIRE
   useEffect(() => {
     let mounted = true;
+    let timeoutId: NodeJS.Timeout;
 
     const initAuth = async () => {
       try {
-        console.log('🔐 [AuthSimple] Initializing auth...');
-        const { data: { session } } = await supabase.auth.getSession();
-        console.log('🔐 [AuthSimple] Session:', session ? 'Found' : 'Not found', session?.user?.email);
+        console.log('🔐 [AuthSimple] START auth initialization');
+
+        // TIMEOUT OBLIGATOIRE de 5 secondes pour getSession
+        const sessionPromise = supabase.auth.getSession();
+        const timeoutPromise = new Promise((_, reject) => {
+          timeoutId = setTimeout(() => reject(new Error('getSession timeout')), 5000);
+        });
+
+        const { data: { session } } = await Promise.race([sessionPromise, timeoutPromise]) as any;
+        clearTimeout(timeoutId);
+
+        console.log('🔐 [AuthSimple] Session obtained:', session ? 'YES' : 'NO', session?.user?.email);
 
         if (session?.user) {
-          console.log('🔐 [AuthSimple] Loading user profile...');
-          const userData = await loadUserProfile(session.user);
-          if (userData) {
-            console.log('🔐 [AuthSimple] User loaded:', userData.email);
-            if (mounted) {
+          console.log('🔐 [AuthSimple] Loading profile with 3s timeout...');
+
+          // TIMEOUT de 3 secondes pour loadUserProfile
+          const profilePromise = loadUserProfile(session.user);
+          const profileTimeout = new Promise((_, reject) => {
+            setTimeout(() => reject(new Error('loadUserProfile timeout')), 3000);
+          });
+
+          try {
+            const userData = await Promise.race([profilePromise, profileTimeout]) as any;
+            if (userData && mounted) {
+              console.log('✅ [AuthSimple] Profile loaded:', userData.email);
               setUser(userData);
+            } else {
+              console.log('⚠️ [AuthSimple] No profile data');
             }
-          } else {
-            console.log('❌ [AuthSimple] Failed to load user profile');
+          } catch (profileError) {
+            console.error('❌ [AuthSimple] Profile load failed:', profileError);
+            // Créer un user minimal même sans profile
+            if (mounted) {
+              setUser({
+                id: session.user.id,
+                email: session.user.email || '',
+                name: session.user.email?.split('@')[0] || 'Utilisateur',
+                createdAt: session.user.created_at,
+              });
+            }
           }
         } else {
-          console.log('❌ [AuthSimple] No session found');
+          console.log('ℹ️ [AuthSimple] No session - user not logged in');
         }
       } catch (error) {
-        console.error('❌ [AuthSimple] Error during auth init:', error);
+        console.error('❌ [AuthSimple] Init error:', error);
       } finally {
+        clearTimeout(timeoutId);
         if (mounted) {
-          console.log('🔐 [AuthSimple] Setting isLoading to false');
+          console.log('✅ [AuthSimple] COMPLETE - Setting isLoading = false');
           setIsLoading(false);
         }
       }
     };
 
-    initAuth();
+    // TIMEOUT GLOBAL de 10 secondes maximum pour toute l'initialisation
+    const globalTimeout = setTimeout(() => {
+      console.error('🚨 [AuthSimple] GLOBAL TIMEOUT - Force completing auth init');
+      if (mounted) {
+        setIsLoading(false);
+      }
+    }, 10000);
+
+    initAuth().finally(() => {
+      clearTimeout(globalTimeout);
+    });
 
     // Écouter les changements d'authentification
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
