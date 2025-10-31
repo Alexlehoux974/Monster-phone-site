@@ -86,36 +86,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, [supabase]);
 
-  // Initialiser l'auth avec TIMEOUT ABSOLU
+  // Initialiser l'auth - SANS TIMEOUT sur getSession, juste timeout global
   useEffect(() => {
     let mounted = true;
-    let hasCompleted = false;
-
-    // TIMEOUT GLOBAL ABSOLU de 5 secondes - FORCE la complétion
-    const absoluteTimeout = setTimeout(() => {
-      if (!hasCompleted && mounted) {
-        console.error('🚨🚨🚨 [AuthSimple] ABSOLUTE TIMEOUT 5s - FORCING isLoading=false');
-        hasCompleted = true;
-        setIsLoading(false);
-      }
-    }, 5000);
 
     const initAuth = async () => {
       try {
         console.log('🔐 [AuthSimple] START auth init');
 
-        // getSession avec timeout 2s
-        const sessionPromise = supabase.auth.getSession();
-        const sessionTimeout = new Promise<never>((_, reject) =>
-          setTimeout(() => reject(new Error('getSession timeout 2s')), 2000)
-        );
-
-        const result = await Promise.race([sessionPromise, sessionTimeout]);
-        const session = result.data.session;
+        // NE PAS mettre de timeout sur getSession - laisser Supabase gérer
+        const { data: { session } } = await supabase.auth.getSession();
 
         console.log('🔐 [AuthSimple] Session:', session ? 'YES' : 'NO');
 
-        if (session?.user && mounted && !hasCompleted) {
+        if (session?.user && mounted) {
           // User minimal direct - pas d'attente profile
           setUser({
             id: session.user.id,
@@ -128,16 +112,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       } catch (error) {
         console.error('❌ [AuthSimple] Error:', error);
       } finally {
-        if (!hasCompleted && mounted) {
+        if (mounted) {
           console.log('✅ [AuthSimple] DONE - isLoading=false');
-          hasCompleted = true;
-          clearTimeout(absoluteTimeout);
           setIsLoading(false);
         }
       }
     };
 
-    initAuth();
+    // TIMEOUT GLOBAL de 3 secondes pour forcer la complétion si getSession bloque
+    const globalTimeout = setTimeout(() => {
+      if (mounted) {
+        console.error('🚨 [AuthSimple] TIMEOUT 3s - Force isLoading=false without session');
+        setIsLoading(false);
+      }
+    }, 3000);
+
+    initAuth().finally(() => clearTimeout(globalTimeout));
 
     // Écouter les changements d'authentification
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
