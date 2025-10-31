@@ -37,10 +37,10 @@ export function createClient(forceNew = false) {
     auth: {
       persistSession: true,
       autoRefreshToken: true,
-      detectSessionInUrl: true,
+      detectSessionInUrl: false, // CRITICAL: Disable to prevent session conflicts
       storage: window.localStorage,
-      storageKey: 'sb-nswlznqoadjffpxkagoz-auth-token', // Explicit storage key
-      flowType: 'pkce', // Use PKCE flow for better security
+      storageKey: 'sb-nswlznqoadjffpxkagoz-auth-token',
+      flowType: 'implicit', // Use simpler implicit flow instead of PKCE
     },
     realtime: {
       params: {
