@@ -84,36 +84,51 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   // Initialiser l'auth UNE SEULE FOIS au montage
   useEffect(() => {
     let mounted = true;
-    let authChecked = false;
 
-    console.log('🔐 [AuthSimple] Starting initialization...');
+    const initAuth = async () => {
+      console.log('🔐 [AuthSimple] Starting initialization...');
 
-    // Écouter les changements d'auth IMMÉDIATEMENT
+      // Utiliser getUser() qui lit JUSTE le localStorage - SYNCHRONE et RAPIDE
+      const { data: { user: currentUser }, error } = await supabase.auth.getUser();
+
+      if (!mounted) return;
+
+      if (error) {
+        console.warn('⚠️ [AuthSimple] getUser() error (user not logged in):', error.message);
+        setIsLoading(false);
+        return;
+      }
+
+      if (currentUser) {
+        console.log('✅ [AuthSimple] User found in storage:', currentUser.email);
+        const userData = await loadUserProfile(currentUser);
+        if (mounted && userData) {
+          console.log('✅ [AuthSimple] Profile loaded:', userData.email);
+          setUser(userData);
+        }
+      } else {
+        console.log('ℹ️ [AuthSimple] No user in storage');
+      }
+
+      if (mounted) {
+        console.log('🔓 [AuthSimple] Auth init complete, setting isLoading to false');
+        setIsLoading(false);
+      }
+    };
+
+    initAuth();
+
+    // Écouter les changements d'auth pour les updates en temps réel
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (!mounted) return;
 
-      console.log('🔐 [AuthSimple] Auth event:', event, 'hasSession:', !!session);
+      console.log('🔐 [AuthSimple] Auth event:', event);
 
-      // Marquer que l'auth a été vérifiée dès le premier event
-      if (!authChecked) {
-        authChecked = true;
-        console.log('🔓 [AuthSimple] First auth check complete, setting isLoading to false');
-        setIsLoading(false);
-      }
-
-      if (event === 'INITIAL_SESSION' || event === 'SIGNED_IN') {
-        if (session?.user) {
-          console.log('✅ [AuthSimple] Session found:', session.user.email);
-          const userData = await loadUserProfile(session.user);
-          if (mounted && userData) {
-            console.log('✅ [AuthSimple] User loaded:', userData.email);
-            setUser(userData);
-          }
-        } else {
-          console.log('ℹ️ [AuthSimple] No session');
-          if (mounted) {
-            setUser(null);
-          }
+      if (event === 'SIGNED_IN' && session?.user) {
+        console.log('✅ [AuthSimple] User signed in:', session.user.email);
+        const userData = await loadUserProfile(session.user);
+        if (mounted && userData) {
+          setUser(userData);
         }
       } else if (event === 'SIGNED_OUT') {
         console.log('👋 [AuthSimple] User signed out');
@@ -123,17 +138,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
     });
 
-    // Fallback: si onAuthStateChange ne fire pas dans 2s, on force isLoading à false
-    const fallbackTimer = setTimeout(() => {
-      if (!authChecked && mounted) {
-        console.warn('⚠️ [AuthSimple] Auth check timeout, forcing isLoading to false');
-        setIsLoading(false);
-      }
-    }, 2000);
-
     return () => {
       mounted = false;
-      clearTimeout(fallbackTimer);
       subscription.unsubscribe();
     };
   }, [supabase, loadUserProfile]);
