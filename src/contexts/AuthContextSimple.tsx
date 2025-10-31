@@ -56,32 +56,64 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       console.log('📋 [AuthSimple] Loading profile for user:', supabaseUser.id);
 
-      const { data: profile, error: profileError } = await supabase
+      // Timeout sur la requête profile aussi (au cas où Supabase bloque complètement)
+      console.log('📋 [AuthSimple] Fetching profile from Supabase with 5s timeout...');
+      const profilePromise = supabase
         .from('profiles')
         .select('*')
         .eq('id', supabaseUser.id)
         .single();
 
+      const timeoutPromise = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error('Profile fetch timeout after 5s')), 5000)
+      );
+
+      const { data: profile, error: profileError } = await Promise.race([
+        profilePromise,
+        timeoutPromise
+      ]) as any;
+
+      console.log('📋 [AuthSimple] Profile fetch completed!', { hasProfile: !!profile, hasError: !!profileError });
+
       if (profileError) {
         console.error('❌ [AuthSimple] Profile query error:', profileError.message);
-        console.log('⚠️ [AuthSimple] Profile may not exist in database - this might be an old account');
 
-        // Si le profil n'existe pas, créer un profil minimal
-        if (profileError.code === 'PGRST116') {
-          console.log('🔧 [AuthSimple] Creating missing profile for user:', supabaseUser.email);
-          const { error: insertError } = await supabase
-            .from('profiles')
-            .insert({
-              id: supabaseUser.id,
-              email: supabaseUser.email,
-              full_name: supabaseUser.user_metadata?.name || supabaseUser.email?.split('@')[0] || 'Utilisateur',
-              created_at: new Date().toISOString(),
-            });
+        // Si c'est un timeout, continuer SANS le profil DB
+        if (profileError.message?.includes('timeout')) {
+          console.warn('⚠️⚠️⚠️ [AuthSimple] PROFILE FETCH TIMEOUT - Supabase requests are blocked!');
+          console.log('🔧 [AuthSimple] Continuing with minimal profile from localStorage session');
+          // On va créer un user minimal avec juste les données de la session
+          // Pas besoin de profile DB pour l'instant
+        } else {
+          console.log('⚠️ [AuthSimple] Profile may not exist in database - this might be an old account');
 
-          if (insertError) {
-            console.error('❌ [AuthSimple] Failed to create profile:', insertError.message);
-          } else {
-            console.log('✅ [AuthSimple] Profile created successfully!');
+          // Si le profil n'existe pas (et ce n'est pas un timeout), essayer de le créer
+          if (profileError.code === 'PGRST116') {
+            console.log('🔧 [AuthSimple] Attempting to create missing profile...');
+            try {
+              const createPromise = supabase
+                .from('profiles')
+                .insert({
+                  id: supabaseUser.id,
+                  email: supabaseUser.email,
+                  full_name: supabaseUser.user_metadata?.name || supabaseUser.email?.split('@')[0] || 'Utilisateur',
+                  created_at: new Date().toISOString(),
+                });
+
+              const createTimeout = new Promise((_, reject) =>
+                setTimeout(() => reject(new Error('Profile creation timeout')), 3000)
+              );
+
+              const { error: insertError } = await Promise.race([createPromise, createTimeout]) as any;
+
+              if (insertError) {
+                console.error('❌ [AuthSimple] Failed to create profile:', insertError.message);
+              } else {
+                console.log('✅ [AuthSimple] Profile created successfully!');
+              }
+            } catch (createErr: any) {
+              console.error('❌ [AuthSimple] Profile creation error:', createErr.message);
+            }
           }
         }
       } else {
