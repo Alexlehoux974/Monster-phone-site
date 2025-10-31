@@ -68,7 +68,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     'service-apres-vente',
     'support',
     'support-technique',
-  ].map((service) => ({
+  ].map((service: any) => ({
     url: `${baseUrl}/services/${service}`,
     lastModified: new Date(),
     changeFrequency: 'monthly' as const,
@@ -81,7 +81,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     'confidentialite',
     'mentions-legales',
     'plan-du-site',
-  ].map((page) => ({
+  ].map((page: any) => ({
     url: `${baseUrl}/legal/${page}`,
     lastModified: new Date(),
     changeFrequency: 'yearly' as const,
@@ -94,7 +94,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     .select('url_slug, updated_at')
     .eq('status', 'active');
 
-  const productPages = (products || []).map((product) => ({
+  const productPages = (products || []).map((product: any) => ({
     url: `${baseUrl}/produit/${product.url_slug}`,
     lastModified: product.updated_at ? new Date(product.updated_at) : new Date(),
     changeFrequency: 'weekly' as const,

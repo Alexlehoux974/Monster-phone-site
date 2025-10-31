@@ -7,6 +7,7 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOi
 declare global {
   interface Window {
     __supabaseClient?: ReturnType<typeof createSupabaseClient>;
+    __supabaseClientCreating?: boolean;
   }
 }
 
@@ -25,12 +26,46 @@ export function createClient(forceNew = false) {
   if (forceNew && window.__supabaseClient) {
     console.log('🔄 [createClient] Destroying old client instance...');
     delete window.__supabaseClient;
+    window.__supabaseClientCreating = false;
   }
 
   // Browser-side: use global singleton to ensure same instance across all bundles
   if (window.__supabaseClient) {
+    console.log('♻️ [createClient] Reusing existing Supabase client instance');
     return window.__supabaseClient;
   }
+
+  // Prevent race condition: if another call is already creating the client, wait
+  if (window.__supabaseClientCreating) {
+    console.log('⏳ [createClient] Waiting for client creation to complete...');
+    // Wait for the other call to finish creating the client
+    const checkInterval = setInterval(() => {
+      if (window.__supabaseClient) {
+        clearInterval(checkInterval);
+      }
+    }, 10);
+    // Return a promise that resolves when the client is ready
+    return new Promise((resolve) => {
+      const check = () => {
+        if (window.__supabaseClient) {
+          clearInterval(checkInterval);
+          resolve(window.__supabaseClient!);
+        }
+      };
+      const intervalId = setInterval(check, 10);
+      // Timeout after 5 seconds
+      setTimeout(() => {
+        clearInterval(intervalId);
+        if (!window.__supabaseClient) {
+          console.error('❌ [createClient] Timeout waiting for client creation');
+          window.__supabaseClientCreating = false;
+        }
+      }, 5000);
+    }) as any;
+  }
+
+  // Mark that we're creating the client
+  window.__supabaseClientCreating = true;
 
   // Create browser client with proper session persistence
   window.__supabaseClient = createSupabaseClient(supabaseUrl, supabaseAnonKey, {
@@ -49,6 +84,7 @@ export function createClient(forceNew = false) {
     }
   });
 
+  window.__supabaseClientCreating = false;
   console.log('🔧 [createClient] Created new Supabase client instance');
 
   return window.__supabaseClient;

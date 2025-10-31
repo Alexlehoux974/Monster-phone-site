@@ -39,7 +39,7 @@ export default async function TestBadgesPage() {
 
         {productsToDisplay.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {productsToDisplay.map((product) => (
+            {productsToDisplay.map((product: any) => (
               <div key={product.id} className="relative">
                 {/* Indicateur visuel supplémentaire pour le test */}
                 <div className="absolute -top-2 -right-2 z-20 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">

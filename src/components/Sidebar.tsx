@@ -249,7 +249,7 @@ export default function Sidebar({
                                   className="overflow-hidden bg-white"
                                 >
                                   <div className="pl-4">
-                                    {brandProducts.map((product) => (
+                                    {brandProducts.map((product: any) => (
                                       <button
                                         key={product.id}
                                         onClick={() => handleProductClick(product.name)}

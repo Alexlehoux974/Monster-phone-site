@@ -378,7 +378,7 @@ export default function StockManagementPage() {
 
         // Update the row in state
         setVariantRows((prev) =>
-          prev.map((r) =>
+          prev.map((r: any) =>
             r.id === rowId ? {
               ...r,
               stock: editingStock,
@@ -417,7 +417,7 @@ export default function StockManagementPage() {
         }
 
         setVariantRows((prev) =>
-          prev.map((r) =>
+          prev.map((r: any) =>
             r.id === rowId ? {
               ...r,
               stock: editingStock,
@@ -615,7 +615,7 @@ export default function StockManagementPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-700">
-              {filteredVariantRows.map((row) => (
+              {filteredVariantRows.map((row: any) => (
                 <tr
                   key={row.id}
                   className="hover:bg-gray-700/30 transition-colors"

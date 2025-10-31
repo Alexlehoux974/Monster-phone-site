@@ -149,7 +149,7 @@ export default function MesCommandesPage() {
                   </p>
                 </div>
 
-                {orders.map((order) => (
+                {orders.map((order: any) => (
                   <div key={order.id} className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
                     <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-6 text-white">
                       <div className="flex items-center justify-between mb-2">

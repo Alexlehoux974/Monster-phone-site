@@ -32,7 +32,7 @@ export default function ProductSuggestions({
       {/* Carousel horizontal de produits */}
       <div className="relative">
         <div className="flex overflow-x-auto scrollbar-hide gap-6 pb-4">
-          {products.map((product) => (
+          {products.map((product: any) => (
             <div key={product.id} className="flex-shrink-0 w-80">
               <ProductCard product={product} />
             </div>

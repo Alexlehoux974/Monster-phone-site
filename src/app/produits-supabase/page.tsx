@@ -165,9 +165,9 @@ function ProduitsSupabasePageContent() {
         (payload) => {
           // Update the specific variant in products
           setProducts((prevProducts) =>
-            prevProducts.map((product) => ({
+            prevProducts.map((product: any) => ({
               ...product,
-              product_variants: product.product_variants.map((variant) =>
+              product_variants: product.product_variants.map((variant: any) =>
                 variant.id === payload.new.id
                   ? { ...variant, stock: payload.new.stock }
                   : variant
@@ -186,7 +186,7 @@ function ProduitsSupabasePageContent() {
         (payload) => {
           // Update product stock and pricing
           setProducts((prevProducts) =>
-            prevProducts.map((product) =>
+            prevProducts.map((product: any) =>
               product.id === payload.new.id
                 ? {
                     ...product,
@@ -444,7 +444,7 @@ function ProduitsSupabasePageContent() {
             ) : paginatedProducts.length > 0 ? (
               <>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {paginatedProducts.map((product) => {
+                  {paginatedProducts.map((product: any) => {
                     const totalStock = product.variants?.reduce((sum, v) => sum + (v.stock || 0), 0) || 0;
                     return (
                       <div key={product.id} className="relative">

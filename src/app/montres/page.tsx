@@ -10,14 +10,14 @@ export const metadata: Metadata = {
 export default async function MontresPage() {
   // Récupérer les catégories pour trouver l'ID de "Montres connectées"
   const categories = await getCategories();
-  const montresCategory = categories.find(cat => cat.name === 'Montres connectées');
+  const montresCategory = categories.find((cat: any) => cat.name === 'Montres connectées');
 
   // Récupérer tous les produits
   const allProducts = await getProducts();
 
   // Filtrer uniquement les produits de la catégorie Montres
   const montresProducts = montresCategory
-    ? allProducts.filter(product => product.category_id === montresCategory.id)
+    ? allProducts.filter((product: any) => product.category_id === montresCategory.id)
     : [];
 
   // Récupérer les marques

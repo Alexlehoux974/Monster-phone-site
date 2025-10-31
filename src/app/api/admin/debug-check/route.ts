@@ -45,7 +45,7 @@ export async function GET() {
     // 3. Vérifier auth.users
     const { data: authData, error: authError } = await supabase.auth.admin.listUsers();
 
-    const alexAuthUser = authData?.users?.find(u => u.email === 'alexlehoux@gmail.com');
+    const alexAuthUser = authData?.users?.find((u: any) => u.email === 'alexlehoux@gmail.com');
 
     return NextResponse.json({
       status: 'OK',

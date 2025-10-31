@@ -175,7 +175,7 @@ export default function CollectionsManagementPage() {
       if (!response.ok) throw new Error('Erreur toggle collection');
 
       setCollections((prev) =>
-        prev.map((c) => (c.id === collectionId ? { ...c, is_active: !isActive } : c))
+        prev.map((c: any) => (c.id === collectionId ? { ...c, is_active: !isActive } : c))
       );
 
       showToast(
@@ -337,7 +337,7 @@ export default function CollectionsManagementPage() {
 
       {/* Collections Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {collections.map((collection) => (
+        {collections.map((collection: any) => (
           <div
             key={collection.id}
             className="bg-gray-800 rounded-xl border border-gray-700 p-6 hover:border-gray-600 transition-colors"
@@ -423,7 +423,7 @@ export default function CollectionsManagementPage() {
               </div>
 
               <div className="space-y-3">
-                {collectionProducts.map((product) => (
+                {collectionProducts.map((product: any) => (
                   <div
                     key={product.id}
                     className="flex items-center justify-between p-4 bg-gray-700/30 rounded-lg hover:bg-gray-700/50 transition-colors"
@@ -476,7 +476,7 @@ export default function CollectionsManagementPage() {
 
             <div className="p-6 flex-1 overflow-y-auto">
               <div className="space-y-2">
-                {availableProducts.map((product) => (
+                {availableProducts.map((product: any) => (
                   <button
                     key={product.id}
                     onClick={() => addProductToCollection(product.id)}

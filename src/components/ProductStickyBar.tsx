@@ -90,7 +90,7 @@ export default function ProductStickyBar({ product }: ProductStickyBarProps) {
                 Couleur:
               </span>
               <div className="flex gap-2">
-                {product.variants.map((variant) => (
+                {product.variants.map((variant: any) => (
                   <button
                     key={variant.id}
                     onClick={() => setSelectedVariant(variant)}

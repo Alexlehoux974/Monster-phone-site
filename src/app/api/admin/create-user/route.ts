@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
 
     // 1. Vérifier si l'utilisateur existe déjà dans auth.users
     const { data: existingUsers } = await supabase.auth.admin.listUsers();
-    let authUser = existingUsers?.users?.find(u => u.email === email);
+    let authUser = existingUsers?.users?.find((u: any) => u.email === email);
 
     if (!authUser) {
       // Créer l'utilisateur dans auth.users

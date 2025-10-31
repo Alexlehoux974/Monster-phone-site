@@ -120,7 +120,7 @@ export async function POST(request: NextRequest) {
               orderNumber: order.order_number,
               customerName: order.customer_name,
               customerEmail: order.customer_email,
-              items: orderItems?.map(item => ({
+              items: orderItems?.map((item: any) => ({
                 product_name: item.product_name,
                 quantity: item.quantity,
                 unit_price: parseFloat(item.unit_price),

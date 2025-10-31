@@ -208,7 +208,7 @@ const DropdownMenu = ({
 
   // Trouver la catégorie actuellement survolée
   const getCurrentCategory = () => {
-    return categories.find(cat => cat.name === hoveredCategory);
+    return categories.find((cat: any) => cat.name === hoveredCategory);
   };
 
   if (!isOpen) return null;
@@ -249,7 +249,7 @@ const DropdownMenu = ({
                 const brands = Array.from(brandSet).sort();
 
                 // Compter les produits pour chaque marque
-                return brands.map((brand) => {
+                return brands.map((brand: any) => {
                   const brandProductCount = categoryProducts.filter(p => p.brand === brand).length;
 
                   return (
@@ -307,7 +307,7 @@ const DropdownMenu = ({
                     <div className="py-3 px-2">
                       {products && products.length > 0 ? (
                         <>
-                          {products.map((product) => (
+                          {products.map((product: any) => (
                             <Link
                               key={product.id}
                               href={`/produit/${product.urlSlug || product.id}`}
@@ -509,7 +509,7 @@ const MobileMenu = ({
           </div>
 
           {/* Catégories avec sous-menus */}
-          {displayCategories.map((category) => {
+          {displayCategories.map((category: any) => {
             const cleanName = category.name.replace(/[📱🎧⌚💡🔧📦]/g, '').trim();
             const isOpen = activeCategory === category.name;
             const products = getProductsByCategory(category.name);
@@ -537,7 +537,7 @@ const MobileMenu = ({
                 {/* Sous-niveau : Marques - EXACTEMENT comme desktop */}
                 {isOpen && (
                   <div className="bg-gradient-to-b from-green-50 to-emerald-50 border-t border-gray-200">
-                    {uniqueBrands.map((brand) => {
+                    {uniqueBrands.map((brand: any) => {
                       const isBrandOpen = activeBrand === brand;
                       const brandProducts = getProductsByBrand(brand).filter(p => {
                         const cleanCat = (cat: string) => cat.replace(/[📱🎧⌚💡🔧📦]/g, '').trim().toLowerCase();
@@ -573,7 +573,7 @@ const MobileMenu = ({
                           {/* Produits - EXACTEMENT comme desktop (liste simple avec petite image) */}
                           {isBrandOpen && (
                             <div className="bg-gradient-to-b from-gray-50 to-white">
-                              {brandProducts.map((product) => (
+                              {brandProducts.map((product: any) => (
                                 <Link
                                   key={product.id}
                                   href={`/produit/${product.urlSlug || product.id}`}
@@ -895,7 +895,7 @@ export default function Header() {
             {/* Navigation centrale */}
             <nav className="hidden xl:flex items-center gap-1 overflow-visible flex-1" ref={menuRef}>
               {/* Génération dynamique des menus à partir de menuStructure */}
-              {menuStructure.map((category) => {
+              {menuStructure.map((category: any) => {
                 // Extraire l'emoji et le nom du menu
                 const menuIcon = category.name.substring(0, 2); // Récupérer l'emoji
                 const menuLabel = category.name.substring(2).trim(); // Récupérer le nom sans emoji
@@ -962,7 +962,7 @@ export default function Header() {
               {/* Suggestions de recherche */}
               {showSuggestions && searchSuggestions.length > 0 && (
                 <div className="absolute top-full mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-80 overflow-y-auto">
-                  {searchSuggestions.map((product) => (
+                  {searchSuggestions.map((product: any) => (
                     <button
                       key={product.id}
                       onClick={() => handleSuggestionClick(product.id)}
@@ -1001,7 +1001,7 @@ export default function Header() {
             
             {/* Navigation tablette (version simplifiée) */}
             <nav className="hidden lg:flex xl:hidden items-center space-x-1">
-              {menuStructure.map((category) => {
+              {menuStructure.map((category: any) => {
                 const menuIcon = category.name.substring(0, 2);
                 const menuLabel = category.name.substring(3).split(' ')[0]; // Premier mot seulement pour tablette
                 
@@ -1077,7 +1077,7 @@ export default function Header() {
                     ) : (
                       <>
                         <div className="max-h-[400px] overflow-y-auto">
-                          {items && items.length > 0 && items.map((item) => {
+                          {items && items.length > 0 && items.map((item: any) => {
                             // Price is already a number in the Product interface
                             const price = item.product.price;
                             return (

@@ -247,7 +247,7 @@ export default function SmartphonesPage() {
               ) : paginatedProducts.length > 0 ? (
                 <>
                   <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 lg:gap-5">
-                    {paginatedProducts.map((product) => (
+                    {paginatedProducts.map((product: any) => (
                       <Link 
                         href={`/produit/${product.urlSlug}`}
                         key={product.id}

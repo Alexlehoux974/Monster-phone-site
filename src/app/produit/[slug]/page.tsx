@@ -34,7 +34,7 @@ async function getProductBySlug(slug: string) {
     `)
     .eq('url_slug', slug)
     .single()
-    .then(result => {
+    .then((result: any) => {
       // Tag this fetch for revalidation
       return result;
     });
@@ -110,7 +110,7 @@ async function getRelatedProducts(brandName: string, currentProductId: string) {
   if (!data) return [];
 
   // Convertir tous les produits
-  return data.map(item => {
+  return data.map((item: any) => {
     const basePrice = typeof item.price === 'string' ? parseFloat(item.price) : item.price;
 
     // IMPORTANT: Si le produit a des variants, la promo est gérée au niveau de chaque variant
@@ -313,7 +313,7 @@ export async function generateStaticParams() {
     .select('url_slug')
     .eq('status', 'active');
 
-  return products?.map((product) => ({
+  return products?.map((product: any) => ({
     slug: product.url_slug,
   })) || [];
 }

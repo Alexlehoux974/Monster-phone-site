@@ -161,7 +161,7 @@ export default function ProductContentManagement() {
 
         if (error) throw error;
 
-        setSections(sections.map((s) => (s.id === editingSection.id ? editingSection : s)));
+        setSections(sections.map((s: any) => (s.id === editingSection.id ? editingSection : s)));
         toast.success('Section mise à jour avec succès');
       }
 
@@ -207,7 +207,7 @@ export default function ProductContentManagement() {
 
       if (error) throw error;
 
-      setSections(sections.map((s) => (s.id === sectionId ? { ...s, is_enabled: enabled } : s)));
+      setSections(sections.map((s: any) => (s.id === sectionId ? { ...s, is_enabled: enabled } : s)));
       toast.success(enabled ? 'Section activée' : 'Section désactivée');
     } catch (error) {
       console.error('Error toggling section:', error);
@@ -227,7 +227,7 @@ export default function ProductContentManagement() {
 
     if (!targetProductsInput) return;
 
-    const targetProductIds = targetProductsInput.split(',').map((id) => id.trim());
+    const targetProductIds = targetProductsInput.split(',').map((id: any) => id.trim());
 
     const supabase = createClient();
     let successCount = 0;
@@ -426,7 +426,7 @@ export default function ProductContentManagement() {
                 </Button>
               </div>
             ) : (
-              sections.map((section) => (
+              sections.map((section: any) => (
                 <div
                   key={section.id}
                   className="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow"

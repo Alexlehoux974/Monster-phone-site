@@ -93,7 +93,7 @@ export default function ProductContentCards({ productId, productCategory }: Prod
               const exists = prev.some((s) => s.id === updatedSection.id);
               if (exists) {
                 return prev
-                  .map((s) => (s.id === updatedSection.id ? updatedSection : s))
+                  .map((s: any) => (s.id === updatedSection.id ? updatedSection : s))
                   .sort((a, b) => a.display_order - b.display_order);
               }
               return [...prev, updatedSection].sort((a, b) => a.display_order - b.display_order);
@@ -128,7 +128,7 @@ export default function ProductContentCards({ productId, productCategory }: Prod
 
   return (
     <div className="space-y-12 mt-12">
-      {sections.map((section) => {
+      {sections.map((section: any) => {
         switch (section.section_type) {
           case 'image_gallery':
             return (
@@ -180,7 +180,7 @@ function ImageGallerySection({ section, productCategory }: { section: ProductCon
           ))
         ) : (
           // Placeholder images
-          [1, 2, 3, 4].map((i) => (
+          [1, 2, 3, 4].map((i: any) => (
             <div
               key={i}
               className="aspect-square bg-gray-100 rounded-xl overflow-hidden relative"

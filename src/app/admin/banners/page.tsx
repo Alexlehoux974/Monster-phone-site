@@ -212,7 +212,7 @@ export default function BannersPage() {
       if (!response.ok) throw new Error('Erreur toggle active');
 
       setBanners((prev) =>
-        prev.map((b) =>
+        prev.map((b: any) =>
           b.id === bannerId ? { ...b, is_active: !currentStatus } : b
         )
       );
@@ -596,7 +596,7 @@ export default function BannersPage() {
                     Couleurs Prédéfinies
                   </label>
                   <div className="grid grid-cols-3 gap-2">
-                    {colorPresets.map((preset) => (
+                    {colorPresets.map((preset: any) => (
                       <button
                         key={preset.name}
                         type="button"

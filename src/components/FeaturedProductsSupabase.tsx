@@ -72,7 +72,7 @@ export default function FeaturedProductsSupabase({ products: initialProducts, ti
         {/* Première rangée de produits */}
         <div className="relative mb-6">
           <div className="flex overflow-x-auto scrollbar-hide gap-6 pb-4 px-2">
-            {firstRow.map((product) => (
+            {firstRow.map((product: any) => (
               <div key={product.id} className="flex-shrink-0 w-80">
                 <ProductCard product={product} />
               </div>
@@ -84,7 +84,7 @@ export default function FeaturedProductsSupabase({ products: initialProducts, ti
         {secondRow.length > 0 && (
           <div className="relative">
             <div className="flex overflow-x-auto scrollbar-hide gap-6 pb-4 px-2">
-              {secondRow.map((product) => (
+              {secondRow.map((product: any) => (
                 <div key={product.id} className="flex-shrink-0 w-80">
                   <ProductCard product={product} />
                 </div>

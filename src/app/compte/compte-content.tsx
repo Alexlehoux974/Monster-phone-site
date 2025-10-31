@@ -379,7 +379,7 @@ export default function ComptePageContent() {
                   </div>
                 ) : (
                   <div className="space-y-4">
-                    {orders.map((order) => (
+                    {orders.map((order: any) => (
                       <div key={order.id} className="border border-gray-200 rounded-lg p-4 hover:border-blue-300 transition-colors">
                         <div className="flex items-center justify-between mb-2">
                           <div>

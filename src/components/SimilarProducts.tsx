@@ -128,7 +128,7 @@ export default function SimilarProducts({ categorySlug, brandSlug, currentProduc
         className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth"
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
-        {products.map((product) => {
+        {products.map((product: any) => {
           const imageUrl = product.product_images?.find(img => img.is_primary)?.url
             || product.product_images?.[0]?.url
             || '/placeholder-monster.svg';

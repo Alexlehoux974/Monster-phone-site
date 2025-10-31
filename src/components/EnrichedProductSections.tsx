@@ -80,7 +80,7 @@ export default function EnrichedProductSections({ productId }: EnrichedProductSe
               const exists = prev.some((s) => s.id === updatedSection.id);
               if (exists) {
                 return prev
-                  .map((s) => (s.id === updatedSection.id ? updatedSection : s))
+                  .map((s: any) => (s.id === updatedSection.id ? updatedSection : s))
                   .sort((a, b) => a.display_order - b.display_order);
               }
               return [...prev, updatedSection].sort((a, b) => a.display_order - b.display_order);
@@ -102,7 +102,7 @@ export default function EnrichedProductSections({ productId }: EnrichedProductSe
       <div className="py-12">
         <div className="max-w-7xl mx-auto px-4">
           <div className="animate-pulse space-y-8">
-            {[1, 2, 3].map((i) => (
+            {[1, 2, 3].map((i: any) => (
               <div key={i} className="h-64 bg-gray-200 rounded-lg" />
             ))}
           </div>
@@ -117,7 +117,7 @@ export default function EnrichedProductSections({ productId }: EnrichedProductSe
 
   return (
     <div className="py-12 space-y-12">
-      {sections.map((section) => (
+      {sections.map((section: any) => (
         <ProductSection key={section.id} section={section} />
       ))}
     </div>

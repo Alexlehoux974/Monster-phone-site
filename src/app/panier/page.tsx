@@ -97,7 +97,7 @@ export default function PanierPage() {
 
                 {/* Produits */}
                 <div className="divide-y divide-gray-200">
-                  {items.map((item) => {
+                  {items.map((item: any) => {
                     // Assurer la conversion en nombre pour éviter NaN
                     const basePrice = typeof item.product.price === 'string'
                       ? parseFloat(item.product.price)

@@ -65,7 +65,7 @@ export default function SortDropdown({ value, onChange }: SortDropdownProps) {
       {isOpen && (
         <div className="absolute right-0 mt-2 w-64 bg-white border border-gray-200 rounded-lg shadow-lg z-40">
           <div className="py-2">
-            {sortOptions.map((option) => (
+            {sortOptions.map((option: any) => (
               <button
                 key={option.value}
                 onClick={() => handleSelect(option.value)}

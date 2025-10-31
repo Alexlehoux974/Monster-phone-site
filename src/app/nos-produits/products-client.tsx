@@ -295,7 +295,7 @@ function ProductsClientContent({
             </div>
           ) : viewMode === 'grid' ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {paginatedProducts.map((product) => (
+              {paginatedProducts.map((product: any) => (
                 <div key={product.id} className="bg-white rounded-lg shadow-sm hover:shadow-lg transition-shadow">
                   <Link href={`/produit/${product.url_slug}`}>
                     <div className="aspect-square relative overflow-hidden rounded-t-lg">
@@ -346,7 +346,7 @@ function ProductsClientContent({
             </div>
           ) : (
             <div className="space-y-4">
-              {paginatedProducts.map((product) => (
+              {paginatedProducts.map((product: any) => (
                 <div key={product.id} className="bg-white rounded-lg shadow-sm hover:shadow-lg transition-shadow p-4">
                   <div className="flex gap-4">
                     <Link href={`/produit/${product.url_slug}`} className="flex-shrink-0">

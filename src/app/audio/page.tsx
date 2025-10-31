@@ -10,14 +10,14 @@ export const metadata: Metadata = {
 export default async function AudioPage() {
   // Récupérer les catégories pour trouver l'ID de "Audio"
   const categories = await getCategories();
-  const audioCategory = categories.find(cat => cat.name === 'Audio');
+  const audioCategory = categories.find((cat: any) => cat.name === 'Audio');
 
   // Récupérer tous les produits
   const allProducts = await getProducts();
 
   // Filtrer uniquement les produits de la catégorie Audio
   const audioProducts = audioCategory
-    ? allProducts.filter(product => product.category_id === audioCategory.id)
+    ? allProducts.filter((product: any) => product.category_id === audioCategory.id)
     : [];
 
   // Récupérer les marques

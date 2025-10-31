@@ -145,7 +145,7 @@ export default function PricingManagementPage() {
       if (!response.ok) throw new Error('Erreur mise à jour prix');
 
       setProducts((prev) =>
-        prev.map((p) => (p.id === productId ? { ...p, ...updates } : p))
+        prev.map((p: any) => (p.id === productId ? { ...p, ...updates } : p))
       );
 
       showToast('Prix mis à jour avec succès', 'success');
@@ -288,7 +288,7 @@ export default function PricingManagementPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-700">
-              {filteredProducts.map((product) => (
+              {filteredProducts.map((product: any) => (
                 <tr
                   key={product.id}
                   className="hover:bg-gray-700/30 transition-colors"

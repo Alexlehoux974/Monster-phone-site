@@ -201,7 +201,7 @@ export default function PlanDuSitePage() {
                             <div className="mt-4 space-y-2">
                               <p className="text-sm font-medium">Sous-catégories :</p>
                               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                                {section.subcategories.map((sub) => (
+                                {section.subcategories.map((sub: any) => (
                                   <Link
                                     key={sub.url}
                                     href={sub.url}
@@ -239,7 +239,7 @@ export default function PlanDuSitePage() {
                   Découvrez tous nos produits par marque :
                 </p>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  {brands.map((brand) => (
+                  {brands.map((brand: any) => (
                     <Link
                       key={brand}
                       href={`/nos-produits?brand=${brand}`}
@@ -268,7 +268,7 @@ export default function PlanDuSitePage() {
               </h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {legalPages.map((page) => (
+                {legalPages.map((page: any) => (
                   <Link
                     key={page.url}
                     href={page.url}

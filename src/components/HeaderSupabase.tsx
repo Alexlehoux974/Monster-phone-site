@@ -121,7 +121,7 @@ export const SupabaseDropdownMenu = ({
               scrollbarColor: '#9ca3af #f3f4f6'
             }}>
               <div className="py-2 px-2">
-                {category.subcategories.map((subcat) => (
+                {category.subcategories.map((subcat: any) => (
                   <button
                     key={subcat.slug}
                     className={cn(
@@ -164,7 +164,7 @@ export const SupabaseDropdownMenu = ({
                   const selectedSubcat = category.subcategories?.find(sub => sub.slug === hoveredSubcategory);
                   const brands = selectedSubcat?.brands || [];
                   
-                  return brands.map((brand) => (
+                  return brands.map((brand: any) => (
                     <button
                       key={brand}
                       className={cn(
@@ -210,7 +210,7 @@ export const SupabaseDropdownMenu = ({
                 </div>
               ) : products.length > 0 ? (
                 <div className="grid gap-3">
-                  {products.slice(0, 5).map((product) => (
+                  {products.slice(0, 5).map((product: any) => (
                     <a
                       key={product.id}
                       href={`/produit/${product.urlSlug}`}

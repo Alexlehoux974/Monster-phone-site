@@ -109,7 +109,7 @@ const ProductCollections = () => {
 
         {/* Tabs de navigation */}
         <div className="flex flex-wrap justify-center gap-2 mb-8">
-          {collections.map((collection) => {
+          {collections.map((collection: any) => {
             const Icon = collection.icon;
             return (
               <motion.button
@@ -135,7 +135,7 @@ const ProductCollections = () => {
 
         {/* Collections Carousel */}
         <AnimatePresence mode="wait">
-          {collections.map((collection) => {
+          {collections.map((collection: any) => {
             if (collection.id !== activeCollection) return null;
             
             return (

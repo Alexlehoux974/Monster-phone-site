@@ -145,7 +145,7 @@ export default function AdminLayout({
 
         {/* Navigation */}
         <nav className="flex-1 p-4 space-y-1">
-          {navigation.map((item) => {
+          {navigation.map((item: any) => {
             const isActive = pathname === item.href;
             const Icon = item.icon;
 

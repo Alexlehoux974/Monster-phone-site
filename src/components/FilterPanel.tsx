@@ -252,7 +252,7 @@ export default function FilterPanel({ products, onFiltersChange, initialFilters 
         
         {expandedSections.has('rating') && (
           <div className="mt-3 space-y-2">
-            {[4, 3, 2, 1].map((rating) => (
+            {[4, 3, 2, 1].map((rating: any) => (
               <button
                 key={rating}
                 onClick={() => handleRatingChange(rating)}
@@ -305,7 +305,7 @@ export default function FilterPanel({ products, onFiltersChange, initialFilters 
           
           {expandedSections.has('brand') && (
             <div className="mt-3 space-y-2 max-h-60 overflow-y-auto">
-              {uniqueBrands.map((brand) => {
+              {uniqueBrands.map((brand: any) => {
                 const count = products.filter(p => p.brand === brand).length;
                 return (
                   <label
@@ -352,7 +352,7 @@ export default function FilterPanel({ products, onFiltersChange, initialFilters 
           
           {expandedSections.has('category') && (
             <div className="mt-3 space-y-2 max-h-60 overflow-y-auto">
-              {uniqueCategories.map((category) => {
+              {uniqueCategories.map((category: any) => {
                 const count = products.filter(p => p.category === category).length;
                 return (
                   <label

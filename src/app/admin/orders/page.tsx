@@ -407,7 +407,7 @@ export default function AdminOrdersPage() {
                   </td>
                 </tr>
               ) : (
-                searchedOrders.map((order) => {
+                searchedOrders.map((order: any) => {
                   const StatusIcon = STATUS_ICONS[order.status];
 
                   return (
@@ -568,7 +568,7 @@ export default function AdminOrdersPage() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200">
-                      {selectedOrder.items?.map((item) => (
+                      {selectedOrder.items?.map((item: any) => (
                         <tr key={item.id}>
                           <td className="px-4 py-3 text-sm text-gray-900">{item.product_name}</td>
                           <td className="px-4 py-3 text-sm text-gray-900 text-right">{item.quantity}</td>

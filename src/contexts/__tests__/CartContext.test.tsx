@@ -12,7 +12,7 @@ const TestComponent = ({ product = mockProduct }: { product?: Product }) => {
       <div data-testid="item-count">{getItemCount()}</div>
       <div data-testid="cart-total">{getCartTotal()}</div>
       <div data-testid="items">
-        {items.map((item) => (
+        {items.map((item: any) => (
           <div key={item.product.id} data-testid={`item-${item.product.id}`}>
             {item.product.name} - {item.quantity}
           </div>
@@ -357,7 +357,7 @@ describe('CartContext', () => {
             <button onClick={() => addToCart(variantProduct, 1, 'Bleu')}>Add Variant Blue</button>
             <div data-testid="variant-item-count">{getItemCount()}</div>
             <div data-testid="variant-items">
-              {items.map((item) => (
+              {items.map((item: any) => (
                 <div key={`${item.product.id}-${item.variant || 'default'}`} data-testid={`variant-item-${item.product.id}-${item.variant || 'default'}`}>
                   {item.product.name} - {item.variant || 'default'} - {item.quantity}
                 </div>

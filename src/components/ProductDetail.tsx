@@ -489,7 +489,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                 }}
                 className="flex flex-wrap gap-2"
               >
-                {variants.map((variant) => (
+                {variants.map((variant: any) => (
                   <div key={variant.color} className="relative">
                     <RadioGroupItem
                       value={variant.color}

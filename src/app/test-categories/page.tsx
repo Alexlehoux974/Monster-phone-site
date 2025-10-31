@@ -22,7 +22,7 @@ export default function TestCategories() {
       <h1 className="text-3xl font-bold mb-8">Test Structure Menu Supabase</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {menuStructure.map((category) => (
+        {menuStructure.map((category: any) => (
           <div key={category.slug} className="bg-white rounded-lg shadow-lg p-6">
             <div className="flex items-center gap-2 mb-4">
               <span className="text-2xl">{category.icon}</span>

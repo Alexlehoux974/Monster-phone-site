@@ -653,7 +653,7 @@ export default function CheckoutPage() {
 
                   {/* Articles */}
                   <div className="space-y-3 mb-4 max-h-64 overflow-y-auto">
-                    {items.map((item) => {
+                    {items.map((item: any) => {
                       // Calculer le prix avec la réduction admin si elle existe
                       const basePrice = typeof item.product.price === 'string'
                         ? parseFloat(item.product.price)

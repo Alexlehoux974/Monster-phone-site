@@ -102,7 +102,7 @@ export default function Pagination({
             </>
           )}
 
-          {pageNumbers.map((page) => (
+          {pageNumbers.map((page: any) => (
             <Button
               key={page}
               variant={currentPage === page ? 'default' : 'outline'}

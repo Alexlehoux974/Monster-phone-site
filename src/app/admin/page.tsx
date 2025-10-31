@@ -162,7 +162,7 @@ export default function AdminDashboard() {
 
       {/* Stats cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-        {statCards.map((card) => {
+        {statCards.map((card: any) => {
           const Icon = card.icon;
           return (
             <div
