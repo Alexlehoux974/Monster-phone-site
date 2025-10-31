@@ -96,24 +96,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
         if (error) {
           console.error('❌ [AuthSimple] Error getting session:', error);
-          return;
-        }
-
-        if (!mounted) return;
-
-        if (session?.user) {
+          // Ne pas return ici - laisser le finally s'exécuter
+        } else if (mounted && session?.user) {
           console.log('✅ [AuthSimple] Session found:', session.user.email);
           const userData = await loadUserProfile(session.user);
           if (mounted && userData) {
             setUser(userData);
           }
-        } else {
+        } else if (mounted) {
           console.log('ℹ️ [AuthSimple] No session found');
         }
       } catch (error) {
         console.error('❌ [AuthSimple] Init error:', error);
       } finally {
         if (mounted) {
+          console.log('🔓 [AuthSimple] Loading complete');
           setIsLoading(false);
         }
       }
