@@ -42,16 +42,12 @@ export default function ComptePageContent() {
     }
   }, []);
 
-  // NOUVEAU: Attendre que l'auth soit vraiment initialisée
+  // Attendre que l'auth soit initialisée
   useEffect(() => {
-    // Attendre que isLoading soit false ET qu'on ait attendu suffisamment
     if (!isLoading) {
-      const timer = setTimeout(() => {
-        console.log('✅ Auth check complete after delay');
-        setAuthCheckComplete(true);
-      }, 1500); // Attendre 1.5 secondes APRÈS que isLoading soit false
-
-      return () => clearTimeout(timer);
+      // Pas de délai artificiel - si isLoading est false, l'auth est prête
+      console.log('✅ Auth check complete');
+      setAuthCheckComplete(true);
     }
   }, [isLoading]);
 
