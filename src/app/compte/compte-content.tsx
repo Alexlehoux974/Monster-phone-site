@@ -53,9 +53,19 @@ export default function ComptePageContent() {
 
   // Redirection si non connecté - SEULEMENT après que authCheckComplete soit true
   useEffect(() => {
+    console.log('🔍 [CompteContent] Checking redirect conditions:', {
+      authCheckComplete,
+      isAuthenticated,
+      activeTab
+    });
+
     if (authCheckComplete && !isAuthenticated) {
-      console.log('🔒 Not authenticated after full check, redirecting to signin');
-      router.push('/auth/signin?redirect=/compte?tab=' + activeTab);
+      console.log('🔒🔒🔒 [CompteContent] NOT AUTHENTICATED! Redirecting to signin page...');
+      const redirectUrl = `/auth/signin?redirect=/compte?tab=${activeTab}`;
+      console.log('🔒 [CompteContent] Redirect URL:', redirectUrl);
+      router.push(redirectUrl);
+    } else if (authCheckComplete && isAuthenticated) {
+      console.log('✅✅✅ [CompteContent] User is AUTHENTICATED! Staying on page.');
     }
   }, [authCheckComplete, isAuthenticated, router, activeTab]);
 
