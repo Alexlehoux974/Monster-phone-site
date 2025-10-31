@@ -67,20 +67,13 @@ export function createClient(forceNew = false) {
   // Mark that we're creating the client
   window.__supabaseClientCreating = true;
 
-  // Create browser client with proper session persistence
+  // Create browser client with MINIMAL config - let Supabase use defaults
   window.__supabaseClient = createSupabaseClient(supabaseUrl, supabaseAnonKey, {
     auth: {
       persistSession: true,
       autoRefreshToken: true,
-      detectSessionInUrl: false, // CRITICAL: Disable to prevent session conflicts
-      storage: window.localStorage,
-      storageKey: 'sb-nswlznqoadjffpxkagoz-auth-token',
-      flowType: 'implicit', // Use simpler implicit flow instead of PKCE
-    },
-    realtime: {
-      params: {
-        eventsPerSecond: 10
-      }
+      detectSessionInUrl: false, // Disable to prevent session conflicts
+      // Let Supabase use default storage and flow type
     }
   });
 
