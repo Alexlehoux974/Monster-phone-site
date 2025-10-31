@@ -86,80 +86,55 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, [supabase]);
 
-  // Initialiser l'auth UNE SEULE FOIS au montage avec TIMEOUT OBLIGATOIRE
+  // Initialiser l'auth avec TIMEOUT ABSOLU
   useEffect(() => {
     let mounted = true;
-    let timeoutId: NodeJS.Timeout;
+
+    // TIMEOUT GLOBAL de 8 secondes - RIEN ne peut bloquer plus longtemps
+    const globalTimeout = setTimeout(() => {
+      console.error('🚨 [AuthSimple] TIMEOUT 8s - Force isLoading=false');
+      if (mounted) {
+        setIsLoading(false);
+      }
+    }, 8000);
 
     const initAuth = async () => {
       try {
-        console.log('🔐 [AuthSimple] START auth initialization');
+        console.log('🔐 [AuthSimple] START auth init');
 
-        // TIMEOUT OBLIGATOIRE de 5 secondes pour getSession
+        // getSession avec timeout 3s
         const sessionPromise = supabase.auth.getSession();
-        const timeoutPromise = new Promise((_, reject) => {
-          timeoutId = setTimeout(() => reject(new Error('getSession timeout')), 5000);
-        });
+        const sessionTimeout = new Promise<never>((_, reject) =>
+          setTimeout(() => reject(new Error('getSession timeout 3s')), 3000)
+        );
 
-        const { data: { session } } = await Promise.race([sessionPromise, timeoutPromise]) as any;
-        clearTimeout(timeoutId);
+        const result = await Promise.race([sessionPromise, sessionTimeout]);
+        const session = result.data.session;
 
-        console.log('🔐 [AuthSimple] Session obtained:', session ? 'YES' : 'NO', session?.user?.email);
+        console.log('🔐 [AuthSimple] Session:', session ? 'YES' : 'NO');
 
-        if (session?.user) {
-          console.log('🔐 [AuthSimple] Loading profile with 3s timeout...');
-
-          // TIMEOUT de 3 secondes pour loadUserProfile
-          const profilePromise = loadUserProfile(session.user);
-          const profileTimeout = new Promise((_, reject) => {
-            setTimeout(() => reject(new Error('loadUserProfile timeout')), 3000);
+        if (session?.user && mounted) {
+          // User minimal direct - pas d'attente profile
+          setUser({
+            id: session.user.id,
+            email: session.user.email || '',
+            name: session.user.email?.split('@')[0] || 'User',
+            createdAt: session.user.created_at,
           });
-
-          try {
-            const userData = await Promise.race([profilePromise, profileTimeout]) as any;
-            if (userData && mounted) {
-              console.log('✅ [AuthSimple] Profile loaded:', userData.email);
-              setUser(userData);
-            } else {
-              console.log('⚠️ [AuthSimple] No profile data');
-            }
-          } catch (profileError) {
-            console.error('❌ [AuthSimple] Profile load failed:', profileError);
-            // Créer un user minimal même sans profile
-            if (mounted) {
-              setUser({
-                id: session.user.id,
-                email: session.user.email || '',
-                name: session.user.email?.split('@')[0] || 'Utilisateur',
-                createdAt: session.user.created_at,
-              });
-            }
-          }
-        } else {
-          console.log('ℹ️ [AuthSimple] No session - user not logged in');
+          console.log('✅ [AuthSimple] User set from session');
         }
       } catch (error) {
-        console.error('❌ [AuthSimple] Init error:', error);
+        console.error('❌ [AuthSimple] Error:', error);
       } finally {
-        clearTimeout(timeoutId);
+        clearTimeout(globalTimeout);
         if (mounted) {
-          console.log('✅ [AuthSimple] COMPLETE - Setting isLoading = false');
+          console.log('✅ [AuthSimple] DONE - isLoading=false');
           setIsLoading(false);
         }
       }
     };
 
-    // TIMEOUT GLOBAL de 10 secondes maximum pour toute l'initialisation
-    const globalTimeout = setTimeout(() => {
-      console.error('🚨 [AuthSimple] GLOBAL TIMEOUT - Force completing auth init');
-      if (mounted) {
-        setIsLoading(false);
-      }
-    }, 10000);
-
-    initAuth().finally(() => {
-      clearTimeout(globalTimeout);
-    });
+    initAuth();
 
     // Écouter les changements d'authentification
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
