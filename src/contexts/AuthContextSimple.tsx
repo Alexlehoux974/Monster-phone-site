@@ -51,75 +51,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   // Créer le client Supabase UNE SEULE FOIS
   const supabase = useMemo(() => createClient(), []);
 
-  // Fonction pour charger le profil utilisateur
+  // Fonction pour charger le profil utilisateur - CODE ORIGINAL QUI MARCHAIT
   const loadUserProfile = useCallback(async (supabaseUser: SupabaseUser): Promise<User | null> => {
     try {
-      console.log('📋 [AuthSimple] Loading profile for user:', supabaseUser.id);
-
-      // Timeout sur la requête profile aussi (au cas où Supabase bloque complètement)
-      console.log('📋 [AuthSimple] Fetching profile from Supabase with 5s timeout...');
-      const profilePromise = supabase
+      const { data: profile, error } = await supabase
         .from('profiles')
         .select('*')
         .eq('id', supabaseUser.id)
         .single();
 
-      const timeoutPromise = new Promise((_, reject) =>
-        setTimeout(() => reject(new Error('Profile fetch timeout after 5s')), 5000)
-      );
-
-      const { data: profile, error: profileError } = await Promise.race([
-        profilePromise,
-        timeoutPromise
-      ]) as any;
-
-      console.log('📋 [AuthSimple] Profile fetch completed!', { hasProfile: !!profile, hasError: !!profileError });
-
-      if (profileError) {
-        console.error('❌ [AuthSimple] Profile query error:', profileError.message);
-
-        // Si c'est un timeout, continuer SANS le profil DB
-        if (profileError.message?.includes('timeout')) {
-          console.warn('⚠️⚠️⚠️ [AuthSimple] PROFILE FETCH TIMEOUT - Supabase requests are blocked!');
-          console.log('🔧 [AuthSimple] Continuing with minimal profile from localStorage session');
-          // On va créer un user minimal avec juste les données de la session
-          // Pas besoin de profile DB pour l'instant
-        } else {
-          console.log('⚠️ [AuthSimple] Profile may not exist in database - this might be an old account');
-
-          // Si le profil n'existe pas (et ce n'est pas un timeout), essayer de le créer
-          if (profileError.code === 'PGRST116') {
-            console.log('🔧 [AuthSimple] Attempting to create missing profile...');
-            try {
-              const createPromise = supabase
-                .from('profiles')
-                .insert({
-                  id: supabaseUser.id,
-                  email: supabaseUser.email,
-                  full_name: supabaseUser.user_metadata?.name || supabaseUser.email?.split('@')[0] || 'Utilisateur',
-                  created_at: new Date().toISOString(),
-                });
-
-              const createTimeout = new Promise((_, reject) =>
-                setTimeout(() => reject(new Error('Profile creation timeout')), 3000)
-              );
-
-              const { error: insertError } = await Promise.race([createPromise, createTimeout]) as any;
-
-              if (insertError) {
-                console.error('❌ [AuthSimple] Failed to create profile:', insertError.message);
-              } else {
-                console.log('✅ [AuthSimple] Profile created successfully!');
-              }
-            } catch (createErr: any) {
-              console.error('❌ [AuthSimple] Profile creation error:', createErr.message);
-            }
-          }
-        }
-      } else {
-        console.log('✅ [AuthSimple] Profile found:', profile);
+      if (error && error.code !== 'PGRST116') { // PGRST116 = no rows returned
+        console.error('Erreur lors du chargement du profil:', error);
       }
 
+      // Mapper les données du profil vers notre interface User
       const userData: User = {
         id: supabaseUser.id,
         email: supabaseUser.email || '',
@@ -134,108 +79,42 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         createdAt: profile?.created_at || supabaseUser.created_at,
       };
 
-      console.log('✅ [AuthSimple] User data assembled:', userData.email);
       return userData;
-    } catch (error: any) {
-      console.error('❌ [AuthSimple] Unexpected error loading profile:', error);
-
-      // Si c'est un timeout, créer un user minimal avec juste les données de session
-      if (error.message?.includes('timeout')) {
-        console.warn('⚠️⚠️⚠️ [AuthSimple] TIMEOUT - Creating minimal user from session data');
-        const minimalUser: User = {
-          id: supabaseUser.id,
-          email: supabaseUser.email || '',
-          name: supabaseUser.user_metadata?.name || supabaseUser.email?.split('@')[0] || 'Utilisateur',
-          createdAt: supabaseUser.created_at,
-        };
-        console.log('✅ [AuthSimple] Minimal user created:', minimalUser.email);
-        return minimalUser;
-      }
-
+    } catch (error) {
+      console.error('Erreur lors du chargement du profil:', error);
       return null;
     }
   }, [supabase]);
 
-  // Initialiser l'auth UNE SEULE FOIS au montage
+  // Initialiser l'auth UNE SEULE FOIS au montage - CODE ORIGINAL QUI MARCHAIT
   useEffect(() => {
     let mounted = true;
 
     const initAuth = async () => {
-      console.log('🔐 [AuthSimple] ===== STARTING AUTH INITIALIZATION =====');
-      console.log('🔐 [AuthSimple] Reading localStorage DIRECTLY (bypassing Supabase methods)...');
-
       try {
-        // NOUVELLE APPROCHE: Lire le localStorage DIRECTEMENT sans passer par Supabase
-        const storageKey = 'sb-nswlznqoadjffpxkagoz-auth-token';
-        const storedSession = localStorage.getItem(storageKey);
+        console.log('🔐 [AuthSimple] Initializing auth...');
+        const { data: { session } } = await supabase.auth.getSession();
+        console.log('🔐 [AuthSimple] Session:', session ? 'Found' : 'Not found', session?.user?.email);
 
-        console.log('🔐 [AuthSimple] localStorage key:', storageKey);
-        console.log('🔐 [AuthSimple] Has stored session:', !!storedSession);
-
-        if (!storedSession) {
-          console.log('ℹ️ [AuthSimple] No session in localStorage → user not logged in');
-          if (mounted) {
-            setIsLoading(false);
-          }
-          return;
-        }
-
-        // Parser la session
-        let sessionData;
-        try {
-          sessionData = JSON.parse(storedSession);
-          console.log('✅ [AuthSimple] Session parsed successfully');
-          console.log('✅ [AuthSimple] User email from session:', sessionData?.user?.email);
-        } catch (parseErr) {
-          console.error('❌ [AuthSimple] Failed to parse session JSON, clearing corrupted data');
-          localStorage.removeItem(storageKey);
-          if (mounted) {
-            setIsLoading(false);
-          }
-          return;
-        }
-
-        // Vérifier si la session est expirée
-        const expiresAt = sessionData?.expires_at;
-        const now = Math.floor(Date.now() / 1000);
-
-        if (expiresAt && expiresAt < now) {
-          console.warn('⚠️ [AuthSimple] Session EXPIRED (expires_at:', expiresAt, ', now:', now, ')');
-          console.log('🧹 [AuthSimple] Cleaning expired session from localStorage');
-          localStorage.removeItem(storageKey);
-          if (mounted) {
-            setIsLoading(false);
-          }
-          return;
-        }
-
-        console.log('✅✅✅ [AuthSimple] Valid session found! Expires at:', new Date((expiresAt || 0) * 1000).toISOString());
-
-        // Maintenant on peut charger le profil avec les données de la session
-        const currentUser = sessionData?.user;
-        if (currentUser) {
-          console.log('✅ [AuthSimple] User ID:', currentUser.id);
-
-          const userData = await loadUserProfile(currentUser);
-          if (mounted && userData) {
-            console.log('✅✅✅ [AuthSimple] Profile loaded successfully:', userData.email);
-            setUser(userData);
-          } else if (mounted && !userData) {
-            console.error('❌ [AuthSimple] Profile loading FAILED for user:', currentUser.email);
+        if (session?.user) {
+          console.log('🔐 [AuthSimple] Loading user profile...');
+          const userData = await loadUserProfile(session.user);
+          if (userData) {
+            console.log('🔐 [AuthSimple] User loaded:', userData.email);
+            if (mounted) {
+              setUser(userData);
+            }
+          } else {
+            console.log('❌ [AuthSimple] Failed to load user profile');
           }
         } else {
-          console.error('❌ [AuthSimple] Session exists but has no user object (corrupted)');
-          localStorage.removeItem(storageKey);
+          console.log('❌ [AuthSimple] No session found');
         }
-
+      } catch (error) {
+        console.error('❌ [AuthSimple] Error during auth init:', error);
+      } finally {
         if (mounted) {
-          console.log('🔓 [AuthSimple] ===== AUTH INIT COMPLETE - setting isLoading to FALSE =====');
-          setIsLoading(false);
-        }
-      } catch (err: any) {
-        console.error('💥 [AuthSimple] UNEXPECTED ERROR during initialization:', err);
-        console.error('💥 [AuthSimple] Error stack:', err.stack);
-        if (mounted) {
+          console.log('🔐 [AuthSimple] Setting isLoading to false');
           setIsLoading(false);
         }
       }
@@ -243,7 +122,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     initAuth();
 
-    // Écouter les changements d'auth pour les updates en temps réel
+    // Écouter les changements d'authentification
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (!mounted) return;
 
@@ -259,6 +138,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         console.log('👋 [AuthSimple] User signed out');
         if (mounted) {
           setUser(null);
+        }
+      } else if (event === 'USER_UPDATED' && session?.user) {
+        const userData = await loadUserProfile(session.user);
+        if (mounted && userData) {
+          setUser(userData);
         }
       }
     });
@@ -292,7 +176,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (userData) {
         setUser(userData);
       }
-      // onAuthStateChange va gérer la suite automatiquement
+
+      // Attendre que Supabase persiste la session dans localStorage
+      await new Promise(resolve => setTimeout(resolve, 100));
+      console.log('✅ [AuthSimple] Session persisted, ready for redirect');
     }
   }, [supabase, loadUserProfile]);
 
@@ -325,7 +212,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     if (data.user) {
-      // Créer le profil
+      // Créer le profil avec toutes les données
       const profileData: any = {
         id: data.user.id,
         email: data.user.email,
@@ -339,14 +226,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         profileData.postal_code = address.postalCode;
       }
 
-      await supabase.from('profiles').insert(profileData);
+      const { error: profileError } = await supabase.from('profiles').insert(profileData);
+
+      if (profileError) {
+        console.error('Erreur lors de la création du profil:', profileError);
+      }
 
       const userData = await loadUserProfile(data.user);
       if (userData) {
         setUser(userData);
       }
 
-      await new Promise(resolve => setTimeout(resolve, 500));
+      // Attendre que Supabase persiste la session dans localStorage
+      await new Promise(resolve => setTimeout(resolve, 100));
+      console.log('✅ [AuthSimple] Registration session persisted, ready for redirect');
     }
   }, [supabase, loadUserProfile]);
 
