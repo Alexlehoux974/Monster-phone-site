@@ -93,7 +93,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         await new Promise(resolve => setTimeout(resolve, 100));
         console.log('🔐 [AuthSimple] Calling getSession()...');
 
-        const { data: { session }, error } = await supabase.auth.getSession();
+        // Ajouter un timeout de 3 secondes pour getSession()
+        const getSessionWithTimeout = Promise.race([
+          supabase.auth.getSession(),
+          new Promise((_, reject) =>
+            setTimeout(() => reject(new Error('getSession() timeout after 3s')), 3000)
+          )
+        ]);
+
+        const { data: { session }, error } = await getSessionWithTimeout as any;
         console.log('🔐 [AuthSimple] getSession() returned:', { hasSession: !!session, hasError: !!error });
 
         if (error) {
