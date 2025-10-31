@@ -136,8 +136,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       console.log('✅ [AuthSimple] User data assembled:', userData.email);
       return userData;
-    } catch (error) {
+    } catch (error: any) {
       console.error('❌ [AuthSimple] Unexpected error loading profile:', error);
+
+      // Si c'est un timeout, créer un user minimal avec juste les données de session
+      if (error.message?.includes('timeout')) {
+        console.warn('⚠️⚠️⚠️ [AuthSimple] TIMEOUT - Creating minimal user from session data');
+        const minimalUser: User = {
+          id: supabaseUser.id,
+          email: supabaseUser.email || '',
+          name: supabaseUser.user_metadata?.name || supabaseUser.email?.split('@')[0] || 'Utilisateur',
+          createdAt: supabaseUser.created_at,
+        };
+        console.log('✅ [AuthSimple] Minimal user created:', minimalUser.email);
+        return minimalUser;
+      }
+
       return null;
     }
   }, [supabase]);
