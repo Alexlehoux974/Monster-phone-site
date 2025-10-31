@@ -116,37 +116,58 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     const initAuth = async () => {
       console.log('🔐 [AuthSimple] ===== STARTING AUTH INITIALIZATION =====');
-      console.log('🔐 [AuthSimple] Checking localStorage for existing session...');
+      console.log('🔐 [AuthSimple] Reading localStorage DIRECTLY (bypassing Supabase methods)...');
 
       try {
-        // Utiliser getUser() qui lit JUSTE le localStorage - SYNCHRONE et RAPIDE
-        const { data: { user: currentUser }, error } = await supabase.auth.getUser();
+        // NOUVELLE APPROCHE: Lire le localStorage DIRECTEMENT sans passer par Supabase
+        const storageKey = 'sb-nswlznqoadjffpxkagoz-auth-token';
+        const storedSession = localStorage.getItem(storageKey);
 
-        if (!mounted) {
-          console.log('⚠️ [AuthSimple] Component unmounted during init, aborting');
-          return;
-        }
+        console.log('🔐 [AuthSimple] localStorage key:', storageKey);
+        console.log('🔐 [AuthSimple] Has stored session:', !!storedSession);
 
-        if (error) {
-          console.error('❌ [AuthSimple] ERROR from getUser():', error.message);
-          console.error('❌ [AuthSimple] Error details:', JSON.stringify(error, null, 2));
-          console.log('👉 [AuthSimple] Invalid/expired session detected → clearing localStorage');
-
-          // Nettoyer complètement la session corrompue
-          try {
-            await supabase.auth.signOut();
-            console.log('✅ [AuthSimple] Old session cleared successfully');
-          } catch (signOutErr) {
-            console.warn('⚠️ [AuthSimple] Error during signOut (session may already be invalid):', signOutErr);
+        if (!storedSession) {
+          console.log('ℹ️ [AuthSimple] No session in localStorage → user not logged in');
+          if (mounted) {
+            setIsLoading(false);
           }
-
-          console.log('👉 [AuthSimple] User will be redirected to signin for fresh login');
-          setIsLoading(false);
           return;
         }
 
+        // Parser la session
+        let sessionData;
+        try {
+          sessionData = JSON.parse(storedSession);
+          console.log('✅ [AuthSimple] Session parsed successfully');
+          console.log('✅ [AuthSimple] User email from session:', sessionData?.user?.email);
+        } catch (parseErr) {
+          console.error('❌ [AuthSimple] Failed to parse session JSON, clearing corrupted data');
+          localStorage.removeItem(storageKey);
+          if (mounted) {
+            setIsLoading(false);
+          }
+          return;
+        }
+
+        // Vérifier si la session est expirée
+        const expiresAt = sessionData?.expires_at;
+        const now = Math.floor(Date.now() / 1000);
+
+        if (expiresAt && expiresAt < now) {
+          console.warn('⚠️ [AuthSimple] Session EXPIRED (expires_at:', expiresAt, ', now:', now, ')');
+          console.log('🧹 [AuthSimple] Cleaning expired session from localStorage');
+          localStorage.removeItem(storageKey);
+          if (mounted) {
+            setIsLoading(false);
+          }
+          return;
+        }
+
+        console.log('✅✅✅ [AuthSimple] Valid session found! Expires at:', new Date((expiresAt || 0) * 1000).toISOString());
+
+        // Maintenant on peut charger le profil avec les données de la session
+        const currentUser = sessionData?.user;
         if (currentUser) {
-          console.log('✅✅✅ [AuthSimple] SUCCESS! User found in localStorage:', currentUser.email);
           console.log('✅ [AuthSimple] User ID:', currentUser.id);
 
           const userData = await loadUserProfile(currentUser);
@@ -157,8 +178,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             console.error('❌ [AuthSimple] Profile loading FAILED for user:', currentUser.email);
           }
         } else {
-          console.warn('⚠️ [AuthSimple] getUser() returned no error but no user either (empty session)');
-          console.log('👉 [AuthSimple] User will be redirected to signin');
+          console.error('❌ [AuthSimple] Session exists but has no user object (corrupted)');
+          localStorage.removeItem(storageKey);
         }
 
         if (mounted) {
