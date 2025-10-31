@@ -91,15 +91,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
         // Attendre un peu pour que localStorage soit prêt
         await new Promise(resolve => setTimeout(resolve, 100));
+        console.log('🔐 [AuthSimple] Calling getSession()...');
 
         const { data: { session }, error } = await supabase.auth.getSession();
+        console.log('🔐 [AuthSimple] getSession() returned:', { hasSession: !!session, hasError: !!error });
 
         if (error) {
           console.error('❌ [AuthSimple] Error getting session:', error);
           // Ne pas return ici - laisser le finally s'exécuter
         } else if (mounted && session?.user) {
           console.log('✅ [AuthSimple] Session found:', session.user.email);
+          console.log('🔐 [AuthSimple] Loading user profile...');
           const userData = await loadUserProfile(session.user);
+          console.log('🔐 [AuthSimple] Profile loaded:', !!userData);
           if (mounted && userData) {
             setUser(userData);
           }
@@ -110,8 +114,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         console.error('❌ [AuthSimple] Init error:', error);
       } finally {
         if (mounted) {
-          console.log('🔓 [AuthSimple] Loading complete');
+          console.log('🔓 [AuthSimple] Loading complete, setting isLoading to false');
           setIsLoading(false);
+        } else {
+          console.log('⚠️ [AuthSimple] Component unmounted, not setting isLoading');
         }
       }
     };
