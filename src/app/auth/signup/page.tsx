@@ -57,6 +57,7 @@ function SignUpFormContent() {
 
     try {
       // Passer toutes les données à la fonction register
+      console.log('🔐 [SignUp] Starting registration process...');
       await register({
         email: formData.email,
         password: formData.password,
@@ -64,7 +65,15 @@ function SignUpFormContent() {
         phone: formData.phone,
         address: formData.address,
       });
+      console.log('✅ [SignUp] Registration completed successfully');
+
+      // Attendre que la réconciliation des commandes se termine
+      // et que onAuthStateChange mette à jour isAuthenticated
+      console.log('⏳ [SignUp] Waiting for session to propagate (500ms)...');
+      await new Promise(resolve => setTimeout(resolve, 500));
+
       // Redirection après inscription réussie
+      console.log('🔄 [SignUp] Redirecting to:', redirectTo);
       router.push(redirectTo);
     } catch (err: any) {
       setError(err.message || 'Erreur lors de la création du compte');
