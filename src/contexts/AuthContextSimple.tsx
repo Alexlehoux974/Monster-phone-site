@@ -141,16 +141,28 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (event === 'SIGNED_IN' && session?.user) {
         console.log('✅ [AuthSimple] User signed in:', session.user.email);
 
-        // CRITIQUE: Débloquer isLoading immédiatement pour éviter le timeout
+        // CRITIQUE: Définir un user MINIMAL IMMÉDIATEMENT pour éviter la redirection
+        const minimalUser = {
+          id: session.user.id,
+          email: session.user.email || '',
+          name: session.user.email?.split('@')[0] || 'User',
+          createdAt: session.user.created_at,
+        };
+        setUser(minimalUser);
+        console.log('⚡ [AuthSimple] Minimal user set immediately');
+
+        // Débloquer isLoading immédiatement
         if (!authCompleted) {
           authCompleted = true;
           setIsLoading(false);
           console.log('✅ [AuthSimple] isLoading=false (from onAuthStateChange)');
         }
 
+        // Charger le profil complet en arrière-plan
         const userData = await loadUserProfile(session.user);
         if (mounted && userData) {
           setUser(userData);
+          console.log('📝 [AuthSimple] Full profile loaded');
         }
       } else if (event === 'SIGNED_OUT') {
         console.log('👋 [AuthSimple] User signed out');
