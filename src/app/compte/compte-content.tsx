@@ -12,9 +12,6 @@ export default function ComptePageContent() {
   // État pour gérer le délai d'initialisation
   const [authCheckComplete, setAuthCheckComplete] = useState(false);
 
-  // Logs pour debugging
-  console.log('🔍 [CompteContent] Render state:', { isLoading, isAuthenticated, hasUser: !!user, authCheckComplete });
-
   // Lire le tab depuis l'URL côté client uniquement
   const [activeTab, setActiveTab] = useState('profile');
   const [formData, setFormData] = useState({
@@ -45,27 +42,14 @@ export default function ComptePageContent() {
   // Attendre que l'auth soit initialisée
   useEffect(() => {
     if (!isLoading) {
-      // Pas de délai artificiel - si isLoading est false, l'auth est prête
-      console.log('✅ Auth check complete');
       setAuthCheckComplete(true);
     }
   }, [isLoading]);
 
   // Redirection si non connecté - SEULEMENT après que authCheckComplete soit true
   useEffect(() => {
-    console.log('🔍 [CompteContent] Checking redirect conditions:', {
-      authCheckComplete,
-      isAuthenticated,
-      activeTab
-    });
-
     if (authCheckComplete && !isAuthenticated) {
-      console.log('🔒🔒🔒 [CompteContent] NOT AUTHENTICATED! Redirecting to signin page...');
-      const redirectUrl = `/auth/signin?redirect=/compte?tab=${activeTab}`;
-      console.log('🔒 [CompteContent] Redirect URL:', redirectUrl);
-      router.push(redirectUrl);
-    } else if (authCheckComplete && isAuthenticated) {
-      console.log('✅✅✅ [CompteContent] User is AUTHENTICATED! Staying on page.');
+      router.push(`/auth/signin?redirect=/compte?tab=${activeTab}`);
     }
   }, [authCheckComplete, isAuthenticated, router, activeTab]);
 

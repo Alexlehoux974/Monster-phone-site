@@ -93,12 +93,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     const initAuth = async () => {
       try {
-        console.log('🔐 [AuthSimple] START auth init');
-
         // Laisser getSession() se terminer sans timeout
         const { data: { session } } = await supabase.auth.getSession();
-
-        console.log('🔐 [AuthSimple] Session:', session ? 'YES' : 'NO');
 
         if (session?.user && mounted) {
           // User minimal direct - pas d'attente profile
@@ -108,14 +104,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             name: session.user.email?.split('@')[0] || 'User',
             createdAt: session.user.created_at,
           });
-          console.log('✅ [AuthSimple] User set from session');
         }
       } catch (error) {
-        console.error('❌ [AuthSimple] Error:', error);
+        console.error('[AuthSimple] Auth init error:', error);
       } finally {
         if (mounted && !authCompleted) {
           authCompleted = true;
-          console.log('✅ [AuthSimple] DONE - isLoading=false');
           setIsLoading(false);
         }
       }
@@ -125,7 +119,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const emergencyTimeout = setTimeout(() => {
       if (mounted && !authCompleted) {
         authCompleted = true;
-        console.error('🚨🚨🚨 [AuthSimple] EMERGENCY TIMEOUT 10s - Force isLoading=false');
+        console.error('[AuthSimple] EMERGENCY TIMEOUT - Force isLoading=false');
         setIsLoading(false);
       }
     }, 10000);
@@ -136,11 +130,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (!mounted) return;
 
-      console.log('🔐 [AuthSimple] Auth event:', event);
-
       if (event === 'SIGNED_IN' && session?.user) {
-        console.log('✅ [AuthSimple] User signed in:', session.user.email);
-
         // CRITIQUE: Définir un user MINIMAL IMMÉDIATEMENT pour éviter la redirection
         const minimalUser = {
           id: session.user.id,
@@ -149,23 +139,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           createdAt: session.user.created_at,
         };
         setUser(minimalUser);
-        console.log('⚡ [AuthSimple] Minimal user set immediately');
 
         // Débloquer isLoading immédiatement
         if (!authCompleted) {
           authCompleted = true;
           setIsLoading(false);
-          console.log('✅ [AuthSimple] isLoading=false (from onAuthStateChange)');
         }
 
         // Charger le profil complet en arrière-plan
         const userData = await loadUserProfile(session.user);
         if (mounted && userData) {
           setUser(userData);
-          console.log('📝 [AuthSimple] Full profile loaded');
         }
       } else if (event === 'SIGNED_OUT') {
-        console.log('👋 [AuthSimple] User signed out');
         if (mounted) {
           setUser(null);
         }
@@ -188,23 +174,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       throw new Error('Email et mot de passe requis');
     }
 
-    console.log('🔐 [AuthSimple] Logging in:', email);
-
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
 
     if (error) {
-      console.error('❌ [AuthSimple] Login error:', error);
+      console.error('[AuthSimple] Login error:', error);
       throw new Error(error.message);
     }
 
     if (data.user) {
-      console.log('✅ [AuthSimple] Login successful');
-
-      // 🔗 RÉCONCILIATION: Lier les commandes guest lors de la connexion aussi
-      console.log('🔗 [AuthSimple] Checking for guest orders with email:', email);
+      // 🔗 RÉCONCILIATION: Lier les commandes guest lors de la connexion
       const { data: guestOrders, error: ordersCheckError } = await supabase
         .from('orders')
         .select('id')
@@ -212,10 +193,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         .is('user_id', null);
 
       if (ordersCheckError) {
-        console.error('❌ [AuthSimple] Error checking guest orders:', ordersCheckError);
+        console.error('[AuthSimple] Error checking guest orders:', ordersCheckError);
       } else if (guestOrders && guestOrders.length > 0) {
-        console.log(`🔗 [AuthSimple] Found ${guestOrders.length} guest orders to link`);
-
         const { error: linkError } = await supabase
           .from('orders')
           .update({ user_id: data.user.id })
@@ -223,12 +202,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           .is('user_id', null);
 
         if (linkError) {
-          console.error('❌ [AuthSimple] Error linking guest orders:', linkError);
-        } else {
-          console.log(`✅ [AuthSimple] Successfully linked ${guestOrders.length} guest orders to account`);
+          console.error('[AuthSimple] Error linking guest orders:', linkError);
         }
-      } else {
-        console.log('ℹ️ [AuthSimple] No guest orders found for this email');
       }
 
       const userData = await loadUserProfile(data.user);
@@ -238,7 +213,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       // Attendre que Supabase persiste la session dans localStorage
       await new Promise(resolve => setTimeout(resolve, 100));
-      console.log('✅ [AuthSimple] Session persisted, ready for redirect');
     }
   }, [supabase, loadUserProfile]);
 
@@ -292,7 +266,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
 
       // 🔗 RÉCONCILIATION: Lier les commandes guest existantes au nouveau compte
-      console.log('🔗 [AuthSimple] Checking for guest orders with email:', email);
       const { data: guestOrders, error: ordersCheckError } = await supabase
         .from('orders')
         .select('id')
@@ -300,10 +273,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         .is('user_id', null);
 
       if (ordersCheckError) {
-        console.error('❌ [AuthSimple] Error checking guest orders:', ordersCheckError);
+        console.error('[AuthSimple] Error checking guest orders:', ordersCheckError);
       } else if (guestOrders && guestOrders.length > 0) {
-        console.log(`🔗 [AuthSimple] Found ${guestOrders.length} guest orders to link`);
-
         // Lier toutes les commandes guest au nouveau user_id
         const { error: linkError } = await supabase
           .from('orders')
@@ -312,12 +283,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           .is('user_id', null);
 
         if (linkError) {
-          console.error('❌ [AuthSimple] Error linking guest orders:', linkError);
-        } else {
-          console.log(`✅ [AuthSimple] Successfully linked ${guestOrders.length} guest orders to account`);
+          console.error('[AuthSimple] Error linking guest orders:', linkError);
         }
-      } else {
-        console.log('ℹ️ [AuthSimple] No guest orders found for this email');
       }
 
       const userData = await loadUserProfile(data.user);
@@ -327,7 +294,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       // Attendre que Supabase persiste la session dans localStorage
       await new Promise(resolve => setTimeout(resolve, 100));
-      console.log('✅ [AuthSimple] Registration session persisted, ready for redirect');
     }
   }, [supabase, loadUserProfile]);
 
