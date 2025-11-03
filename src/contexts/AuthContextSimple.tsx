@@ -140,6 +140,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       if (event === 'SIGNED_IN' && session?.user) {
         console.log('✅ [AuthSimple] User signed in:', session.user.email);
+
+        // CRITIQUE: Débloquer isLoading immédiatement pour éviter le timeout
+        if (!authCompleted) {
+          authCompleted = true;
+          setIsLoading(false);
+          console.log('✅ [AuthSimple] isLoading=false (from onAuthStateChange)');
+        }
+
         const userData = await loadUserProfile(session.user);
         if (mounted && userData) {
           setUser(userData);
