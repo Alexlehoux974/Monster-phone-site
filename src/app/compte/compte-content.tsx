@@ -87,15 +87,22 @@ export default function ComptePageContent() {
 
   // Charger les commandes
   useEffect(() => {
-    if (isAuthenticated && activeTab === 'orders') {
+    if (isAuthenticated && activeTab === 'orders' && user) {
       const fetchOrders = async () => {
         try {
           setLoadingOrders(true);
-          const response = await fetch('/api/orders/list');
+          // Passer userId ET email pour récupérer TOUTES les commandes (avec user_id OU avec customer_email)
+          const params = new URLSearchParams();
+          if (user.id) params.append('userId', user.id);
+          if (user.email) params.append('email', user.email);
+
+          console.log('📦 [CompteContent] Fetching orders with params:', params.toString());
+
+          const response = await fetch(`/api/orders/list?${params.toString()}`);
           if (response.ok) {
             const data = await response.json();
-            // S'assurer que data est bien un tableau
-            const ordersArray = Array.isArray(data) ? data : [];
+            // S'assurer que data.orders est bien un tableau
+            const ordersArray = Array.isArray(data.orders) ? data.orders : [];
             console.log('📦 Orders fetched successfully:', ordersArray.length, 'orders');
             if (ordersArray.length > 0) {
               console.log('📦 First order sample:', ordersArray[0]);
@@ -114,7 +121,7 @@ export default function ComptePageContent() {
       };
       fetchOrders();
     }
-  }, [isAuthenticated, activeTab]);
+  }, [isAuthenticated, activeTab, user]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

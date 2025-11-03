@@ -179,6 +179,35 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     if (data.user) {
       console.log('✅ [AuthSimple] Login successful');
+
+      // 🔗 RÉCONCILIATION: Lier les commandes guest lors de la connexion aussi
+      console.log('🔗 [AuthSimple] Checking for guest orders with email:', email);
+      const { data: guestOrders, error: ordersCheckError } = await supabase
+        .from('orders')
+        .select('id')
+        .eq('customer_email', email)
+        .is('user_id', null);
+
+      if (ordersCheckError) {
+        console.error('❌ [AuthSimple] Error checking guest orders:', ordersCheckError);
+      } else if (guestOrders && guestOrders.length > 0) {
+        console.log(`🔗 [AuthSimple] Found ${guestOrders.length} guest orders to link`);
+
+        const { error: linkError } = await supabase
+          .from('orders')
+          .update({ user_id: data.user.id })
+          .eq('customer_email', email)
+          .is('user_id', null);
+
+        if (linkError) {
+          console.error('❌ [AuthSimple] Error linking guest orders:', linkError);
+        } else {
+          console.log(`✅ [AuthSimple] Successfully linked ${guestOrders.length} guest orders to account`);
+        }
+      } else {
+        console.log('ℹ️ [AuthSimple] No guest orders found for this email');
+      }
+
       const userData = await loadUserProfile(data.user);
       if (userData) {
         setUser(userData);
@@ -237,6 +266,35 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       if (profileError) {
         console.error('Erreur lors de la création du profil:', profileError);
+      }
+
+      // 🔗 RÉCONCILIATION: Lier les commandes guest existantes au nouveau compte
+      console.log('🔗 [AuthSimple] Checking for guest orders with email:', email);
+      const { data: guestOrders, error: ordersCheckError } = await supabase
+        .from('orders')
+        .select('id')
+        .eq('customer_email', email)
+        .is('user_id', null);
+
+      if (ordersCheckError) {
+        console.error('❌ [AuthSimple] Error checking guest orders:', ordersCheckError);
+      } else if (guestOrders && guestOrders.length > 0) {
+        console.log(`🔗 [AuthSimple] Found ${guestOrders.length} guest orders to link`);
+
+        // Lier toutes les commandes guest au nouveau user_id
+        const { error: linkError } = await supabase
+          .from('orders')
+          .update({ user_id: data.user.id })
+          .eq('customer_email', email)
+          .is('user_id', null);
+
+        if (linkError) {
+          console.error('❌ [AuthSimple] Error linking guest orders:', linkError);
+        } else {
+          console.log(`✅ [AuthSimple] Successfully linked ${guestOrders.length} guest orders to account`);
+        }
+      } else {
+        console.log('ℹ️ [AuthSimple] No guest orders found for this email');
       }
 
       const userData = await loadUserProfile(data.user);
