@@ -86,15 +86,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, [supabase]);
 
-  // Initialiser l'auth - SANS TIMEOUT sur getSession, juste timeout global
+  // Initialiser l'auth - PAS DE TIMEOUT, laisser getSession terminer naturellement
   useEffect(() => {
     let mounted = true;
+    let authCompleted = false;
 
     const initAuth = async () => {
       try {
         console.log('🔐 [AuthSimple] START auth init');
 
-        // NE PAS mettre de timeout sur getSession - laisser Supabase gérer
+        // Laisser getSession() se terminer sans timeout
         const { data: { session } } = await supabase.auth.getSession();
 
         console.log('🔐 [AuthSimple] Session:', session ? 'YES' : 'NO');
@@ -112,22 +113,24 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       } catch (error) {
         console.error('❌ [AuthSimple] Error:', error);
       } finally {
-        if (mounted) {
+        if (mounted && !authCompleted) {
+          authCompleted = true;
           console.log('✅ [AuthSimple] DONE - isLoading=false');
           setIsLoading(false);
         }
       }
     };
 
-    // TIMEOUT GLOBAL de 3 secondes pour forcer la complétion si getSession bloque
-    const globalTimeout = setTimeout(() => {
-      if (mounted) {
-        console.error('🚨 [AuthSimple] TIMEOUT 3s - Force isLoading=false without session');
+    // Timeout de secours UNIQUEMENT si getSession() n'a pas terminé après 10s
+    const emergencyTimeout = setTimeout(() => {
+      if (mounted && !authCompleted) {
+        authCompleted = true;
+        console.error('🚨🚨🚨 [AuthSimple] EMERGENCY TIMEOUT 10s - Force isLoading=false');
         setIsLoading(false);
       }
-    }, 3000);
+    }, 10000);
 
-    initAuth().finally(() => clearTimeout(globalTimeout));
+    initAuth().finally(() => clearTimeout(emergencyTimeout));
 
     // Écouter les changements d'authentification
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
