@@ -44,12 +44,12 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+// Créer le client Supabase UNE SEULE FOIS au niveau du module (en dehors du composant)
+const supabase = createClient();
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-
-  // Créer le client Supabase UNE SEULE FOIS
-  const supabase = useMemo(() => createClient(), []);
 
   // Fonction pour charger le profil utilisateur - CODE ORIGINAL QUI MARCHAIT
   const loadUserProfile = useCallback(async (supabaseUser: SupabaseUser): Promise<User | null> => {
@@ -84,7 +84,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       console.error('Erreur lors du chargement du profil:', error);
       return null;
     }
-  }, [supabase]);
+  }, []); // Plus de dépendance sur supabase car c'est une constante module-level
 
   // Initialiser l'auth - PAS DE TIMEOUT, laisser getSession terminer naturellement
   useEffect(() => {
@@ -167,7 +167,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       mounted = false;
       subscription.unsubscribe();
     };
-  }, [supabase, loadUserProfile]);
+  }, [loadUserProfile]); // Supabase n'est plus une dépendance car c'est une constante
 
   const login = useCallback(async (email: string, password: string) => {
     if (!email || !password) {
@@ -214,7 +214,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       // Attendre que Supabase persiste la session dans localStorage
       await new Promise(resolve => setTimeout(resolve, 100));
     }
-  }, [supabase, loadUserProfile]);
+  }, [loadUserProfile]);
 
   const register = useCallback(async (registerData: RegisterData) => {
     const { email, password, name, phone, address } = registerData;
@@ -305,13 +305,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       // Attendre juste un peu pour que la session se propage
       await new Promise(resolve => setTimeout(resolve, 100));
     }
-  }, [supabase, loadUserProfile]);
+  }, [loadUserProfile]);
 
   const logout = useCallback(async () => {
     await supabase.auth.signOut();
     setUser(null);
     toast.info('Vous avez été déconnecté');
-  }, [supabase]);
+  }, []); // Plus de dépendance sur supabase
 
   const updateProfile = useCallback(async (updates: Partial<User>) => {
     if (!user) {
@@ -338,7 +338,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     setUser({ ...user, ...updates });
     toast.success('Profil mis à jour');
-  }, [user, supabase]);
+  }, [user]); // Plus de dépendance sur supabase
 
   const value: AuthContextType = {
     user,

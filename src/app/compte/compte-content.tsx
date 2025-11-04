@@ -142,8 +142,10 @@ export default function ComptePageContent() {
     }
   };
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async () => {
+    console.log('🔴 [CompteContent] Starting logout...');
+    await logout();
+    console.log('✅ [CompteContent] Logout completed, redirecting to home...');
     router.push('/');
   };
 
