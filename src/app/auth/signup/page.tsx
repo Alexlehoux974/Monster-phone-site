@@ -69,25 +69,13 @@ function SignUpFormContent() {
       });
       console.log('✅ [SignUp] Registration completed successfully');
 
-      // ✅ Fix race condition: Attendre que isAuthenticated devienne true
-      console.log('⏳ [SignUp] Waiting for authentication confirmation...');
-      let attempts = 0;
-      const maxAttempts = 30; // 3 secondes max
+      // Attendre un peu pour que la session se propage
+      console.log('⏳ [SignUp] Waiting for session to propagate (500ms)...');
+      await new Promise(resolve => setTimeout(resolve, 500));
 
-      while (!isAuthenticated && attempts < maxAttempts) {
-        await new Promise(resolve => setTimeout(resolve, 100));
-        attempts++;
-        console.log(`🔄 [SignUp] Auth check attempt ${attempts}/${maxAttempts}, isAuthenticated:`, isAuthenticated);
-      }
-
-      if (isAuthenticated) {
-        console.log('✅ [SignUp] Authentication confirmed, redirecting to:', redirectTo);
-        router.push(redirectTo);
-      } else {
-        console.warn('⚠️ [SignUp] Authentication timeout - compte créé mais connexion différée');
-        // Compte créé mais connexion non confirmée - rediriger vers signin avec message
-        router.push(`/auth/signin?message=account_created&redirect=${encodeURIComponent(redirectTo)}`);
-      }
+      // Redirection immédiate avec window.location pour forcer le rechargement
+      console.log('🔄 [SignUp] Redirecting to:', redirectTo);
+      window.location.href = redirectTo;
     } catch (err: any) {
       setError(err.message || 'Erreur lors de la création du compte');
     } finally {

@@ -42,12 +42,11 @@ function SignInFormContent() {
       await login(formData.email, formData.password);
       console.log('✅ [SignIn] Login completed successfully');
 
-      // Attendre un peu plus longtemps pour que la réconciliation des commandes se termine
-      // et que onAuthStateChange mette à jour isAuthenticated
+      // Attendre un peu pour que la session et la réconciliation des commandes se terminent
       console.log('⏳ [SignIn] Waiting for session to propagate (500ms)...');
       await new Promise(resolve => setTimeout(resolve, 500));
 
-      // Redirection après que la session soit bien établie
+      // Redirection immédiate avec window.location pour forcer le rechargement
       console.log('🔄 [SignIn] Redirecting to:', redirectTo);
       window.location.href = redirectTo;
     } catch (err: any) {
