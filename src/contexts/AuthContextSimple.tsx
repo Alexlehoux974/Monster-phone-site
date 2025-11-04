@@ -264,55 +264,46 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     console.log('🔐 [AuthContext] Setting session with tokens...');
     if (session && user) {
-      // Restaurer la session Supabase côté client avec timeout
-      const sessionPromise = supabase.auth.setSession({
+      // Restaurer la session Supabase côté client EN ARRIÈRE-PLAN (non bloquant)
+      supabase.auth.setSession({
         access_token: session.access_token,
         refresh_token: session.refresh_token,
-      });
-
-      const timeoutPromise = new Promise((_, reject) =>
-        setTimeout(() => reject(new Error('Session timeout')), 5000)
-      );
-
-      try {
-        const { error: sessionError } = await Promise.race([sessionPromise, timeoutPromise]) as any;
-
+      }).then(({ error: sessionError }) => {
         if (sessionError) {
           console.error('❌ [AuthContext] Error setting session:', sessionError);
-          throw new Error('Erreur lors de la connexion automatique');
-        }
-
-        console.log('✅ [AuthContext] Session set successfully');
-      } catch (timeoutError: any) {
-        if (timeoutError.message === 'Session timeout') {
-          console.warn('⚠️ [AuthContext] Session timeout - Vérification manuelle de la session...');
-
-          // Vérifier si la session existe malgré le timeout
-          const { data: { session: currentSession } } = await supabase.auth.getSession();
-          if (currentSession) {
-            console.log('✅ [AuthContext] Session found after timeout');
-          } else {
-            console.error('❌ [AuthContext] Session not found after timeout');
-            throw new Error('Erreur lors de la connexion automatique');
-          }
         } else {
-          throw timeoutError;
+          console.log('✅ [AuthContext] Session set successfully');
         }
-      }
+      });
 
-      console.log('👤 [AuthContext] Loading user profile...');
-      // Charger le profil complet
-      const userData = await loadUserProfile(user);
-      if (userData) {
-        console.log('✅ [AuthContext] User profile loaded:', userData.email);
-        setUser(userData);
-      }
+      // Définir l'utilisateur immédiatement sans attendre setSession
+      const minimalUser = {
+        id: user.id,
+        email: user.email || '',
+        name: user.user_metadata?.name || user.email?.split('@')[0] || 'User',
+        phone: user.user_metadata?.phone || '',
+        address: user.user_metadata?.address || {
+          street: '',
+          city: '',
+          postalCode: '',
+          country: 'France',
+        },
+        createdAt: user.created_at,
+      };
+      setUser(minimalUser);
 
-      console.log('⏳ [AuthContext] Waiting for localStorage persistence...');
-      // Attendre que Supabase persiste la session dans localStorage
+      console.log('✅ [AuthContext] User set, registration complete');
+
+      // Charger le profil complet en arrière-plan (non bloquant)
+      loadUserProfile(user).then((userData) => {
+        if (userData) {
+          console.log('✅ [AuthContext] Full user profile loaded');
+          setUser(userData);
+        }
+      });
+
+      // Attendre juste un peu pour que la session se propage
       await new Promise(resolve => setTimeout(resolve, 100));
-
-      console.log('✅ [AuthContext] register() completed successfully');
     }
   }, [supabase, loadUserProfile]);
 
