@@ -20,6 +20,8 @@ interface OrderDetails {
   customer_name: string;
   customer_email: string;
   amount_total: number;
+  subtotal?: number;
+  shipping_cost?: number;
   payment_status: string;
   status: string;
   created_at: string;
@@ -69,6 +71,8 @@ function CheckoutSuccessContent() {
           customer_name: createdOrder.customer_name,
           customer_email: createdOrder.customer_email,
           amount_total: createdOrder.total,
+          subtotal: createdOrder.subtotal || createdOrder.amount_subtotal,
+          shipping_cost: createdOrder.shipping_cost,
           payment_status: createdOrder.payment_status,
           status: createdOrder.status,
           created_at: createdOrder.created_at,
@@ -212,6 +216,22 @@ function CheckoutSuccessContent() {
             ))}
           </div>
 
+          {/* Subtotal et frais de livraison */}
+          <div className="space-y-3 pt-4 border-t border-gray-200">
+            {order.subtotal !== undefined && (
+              <div className="flex justify-between items-center text-gray-700">
+                <span className="font-medium">Sous-total</span>
+                <span className="font-semibold">{(order.subtotal || 0).toFixed(2)} €</span>
+              </div>
+            )}
+            {order.shipping_cost !== undefined && (
+              <div className="flex justify-between items-center text-gray-700">
+                <span className="font-medium">Frais de livraison</span>
+                <span className="font-semibold">{(order.shipping_cost || 0).toFixed(2)} €</span>
+              </div>
+            )}
+          </div>
+
           <div className="flex justify-between items-center pt-6 border-t-2 border-gray-300">
             <span className="text-xl font-bold text-gray-900">Total payé</span>
             <span className="text-3xl font-bold text-green-600">
@@ -242,7 +262,7 @@ function CheckoutSuccessContent() {
               <div className="flex-1">
                 <p className="text-sm font-medium text-gray-600 mb-1">Statut de la commande</p>
                 <p className="text-lg font-bold text-blue-600">
-                  📦 {order.status === 'pending' ? 'En préparation' : order.status}
+                  📦 {order.status === 'processing' ? 'En cours de traitement' : order.status === 'pending' ? 'En préparation' : order.status}
                 </p>
               </div>
             </div>
@@ -268,7 +288,7 @@ function CheckoutSuccessContent() {
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-purple-600 font-bold mt-1">3.</span>
-                  <span>Livraison estimée sous <strong>3-5 jours ouvrés</strong> 🚚</span>
+                  <span>Livraison estimée sous <strong>2 à 3 jours ouvrés</strong> 🚚</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-purple-600 font-bold mt-1">4.</span>
@@ -285,14 +305,22 @@ function CheckoutSuccessContent() {
           <h3 className="text-2xl font-bold mb-3">
             Suivez vos commandes
           </h3>
-          <p className="mb-6 text-blue-100">
-            Accédez à votre espace client pour suivre vos commandes
-          </p>
+          <div className="mb-6 text-blue-100 space-y-2">
+            <p className="font-medium">
+              📱 <strong>Pas encore de compte ?</strong>
+            </p>
+            <p className="text-sm">
+              Créez votre compte avec l'email <strong className="text-white">{order.customer_email}</strong> pour retrouver automatiquement cette commande et suivre son statut en temps réel.
+            </p>
+            <p className="text-sm mt-3">
+              💡 <strong>Vous avez déjà un compte ?</strong> Connectez-vous pour accéder au récapitulatif de toutes vos commandes dans votre espace client.
+            </p>
+          </div>
           <Link
             href="/compte?tab=orders"
             className="inline-flex items-center gap-2 bg-white text-blue-600 px-8 py-3 rounded-lg hover:bg-blue-50 transition-all hover:shadow-lg font-bold"
           >
-            Voir mes commandes
+            Accéder à mon espace
             <ArrowRight className="w-5 h-5" />
           </Link>
         </div>

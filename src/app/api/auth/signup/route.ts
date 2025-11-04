@@ -45,8 +45,18 @@ export async function POST(request: NextRequest) {
 
     if (createError) {
       console.error('❌ [SIGNUP API] User creation failed:', createError);
+
+      // Traduire les erreurs Supabase en français
+      let errorMessage = createError.message;
+
+      if (createError.message.includes('already been registered')) {
+        errorMessage = 'Cet email est déjà utilisé. Vous avez déjà un compte ? Connectez-vous.';
+      } else if (createError.message.includes('User already registered')) {
+        errorMessage = 'Cet email est déjà utilisé. Vous avez déjà un compte ? Connectez-vous.';
+      }
+
       return NextResponse.json(
-        { error: createError.message },
+        { error: errorMessage },
         { status: 400 }
       );
     }

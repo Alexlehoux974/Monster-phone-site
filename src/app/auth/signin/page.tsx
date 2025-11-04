@@ -146,6 +146,14 @@ function SignInFormContent() {
                 ← Retour à l'accueil
               </Link>
             </div>
+            <div className="text-sm">
+              <Link
+                href="/auth/forgot-password"
+                className="font-medium text-blue-600 hover:text-blue-500"
+              >
+                Mot de passe oublié ?
+              </Link>
+            </div>
           </div>
 
           <div>

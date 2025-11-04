@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, Suspense } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useAuth } from '@/contexts/AuthContextSimple';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -9,18 +9,20 @@ import Footer from '@/components/Footer';
 import { Mail, Lock, User, ArrowRight, AlertCircle, CheckCircle } from 'lucide-react';
 
 function SignUpFormContent() {
-  const { register } = useAuth();
+  const { register, isAuthenticated } = useAuth();
   const router = useRouter();
 
-  // Récupérer l'URL de redirection depuis les paramètres (par défaut: /compte?tab=orders)
-  // Utiliser window.location au lieu de useSearchParams pour éviter l'erreur React #300
-  const [redirectTo] = useState(() => {
+  // ✅ Fix hydration: Récupérer l'URL de redirection côté client uniquement
+  const [redirectTo, setRedirectTo] = useState('/compte?tab=orders');
+
+  // Effet pour initialiser redirectTo uniquement côté client
+  useEffect(() => {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
-      return params.get('redirect') || '/compte?tab=orders';
+      const redirect = params.get('redirect') || '/compte?tab=orders';
+      setRedirectTo(redirect);
     }
-    return '/compte?tab=orders';
-  });
+  }, []);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -67,14 +69,25 @@ function SignUpFormContent() {
       });
       console.log('✅ [SignUp] Registration completed successfully');
 
-      // Attendre que la réconciliation des commandes se termine
-      // et que onAuthStateChange mette à jour isAuthenticated
-      console.log('⏳ [SignUp] Waiting for session to propagate (500ms)...');
-      await new Promise(resolve => setTimeout(resolve, 500));
+      // ✅ Fix race condition: Attendre que isAuthenticated devienne true
+      console.log('⏳ [SignUp] Waiting for authentication confirmation...');
+      let attempts = 0;
+      const maxAttempts = 30; // 3 secondes max
 
-      // Redirection après inscription réussie
-      console.log('🔄 [SignUp] Redirecting to:', redirectTo);
-      router.push(redirectTo);
+      while (!isAuthenticated && attempts < maxAttempts) {
+        await new Promise(resolve => setTimeout(resolve, 100));
+        attempts++;
+        console.log(`🔄 [SignUp] Auth check attempt ${attempts}/${maxAttempts}, isAuthenticated:`, isAuthenticated);
+      }
+
+      if (isAuthenticated) {
+        console.log('✅ [SignUp] Authentication confirmed, redirecting to:', redirectTo);
+        router.push(redirectTo);
+      } else {
+        console.warn('⚠️ [SignUp] Authentication timeout - compte créé mais connexion différée');
+        // Compte créé mais connexion non confirmée - rediriger vers signin avec message
+        router.push(`/auth/signin?message=account_created&redirect=${encodeURIComponent(redirectTo)}`);
+      }
     } catch (err: any) {
       setError(err.message || 'Erreur lors de la création du compte');
     } finally {
@@ -104,10 +117,10 @@ function SignUpFormContent() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md w-full space-y-8">
+    <div className="min-h-screen bg-gray-50 pt-32 pb-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-md w-full mx-auto space-y-8">
           <div>
-            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            <h2 className="text-center text-3xl font-extrabold text-gray-900">
               Créer votre compte
             </h2>
             <p className="mt-2 text-center text-sm text-gray-600">
@@ -128,6 +141,17 @@ function SignUpFormContent() {
                   <AlertCircle className="h-5 w-5 text-red-400" />
                   <div className="ml-3">
                     <p className="text-sm text-red-800">{error}</p>
+                    {(error.includes('déjà utilisé') || error.includes('déjà un compte')) && (
+                      <p className="mt-2">
+                        <Link
+                          href={`/auth/signin${redirectTo !== '/compte?tab=orders' ? `?redirect=${encodeURIComponent(redirectTo)}` : ''}`}
+                          className="text-sm text-blue-600 hover:text-blue-700 font-medium inline-flex items-center gap-1"
+                        >
+                          <ArrowRight className="w-4 h-4" />
+                          Se connecter maintenant
+                        </Link>
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
