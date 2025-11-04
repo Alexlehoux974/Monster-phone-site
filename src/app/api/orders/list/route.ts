@@ -86,7 +86,24 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    return NextResponse.json({ orders: orders || [], success: true });
+    // Calculer amount_total si manquant (somme des items + shipping_cost)
+    const ordersWithTotal = (orders || []).map(order => {
+      if (!order.amount_total || order.amount_total === 0) {
+        // Calculer la somme des items
+        const itemsTotal = (order.order_items || []).reduce((sum: number, item: any) => {
+          return sum + (item.total_price || 0);
+        }, 0);
+
+        // Ajouter les frais de livraison
+        const shippingCost = order.shipping_cost || 0;
+
+        // Mettre à jour amount_total
+        order.amount_total = itemsTotal + shippingCost;
+      }
+      return order;
+    });
+
+    return NextResponse.json({ orders: ordersWithTotal, success: true });
   } catch (error) {
     console.error('Error in list orders:', error);
     return NextResponse.json(

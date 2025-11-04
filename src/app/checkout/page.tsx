@@ -683,6 +683,11 @@ export default function CheckoutPage() {
                           </div>
                           <div className="flex-1">
                             <p className="text-sm font-medium line-clamp-1">{item.product.name}</p>
+                            {item.variant && (
+                              <p className="text-xs text-blue-600 font-medium">
+                                Couleur: {item.variant}
+                              </p>
+                            )}
                             <p className="text-xs text-gray-600">
                               {item.quantity} × {price.toFixed(2)} €
                             </p>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, Suspense } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useAuth } from '@/contexts/AuthContextSimple';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -13,14 +13,17 @@ function SignInFormContent() {
   const router = useRouter();
 
   // Récupérer l'URL de redirection depuis les paramètres (par défaut: /compte?tab=orders)
-  // Utiliser window.location au lieu de useSearchParams pour éviter l'erreur React #300
-  const [redirectTo] = useState(() => {
+  // On calcule redirectTo uniquement côté client pour éviter hydration mismatch
+  const [redirectTo, setRedirectTo] = useState('/compte?tab=orders');
+
+  // Effet pour initialiser redirectTo uniquement côté client
+  useEffect(() => {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
-      return params.get('redirect') || '/compte?tab=orders';
+      const redirect = params.get('redirect') || '/compte?tab=orders';
+      setRedirectTo(redirect);
     }
-    return '/compte?tab=orders';
-  });
+  }, []);
 
   const [formData, setFormData] = useState({
     email: '',

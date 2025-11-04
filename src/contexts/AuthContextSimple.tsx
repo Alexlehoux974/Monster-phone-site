@@ -219,6 +219,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const register = useCallback(async (registerData: RegisterData) => {
     const { email, password, name, phone, address } = registerData;
 
+    console.log('🔄 [AuthContext] register() called with email:', email);
+
     if (!email || !password || !name) {
       throw new Error('Tous les champs sont requis');
     }
@@ -232,68 +234,85 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       throw new Error('Email invalide');
     }
 
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: { name },
-      },
+    console.log('📡 [AuthContext] Calling /api/auth/signup...');
+
+    // Utiliser l'API server-side pour auto-confirmer l'email
+    const response = await fetch('/api/auth/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password, name, phone, address }),
     });
 
-    if (error) {
-      throw new Error(error.message);
+    console.log('📥 [AuthContext] API response status:', response.status, response.ok);
+
+    const result = await response.json();
+    console.log('📦 [AuthContext] API result:', result);
+
+    if (!response.ok) {
+      console.error('❌ [AuthContext] API error:', result.error);
+      throw new Error(result.error || 'Erreur lors de la création du compte');
     }
 
-    if (data.user) {
-      // Créer le profil avec toutes les données
-      const profileData: any = {
-        id: data.user.id,
-        email: data.user.email,
-        full_name: name,
-      };
+    console.log('🔑 [AuthContext] Extracting session and user...');
+    // La session est déjà créée côté serveur, il faut la restaurer côté client
+    const { session, user } = result;
 
-      if (phone) profileData.phone = phone;
-      if (address) {
-        profileData.address = address.street;
-        profileData.city = address.city;
-        profileData.postal_code = address.postalCode;
-      }
+    if (!session || !user) {
+      console.error('❌ [AuthContext] Missing session or user in API response!', { hasSession: !!session, hasUser: !!user });
+      throw new Error('Réponse API invalide - session ou utilisateur manquant');
+    }
 
-      const { error: profileError } = await supabase.from('profiles').insert(profileData);
+    console.log('🔐 [AuthContext] Setting session with tokens...');
+    if (session && user) {
+      // Restaurer la session Supabase côté client avec timeout
+      const sessionPromise = supabase.auth.setSession({
+        access_token: session.access_token,
+        refresh_token: session.refresh_token,
+      });
 
-      if (profileError) {
-        console.error('Erreur lors de la création du profil:', profileError);
-      }
+      const timeoutPromise = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error('Session timeout')), 5000)
+      );
 
-      // 🔗 RÉCONCILIATION: Lier les commandes guest existantes au nouveau compte
-      const { data: guestOrders, error: ordersCheckError } = await supabase
-        .from('orders')
-        .select('id')
-        .eq('customer_email', email)
-        .is('user_id', null);
+      try {
+        const { error: sessionError } = await Promise.race([sessionPromise, timeoutPromise]) as any;
 
-      if (ordersCheckError) {
-        console.error('[AuthSimple] Error checking guest orders:', ordersCheckError);
-      } else if (guestOrders && guestOrders.length > 0) {
-        // Lier toutes les commandes guest au nouveau user_id
-        const { error: linkError } = await supabase
-          .from('orders')
-          .update({ user_id: data.user.id })
-          .eq('customer_email', email)
-          .is('user_id', null);
+        if (sessionError) {
+          console.error('❌ [AuthContext] Error setting session:', sessionError);
+          throw new Error('Erreur lors de la connexion automatique');
+        }
 
-        if (linkError) {
-          console.error('[AuthSimple] Error linking guest orders:', linkError);
+        console.log('✅ [AuthContext] Session set successfully');
+      } catch (timeoutError: any) {
+        if (timeoutError.message === 'Session timeout') {
+          console.warn('⚠️ [AuthContext] Session timeout - Vérification manuelle de la session...');
+
+          // Vérifier si la session existe malgré le timeout
+          const { data: { session: currentSession } } = await supabase.auth.getSession();
+          if (currentSession) {
+            console.log('✅ [AuthContext] Session found after timeout');
+          } else {
+            console.error('❌ [AuthContext] Session not found after timeout');
+            throw new Error('Erreur lors de la connexion automatique');
+          }
+        } else {
+          throw timeoutError;
         }
       }
 
-      const userData = await loadUserProfile(data.user);
+      console.log('👤 [AuthContext] Loading user profile...');
+      // Charger le profil complet
+      const userData = await loadUserProfile(user);
       if (userData) {
+        console.log('✅ [AuthContext] User profile loaded:', userData.email);
         setUser(userData);
       }
 
+      console.log('⏳ [AuthContext] Waiting for localStorage persistence...');
       // Attendre que Supabase persiste la session dans localStorage
       await new Promise(resolve => setTimeout(resolve, 100));
+
+      console.log('✅ [AuthContext] register() completed successfully');
     }
   }, [supabase, loadUserProfile]);
 

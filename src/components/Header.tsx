@@ -1102,6 +1102,11 @@ export default function Header() {
                                   </div>
                                   <div className="flex-1">
                                     <h4 className="text-sm font-medium">{item.product.name}</h4>
+                                    {item.variant && (
+                                      <p className="text-xs text-blue-600 font-medium">
+                                        Couleur: {item.variant}
+                                      </p>
+                                    )}
                                     <p className="text-xs text-gray-600 mt-1 whitespace-normal">
                                       {item.quantity} × {price.toFixed(2)} €
                                     </p>
