@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
   try {
     const stripe = getStripe();
     const body = await request.json();
-    const { items, customerInfo, userId } = body;
+    const { items, customerInfo, userId, shippingCost, shippingMethod } = body;
 
     // 🔍 DEBUG: Log userId reçu par l'API
     console.log('🔍 [API create-checkout-session]', {
@@ -203,6 +203,8 @@ export async function POST(request: NextRequest) {
       cart_session_id: cartSessionId,
       product_ids: JSON.stringify(items.map((item: any) => String(item.id))),
       variant_colors: JSON.stringify(items.map((item: any) => item.variant || '')),
+      shipping_cost: String(shippingCost || 0),
+      shipping_method: shippingMethod || 'standard',
     };
 
     console.log('🔍 [API avant envoi Stripe]', {

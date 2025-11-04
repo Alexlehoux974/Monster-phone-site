@@ -131,7 +131,7 @@ export async function POST(request: NextRequest) {
       // Créer la commande dans Supabase
       const orderNumber = `ORDER-${Date.now()}`;
       const subtotal = (session.amount_subtotal || session.amount_total || 0) / 100;
-      const shippingCost = 0;
+      const shippingCost = parseFloat(metadata.shipping_cost || '0');
       const total = (session.amount_total || 0) / 100;
 
       const { data: order, error } = await supabase

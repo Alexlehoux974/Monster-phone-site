@@ -126,7 +126,7 @@ export async function POST(request: NextRequest) {
 
     // Calculer les montants
     const subtotal = (session.amount_subtotal || session.amount_total || 0) / 100;
-    const shippingCost = 0; // Pas de frais de port dans la session
+    const shippingCost = parseFloat(metadata.shipping_cost || '0');
 
     const { data: order, error } = await supabase
       .from('orders')

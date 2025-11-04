@@ -248,6 +248,8 @@ export default function CheckoutPage() {
           }),
           customerInfo,
           userId: capturedUserId, // ✅ Utiliser la variable capturée
+          shippingCost: shipping, // ✅ Inclure les frais de livraison
+          shippingMethod: formData.shippingMethod, // ✅ Inclure la méthode de livraison
         }),
       });
 
