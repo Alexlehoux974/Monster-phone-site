@@ -80,3 +80,4 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+// Force rebuild Thu Nov  6 13:35:51 UTC 2025
