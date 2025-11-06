@@ -30,6 +30,32 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
+        // Pages produits statiques - désactiver COMPLÈTEMENT le cache
+        source: '/produit/:slug',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0',
+          },
+          {
+            key: 'Pragma',
+            value: 'no-cache',
+          },
+          {
+            key: 'Expires',
+            value: '0',
+          },
+          {
+            key: 'CDN-Cache-Control',
+            value: 'no-store',
+          },
+          {
+            key: 'Vercel-CDN-Cache-Control',
+            value: 'no-store',
+          },
+        ],
+      },
+      {
         // Pages produits - désactiver le cache
         source: '/produit-supabase/:slug',
         headers: [
