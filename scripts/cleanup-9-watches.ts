@@ -11,44 +11,43 @@ const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
 /**
- * Script pour mettre à jour les produits HONOR avec du contenu réel
- * 1. Supprime les anciennes sections génériques
- * 2. Recrée les sections avec le contenu spécifique sourced
+ * Script pour supprimer les anciennes sections de 9 montres HIFUTURE
+ * Lume, Active, Evo 2, Aura, Aurora, Vela, Zone 2, Aix, Mixx 3
  */
 
-async function updateHonorProducts() {
-  console.log('🔄 Mise à jour des produits HONOR avec contenu réel\n');
+async function cleanup9Watches() {
+  console.log('🧹 Nettoyage des sections pour 9 montres HIFUTURE\n');
   console.log('================================================\n');
 
-  // Liste des produits HONOR à mettre à jour
-  const honorProducts = [
-    'HONOR PAD 9 WIFI 8+',
-    'HONOR X5',
-    'HONOR X5B 4+',
-    'HONOR X6C 6+',
-    'HONOR X7C 8+',
-    'HONOR X9C 12+',
-    'HONOR 200 PRO 12+',
+  const targetProducts = [
+    'LUME',
+    'ACTIVE',
+    'EVO 2',
+    'AURA',
+    'AURORA',
+    'VELA',
+    'ZONE 2',
+    'AIX',
+    'MIXX 3',
   ];
 
-  for (const productName of honorProducts) {
+  for (const productName of targetProducts) {
     console.log(`\n📦 Traitement: ${productName}`);
 
-    // 1. Trouver le produit
+    // Trouver le produit
     const { data: product, error: productError } = await supabase
       .from('products')
       .select('id, name, url_slug')
       .ilike('name', `%${productName}%`)
+      .limit(1)
       .single();
 
     if (productError || !product) {
-      console.log(`   ⚠️  Produit non trouvé: ${productName}`);
+      console.log(`   ⚠️  Produit non trouvé`);
       continue;
     }
 
-    console.log(`   ✓ Produit trouvé: ${product.name} (${product.id})`);
-
-    // 2. Supprimer les anciennes sections
+    // Supprimer les anciennes sections
     const { error: deleteError } = await supabase
       .from('product_content_sections')
       .delete()
@@ -61,13 +60,12 @@ async function updateHonorProducts() {
     }
 
     console.log(`   ✓ Anciennes sections supprimées`);
-    console.log(`   💡 Lancer le script d'enrichissement pour recréer avec contenu réel`);
   }
 
   console.log('\n================================================');
-  console.log('✅ Suppression terminée!');
+  console.log(`✅ Nettoyage terminé pour 9 montres!`);
   console.log('\n💡 Maintenant, lancez:');
-  console.log('   npx tsx scripts/enrich-product-cms.ts --limit=7\n');
+  console.log('   npx tsx scripts/enrich-product-cms.ts\n');
 }
 
-updateHonorProducts();
+cleanup9Watches();

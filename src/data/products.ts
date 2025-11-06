@@ -2415,62 +2415,6 @@ export const PRODUCTS: Product[] = [
     }
   },
   {
-    "id": "57a25bee-bb58-4248-95c8-4622e61e0227",
-    "airtableId": "57a25bee-bb58-4248-95c8-4622e61e0227",
-    "sku": "SKU-0027",
-    "name": "HONOR X5",
-    "urlSlug": "hon-x5",
-    "shortDescription": "",
-    "fullDescription": "<div class=\"max-w-4xl mx-auto\">\n  <h3 class=\"text-2xl font-bold text-gray-900 mb-6\">HON X5</h3>\n  <p class=\"text-gray-700\">[PLACEHOLDER] Description à compléter</p>\n</div>",
-    "originalPrice": null,
-    "basePrice": 0,
-    "discountPercent": 0,
-    "brandId": "0787543a-2ab3-4c65-850d-9abb59ca4d4c",
-    "brandName": "HONOR",
-    "brandSlug": "honor",
-    "categoryId": "c8f5a3d2-9e4b-4a7c-8b5f-2d3e4f5a6b7c",
-    "categoryName": "Montres",
-    "categorySlug": "montres",
-    "features": [],
-    "specifications": [],
-    "repairabilityIndex": null,
-    "dasHead": null,
-    "dasBody": null,
-    "dasLimb": null,
-    "energyClass": "",
-    "tags": [],
-    "isFeatured": false,
-    "isNewArrival": false,
-    "showOnHomepage": false,
-    "status": "active",
-    "variants": [
-      {
-        "id": "78233478-ee72-484a-84cd-8698864ad26a",
-        "color": "Or",
-        "colorCode": "#FFD700",
-        "ean": "6975840260126",
-        "stock": 315,
-        "is_default": true,
-        "images": [],
-        "adminDiscountPercent": 0,
-        "capacity": null,
-        "size": null
-      }
-    ],
-    "rating": {
-      "average": 0,
-      "count": 0,
-      "distribution": {
-        "1": 0,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0
-      },
-      "reviews": []
-    }
-  },
-  {
     "id": "a0ecbdab-2fc8-4a45-95ef-8914a7647b2e",
     "airtableId": "a0ecbdab-2fc8-4a45-95ef-8914a7647b2e",
     "sku": "SKU-0001",

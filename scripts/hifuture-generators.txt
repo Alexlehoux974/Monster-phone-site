@@ -1,0 +1,214 @@
+// ============================================================
+// HIFUTURE PRODUCT SPECIFIC CONTENT GENERATORS
+// ============================================================
+
+/**
+ * HIFUTURE FlyBuds 4 ANC - Écouteurs TWS avec réduction de bruit
+ */
+function generateHifutureFlyBuds4Content() {
+  return {
+    description: `<p>Les <strong>HIFUTURE FlyBuds 4 ANC</strong> sont des écouteurs sans fil true wireless équipés de la réduction de bruit active (ANC) pour une immersion sonore complète. Leur technologie Graphite Sound délivre des basses puissantes, des voix cristallines et des médiums équilibrés.</p>
+<p>Avec 30 heures d'autonomie totale (5h + 25h boîtier), Bluetooth 5.4 ultra-stable et système 4 microphones pour appels clairs, ces écouteurs combinent confort, performance et style. Quatre couleurs disponibles pour accompagner votre quotidien à La Réunion.</p>`,
+    specs: [
+      { icon: '🎧', label: 'TYPE', value: 'TWS ANC', details: 'True Wireless Stereo' },
+      { icon: '🔇', label: 'ANC', value: 'Réduction de bruit', details: 'Active Noise Cancellation' },
+      { icon: '🔋', label: 'AUTONOMIE', value: '30 heures', details: '5h + 25h boîtier' },
+      { icon: '📡', label: 'BLUETOOTH', value: '5.4', details: 'Connexion stable' },
+      { icon: '🎤', label: 'MICROPHONES', value: '4 micros', details: 'Appels ultra-clairs' },
+      { icon: '🎨', label: 'COULEURS', value: '4 coloris', details: 'Vert, Noir, Blanc, Rouge' },
+      { icon: '⚡', label: 'CHARGE', value: 'Boîtier inclus', details: 'Recharge rapide' },
+      { icon: '🚚', label: 'LIVRAISON', value: '24-48h', details: 'Express La Réunion' },
+    ],
+    features: [
+      { icon: '✓', text: 'ANC active - Réduction de bruit pour immersion totale' },
+      { icon: '✓', text: '30h d\'autonomie - Musique non-stop toute la journée' },
+      { icon: '✓', text: 'Bluetooth 5.4 - Connexion ultra-stable sans coupure' },
+      { icon: '✓', text: 'Système 4 micros - Appels clairs même en environnement bruyant' },
+      { icon: '✓', text: 'Graphite Sound - Audio premium avec basses profondes' },
+    ],
+    engagement: `<p>Les <strong>HIFUTURE FlyBuds 4 ANC</strong> offrent qualité audio premium, réduction de bruit efficace et autonomie exceptionnelle. L'accessoire idéal pour musique, sport et appels au quotidien.</p>
+<p><strong>Livraison express La Réunion</strong> - Reçus en 24-48h.</p>
+<p><strong>Garantie constructeur</strong> - SAV disponible localement.</p>`,
+  };
+}
+
+/**
+ * HIFUTURE Tour X - Casque ANC over-ear premium
+ */
+function generateHifutureTourXContent() {
+  return {
+    description: `<p>Le <strong>HIFUTURE Tour X</strong> est un casque over-ear premium équipé de la réduction de bruit active hybride (ANC) pour une expérience d'écoute immersive. Son design élégant et ses coussinets en mousse protéine garantissent un confort optimal pour des sessions prolongées.</p>
+<p>Avec 35 heures d'autonomie, Bluetooth 5.3, technologie AI pour appels ultra-clairs et design pliable compact, ce casque allie performance et portabilité. Parfait pour le télétravail, les voyages et l'écoute intensive à La Réunion.</p>`,
+    specs: [
+      { icon: '🎧', label: 'TYPE', value: 'Over-Ear ANC', details: 'Casque supra-auriculaire' },
+      { icon: '🔇', label: 'ANC', value: 'Hybride', details: 'Réduction bruit active' },
+      { icon: '🔋', label: 'AUTONOMIE', value: '35 heures', details: 'Usage intensif' },
+      { icon: '📡', label: 'BLUETOOTH', value: '5.3', details: 'Connexion stable' },
+      { icon: '🎤', label: 'APPELS', value: 'AI Clear Call', details: 'Technologie IA' },
+      { icon: '💼', label: 'DESIGN', value: 'Pliable', details: 'Compact et portable' },
+      { icon: '🛋️', label: 'CONFORT', value: 'Mousse protéine', details: 'Coussinets premium' },
+      { icon: '🚚', label: 'LIVRAISON', value: '24-48h', details: 'Express La Réunion' },
+    ],
+    features: [
+      { icon: '✓', text: 'ANC hybride - Isolation sonore maximale pour concentration' },
+      { icon: '✓', text: '35h d\'autonomie - Plusieurs jours sans recharge' },
+      { icon: '✓', text: 'AI Clear Call - Appels professionnels ultra-clairs' },
+      { icon: '✓', text: 'Coussinets mousse protéine - Confort longue durée' },
+      { icon: '✓', text: 'Design pliable - Transport facile en déplacement' },
+    ],
+    engagement: `<p>Le <strong>HIFUTURE Tour X</strong> combine ANC hybride performant, autonomie exceptionnelle et confort premium. Le casque idéal pour travail, voyage et écoute intensive au quotidien.</p>
+<p><strong>Livraison rapide La Réunion</strong> - Réception en 24-48h.</p>
+<p><strong>Garantie 2 ans</strong> - SAV local disponible.</p>`,
+  };
+}
+
+/**
+ * HIFUTURE Yacht - Écouteurs TWS Qualcomm avec AptX
+ */
+function generateHifutureYachtContent() {
+  return {
+    description: `<p>Les <strong>HIFUTURE Yacht</strong> sont des écouteurs true wireless haut de gamme équipés de la puce Qualcomm QCC3040 et du codec AptX Adaptive pour une qualité audio audiophile. La technologie CVC 8.0 élimine le bruit du vent pour des appels parfaits en extérieur.</p>
+<p>Avec 20 heures d'autonomie totale, certification IPX5 waterproof, boîtier métallique premium et HiFuture Soft Base pour basses profondes, ces écouteurs offrent l'expérience audio la plus aboutie de la gamme. Disponibles en trois finitions élégantes pour La Réunion.</p>`,
+    specs: [
+      { icon: '🎧', label: 'TYPE', value: 'TWS Qualcomm', details: 'Puce QCC3040' },
+      { icon: '🎵', label: 'CODEC', value: 'AptX Adaptive', details: 'Qualité audiophile' },
+      { icon: '🔋', label: 'AUTONOMIE', value: '20 heures', details: '5h + 15h boîtier' },
+      { icon: '💧', label: 'WATERPROOF', value: 'IPX5', details: 'Résistant eau' },
+      { icon: '🎤', label: 'CVC 8.0', value: 'Anti-bruit vent', details: 'Appels extérieur' },
+      { icon: '⚡', label: 'CHARGE', value: 'USB-C 10W', details: 'Charge rapide' },
+      { icon: '🎨', label: 'FINITIONS', value: '3 coloris', details: 'Noir, Gold, Rose' },
+      { icon: '🚚', label: 'LIVRAISON', value: '24-48h', details: 'Express La Réunion' },
+    ],
+    features: [
+      { icon: '✓', text: 'Qualcomm QCC3040 - Puce premium pour audio haute fidélité' },
+      { icon: '✓', text: 'AptX Adaptive - Codec lossless pour qualité audiophile' },
+      { icon: '✓', text: 'CVC 8.0 - Suppression bruit du vent pour appels extérieurs' },
+      { icon: '✓', text: 'IPX5 waterproof - Résiste à la transpiration et pluie' },
+      { icon: '✓', text: 'Boîtier métallique - Design premium et protection optimale' },
+    ],
+    engagement: `<p>Les <strong>HIFUTURE Yacht</strong> représentent le summum de la qualité audio avec puce Qualcomm, codec AptX et CVC 8.0. L'excellence pour audiophiles exigeants qui refusent les compromis.</p>
+<p><strong>Livraison express La Réunion</strong> - Reçus en 24-48h.</p>
+<p><strong>Garantie constructeur</strong> - SAV local disponible.</p>`,
+  };
+}
+
+/**
+ * HIFUTURE Altus - Enceinte portable 10W waterproof
+ */
+function generateHifutureAltusContent() {
+  return {
+    description: `<p>L'<strong>HIFUTURE Altus</strong> est une enceinte portable Bluetooth 10W compacte et robuste, certifiée IPX5 waterproof pour une utilisation en extérieur sans crainte. Ses effets lumineux colorés créent une ambiance festive où que vous soyez.</p>
+<p>Avec 10 heures d'autonomie, mode TWS pour connecter deux enceintes, charge rapide USB-C et portée Bluetooth 10 mètres, l'Altus transforme chaque sortie en expérience musicale. Design compact avec sangle multiposition pour La Réunion.</p>`,
+    specs: [
+      { icon: '🔊', label: 'PUISSANCE', value: '10W', details: 'Son puissant' },
+      { icon: '💧', label: 'WATERPROOF', value: 'IPX5', details: 'Résistant eau' },
+      { icon: '🔋', label: 'AUTONOMIE', value: '10 heures', details: 'Musique non-stop' },
+      { icon: '⚡', label: 'CHARGE', value: 'USB-C rapide', details: '1,5h recharge' },
+      { icon: '📡', label: 'BLUETOOTH', value: '5.3', details: 'Portée 10m' },
+      { icon: '🎨', label: 'LUMIÈRES', value: 'RGB colorées', details: 'Ambiance festive' },
+      { icon: '🔗', label: 'TWS', value: 'Mode Stéréo', details: '2 enceintes simultanées' },
+      { icon: '🚚', label: 'LIVRAISON', value: '24-48h', details: 'Express La Réunion' },
+    ],
+    features: [
+      { icon: '✓', text: 'IPX5 waterproof - Plage, piscine, douche sans souci' },
+      { icon: '✓', text: '10h d\'autonomie - Journée complète de musique' },
+      { icon: '✓', text: 'Mode TWS - Double le son avec 2 enceintes appairées' },
+      { icon: '✓', text: 'Lumières RGB - Ambiance colorée pour soirées' },
+      { icon: '✓', text: 'Compact + sangle - Portable partout facilement' },
+    ],
+    engagement: `<p>L'<strong>HIFUTURE Altus</strong> combine son puissant 10W, résistance IPX5 et autonomie solide dans un format ultra-portable. L'enceinte parfaite pour plage, piscine et sorties outdoor à La Réunion.</p>
+<p><strong>Livraison rapide La Réunion</strong> - Réception en 24-48h.</p>
+<p><strong>Garantie constructeur</strong> - SAV disponible localement.</p>`,
+  };
+}
+
+/**
+ * HIFUTURE Gravity - Enceinte puissante 45W waterproof
+ */
+function generateHifutureGravityContent() {
+  return {
+    description: `<p>La <strong>HIFUTURE Gravity</strong> est une enceinte portable ultra-puissante de 45W (30W woofer + 15W tweeter) avec double driver et radiateur passif pour des basses profondes et médiums cristallins. Sa certification IPX7 permet une immersion totale sous l'eau.</p>
+<p>Avec 8 heures d'autonomie, mode TWS pour son stéréo double, lumières RGB vibrantes et charge rapide USB-C 10W, la Gravity transforme chaque rassemblement en événement. Construction tissu premium pour parties et aventures à La Réunion.</p>`,
+    specs: [
+      { icon: '🔊', label: 'PUISSANCE', value: '45W', details: '30W woofer + 15W tweeter' },
+      { icon: '💧', label: 'WATERPROOF', value: 'IPX7', details: 'Immersion totale' },
+      { icon: '🔋', label: 'AUTONOMIE', value: '8 heures', details: 'Parties prolongées' },
+      { icon: '⚡', label: 'CHARGE', value: 'USB-C 10W', details: 'Recharge rapide' },
+      { icon: '📡', label: 'BLUETOOTH', value: '5.3', details: 'Connexion stable' },
+      { icon: '🎨', label: 'LUMIÈRES', value: 'RGB LED', details: 'Effets vibrants' },
+      { icon: '🔗', label: 'TWS', value: 'Stéréo double', details: '2 enceintes simultanées' },
+      { icon: '🚚', label: 'LIVRAISON', value: '24-48h', details: 'Express La Réunion' },
+    ],
+    features: [
+      { icon: '✓', text: 'Puissance 45W - Son massif pour grandes soirées' },
+      { icon: '✓', text: 'IPX7 waterproof - Immersion complète sans risque' },
+      { icon: '✓', text: 'Double driver + radiateur - Basses profondes exceptionnelles' },
+      { icon: '✓', text: 'Mode TWS - Son stéréo avec 2 enceintes appairées' },
+      { icon: '✓', text: 'RGB LED vibrantes - Ambiance visuelle spectaculaire' },
+    ],
+    engagement: `<p>La <strong>HIFUTURE Gravity</strong> délivre une puissance audio de 45W avec IPX7 waterproof et lumières RGB immersives. L'enceinte ultime pour parties, piscine et aventures outdoor à La Réunion.</p>
+<p><strong>Livraison express La Réunion</strong> - Réception en 24-48h.</p>
+<p><strong>Garantie 2 ans</strong> - SAV local disponible.</p>`,
+  };
+}
+
+/**
+ * HIFUTURE Lume Pro - Montre connectée sportive AMOLED
+ */
+function generateHifutureLumeProContent() {
+  return {
+    description: `<p>La <strong>HIFUTURE Lume Pro</strong> est une montre connectée sportive premium avec écran AMOLED 1,85 pouces ultra-lumineux pour visibilité parfaite en extérieur. Son boîtier aluminium léger et son processeur double cœur garantissent fluidité et réactivité instantanée.</p>
+<p>Avec 7 jours d'autonomie, appels Bluetooth depuis le poignet, suivi santé 24/7 (fréquence cardiaque, SpO2, sommeil), 100+ modes sportifs et interface 3D tactile, la Lume Pro allie style premium et performances complètes. Parfaite pour sportifs exigeants à La Réunion.</p>`,
+    specs: [
+      { icon: '⌚', label: 'ÉCRAN', value: '1,85" AMOLED', details: 'Always-On Display' },
+      { icon: '🔋', label: 'AUTONOMIE', value: '7 jours', details: 'Usage intensif' },
+      { icon: '📞', label: 'APPELS BT', value: 'Depuis poignet', details: 'Appels directs' },
+      { icon: '❤️', label: 'SANTÉ 24/7', value: 'HR + SpO2', details: 'Suivi complet' },
+      { icon: '🏃', label: 'SPORTS', value: '100+ modes', details: 'Tous les sports' },
+      { icon: '💎', label: 'BOÎTIER', value: 'Aluminium', details: 'Léger et robuste' },
+      { icon: '⚡', label: 'PROCESSEUR', value: 'Double cœur', details: 'Ultra-réactif' },
+      { icon: '🚚', label: 'LIVRAISON', value: '24-48h', details: 'Express La Réunion' },
+    ],
+    features: [
+      { icon: '✓', text: 'AMOLED ultra-lumineux - Lisibilité parfaite en plein soleil' },
+      { icon: '✓', text: 'Appels Bluetooth - Répondez depuis votre poignet' },
+      { icon: '✓', text: 'Suivi santé 24/7 - HR, SpO2, sommeil, stress' },
+      { icon: '✓', text: '100+ modes sportifs - Tous vos entraînements trackés' },
+      { icon: '✓', text: 'Interface 3D tactile - Navigation fluide et intuitive' },
+    ],
+    engagement: `<p>La <strong>HIFUTURE Lume Pro</strong> combine écran AMOLED premium, autonomie 7 jours, appels Bluetooth et suivi santé complet. La montre connectée idéale pour sportifs et actifs à La Réunion.</p>
+<p><strong>Livraison rapide La Réunion</strong> - Réception en 24-48h.</p>
+<p><strong>Garantie constructeur</strong> - SAV local disponible.</p>`,
+  };
+}
+
+/**
+ * HIFUTURE GO PRO 2 - Montre connectée acier inoxydable premium
+ */
+function generateHifutureGoPro2Content() {
+  return {
+    description: `<p>La <strong>HIFUTURE GO PRO 2</strong> est une montre connectée premium en acier inoxydable au design suisse-inspiré. Son écran AMOLED 1,32 pouces (360x360 pixels) avec interface 3D et réveil au poignet offre une expérience visuelle exceptionnelle.</p>
+<p>Propulsée par Syntra™ AI avec processeur double cœur, cette montre offre 20 jours d'autonomie, Bluetooth 5.2, 24 modes sportifs, suivi santé complet (HR, tension, SpO2, cycle menstruel) et certification 3ATM waterproof. Élégance et technologie pour La Réunion.</p>`,
+    specs: [
+      { icon: '⌚', label: 'ÉCRAN', value: '1,32" AMOLED', details: '360x360 pixels' },
+      { icon: '🔋', label: 'AUTONOMIE', value: '20 jours', details: 'Batterie 430mAh' },
+      { icon: '💎', label: 'BOÎTIER', value: 'Acier inoxydable', details: 'Design suisse' },
+      { icon: '🤖', label: 'PROCESSEUR', value: 'Syntra™ AI', details: 'Double cœur' },
+      { icon: '📡', label: 'BLUETOOTH', value: '5.2', details: 'Connexion stable' },
+      { icon: '❤️', label: 'SANTÉ', value: 'HR + SpO2 + BP', details: 'Suivi complet' },
+      { icon: '🏃', label: 'SPORTS', value: '24 modes', details: 'Multisport' },
+      { icon: '💧', label: 'ÉTANCHÉITÉ', value: '3ATM', details: 'Résistant eau' },
+    ],
+    features: [
+      { icon: '✓', text: 'Design acier inoxydable - Élégance suisse premium' },
+      { icon: '✓', text: '20 jours d\'autonomie - Trois semaines sans recharge' },
+      { icon: '✓', text: 'Syntra™ AI - Intelligence artificielle embarquée' },
+      { icon: '✓', text: 'Suivi santé avancé - HR, tension, SpO2, cycle menstruel' },
+      { icon: '✓', text: 'Interface 3D - Navigation fluide et moderne' },
+    ],
+    engagement: `<p>La <strong>HIFUTURE GO PRO 2</strong> allie design premium en acier inoxydable, autonomie exceptionnelle de 20 jours et intelligence artificielle Syntra™. L'excellence pour ceux qui ne transigent pas sur le style et les performances.</p>
+<p><strong>Livraison express La Réunion</strong> - Réception en 24-48h.</p>
+<p><strong>Garantie 2 ans</strong> - SAV local disponible.</p>`,
+  };
+}
+
