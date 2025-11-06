@@ -176,17 +176,17 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: product.name,
-    description: product.description || product.shortDescription,
-    image: product.images,
+    description: product.fullDescription || product.shortDescription,
+    image: product.variants?.[0]?.images?.[0] || '',
     brand: {
       '@type': 'Brand',
-      name: product.brand,
+      name: product.brandName,
     },
     offers: {
       '@type': 'Offer',
       url: `https://monsterphone.re/produit/${product.urlSlug}`,
       priceCurrency: 'EUR',
-      price: product.price,
+      price: product.basePrice,
       itemCondition: 'https://schema.org/NewCondition',
       availability: product.variants?.some(v => v.stock > 0) ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
       seller: {
@@ -254,15 +254,15 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   };
 
   return {
-    title: product.metaTitle || `${product.name} | ${product.brand} | Monster Phone Boutique`,
-    description: product.metaDescription || product.shortDescription || `Découvrez ${product.name} de ${product.brand}. Livraison gratuite à La Réunion dès 50€. Garantie 2 ans.`,
-    keywords: product.keywords?.join(', ') || `${product.name}, ${product.brand}, ${product.category}, La Réunion, 974, Monster Phone`,
+    title: `${product.name} | ${product.brandName} | Monster Phone Boutique`,
+    description: product.shortDescription || `Découvrez ${product.name} de ${product.brandName}. Livraison gratuite à La Réunion dès 50€. Garantie 2 ans.`,
+    keywords: `${product.name}, ${product.brandName}, ${product.categoryName}, La Réunion, 974, Monster Phone`,
     openGraph: {
-      title: product.metaTitle || product.name,
-      description: product.metaDescription || product.shortDescription,
+      title: product.name,
+      description: product.shortDescription,
       url: `https://monsterphone.re/produit/${product.urlSlug}`,
       siteName: 'Monster Phone Boutique',
-      images: product.images.map(image => ({
+      images: (product.variants?.[0]?.images || []).map(image => ({
         url: image,
         width: 1200,
         height: 1200,
@@ -275,7 +275,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
       card: 'summary_large_image',
       title: product.name,
       description: product.shortDescription,
-      images: [product.images[0]],
+      images: [product.variants?.[0]?.images?.[0] || ''],
     },
     alternates: {
       canonical: `https://monsterphone.re/produit/${product.urlSlug}`,
@@ -292,12 +292,12 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
       },
     },
     other: {
-      'product:price:amount': product.price.toString(),
+      'product:price:amount': product.basePrice.toString(),
       'product:price:currency': 'EUR',
       'product:availability': product.variants?.some(v => v.stock > 0) ? 'in stock' : 'out of stock',
       'product:condition': 'new',
-      'product:brand': product.brand,
-      'product:category': product.category,
+      'product:brand': product.brandName,
+      'product:category': product.categoryName,
       ...(jsonLd && {
         'application/ld+json': JSON.stringify(jsonLd),
       }),
@@ -327,7 +327,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
   }
 
   // Produits similaires de la même marque
-  const relatedProducts = await getRelatedProducts(product.brand, product.id);
+  const relatedProducts = await getRelatedProducts(product.brandName, product.id);
 
   return (
     <div className="min-h-screen">
@@ -349,7 +349,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
         {relatedProducts.length > 0 && (
           <FeaturedProducts
             products={relatedProducts}
-            title={`Autres produits ${product.brand}`}
+            title={`Autres produits ${product.brandName}`}
             hideDescription={true}
             hideCTA={true}
           />

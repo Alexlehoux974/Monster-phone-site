@@ -81,16 +81,16 @@ export default function SmartphonesPage() {
       // Recherche
       const matchesSearch = searchQuery === '' || 
         product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.category.toLowerCase().includes(searchQuery.toLowerCase());
+        product.brandName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.categoryName.toLowerCase().includes(searchQuery.toLowerCase());
       
       // Filtres de prix
-      const matchesPrice = product.price >= filters.priceRange[0] && 
-                          product.price <= filters.priceRange[1];
+      const matchesPrice = product.basePrice >= filters.priceRange[0] && 
+                          product.basePrice <= filters.priceRange[1];
       
       // Promotion
       const matchesPromo = !filters.hasPromo || 
-                          (product.discount && product.discount > 0);
+                          (product.discountPercent && product.discountPercent > 0);
       
       // Note minimale
       const matchesRating = !filters.minRating || 
@@ -102,11 +102,11 @@ export default function SmartphonesPage() {
       
       // Marques
       const matchesBrand = filters.brands.length === 0 || 
-                          filters.brands.includes(product.brand);
+                          filters.brands.includes(product.brandName);
       
       // Catégories
       const matchesCategory = filters.categories.length === 0 || 
-                             filters.categories.includes(product.category);
+                             filters.categories.includes(product.categoryName);
       
       return matchesSearch && matchesPrice && matchesPromo && 
              matchesRating && matchesStock && matchesBrand && matchesCategory;
@@ -119,9 +119,9 @@ export default function SmartphonesPage() {
     
     switch (sortOption) {
       case 'price-asc':
-        return sorted.sort((a, b) => a.price - b.price);
+        return sorted.sort((a, b) => a.basePrice - b.basePrice);
       case 'price-desc':
-        return sorted.sort((a, b) => b.price - a.price);
+        return sorted.sort((a, b) => b.basePrice - a.basePrice);
       case 'name-asc':
         return sorted.sort((a, b) => a.name.localeCompare(b.name));
       case 'name-desc':
@@ -260,9 +260,9 @@ export default function SmartphonesPage() {
                             fill
                             className="object-cover group-hover:scale-105 transition-transform duration-200"
                           />
-                          {product.discount && product.discount > 0 && (
+                          {product.discountPercent && product.discountPercent > 0 && (
                             <div className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded-md text-xs font-bold">
-                              -{product.discount}%
+                              -{product.discountPercent}%
                             </div>
                           )}
                           {product.status === 'out-of-stock' && (
@@ -277,7 +277,7 @@ export default function SmartphonesPage() {
                           <h3 className="font-semibold text-sm lg:text-base text-gray-900 mb-1 line-clamp-2">
                             {product.name}
                           </h3>
-                          <p className="text-xs lg:text-sm text-gray-600 mb-2">{product.brand}</p>
+                          <p className="text-xs lg:text-sm text-gray-600 mb-2">{product.brandName}</p>
                           
                           {/* Notation */}
                           {product.rating && product.rating.average > 0 && (
@@ -304,9 +304,9 @@ export default function SmartphonesPage() {
                           <div className="flex items-center justify-between">
                             <div>
                               <p className="text-lg lg:text-xl font-bold text-blue-600">
-                                {product.price ? `${product.price.toFixed(2)}€` : 'Prix sur demande'}
+                                {product.basePrice ? `${product.basePrice.toFixed(2)}€` : 'Prix sur demande'}
                               </p>
-                              {product.originalPrice && product.originalPrice > product.price && (
+                              {product.originalPrice && product.originalPrice > product.basePrice && (
                                 <p className="text-sm text-gray-500 line-through">
                                   {product.originalPrice.toFixed(2)}€
                                 </p>

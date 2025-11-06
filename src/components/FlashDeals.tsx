@@ -180,7 +180,7 @@ const FlashDeals = () => {
                 className="absolute -top-3 -right-3 z-20 bg-red-600 text-white rounded-full w-16 h-16 flex flex-col items-center justify-center font-bold shadow-lg"
               >
                 <span className="text-xs">-</span>
-                <span className="text-xl">{product.discount}%</span>
+                <span className="text-xl">{product.discountPercent}%</span>
               </motion.div>
 
               {/* Indicateur de stock */}

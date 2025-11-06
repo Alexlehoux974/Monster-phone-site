@@ -37,8 +37,8 @@ export default function Sidebar({
 
   // Organiser les produits en hiérarchie
   const hierarchy: HierarchyStructure = products.reduce((acc, product) => {
-    const category = product.category;
-    const brand = product.brand;
+    const category = product.categoryName;
+    const brand = product.brandName;
     
     if (!acc[category]) {
       acc[category] = {};
@@ -287,7 +287,7 @@ export default function Sidebar({
           <div className="text-xs text-gray-800 space-y-1">
             <div>Total produits: {products.length}</div>
             <div>Catégories: {Object.keys(hierarchy).length}</div>
-            <div>Marques: {new Set(products.map(p => p.brand)).size}</div>
+            <div>Marques: {new Set(products.map(p => p.brandName)).size}</div>
           </div>
         </div>
     </div>

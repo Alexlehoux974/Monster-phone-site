@@ -5,7 +5,7 @@
  */
 
 import { createClient } from '@supabase/supabase-js';
-import { allProducts, type Product, type ProductVariant, type ProductSpecification, type Review } from '../../src/data/products';
+import { PRODUCTS, type Product, type ProductVariant, type ProductSpecification, type Review } from '../../src/data/products';
 import * as dotenv from 'dotenv';
 
 // Charger les variables d'environnement
@@ -60,11 +60,8 @@ interface SupabaseProduct {
   short_description?: string;
   price: number;
   original_price?: number;
-  discount?: number;
-  promo?: string;
+  discount_percentage?: number;
   status: 'active' | 'draft' | 'out-of-stock';
-  warranty?: string;
-  delivery_time?: string;
   repairability_index?: number;
   das_head?: string;
   das_body?: string;
@@ -87,7 +84,7 @@ async function migrateBrands() {
   console.log('📦 Migration des marques...');
   
   // Extraire les marques uniques
-  const uniqueBrands = new Set(allProducts.map(p => p.brand));
+  const uniqueBrands = new Set(PRODUCTS.map(p => p.brandName));
   const brands: SupabaseBrand[] = Array.from(uniqueBrands).map(brand => ({
     name: brand,
     slug: createSlug(brand),
@@ -121,12 +118,12 @@ async function migrateCategories() {
   // Extraire les catégories et sous-catégories uniques
   const categoriesMap = new Map<string, Set<string>>();
   
-  allProducts.forEach(product => {
-    if (!categoriesMap.has(product.category)) {
-      categoriesMap.set(product.category, new Set());
+  PRODUCTS.forEach(product => {
+    if (!categoriesMap.has(product.categoryName)) {
+      categoriesMap.set(product.categoryName, new Set());
     }
     if (product.subcategory) {
-      categoriesMap.get(product.category)?.add(product.subcategory);
+      categoriesMap.get(product.categoryName)?.add(product.subcategory);
     }
   });
 
@@ -196,14 +193,14 @@ async function migrateProduct(product: Product) {
     const { data: brand } = await supabase
       .from('brands')
       .select('id')
-      .eq('name', product.brand)
+      .eq('name', product.brandName)
       .single();
 
     // Récupérer la catégorie
     const { data: category } = await supabase
       .from('categories')
       .select('id')
-      .eq('name', product.category)
+      .eq('name', product.categoryName)
       .is('parent_id', null)
       .single();
       
@@ -227,15 +224,12 @@ async function migrateProduct(product: Product) {
       brand_id: brand?.id,
       category_id: category?.id,
       subcategory_id: subcategory?.id,
-      description: product.description,
+      description: product.fullDescription,
       short_description: product.shortDescription,
-      price: product.price,
+      price: product.basePrice,
       original_price: product.originalPrice,
-      discount: product.discount,
-      promo: product.promo,
-      status: product.status || 'active',
-      warranty: product.warranty,
-      delivery_time: product.deliveryTime,
+      discount_percentage: product.discountPercent,
+      status: (product.status as 'active' | 'draft' | 'out-of-stock') || 'active',
       repairability_index: product.repairabilityIndex,
       das_head: product.dasHead,
       das_body: product.dasBody,
@@ -262,7 +256,7 @@ async function migrateProduct(product: Product) {
         color_code: variant.colorCode,
         ean: variant.ean,
         stock: variant.stock,
-        is_default: variant.color === product.defaultVariant
+        is_default: index === 0 // First variant is default
       }));
 
       const { data: insertedVariants, error: variantError } = await supabase
@@ -298,20 +292,7 @@ async function migrateProduct(product: Product) {
       }
     }
 
-    // Migrer les images principales du produit
-    if (product.images && product.images.length > 0) {
-      const productImages = product.images.map((url, index) => ({
-        product_id: insertedProduct.id,
-        url,
-        alt: `${product.name} - Image ${index + 1}`,
-        is_primary: index === 0,
-        display_order: index + 1
-      }));
-
-      await supabase
-        .from('product_images')
-        .upsert(productImages, { onConflict: 'url' });
-    }
+    // Images are now handled in variants, not at product level
 
     // Migrer les spécifications
     if (product.specifications && product.specifications.length > 0) {
@@ -328,115 +309,7 @@ async function migrateProduct(product: Product) {
         .upsert(specifications);
     }
 
-    // Migrer les highlights
-    if (product.highlights && product.highlights.length > 0) {
-      const highlights = product.highlights.map((highlight, index) => ({
-        product_id: insertedProduct.id,
-        text: highlight,
-        display_order: index + 1
-      }));
-
-      await supabase
-        .from('product_highlights')
-        .upsert(highlights);
-    }
-
-    // Migrer les badges
-    if (product.badges && product.badges.length > 0) {
-      const badges = product.badges.map((badge, index) => ({
-        product_id: insertedProduct.id,
-        badge_text: badge,
-        badge_color: badge === 'Nouveau' ? '#10b981' :
-                     badge === 'Bestseller' ? '#f59e0b' :
-                     badge === 'Promo' ? '#ef4444' : '#6b7280',
-        display_order: index + 1
-      }));
-
-      await supabase
-        .from('product_badges')
-        .upsert(badges);
-    }
-
-    // Migrer les vidéos
-    if (product.videos && product.videos.length > 0) {
-      const videos = product.videos.map((url, index) => ({
-        product_id: insertedProduct.id,
-        url,
-        title: `Vidéo ${product.name} ${index + 1}`,
-        display_order: index + 1
-      }));
-
-      await supabase
-        .from('product_videos')
-        .upsert(videos);
-    }
-
-    // Migrer les métadonnées SEO
-    if (product.metaTitle || product.metaDescription || product.keywords) {
-      const seoData = {
-        product_id: insertedProduct.id,
-        meta_title: product.metaTitle,
-        meta_description: product.metaDescription,
-        keywords: product.keywords,
-        og_title: product.metaTitle,
-        og_description: product.metaDescription,
-        og_image: product.images?.[0],
-        structured_data: {
-          "@context": "https://schema.org",
-          "@type": "Product",
-          "name": product.name,
-          "brand": product.brand,
-          "category": product.category
-        }
-      };
-
-      await supabase
-        .from('seo_metadata')
-        .upsert(seoData);
-    }
-
-    // Migrer les avis (reviews)
-    if (product.reviews && product.reviews.length > 0) {
-      const reviews = product.reviews.map((review: Review) => ({
-        product_id: insertedProduct.id,
-        author_name: review.author,
-        rating: review.rating,
-        title: review.title,
-        comment: review.comment,
-        is_verified: review.verified,
-        helpful_count: review.helpful || 0,
-        created_at: review.date
-      }));
-
-      await supabase
-        .from('product_reviews')
-        .upsert(reviews);
-    }
-
-    // Générer des avis si le produit a un rating mais pas de reviews
-    if (product.rating && (!product.reviews || product.reviews.length === 0)) {
-      const reviewsToGenerate = Math.min(product.rating.count, 10); // Limiter à 10 pour l'exemple
-      const generatedReviews = [];
-      
-      for (let i = 0; i < reviewsToGenerate; i++) {
-        const rating = Math.random() > 0.7 ? 5 : Math.random() > 0.5 ? 4 : 3;
-        generatedReviews.push({
-          product_id: insertedProduct.id,
-          author_name: `Client ${i + 1}`,
-          rating,
-          title: rating === 5 ? 'Excellent produit' : rating === 4 ? 'Très bon produit' : 'Correct',
-          comment: rating === 5 ? 'Produit conforme à la description, livraison rapide.' :
-                   rating === 4 ? 'Bon rapport qualité-prix, je recommande.' :
-                   'Produit correct pour le prix.',
-          is_verified: true,
-          helpful_count: Math.floor(Math.random() * 10)
-        });
-      }
-
-      await supabase
-        .from('product_reviews')
-        .upsert(generatedReviews);
-    }
+    // Highlights, badges, videos, SEO metadata, and reviews are no longer part of the Product interface
 
     console.log(`✅ Produit migré: ${product.name} (${product.sku})`);
 
@@ -448,7 +321,7 @@ async function migrateProduct(product: Product) {
 // Fonction principale de migration
 async function migrateAllData() {
   console.log('🚀 Début de la migration des données produits vers Supabase');
-  console.log(`📊 Nombre total de produits à migrer: ${allProducts.length}`);
+  console.log(`📊 Nombre total de produits à migrer: ${PRODUCTS.length}`);
   
   try {
     // Étape 1: Migrer les marques
@@ -462,12 +335,12 @@ async function migrateAllData() {
     
     // Traiter les produits par batch pour éviter la surcharge
     const batchSize = 5;
-    for (let i = 0; i < allProducts.length; i += batchSize) {
-      const batch = allProducts.slice(i, i + batchSize);
+    for (let i = 0; i < PRODUCTS.length; i += batchSize) {
+      const batch = PRODUCTS.slice(i, i + batchSize);
       await Promise.all(batch.map(product => migrateProduct(product)));
       
-      const progress = Math.min(i + batchSize, allProducts.length);
-      console.log(`📈 Progression: ${progress}/${allProducts.length} produits traités`);
+      const progress = Math.min(i + batchSize, PRODUCTS.length);
+      console.log(`📈 Progression: ${progress}/${PRODUCTS.length} produits traités`);
     }
     
     // Étape 4: Créer les collections par défaut
@@ -589,9 +462,9 @@ async function migrateAllData() {
     
     console.log('✅ Migration terminée avec succès!');
     console.log('📊 Résumé:');
-    console.log(`   - Produits migrés: ${allProducts.length}`);
-    console.log(`   - Marques créées: ${new Set(allProducts.map(p => p.brand)).size}`);
-    console.log(`   - Catégories créées: ${new Set(allProducts.map(p => p.category)).size}`);
+    console.log(`   - Produits migrés: ${PRODUCTS.length}`);
+    console.log(`   - Marques créées: ${new Set(PRODUCTS.map(p => p.brandName)).size}`);
+    console.log(`   - Catégories créées: ${new Set(PRODUCTS.map(p => p.categoryName)).size}`);
     
     // Rafraîchir les vues matérialisées
     console.log('🔄 Rafraîchissement des vues matérialisées...');

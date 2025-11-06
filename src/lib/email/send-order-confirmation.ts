@@ -8,6 +8,7 @@ interface OrderItem {
   quantity: number;
   unit_price: number;
   total_price: number;
+  variant?: string;
 }
 
 interface SendOrderConfirmationParams {
@@ -15,8 +16,13 @@ interface SendOrderConfirmationParams {
   orderNumber: string;
   customerName: string;
   customerEmail: string;
+  customerPhone?: string;
+  shippingAddress?: string;
+  shippingCity?: string;
+  shippingPostalCode?: string;
   items: OrderItem[];
   subtotal: number;
+  shippingCost?: number;
   total: number;
   orderDate: string;
 }
@@ -29,8 +35,13 @@ export async function sendOrderConfirmation(params: SendOrderConfirmationParams)
         orderNumber: params.orderNumber,
         customerName: params.customerName,
         customerEmail: params.customerEmail,
+        customerPhone: params.customerPhone,
+        shippingAddress: params.shippingAddress,
+        shippingCity: params.shippingCity,
+        shippingPostalCode: params.shippingPostalCode,
         items: params.items,
         subtotal: params.subtotal,
+        shippingCost: params.shippingCost,
         total: params.total,
         orderDate: params.orderDate,
       })

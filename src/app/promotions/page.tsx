@@ -213,9 +213,9 @@ export default function PromotionsPage() {
       const productsWithPromos = supabaseProducts.map(product => ({
         ...product,
         promotion: {
-          discount: product.discount || 0,
+          discount: product.discountPercent || 0,
           originalPrice: product.originalPrice ? `${product.originalPrice}€` : '',
-          promoPrice: `${product.price}€`
+          promoPrice: `${product.basePrice}€`
         }
       }));
       setProductsWithPromotions(productsWithPromos);
@@ -227,7 +227,7 @@ export default function PromotionsPage() {
     let filtered = productsWithPromotions;
 
     if (selectedCategory !== 'all') {
-      filtered = filtered.filter(product => product.category === selectedCategory);
+      filtered = filtered.filter(product => product.categoryName === selectedCategory);
     }
 
     // Trier par critère sélectionné
@@ -238,9 +238,9 @@ export default function PromotionsPage() {
       filtered.sort((a, b) => {
         switch (sortBy) {
           case 'discount':
-            return (b.discount || 0) - (a.discount || 0);
+            return (b.discountPercent || 0) - (a.discountPercent || 0);
           case 'price':
-            return a.price - b.price;
+            return a.basePrice - b.basePrice;
           case 'name':
             return a.name.localeCompare(b.name);
           default:
@@ -253,7 +253,7 @@ export default function PromotionsPage() {
   }, [productsWithPromotions, selectedCategory, sortBy]);
 
   // Catégories disponibles
-  const categories = Array.from(new Set(productsWithPromotions.map(p => p.category)));
+  const categories = Array.from(new Set(productsWithPromotions.map(p => p.categoryName)));
 
   useEffect(() => {
     document.title = 'Promotions Monster Phone | Smartphones Gaming en Promo La Réunion 974';
@@ -462,15 +462,15 @@ export default function PromotionsPage() {
                   <div className="absolute top-3 left-3 z-10">
                     <Badge className="bg-red-600 text-white px-2 py-1 text-xs font-bold">
                       <TrendingDown className="w-3 h-3 mr-1" />
-                      -{product.discount}%
+                      -{product.discountPercent}%
                     </Badge>
                   </div>
 
                   {/* Image produit */}
                   <div className="aspect-square bg-gray-100 relative overflow-hidden">
-                    {product.images && product.images.length > 0 ? (
+                    {product.variants?.[0]?.images && product.variants[0].images.length > 0 ? (
                       <Image
-                        src={product.images[0]}
+                        src={product.variants[0].images[0]}
                         alt={product.name}
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-300"
@@ -499,7 +499,7 @@ export default function PromotionsPage() {
                   <div className="p-4">
                     {/* Marque */}
                     <Badge variant="outline" className="text-xs mb-2">
-                      {product.brand}
+                      {product.brandName}
                     </Badge>
 
                     {/* Nom du produit */}
@@ -510,7 +510,7 @@ export default function PromotionsPage() {
                     {/* Prix */}
                     <div className="flex items-center gap-2 mb-3">
                       <span className="text-lg font-bold text-red-600">
-                        {formatPrice(product.price)}
+                        {formatPrice(product.basePrice)}
                       </span>
                       {product.originalPrice && (
                         <span className="text-sm text-gray-700 line-through">
@@ -521,7 +521,7 @@ export default function PromotionsPage() {
 
                     {/* Description courte */}
                     <p className="text-sm text-gray-700 line-clamp-2 mb-4">
-                      {product.description}
+                      {product.shortDescription}
                     </p>
 
                     {/* Actions */}

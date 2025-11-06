@@ -88,9 +88,9 @@ export function CartProvider({ children, initialItems }: { children: ReactNode; 
         return;
       }
       availableStock = selectedVariant.stock || 0;
-    } else if (productToAdd.stockQuantity !== undefined) {
+    } else if (productToAdd.variants?.[0]?.stock || 0 !== undefined) {
       // Produit sans variants: utiliser stockQuantity
-      availableStock = productToAdd.stockQuantity;
+      availableStock = productToAdd.variants?.[0]?.stock || 0;
     } else {
       // Fallback: utiliser le stock total des variantes
       availableStock = productToAdd.variants?.reduce((sum, v) => sum + (v.stock || 0), 0) || 0;
@@ -163,9 +163,9 @@ export function CartProvider({ children, initialItems }: { children: ReactNode; 
           if (item.product.variants && item.product.variants.length > 0 && item.variant) {
             const selectedVariant = item.product.variants?.find(v => v.color === item.variant);
             availableStock = selectedVariant?.stock || 0;
-          } else if (item.product.stockQuantity !== undefined) {
+          } else if (item.product.variants?.[0]?.stock || 0 !== undefined) {
             // Produit sans variants: utiliser stockQuantity
-            availableStock = item.product.stockQuantity;
+            availableStock = item.product.variants?.[0]?.stock || 0;
           } else {
             availableStock = item.product.variants?.reduce((sum, v) => sum + (v.stock || 0), 0) || 0;
           }
@@ -192,12 +192,16 @@ export function CartProvider({ children, initialItems }: { children: ReactNode; 
   const getCartTotal = () => {
     return items.reduce((total, item) => {
       // Assurer la conversion en nombre pour éviter NaN
-      const basePrice = typeof item.product.price === 'string'
-        ? parseFloat(item.product.price)
-        : item.product.price;
+      const basePrice = typeof item.product.basePrice === 'string'
+        ? parseFloat(item.product.basePrice)
+        : item.product.basePrice;
 
-      // Appliquer la réduction admin si elle existe
-      const adminDiscount = item.product.adminDiscountPercent || 0;
+      // Appliquer la réduction admin si elle existe dans le variant
+      let adminDiscount = 0;
+      if (item.variant && item.product.variants) {
+        const selectedVariant = item.product.variants.find(v => v.color === item.variant);
+        adminDiscount = selectedVariant?.adminDiscountPercent || 0;
+      }
       const finalPrice = adminDiscount > 0
         ? basePrice * (1 - adminDiscount / 100)
         : basePrice;
@@ -254,9 +258,9 @@ export function CartProvider({ children, initialItems }: { children: ReactNode; 
           variantId = selectedVariant?.id;
         }
 
-        const price = typeof item.product.price === 'string'
-          ? parseFloat(item.product.price)
-          : item.product.price;
+        const price = typeof item.product.basePrice === 'string'
+          ? parseFloat(item.product.basePrice)
+          : item.product.basePrice;
 
         return {
           productId: item.product.id,

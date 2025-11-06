@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowRight, Sparkles } from 'lucide-react';
-import { allProducts } from '@/data/products';
+import { PRODUCTS } from '@/data/products';
 
 interface Brand {
   name: string;
@@ -18,7 +18,7 @@ interface Brand {
 const BrandShowcase = () => {
   // Compter les produits par marque
   const getBrandProductCount = (brandName: string) => {
-    return allProducts.filter(p => p.brand === brandName).length;
+    return PRODUCTS.filter(p => p.brandName === brandName).length;
   };
 
   const brands: Brand[] = [

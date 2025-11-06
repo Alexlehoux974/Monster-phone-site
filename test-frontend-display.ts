@@ -41,28 +41,28 @@ async function testFrontendDisplay() {
 
   console.log('\n✅ Product after adapter conversion:');
   console.log('   Name:', legacyProduct.name);
-  console.log('   Price:', legacyProduct.price, '€');
-  console.log('   Admin Discount Percent:', legacyProduct.adminDiscountPercent, '%');
-  console.log('   Is Visible:', legacyProduct.isVisible);
+  console.log('   Price:', legacyProduct.basePrice, '€');
+  console.log('   Admin Discount Percent:', legacyProduct.variants[0]?.adminDiscountPercent, '%');
+  console.log('   Is Visible:', legacyProduct.status === "active");
 
   // Simuler le calcul dans ProductCard
-  const hasAdminDiscount = legacyProduct.adminDiscountPercent && legacyProduct.adminDiscountPercent > 0;
+  const hasAdminDiscount = legacyProduct.variants[0]?.adminDiscountPercent && legacyProduct.variants[0]?.adminDiscountPercent > 0;
   const finalPrice = hasAdminDiscount
-    ? legacyProduct.price * (1 - legacyProduct.adminDiscountPercent! / 100)
-    : legacyProduct.price;
+    ? legacyProduct.basePrice * (1 - legacyProduct.variants[0]?.adminDiscountPercent! / 100)
+    : legacyProduct.basePrice;
 
   console.log('\n✅ Price calculation (as in ProductCard):');
   console.log('   Has Admin Discount:', hasAdminDiscount);
-  console.log('   Original Price:', legacyProduct.price.toFixed(2), '€');
+  console.log('   Original Price:', legacyProduct.basePrice.toFixed(2), '€');
   console.log('   💰 Final Price:', finalPrice.toFixed(2), '€');
-  console.log('   💵 Discount Amount:', (legacyProduct.price - finalPrice).toFixed(2), '€');
-  console.log('   📊 Badge Display: -' + legacyProduct.adminDiscountPercent + '%');
+  console.log('   💵 Discount Amount:', (legacyProduct.basePrice - finalPrice).toFixed(2), '€');
+  console.log('   📊 Badge Display: -' + legacyProduct.variants[0]?.adminDiscountPercent + '%');
 
   // Vérifier les prix affichés
   console.log('\n✅ What will be displayed on ProductCard:');
-  console.log('   🏷️ Badge: -' + legacyProduct.adminDiscountPercent + '%');
+  console.log('   🏷️ Badge: -' + legacyProduct.variants[0]?.adminDiscountPercent + '%');
   console.log('   💰 Main Price (blue, large): ' + finalPrice.toFixed(2) + '€');
-  console.log('   💸 Crossed Price (gray, small): ' + legacyProduct.price.toFixed(2) + '€');
+  console.log('   💸 Crossed Price (gray, small): ' + legacyProduct.basePrice.toFixed(2) + '€');
 
   // Test avec d'autres pourcentages
   console.log('\n🔍 Testing different discount scenarios:');
@@ -74,7 +74,7 @@ async function testFrontendDisplay() {
   ];
 
   scenarios.forEach(scenario => {
-    const price = legacyProduct.price;
+    const price = legacyProduct.basePrice;
     const finalPrice = price * (1 - scenario.discount / 100);
     const savings = price - finalPrice;
     console.log(`   ${scenario.description}:`);

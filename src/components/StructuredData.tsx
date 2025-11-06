@@ -63,17 +63,17 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
         if (!data || !data.product) return null;
         const product: Product = data.product;
         // Price is already a number in the Product interface
-        const price = product.price;
+        const price = product.basePrice;
         
         return {
           '@context': 'https://schema.org',
           '@type': 'Product',
           name: product.name,
-          description: product.description,
-          image: product.images[0] || 'https://monsterphone.re/placeholder-product.png',
+          description: product.shortDescription || product.fullDescription,
+          image: product.variants?.[0]?.images?.[0] || 'https://monsterphone.re/placeholder-product.png',
           brand: {
             '@type': 'Brand',
-            name: product.brand,
+            name: product.brandName,
           },
           offers: {
             '@type': 'Offer',

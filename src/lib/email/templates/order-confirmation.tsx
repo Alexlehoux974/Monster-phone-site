@@ -5,6 +5,7 @@ interface OrderItem {
   quantity: number;
   unit_price: number;
   total_price: number;
+  variant?: string; // Couleur, capacité, taille, etc.
 }
 
 interface OrderConfirmationEmailProps {
@@ -12,8 +13,13 @@ interface OrderConfirmationEmailProps {
   orderNumber: string;
   customerName: string;
   customerEmail: string;
+  customerPhone?: string;
+  shippingAddress?: string;
+  shippingCity?: string;
+  shippingPostalCode?: string;
   items: OrderItem[];
   subtotal: number;
+  shippingCost?: number;
   total: number;
   orderDate: string;
 }
@@ -23,8 +29,13 @@ export const OrderConfirmationEmail: React.FC<OrderConfirmationEmailProps> = ({
   orderNumber,
   customerName,
   customerEmail,
+  customerPhone,
+  shippingAddress,
+  shippingCity,
+  shippingPostalCode,
   items,
   subtotal,
+  shippingCost = 0,
   total,
   orderDate,
 }) => (
@@ -190,7 +201,25 @@ export const OrderConfirmationEmail: React.FC<OrderConfirmationEmailProps> = ({
               hour: '2-digit',
               minute: '2-digit'
             })}</p>
-            <p><strong>Email :</strong> {customerEmail}</p>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginTop: '20px' }}>
+            <div className="order-info">
+              <h3 style={{ fontSize: '16px', margin: '0 0 10px', color: '#667eea' }}>📧 Informations client</h3>
+              <p><strong>Nom :</strong> {customerName}</p>
+              <p><strong>Email :</strong> {customerEmail}</p>
+              {customerPhone && <p><strong>Téléphone :</strong> {customerPhone}</p>}
+            </div>
+
+            {(shippingAddress || shippingCity || shippingPostalCode) && (
+              <div className="order-info">
+                <h3 style={{ fontSize: '16px', margin: '0 0 10px', color: '#667eea' }}>🚚 Adresse de livraison</h3>
+                {shippingAddress && <p>{shippingAddress}</p>}
+                {(shippingPostalCode || shippingCity) && (
+                  <p>{shippingPostalCode} {shippingCity}</p>
+                )}
+              </div>
+            )}
           </div>
 
           <h2 style={{ fontSize: '20px', marginTop: '30px', marginBottom: '15px' }}>
@@ -209,7 +238,14 @@ export const OrderConfirmationEmail: React.FC<OrderConfirmationEmailProps> = ({
             <tbody>
               {items.map((item, index) => (
                 <tr key={index}>
-                  <td>{item.product_name}</td>
+                  <td>
+                    {item.product_name}
+                    {item.variant && (
+                      <span style={{ display: 'block', fontSize: '12px', color: '#666', marginTop: '4px' }}>
+                        Variant: {item.variant}
+                      </span>
+                    )}
+                  </td>
                   <td style={{ textAlign: 'center' }}>{item.quantity}</td>
                   <td style={{ textAlign: 'right' }}>{item.unit_price.toFixed(2)} €</td>
                   <td style={{ textAlign: 'right' }}>{item.total_price.toFixed(2)} €</td>
@@ -219,6 +255,20 @@ export const OrderConfirmationEmail: React.FC<OrderConfirmationEmailProps> = ({
                 <td colSpan={3} style={{ textAlign: 'right' }}>Sous-total</td>
                 <td style={{ textAlign: 'right' }}>{subtotal.toFixed(2)} €</td>
               </tr>
+              {shippingCost > 0 && (
+                <tr className="total-row">
+                  <td colSpan={3} style={{ textAlign: 'right' }}>Frais de livraison</td>
+                  <td style={{ textAlign: 'right' }}>{shippingCost.toFixed(2)} €</td>
+                </tr>
+              )}
+              {shippingCost === 0 && (
+                <tr className="total-row">
+                  <td colSpan={3} style={{ textAlign: 'right' }}>Frais de livraison</td>
+                  <td style={{ textAlign: 'right', color: '#10b981' }}>
+                    <strong>GRATUIT 🎉</strong>
+                  </td>
+                </tr>
+              )}
               <tr className="total-row">
                 <td colSpan={3} style={{ textAlign: 'right' }}>
                   <strong>Total TTC</strong>

@@ -4,7 +4,15 @@
  */
 
 import type { ProductFullView, DatabaseCategory } from './client';
-import type { Product, ProductVariant as LegacyVariant, Review, ProductSpecification, CategoryStructure } from '@/data/products';
+import type { Product, ProductVariant as LegacyVariant, Review, ProductSpecification } from '@/data/products';
+
+// Define CategoryStructure locally
+export interface CategoryStructure {
+  name: string;
+  slug: string;
+  subcategories: { name: string; slug: string; productCount?: number }[];
+  productCount?: number;
+}
 
 /**
  * Extraire le texte pur depuis une chaîne HTML
@@ -31,9 +39,7 @@ export function supabaseProductToLegacy(product: ProductFullView): Product {
     colorCode: v.color_code || '',
     ean: v.ean || '',
     stock: v.stock || 0,
-    images: v.images || [],
     is_default: v.is_default,
-    adminDiscountPercent: v.admin_discount_percent || 0 // Promotion admin spécifique au variant
   })) || [];
 
   // Construire les spécifications
@@ -82,7 +88,7 @@ export function supabaseProductToLegacy(product: ProductFullView): Product {
 
     // Forcer la détection pour Monster
     if (nameLower.includes('monster')) {
-      brandName = 'Monster';
+      brandName = 'MONSTER';
     } else if (!brandName) {
       // Pour les autres marques, détecter seulement si brand_name n'est pas défini
       if (nameLower.includes('muvit')) {
@@ -113,42 +119,45 @@ export function supabaseProductToLegacy(product: ProductFullView): Product {
   const finalOriginalPrice = adminDiscountPercent > 0 ? basePrice : product.original_price;
   const finalDiscountPercent = adminDiscountPercent > 0 ? adminDiscountPercent : product.discount_percentage;
 
+  // Generate IDs and slugs from names
+  const categoryName = mapCategoryToLegacy(product.category_name || '');
+  const brandSlug = (brandName || '').toLowerCase().replace(/\s+/g, '-');
+  const categorySlug = categoryName.toLowerCase().replace(/\s+/g, '-');
+
   return {
     id: product.id,
     airtableId: product.id, // Utiliser l'ID Supabase comme airtableId pour compatibilité
     sku: product.sku,
     name: product.name,
-    brand: brandName || 'Sans marque',
-    category: mapCategoryToLegacy(product.category_name || ''),
-    subcategory: mapSubcategoryToLegacy(product.subcategory_name),
-    price: finalPrice,
+    brandId: '', // Not available in ProductFullView
+    brandName: brandName || 'Sans marque',
+    brandSlug,
+    categoryId: '', // Not available in ProductFullView
+    categoryName,
+    categorySlug,
+    subcategory: product.subcategory_name || undefined,
+    basePrice: finalPrice,
     originalPrice: finalOriginalPrice,
-    discount: finalDiscountPercent,
-    promo: finalDiscountPercent ? `${finalDiscountPercent}% de réduction` : undefined,
-    adminDiscountPercent: adminDiscountPercent, // Réduction admin
-    description: product.description || '',
+    discountPercent: finalDiscountPercent,
+    fullDescription: product.description || '',
     shortDescription: product.short_description ||
                      (product.description ? stripHtmlTags(product.description).substring(0, 150) + '...' : ''),
     urlSlug: product.url_slug,
-    images: product.images || [],
+    features: [], // Not available in ProductFullView
     specifications,
-    highlights: product.highlights || generateHighlights(product),
-    badges: product.badges || [],
-    variants,
-    // @ts-ignore - stock_quantity type issue
-    stockQuantity: product.stock_quantity ?? 0, // Stock pour produits sans variants (null/undefined = 0)
-    isVisible: product.is_visible !== undefined ? product.is_visible : true, // Visibilité
-    rating,
-    reviews,
-    warranty: product.warranty || '2 ans constructeur',
-    deliveryTime: product.delivery_time || '24-48h',
     repairabilityIndex: product.repairability_index,
+    d3e: undefined, // Not available in ProductFullView
     dasHead: product.das_head,
     dasBody: product.das_body,
-    keywords: [],
-    metaTitle: `${product.name} | Monster Phone 974`,
-    metaDescription: product.short_description || product.description?.substring(0, 160) || `${product.name} disponible chez Monster Phone La Réunion`,
-    status: (product.status as 'active' | 'draft' | 'out-of-stock') || 'active'
+    dasLimb: undefined, // Not available in ProductFullView
+    energyClass: undefined, // Not available in ProductFullView
+    tags: [], // Not available in ProductFullView
+    isFeatured: false, // Not available in ProductFullView
+    isNewArrival: false, // Not available in ProductFullView
+    showOnHomepage: false, // Not available in ProductFullView
+    status: (product.status as 'active' | 'draft' | 'out-of-stock') || 'active',
+    variants,
+    rating
   };
 }
 
@@ -363,7 +372,7 @@ export function convertProductsArray(products: ProductFullView[]): Product[] {
  */
 export function getProductsByCategory(products: Product[], category: string): Product[] {
   return products.filter(p => 
-    p.category.toLowerCase() === category.toLowerCase()
+    p.categoryName.toLowerCase() === category.toLowerCase()
   );
 }
 
@@ -372,7 +381,7 @@ export function getProductsByCategory(products: Product[], category: string): Pr
  */
 export function getProductsByBrand(products: Product[], brand: string): Product[] {
   return products.filter(p => 
-    p.brand.toLowerCase() === brand.toLowerCase()
+    p.brandName.toLowerCase() === brand.toLowerCase()
   );
 }
 
@@ -452,10 +461,10 @@ export function generateMenuStructureFromProducts(
 
   // Organiser les produits par catégorie principale
   products.forEach(product => {
-    if (!product.category) return;
+    if (!product.categoryName) return;
 
     // Utiliser le nom de la catégorie tel quel
-    const categoryKey = product.category;
+    const categoryKey = product.categoryName;
 
     if (!categoryProductsMap.has(categoryKey)) {
       categoryProductsMap.set(categoryKey, []);
@@ -480,8 +489,8 @@ export function generateMenuStructureFromProducts(
 
     products.forEach(product => {
       // Ajouter la marque
-      if (product.brand) {
-        brandsInCategory.add(product.brand);
+      if (product.brandName) {
+        brandsInCategory.add(product.brandName);
       }
 
       // Organiser par sous-catégorie uniquement si elle existe
@@ -571,8 +580,8 @@ export function generateMenuStructureFromProducts(
         if (!subcategoryMap.has(displaySubcategory)) {
           subcategoryMap.set(displaySubcategory, new Set());
         }
-        if (product.brand) {
-          subcategoryMap.get(displaySubcategory)!.add(product.brand);
+        if (product.brandName) {
+          subcategoryMap.get(displaySubcategory)!.add(product.brandName);
         }
       }
     });

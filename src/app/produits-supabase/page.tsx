@@ -263,18 +263,18 @@ function ProduitsSupabasePageContent() {
   const filteredProducts = useMemo(() => {
     return transformedProducts.filter(product => {
       // Recherche
-      const matchesSearch = searchQuery === '' || 
+      const matchesSearch = searchQuery === '' ||
         product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.category.toLowerCase().includes(searchQuery.toLowerCase());
-      
+        product.brandName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.categoryName.toLowerCase().includes(searchQuery.toLowerCase());
+
       // Filtres de prix
-      const matchesPrice = product.price >= filters.priceRange[0] && 
-                          product.price <= filters.priceRange[1];
+      const matchesPrice = product.basePrice >= filters.priceRange[0] &&
+                          product.basePrice <= filters.priceRange[1];
       
       // Promotion
-      const matchesPromo = !filters.hasPromo || 
-                          (product.discount && product.discount > 0);
+      const matchesPromo = !filters.hasPromo ||
+                          (product.discountPercent && product.discountPercent > 0);
       
       // Note minimale
       const matchesRating = !filters.minRating || 
@@ -285,12 +285,12 @@ function ProduitsSupabasePageContent() {
       const matchesStock = !filters.inStock || hasStock;
       
       // Marques
-      const matchesBrand = filters.brands.length === 0 || 
-                          filters.brands.includes(product.brand);
+      const matchesBrand = filters.brands.length === 0 ||
+                          filters.brands.includes(product.brandName);
       
       // Catégories
-      const matchesCategory = filters.categories.length === 0 || 
-                             filters.categories.includes(product.category);
+      const matchesCategory = filters.categories.length === 0 ||
+                             filters.categories.includes(product.categoryName);
       
       return matchesSearch && matchesPrice && matchesPromo && 
              matchesRating && matchesStock && matchesBrand && matchesCategory;
@@ -303,10 +303,10 @@ function ProduitsSupabasePageContent() {
     
     switch (sortOption) {
       case 'price-asc':
-        sorted.sort((a, b) => a.price - b.price);
+        sorted.sort((a, b) => a.basePrice - b.basePrice);
         break;
       case 'price-desc':
-        sorted.sort((a, b) => b.price - a.price);
+        sorted.sort((a, b) => b.basePrice - a.basePrice);
         break;
       case 'name-asc':
         sorted.sort((a, b) => a.name.localeCompare(b.name));

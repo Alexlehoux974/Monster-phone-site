@@ -4,7 +4,7 @@ import { useState, useRef } from 'react';
 import { ChevronLeft, ChevronRight, Flame, Gamepad2, Headphones, Watch } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import { allProducts } from '@/data/products';
+import { PRODUCTS } from '@/data/products';
 import ProductCard from '@/components/ProductCard';
 import { cn, sortProductsByPriority } from '@/lib/utils';
 
@@ -13,7 +13,7 @@ interface Collection {
   title: string;
   icon: any;
   emoji: string;
-  products: typeof allProducts;
+  products: typeof PRODUCTS;
   description?: string;
 }
 
@@ -30,7 +30,7 @@ const ProductCollections = () => {
       emoji: '🔥',
       description: 'Pack complet inclus : écouteurs, chargeur, protection, coque',
       products: sortProductsByPriority(
-        allProducts.filter(p => p.category === 'Smartphones')
+        PRODUCTS.filter(p => p.categoryName === 'Smartphones')
       ).slice(0, 10),
     },
     {
@@ -39,10 +39,10 @@ const ProductCollections = () => {
       icon: Gamepad2,
       emoji: '🎮',
       products: sortProductsByPriority(
-        allProducts.filter(p =>
-          p.category === 'LED' ||
-          p.category === 'Accessoires' ||
-          p.category === 'Supports gaming'
+        PRODUCTS.filter(p =>
+          p.categoryName === 'LED' ||
+          p.categoryName === 'Accessoires' ||
+          p.categoryName === 'Supports gaming'
         )
       ).slice(0, 10),
     },
@@ -52,11 +52,11 @@ const ProductCollections = () => {
       icon: Headphones,
       emoji: '🎧',
       products: sortProductsByPriority(
-        allProducts.filter(p =>
-          p.category === 'Audio' ||
-          p.category === 'Écouteurs' ||
-          p.category === 'Casques' ||
-          p.category === 'Enceintes'
+        PRODUCTS.filter(p =>
+          p.categoryName === 'Audio' ||
+          p.categoryName === 'Écouteurs' ||
+          p.categoryName === 'Casques' ||
+          p.categoryName === 'Enceintes'
         )
       ).slice(0, 10),
     },
@@ -66,9 +66,9 @@ const ProductCollections = () => {
       icon: Watch,
       emoji: '⌚',
       products: sortProductsByPriority(
-        allProducts.filter(p =>
-          p.category === 'Montres' ||
-          p.category === 'Montres connectées'
+        PRODUCTS.filter(p =>
+          p.categoryName === 'Montres' ||
+          p.categoryName === 'Montres connectées'
         )
       ).slice(0, 10),
     },
@@ -85,9 +85,9 @@ const ProductCollections = () => {
     }
   };
 
-  const getProductLabel = (product: typeof allProducts[0]) => {
-    if (product.badges?.includes('Nouveau')) return { text: 'Nouveau', color: 'bg-green-500' };
-    if (product.discount && product.discount > 0) return { text: `${product.discount}%`, color: 'bg-red-500' };
+  const getProductLabel = (product: typeof PRODUCTS[0]) => {
+    if (product.isNewArrival) return { text: 'Nouveau', color: 'bg-green-500' };
+    if (product.discountPercent && product.discountPercent > 0) return { text: `${product.discountPercent}%`, color: 'bg-red-500' };
     if (product.rating && product.rating.average >= 4.5) return { text: 'Bestseller', color: 'bg-orange-500' };
     return null;
   };

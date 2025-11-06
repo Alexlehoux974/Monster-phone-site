@@ -33,37 +33,23 @@ async function testHomepageProducts() {
   console.log('=== 12 PRODUITS AFFICHÉS SUR LA PAGE D\'ACCUEIL ===\n');
 
   featuredProducts.forEach((product, index) => {
-    const outOfStock = isCompletelyOutOfStock({
-      stockQuantity: product.stockQuantity,
-      variants: product.variants
-    });
+    const outOfStock = isCompletelyOutOfStock(product);
 
-    const isFeatured = product.badges?.some(badge =>
-      badge.includes('Bestseller') ||
-      badge.includes('Best-seller') ||
-      badge.includes('Nouveau') ||
-      badge.includes('Premium')
-    ) || product.price >= 500;
+    const isFeatured = product.basePrice >= 500;
+
+    const totalStock = product.variants.reduce((sum, v) => sum + (v.stock || 0), 0);
 
     console.log(`${index + 1}. ${product.name}`);
-    console.log(`   💰 Prix: ${product.price}€`);
-    console.log(`   📦 Stock: ${product.stockQuantity || 0} ${product.variants?.length ? `(+ ${product.variants.length} variants)` : ''}`);
+    console.log(`   💰 Prix: ${product.basePrice}€`);
+    console.log(`   📦 Stock: ${totalStock} (${product.variants?.length} variants)`);
     console.log(`   ${outOfStock ? '❌ RUPTURE DE STOCK' : '✅ EN STOCK'}`);
     console.log(`   ${isFeatured ? '⭐ PRODUIT PHARE' : '📌 Produit standard'}`);
-    console.log(`   🏷️  Badges: ${product.badges?.join(', ') || 'aucun'}`);
     console.log('');
   });
 
   // Statistiques
   const inStock = featuredProducts.filter(p => !isCompletelyOutOfStock(p)).length;
-  const featured = featuredProducts.filter(p =>
-    p.badges?.some(badge =>
-      badge.includes('Bestseller') ||
-      badge.includes('Best-seller') ||
-      badge.includes('Nouveau') ||
-      badge.includes('Premium')
-    ) || p.price >= 500
-  ).length;
+  const featured = featuredProducts.filter(p => p.basePrice >= 500).length;
 
   console.log('=== STATISTIQUES ===');
   console.log(`✅ Produits en stock: ${inStock}/12`);

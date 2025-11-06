@@ -28,15 +28,15 @@ export default function FilterPanel({ products, onFiltersChange, initialFilters 
   const safeProducts = products || [];
   
   // Calculer les prix min et max depuis les produits
-  const prices = safeProducts.length > 0 
-    ? safeProducts.map(p => p.price).filter(p => p !== undefined)
+  const prices = safeProducts.length > 0
+    ? safeProducts.map(p => p.basePrice).filter(p => p !== undefined)
     : [0];
   const minPrice = prices.length > 0 ? Math.floor(Math.min(...prices)) : 0;
   const maxPrice = prices.length > 0 ? Math.ceil(Math.max(...prices)) : 2000;
-  
+
   // Extraire les marques et catégories uniques
-  const uniqueBrands = Array.from(new Set(safeProducts.map(p => p.brand))).sort();
-  const uniqueCategories = Array.from(new Set(safeProducts.map(p => p.category))).sort();
+  const uniqueBrands = Array.from(new Set(safeProducts.map(p => p.brandName))).sort();
+  const uniqueCategories = Array.from(new Set(safeProducts.map(p => p.categoryName))).sort();
   
   const [filters, setFilters] = useState<FilterState>(initialFilters || {
     priceRange: [minPrice, maxPrice],
@@ -306,7 +306,7 @@ export default function FilterPanel({ products, onFiltersChange, initialFilters 
           {expandedSections.has('brand') && (
             <div className="mt-3 space-y-2 max-h-60 overflow-y-auto">
               {uniqueBrands.map((brand: any) => {
-                const count = products.filter(p => p.brand === brand).length;
+                const count = products.filter(p => p.brandName === brand).length;
                 return (
                   <label
                     key={brand}
@@ -353,7 +353,7 @@ export default function FilterPanel({ products, onFiltersChange, initialFilters 
           {expandedSections.has('category') && (
             <div className="mt-3 space-y-2 max-h-60 overflow-y-auto">
               {uniqueCategories.map((category: any) => {
-                const count = products.filter(p => p.category === category).length;
+                const count = products.filter(p => p.categoryName === category).length;
                 return (
                   <label
                     key={category}

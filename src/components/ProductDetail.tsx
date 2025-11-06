@@ -31,9 +31,9 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                         product.variants?.[0];
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | undefined>(defaultVariant);
   const [variants, setVariants] = useState<ProductVariant[]>(product.variants || []);
-  const [productPrice, setProductPrice] = useState(product.price);
-  const [productStockQuantity, setProductStockQuantity] = useState(product.stockQuantity || 0);
-  const [adminDiscountPercent, setAdminDiscountPercent] = useState(product.adminDiscountPercent || 0);
+  const [productPrice, setProductPrice] = useState(product.basePrice);
+  const [productStockQuantity, setProductStockQuantity] = useState(defaultVariant?.stock || 0);
+  const [adminDiscountPercent, setAdminDiscountPercent] = useState(defaultVariant?.adminDiscountPercent || 0);
   const [quantity, setQuantity] = useState(1);
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -43,24 +43,24 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   useEffect(() => {
     console.log('🔄 [PRODUCT SYNC] Synchronisation des états avec nouvelles props');
 
-    // Réinitialiser tous les états avec les nouvelles données du produit
-    setProductPrice(product.price);
-    setProductStockQuantity(product.stockQuantity || 0);
-    setAdminDiscountPercent(product.adminDiscountPercent || 0);
-    setVariants(product.variants || []);
-
     // Réinitialiser le variant sélectionné
     const newDefaultVariant = product.variants?.find(v => v.is_default) ||
                               product.variants?.find(v => v.stock > 0) ||
                               product.variants?.[0];
     setSelectedVariant(newDefaultVariant);
+
+    // Réinitialiser tous les états avec les nouvelles données du produit
+    setProductPrice(product.basePrice);
+    setProductStockQuantity(newDefaultVariant?.stock || 0);
+    setAdminDiscountPercent(newDefaultVariant?.adminDiscountPercent || 0);
+    setVariants(product.variants || []);
     setSelectedImageIndex(0);
     setQuantity(1);
 
     console.log('✅ [PRODUCT SYNC] États synchronisés avec:', {
-      price: product.price,
-      stock: product.stockQuantity,
-      discount: product.adminDiscountPercent,
+      price: product.basePrice,
+      stock: newDefaultVariant?.stock,
+      discount: newDefaultVariant?.adminDiscountPercent,
       variants: product.variants?.length
     });
   }, [product]);
@@ -117,22 +117,14 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   // Mettre à jour le prix et la promotion lorsque le variant sélectionné change
   useEffect(() => {
     if (selectedVariant) {
-      // Si le produit a des variants, utiliser la promotion du variant sélectionné
+      // Utiliser la promotion du variant sélectionné
       setAdminDiscountPercent(selectedVariant.adminDiscountPercent || 0);
-    } else {
-      // Si pas de variant sélectionné, utiliser la promotion du produit parent
-      setAdminDiscountPercent(product.adminDiscountPercent || 0);
     }
-  }, [selectedVariant, product.adminDiscountPercent]);
+  }, [selectedVariant]);
 
-  // Combiner toutes les images : produit principal + images de toutes les variantes
+  // Combiner toutes les images : images de toutes les variantes
   const getAllImages = () => {
     const allImages: { src: string; variant?: string; variantColor?: string }[] = [];
-
-    // Ajouter les images du produit principal
-    product.images.forEach((img) => {
-      allImages.push({ src: img });
-    });
 
     // Ajouter les images de chaque variante
     if (product.variants) {
@@ -162,7 +154,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   };
 
   const allImages = getAllImages();
-  const mainImage = allImages[selectedImageIndex]?.src || product.images[0];
+  const mainImage = allImages[selectedImageIndex]?.src || (product.variants?.[0]?.images?.[0] || '/placeholder-monster.svg');
 
   // Prix avec réduction (utiliser productPrice pour le temps réel)
   const hasAdminDiscount = adminDiscountPercent > 0;
@@ -171,8 +163,8 @@ export default function ProductDetail({ product }: ProductDetailProps) {
     : productPrice;
   const currentPrice = finalPrice;
   const originalPrice = hasAdminDiscount ? productPrice : (product.originalPrice || productPrice);
-  const hasDiscount = hasAdminDiscount || (product.discount && product.discount > 0);
-  const displayDiscount = hasAdminDiscount ? adminDiscountPercent : product.discount;
+  const hasDiscount = hasAdminDiscount || (product.discountPercent && product.discountPercent > 0);
+  const displayDiscount = hasAdminDiscount ? adminDiscountPercent : product.discountPercent;
   const savings = hasDiscount ? originalPrice - currentPrice : 0;
 
   // Stock de la variante sélectionnée ou stock du produit principal (utiliser productStockQuantity pour le temps réel)
@@ -206,7 +198,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
     if (navigator.share) {
       navigator.share({
         title: product.name,
-        text: product.description || product.shortDescription,
+        text: product.shortDescription || product.fullDescription,
         url: window.location.href,
       });
     } else {
@@ -233,7 +225,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           <ChevronRight className="h-4 w-4 text-gray-400" />
           <Link href="/nos-produits" className="hover:text-red-600 transition-colors">Produits</Link>
           <ChevronRight className="h-4 w-4 text-gray-400" />
-          <Link href={`/nos-produits?category=${product.category}`} className="hover:text-red-600 transition-colors">{product.category}</Link>
+          <Link href={`/nos-produits?category=${product.categoryName}`} className="hover:text-red-600 transition-colors">{product.categoryName}</Link>
           <ChevronRight className="h-4 w-4 text-gray-400" />
           <span className="text-gray-900 font-semibold">{product.name}</span>
         </nav>
@@ -255,7 +247,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                   -{displayDiscount}%
                 </Badge>
               )}
-              {product.badges?.includes('Nouveau') && (
+              {product.isNewArrival && (
                 <Badge className="absolute top-4 right-4 z-10 bg-blue-500 text-white">
                   Nouveau
                 </Badge>
@@ -269,7 +261,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
               <ImageWithFallback
                 src={mainImage}
                 alt={product.name}
-                productCategory={product.category}
+                productCategory={product.categoryName}
                 fill
                 className={cn(
                   "object-contain transition-transform duration-300",
@@ -344,7 +336,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                     <ImageWithFallback
                       src={image.src}
                       alt={`${product.name} - ${image.variant ? `Couleur ${image.variant}` : `Image ${index + 1}`}`}
-                      productCategory={product.category}
+                      productCategory={product.categoryName}
                       fill
                       className="object-contain"
                     />
@@ -385,7 +377,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                     <ImageWithFallback
                       src={image.src}
                       alt={`${product.name} - ${image.variant ? `Couleur ${image.variant}` : `Image ${index + 1}`}`}
-                      productCategory={product.category}
+                      productCategory={product.categoryName}
                       fill
                       className="object-contain group-hover:scale-105 transition-transform"
                     />
@@ -410,7 +402,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           <div>
             <div className="flex items-start justify-between mb-2">
               <div>
-                <p className="text-sm text-gray-600 mb-1">{product.brand}</p>
+                <p className="text-sm text-gray-600 mb-1">{product.brandName}</p>
                 <h1 className="text-3xl font-bold text-gray-900">{product.name}</h1>
                 {product.sku && (
                   <p className="text-sm text-gray-500 mt-1">Réf: {product.sku}</p>
@@ -619,7 +611,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
               </div>
               <div className="flex items-center gap-2 text-sm text-gray-600">
                 <Shield className="h-4 w-4 text-blue-600" />
-                <span>Garantie {product.warranty || '2 ans'}</span>
+                <span>Garantie 2 ans</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-gray-600">
                 <RefreshCw className="h-4 w-4 text-purple-600" />
@@ -672,7 +664,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
       </div>
 
       {/* Product Content Cards - CMS-managed content with modern card layout */}
-      <ProductContentCards productId={product.id} productCategory={product.category} />
+      <ProductContentCards productId={product.id} productCategory={product.categoryName} />
       </div>
     </div>
   );

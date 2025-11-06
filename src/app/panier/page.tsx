@@ -99,12 +99,17 @@ export default function PanierPage() {
                 <div className="divide-y divide-gray-200">
                   {items.map((item: any) => {
                     // Assurer la conversion en nombre pour éviter NaN
-                    const basePrice = typeof item.product.price === 'string'
-                      ? parseFloat(item.product.price)
-                      : item.product.price;
+                    const basePrice = typeof item.product.basePrice === 'string'
+                      ? parseFloat(item.product.basePrice)
+                      : item.product.basePrice;
 
-                    // Appliquer la réduction admin si elle existe
-                    const adminDiscount = item.product.adminDiscountPercent || 0;
+                    // Trouver le variant correspondant (si spécifié) ou prendre le premier
+                    const selectedVariant = item.variant
+                      ? item.product.variants.find((v: any) => v.color === item.variant)
+                      : item.product.variants[0];
+
+                    // Appliquer la réduction admin si elle existe au niveau du variant
+                    const adminDiscount = selectedVariant?.adminDiscountPercent || 0;
                     const price = adminDiscount > 0
                       ? basePrice * (1 - adminDiscount / 100)
                       : basePrice;
@@ -119,9 +124,9 @@ export default function PanierPage() {
                           <div className="col-span-12 md:col-span-6">
                             <div className="flex items-center space-x-4">
                               <div className="relative w-20 h-20 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
-                                {item.product.images[0] ? (
+                                {selectedVariant?.images?.[0] ? (
                                   <Image
-                                    src={item.product.images[0]}
+                                    src={selectedVariant.images[0]}
                                     alt={item.product.name}
                                     fill
                                     className="object-contain"
@@ -140,7 +145,7 @@ export default function PanierPage() {
                                   {item.product.name}
                                 </h3>
                                 <p className="text-sm text-gray-600">
-                                  {item.product.brand}
+                                  {item.product.brandName}
                                 </p>
                                 {item.variant && (
                                   <p className="text-sm text-gray-500">

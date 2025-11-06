@@ -76,12 +76,12 @@ export const MENU_STRUCTURE: MenuCategory[] = [
       {
         name: 'Écouteurs',
         slug: 'ecouteurs',
-        brands: ['Monster', 'Apple AirPods', 'Samsung Galaxy Buds', 'Sony', 'JBL', 'Beats', 'Nothing Ear']
+        brands: ['MONSTER', 'Apple AirPods', 'Samsung Galaxy Buds', 'Sony', 'JBL', 'Beats', 'Nothing Ear']
       },
       {
         name: 'Casques',
         slug: 'casques-audio',
-        brands: ['Monster', 'MUVIT', 'Sony', 'Bose', 'JBL', 'Marshall', 'Beats', 'HyperX']
+        brands: ['MONSTER', 'MUVIT', 'Sony', 'Bose', 'JBL', 'Marshall', 'Beats', 'HyperX']
       },
       {
         name: 'Enceintes',
@@ -91,7 +91,7 @@ export const MENU_STRUCTURE: MenuCategory[] = [
       {
         name: 'Gaming Audio',
         slug: 'gaming-audio',
-        brands: ['Monster', 'HyperX', 'Razer', 'SteelSeries', 'Logitech G', 'ASUS ROG']
+        brands: ['MONSTER', 'HyperX', 'Razer', 'SteelSeries', 'Logitech G', 'ASUS ROG']
       }
     ]
   },
@@ -128,12 +128,12 @@ export const MENU_STRUCTURE: MenuCategory[] = [
       {
         name: 'Barre LED',
         slug: 'barre-led',
-        brands: ['Philips Hue', 'Govee', 'Monster LED', 'LIFX']
+        brands: ['Philips Hue', 'Govee', 'MONSTER LED', 'LIFX']
       },
       {
         name: 'Néon',
         slug: 'neon',
-        brands: ['Govee', 'Nanoleaf', 'Monster LED', 'Twinkly']
+        brands: ['Govee', 'Nanoleaf', 'MONSTER LED', 'Twinkly']
       },
       {
         name: 'Kits Éclairage',
@@ -148,12 +148,12 @@ export const MENU_STRUCTURE: MenuCategory[] = [
       {
         name: 'RGB',
         slug: 'rgb',
-        brands: ['MY WAY', 'Monster LED', 'Razer Chroma', 'Govee']
+        brands: ['MY WAY', 'MONSTER LED', 'Razer Chroma', 'Govee']
       },
       {
         name: 'Cables Lumineux',
         slug: 'cables-lumineux',
-        brands: ['MY WAY', 'Monster LED', 'Baseus', 'UGREEN']
+        brands: ['MY WAY', 'MONSTER LED', 'Baseus', 'UGREEN']
       }
     ]
   },
@@ -164,22 +164,22 @@ export const MENU_STRUCTURE: MenuCategory[] = [
       {
         name: 'Coques & Protection',
         slug: 'coques-protection',
-        brands: ['Spigen', 'OtterBox', 'UAG', 'Ringke', 'ESR', 'Monster Shield']
+        brands: ['Spigen', 'OtterBox', 'UAG', 'Ringke', 'ESR', 'MONSTER Shield']
       },
       {
         name: 'Chargeurs',
         slug: 'chargeurs',
-        brands: ['Anker', 'Belkin', 'Samsung', 'Apple', 'Baseus', 'Monster Charge']
+        brands: ['Anker', 'Belkin', 'Samsung', 'Apple', 'Baseus', 'MONSTER Charge']
       },
       {
         name: 'Câbles',
         slug: 'cables',
-        brands: ['Anker', 'Belkin', 'Baseus', 'UGREEN', 'Monster Cable']
+        brands: ['Anker', 'Belkin', 'Baseus', 'UGREEN', 'MONSTER Cable']
       },
       {
         name: 'Batteries externes',
         slug: 'batteries',
-        brands: ['Anker', 'Xiaomi', 'Baseus', 'Monster Power']
+        brands: ['Anker', 'Xiaomi', 'Baseus', 'MONSTER Power']
       },
       {
         name: 'Supports',

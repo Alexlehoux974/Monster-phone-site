@@ -90,7 +90,7 @@ export default function ProductTabs({ product }: ProductTabsProps) {
                   <div>
                     <p className="font-semibold">Livraison express</p>
                     <p className="text-sm text-gray-600">
-                      Livraison en {product.deliveryTime || '24-48h'} à La Réunion (974)
+                      Livraison en {'24-48h'} à La Réunion (974)
                     </p>
                   </div>
                 </div>
@@ -130,7 +130,7 @@ export default function ProductTabs({ product }: ProductTabsProps) {
                 <div className="flex items-start gap-3">
                   <Shield className="h-5 w-5 text-primary mt-0.5" />
                   <div>
-                    <p className="font-semibold">Garantie {product.warranty || '2 ans'}</p>
+                    <p className="font-semibold">Garantie {'2 ans'}</p>
                     <p className="text-sm text-gray-600">
                       Garantie constructeur couvrant les défauts de fabrication
                     </p>

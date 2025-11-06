@@ -245,8 +245,13 @@ export async function POST(request: NextRequest) {
           orderNumber: orderNumber,
           customerName: customerName,
           customerEmail: customerEmail,
+          customerPhone: customerPhone,
+          shippingAddress: shippingAddress,
+          shippingCity: shippingCity,
+          shippingPostalCode: shippingPostalCode,
           items: items,
           subtotal: subtotal,
+          shippingCost: shippingCost,
           total: total,
           orderDate: new Date().toISOString(),
         });

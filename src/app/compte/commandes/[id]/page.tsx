@@ -395,16 +395,14 @@ export default async function OrderDetailsPage({ params }: OrderDetailsPageProps
               </div>
 
               <div className="px-6 py-4">
-                {order.shipping_address && typeof order.shipping_address === 'object' ? (
+                {(order.shipping_address || order.shipping_city || order.shipping_postal_code) ? (
                   <address className="not-italic text-sm text-gray-600 leading-relaxed">
-                    {order.shipping_address.line1 && <div>{order.shipping_address.line1}</div>}
-                    {order.shipping_address.line2 && <div>{order.shipping_address.line2}</div>}
-                    {(order.shipping_address.postal_code || order.shipping_address.city) && (
+                    {order.shipping_address && <div>{order.shipping_address}</div>}
+                    {(order.shipping_postal_code || order.shipping_city) && (
                       <div>
-                        {order.shipping_address.postal_code} {order.shipping_address.city}
+                        {order.shipping_postal_code} {order.shipping_city}
                       </div>
                     )}
-                    {order.shipping_address.country && <div>{order.shipping_address.country}</div>}
                   </address>
                 ) : (
                   <p className="text-sm text-gray-500">Adresse non disponible</p>

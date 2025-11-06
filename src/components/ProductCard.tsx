@@ -21,20 +21,20 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
   const [showSuccess, setShowSuccess] = useState(false);
   const [selectedVariant, setSelectedVariant] = useState(product.variants?.[0]);
 
-  const mainImage = product.images[0] || '';
-  const hasDiscount = product.discount && product.discount > 0;
-  const hasAdminDiscount = product.adminDiscountPercent && product.adminDiscountPercent > 0;
+  const mainImage = selectedVariant?.images?.[0] || product.variants?.[0]?.images?.[0] || '';
+  const hasDiscount = product.discountPercent && product.discountPercent > 0;
+  const hasAdminDiscount = selectedVariant?.adminDiscountPercent && selectedVariant.adminDiscountPercent > 0;
   const outOfStock = isCompletelyOutOfStock(product);
 
   // Calculer le prix final avec la réduction admin
   const finalPrice = hasAdminDiscount
-    ? product.price * (1 - product.adminDiscountPercent! / 100)
-    : product.price;
+    ? product.basePrice * (1 - selectedVariant.adminDiscountPercent! / 100)
+    : product.basePrice;
 
-  // Vérifier le stock: pour variants OU pour produits directs
+  // Vérifier le stock: pour variants
   const isInStock = selectedVariant
     ? selectedVariant.stock > 0
-    : (product.stockQuantity !== undefined ? product.stockQuantity > 0 : true);
+    : (product.variants?.[0]?.stock || 0) > 0;
 
   const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -69,12 +69,12 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
                 <div className="absolute top-0 left-0 z-10 flex flex-col gap-1">
                   {hasAdminDiscount && (
                     <Badge className="bg-red-500 text-white">
-                      -{product.adminDiscountPercent}%
+                      -{selectedVariant?.adminDiscountPercent}%
                     </Badge>
                   )}
                   {!hasAdminDiscount && hasDiscount && (
                     <Badge className="bg-red-500 text-white">
-                      -{product.discount}%
+                      -{product.discountPercent}%
                     </Badge>
                   )}
                   {outOfStock && (
@@ -86,7 +86,7 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
                 <ImageWithFallback
                   src={mainImage}
                   alt={product.name}
-                  productCategory={product.category}
+                  productCategory={product.categoryName}
                   fill
                   className="object-contain rounded-lg group-hover:scale-105 transition-transform duration-300"
                   sizes="128px"
@@ -102,9 +102,9 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
                 {product.name}
               </h3>
             </Link>
-            <p className="text-sm text-gray-600 mb-2">{product.brand}</p>
+            <p className="text-sm text-gray-600 mb-2">{product.brandName}</p>
             <p className="text-sm text-gray-700 line-clamp-2 mb-3">
-              {product.shortDescription || product.description}
+              {product.shortDescription || product.fullDescription}
             </p>
             
             {/* Note */}
@@ -134,7 +134,7 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
                 </span>
                 {(hasAdminDiscount || hasDiscount) && (
                   <span className="text-lg text-gray-400 line-through">
-                    {formatPrice(product.price)}
+                    {formatPrice(product.basePrice)}
                   </span>
                 )}
                 {product.variants && product.variants.length > 1 && (
@@ -198,20 +198,20 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
           <div className="absolute top-2 left-2 z-10 flex flex-col gap-1">
             {hasAdminDiscount && (
               <Badge className="bg-red-500 text-white">
-                -{product.adminDiscountPercent}%
+                -{selectedVariant?.adminDiscountPercent}%
               </Badge>
             )}
             {!hasAdminDiscount && hasDiscount && (
               <Badge className="bg-red-500 text-white">
-                -{product.discount}%
+                -{product.discountPercent}%
               </Badge>
             )}
-            {product.badges?.includes('Nouveau') && (
+            {product.isNewArrival && (
               <Badge className="bg-blue-500 text-white">
                 Nouveau
               </Badge>
             )}
-            {product.badges?.includes('Bestseller') && (
+            {product.isFeatured && (
               <Badge className="bg-orange-500 text-white">
                 <Zap className="w-3 h-3 mr-1" />
                 Best-seller
@@ -225,19 +225,17 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
           </div>
           
           {/* Badge garantie */}
-          {product.warranty && (
-            <div className="absolute top-2 right-2 z-10">
-              <Badge variant="outline" className="bg-white/90">
-                <Shield className="w-3 h-3 mr-1" />
-                2 ans Garantie
-              </Badge>
-            </div>
-          )}
+          <div className="absolute top-2 right-2 z-10">
+            <Badge variant="outline" className="bg-white/90">
+              <Shield className="w-3 h-3 mr-1" />
+              2 ans Garantie
+            </Badge>
+          </div>
           
           <ImageWithFallback
             src={mainImage}
             alt={product.name}
-            productCategory={product.category}
+            productCategory={product.categoryName}
             fill
             className="object-contain p-4 group-hover:scale-110 transition-transform duration-300"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -253,9 +251,9 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
         </Link>
         
         <div className="flex items-center gap-2 mt-1 mb-3">
-          <p className="text-sm text-gray-600">{product.brand}</p>
+          <p className="text-sm text-gray-600">{product.brandName}</p>
           <span className="text-gray-300">•</span>
-          <p className="text-sm text-gray-600">{product.category}</p>
+          <p className="text-sm text-gray-600">{product.categoryName}</p>
         </div>
 
         {/* Note et avis */}
@@ -287,7 +285,7 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
               </span>
               {(hasAdminDiscount || hasDiscount) && (
                 <span className="text-sm text-gray-400 line-through">
-                  {formatPrice(product.price)}
+                  {formatPrice(product.basePrice)}
                 </span>
               )}
             </div>

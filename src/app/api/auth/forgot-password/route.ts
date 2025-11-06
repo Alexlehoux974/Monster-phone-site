@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
     // Envoyer l'email de réinitialisation avec Supabase
     // L'URL de redirection sera vers notre page de réinitialisation
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3001'}/auth/reset-password`,
+      redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/auth/reset-password`,
     });
 
     if (error) {

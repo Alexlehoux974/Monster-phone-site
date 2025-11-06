@@ -75,7 +75,7 @@ export function hasStock(product: { variants?: { stock: number }[]; stockQuantit
  * Vérifier si un produit est un produit phare/prestigieux
  * Basé sur les badges et le prix
  */
-export function isFeaturedProduct(product: { badges?: string[]; price: number }): boolean {
+export function isFeaturedProduct(product: { badges?: string[]; price?: number; basePrice?: number }): boolean {
   const hasPrestigiousBadge = product.badges?.some(badge =>
     badge.includes('Bestseller') ||
     badge.includes('Best-seller') ||
@@ -83,15 +83,16 @@ export function isFeaturedProduct(product: { badges?: string[]; price: number })
     badge.includes('Premium')
   );
 
+  const productPrice = product.basePrice ?? product.price ?? 0;
   // Produit avec badge prestigieux OU prix élevé (>500€)
-  return hasPrestigiousBadge || product.price >= 500;
+  return hasPrestigiousBadge || productPrice >= 500;
 }
 
 /**
  * Tri intelligent des produits par priorité
  * Ordre: En stock > Phares > Prix décroissant > Rupture de stock
  */
-export function sortProductsByPriority<T extends { variants?: { stock: number }[]; stockQuantity?: number; badges?: string[]; price: number }>(
+export function sortProductsByPriority<T extends { variants?: { stock: number }[]; stockQuantity?: number; badges?: string[]; price?: number; basePrice?: number }>(
   products: T[]
 ): T[] {
   return [...products].sort((a, b) => {
@@ -111,6 +112,8 @@ export function sortProductsByPriority<T extends { variants?: { stock: number }[
     }
 
     // 3. Trier par prix décroissant (produits premium en premier)
-    return b.price - a.price;
+    const aPrice = a.basePrice ?? a.price ?? 0;
+    const bPrice = b.basePrice ?? b.price ?? 0;
+    return bPrice - aPrice;
   });
 }

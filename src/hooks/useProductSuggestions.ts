@@ -9,8 +9,8 @@ export function useProductSuggestions(
 ) {
   const suggestions = useMemo(() => {
     // Extraire les catégories et marques des produits dans le panier
-    const cartCategories = new Set(cartItems.map(item => item.product.category));
-    const cartBrands = new Set(cartItems.map(item => item.product.brand));
+    const cartCategories = new Set(cartItems.map(item => item.product.categoryName));
+    const cartBrands = new Set(cartItems.map(item => item.product.brandName));
     const cartProductIds = new Set(cartItems.map(item => item.product.id));
 
     // Calculer un score pour chaque produit
@@ -20,18 +20,18 @@ export function useProductSuggestions(
         let score = 0;
 
         // Bonus si même catégorie
-        if (cartCategories.has(product.category)) {
+        if (cartCategories.has(product.categoryName)) {
           score += 3;
         }
 
         // Bonus si même marque
-        if (cartBrands.has(product.brand)) {
+        if (cartBrands.has(product.brandName)) {
           score += 2;
         }
 
         // Bonus pour les accessoires si des téléphones sont dans le panier
-        const hasPhones = cartItems.some(item => item.product.category === 'Smartphones');
-        if (hasPhones && product.category !== 'Smartphones') {
+        const hasPhones = cartItems.some(item => item.product.categoryName === 'Smartphones');
+        if (hasPhones && product.categoryName !== 'Smartphones') {
           score += 1;
         }
 

@@ -6,13 +6,13 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Search, ShoppingCart, User, Menu, X, ChevronDown, ChevronRight, ArrowRight, Truck, Flame, Trash2, CreditCard, Plus, Minus, Package, Smartphone, Watch, Headphones, Lightbulb } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { type CategoryStructure, type Product } from '@/data/products';
+import { type Product } from '@/data/products';
 import { useCart } from '@/contexts/CartContext';
 import { useRouter } from 'next/navigation';
 import debounce from 'lodash.debounce';
 import ImageWithFallback from '@/components/ImageWithFallback';
 import { useSupabaseProducts, useSupabaseCategories } from '@/hooks/useSupabaseData';
-import { generateMenuStructureFromProducts } from '@/lib/supabase/adapters';
+import { generateMenuStructureFromProducts, type CategoryStructure } from '@/lib/supabase/adapters';
 
 // Composant pour la barre d'urgence promotionnelle
 const PromoBar = () => (
@@ -70,12 +70,12 @@ const DropdownMenu = ({
       if (categories[0]?.name) {
         const normalizedCat = categories[0].name.replace(/[📱🎧⌚💡🔧📦]/g, '').trim();
         const categoryProducts = allProducts.filter(p => {
-          const productCat = p.category.replace(/[📱🎧⌚💡🔧📦]/g, '').trim();
+          const productCat = p.categoryName.replace(/[📱🎧⌚💡🔧📦]/g, '').trim();
           return productCat.toLowerCase() === normalizedCat.toLowerCase();
         });
         const brandSet = new Set<string>();
         categoryProducts.forEach(p => {
-          if (p.brand) brandSet.add(p.brand);
+          if (p.brandName) brandSet.add(p.brandName);
         });
         const brands = Array.from(brandSet).sort();
         if (brands.length > 0) {
@@ -124,7 +124,7 @@ const DropdownMenu = ({
     if (hoveredBrand) {
       // Filtrer par marque d'abord
       const brandProducts = allProducts.filter(p => 
-        p.brand === hoveredBrand
+        p.brandName === hoveredBrand
       );
       
       // Si on a une sous-catégorie sélectionnée
@@ -133,27 +133,27 @@ const DropdownMenu = ({
           // Pour les catégories LED, utiliser la logique de regroupement
           if (isLEDCategory) {
             return matchesConsolidatedSubcategory(p.subcategory, hoveredSubcategory) && 
-                   normalizeCategory(p.category) === normalizedHoveredCategory;
+                   normalizeCategory(p.categoryName) === normalizedHoveredCategory;
           }
           // Pour les autres catégories, comparaison exacte
           return p.subcategory === hoveredSubcategory && 
-                 normalizeCategory(p.category) === normalizedHoveredCategory;
+                 normalizeCategory(p.categoryName) === normalizedHoveredCategory;
         });
         // Trier par prix décroissant (du plus cher au moins cher)
-        return filteredProducts.sort((a, b) => (b.price || 0) - (a.price || 0));
+        return filteredProducts.sort((a, b) => (b.basePrice || 0) - (a.basePrice || 0));
       }
       
       // Sinon filtrer par catégorie
       if (normalizedHoveredCategory) {
         const filteredProducts = brandProducts.filter(p => 
-          normalizeCategory(p.category) === normalizedHoveredCategory
+          normalizeCategory(p.categoryName) === normalizedHoveredCategory
         );
         // Trier par prix décroissant (du plus cher au moins cher)
-        return filteredProducts.sort((a, b) => (b.price || 0) - (a.price || 0));
+        return filteredProducts.sort((a, b) => (b.basePrice || 0) - (a.basePrice || 0));
       }
       
       // Trier par prix décroissant (du plus cher au moins cher)
-      return brandProducts.sort((a, b) => (b.price || 0) - (a.price || 0));
+      return brandProducts.sort((a, b) => (b.basePrice || 0) - (a.basePrice || 0));
     }
     
     // Si pas de marque sélectionnée mais une sous-catégorie
@@ -162,23 +162,23 @@ const DropdownMenu = ({
         // Pour les catégories LED, utiliser la logique de regroupement
         if (isLEDCategory) {
           return matchesConsolidatedSubcategory(p.subcategory, hoveredSubcategory) && 
-                 normalizeCategory(p.category) === normalizedHoveredCategory;
+                 normalizeCategory(p.categoryName) === normalizedHoveredCategory;
         }
         // Pour les autres catégories, comparaison exacte
         return p.subcategory === hoveredSubcategory && 
-               normalizeCategory(p.category) === normalizedHoveredCategory;
+               normalizeCategory(p.categoryName) === normalizedHoveredCategory;
       });
       // Trier par prix décroissant (du plus cher au moins cher)
-      return filteredProducts.sort((a, b) => (b.price || 0) - (a.price || 0));
+      return filteredProducts.sort((a, b) => (b.basePrice || 0) - (a.basePrice || 0));
     }
     
     // Si seulement une catégorie
     if (normalizedHoveredCategory) {
       const filteredProducts = allProducts.filter(p => 
-        normalizeCategory(p.category) === normalizedHoveredCategory
+        normalizeCategory(p.categoryName) === normalizedHoveredCategory
       );
       // Trier par prix décroissant (du plus cher au moins cher)
-      return filteredProducts.sort((a, b) => (b.price || 0) - (a.price || 0));
+      return filteredProducts.sort((a, b) => (b.basePrice || 0) - (a.basePrice || 0));
     }
     
     return [];
@@ -191,15 +191,15 @@ const DropdownMenu = ({
     if (hoveredSubcategory) {
       // Obtenir les marques pour la sous-catégorie
       allProducts.forEach(p => {
-        if (p.subcategory === hoveredSubcategory && p.category === hoveredCategory && p.brand) {
-          brands.add(p.brand);
+        if (p.subcategory === hoveredSubcategory && p.categoryName === hoveredCategory && p.brandName) {
+          brands.add(p.brandName);
         }
       });
     } else if (hoveredCategory) {
       // Obtenir les marques pour la catégorie
       const categoryProducts = getProductsByCategory(hoveredCategory);
       categoryProducts.forEach(p => {
-        if (p.brand) brands.add(p.brand);
+        if (p.brandName) brands.add(p.brandName);
       });
     }
     
@@ -238,19 +238,19 @@ const DropdownMenu = ({
                 // Obtenir toutes les marques uniques pour cette catégorie
                 const normalizedCat = categories[0].name.replace(/[📱🎧⌚💡🔧📦]/g, '').trim();
                 const categoryProducts = allProducts.filter(p => {
-                  const productCat = p.category.replace(/[📱🎧⌚💡🔧📦]/g, '').trim();
+                  const productCat = p.categoryName.replace(/[📱🎧⌚💡🔧📦]/g, '').trim();
                   return productCat.toLowerCase() === normalizedCat.toLowerCase();
                 });
 
                 const brandSet = new Set<string>();
                 categoryProducts.forEach(p => {
-                  if (p.brand) brandSet.add(p.brand);
+                  if (p.brandName) brandSet.add(p.brandName);
                 });
                 const brands = Array.from(brandSet).sort();
 
                 // Compter les produits pour chaque marque
                 return brands.map((brand: any) => {
-                  const brandProductCount = categoryProducts.filter(p => p.brand === brand).length;
+                  const brandProductCount = categoryProducts.filter(p => p.brandName === brand).length;
 
                   return (
                     <div key={brand}>
@@ -323,7 +323,7 @@ const DropdownMenu = ({
                                       width={48}
                                       height={48}
                                       className="w-full h-full object-contain"
-                                      productCategory={product.category}
+                                      productCategory={product.categoryName}
                                     />
                                   ) : (
                                     <div className="w-full h-full flex items-center justify-center relative">
@@ -345,11 +345,11 @@ const DropdownMenu = ({
                                   <p className="text-sm font-semibold text-gray-900 whitespace-normal">
                                     {product.name}
                                   </p>
-                                  {product.price && (
+                                  {product.basePrice && (
                                     <p className="text-base font-bold text-red-600 mt-1 whitespace-nowrap">
-                                      {typeof product.price === 'number' 
-                                        ? `${product.price.toFixed(2)} €` 
-                                        : product.price}
+                                      {typeof product.basePrice === 'number' 
+                                        ? `${product.basePrice.toFixed(2)} €` 
+                                        : product.basePrice}
                                     </p>
                                   )}
                                   {product.shortDescription && (
@@ -436,7 +436,7 @@ const MobileMenu = ({
     };
     const searchCategory = cleanCategory(categoryName);
     return allProducts.filter(p => {
-      const productCategory = cleanCategory(p.category);
+      const productCategory = cleanCategory(p.categoryName);
       return productCategory === searchCategory;
     });
   };
@@ -444,7 +444,7 @@ const MobileMenu = ({
   // Helper pour obtenir les produits d'une marque
   const getProductsByBrand = (brandName: string): Product[] => {
     return allProducts.filter(p =>
-      p.brand.toLowerCase() === brandName.toLowerCase()
+      p.brandName.toLowerCase() === brandName.toLowerCase()
     );
   };
 
@@ -514,7 +514,7 @@ const MobileMenu = ({
             const isOpen = activeCategory === category.name;
             const products = getProductsByCategory(category.name);
             const brands = new Set<string>();
-            products.forEach(p => { if (p.brand) brands.add(p.brand); });
+            products.forEach(p => { if (p.brandName) brands.add(p.brandName); });
             const uniqueBrands = Array.from(brands).sort();
 
             return (
@@ -541,8 +541,8 @@ const MobileMenu = ({
                       const isBrandOpen = activeBrand === brand;
                       const brandProducts = getProductsByBrand(brand).filter(p => {
                         const cleanCat = (cat: string) => cat.replace(/[📱🎧⌚💡🔧📦]/g, '').trim().toLowerCase();
-                        return cleanCat(p.category) === cleanCat(category.name);
-                      }).sort((a, b) => (b.price || 0) - (a.price || 0));
+                        return cleanCat(p.categoryName) === cleanCat(category.name);
+                      }).sort((a, b) => (b.basePrice || 0) - (a.basePrice || 0));
 
                       return (
                         <div key={brand}>
@@ -590,7 +590,7 @@ const MobileMenu = ({
                                           width={48}
                                           height={48}
                                           className="w-full h-full object-contain"
-                                          productCategory={product.category}
+                                          productCategory={product.categoryName}
                                         />
                                       ) : (
                                         <div className="w-full h-full flex items-center justify-center relative">
@@ -610,11 +610,11 @@ const MobileMenu = ({
                                       <p className="text-sm font-semibold text-gray-900 whitespace-normal">
                                         {product.name}
                                       </p>
-                                      {product.price && (
+                                      {product.basePrice && (
                                         <p className="text-base font-bold text-red-600 mt-1 whitespace-nowrap">
-                                          {typeof product.price === 'number'
-                                            ? `${product.price.toFixed(2)} €`
-                                            : product.price}
+                                          {typeof product.basePrice === 'number'
+                                            ? `${product.basePrice.toFixed(2)} €`
+                                            : product.basePrice}
                                         </p>
                                       )}
                                       {product.shortDescription && (
@@ -680,7 +680,7 @@ export default function Header() {
         const categoryMap = new Map<string, CategoryStructure>();
 
         supabaseProducts.forEach(product => {
-          const catName = product.category;
+          const catName = product.categoryName;
           if (!categoryMap.has(catName)) {
             categoryMap.set(catName, {
               name: catName,
@@ -706,7 +706,7 @@ export default function Header() {
     const searchCategory = cleanCategory(category);
     
     return allProducts.filter(p => {
-      const productCategory = cleanCategory(p.category);
+      const productCategory = cleanCategory(p.categoryName);
       // Matcher sur les noms normalisés
       return productCategory === searchCategory || 
              // Gérer les variations communes
@@ -721,7 +721,7 @@ export default function Header() {
   
   const getProductsByBrand = (brand: string) => {
     return allProducts.filter(p => 
-      p.brand.toLowerCase() === brand.toLowerCase()
+      p.brandName.toLowerCase() === brand.toLowerCase()
     );
   };
   const router = useRouter();
@@ -734,8 +734,8 @@ export default function Header() {
       if (query.trim().length > 1) {
         const suggestions = allProducts.filter(product => 
           product.name.toLowerCase().includes(query.toLowerCase()) ||
-          product.brand.toLowerCase().includes(query.toLowerCase()) ||
-          product.category.toLowerCase().includes(query.toLowerCase())
+          product.brandName.toLowerCase().includes(query.toLowerCase()) ||
+          product.categoryName.toLowerCase().includes(query.toLowerCase())
         ).slice(0, 5); // Limiter à 5 suggestions
         setSearchSuggestions(suggestions);
         setShowSuggestions(true);
@@ -982,9 +982,9 @@ export default function Header() {
                         )}
                         <div className="flex-1 min-w-0">
                           <p className="text-sm font-medium text-gray-900 truncate">{product.name}</p>
-                          <p className="text-xs text-gray-500">{product.brand} - {product.category}</p>
+                          <p className="text-xs text-gray-500">{product.brandName} - {product.categoryName}</p>
                         </div>
-                        <p className="text-sm font-bold text-blue-600">{product.price}€</p>
+                        <p className="text-sm font-bold text-blue-600">{product.basePrice}€</p>
                       </div>
                     </button>
                   ))}
@@ -1078,15 +1078,20 @@ export default function Header() {
                       <>
                         <div className="max-h-[400px] overflow-y-auto">
                           {items && items.length > 0 && items.map((item: any) => {
+                            // Trouver le variant correspondant (si spécifié) ou prendre le premier
+                            const selectedVariant = item.variant
+                              ? item.product.variants.find((v: any) => v.color === item.variant)
+                              : item.product.variants[0];
+
                             // Price is already a number in the Product interface
-                            const price = item.product.price;
+                            const price = item.product.basePrice;
                             return (
                               <div key={`${item.product.id}-${item.variant}`} className="p-4 border-b border-gray-100 hover:bg-gray-50">
                                 <div className="flex items-start space-x-3">
                                   <div className="relative w-16 h-16 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
-                                    {item.product.images[0] ? (
+                                    {selectedVariant?.images?.[0] ? (
                                       <Image
-                                        src={item.product.images[0]}
+                                        src={selectedVariant.images[0]}
                                         alt={item.product.name}
                                         fill
                                         className="object-contain"

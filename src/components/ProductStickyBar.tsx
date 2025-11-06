@@ -23,18 +23,16 @@ export default function ProductStickyBar({ product }: ProductStickyBarProps) {
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | undefined>(defaultVariant);
   const [quantity] = useState(1);
 
-  // Calculer le prix final avec promotion variant ou produit
-  const variantDiscount = selectedVariant?.adminDiscountPercent || 0;
-  const productDiscount = product.adminDiscountPercent || 0;
-  const activeDiscount = variantDiscount > 0 ? variantDiscount : productDiscount;
+  // Calculer le prix final avec promotion variant
+  const activeDiscount = selectedVariant?.adminDiscountPercent || 0;
 
   const finalPrice = activeDiscount > 0
-    ? product.price * (1 - activeDiscount / 100)
-    : product.price;
-  const originalPrice = activeDiscount > 0 ? product.price : product.originalPrice;
+    ? product.basePrice * (1 - activeDiscount / 100)
+    : product.basePrice;
+  const originalPrice = activeDiscount > 0 ? product.basePrice : (product.discountPercent && product.discountPercent > 0 ? product.basePrice : product.basePrice);
 
   // Déterminer le stock disponible
-  const currentStock = selectedVariant?.stock ?? product.stockQuantity ?? 0;
+  const currentStock = selectedVariant?.stock ?? 0;
   const isInStock = currentStock > 0;
   const isOutOfStock = currentStock === 0;
   const isLowStock = currentStock > 0 && currentStock <= 5;

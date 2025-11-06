@@ -25,12 +25,9 @@ async function test() {
 
     const converted = supabaseProductToLegacy(data);
     console.log('\n🔄 PRODUIT CONVERTI:');
-    console.log('stockQuantity:', converted.stockQuantity);
     console.log('variants:', converted.variants);
-    console.log('typeof stockQuantity:', typeof converted.stockQuantity);
-    console.log('stockQuantity === 0:', converted.stockQuantity === 0);
-    console.log('stockQuantity === undefined:', converted.stockQuantity === undefined);
-    
+    console.log('variant stocks:', converted.variants.map(v => ({ color: v.color, stock: v.stock })));
+
     console.log('\n🎯 TEST isCompletelyOutOfStock:');
     const result = isCompletelyOutOfStock(converted);
     console.log('Résultat:', result);
