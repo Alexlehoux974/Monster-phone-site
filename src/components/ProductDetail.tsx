@@ -664,7 +664,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
       </div>
 
       {/* Product Content Cards - CMS-managed content with modern card layout */}
-      <ProductContentCards productId={product.id} productCategory={product.categoryName} productBrand={product.brand} />
+      <ProductContentCards productId={product.id} productCategory={product.categoryName} productBrand={product.brandName} />
       </div>
     </div>
   );
