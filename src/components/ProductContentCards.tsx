@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { createClient } from '@/lib/supabase/client';
 import { cn } from '@/lib/utils';
 import ImageWithFallback from '@/components/ImageWithFallback';
-import { FileText, BarChart3, Star, Lightbulb, CheckCircle2 } from 'lucide-react';
+import { FileText, BarChart3, Star, Lightbulb, CheckCircle2, Headphones, Battery, Shield, Smartphone } from 'lucide-react';
 
 interface ProductContentSection {
   id: string;
@@ -36,9 +36,10 @@ interface ProductContentSection {
 interface ProductContentCardsProps {
   productId: string;
   productCategory: string;
+  productBrand?: string;
 }
 
-export default function ProductContentCards({ productId, productCategory }: ProductContentCardsProps) {
+export default function ProductContentCards({ productId, productCategory, productBrand }: ProductContentCardsProps) {
   const [sections, setSections] = useState<ProductContentSection[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -126,28 +127,82 @@ export default function ProductContentCards({ productId, productCategory }: Prod
 
   console.log('🎨 [ProductContentCards] Rendering', sections.length, 'sections');
 
+  // Détecter si c'est un produit HONOR
+  const isHonor = productBrand?.toUpperCase() === 'HONOR';
+
+  // Trouver l'index de la première section description_card
+  const firstDescriptionIndex = sections.findIndex(s => s.section_type === 'description_card');
+
   return (
     <div className="space-y-12 mt-12">
-      {sections.map((section: any) => {
-        switch (section.section_type) {
-          case 'image_gallery':
-            return (
-              <div key={section.id} className="hidden lg:block">
-                <ImageGallerySection section={section} productCategory={productCategory} />
-              </div>
-            );
-          case 'description_card':
-            return <DescriptionCardSection key={section.id} section={section} productCategory={productCategory} />;
-          case 'specs_grid':
-            return <SpecsGridSection key={section.id} section={section} />;
-          case 'features_list':
-            return <FeaturesListSection key={section.id} section={section} productCategory={productCategory} />;
-          case 'engagement_card':
-            return <EngagementCardSection key={section.id} section={section} productCategory={productCategory} />;
-          default:
-            return null;
-        }
+      {sections.map((section: any, index: number) => {
+        // Afficher la bannière HONOR juste avant la première section description_card
+        const shouldShowHonorBanner = isHonor && index === firstDescriptionIndex;
+
+        return (
+          <div key={section.id}>
+            {shouldShowHonorBanner && <HonorPackBanner />}
+            {(() => {
+              switch (section.section_type) {
+                case 'image_gallery':
+                  return (
+                    <div className="hidden lg:block">
+                      <ImageGallerySection section={section} productCategory={productCategory} />
+                    </div>
+                  );
+                case 'description_card':
+                  return <DescriptionCardSection section={section} productCategory={productCategory} />;
+                case 'specs_grid':
+                  return <SpecsGridSection section={section} />;
+                case 'features_list':
+                  return <FeaturesListSection section={section} productCategory={productCategory} />;
+                case 'engagement_card':
+                  return <EngagementCardSection section={section} productCategory={productCategory} />;
+                default:
+                  return null;
+              }
+            })()}
+          </div>
+        );
       })}
+    </div>
+  );
+}
+
+// Bannière Pack HONOR
+function HonorPackBanner() {
+  return (
+    <div className="bg-gradient-to-r from-orange-500 via-orange-600 to-red-600 text-white py-4 px-4 relative overflow-hidden mb-12 rounded-2xl">
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-shimmer"></div>
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="text-2xl font-bold flex items-center gap-2">
+            <span>🎁</span>
+            <span className="text-sm sm:text-base lg:text-lg">Tous nos smartphones incluent :</span>
+          </div>
+          <div className="flex items-center gap-3 sm:gap-4 flex-wrap justify-center">
+            <div className="flex items-center gap-1.5 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1.5">
+              <Headphones className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
+              <span className="text-xs sm:text-sm font-medium">Écouteurs</span>
+            </div>
+            <div className="flex items-center gap-1.5 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1.5">
+              <Battery className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
+              <span className="text-xs sm:text-sm font-medium">Chargeur</span>
+            </div>
+            <div className="flex items-center gap-1.5 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1.5">
+              <Shield className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
+              <span className="text-xs sm:text-sm font-medium">Protection vitre</span>
+            </div>
+            <div className="flex items-center gap-1.5 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1.5">
+              <Smartphone className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
+              <span className="text-xs sm:text-sm font-medium">Coque</span>
+            </div>
+          </div>
+        </div>
+        <div className="mt-2 text-center text-xs sm:text-sm opacity-90">
+          ✨ Pack complet offert avec chaque smartphone
+        </div>
+      </div>
     </div>
   );
 }
