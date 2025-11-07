@@ -37,16 +37,6 @@ export default function BrandCarousel() {
   return (
     <section className="py-16 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
       <div className="container mx-auto px-4">
-        <motion.h2
-          className="text-3xl font-bold text-center mb-12 text-gray-900"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          Nos Marques Partenaires
-        </motion.h2>
-
         {/* Conteneur du carrousel avec overflow hidden */}
         <div className="relative">
           {/* Gradient fade sur les bords */}
@@ -85,17 +75,6 @@ export default function BrandCarousel() {
             ))}
           </motion.div>
         </div>
-
-        {/* Texte informatif */}
-        <motion.p
-          className="text-center text-gray-600 mt-8 text-sm"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          viewport={{ once: true }}
-        >
-          Découvrez nos produits des plus grandes marques gaming et tech
-        </motion.p>
       </div>
     </section>
   );
