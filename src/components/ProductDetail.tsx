@@ -445,15 +445,6 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                 <span className="text-gray-600">({product.rating?.count || 0} avis)</span>
               </div>
             )}
-
-            {/* Description courte */}
-            {product.shortDescription && (
-              <div className="mt-4 p-3 bg-gray-50 rounded-lg">
-                <p className="text-sm text-gray-700 leading-relaxed">
-                  {product.shortDescription}
-                </p>
-              </div>
-            )}
           </div>
 
           {/* Prix */}
