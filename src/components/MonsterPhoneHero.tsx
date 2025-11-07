@@ -437,24 +437,6 @@ const MonsterPhoneHero = () => {
             </motion.div>
           </motion.div>
 
-          {/* Message d'urgence */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.2, duration: 0.5 }}
-            className="flex items-center justify-center gap-2 text-sm text-orange-300 mb-8"
-          >
-            <Clock className="w-4 h-4 animate-pulse" />
-            <span className="font-medium">
-              Offre limitée • Livraison gratuite aujourd'hui seulement
-            </span>
-            <motion.span
-              animate={{ opacity: [1, 0.5, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="inline-block w-2 h-2 bg-orange-400 rounded-full"
-            />
-          </motion.div>
-
           {/* Stats */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
