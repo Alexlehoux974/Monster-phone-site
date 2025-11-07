@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 
 const brands = [
   { name: 'HONOR', logo: '/brands/honor-logo.png' },
-  { name: 'HIFUTURE', logo: '/brands/hifuture-logo.jpeg' },
+  { name: 'HIFUTURE', logo: '/brands/hifuture-logo.webp' },
   { name: 'MONSTER', logo: '/brands/monster-logo.png' },
   { name: 'MUVIT', logo: '/brands/muvit-logo.webp' },
   { name: 'MY WAY', logo: '/brands/myway-logo.jpg' },

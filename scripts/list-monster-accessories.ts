@@ -8,8 +8,8 @@ const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
-async function listMonsterLED() {
-  console.log('🔍 PRODUITS MONSTER LED\n');
+async function listMonsterAccessories() {
+  console.log('🔍 PRODUITS MONSTER ACCESSOIRES - 8 PRODUITS SPÉCIFIQUES\n');
   console.log('='.repeat(80));
 
   const { data: brand } = await supabase
@@ -25,38 +25,32 @@ async function listMonsterLED() {
 
   console.log(`\n✅ Marque: ${brand.name} (ID: ${brand.id})\n`);
 
-  // Récupérer toutes les catégories LED
-  const ledCategoryNames = ['LED', 'Barre LED', 'Cables Lumineux', 'Kits Éclairage', 'Néon', 'RGB', 'Ampoules'];
-
-  const { data: categories } = await supabase
-    .from('categories')
-    .select('id, name')
-    .in('name', ledCategoryNames);
-
-  if (!categories || categories.length === 0) {
-    console.log('❌ Aucune catégorie LED trouvée');
-    return;
-  }
-
-  console.log(`📂 Catégories LED trouvées: ${categories.map(c => c.name).join(', ')}\n`);
-
-  // Récupérer tous les produits MONSTER dans ces catégories
-  const categoryIds = categories.map(c => c.id);
+  // Les 8 produits spécifiques du menu header
+  const targetSlugs = [
+    'monster-cable-type-c-vers-hdmi-4k-2m',
+    'monster-cable-hdmi-essential-8k-1m8',
+    'monster-cable-hdmi-essential-4k-3m6',
+    'monster-multiprise-4-prises',
+    'monster-cable-essential-fibre-optique-3m',
+    'monster-cable-hdmi-essential-4k-1m8',
+    'monster-cable-essential-fibre-optique-1m5',
+    'monster-nettoyant-et-lingette-200ml'
+  ];
 
   const { data: products } = await supabase
     .from('products')
     .select('id, name, url_slug, short_description, category:categories!products_category_id_fkey(name)')
     .eq('brand_id', brand.id)
-    .in('category_id', categoryIds)
+    .in('url_slug', targetSlugs)
     .eq('status', 'active')
     .order('name');
 
   if (!products || products.length === 0) {
-    console.log('❌ Aucun produit MONSTER LED trouvé');
+    console.log('❌ Aucun produit trouvé pour les slugs spécifiés');
     return;
   }
 
-  console.log(`📦 ${products.length} produits MONSTER LED:\n`);
+  console.log(`📦 ${products.length}/8 produits trouvés:\n`);
 
   let withCMS = 0;
   let withoutCMS = 0;
@@ -87,9 +81,14 @@ async function listMonsterLED() {
 
   console.log('='.repeat(80));
   console.log(`\n📊 RÉSULTATS:`);
-  console.log(`   📦 Total: ${products.length} produits`);
+  console.log(`   📦 Total: ${products.length}/8 produits trouvés`);
   console.log(`   ✅ CMS complet (4/4): ${withCMS} produits`);
   console.log(`   ❌ CMS incomplet: ${withoutCMS} produits\n`);
+
+  if (products.length < 8) {
+    console.log('⚠️  ATTENTION: Certains produits n\'ont pas été trouvés dans la base.');
+    console.log('   Vérifier les slugs ou le statut des produits.\n');
+  }
 }
 
-listMonsterLED();
+listMonsterAccessories();
