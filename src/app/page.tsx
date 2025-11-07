@@ -70,7 +70,9 @@ export default async function Home() {
       <Header />
       <div className="pt-[110px]">
         <MonsterPhoneHero />
-        <SmartphonePackBanner />
+        <div className="hidden md:block">
+          <SmartphonePackBanner />
+        </div>
         <FeaturedProductsSupabase products={featuredProducts} />
         <BrandCarousel />
         <TrustSection />

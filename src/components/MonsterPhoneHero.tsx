@@ -327,7 +327,7 @@ const MonsterPhoneHero = () => {
       {/* Hero Section with Aurora Background */}
       <motion.section
         style={{ backgroundImage }}
-        className="relative min-h-screen flex items-center justify-center overflow-hidden"
+        className="relative min-h-screen flex items-center justify-center overflow-hidden pb-8 md:pb-0"
       >
         {/* Sparkles Background */}
         {/* <SparklesCore

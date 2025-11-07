@@ -25,7 +25,7 @@ const PromoBar = () => (
           <span>LIVRAISON EXPRESS 24H/48H À LA RÉUNION</span>
         </div>
         <span className="hidden sm:block text-xs">•</span>
-        <div className="flex items-center gap-1.5">
+        <div className="hidden md:flex items-center gap-1.5">
           <Flame className="w-4 h-4" />
           <span>LIVRAISON GRATUITE DÈS 50€</span>
         </div>
