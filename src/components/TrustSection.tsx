@@ -89,7 +89,7 @@ export default function TrustSection() {
         </svg>
       ),
       title: "Support Technique",
-      description: "Assistance 7j/7 par téléphone",
+      description: "Assistance par téléphone",
       detail: "Équipe d'experts à votre service"
     },
     {
