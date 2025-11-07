@@ -3,6 +3,7 @@ import MonsterPhoneHero from '@/components/MonsterPhoneHero';
 import SmartphonePackBanner from '@/components/SmartphonePackBanner';
 import TrustSection from '@/components/TrustSection';
 import FeaturedProductsSupabase from '@/components/FeaturedProductsSupabase';
+import BrandCarousel from '@/components/BrandCarousel';
 import FeaturesSection from '@/components/FeaturesSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import Footer from '@/components/Footer';
@@ -71,6 +72,7 @@ export default async function Home() {
         <MonsterPhoneHero />
         <SmartphonePackBanner />
         <FeaturedProductsSupabase products={featuredProducts} />
+        <BrandCarousel />
         <TrustSection />
         <FeaturesSection />
         <TestimonialsSection />
