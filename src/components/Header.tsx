@@ -876,20 +876,17 @@ export default function Header() {
       >
         <div className="w-full px-6">
           {/* Header principal */}
-          <div className="flex items-center justify-between gap-3 h-20">
+          <div className="flex items-center justify-between gap-3 h-32">
             {/* Logo */}
-            <Link href="/" className="flex-shrink-0 group relative">
-              <div className="relative px-4 py-2 rounded-xl bg-gradient-to-br from-gray-50/50 via-white to-blue-50/30 backdrop-blur-sm transition-all duration-300 group-hover:shadow-lg group-hover:shadow-blue-500/10 group-hover:scale-[1.02]">
-                <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <Image
-                  src="/LOGO-MONSTER-PHONE.png"
-                  alt="Monster Phone"
-                  width={120}
-                  height={60}
-                  className="h-10 w-auto relative z-10 drop-shadow-sm"
-                  priority
-                />
-              </div>
+            <Link href="/" className="flex-shrink-0 group relative overflow-hidden py-2">
+              <Image
+                src="/LOGO-MONSTER-PHONE.png"
+                alt="Monster Phone"
+                width={400}
+                height={200}
+                className="h-28 w-auto object-contain transition-all duration-300 group-hover:scale-105"
+                priority
+              />
             </Link>
 
             {/* Navigation centrale */}
