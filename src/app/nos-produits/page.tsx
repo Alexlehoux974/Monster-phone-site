@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import BrandCarousel from '@/components/BrandCarousel';
 import ProductsClient from './products-client';
 import ProductCardSkeleton from '@/components/ProductCardSkeleton';
 import { getProducts, getCategories, getBrands } from '@/lib/supabase/client';
@@ -34,6 +35,7 @@ export default async function ProductsPage() {
           />
         </Suspense>
       </main>
+      <BrandCarousel />
       <Footer />
     </>
   );

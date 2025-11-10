@@ -222,9 +222,9 @@ export default function Footer() {
                 <Image
                   src="/LOGO-MONSTER-PHONE.png"
                   alt="Monster Phone Boutique"
-                  width={150}
-                  height={60}
-                  className="h-auto w-auto max-w-[150px]"
+                  width={225}
+                  height={90}
+                  className="h-auto w-auto max-w-[225px]"
                 />
               </motion.div>
             </Link>

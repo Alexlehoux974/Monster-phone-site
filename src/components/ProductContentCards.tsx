@@ -127,8 +127,11 @@ export default function ProductContentCards({ productId, productCategory, produc
 
   console.log('🎨 [ProductContentCards] Rendering', sections.length, 'sections');
 
-  // Détecter si c'est un produit HONOR
+  // Détecter si c'est un produit HONOR ET un smartphone (pas une tablette)
   const isHonor = productBrand?.toUpperCase() === 'HONOR';
+  const isSmartphone = productCategory?.toLowerCase().includes('smartphone') ||
+                       productCategory?.toLowerCase().includes('téléphone');
+  const shouldShowPackBanner = isHonor && isSmartphone;
 
   // Trouver l'index de la première section description_card
   const firstDescriptionIndex = sections.findIndex(s => s.section_type === 'description_card');
@@ -136,8 +139,8 @@ export default function ProductContentCards({ productId, productCategory, produc
   return (
     <div className="space-y-12 mt-12">
       {sections.map((section: any, index: number) => {
-        // Afficher la bannière HONOR juste avant la première section description_card
-        const shouldShowHonorBanner = isHonor && index === firstDescriptionIndex;
+        // Afficher la bannière HONOR uniquement pour les smartphones, juste avant la première section description_card
+        const shouldShowHonorBanner = shouldShowPackBanner && index === firstDescriptionIndex;
 
         return (
           <div key={section.id}>

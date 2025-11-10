@@ -395,7 +395,7 @@ const MonsterPhoneHero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6"
           >
             <Link href="/nos-produits">
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
@@ -437,55 +437,7 @@ const MonsterPhoneHero = () => {
             </motion.div>
           </motion.div>
 
-          {/* Stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
-            className="grid grid-cols-3 gap-8 max-w-2xl mx-auto"
-          >
-            {[
-              { number: "16K", label: "CLIENTS", icon: Users },
-              { number: "98%", label: "SATISFACTION", icon: ThumbsUp },
-              { number: "48H", label: "LIVRAISON", icon: Truck },
-            ].map((stat, index) => (
-              <motion.div 
-                key={index} 
-                className="text-center"
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.2 }}
-              >
-                <div className="flex justify-center mb-2">
-                  <stat.icon className="w-8 h-8 text-purple-400" />
-                </div>
-                <div className="text-3xl md:text-4xl font-bold text-white mb-1">
-                  {stat.number}
-                </div>
-                <div className="text-gray-100 text-base font-medium tracking-wide">{stat.label}</div>
-              </motion.div>
-            ))}
-          </motion.div>
         </div>
-
-        {/* Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center"
-          >
-            <motion.div
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="w-1 h-3 bg-white/60 rounded-full mt-2"
-            />
-          </motion.div>
-        </motion.div>
       </motion.section>
 
 

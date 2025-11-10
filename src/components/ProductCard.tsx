@@ -108,80 +108,76 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
             </p>
             
             {/* Note */}
-            {product.rating && product.rating.average > 0 && (
-              <div className="flex items-center gap-1 mb-3">
-                {[...Array(5)].map((_, i) => (
-                  <Star
-                    key={i}
-                    className={cn(
-                      "w-4 h-4",
-                      i < Math.floor(product.rating?.average || 0)
-                        ? "fill-yellow-400 text-yellow-400"
-                        : "text-gray-300"
-                    )}
-                  />
-                ))}
-                <span className="text-sm text-gray-600 ml-1">
-                  ({product.rating.average}) • {product.rating.count || 0} avis
-                </span>
-              </div>
-            )}
-            
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <span className="text-2xl font-bold text-blue-600">
-                  {formatPrice(finalPrice)}
-                </span>
-                {(hasAdminDiscount || hasDiscount) && (
-                  <span className="text-lg text-gray-400 line-through">
-                    {formatPrice(product.basePrice)}
-                  </span>
-                )}
-                {product.variants && product.variants.length > 1 && (
-                  <span className="text-sm text-gray-500">
-                    {product.variants.length} variantes
-                  </span>
-                )}
-              </div>
-              
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={handleAddToCart}
-                  disabled={isAdding || !isInStock}
+            <div className="flex items-center gap-1 mb-3">
+              {[...Array(5)].map((_, i) => (
+                <Star
+                  key={i}
                   className={cn(
-                    "px-4 py-2 rounded-lg font-medium transition-all duration-300 flex items-center gap-2",
-                    showSuccess
-                      ? "bg-green-600 text-white"
-                      : isInCart(product.id)
-                      ? "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                      : "bg-blue-600 text-white hover:bg-blue-700",
-                    (isAdding || !isInStock) && "opacity-50 cursor-not-allowed",
-                    isAdding && "scale-95"
+                    "w-4 h-4",
+                    i < Math.floor(product.rating?.average || 0)
+                      ? "fill-yellow-400 text-yellow-400"
+                      : "text-gray-300"
                   )}
-                >
-                  {showSuccess ? (
-                    <>
-                      <Check className="w-4 h-4" />
-                      Ajouté !
-                    </>
-                  ) : !isInStock ? (
-                    'Rupture'
-                  ) : isInCart(product.id) ? (
-                    <>
-                      <ShoppingCart className="w-4 h-4" />
-                      Dans le panier
-                    </>
-                  ) : (
-                    <>
-                      <ShoppingCart className="w-4 h-4" />
-                      Ajouter
-                    </>
-                  )}
-                </button>
-                <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors">
-                  <Heart className="w-5 h-5 text-gray-400 hover:text-red-500" />
-                </button>
-              </div>
+                />
+              ))}
+              {product.rating && product.rating.count > 0 && (
+                <span className="text-sm text-gray-600 ml-1">
+                  ({product.rating.count} avis)
+                </span>
+              )}
+            </div>
+            
+            <div className="flex items-center gap-4 mb-4">
+              <span className="text-2xl font-bold text-blue-600">
+                {formatPrice(finalPrice)}
+              </span>
+              {(hasAdminDiscount || hasDiscount) && (
+                <span className="text-lg text-gray-400 line-through">
+                  {formatPrice(product.basePrice)}
+                </span>
+              )}
+              {product.variants && product.variants.length > 1 && (
+                <span className="text-sm text-gray-500">
+                  {product.variants.length} variantes
+                </span>
+              )}
+            </div>
+
+            <div className="flex items-center gap-2">
+              <Link
+                href={`/produit/${product.urlSlug}`}
+                className="px-6 py-2 text-center rounded-lg border-2 border-blue-600 text-blue-600 font-medium hover:bg-blue-50 transition-colors"
+              >
+                Voir le produit
+              </Link>
+              <button
+                onClick={handleAddToCart}
+                disabled={isAdding || !isInStock}
+                className={cn(
+                  "px-6 py-2 rounded-lg font-medium transition-all duration-300 flex items-center gap-2",
+                  showSuccess
+                    ? "bg-green-600 text-white"
+                    : isInCart(product.id)
+                    ? "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    : "bg-blue-600 text-white hover:bg-blue-700",
+                  (isAdding || !isInStock) && "opacity-50 cursor-not-allowed",
+                  isAdding && "scale-95"
+                )}
+              >
+                {showSuccess ? (
+                  <>
+                    <Check className="w-4 h-4" />
+                    Ajouté !
+                  </>
+                ) : !isInStock ? (
+                  'Rupture de stock'
+                ) : (
+                  <>
+                    <ShoppingCart className="w-4 h-4" />
+                    Acheter maintenant
+                  </>
+                )}
+              </button>
             </div>
           </div>
         </div>
@@ -257,74 +253,80 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
         </div>
 
         {/* Note et avis */}
-        {product.rating && product.rating.average > 0 && (
-          <div className="flex items-center gap-1 mb-3">
-            {[...Array(5)].map((_, i) => (
-              <Star
-                key={i}
-                className={cn(
-                  "w-4 h-4",
-                  i < Math.floor(product.rating?.average || 0)
-                    ? "fill-yellow-400 text-yellow-400"
-                    : "text-gray-300"
-                )}
-              />
-            ))}
-            <span className="text-sm text-gray-600 ml-1">
-              ({product.rating.average})
-            </span>
-          </div>
-        )}
-
-        {/* Prix et actions */}
-        <div className="flex items-center justify-between mt-auto">
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="text-2xl font-bold text-blue-600">
-                {formatPrice(finalPrice)}
-              </span>
-              {(hasAdminDiscount || hasDiscount) && (
-                <span className="text-sm text-gray-400 line-through">
-                  {formatPrice(product.basePrice)}
-                </span>
+        <div className="flex items-center gap-1 mb-3">
+          {[...Array(5)].map((_, i) => (
+            <Star
+              key={i}
+              className={cn(
+                "w-4 h-4",
+                i < Math.floor(product.rating?.average || 0)
+                  ? "fill-yellow-400 text-yellow-400"
+                  : "text-gray-300"
               )}
-            </div>
-            {product.variants && product.variants.length > 1 && (
-              <p className="text-xs text-gray-500 mt-1">
-                {product.variants.length} variantes disponibles
-              </p>
+            />
+          ))}
+          {product.rating && product.rating.count > 0 && (
+            <span className="text-sm text-gray-600 ml-1">
+              ({product.rating.count} avis)
+            </span>
+          )}
+        </div>
+
+        {/* Prix */}
+        <div className="mb-3">
+          <div className="flex items-center gap-2">
+            <span className="text-2xl font-bold text-blue-600">
+              {formatPrice(finalPrice)}
+            </span>
+            {(hasAdminDiscount || hasDiscount) && (
+              <span className="text-sm text-gray-400 line-through">
+                {formatPrice(product.basePrice)}
+              </span>
             )}
           </div>
-          
-          <div className="flex items-center gap-1">
-            <button
-              onClick={handleAddToCart}
-              disabled={isAdding || !isInStock}
-              className={cn(
-                "p-2 rounded-lg transition-all duration-300",
-                showSuccess
-                  ? "bg-green-600 text-white"
-                  : isInCart(product.id)
-                  ? "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                  : "bg-blue-600 text-white hover:bg-blue-700",
-                (isAdding || !isInStock) && "opacity-50 cursor-not-allowed",
-                isAdding && "scale-95"
-              )}
-              title={!isInStock ? "Rupture de stock" : isInCart(product.id) ? "Déjà dans le panier" : "Ajouter au panier"}
-            >
-              {showSuccess ? (
-                <Check className="w-5 h-5" />
-              ) : (
-                <ShoppingCart className="w-5 h-5" />
-              )}
-            </button>
-            <button 
-              className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
-              title="Ajouter aux favoris"
-            >
-              <Heart className="w-5 h-5 text-gray-400 hover:text-red-500" />
-            </button>
-          </div>
+          {product.variants && product.variants.length > 1 && (
+            <p className="text-xs text-gray-500 mt-1">
+              {product.variants.length} variantes disponibles
+            </p>
+          )}
+        </div>
+
+        {/* Boutons d'action */}
+        <div className="flex flex-col gap-2">
+          <Link
+            href={`/produit/${product.urlSlug}`}
+            className="w-full px-4 py-2 text-center rounded-lg border-2 border-blue-600 text-blue-600 font-medium hover:bg-blue-50 transition-colors"
+          >
+            Voir le produit
+          </Link>
+          <button
+            onClick={handleAddToCart}
+            disabled={isAdding || !isInStock}
+            className={cn(
+              "w-full px-4 py-2 rounded-lg font-medium transition-all duration-300 flex items-center justify-center gap-2",
+              showSuccess
+                ? "bg-green-600 text-white"
+                : isInCart(product.id)
+                ? "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                : "bg-blue-600 text-white hover:bg-blue-700",
+              (isAdding || !isInStock) && "opacity-50 cursor-not-allowed",
+              isAdding && "scale-95"
+            )}
+          >
+            {showSuccess ? (
+              <>
+                <Check className="w-4 h-4" />
+                Ajouté !
+              </>
+            ) : !isInStock ? (
+              'Rupture de stock'
+            ) : (
+              <>
+                <ShoppingCart className="w-4 h-4" />
+                Acheter maintenant
+              </>
+            )}
+          </button>
         </div>
       </div>
     </div>

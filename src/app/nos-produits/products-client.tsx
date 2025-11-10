@@ -318,26 +318,44 @@ function ProductsClientContent({
                         {product.name}
                       </Link>
                     </h3>
-                    {product.average_rating && (
-                      <div className="flex items-center gap-1 mb-2">
-                        <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                        <span className="text-sm text-gray-600">
-                          {product.average_rating.toFixed(1)} ({product.total_reviews || 0})
+                    <div className="flex items-center gap-1 mb-2">
+                      {[...Array(5)].map((_, i) => (
+                        <Star
+                          key={i}
+                          className={`w-4 h-4 ${
+                            i < Math.floor(product.average_rating || 0)
+                              ? 'fill-yellow-400 text-yellow-400'
+                              : 'text-gray-300'
+                          }`}
+                        />
+                      ))}
+                      {product.total_reviews > 0 && (
+                        <span className="text-sm text-gray-600 ml-1">
+                          ({product.total_reviews} avis)
                         </span>
-                      </div>
-                    )}
-                    <div className="flex items-center justify-between">
-                      <div>
+                      )}
+                    </div>
+                    <div className="mb-3">
+                      <div className="flex items-center gap-2">
                         <p className="text-lg font-bold text-monster-green">{formatPrice(product.price)}</p>
                         {product.original_price && product.original_price > product.price && (
                           <p className="text-sm text-gray-500 line-through">{formatPrice(product.original_price)}</p>
                         )}
                       </div>
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <Link
+                        href={`/produit/${product.url_slug}`}
+                        className="w-full px-3 py-2 text-center text-sm rounded-lg border-2 border-blue-600 text-blue-600 font-medium hover:bg-blue-50 transition-colors"
+                      >
+                        Voir le produit
+                      </Link>
                       <button
                         onClick={() => handleAddToCart(product)}
-                        className="p-2 bg-monster-green text-white rounded hover:bg-monster-green-dark transition-colors"
+                        className="w-full px-3 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
                       >
                         <ShoppingCart className="w-4 h-4" />
+                        Acheter maintenant
                       </button>
                     </div>
                   </div>
@@ -368,19 +386,45 @@ function ProductsClientContent({
                       {product.short_description && (
                         <p className="text-sm text-gray-600 mb-2 line-clamp-2">{product.short_description}</p>
                       )}
+                      <div className="flex items-center gap-1 mb-3">
+                        {[...Array(5)].map((_, i) => (
+                          <Star
+                            key={i}
+                            className={`w-4 h-4 ${
+                              i < Math.floor(product.average_rating || 0)
+                                ? 'fill-yellow-400 text-yellow-400'
+                                : 'text-gray-300'
+                            }`}
+                          />
+                        ))}
+                        {product.total_reviews > 0 && (
+                          <span className="text-sm text-gray-600 ml-1">
+                            ({product.total_reviews} avis)
+                          </span>
+                        )}
+                      </div>
                       <div className="flex items-center justify-between">
-                        <div>
+                        <div className="mb-3">
                           <p className="text-xl font-bold text-monster-green">{formatPrice(product.price)}</p>
                           {product.original_price && product.original_price > product.price && (
                             <p className="text-sm text-gray-500 line-through">{formatPrice(product.original_price)}</p>
                           )}
                         </div>
-                        <button
-                          onClick={() => handleAddToCart(product)}
-                          className="px-4 py-2 bg-monster-green text-white rounded hover:bg-monster-green-dark transition-colors"
-                        >
-                          Ajouter au panier
-                        </button>
+                        <div className="flex items-center gap-2">
+                          <Link
+                            href={`/produit/${product.url_slug}`}
+                            className="px-4 py-2 text-center rounded-lg border-2 border-blue-600 text-blue-600 font-medium hover:bg-blue-50 transition-colors"
+                          >
+                            Voir le produit
+                          </Link>
+                          <button
+                            onClick={() => handleAddToCart(product)}
+                            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
+                          >
+                            <ShoppingCart className="w-4 h-4" />
+                            Acheter maintenant
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
