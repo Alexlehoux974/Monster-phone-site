@@ -40,7 +40,17 @@ export function supabaseProductToLegacy(product: ProductFullView): Product {
     ean: v.ean || '',
     stock: v.stock || 0,
     is_default: v.is_default,
+    // Si le variant n'a pas d'images mais que le produit en a, utiliser les images du produit
+    images: (v.images && v.images.length > 0) ? v.images : (product.images || [])
   })) || [];
+
+  // IMPORTANT: Trier les variants pour garantir que le variant par défaut est en premier
+  // Cela assure que même si la requête Supabase ne trie pas correctement, l'ordre est correct
+  variants.sort((a, b) => {
+    if (a.is_default && !b.is_default) return -1;
+    if (!a.is_default && b.is_default) return 1;
+    return 0;
+  });
 
   // Construire les spécifications
   const specifications: ProductSpecification[] = [];
