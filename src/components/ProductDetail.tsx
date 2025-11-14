@@ -144,12 +144,6 @@ export default function ProductDetail({ product }: ProductDetailProps) {
       });
     }
 
-    // Ajouter des placeholders pour avoir au moins 8 images dans le carrousel
-    const minImages = 8;
-    while (allImages.length < minImages) {
-      allImages.push({ src: '/placeholder-monster.svg' });
-    }
-
     return allImages;
   };
 

@@ -277,21 +277,21 @@ function DescriptionCardSection({ section, productCategory }: { section: Product
           )}
           {section.content && (
             <div
-              className="text-gray-700 leading-relaxed prose prose-sm max-w-none"
+              className="text-gray-700 leading-relaxed prose prose-sm max-w-none [&>p]:mb-4"
               dangerouslySetInnerHTML={{ __html: section.content }}
             />
           )}
         </div>
 
         {/* Image */}
-        <div className={cn("relative h-64 lg:h-auto lg:min-h-96", isImageLeft ? "lg:col-start-1" : "lg:col-start-2")}>
+        <div className={cn("relative h-64 lg:h-auto lg:min-h-[500px]", isImageLeft ? "lg:col-start-1" : "lg:col-start-2")}>
           {section.images && section.images.length > 0 ? (
             <ImageWithFallback
               src={section.images[0]}
               alt={section.title || 'Product image'}
               productCategory={productCategory}
               fill
-              className="object-cover"
+              className="object-contain"
             />
           ) : (
             <Image
@@ -372,14 +372,14 @@ function FeaturesListSection({ section, productCategory }: { section: ProductCon
         </div>
 
         {/* Image */}
-        <div className={cn("relative h-64 lg:h-auto lg:min-h-96 hidden lg:block", isImageLeft ? "lg:col-start-1" : "lg:col-start-2")}>
+        <div className={cn("relative h-64 lg:h-auto lg:min-h-[500px] hidden lg:block", isImageLeft ? "lg:col-start-1" : "lg:col-start-2")}>
           {section.images && section.images.length > 0 ? (
             <ImageWithFallback
               src={section.images[0]}
               alt={section.title || 'Product features'}
               productCategory={productCategory}
               fill
-              className="object-cover"
+              className="object-contain"
             />
           ) : (
             <Image
@@ -415,21 +415,21 @@ function EngagementCardSection({ section, productCategory }: { section: ProductC
           )}
           {section.content && (
             <div
-              className="text-gray-700 leading-relaxed prose prose-sm max-w-none"
+              className="text-gray-700 leading-relaxed prose prose-sm max-w-none [&>p]:mb-4"
               dangerouslySetInnerHTML={{ __html: section.content }}
             />
           )}
         </div>
 
         {/* Image */}
-        <div className={cn("relative h-64 lg:h-auto lg:min-h-96", isImageLeft ? "lg:col-start-1" : "lg:col-start-2")}>
+        <div className={cn("relative h-64 lg:h-auto lg:min-h-[500px]", isImageLeft ? "lg:col-start-1" : "lg:col-start-2")}>
           {section.images && section.images.length > 0 ? (
             <ImageWithFallback
               src={section.images[0]}
               alt={section.title || 'Product engagement'}
               productCategory={productCategory}
               fill
-              className="object-cover"
+              className="object-contain"
             />
           ) : (
             <Image
