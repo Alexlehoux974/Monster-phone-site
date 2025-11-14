@@ -12,6 +12,12 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
   // Allow Cloudflare tunnel and direct IP dev origins
@@ -106,4 +112,4 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
-// Force rebuild Thu Nov  6 13:35:51 UTC 2025
+// Force rebuild: Clear ALL Vercel cache - Thu Nov 14 2025 13:00:00 UTC
