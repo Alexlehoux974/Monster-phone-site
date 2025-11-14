@@ -40,6 +40,9 @@ async function getProductBySlug(slug: string) {
 
   if (error || !data) return null;
 
+  // 🔍 DEBUG: Log variants data
+  console.log('🔍 DEBUG VARIANTS:', JSON.stringify(data.product_variants, null, 2));
+
   // Construire un ProductFullView à partir des données Supabase
   const basePrice = typeof data.price === 'string' ? parseFloat(data.price) : data.price;
 
