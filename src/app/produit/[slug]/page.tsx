@@ -32,6 +32,7 @@ async function getProductBySlug(slug: string) {
       product_variants(*)
     `)
     .eq('url_slug', slug)
+    .order('is_default', { referencedTable: 'product_variants', ascending: false })
     .single()
     .then((result: any) => {
       // Tag this fetch for revalidation
@@ -107,6 +108,7 @@ async function getRelatedProducts(brandName: string, currentProductId: string) {
     `)
     .eq('brand.name', brandName)
     .neq('id', currentProductId)
+    .order('is_default', { referencedTable: 'product_variants', ascending: false })
     .limit(4);
 
   if (!data) return [];
