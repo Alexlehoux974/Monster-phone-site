@@ -316,9 +316,9 @@ const DropdownMenu = ({
                             >
                               <div className="flex items-start space-x-2">
                                 <div className="w-12 h-12 bg-black border border-gray-800 rounded overflow-hidden flex-shrink-0 shadow-sm">
-                                  {product.images && product.images.length > 0 && !product.images[0].includes('placeholder') ? (
+                                  {product.variants?.[0]?.images && product.variants[0].images.length > 0 && !product.variants[0].images[0].includes('placeholder') ? (
                                     <ImageWithFallback
-                                      src={product.images[0]}
+                                      src={product.variants[0].images[0]}
                                       alt={product.name}
                                       width={48}
                                       height={48}

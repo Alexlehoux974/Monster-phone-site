@@ -8,7 +8,7 @@ import FeaturesSection from '@/components/FeaturesSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import Footer from '@/components/Footer';
 import type { Metadata } from 'next';
-import { getActiveProducts } from '@/lib/supabase/api';
+import { getActiveProducts } from '@/lib/supabase/api-rest';
 import { supabaseProductToLegacy } from '@/lib/supabase/adapters';
 import { sortProductsByPriority } from '@/lib/utils';
 
