@@ -8,6 +8,7 @@ import FeaturedProducts from '@/components/FeaturedProducts';
 import { createClient } from '@/lib/supabase/client';
 import { supabaseProductToLegacy } from '@/lib/supabase/adapters';
 import type { ProductFullView } from '@/lib/supabase/client';
+import { getWorkingImageUrl } from '@/lib/image-utils';
 
 // ⚡ DÉSACTIVER COMPLÈTEMENT LE CACHE Next.js 15
 export const dynamic = 'force-dynamic';
@@ -40,9 +41,6 @@ async function getProductBySlug(slug: string) {
     });
 
   if (error || !data) return null;
-
-  // 🔍 DEBUG: Log variants data
-  console.log('🔍 DEBUG VARIANTS:', JSON.stringify(data.product_variants, null, 2));
 
   // Construire un ProductFullView à partir des données Supabase
   const basePrice = typeof data.price === 'string' ? parseFloat(data.price) : data.price;
@@ -90,6 +88,18 @@ async function getProductBySlug(slug: string) {
     videos: data.videos || undefined,
     reviews: []
   };
+
+  // ✨ TRANSFORM all variant images from Cloudinary IDs to full URLs (SSR-safe)
+  if (product.variants && product.variants.length > 0) {
+    product.variants = product.variants.map(variant => ({
+      ...variant,
+      images: variant.images?.map(img =>
+        img.startsWith('http')
+          ? img
+          : `https://res.cloudinary.com/monster-phone/image/upload/v1763527513/${img}.png`
+      ) || []
+    }));
+  }
 
   // Utiliser l'adaptateur pour convertir au format legacy
   return supabaseProductToLegacy(product);
@@ -160,6 +170,19 @@ async function getRelatedProducts(brandName: string, currentProductId: string) {
       videos: item.videos || undefined,
       reviews: []
     };
+
+    // ✨ TRANSFORM all variant images from Cloudinary IDs to full URLs (SSR-safe)
+    if (product.variants && product.variants.length > 0) {
+      product.variants = product.variants.map(variant => ({
+        ...variant,
+        images: variant.images?.map(img =>
+          img.startsWith('http')
+            ? img
+            : `https://res.cloudinary.com/monster-phone/image/upload/v1763527513/${img}.png`
+        ) || []
+      }));
+    }
+
     return supabaseProductToLegacy(product);
   });
 }
@@ -176,12 +199,16 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
     };
   }
 
+  // ✨ Transform Cloudinary IDs to full URLs for metadata
+  const firstImage = product.variants?.[0]?.images?.[0];
+  const transformedFirstImage = firstImage ? getWorkingImageUrl(firstImage, product.categoryName) : '';
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: product.name,
     description: product.fullDescription || product.shortDescription,
-    image: product.variants?.[0]?.images?.[0] || '',
+    image: transformedFirstImage,
     brand: {
       '@type': 'Brand',
       name: product.brandName,
@@ -267,7 +294,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
       url: `https://monsterphone.re/produit/${product.urlSlug}`,
       siteName: 'Monster Phone Boutique',
       images: (product.variants?.[0]?.images || []).map(image => ({
-        url: image,
+        url: getWorkingImageUrl(image, product.categoryName),
         width: 1200,
         height: 1200,
         alt: product.name,
@@ -279,7 +306,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
       card: 'summary_large_image',
       title: product.name,
       description: product.shortDescription,
-      images: [product.variants?.[0]?.images?.[0] || ''],
+      images: [transformedFirstImage],
     },
     alternates: {
       canonical: `https://monsterphone.re/produit/${product.urlSlug}`,

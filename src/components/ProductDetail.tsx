@@ -131,10 +131,16 @@ export default function ProductDetail({ product }: ProductDetailProps) {
       product.variants.forEach((variant) => {
         if (variant.images && variant.images.length > 0) {
           variant.images.forEach((img) => {
-            // Éviter les doublons
+            // Éviter les doublons (comparer sur l'image brute, pas l'URL transformée)
             if (!allImages.find(i => i.src === img)) {
+              // ✨ TRANSFORM Cloudinary IDs to full URLs HERE (server-side)
+              // This prevents Next.js Image from receiving raw IDs during SSR
+              const fullUrl = img.startsWith('http')
+                ? img
+                : `https://res.cloudinary.com/monster-phone/image/upload/v1763527513/${img}.png`;
+
               allImages.push({
-                src: img,
+                src: fullUrl, // Now passing full URL instead of Cloudinary ID
                 variant: variant.color,
                 variantColor: variant.colorCode
               });
@@ -148,7 +154,16 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   };
 
   const allImages = getAllImages();
-  const mainImage = allImages[selectedImageIndex]?.src || (product.variants?.[0]?.images?.[0] || '/placeholder-monster.svg');
+
+  // ✨ IMPORTANT: Fallback image MUST also be transformed from Cloudinary ID to full URL
+  const fallbackImage = product.variants?.[0]?.images?.[0];
+  const transformedFallback = fallbackImage
+    ? (fallbackImage.startsWith('http')
+        ? fallbackImage
+        : `https://res.cloudinary.com/monster-phone/image/upload/v1763527513/${fallbackImage}.png`)
+    : '/placeholder-monster.svg';
+
+  const mainImage = allImages[selectedImageIndex]?.src || transformedFallback;
 
   // Prix avec réduction (utiliser productPrice pour le temps réel)
   const hasAdminDiscount = adminDiscountPercent > 0;

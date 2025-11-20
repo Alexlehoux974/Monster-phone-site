@@ -37,16 +37,20 @@ export function isProblematicGitHubUrl(url: string): boolean {
 
 /**
  * Transform image URL to use a proxy or alternative source
- * For now, this returns the placeholder based on category
+ * Converts Cloudinary IDs to full URLs
  */
 export function getWorkingImageUrl(originalUrl: string, productCategory?: string): string {
   // If no URL provided, return placeholder
   if (!originalUrl) {
     return getCategoryPlaceholder(productCategory || 'default');
   }
-  
-  // Return the URL as-is, including GitHub raw URLs
-  // GitHub raw URLs are now working properly
+
+  // Check if it's a Cloudinary ID (doesn't start with http)
+  if (!originalUrl.startsWith('http')) {
+    return `https://res.cloudinary.com/monster-phone/image/upload/v1763527513/${originalUrl}.png`;
+  }
+
+  // Return the URL as-is for full URLs
   return originalUrl;
 }
 

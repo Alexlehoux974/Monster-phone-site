@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { getWorkingImageUrl, getCategoryPlaceholder } from '@/lib/image-utils';
@@ -40,33 +40,33 @@ export default function ImageWithFallback({
   showSkeleton = true,
 }: ImageWithFallbackProps) {
   // Use the working image URL or fallback based on category
-  const workingUrl = getWorkingImageUrl(src, productCategory);
-  const defaultFallback = fallbackSrc || getCategoryPlaceholder(productCategory || 'default');
-  
-  const [imgSrc, setImgSrc] = useState(workingUrl);
+  // useMemo ensures workingUrl is recalculated when src or productCategory changes
+  const workingUrl = useMemo(() => {
+    const transformed = getWorkingImageUrl(src, productCategory);
+    console.log(`🖼️  [ImageWithFallback] Transforming: "${src}" → "${transformed}"`);
+    return transformed;
+  }, [src, productCategory]);
+  const defaultFallback = useMemo(() => fallbackSrc || getCategoryPlaceholder(productCategory || 'default'), [fallbackSrc, productCategory]);
+
   const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(showSkeleton);
 
+  // Derive imgSrc directly from workingUrl and error state - no useState needed!
+  const imgSrc = hasError ? defaultFallback : workingUrl;
+
+  console.log(`🎨 [ImageWithFallback] Final imgSrc: "${imgSrc}" (hasError: ${hasError})`);
+
   useEffect(() => {
-    // Reset the image source when src changes
-    setImgSrc(workingUrl);
+    // Reset error state when src changes
     setHasError(false);
-  }, [src, workingUrl]);
+    setIsLoading(showSkeleton);
+  }, [src, workingUrl, showSkeleton]);
 
   const handleError = () => {
     if (!hasError) {
       setHasError(true);
-      setImgSrc(defaultFallback);
     }
   };
-
-  // Si l'image source change, réinitialiser l'état
-  useEffect(() => {
-    if (src !== workingUrl && !hasError) {
-      setImgSrc(workingUrl);
-      setHasError(false);
-    }
-  }, [src, workingUrl, hasError]);
 
   const imageProps = fill
     ? { fill: true, sizes: sizes || '100vw' }
@@ -99,6 +99,7 @@ export default function ImageWithFallback({
         quality={quality}
         placeholder={placeholder}
         blurDataURL={blurDataURL}
+        unoptimized={true}
       />
     </>
   );

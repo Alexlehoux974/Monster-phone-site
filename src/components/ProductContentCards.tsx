@@ -44,26 +44,39 @@ export default function ProductContentCards({ productId, productCategory, produc
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log('🔍 [ProductContentCards] Mounting with productId:', productId);
+    console.log('🔍 [ProductContentCards CLIENT] Mounting with productId:', productId);
+    console.log('🔍 [ProductContentCards CLIENT] Window location:', typeof window !== 'undefined' ? window.location.href : 'SSR');
 
     // Initial fetch via API (contourne les RLS Supabase)
     const fetchSections = async () => {
-      console.log('📡 [ProductContentCards] Fetching sections via API for product:', productId);
+      const apiUrl = `/api/product-sections?productId=${productId}`;
+      console.log('📡 [ProductContentCards CLIENT] Fetching sections via API:', apiUrl);
+      console.log('📡 [ProductContentCards CLIENT] Timestamp:', new Date().toISOString());
+
       try {
-        const response = await fetch(`/api/product-sections?productId=${productId}`);
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
+
+        const response = await fetch(apiUrl, { signal: controller.signal });
+        clearTimeout(timeoutId);
+
+        console.log('📡 [ProductContentCards CLIENT] Response status:', response.status, response.ok);
         const data = await response.json();
+        console.log('📡 [ProductContentCards CLIENT] Response data:', data);
 
         if (!response.ok) {
-          console.error('❌ [ProductContentCards] API error:', data.error);
+          console.error('❌ [ProductContentCards CLIENT] API error:', data.error);
           setLoading(false);
           return;
         }
 
-        console.log('✅ [ProductContentCards] Loaded', data.sections?.length || 0, 'sections');
+        console.log('✅ [ProductContentCards CLIENT] Loaded', data.sections?.length || 0, 'sections');
         setSections(data.sections || []);
         setLoading(false);
       } catch (error) {
-        console.error('❌ [ProductContentCards] Fetch error:', error);
+        console.error('❌ [ProductContentCards CLIENT] Fetch error:', error);
+        console.error('❌ [ProductContentCards CLIENT] Error name:', error instanceof Error ? error.name : 'Unknown');
+        console.error('❌ [ProductContentCards CLIENT] Error message:', error instanceof Error ? error.message : error);
         setLoading(false);
       }
     };
@@ -112,7 +125,8 @@ export default function ProductContentCards({ productId, productCategory, produc
   }, [productId]);
 
   if (loading) {
-    console.log('⏳ [ProductContentCards] Still loading...');
+    const isClient = typeof window !== 'undefined';
+    console.log(`⏳ [ProductContentCards ${isClient ? 'CLIENT' : 'SSR'}] Still loading...`);
     return (
       <div className="flex items-center justify-center py-12">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
