@@ -88,11 +88,19 @@ export function isFeaturedProduct(product: { badges?: string[]; price?: number; 
   return hasPrestigiousBadge || productPrice >= 500;
 }
 
+// IDs des catégories prioritaires pour la page d'accueil
+const PRIORITY_CATEGORY_IDS = [
+  '3fa6e04b-2cab-46db-8a85-f6865909d51c', // Écouteurs
+  '80194285-ea90-40ff-8e2a-8edbe3609330', // Smartphones
+  '1273f118-da30-41c3-818e-c7cb1b1c1b19', // Smartphones Gaming
+  '6a9f5e42-d28c-433e-9c0c-29ee2f264ee0', // Smartphones 5G
+];
+
 /**
  * Tri intelligent des produits par priorité
- * Ordre: En stock > Phares > Prix décroissant > Rupture de stock
+ * Ordre: En stock > Catégories prioritaires (Smartphones/Écouteurs) > Phares > Prix décroissant > Rupture de stock
  */
-export function sortProductsByPriority<T extends { variants?: { stock: number }[]; stockQuantity?: number; badges?: string[]; price?: number; basePrice?: number }>(
+export function sortProductsByPriority<T extends { variants?: { stock: number }[]; stockQuantity?: number; badges?: string[]; price?: number; basePrice?: number; categoryId?: string }>(
   products: T[]
 ): T[] {
   return [...products].sort((a, b) => {
@@ -100,18 +108,25 @@ export function sortProductsByPriority<T extends { variants?: { stock: number }[
     const bInStock = hasStock(b);
     const aIsFeatured = isFeaturedProduct(a);
     const bIsFeatured = isFeaturedProduct(b);
+    const aIsPriority = PRIORITY_CATEGORY_IDS.includes(a.categoryId || '');
+    const bIsPriority = PRIORITY_CATEGORY_IDS.includes(b.categoryId || '');
 
     // 1. Produits en stock d'abord
     if (aInStock !== bInStock) {
       return aInStock ? -1 : 1;
     }
 
-    // 2. Parmi les produits en stock (ou hors stock), produits phares d'abord
+    // 2. Parmi les produits en stock, catégories prioritaires (smartphones/écouteurs) d'abord
+    if (aIsPriority !== bIsPriority) {
+      return aIsPriority ? -1 : 1;
+    }
+
+    // 3. Produits phares d'abord
     if (aIsFeatured !== bIsFeatured) {
       return aIsFeatured ? -1 : 1;
     }
 
-    // 3. Trier par prix décroissant (produits premium en premier)
+    // 4. Trier par prix décroissant (produits premium en premier)
     const aPrice = a.basePrice ?? a.price ?? 0;
     const bPrice = b.basePrice ?? b.price ?? 0;
     return bPrice - aPrice;

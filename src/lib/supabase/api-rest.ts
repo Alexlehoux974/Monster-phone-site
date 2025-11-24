@@ -76,6 +76,7 @@ export async function getActiveProducts(options?: {
     ...product,
     brand_name: product.brand?.name || '',
     brand_slug: product.brand?.slug || '',
+    category_id: product.category?.id || product.category_id || '',
     category_name: product.category?.name || '',
     category_slug: product.category?.slug || '',
     subcategory_name: product.subcategory || '',

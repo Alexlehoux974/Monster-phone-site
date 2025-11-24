@@ -212,6 +212,7 @@ export interface ProductFullView {
   name: string;
   url_slug: string;
   brand_name: string;
+  category_id?: string;
   category_name: string;
   subcategory_name?: string;
   description?: string;

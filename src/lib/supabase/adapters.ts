@@ -142,7 +142,7 @@ export function supabaseProductToLegacy(product: ProductFullView): Product {
     brandId: '', // Not available in ProductFullView
     brandName: brandName || 'Sans marque',
     brandSlug,
-    categoryId: '', // Not available in ProductFullView
+    categoryId: product.category_id || '', // Utiliser category_id de ProductFullView
     categoryName,
     categorySlug,
     subcategory: product.subcategory_name || undefined,
