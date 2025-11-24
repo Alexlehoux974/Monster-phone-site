@@ -1,12 +1,14 @@
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
+import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { ChevronRight } from 'lucide-react';
 import { useSupabaseMenu } from '@/hooks/useSupabaseData';
 import { supabaseProductToLegacy } from '@/lib/supabase/adapters';
 import { MENU_STRUCTURE, type MenuCategory } from '@/lib/supabase/menu-structure';
 import type { Product } from '@/data/products';
+import ImageWithFallback from '@/components/ImageWithFallback';
 
 // Hook pour obtenir les produits d'une catégorie/sous-catégorie
 export const useMenuProducts = (
@@ -28,25 +30,22 @@ export const useMenuProducts = (
       setLoading(true);
       try {
         let fetchedProducts = [];
-        
+
         if (brand) {
           // Récupérer les produits par marque
           const brandProducts = await getProductsForBrand(brand.toLowerCase().replace(/\s+/g, '-'));
           fetchedProducts = brandProducts;
         } else {
-          // Récupérer les produits par catégorie
-          const categoryProducts = await getProductsForCategory(category);
+          // Si une sous-catégorie est sélectionnée, récupérer ses produits directement
+          // Sinon, récupérer les produits de la catégorie principale
+          const targetSlug = subcategory || category;
+          const categoryProducts = await getProductsForCategory(targetSlug);
           fetchedProducts = categoryProducts;
         }
 
-        // Convertir vers format legacy et filtrer si nécessaire
+        // Convertir vers format legacy
         const legacyProducts = fetchedProducts.map(supabaseProductToLegacy);
-        
-        if (subcategory) {
-          setProducts(legacyProducts.filter(p => p.subcategory === subcategory));
-        } else {
-          setProducts(legacyProducts);
-        }
+        setProducts(legacyProducts);
       } catch (error) {
         console.error('Erreur récupération produits menu:', error);
         setProducts([]);
@@ -62,56 +61,57 @@ export const useMenuProducts = (
 };
 
 // Composant DropdownMenu amélioré avec Supabase
-export const SupabaseDropdownMenu = ({ 
+export const SupabaseDropdownMenu = ({
   categorySlug,
-  isOpen, 
+  isOpen,
   onClose,
   alignRight = false
-}: { 
+}: {
   categorySlug: string;
   isOpen: boolean;
   onClose: () => void;
   alignRight?: boolean;
 }) => {
   const [hoveredSubcategory, setHoveredSubcategory] = useState<string | null>(null);
-  const [hoveredBrand, setHoveredBrand] = useState<string | null>(null);
-  
+
   // Récupérer la structure du menu depuis la configuration fixe
   const category = useMemo(() => {
     return MENU_STRUCTURE.find(cat => cat.slug === categorySlug);
   }, [categorySlug]);
 
+  // Pour les catégories sans sous-catégories, récupérer directement les produits
+  const hasSubcategories = category?.subcategories && category.subcategories.length > 0;
+
   // Récupérer les produits en fonction de la sélection
   const { products, loading } = useMenuProducts(
     category?.slug,
     hoveredSubcategory || undefined,
-    hoveredBrand || undefined
+    undefined // Plus de gestion des marques
   );
 
   // Réinitialiser les états quand le menu se ferme
   useEffect(() => {
     if (!isOpen) {
       setHoveredSubcategory(null);
-      setHoveredBrand(null);
     }
   }, [isOpen]);
 
   if (!isOpen || !category) return null;
   
   return (
-    <div 
+    <div
       className={cn(
         "absolute top-full mt-1 bg-white shadow-2xl border border-gray-200 rounded-xl z-[150]",
         alignRight ? "right-0" : "left-0"
       )}
-      style={{ 
+      style={{
         boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
         overflow: 'hidden'
       }}
     >
       <div className="flex min-h-[450px] w-fit max-w-[calc(100vw-4rem)]">
-        {/* Colonne 1: Sous-catégories */}
-        {category.subcategories && category.subcategories.length > 0 && (
+        {/* Colonne 1: Sous-catégories OU Titre seul pour catégories sans sous-catégories */}
+        {hasSubcategories ? (
           <div className="min-w-[200px] bg-gradient-to-b from-gray-50 to-white border-r border-gray-200 max-h-[600px] flex flex-col">
             <div className="p-3 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-indigo-50 flex-shrink-0">
               <h3 className="font-bold text-gray-900 text-lg">{category.name}</h3>
@@ -121,19 +121,16 @@ export const SupabaseDropdownMenu = ({
               scrollbarColor: '#9ca3af #f3f4f6'
             }}>
               <div className="py-2 px-2">
-                {category.subcategories.map((subcat: any) => (
+                {category.subcategories!.map((subcat: any) => (
                   <button
                     key={subcat.slug}
                     className={cn(
                       "w-full text-left px-4 py-3 text-sm font-medium transition-all duration-200",
-                      hoveredSubcategory === subcat.slug 
-                        ? "bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 border-l-4 border-blue-600" 
+                      hoveredSubcategory === subcat.slug
+                        ? "bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 border-l-4 border-blue-600"
                         : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
                     )}
-                    onMouseEnter={() => {
-                      setHoveredSubcategory(subcat.slug);
-                      setHoveredBrand(null);
-                    }}
+                    onMouseEnter={() => setHoveredSubcategory(subcat.slug)}
                   >
                     <div className="flex items-center justify-between">
                       <span className="font-semibold text-base">{subcat.name}</span>
@@ -147,56 +144,21 @@ export const SupabaseDropdownMenu = ({
               </div>
             </div>
           </div>
-        )}
+        ) : null}
 
-        {/* Colonne 2: Marques */}
-        {hoveredSubcategory && (
-          <div className="min-w-[170px] bg-white border-r border-gray-200 max-h-[600px] flex flex-col">
-            <div className="p-3 border-b border-gray-200 bg-gradient-to-r from-green-50 to-emerald-50 flex-shrink-0">
-              <h4 className="font-bold text-gray-900 text-base">Marques</h4>
-            </div>
-            <div className="flex-1 overflow-y-auto" style={{
-              scrollbarWidth: 'thin',
-              scrollbarColor: '#9ca3af #f3f4f6'
-            }}>
-              <div className="py-2 px-2">
-                {(() => {
-                  const selectedSubcat = category.subcategories?.find(sub => sub.slug === hoveredSubcategory);
-                  const brands = selectedSubcat?.brands || [];
-                  
-                  return brands.map((brand: any) => (
-                    <button
-                      key={brand}
-                      className={cn(
-                        "w-full text-left px-4 py-3 text-sm transition-all duration-200",
-                        hoveredBrand === brand 
-                          ? "bg-gradient-to-r from-green-50 to-emerald-50 text-green-700 border-l-4 border-green-600" 
-                          : "text-gray-700 hover:text-green-600 hover:bg-gray-50"
-                      )}
-                      onMouseEnter={() => setHoveredBrand(brand)}
-                    >
-                      <div className="flex items-center justify-between">
-                        <span className="font-medium text-base">{brand}</span>
-                        <ChevronRight className={cn(
-                          "w-4 h-4 transition-transform",
-                          hoveredBrand === brand ? "translate-x-1" : ""
-                        )} />
-                      </div>
-                    </button>
-                  ));
-                })()}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Colonne 3: Produits populaires */}
-        {(hoveredSubcategory || hoveredBrand) && (
+        {/* Colonne 2: Produits (pour catégories sans sous-catégories ou avec sous-catégorie sélectionnée) */}
+        {(!hasSubcategories || hoveredSubcategory) && (
           <div className="min-w-[300px] bg-white max-h-[600px] flex flex-col">
             <div className="p-3 border-b border-gray-200 bg-gradient-to-r from-purple-50 to-pink-50 flex-shrink-0">
               <h4 className="font-bold text-gray-900 text-base">
-                {loading ? 'Chargement...' : `Produits populaires (${products.length})`}
+                {!hasSubcategories && category.name}
+                {hasSubcategories && hoveredSubcategory && (
+                  category.subcategories?.find(sub => sub.slug === hoveredSubcategory)?.name
+                )}
               </h4>
+              <p className="text-sm text-gray-600 mt-1">
+                {loading ? 'Chargement...' : `${products.length} produit${products.length > 1 ? 's' : ''}`}
+              </p>
             </div>
             <div className="flex-1 overflow-y-auto p-4" style={{
               scrollbarWidth: 'thin',
@@ -204,29 +166,57 @@ export const SupabaseDropdownMenu = ({
             }}>
               {loading ? (
                 <div className="space-y-2">
-                  {[...Array(3)].map((_, i) => (
+                  {[...Array(5)].map((_, i) => (
                     <div key={i} className="h-16 bg-gray-100 rounded animate-pulse" />
                   ))}
                 </div>
               ) : products.length > 0 ? (
-                <div className="grid gap-3">
-                  {products.slice(0, 5).map((product: any) => (
-                    <a
+                <div className="grid gap-2">
+                  {products.map((product: any) => (
+                    <Link
                       key={product.id}
-                      href={`/produit/${product.urlSlug}`}
-                      className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors"
+                      href={`/produit/${product.urlSlug || product.id}`}
+                      className="block px-4 py-3 hover:bg-gradient-to-r hover:from-orange-50 hover:to-transparent transition-all duration-200"
                       onClick={onClose}
                     >
-                      <div className="w-12 h-12 bg-gray-100 rounded flex-shrink-0" />
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate">
-                          {product.name}
-                        </p>
-                        <p className="text-sm text-gray-600">
-                          {product.price}€
-                        </p>
+                      <div className="flex items-start space-x-2">
+                        <div className="w-12 h-12 bg-black border border-gray-800 rounded overflow-hidden flex-shrink-0 shadow-sm">
+                          {product.variants?.[0]?.images && product.variants[0].images.length > 0 && !product.variants[0].images[0].includes('placeholder') ? (
+                            <ImageWithFallback
+                              src={product.variants[0].images[0]}
+                              alt={product.name}
+                              width={48}
+                              height={48}
+                              className="w-full h-full object-contain"
+                              productCategory={product.categoryName}
+                            />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center">
+                              <svg className="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+                              </svg>
+                            </div>
+                          )}
+                        </div>
+                        <div className="flex-1">
+                          <p className="text-sm font-semibold text-gray-900 whitespace-normal">
+                            {product.name}
+                          </p>
+                          {product.basePrice && (
+                            <p className="text-base font-bold text-red-600 mt-1 whitespace-nowrap">
+                              {typeof product.basePrice === 'number'
+                                ? `${product.basePrice.toFixed(2)} €`
+                                : product.basePrice}
+                            </p>
+                          )}
+                          {product.shortDescription && (
+                            <p className="text-xs text-gray-600 mt-1 whitespace-normal">
+                              {product.shortDescription}
+                            </p>
+                          )}
+                        </div>
                       </div>
-                    </a>
+                    </Link>
                   ))}
                 </div>
               ) : (

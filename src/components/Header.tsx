@@ -13,6 +13,8 @@ import debounce from 'lodash.debounce';
 import ImageWithFallback from '@/components/ImageWithFallback';
 import { useSupabaseProducts, useSupabaseCategories } from '@/hooks/useSupabaseData';
 import { generateMenuStructureFromProducts, type CategoryStructure } from '@/lib/supabase/adapters';
+import { MENU_STRUCTURE as FIXED_MENU_STRUCTURE, type MenuCategory } from '@/lib/supabase/menu-structure';
+import { SupabaseDropdownMenu } from '@/components/HeaderSupabase';
 
 // Composant pour la barre d'urgence promotionnelle
 const PromoBar = () => (
@@ -891,14 +893,10 @@ export default function Header() {
 
             {/* Navigation centrale */}
             <nav className="hidden xl:flex items-center gap-1 overflow-visible flex-1" ref={menuRef}>
-              {/* Génération dynamique des menus à partir de menuStructure */}
-              {menuStructure.map((category: any) => {
-                // Extraire l'emoji et le nom du menu
-                const menuIcon = category.name.substring(0, 2); // Récupérer l'emoji
-                const menuLabel = category.name.substring(2).trim(); // Récupérer le nom sans emoji
-                
+              {/* Génération des menus à partir de FIXED_MENU_STRUCTURE */}
+              {FIXED_MENU_STRUCTURE.map((category: MenuCategory) => {
                 return (
-                  <div 
+                  <div
                     key={category.slug}
                     className="relative group"
                     onMouseEnter={() => handleMouseEnter(category.slug)}
@@ -911,30 +909,26 @@ export default function Header() {
                       }}
                       className={`flex items-center gap-1.5 px-3 py-2 text-sm font-bold transition-all duration-200 rounded-lg ${
                         dropdownOpen === category.slug || clickedMenu === category.slug
-                          ? 'text-blue-600 bg-blue-50 shadow-sm' 
+                          ? 'text-blue-600 bg-blue-50 shadow-sm'
                           : 'text-gray-900 hover:text-blue-600 hover:bg-blue-50'
                       }`}
                     >
-                      <span className="text-base">{menuIcon}</span>
-                      <span>{menuLabel}</span>
+                      <span>{category.name}</span>
                       <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${
                         dropdownOpen === category.slug || clickedMenu === category.slug ? 'rotate-180' : ''
                       }`} />
                     </button>
-                    
-                    <DropdownMenu
-                      categories={[category]}
+
+                    <SupabaseDropdownMenu
+                      categorySlug={category.slug}
                       isOpen={dropdownOpen === category.slug || clickedMenu === category.slug}
                       onClose={closeDropdown}
-                      menuType={category.slug}
-                      allProducts={allProducts}
-                      getProductsByCategory={getProductsByCategory}
-                      getProductsByBrand={getProductsByBrand}
+                      alignRight={false}
                     />
                   </div>
                 );
               })}
-              
+
             </nav>
             
             {/* Barre de recherche desktop */}

@@ -18,56 +18,19 @@ export interface MenuCategory {
 }
 
 /**
- * Structure de menu fixe - DOIT rester identique à l'original
+ * Structure de menu fixe - Organisation par catégories
  * Les slugs sont mappés vers les catégories/sous-catégories Supabase
  */
 export const MENU_STRUCTURE: MenuCategory[] = [
   {
     name: 'Smartphones',
     slug: 'smartphones',
-    subcategories: [
-      {
-        name: 'Par marque',
-        slug: 'par-marque',
-        brands: ['Samsung', 'Apple', 'Xiaomi', 'Honor', 'Oppo', 'OnePlus', 'Google', 'Nothing']
-      },
-      {
-        name: 'Par gamme de prix',
-        slug: 'par-prix',
-        brands: ['Moins de 200€', '200€ - 500€', '500€ - 800€', 'Plus de 800€']
-      },
-      {
-        name: 'Smartphones Gaming',
-        slug: 'gaming',
-        brands: ['ASUS ROG', 'RedMagic', 'Black Shark', 'Legion']
-      },
-      {
-        name: 'Smartphones pliables',
-        slug: 'pliables',
-        brands: ['Samsung Galaxy Z', 'Motorola Razr', 'Oppo Find N']
-      }
-    ]
+    // Pas de subcategories - affichage direct des produits
   },
   {
     name: 'Tablettes',
     slug: 'tablettes',
-    subcategories: [
-      {
-        name: 'iPad',
-        slug: 'ipad',
-        brands: ['iPad Pro', 'iPad Air', 'iPad', 'iPad Mini']
-      },
-      {
-        name: 'Tablettes Android',
-        slug: 'android',
-        brands: ['Samsung Galaxy Tab', 'Xiaomi Pad', 'Lenovo Tab', 'OnePlus Pad']
-      },
-      {
-        name: 'Tablettes Gaming',
-        slug: 'gaming-tablets',
-        brands: ['ASUS ROG', 'Lenovo Legion']
-      }
-    ]
+    // Pas de subcategories - affichage direct des produits
   },
   {
     name: 'Audio',
@@ -76,22 +39,18 @@ export const MENU_STRUCTURE: MenuCategory[] = [
       {
         name: 'Écouteurs',
         slug: 'ecouteurs',
-        brands: ['MONSTER', 'Apple AirPods', 'Samsung Galaxy Buds', 'Sony', 'JBL', 'Beats', 'Nothing Ear']
-      },
-      {
-        name: 'Casques',
-        slug: 'casques-audio',
-        brands: ['MONSTER', 'MUVIT', 'Sony', 'Bose', 'JBL', 'Marshall', 'Beats', 'HyperX']
       },
       {
         name: 'Enceintes',
         slug: 'enceintes',
-        brands: ['JBL', 'Sony', 'Bose', 'Marshall', 'Ultimate Ears', 'Harman Kardon']
       },
       {
-        name: 'Gaming Audio',
-        slug: 'gaming-audio',
-        brands: ['MONSTER', 'HyperX', 'Razer', 'SteelSeries', 'Logitech G', 'ASUS ROG']
+        name: 'Casques',
+        slug: 'casques',
+      },
+      {
+        name: 'Micro',
+        slug: 'micro',
       }
     ]
   },
@@ -100,96 +59,39 @@ export const MENU_STRUCTURE: MenuCategory[] = [
     slug: 'montres',
     subcategories: [
       {
-        name: 'Apple Watch',
-        slug: 'apple-watch',
-        brands: ['Series 9', 'SE', 'Ultra']
-      },
-      {
-        name: 'Galaxy Watch',
-        slug: 'galaxy-watch',
-        brands: ['Watch 6', 'Watch 6 Classic', 'Watch FE']
+        name: 'Montres connectées',
+        slug: 'connectees',
       },
       {
         name: 'Montres Sport',
         slug: 'sport',
-        brands: ['Garmin', 'Polar', 'Suunto', 'Fitbit']
-      },
-      {
-        name: 'Montres connectées',
-        slug: 'connectees',
-        brands: ['Xiaomi', 'Amazfit', 'Honor', 'Huawei', 'OnePlus']
       }
     ]
   },
   {
     name: 'LED',
     slug: 'led',
-    subcategories: [
-      {
-        name: 'Barre LED',
-        slug: 'barre-led',
-        brands: ['Philips Hue', 'Govee', 'MONSTER LED', 'LIFX']
-      },
-      {
-        name: 'Néon',
-        slug: 'neon',
-        brands: ['Govee', 'Nanoleaf', 'MONSTER LED', 'Twinkly']
-      },
-      {
-        name: 'Kits Éclairage',
-        slug: 'kits-eclairage',
-        brands: ['Philips Hue', 'LIFX', 'Razer Chroma', 'Elgato']
-      },
-      {
-        name: 'Ampoules',
-        slug: 'ampoules',
-        brands: ['Philips Hue', 'LIFX', 'TP-Link Kasa', 'Yeelight']
-      },
-      {
-        name: 'RGB',
-        slug: 'rgb',
-        brands: ['MY WAY', 'MONSTER LED', 'Razer Chroma', 'Govee']
-      },
-      {
-        name: 'Cables Lumineux',
-        slug: 'cables-lumineux',
-        brands: ['MY WAY', 'MONSTER LED', 'Baseus', 'UGREEN']
-      }
-    ]
+    // Pas de subcategories - affichage direct des produits
   },
   {
     name: 'Accessoires',
     slug: 'accessoires',
     subcategories: [
       {
-        name: 'Coques & Protection',
-        slug: 'coques-protection',
-        brands: ['Spigen', 'OtterBox', 'UAG', 'Ringke', 'ESR', 'MONSTER Shield']
+        name: 'Câbles',
+        slug: 'cables',
       },
       {
         name: 'Chargeurs',
         slug: 'chargeurs',
-        brands: ['Anker', 'Belkin', 'Samsung', 'Apple', 'Baseus', 'MONSTER Charge']
-      },
-      {
-        name: 'Câbles',
-        slug: 'cables',
-        brands: ['Anker', 'Belkin', 'Baseus', 'UGREEN', 'MONSTER Cable']
       },
       {
         name: 'Batteries externes',
         slug: 'batteries',
-        brands: ['Anker', 'Xiaomi', 'Baseus', 'MONSTER Power']
       },
       {
-        name: 'Supports',
-        slug: 'supports',
-        brands: ['Support voiture', 'Support bureau', 'Support vélo', 'Trépied']
-      },
-      {
-        name: 'Gaming Mobile',
-        slug: 'gaming-mobile',
-        brands: ['Manettes', 'Triggers', 'Cooling fans', 'Grips']
+        name: 'Divers',
+        slug: 'divers',
       }
     ]
   }
@@ -200,38 +102,29 @@ export const MENU_STRUCTURE: MenuCategory[] = [
  * Permet de maintenir la structure fixe tout en utilisant les données Supabase
  */
 export const MENU_TO_SUPABASE_MAPPING: Record<string, string> = {
+  // Catégories principales
   'smartphones': 'smartphones',
   'tablettes': 'tablettes',
   'audio': 'audio',
-  'montres': 'montres-connectees',
-  'led': 'eclairage-led',
+  'montres': 'montres',
+  'led': 'led',
   'accessoires': 'accessoires',
-  // Sous-catégories
-  'par-marque': 'all-brands',
-  'par-prix': 'by-price',
-  'gaming': 'gaming-phones',
-  'pliables': 'foldable-phones',
-  'ipad': 'apple-ipad',
-  'android': 'android-tablets',
-  'gaming-tablets': 'gaming-tablets',
-  'ecouteurs': 'earphones',
-  'casques': 'headphones',
-  'enceintes': 'speakers',
-  'gaming-audio': 'gaming-audio',
-  'apple-watch': 'apple-watch',
-  'galaxy-watch': 'samsung-watch',
-  'sport': 'sport-watches',
-  'connectees': 'smartwatches',
-  'gaming-led': 'gaming-lighting',
-  'eclairage-intelligent': 'smart-lighting',
-  'decoratives': 'decorative-led',
-  'accessoires-led': 'led-accessories',
-  'coques-protection': 'cases-protection',
-  'chargeurs': 'chargers',
+
+  // Sous-catégories Audio
+  'ecouteurs': 'ecouteurs',
+  'enceintes': 'enceintes',
+  'casques': 'casques-audio',
+  'micro': 'micro',
+
+  // Sous-catégories Montres
+  'connectees': 'montres-connectees',
+  'sport': 'montres-sport',
+
+  // Sous-catégories Accessoires
   'cables': 'cables',
-  'batteries': 'power-banks',
-  'supports': 'mounts-stands',
-  'gaming-mobile': 'mobile-gaming'
+  'chargeurs': 'chargeurs',
+  'batteries': 'batteries-externes',
+  'divers': 'accessoires-divers',
 };
 
 /**
