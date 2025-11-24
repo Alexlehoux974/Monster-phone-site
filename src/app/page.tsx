@@ -8,7 +8,7 @@ import FeaturesSection from '@/components/FeaturesSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import Footer from '@/components/Footer';
 import type { Metadata } from 'next';
-import { getActiveProducts } from '@/lib/supabase/api-rest';
+import { getProductsByCategoryId } from '@/lib/supabase/api-rest';
 import { supabaseProductToLegacy } from '@/lib/supabase/adapters';
 import { sortProductsByPriority } from '@/lib/utils';
 
@@ -54,16 +54,28 @@ export const metadata: Metadata = {
   },
 };
 
+// IDs des catégories prioritaires
+const SMARTPHONES_CATEGORY_ID = '80194285-ea90-40ff-8e2a-8edbe3609330';
+const ECOUTEURS_CATEGORY_ID = '3fa6e04b-2cab-46db-8a85-f6865909d51c';
+
 export default async function Home() {
-  // Récupérer seulement 20 produits actifs (marge pour le tri)
-  const supabaseProducts = await getActiveProducts({ limit: 20, sortBy: 'created_at', sortOrder: 'desc' });
+  // Récupérer les smartphones (limite 6 pour le premier carrousel)
+  const smartphonesData = await getProductsByCategoryId(SMARTPHONES_CATEGORY_ID, {
+    limit: 12,
+    sortBy: 'created_at',
+    sortOrder: 'desc'
+  });
+  const smartphones = smartphonesData.map(supabaseProductToLegacy);
+  const featuredSmartphones = sortProductsByPriority(smartphones).slice(0, 6);
 
-  // Convertir les produits Supabase vers le format legacy pour ProductCard
-  const convertedProducts = supabaseProducts.map(supabaseProductToLegacy);
-
-  // Trier les produits par priorité (en stock > phares > prix décroissant)
-  // puis prendre les 12 premiers pour affichage (2 rangées de 6)
-  const featuredProducts = sortProductsByPriority(convertedProducts).slice(0, 12);
+  // Récupérer les écouteurs (limite 6 pour le deuxième carrousel)
+  const ecouteursData = await getProductsByCategoryId(ECOUTEURS_CATEGORY_ID, {
+    limit: 12,
+    sortBy: 'created_at',
+    sortOrder: 'desc'
+  });
+  const ecouteurs = ecouteursData.map(supabaseProductToLegacy);
+  const featuredEcouteurs = sortProductsByPriority(ecouteurs).slice(0, 6);
 
   return (
     <div className="min-h-screen">
@@ -73,7 +85,19 @@ export default async function Home() {
         <div className="hidden md:block">
           <SmartphonePackBanner />
         </div>
-        <FeaturedProductsSupabase products={featuredProducts} />
+
+        {/* Section Smartphones */}
+        <FeaturedProductsSupabase
+          products={featuredSmartphones}
+          title="Nos Smartphones Gaming"
+        />
+
+        {/* Section Écouteurs */}
+        <FeaturedProductsSupabase
+          products={featuredEcouteurs}
+          title="Nos Écouteurs Gaming"
+        />
+
         <BrandCarousel />
         <TrustSection />
         <FeaturesSection />
