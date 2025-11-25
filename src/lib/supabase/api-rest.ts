@@ -7,9 +7,11 @@ import type { ProductFullView } from './client';
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 
 /**
  * Helper pour faire des requêtes REST vers Supabase
+ * Utilise la service_role key côté serveur pour accéder à toutes les colonnes (bypass RLS)
  */
 async function supabaseRest<T>(
   table: string,
@@ -19,11 +21,25 @@ async function supabaseRest<T>(
   const queryParams = new URLSearchParams(params);
   const url = `${SUPABASE_URL}/rest/v1/${table}?${queryParams}`;
 
+  // Utiliser service_role key côté serveur pour bypass RLS et accéder au champ images
+  const isServer = typeof window === 'undefined';
+  const hasServiceKey = !!SUPABASE_SERVICE_ROLE_KEY;
+  const apiKey = isServer && hasServiceKey
+    ? SUPABASE_SERVICE_ROLE_KEY
+    : SUPABASE_ANON_KEY;
+
+  console.log('🔑 [API Key Check]', {
+    isServer,
+    hasServiceKey,
+    usingServiceKey: isServer && hasServiceKey,
+    keyPrefix: apiKey.substring(0, 20) + '...'
+  });
+
   const response = await fetch(url, {
     ...options,
     headers: {
-      'apikey': SUPABASE_ANON_KEY,
-      'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+      'apikey': apiKey,
+      'Authorization': `Bearer ${apiKey}`,
       'Content-Type': 'application/json',
       ...options.headers,
     },
@@ -71,18 +87,63 @@ export async function getActiveProducts(options?: {
 
   const data = await supabaseRest<any>('products', params);
 
+  // Debug: Log products with images to understand data structure
+  if (data.length > 0) {
+    console.log('🔍 [DEBUG] Total products returned:', data.length);
+    console.log('🔍 [DEBUG] First 3 products:');
+    data.slice(0, 3).forEach((p: any, i: number) => {
+      console.log(`  ${i + 1}. ${p.name}:`);
+      console.log(`     - images: ${p.images ? JSON.stringify(p.images.slice(0, 2)) : 'null'}`);
+      console.log(`     - product_images: ${p.product_images?.length || 0} items`);
+    });
+
+    // Show products WITH images
+    const withImages = data.filter((p: any) => p.images && p.images.length > 0);
+    console.log(`🔍 [DEBUG] Products WITH images: ${withImages.length}/${data.length}`);
+    if (withImages.length > 0) {
+      console.log('   Examples:');
+      withImages.slice(0, 3).forEach((p: any) => {
+        console.log(`   - ${p.name}: ${p.images.length} images`);
+      });
+    }
+  }
+
   // Transform to ProductFullView format
-  return data.map(product => ({
-    ...product,
-    brand_name: product.brand?.name || '',
-    brand_slug: product.brand?.slug || '',
-    category_id: product.category?.id || product.category_id || '',
-    category_name: product.category?.name || '',
-    category_slug: product.category?.slug || '',
-    subcategory_name: product.subcategory || '',
-    variants: product.product_variants || [],
-    images: product.product_images?.map((img: any) => img.url) || product.images || []
-  })) as ProductFullView[];
+  const transformed = data.map(product => {
+    // PRIORITÉ: products.images (Cloudinary URLs complets) > product_images (potentiellement cassés)
+    // On utilise products.images si disponible, sinon product_images en fallback
+    let productImages: string[] = [];
+
+    if (product.images && product.images.length > 0) {
+      // Utiliser products.images si disponible (URLs Cloudinary complets)
+      productImages = product.images;
+    } else if (product.product_images && product.product_images.length > 0) {
+      // Fallback: utiliser product_images si products.images est vide
+      productImages = product.product_images.map((img: any) => img.url);
+    }
+
+    return {
+      ...product,
+      brand_name: product.brand?.name || '',
+      brand_slug: product.brand?.slug || '',
+      category_id: product.category?.id || product.category_id || '',
+      category_name: product.category?.name || '',
+      category_slug: product.category?.slug || '',
+      subcategory_name: product.subcategory || '',
+      variants: product.product_variants || [],
+      images: productImages
+    };
+  }) as ProductFullView[];
+
+  // Debug: Log products WITH images after transformation
+  const afterWithImages = transformed.filter(p => p.images && p.images.length > 0);
+  console.log(`🔍 [AFTER TRANSFORM] Products WITH images: ${afterWithImages.length}/${transformed.length}`);
+  if (afterWithImages.length > 0) {
+    console.log('   First product with images:', afterWithImages[0].name);
+    console.log('   Its images:', afterWithImages[0].images?.slice(0, 2));
+  }
+
+  return transformed;
 }
 
 /**

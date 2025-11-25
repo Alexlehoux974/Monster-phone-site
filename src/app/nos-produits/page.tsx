@@ -4,15 +4,19 @@ import Footer from '@/components/Footer';
 import BrandCarousel from '@/components/BrandCarousel';
 import ProductsClient from './products-client';
 import ProductCardSkeleton from '@/components/ProductCardSkeleton';
-import { getProducts, getCategories, getBrands } from '@/lib/supabase/client';
+import { getActiveProducts, getAllCategories, getAllBrands } from '@/lib/supabase/api-rest';
+
+// Force dynamic rendering and disable cache
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 // Make this a server component
 export default async function ProductsPage() {
-  // Fetch data on the server
+  // Fetch data on the server using REST API (no cache)
   const [products, categories, brands] = await Promise.all([
-    getProducts(),
-    getCategories(),
-    getBrands()
+    getActiveProducts(),
+    getAllCategories(),
+    getAllBrands()
   ]);
 
   return (

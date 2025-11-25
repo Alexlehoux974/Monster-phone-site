@@ -45,13 +45,18 @@ export function getWorkingImageUrl(originalUrl: string, productCategory?: string
     return getCategoryPlaceholder(productCategory || 'default');
   }
 
-  // Check if it's a Cloudinary ID (doesn't start with http)
-  if (!originalUrl.startsWith('http')) {
-    return `https://res.cloudinary.com/monster-phone/image/upload/v1763527513/${originalUrl}.png`;
+  // Check if it's already a full URL
+  if (originalUrl.startsWith('http')) {
+    return originalUrl;
   }
 
-  // Return the URL as-is for full URLs
-  return originalUrl;
+  // If it starts with a slash (local path), it's a placeholder - return as-is
+  if (originalUrl.startsWith('/')) {
+    return originalUrl;
+  }
+
+  // Otherwise it's a Cloudinary identifier - convert to full URL
+  return `https://res.cloudinary.com/monster-phone/image/upload/v1763527513/${originalUrl}.png`;
 }
 
 /**
