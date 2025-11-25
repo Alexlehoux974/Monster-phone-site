@@ -13,6 +13,7 @@ interface Collection {
   title: string;
   icon: any;
   emoji: string;
+  categoryName?: string;
   products: typeof PRODUCTS;
   description?: string;
 }
@@ -29,6 +30,7 @@ const ProductCollections = () => {
       icon: Flame,
       emoji: '🔥',
       description: 'Pack complet inclus : écouteurs, chargeur, protection, coque',
+      categoryName: 'Smartphones', // Nom réel de la catégorie pour le filtre
       products: sortProductsByPriority(
         PRODUCTS.filter(p => p.categoryName === 'Smartphones')
       ).slice(0, 10),
@@ -38,6 +40,7 @@ const ProductCollections = () => {
       title: 'Accessoires Gaming Essentiels',
       icon: Gamepad2,
       emoji: '🎮',
+      categoryName: 'Accessoires', // Catégorie principale pour le filtre
       products: sortProductsByPriority(
         PRODUCTS.filter(p =>
           p.categoryName === 'LED' ||
@@ -51,6 +54,7 @@ const ProductCollections = () => {
       title: 'Audio Premium',
       icon: Headphones,
       emoji: '🎧',
+      categoryName: 'Écouteurs', // Catégorie principale pour le filtre
       products: sortProductsByPriority(
         PRODUCTS.filter(p =>
           p.categoryName === 'Audio' ||
@@ -65,6 +69,7 @@ const ProductCollections = () => {
       title: 'Montres Connectées',
       icon: Watch,
       emoji: '⌚',
+      categoryName: 'Montres', // Catégorie principale pour le filtre
       products: sortProductsByPriority(
         PRODUCTS.filter(p =>
           p.categoryName === 'Montres' ||
@@ -232,7 +237,7 @@ const ProductCollections = () => {
                 {/* Lien voir plus */}
                 <div className="text-center mt-6">
                   <Link
-                    href={`/nos-produits?category=${encodeURIComponent(collection.title)}`}
+                    href={`/nos-produits?category=${encodeURIComponent(collection.categoryName || collection.title)}`}
                     className="inline-flex items-center gap-2 text-orange-600 hover:text-orange-700 font-medium"
                   >
                     Voir tous les produits {collection.title}

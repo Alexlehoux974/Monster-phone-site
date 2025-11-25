@@ -234,7 +234,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           <ChevronRight className="h-4 w-4 text-gray-400" />
           <Link href="/nos-produits" className="hover:text-red-600 transition-colors">Produits</Link>
           <ChevronRight className="h-4 w-4 text-gray-400" />
-          <Link href={`/nos-produits?category=${product.categoryName}`} className="hover:text-red-600 transition-colors">{product.categoryName}</Link>
+          <Link href={`/nos-produits?category=${encodeURIComponent(product.categoryName)}`} className="hover:text-red-600 transition-colors">{product.categoryName}</Link>
           <ChevronRight className="h-4 w-4 text-gray-400" />
           <span className="text-gray-900 font-semibold">{product.name}</span>
         </nav>
