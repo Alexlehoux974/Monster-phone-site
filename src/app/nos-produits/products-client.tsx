@@ -295,12 +295,18 @@ function ProductsClientContent({
             </div>
           ) : viewMode === 'grid' ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {paginatedProducts.map((product: any) => (
+              {paginatedProducts.map((product: any) => {
+                // Utiliser la première image du produit ou un placeholder
+                const productImage = product.images && product.images.length > 0
+                  ? product.images[0]
+                  : '/images/placeholder-product.jpg';
+
+                return (
                 <div key={product.id} className="bg-white rounded-lg shadow-sm hover:shadow-lg transition-shadow">
                   <Link href={`/produit/${product.url_slug}`}>
                     <div className="aspect-square relative overflow-hidden rounded-t-lg">
                       <ImageWithFallback
-                        src="/images/placeholder-product.jpg"
+                        src={productImage}
                         alt={product.name}
                         fill
                         className="object-cover"
@@ -360,17 +366,24 @@ function ProductsClientContent({
                     </div>
                   </div>
                 </div>
-              ))}
+                );
+              })}
             </div>
           ) : (
             <div className="space-y-4">
-              {paginatedProducts.map((product: any) => (
+              {paginatedProducts.map((product: any) => {
+                // Utiliser la première image du produit ou un placeholder
+                const productImage = product.images && product.images.length > 0
+                  ? product.images[0]
+                  : '/images/placeholder-product.jpg';
+
+                return (
                 <div key={product.id} className="bg-white rounded-lg shadow-sm hover:shadow-lg transition-shadow p-4">
                   <div className="flex gap-4">
                     <Link href={`/produit/${product.url_slug}`} className="flex-shrink-0">
                       <div className="w-32 h-32 relative overflow-hidden rounded">
                         <ImageWithFallback
-                          src="/images/placeholder-product.jpg"
+                          src={productImage}
                           alt={product.name}
                           fill
                           className="object-cover"
@@ -429,7 +442,8 @@ function ProductsClientContent({
                     </div>
                   </div>
                 </div>
-              ))}
+                );
+              })}
             </div>
           )}
 
