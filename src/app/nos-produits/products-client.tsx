@@ -13,13 +13,13 @@ import ImageWithFallback from '@/components/ImageWithFallback';
 import { useCart } from '@/contexts/CartContext';
 import { formatPrice, sortProductsByPriority } from '@/lib/utils';
 import type { Product } from '@/data/products';
-import type { DatabaseProduct, DatabaseBrand, DatabaseCategory } from '@/lib/supabase/client';
+import type { ProductFullView } from '@/lib/supabase/client';
 import { supabaseProductToLegacy } from '@/lib/supabase/adapters';
 
 interface ProductsClientProps {
-  initialProducts: DatabaseProduct[];
-  categories: DatabaseCategory[];
-  brands: DatabaseBrand[];
+  initialProducts: ProductFullView[];
+  categories: { id: string; name: string; slug: string }[];
+  brands: { id: string; name: string; slug: string }[];
 }
 
 function ProductsClientContent({
@@ -30,17 +30,13 @@ function ProductsClientContent({
   const searchParams = useSearchParams();
   const { addToCart } = useCart();
   
-  // Transformer les DatabaseProduct en Product pour FilterPanel
+  // Transformer les ProductFullView en Product pour FilterPanel
   const legacyProducts: Product[] = useMemo(() => {
     return initialProducts.map(p => {
-      // Créer un ProductFullView partiel pour l'adaptateur
+      // ProductFullView a déjà brand_name, category_name, etc. depuis l'API
       const fullViewProduct = {
         ...p,
-        brand_name: brands.find(b => b.id === p.brand_id)?.name || '',
-        brand_slug: brands.find(b => b.id === p.brand_id)?.slug || '',
-        category_name: categories.find(c => c.id === p.category_id)?.name || '',
-        category_slug: categories.find(c => c.id === p.category_id)?.slug || '',
-        product_variants: (p as any).product_variants || [],
+        product_variants: p.variants || [],
         reviews: [],
         rating: p.average_rating ? {
           average: p.average_rating,
@@ -49,7 +45,7 @@ function ProductsClientContent({
       };
       return supabaseProductToLegacy(fullViewProduct as any);
     });
-  }, [initialProducts, categories, brands]);
+  }, [initialProducts]);
   
   // State management
   const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '');
@@ -104,19 +100,16 @@ function ProductsClientContent({
       const matchesRating = !filters.minRating || 
                            (product.average_rating && product.average_rating >= filters.minRating);
       
-      // Stock
-      const inStock = product.stock_quantity && product.stock_quantity > 0;
-      const matchesStock = !filters.inStock || inStock;
-      
-      // Marques - comparer par nom
-      const productBrand = brands.find(b => b.id === product.brand_id)?.name;
-      const matchesBrand = filters.brands.length === 0 ||
-                          (productBrand && filters.brands.includes(productBrand));
+      // Stock - ProductFullView n'a pas stock_quantity, on suppose tous en stock
+      const matchesStock = !filters.inStock || true;
 
-      // Catégories - comparer par nom
-      const productCategory = categories.find(c => c.id === product.category_id)?.name;
+      // Marques - utiliser brand_name directement depuis ProductFullView
+      const matchesBrand = filters.brands.length === 0 ||
+                          filters.brands.includes(product.brand_name);
+
+      // Catégories - utiliser category_name directement depuis ProductFullView
       const matchesCategory = filters.categories.length === 0 ||
-                             (productCategory && filters.categories.includes(productCategory));
+                             filters.categories.includes(product.category_name);
       
       return matchesSearch && matchesPrice && matchesPromo && 
              matchesRating && matchesStock && matchesBrand && matchesCategory;
@@ -125,15 +118,12 @@ function ProductsClientContent({
 
   // Tri des produits
   const sortedProducts = useMemo(() => {
-    // Convertir les DatabaseProduct filtrés en format Product pour le tri
+    // Convertir les ProductFullView filtrés en format Product pour le tri
     const convertedFiltered = filteredProducts.map(p => {
+      // ProductFullView a déjà brand_name, category_name, etc.
       const fullViewProduct = {
         ...p,
-        brand_name: brands.find(b => b.id === p.brand_id)?.name || '',
-        brand_slug: brands.find(b => b.id === p.brand_id)?.slug || '',
-        category_name: categories.find(c => c.id === p.category_id)?.name || '',
-        category_slug: categories.find(c => c.id === p.category_id)?.slug || '',
-        product_variants: (p as any).product_variants || [],
+        product_variants: p.variants || [],
         reviews: [],
         rating: p.average_rating ? {
           average: p.average_rating,
@@ -186,15 +176,11 @@ function ProductsClientContent({
   const totalPages = Math.ceil(sortedProducts.length / itemsPerPage);
 
   // Ajouter au panier
-  const handleAddToCart = useCallback((product: DatabaseProduct) => {
-    // Créer un ProductFullView pour le panier
+  const handleAddToCart = useCallback((product: ProductFullView) => {
+    // ProductFullView a déjà toutes les infos nécessaires
     const fullViewProduct = {
       ...product,
-      brand_name: brands.find(b => b.id === product.brand_id)?.name || '',
-      brand_slug: brands.find(b => b.id === product.brand_id)?.slug || '',
-      category_name: categories.find(c => c.id === product.category_id)?.name || '',
-      category_slug: categories.find(c => c.id === product.category_id)?.slug || '',
-      product_variants: (product as any).product_variants || [],
+      product_variants: product.variants || [],
       reviews: [],
       rating: product.average_rating ? {
         average: product.average_rating,
@@ -202,7 +188,7 @@ function ProductsClientContent({
       } : undefined
     };
     addToCart(fullViewProduct as any);
-  }, [addToCart, brands, categories]);
+  }, [addToCart]);
 
   return (
     <div className="container mx-auto px-4 pt-32 pb-8">
