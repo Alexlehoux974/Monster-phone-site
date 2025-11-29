@@ -72,6 +72,7 @@ export async function getActiveProducts(options?: {
       product_images(*)
     `.replace(/\s+/g, ''),
     status: 'eq.active',
+    is_visible: 'eq.true',
   };
 
   // Tri
@@ -166,6 +167,7 @@ export async function getProductsByCategoryId(
       product_images(*)
     `.replace(/\s+/g, ''),
     status: 'eq.active',
+    is_visible: 'eq.true',
     category_id: `eq.${categoryId}`,
   };
 
@@ -212,6 +214,7 @@ export async function getProductsByCategory(
       product_images(*)
     `.replace(/\s+/g, ''),
     status: 'eq.active',
+    is_visible: 'eq.true',
   };
 
   if (options?.limit) {
@@ -254,6 +257,7 @@ export async function getProductsByBrand(
       product_images(*)
     `.replace(/\s+/g, ''),
     status: 'eq.active',
+    is_visible: 'eq.true',
   };
 
   if (options?.limit) {
@@ -311,6 +315,7 @@ export async function getBestSellers(limit: number = 10): Promise<ProductFullVie
       product_images(*)
     `.replace(/\s+/g, ''),
     status: 'eq.active',
+    is_visible: 'eq.true',
     order: 'total_sales.desc',
     limit: limit.toString(),
   };
@@ -340,6 +345,7 @@ export async function getDiscountedProducts(minDiscount: number = 10): Promise<P
       product_images(*)
     `.replace(/\s+/g, ''),
     status: 'eq.active',
+    is_visible: 'eq.true',
     admin_discount_percent: `gte.${minDiscount}`,
     order: 'admin_discount_percent.desc',
   };
@@ -372,6 +378,7 @@ export async function getNewProducts(days: number = 30, limit: number = 10): Pro
       product_images(*)
     `.replace(/\s+/g, ''),
     status: 'eq.active',
+    is_visible: 'eq.true',
     created_at: `gte.${daysAgo.toISOString()}`,
     order: 'created_at.desc',
     limit: limit.toString(),
@@ -431,6 +438,7 @@ export async function getFeaturedProductsBySection(
         product_images(*)
       `.replace(/\s+/g, ''),
       status: 'eq.active',
+      is_visible: 'eq.true',
       id: `in.(${productIds.join(',')})`,
     };
 

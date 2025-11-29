@@ -37,7 +37,8 @@ export async function getActiveProducts(options?: {
       product_variants(*),
       product_images(*)
     `)
-    .eq('status', 'active');
+    .eq('status', 'active')
+    .eq('is_visible', true);
 
   // Tri
   const sortColumn = options?.sortBy === 'rating' ? 'average_rating' : (options?.sortBy || 'created_at');
@@ -160,6 +161,7 @@ export async function searchProducts(query: string, options?: {
       categories!category_id(name, slug)
     `)
     .eq('status', 'active')
+    .eq('is_visible', true)
     .textSearch('search_vector', query, {
       type: 'websearch',
       config: 'french'
@@ -220,7 +222,8 @@ export async function getProductsByCategory(categorySlug: string, options?: {
       product_variants(*),
       product_images(*)
     `)
-    .eq('status', 'active');
+    .eq('status', 'active')
+    .eq('is_visible', true);
 
   if (options?.includeSubcategories) {
     // Récupérer aussi les sous-catégories
@@ -292,6 +295,7 @@ export async function getProductsByBrand(brandSlug: string, options?: {
       product_images(*)
     `)
     .eq('status', 'active')
+    .eq('is_visible', true)
     .eq('brand_id', brand.id)
     .range(
       options?.offset || 0,
@@ -346,7 +350,7 @@ export async function getProductsByCollection(collectionSlug: string) {
     return [];
   }
 
-  // Extraire et trier les produits
+  // Extraire et trier les produits (filtrer par is_visible et status)
   const products = data?.product_collections
     ?.sort((a: any, b: any) => a.display_order - b.display_order)
     ?.map((pc: any) => pc.product ? {
@@ -359,7 +363,7 @@ export async function getProductsByCollection(collectionSlug: string) {
       variants: pc.product.product_variants || [],
       images: pc.product.product_images || []
     } : null)
-    ?.filter(Boolean) || [];
+    ?.filter((p: any) => p && p.status === 'active' && p.is_visible !== false) || [];
 
   return products as ProductFullView[];
 }
@@ -380,6 +384,7 @@ export async function getDiscountedProducts(minDiscount: number = 10) {
       product_images(*)
     `)
     .eq('status', 'active')
+    .eq('is_visible', true)
     .not('discount', 'is', null)
     .gte('discount', minDiscount)
     .order('discount', { ascending: false });
@@ -422,6 +427,7 @@ export async function getNewProducts(days: number = 30, limit: number = 10) {
       product_images(*)
     `)
     .eq('status', 'active')
+    .eq('is_visible', true)
     .gte('created_at', date.toISOString())
     .order('created_at', { ascending: false })
     .limit(limit);
@@ -460,6 +466,7 @@ export async function getBestSellers(limit: number = 10) {
       product_images(*)
     `)
     .eq('status', 'active')
+    .eq('is_visible', true)
     .order('total_reviews', { ascending: false })
     .order('average_rating', { ascending: false })
     .limit(limit);
@@ -508,6 +515,7 @@ export async function getSimilarProducts(productId: string, limit: number = 4) {
       product_images(*)
     `)
     .eq('status', 'active')
+    .eq('is_visible', true)
     .neq('id', productId)
     .or(`category_id.eq.${currentProduct.category_id},brand_id.eq.${currentProduct.brand_id}`)
     .gte('price', currentProduct.price * 0.7)
