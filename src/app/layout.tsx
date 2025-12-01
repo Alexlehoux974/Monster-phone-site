@@ -5,6 +5,7 @@ import { CartProvider } from "@/contexts/CartContext";
 import { AuthProvider } from "@/contexts/AuthContextSimple";
 import StructuredData from "@/components/StructuredData";
 import { Toaster } from "sonner";
+import CookieConsent from "@/components/CookieConsent";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -79,6 +80,7 @@ export default function RootLayout({
           <CartProvider>
             {children}
             <Toaster position="bottom-right" richColors />
+            <CookieConsent />
           </CartProvider>
         </AuthProvider>
       </body>
