@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useCart } from '@/contexts/CartContext';
 import { useAuth } from '@/contexts/AuthContextSimple';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ProductSuggestions from '@/components/ProductSuggestions';
@@ -22,15 +22,26 @@ import {
   Phone,
   Mail,
   Clock,
-  ArrowLeft
+  ArrowLeft,
+  AlertCircle,
+  X
 } from 'lucide-react';
 
 export default function CheckoutPage() {
   const { items, getCartTotal, clearCart, createOrder } = useCart();
   const { user, isAuthenticated, isLoading } = useAuth();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [isProcessing, setIsProcessing] = useState(false);
   const [orderComplete, setOrderComplete] = useState(false);
+  const [showCanceledMessage, setShowCanceledMessage] = useState(false);
+
+  // Détecter si l'utilisateur revient après avoir annulé sur Stripe
+  useEffect(() => {
+    if (searchParams.get('canceled') === 'true') {
+      setShowCanceledMessage(true);
+    }
+  }, [searchParams]);
   // Suppression du système d'étapes pour un checkout en 1 seule page
 
   // Récupérer tous les produits actifs depuis Supabase
@@ -367,6 +378,25 @@ export default function CheckoutPage() {
             <p className="text-gray-600 mb-6">
               Remplissez vos informations et procédez au paiement sécurisé
             </p>
+
+            {/* Message d'annulation Stripe */}
+            {showCanceledMessage && (
+              <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 flex items-start gap-3">
+                <AlertCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+                <div className="flex-1">
+                  <p className="font-medium text-amber-800">Paiement annulé</p>
+                  <p className="text-sm text-amber-700">
+                    Votre paiement a été annulé. Vos articles sont toujours dans votre panier, vous pouvez réessayer quand vous le souhaitez.
+                  </p>
+                </div>
+                <button
+                  onClick={() => setShowCanceledMessage(false)}
+                  className="text-amber-600 hover:text-amber-800"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+            )}
           </div>
 
           <form onSubmit={handleSubmit}>
