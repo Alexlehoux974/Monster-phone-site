@@ -182,11 +182,35 @@ export default function CheckoutPage() {
     // Validation des informations de livraison
     if (!formData.firstName) newErrors.firstName = 'Prénom requis';
     if (!formData.lastName) newErrors.lastName = 'Nom requis';
-    if (!formData.email) newErrors.email = 'Email requis';
-    if (!formData.phone) newErrors.phone = 'Téléphone requis';
+
+    // Validation email avec regex
+    if (!formData.email) {
+      newErrors.email = 'Email requis';
+    } else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(formData.email)) {
+      newErrors.email = 'Format email invalide (ex: nom@exemple.com)';
+    }
+
+    // Validation téléphone (format La Réunion / France)
+    if (!formData.phone) {
+      newErrors.phone = 'Téléphone requis';
+    } else {
+      // Nettoyer le numéro (enlever espaces, tirets, points)
+      const cleanPhone = formData.phone.replace(/[\s.\-]/g, '');
+      // Accepter : 0692XXXXXX, 0262XXXXXX, +262692XXXXXX, 06XXXXXXXX, etc.
+      if (!/^(?:(?:\+|00)(?:262|33)|0)[1-9](?:[0-9]{8})$/.test(cleanPhone)) {
+        newErrors.phone = 'Format téléphone invalide (ex: 0692 XX XX XX)';
+      }
+    }
+
     if (!formData.address) newErrors.address = 'Adresse requise';
     if (!formData.city) newErrors.city = 'Ville requise';
-    if (!formData.postalCode) newErrors.postalCode = 'Code postal requis';
+
+    // Validation code postal (La Réunion 974XX ou France métropolitaine)
+    if (!formData.postalCode) {
+      newErrors.postalCode = 'Code postal requis';
+    } else if (!/^(974|97[1-6]|[0-9]{5})$/.test(formData.postalCode.replace(/\s/g, ''))) {
+      newErrors.postalCode = 'Code postal invalide (ex: 97400)';
+    }
 
     // Validation finale avant paiement Stripe
     if (!formData.terms) newErrors.terms = 'Vous devez accepter les conditions';

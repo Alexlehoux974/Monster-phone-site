@@ -81,7 +81,38 @@ export default function PanierPage() {
 
       <main className="container mx-auto px-4 py-8 pt-[150px]">
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-3xl font-bold mb-8">Mon Panier ({items.length} article{items.length > 1 ? 's' : ''})</h1>
+          <h1 className="text-3xl font-bold mb-4">Mon Panier ({items.length} article{items.length > 1 ? 's' : ''})</h1>
+
+          {/* Barre de progression livraison gratuite */}
+          {subtotal < 50 && (
+            <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg p-4 mb-6">
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center gap-2">
+                  <Truck className="w-5 h-5 text-blue-600" />
+                  <span className="font-medium text-blue-900">
+                    Plus que {(50 - subtotal).toFixed(2)}€ pour la livraison gratuite !
+                  </span>
+                </div>
+                <span className="text-sm text-blue-700">{Math.round((subtotal / 50) * 100)}%</span>
+              </div>
+              <div className="w-full bg-blue-200 rounded-full h-2.5">
+                <div
+                  className="bg-blue-600 h-2.5 rounded-full transition-all duration-500"
+                  style={{ width: `${Math.min((subtotal / 50) * 100, 100)}%` }}
+                />
+              </div>
+            </div>
+          )}
+          {subtotal >= 50 && (
+            <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6 flex items-center gap-3">
+              <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <span className="font-medium text-green-800">Livraison gratuite débloquée !</span>
+            </div>
+          )}
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Liste des produits */}
@@ -286,9 +317,24 @@ export default function PanierPage() {
                       Appliquer
                     </button>
                   </div>
-                  <p className="text-xs text-gray-500 mt-1">
-                    Essayez: MONSTER10 ou BIENVENUE
-                  </p>
+                  {/* Codes promo disponibles - plus visible */}
+                  <div className="mt-3 p-3 bg-amber-50 border border-amber-200 rounded-lg">
+                    <p className="text-sm font-medium text-amber-800 mb-1">🎁 Codes disponibles :</p>
+                    <div className="flex flex-wrap gap-2">
+                      <button
+                        onClick={() => setPromoCode('MONSTER10')}
+                        className="text-xs px-2 py-1 bg-amber-100 text-amber-800 rounded font-mono hover:bg-amber-200 transition-colors"
+                      >
+                        MONSTER10 (-10%)
+                      </button>
+                      <button
+                        onClick={() => setPromoCode('BIENVENUE')}
+                        className="text-xs px-2 py-1 bg-amber-100 text-amber-800 rounded font-mono hover:bg-amber-200 transition-colors"
+                      >
+                        BIENVENUE (-5€)
+                      </button>
+                    </div>
+                  </div>
                 </div>
 
                 {/* Détails du prix */}
@@ -332,7 +378,7 @@ export default function PanierPage() {
 
                 {!isAuthenticated && (
                   <p className="text-sm text-gray-600 text-center mt-3">
-                    Vous devrez vous connecter pour finaliser votre commande
+                    Pas de compte ? Pas de problème ! Commandez en tant qu&apos;invité.
                   </p>
                 )}
 
