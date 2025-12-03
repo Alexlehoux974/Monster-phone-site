@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useCart } from '@/contexts/CartContext';
 import { useAuth } from '@/contexts/AuthContextSimple';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -27,7 +27,20 @@ import {
   X
 } from 'lucide-react';
 
+// Wrapper pour gérer Suspense avec useSearchParams
 export default function CheckoutPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600"></div>
+      </div>
+    }>
+      <CheckoutContent />
+    </Suspense>
+  );
+}
+
+function CheckoutContent() {
   const { items, getCartTotal, clearCart, createOrder } = useCart();
   const { user, isAuthenticated, isLoading } = useAuth();
   const router = useRouter();
