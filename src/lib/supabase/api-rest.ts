@@ -197,6 +197,7 @@ export async function getProductsByCategoryId(
 
 /**
  * Récupérer les produits d'une catégorie par slug
+ * Si includeSubcategories est true, récupère aussi les produits des catégories enfants
  */
 export async function getProductsByCategory(
   categorySlug: string,
@@ -205,11 +206,33 @@ export async function getProductsByCategory(
     includeSubcategories?: boolean;
   }
 ): Promise<ProductFullView[]> {
+  console.log(`🔍 [getProductsByCategory] CALLED with slug="${categorySlug}", includeSubcategories=${options?.includeSubcategories}`);
+
+  // D'abord, récupérer la catégorie et ses enfants si nécessaire
+  let categoryIds: string[] = [];
+
+  if (options?.includeSubcategories) {
+    // Récupérer la catégorie parent et toutes ses sous-catégories
+    const categoriesParams: Record<string, string> = {
+      select: 'id,slug,parent_id',
+    };
+    const allCategories = await supabaseRest<any>('categories', categoriesParams);
+
+    // Trouver la catégorie parent
+    const parentCategory = allCategories.find((c: any) => c.slug === categorySlug);
+    if (parentCategory) {
+      categoryIds.push(parentCategory.id);
+      // Trouver toutes les sous-catégories
+      const childCategories = allCategories.filter((c: any) => c.parent_id === parentCategory.id);
+      categoryIds.push(...childCategories.map((c: any) => c.id));
+    }
+  }
+
   const params: Record<string, string> = {
     select: `
       *,
       brand:brands(id,name,slug),
-      category:categories!products_category_id_fkey(id,name,slug),
+      category:categories!products_category_id_fkey(id,name,slug,parent_id),
       product_variants(*),
       product_images(*)
     `.replace(/\s+/g, ''),
@@ -217,26 +240,64 @@ export async function getProductsByCategory(
     is_visible: 'eq.true',
   };
 
+  // IMPORTANT: Filtrer directement par category_id si on a les IDs
+  // Cela évite de récupérer tous les produits puis filtrer côté client
+  if (categoryIds.length > 0) {
+    params['category_id'] = `in.(${categoryIds.join(',')})`;
+  }
+
+  // La limite s'applique APRÈS le filtre de catégorie
   if (options?.limit) {
     params.limit = options.limit.toString();
   }
 
-  // On récupère tous les produits et on filtre côté client car le slug est dans la relation
   const data = await supabaseRest<any>('products', params);
 
-  const filtered = data.filter(p =>
-    p.category?.slug === categorySlug ||
-    (options?.includeSubcategories && p.subcategory === categorySlug)
-  );
+  // Debug: Log what we received
+  console.log(`🔍 [getProductsByCategory] Searching for categorySlug="${categorySlug}", categoryIds=[${categoryIds.join(', ')}]`);
+  console.log(`🔍 [getProductsByCategory] Total products from DB: ${data.length}`);
+  if (data.length > 0) {
+    console.log(`🔍 [getProductsByCategory] First 3 products category info:`);
+    data.slice(0, 3).forEach((p: any, i: number) => {
+      console.log(`  ${i + 1}. ${p.name}: category_id=${p.category_id}, category?.slug=${p.category?.slug}`);
+    });
+  }
 
-  return filtered.map(product => ({
-    ...product,
-    brand_name: product.brand?.name || '',
-    category_name: product.category?.name || '',
-    subcategory_name: product.subcategory || '',
-    variants: product.product_variants || [],
-    images: product.product_images?.map((img: any) => img.url) || product.images || []
-  })) as ProductFullView[];
+  // Filtrer par catégorie ou sous-catégories
+  const filtered = data.filter(p => {
+    // Match direct sur le slug de la catégorie
+    if (p.category?.slug === categorySlug) return true;
+
+    // Match sur les IDs de catégories (parent + enfants)
+    if (categoryIds.length > 0 && categoryIds.includes(p.category_id)) return true;
+
+    // Match sur le champ subcategory (legacy)
+    if (options?.includeSubcategories && p.subcategory === categorySlug) return true;
+
+    return false;
+  });
+
+  console.log(`🔍 [getProductsByCategory] Filtered to ${filtered.length} products for "${categorySlug}"`);
+
+
+  return filtered.map(product => {
+    // PRIORITÉ: products.images (Cloudinary URLs complets) > product_images
+    let productImages: string[] = [];
+    if (product.images && product.images.length > 0) {
+      productImages = product.images;
+    } else if (product.product_images && product.product_images.length > 0) {
+      productImages = product.product_images.map((img: any) => img.url);
+    }
+
+    return {
+      ...product,
+      brand_name: product.brand?.name || '',
+      category_name: product.category?.name || '',
+      subcategory_name: product.subcategory || '',
+      variants: product.product_variants || [],
+      images: productImages
+    };
+  }) as ProductFullView[];
 }
 
 /**

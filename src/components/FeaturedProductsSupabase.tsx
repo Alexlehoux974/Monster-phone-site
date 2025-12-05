@@ -52,10 +52,6 @@ export default function FeaturedProductsSupabase({ products: initialProducts, ti
     };
   }, []);
 
-  // Séparer les produits en 2 rangées de 6 produits
-  const firstRow = products.slice(0, 6);
-  const secondRow = products.slice(6, 12);
-
   return (
     <section className="py-16 bg-gray-50">
       <div className="w-full px-6">
@@ -69,29 +65,16 @@ export default function FeaturedProductsSupabase({ products: initialProducts, ti
           </p>
         </div>
 
-        {/* Première rangée de produits */}
-        <div className="relative mb-6">
+        {/* Tous les produits en une seule rangée scrollable */}
+        <div className="relative">
           <div className="flex overflow-x-auto scrollbar-hide gap-6 pb-4 px-2">
-            {firstRow.map((product: any) => (
+            {products.map((product: any) => (
               <div key={product.id} className="flex-shrink-0 w-80">
                 <ProductCard product={product} />
               </div>
             ))}
           </div>
         </div>
-
-        {/* Deuxième rangée de produits */}
-        {secondRow.length > 0 && (
-          <div className="relative">
-            <div className="flex overflow-x-auto scrollbar-hide gap-6 pb-4 px-2">
-              {secondRow.map((product: any) => (
-                <div key={product.id} className="flex-shrink-0 w-80">
-                  <ProductCard product={product} />
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
 
         {/* CTA vers catalogue complet */}
         <div className="text-center mt-12">

@@ -6,6 +6,8 @@ import FeaturedProductsSupabase from '@/components/FeaturedProductsSupabase';
 import BrandCarousel from '@/components/BrandCarousel';
 import FeaturesSection from '@/components/FeaturesSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
+import FlashDeals from '@/components/FlashDeals';
+import ProductCollectionsSupabase from '@/components/ProductCollectionsSupabase';
 import Footer from '@/components/Footer';
 import type { Metadata } from 'next';
 import { getProductsByCategoryId } from '@/lib/supabase/api-rest';
@@ -59,23 +61,23 @@ const SMARTPHONES_CATEGORY_ID = '80194285-ea90-40ff-8e2a-8edbe3609330';
 const ECOUTEURS_CATEGORY_ID = '3fa6e04b-2cab-46db-8a85-f6865909d51c';
 
 export default async function Home() {
-  // Récupérer les smartphones (limite 6 pour le premier carrousel)
+  // Récupérer tous les smartphones de la catégorie
   const smartphonesData = await getProductsByCategoryId(SMARTPHONES_CATEGORY_ID, {
-    limit: 12,
+    limit: 100,
     sortBy: 'created_at',
     sortOrder: 'desc'
   });
   const smartphones = smartphonesData.map(supabaseProductToLegacy);
-  const featuredSmartphones = sortProductsByPriority(smartphones).slice(0, 6);
+  const featuredSmartphones = sortProductsByPriority(smartphones);
 
-  // Récupérer les écouteurs (limite 6 pour le deuxième carrousel)
+  // Récupérer tous les écouteurs de la catégorie
   const ecouteursData = await getProductsByCategoryId(ECOUTEURS_CATEGORY_ID, {
-    limit: 12,
+    limit: 100,
     sortBy: 'created_at',
     sortOrder: 'desc'
   });
   const ecouteurs = ecouteursData.map(supabaseProductToLegacy);
-  const featuredEcouteurs = sortProductsByPriority(ecouteurs).slice(0, 6);
+  const featuredEcouteurs = sortProductsByPriority(ecouteurs);
 
   return (
     <div className="min-h-screen">
@@ -97,6 +99,12 @@ export default async function Home() {
           products={featuredEcouteurs}
           title="Nos Écouteurs Gaming"
         />
+
+        {/* Flash Deals - S'affiche si des promos existent */}
+        <FlashDeals />
+
+        {/* Collections par catégorie avec tabs (Smartphones, Montres, Audio, LED, Accessoires) */}
+        <ProductCollectionsSupabase />
 
         <BrandCarousel />
         <TrustSection />
