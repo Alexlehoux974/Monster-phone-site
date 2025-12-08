@@ -6,6 +6,7 @@ import { AuthProvider } from "@/contexts/AuthContextSimple";
 import StructuredData from "@/components/StructuredData";
 import { Toaster } from "sonner";
 import CookieConsent from "@/components/CookieConsent";
+import GoogleTagManager, { GoogleTagManagerNoscript } from "@/components/tracking/GoogleTagManager";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -72,10 +73,14 @@ export default function RootLayout({
         <meta name="theme-color" content="#2563eb" />
         <StructuredData type="organization" />
         <StructuredData type="website" />
+        {/* Google Tag Manager avec Consent Mode V2 */}
+        <GoogleTagManager />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
       >
+        {/* GTM noscript fallback */}
+        <GoogleTagManagerNoscript />
         <AuthProvider>
           <CartProvider>
             {children}

@@ -17,6 +17,7 @@ import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
 import { createClient } from '@/lib/supabase/client';
 import ProductContentCards from '@/components/ProductContentCards';
+import { trackViewItem, trackAddToCart } from '@/lib/tracking/events';
 
 interface ProductDetailProps {
   product: Product;
@@ -62,6 +63,16 @@ export default function ProductDetail({ product }: ProductDetailProps) {
       stock: newDefaultVariant?.stock,
       discount: newDefaultVariant?.adminDiscountPercent,
       variants: product.variants?.length
+    });
+
+    // 📊 Tracking GA4 - view_item
+    trackViewItem({
+      item_id: product.sku || product.id,
+      item_name: product.name,
+      item_brand: product.brandName,
+      item_category: product.categoryName,
+      item_variant: newDefaultVariant?.color,
+      price: product.basePrice,
     });
   }, [product]);
 
@@ -188,6 +199,17 @@ export default function ProductDetail({ product }: ProductDetailProps) {
     addToCart(product, quantity, selectedVariant?.color);
     toast.success(`${product.name} ajouté au panier`, {
       description: selectedVariant ? `Couleur: ${selectedVariant.color}` : undefined,
+    });
+
+    // 📊 Tracking GA4 - add_to_cart
+    trackAddToCart({
+      item_id: product.sku || product.id,
+      item_name: product.name,
+      item_brand: product.brandName,
+      item_category: product.categoryName,
+      item_variant: selectedVariant?.color,
+      price: finalPrice,
+      quantity: quantity,
     });
   };
 

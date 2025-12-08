@@ -49,6 +49,16 @@ export default function CookieConsent() {
     setPreferences(finalPreferences);
     setIsVisible(false);
 
+    // Mettre à jour Google Consent Mode V2
+    if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+      window.gtag('consent', 'update', {
+        'analytics_storage': finalPreferences.analytics ? 'granted' : 'denied',
+        'ad_storage': finalPreferences.marketing ? 'granted' : 'denied',
+        'ad_user_data': finalPreferences.marketing ? 'granted' : 'denied',
+        'ad_personalization': finalPreferences.marketing ? 'granted' : 'denied',
+      });
+    }
+
     // Dispatch event for analytics initialization if accepted
     if (finalPreferences.analytics) {
       window.dispatchEvent(new CustomEvent('cookieConsentGranted', {

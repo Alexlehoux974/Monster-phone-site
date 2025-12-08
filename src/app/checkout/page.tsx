@@ -11,6 +11,8 @@ import { useProductSuggestions } from '@/hooks/useProductSuggestions';
 import { useProducts } from '@/lib/supabase/hooks';
 import { supabaseProductToLegacy } from '@/lib/supabase/adapters';
 import Image from 'next/image';
+import { trackBeginCheckout } from '@/lib/tracking/events';
+import type { GA4Item } from '@/lib/tracking/types';
 import {
   CreditCard,
   Truck,
@@ -128,6 +130,28 @@ function CheckoutContent() {
     // ✅ NE PLUS BLOQUER si non authentifié - permettre le checkout invité
     // Les utilisateurs peuvent passer commande sans compte
   }, [items, router, orderComplete, isLoading]);
+
+  // 📊 Tracking GA4 - begin_checkout (une seule fois au chargement)
+  useEffect(() => {
+    if (items.length > 0) {
+      const ga4Items: GA4Item[] = items.map(item => ({
+        item_id: item.product.sku || item.product.id,
+        item_name: item.product.name,
+        item_brand: item.product.brandName,
+        item_category: item.product.categoryName,
+        item_variant: item.variant,
+        price: item.product.basePrice,
+        quantity: item.quantity,
+      }));
+
+      trackBeginCheckout({
+        items: ga4Items,
+        value: getCartTotal(),
+        currency: 'EUR',
+      });
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Intentionnellement vide pour ne tracker qu'une fois
 
   // Pré-remplir avec les infos utilisateur si connecté (prioritaire sur localStorage)
   useEffect(() => {

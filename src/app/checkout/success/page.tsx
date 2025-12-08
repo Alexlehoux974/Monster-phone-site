@@ -13,6 +13,8 @@ import {
   ShoppingBag,
   Sparkles
 } from 'lucide-react';
+import { trackPurchase } from '@/lib/tracking/events';
+import type { GA4Item } from '@/lib/tracking/types';
 
 interface OrderDetails {
   id: string;
@@ -86,6 +88,22 @@ function CheckoutSuccessContent() {
           // Force reload du panier pour mettre à jour le header
           window.dispatchEvent(new Event('storage'));
         }
+
+        // 📊 Tracking GA4 - purchase (conversion)
+        const ga4Items: GA4Item[] = (createdOrder.items || []).map((item: { product_name: string; product_id?: string; quantity: number; unit_price: number }) => ({
+          item_id: item.product_id || item.product_name,
+          item_name: item.product_name,
+          price: item.unit_price,
+          quantity: item.quantity,
+        }));
+
+        trackPurchase({
+          transaction_id: createdOrder.order_number || createdOrder.id,
+          items: ga4Items,
+          value: createdOrder.total,
+          shipping: createdOrder.shipping_cost || 0,
+          currency: 'EUR',
+        });
 
       } catch (err: any) {
         console.error('Erreur création/récupération commande:', err);
