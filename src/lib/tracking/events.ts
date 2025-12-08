@@ -1,14 +1,23 @@
 /**
- * Helpers pour les événements e-commerce GA4
+ * Helpers pour les événements e-commerce GA4 + Meta
  */
 
 import { pushToDataLayer, clearEcommerceData } from './gtm';
+import {
+  trackMetaViewContent,
+  trackMetaAddToCart,
+  trackMetaInitiateCheckout,
+  trackMetaPurchase,
+  generateEventId,
+  sendMetaCAPIEvent,
+} from './meta';
 import type {
   GA4Item,
   ViewItemParams,
   AddToCartParams,
   BeginCheckoutParams,
   PurchaseParams,
+  MetaContentItem,
 } from './types';
 
 const DEFAULT_CURRENCY = 'EUR';
@@ -30,10 +39,11 @@ export function createGA4Item(params: ViewItemParams & { quantity?: number }): G
 
 /**
  * Événement view_item - Quand un utilisateur voit un produit
+ * Envoie à GA4 + Meta Pixel + CAPI
  */
 export function trackViewItem(params: ViewItemParams): void {
+  // GA4
   clearEcommerceData();
-
   pushToDataLayer({
     event: 'view_item',
     ecommerce: {
@@ -42,22 +52,70 @@ export function trackViewItem(params: ViewItemParams): void {
       items: [createGA4Item(params)],
     },
   });
+
+  // Meta Pixel (ViewContent)
+  trackMetaViewContent({
+    content_id: params.item_id,
+    content_name: params.item_name,
+    content_category: params.item_category,
+    value: params.price,
+    currency: DEFAULT_CURRENCY,
+  });
+
+  // Meta CAPI
+  const eventId = generateEventId();
+  sendMetaCAPIEvent({
+    eventName: 'ViewContent',
+    eventId,
+    customData: {
+      content_ids: [params.item_id],
+      content_name: params.item_name,
+      content_category: params.item_category,
+      content_type: 'product',
+      value: params.price,
+      currency: DEFAULT_CURRENCY,
+    },
+  });
 }
 
 /**
  * Événement add_to_cart - Quand un utilisateur ajoute au panier
+ * Envoie à GA4 + Meta Pixel + CAPI
  */
 export function trackAddToCart(params: AddToCartParams): void {
+  // GA4
   clearEcommerceData();
-
   const item = createGA4Item(params);
-
   pushToDataLayer({
     event: 'add_to_cart',
     ecommerce: {
       currency: DEFAULT_CURRENCY,
       value: params.price * params.quantity,
       items: [item],
+    },
+  });
+
+  // Meta Pixel (AddToCart)
+  trackMetaAddToCart({
+    content_id: params.item_id,
+    content_name: params.item_name,
+    value: params.price,
+    quantity: params.quantity,
+    currency: DEFAULT_CURRENCY,
+  });
+
+  // Meta CAPI
+  const eventId = generateEventId();
+  sendMetaCAPIEvent({
+    eventName: 'AddToCart',
+    eventId,
+    customData: {
+      content_ids: [params.item_id],
+      content_name: params.item_name,
+      content_type: 'product',
+      contents: [{ id: params.item_id, quantity: params.quantity, item_price: params.price }],
+      value: params.price * params.quantity,
+      currency: DEFAULT_CURRENCY,
     },
   });
 }
@@ -98,16 +156,50 @@ export function trackViewCart(items: GA4Item[], value: number): void {
 
 /**
  * Événement begin_checkout - Quand un utilisateur commence le checkout
+ * Envoie à GA4 + Meta Pixel + CAPI
  */
 export function trackBeginCheckout(params: BeginCheckoutParams): void {
+  // GA4
   clearEcommerceData();
-
   pushToDataLayer({
     event: 'begin_checkout',
     ecommerce: {
       currency: params.currency ?? DEFAULT_CURRENCY,
       value: params.value,
       items: params.items,
+    },
+  });
+
+  // Préparer les données pour Meta
+  const contentIds = params.items.map(item => item.item_id);
+  const contents: MetaContentItem[] = params.items.map(item => ({
+    id: item.item_id,
+    quantity: item.quantity,
+    item_price: item.price,
+  }));
+  const numItems = params.items.reduce((sum, item) => sum + item.quantity, 0);
+
+  // Meta Pixel (InitiateCheckout)
+  trackMetaInitiateCheckout({
+    content_ids: contentIds,
+    contents,
+    value: params.value,
+    num_items: numItems,
+    currency: params.currency ?? DEFAULT_CURRENCY,
+  });
+
+  // Meta CAPI
+  const eventId = generateEventId();
+  sendMetaCAPIEvent({
+    eventName: 'InitiateCheckout',
+    eventId,
+    customData: {
+      content_ids: contentIds,
+      content_type: 'product',
+      contents,
+      value: params.value,
+      num_items: numItems,
+      currency: params.currency ?? DEFAULT_CURRENCY,
     },
   });
 }
@@ -146,10 +238,11 @@ export function trackAddPaymentInfo(params: BeginCheckoutParams & { payment_type
 
 /**
  * Événement purchase - Quand un achat est confirmé
+ * Envoie à GA4 + Meta Pixel + CAPI
  */
 export function trackPurchase(params: PurchaseParams): void {
+  // GA4
   clearEcommerceData();
-
   pushToDataLayer({
     event: 'purchase',
     ecommerce: {
@@ -159,6 +252,39 @@ export function trackPurchase(params: PurchaseParams): void {
       tax: params.tax,
       shipping: params.shipping,
       items: params.items,
+    },
+  });
+
+  // Préparer les données pour Meta
+  const contentIds = params.items.map(item => item.item_id);
+  const contents: MetaContentItem[] = params.items.map(item => ({
+    id: item.item_id,
+    quantity: item.quantity,
+    item_price: item.price,
+  }));
+  const numItems = params.items.reduce((sum, item) => sum + item.quantity, 0);
+
+  // Meta Pixel (Purchase)
+  trackMetaPurchase({
+    content_ids: contentIds,
+    contents,
+    value: params.value,
+    num_items: numItems,
+    currency: params.currency ?? DEFAULT_CURRENCY,
+  });
+
+  // Meta CAPI
+  const eventId = generateEventId();
+  sendMetaCAPIEvent({
+    eventName: 'Purchase',
+    eventId,
+    customData: {
+      content_ids: contentIds,
+      content_type: 'product',
+      contents,
+      value: params.value,
+      num_items: numItems,
+      currency: params.currency ?? DEFAULT_CURRENCY,
     },
   });
 }

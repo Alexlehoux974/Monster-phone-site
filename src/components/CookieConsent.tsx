@@ -59,6 +59,15 @@ export default function CookieConsent() {
       });
     }
 
+    // Mettre à jour Meta Pixel consent
+    if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
+      if (finalPreferences.marketing) {
+        window.fbq('consent', 'grant');
+      } else {
+        window.fbq('consent', 'revoke');
+      }
+    }
+
     // Dispatch event for analytics initialization if accepted
     if (finalPreferences.analytics) {
       window.dispatchEvent(new CustomEvent('cookieConsentGranted', {

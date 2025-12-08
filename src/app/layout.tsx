@@ -7,6 +7,7 @@ import StructuredData from "@/components/StructuredData";
 import { Toaster } from "sonner";
 import CookieConsent from "@/components/CookieConsent";
 import GoogleTagManager, { GoogleTagManagerNoscript } from "@/components/tracking/GoogleTagManager";
+import MetaPixel from "@/components/tracking/MetaPixel";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -75,6 +76,8 @@ export default function RootLayout({
         <StructuredData type="website" />
         {/* Google Tag Manager avec Consent Mode V2 */}
         <GoogleTagManager />
+        {/* Meta Pixel avec gestion du consentement */}
+        <MetaPixel />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
