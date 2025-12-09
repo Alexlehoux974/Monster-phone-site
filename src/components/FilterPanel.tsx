@@ -38,16 +38,33 @@ export default function FilterPanel({ products, onFiltersChange, initialFilters 
   const uniqueBrands = Array.from(new Set(safeProducts.map(p => p.brandName))).sort();
   const uniqueCategories = Array.from(new Set(safeProducts.map(p => p.categoryName))).sort();
   
-  const [filters, setFilters] = useState<FilterState>(initialFilters || {
-    priceRange: [minPrice, maxPrice],
-    hasPromo: false,
-    minRating: 0,
-    inStock: false,
-    brands: [],
-    categories: []
+  // Déterminer si les filtres initiaux de prix sont à leur valeur par défaut (non modifiés par l'utilisateur)
+  const isPriceRangeDefault = initialFilters
+    ? (initialFilters.priceRange[0] === 0 && initialFilters.priceRange[1] === 2000) // Valeur par défaut de products-client
+    : true;
+
+  const [filters, setFilters] = useState<FilterState>(() => {
+    if (initialFilters) {
+      // Si les prix sont à leur valeur par défaut, utiliser les vrais min/max
+      if (isPriceRangeDefault) {
+        return {
+          ...initialFilters,
+          priceRange: [minPrice, maxPrice]
+        };
+      }
+      return initialFilters;
+    }
+    return {
+      priceRange: [minPrice, maxPrice],
+      hasPromo: false,
+      minRating: 0,
+      inStock: false,
+      brands: [],
+      categories: []
+    };
   });
 
-  const [tempPriceRange, setTempPriceRange] = useState<[number, number]>(filters.priceRange);
+  const [tempPriceRange, setTempPriceRange] = useState<[number, number]>([minPrice, maxPrice]);
 
   useEffect(() => {
     onFiltersChange(filters);

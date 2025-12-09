@@ -46,13 +46,14 @@ function ProductsClientContent({
       return supabaseProductToLegacy(fullViewProduct as any);
     });
   }, [initialProducts]);
-  
+
   // State management
   const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
 
-  // Filtres - utiliser les noms depuis les paramètres d'URL
+  // Filtres - utiliser [0, 2000] comme valeur par défaut signalant "non modifié"
+  // Le FilterPanel détectera cette valeur et utilisera les vrais min/max
   const [filters, setFilters] = useState<FilterState>({
     priceRange: [0, 2000],
     hasPromo: false,
