@@ -18,6 +18,7 @@ import { toast } from 'sonner';
 import { createClient } from '@/lib/supabase/client';
 import ProductContentCards from '@/components/ProductContentCards';
 import { trackViewItem, trackAddToCart } from '@/lib/tracking/events';
+import { useAuth } from '@/contexts/AuthContextSimple';
 
 interface ProductDetailProps {
   product: Product;
@@ -26,6 +27,7 @@ interface ProductDetailProps {
 export default function ProductDetail({ product }: ProductDetailProps) {
   const { addToCart } = useCart();
   const router = useRouter();
+  const { isAuthenticated } = useAuth();
   // Sélectionner le variant par défaut ou le premier disponible avec du stock
   const defaultVariant = product.variants?.find(v => v.is_default) ||
                         product.variants?.find(v => v.stock > 0) ||
@@ -37,8 +39,29 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   const [adminDiscountPercent, setAdminDiscountPercent] = useState(defaultVariant?.adminDiscountPercent || 0);
   const [quantity, setQuantity] = useState(1);
   const [isWishlisted, setIsWishlisted] = useState(false);
+  const [wishlistLoading, setWishlistLoading] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false);
+
+  // Vérifier si le produit est dans la wishlist
+  useEffect(() => {
+    if (isAuthenticated && product.id) {
+      checkWishlistStatus();
+    }
+  }, [isAuthenticated, product.id]);
+
+  const checkWishlistStatus = async () => {
+    try {
+      const response = await fetch('/api/user/wishlist');
+      if (response.ok) {
+        const data = await response.json();
+        const inWishlist = data.wishlist?.some((item: any) => item.product_id === product.id);
+        setIsWishlisted(inWishlist);
+      }
+    } catch (error) {
+      console.error('Error checking wishlist:', error);
+    }
+  };
 
   // 🔄 Synchroniser les états locaux quand les props changent (après refresh)
   useEffect(() => {
@@ -220,9 +243,45 @@ export default function ProductDetail({ product }: ProductDetailProps) {
     }
   };
 
-  const handleWishlist = () => {
-    setIsWishlisted(!isWishlisted);
-    toast.success(isWishlisted ? 'Retiré des favoris' : 'Ajouté aux favoris');
+  const handleWishlist = async () => {
+    if (!isAuthenticated) {
+      toast.error('Connectez-vous pour ajouter des favoris');
+      router.push('/auth/signin?redirect=' + encodeURIComponent(window.location.pathname));
+      return;
+    }
+
+    setWishlistLoading(true);
+    try {
+      if (isWishlisted) {
+        // Retirer de la wishlist
+        const response = await fetch(`/api/user/wishlist?product_id=${product.id}`, {
+          method: 'DELETE',
+        });
+        if (response.ok) {
+          setIsWishlisted(false);
+          toast.success('Retiré des favoris');
+        }
+      } else {
+        // Ajouter à la wishlist
+        const response = await fetch('/api/user/wishlist', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            product_id: product.id,
+            variant_id: selectedVariant?.id,
+          }),
+        });
+        if (response.ok) {
+          setIsWishlisted(true);
+          toast.success('Ajouté aux favoris');
+        }
+      }
+    } catch (error) {
+      console.error('Error toggling wishlist:', error);
+      toast.error('Erreur lors de la mise à jour des favoris');
+    } finally {
+      setWishlistLoading(false);
+    }
   };
 
   const handleShare = () => {
@@ -444,9 +503,15 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                   variant="outline"
                   size="icon"
                   onClick={handleWishlist}
+                  disabled={wishlistLoading}
                   className={cn(isWishlisted && "text-red-500 border-red-500")}
+                  title={isAuthenticated ? (isWishlisted ? "Retirer des favoris" : "Ajouter aux favoris") : "Connectez-vous pour ajouter aux favoris"}
                 >
-                  <Heart className={cn("h-5 w-5", isWishlisted && "fill-current")} />
+                  {wishlistLoading ? (
+                    <div className="h-5 w-5 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                  ) : (
+                    <Heart className={cn("h-5 w-5", isWishlisted && "fill-current")} />
+                  )}
                 </Button>
                 <Button variant="outline" size="icon" onClick={handleShare}>
                   <Share2 className="h-5 w-5" />
