@@ -14,6 +14,7 @@ import {
   LogOut,
   Menu,
   X,
+  ShoppingCart,
 } from 'lucide-react';
 
 interface NavItem {
@@ -24,6 +25,7 @@ interface NavItem {
 
 const navigation: NavItem[] = [
   { name: 'Tableau de bord', href: '/admin', icon: LayoutDashboard },
+  { name: 'Commandes', href: '/admin/orders', icon: ShoppingCart },
   { name: 'Gestion Stock', href: '/admin/stock', icon: Package },
   { name: 'Collections', href: '/admin/collections', icon: Tag },
   { name: 'Bannières', href: '/admin/banners', icon: Megaphone },
