@@ -401,7 +401,7 @@ const MonsterPhoneHero = () => {
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Button className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-4 text-lg shadow-lg">
                   <ShoppingCart className="w-5 h-5 mr-2" />
-                  Découvrir la Collection
+                  Découvrir nos produits
                 </Button>
               </motion.div>
             </Link>

@@ -13,7 +13,7 @@ test.describe('Homepage', () => {
     await expect(page.getByText(/Découvrez notre collection exclusive/i)).toBeVisible();
     
     // Check CTA buttons
-    await expect(page.getByRole('link', { name: /Découvrir la Collection/i })).toBeVisible();
+    await expect(page.getByRole('link', { name: /Découvrir nos produits/i })).toBeVisible();
     await expect(page.getByRole('link', { name: /Voir les Offres Spéciales/i })).toBeVisible();
   });
 
@@ -63,8 +63,8 @@ test.describe('Homepage', () => {
   });
 
   test('should navigate to products page', async ({ page }) => {
-    // Click on "Découvrir la Collection" button
-    await page.getByRole('link', { name: /Découvrir la Collection/i }).click();
+    // Click on "Découvrir nos produits" button
+    await page.getByRole('link', { name: /Découvrir nos produits/i }).click();
     
     // Wait for navigation
     await page.waitForURL('/nos-produits');
