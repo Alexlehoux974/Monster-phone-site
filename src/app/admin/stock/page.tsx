@@ -79,6 +79,7 @@ export default function StockManagementPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [editingId, setEditingId] = useState<string | null>(null);
+  const [editingName, setEditingName] = useState<string>('');
   const [editingStock, setEditingStock] = useState<number>(0);
   const [editingPrice, setEditingPrice] = useState<number>(0);
   const [editingVisible, setEditingVisible] = useState<boolean>(true);
@@ -223,6 +224,7 @@ export default function StockManagementPage() {
 
   const startEditing = (row: VariantRow) => {
     setEditingId(row.id);
+    setEditingName(row.productName);
     setEditingStock(row.stock);
     setEditingPrice(row.price);
     setEditingVisible(row.isVisible);
@@ -231,6 +233,7 @@ export default function StockManagementPage() {
 
   const cancelEditing = () => {
     setEditingId(null);
+    setEditingName('');
     setEditingStock(0);
     setEditingPrice(0);
     setEditingVisible(true);
@@ -347,9 +350,9 @@ export default function StockManagementPage() {
           throw new Error(variantResult.error || 'Failed to update variant');
         }
 
-        console.log('🏷️ [SAVE STOCK] Updating product (price, visibility)...');
+        console.log('🏷️ [SAVE STOCK] Updating product (name, price, visibility)...');
 
-        // Update product price and visibility (NOT discount - it's now per-variant)
+        // Update product name, price and visibility (NOT discount - it's now per-variant)
         const productResponse = await fetch('/api/admin/supabase', {
           method: 'POST',
           headers: {
@@ -360,6 +363,7 @@ export default function StockManagementPage() {
             operation: 'update',
             table: 'products',
             data: {
+              name: editingName,
               price: editingPrice,
               is_visible: editingVisible
             },
@@ -376,21 +380,22 @@ export default function StockManagementPage() {
           throw new Error(productResult.error || 'Failed to update product');
         }
 
-        // Update the row in state
+        // Update the row in state (and all rows with the same productId for the name)
         setVariantRows((prev) =>
           prev.map((r: any) =>
-            r.id === rowId ? {
+            r.productId === row.productId ? {
               ...r,
-              stock: editingStock,
+              productName: editingName,
+              stock: r.id === rowId ? editingStock : r.stock,
               price: editingPrice,
               isVisible: editingVisible,
-              adminDiscountPercent: editingDiscount
+              adminDiscountPercent: r.id === rowId ? editingDiscount : r.adminDiscountPercent
             } : r
           )
         );
       } else {
         // Fallback for products without variants (backward compatibility)
-        // Update stock, price, visibility and discount via API route
+        // Update name, stock, price, visibility and discount via API route
         const response = await fetch('/api/admin/supabase', {
           method: 'POST',
           headers: {
@@ -401,6 +406,7 @@ export default function StockManagementPage() {
             operation: 'update',
             table: 'products',
             data: {
+              name: editingName,
               stock_quantity: editingStock,
               price: editingPrice,
               status: editingStock === 0 ? 'out-of-stock' : 'active',
@@ -420,6 +426,7 @@ export default function StockManagementPage() {
           prev.map((r: any) =>
             r.id === rowId ? {
               ...r,
+              productName: editingName,
               stock: editingStock,
               price: editingPrice,
               isVisible: editingVisible,
@@ -621,12 +628,27 @@ export default function StockManagementPage() {
                   className="hover:bg-gray-700/30 transition-colors"
                 >
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm font-medium text-white">
-                      {row.productName}
-                      {row.isVariant && (
-                        <span className="ml-2 text-gray-400">- {row.color}</span>
-                      )}
-                    </div>
+                    {editingId === row.id ? (
+                      <div className="flex items-center gap-2">
+                        <input
+                          type="text"
+                          value={editingName}
+                          onChange={(e) => setEditingName(e.target.value)}
+                          className="w-48 px-3 py-1 bg-gray-700 border border-gray-600 rounded text-white focus:outline-none focus:ring-2 focus:ring-red-500"
+                          placeholder="Nom du produit"
+                        />
+                        {row.isVariant && (
+                          <span className="text-gray-400 text-sm">- {row.color}</span>
+                        )}
+                      </div>
+                    ) : (
+                      <div className="text-sm font-medium text-white">
+                        {row.productName}
+                        {row.isVariant && (
+                          <span className="ml-2 text-gray-400">- {row.color}</span>
+                        )}
+                      </div>
+                    )}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm text-gray-400">{row.sku}</div>

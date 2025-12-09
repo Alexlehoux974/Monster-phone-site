@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { createClient } from '@/lib/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -11,6 +10,7 @@ import { Switch } from '@/components/ui/switch';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { toast } from 'sonner';
 import { ArrowLeft, Plus, Save, Trash2, Eye, EyeOff, GripVertical, Copy, X } from 'lucide-react';
+import LoadingSpinner from '@/components/admin/LoadingSpinner';
 
 // Interface EXACTE correspondant à ProductContentCards.tsx
 interface ProductContentSection {
@@ -57,44 +57,71 @@ export default function ProductContentManagement() {
   const [editingSection, setEditingSection] = useState<ProductContentSection | null>(null);
   const [isNewSection, setIsNewSection] = useState(false);
 
-  // Load product and sections
+  // Load product and sections using REST API (avoids Supabase client blocking issues)
   useEffect(() => {
     const loadData = async () => {
-      const supabase = createClient();
+      console.log('📦 [CONTENT] Loading data for product:', productId);
 
-      // Load product
-      const { data: productData, error: productError } = await supabase
-        .from('products')
-        .select('id, name, brand:brands!inner(name)')
-        .eq('id', productId)
-        .single();
+      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+      const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
-      if (productError || !productData) {
-        toast.error('Produit non trouvé');
-        router.push('/admin/stock');
-        return;
+      const headers = {
+        'apikey': supabaseAnonKey,
+        'Authorization': `Bearer ${supabaseAnonKey}`,
+        'Content-Type': 'application/json',
+      };
+
+      try {
+        // Load product with brand (LEFT JOIN to avoid failure if no brand)
+        const productResponse = await fetch(
+          `${supabaseUrl}/rest/v1/products?select=id,name,brands(name)&id=eq.${productId}`,
+          { headers, signal: AbortSignal.timeout(10000) }
+        );
+
+        if (!productResponse.ok) {
+          console.error('❌ [CONTENT] Product fetch error:', productResponse.status);
+          toast.error('Erreur lors du chargement du produit');
+          router.push('/admin/stock');
+          return;
+        }
+
+        const productData = await productResponse.json();
+        console.log('✅ [CONTENT] Product loaded:', productData);
+
+        if (!productData || productData.length === 0) {
+          toast.error('Produit non trouvé');
+          router.push('/admin/stock');
+          return;
+        }
+
+        const prod = productData[0];
+        setProduct({
+          id: prod.id,
+          name: prod.name,
+          brand: prod.brands?.name || '',
+        });
+
+        // Load sections
+        const sectionsResponse = await fetch(
+          `${supabaseUrl}/rest/v1/product_content_sections?product_id=eq.${productId}&order=display_order.asc`,
+          { headers, signal: AbortSignal.timeout(10000) }
+        );
+
+        if (sectionsResponse.ok) {
+          const sectionsData = await sectionsResponse.json();
+          console.log('✅ [CONTENT] Sections loaded:', sectionsData?.length || 0);
+          setSections(sectionsData || []);
+        } else {
+          console.error('❌ [CONTENT] Sections fetch error:', sectionsResponse.status);
+          toast.error('Erreur lors du chargement des sections');
+          setSections([]);
+        }
+      } catch (error) {
+        console.error('❌ [CONTENT] Error loading data:', error);
+        toast.error('Erreur de connexion');
+      } finally {
+        setLoading(false);
       }
-
-      setProduct({
-        id: productData.id,
-        name: productData.name,
-        brand: Array.isArray(productData.brand) ? productData.brand[0]?.name || '' : (productData.brand as any)?.name || '',
-      });
-
-      // Load sections
-      const { data: sectionsData, error: sectionsError } = await supabase
-        .from('product_content_sections')
-        .select('*')
-        .eq('product_id', productId)
-        .order('display_order');
-
-      if (sectionsError) {
-        toast.error('Erreur lors du chargement des sections');
-      } else {
-        setSections(sectionsData || []);
-      }
-
-      setLoading(false);
     };
 
     loadData();
@@ -121,11 +148,34 @@ export default function ProductContentManagement() {
     setIsNewSection(true);
   };
 
+  // Revalidate cache after content changes
+  const revalidateCache = async () => {
+    try {
+      await fetch('/api/revalidate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tag: 'products' }),
+      });
+      console.log('✅ [CONTENT] Cache revalidated');
+    } catch (error) {
+      console.error('⚠️ [CONTENT] Revalidation error (non-blocking):', error);
+    }
+  };
+
   const handleSaveSection = async () => {
     if (!editingSection) return;
 
     setSaving(true);
-    const supabase = createClient();
+
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+
+    const headers = {
+      'apikey': supabaseAnonKey,
+      'Authorization': `Bearer ${supabaseAnonKey}`,
+      'Content-Type': 'application/json',
+      'Prefer': 'return=representation',
+    };
 
     try {
       const sectionData = {
@@ -141,35 +191,52 @@ export default function ProductContentManagement() {
       };
 
       if (isNewSection) {
-        // Insert new section
-        const { data, error } = await supabase
-          .from('product_content_sections')
-          .insert(sectionData)
-          .select()
-          .single();
+        // Insert new section via REST API
+        const response = await fetch(
+          `${supabaseUrl}/rest/v1/product_content_sections`,
+          {
+            method: 'POST',
+            headers,
+            body: JSON.stringify(sectionData),
+          }
+        );
 
-        if (error) throw error;
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || 'Erreur lors de l\'ajout');
+        }
 
-        setSections([...sections, data]);
+        const newSection = await response.json();
+        setSections([...sections, Array.isArray(newSection) ? newSection[0] : newSection]);
         toast.success('Section ajoutée avec succès');
       } else {
-        // Update existing section
-        const { error } = await supabase
-          .from('product_content_sections')
-          .update(sectionData)
-          .eq('id', editingSection.id);
+        // Update existing section via REST API
+        const response = await fetch(
+          `${supabaseUrl}/rest/v1/product_content_sections?id=eq.${editingSection.id}`,
+          {
+            method: 'PATCH',
+            headers,
+            body: JSON.stringify(sectionData),
+          }
+        );
 
-        if (error) throw error;
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || 'Erreur lors de la mise à jour');
+        }
 
-        setSections(sections.map((s: any) => (s.id === editingSection.id ? editingSection : s)));
+        setSections(sections.map((s: any) => (s.id === editingSection.id ? { ...editingSection, ...sectionData } : s)));
         toast.success('Section mise à jour avec succès');
       }
+
+      // Revalidate cache to update the site
+      await revalidateCache();
 
       setEditingSection(null);
       setIsNewSection(false);
     } catch (error) {
       console.error('Error saving section:', error);
-      toast.error('Erreur lors de la sauvegarde');
+      toast.error(error instanceof Error ? error.message : 'Erreur lors de la sauvegarde');
     } finally {
       setSaving(false);
     }
@@ -178,18 +245,30 @@ export default function ProductContentManagement() {
   const handleDeleteSection = async (sectionId: string) => {
     if (!confirm('Êtes-vous sûr de vouloir supprimer cette section ?')) return;
 
-    const supabase = createClient();
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
     try {
-      const { error } = await supabase
-        .from('product_content_sections')
-        .delete()
-        .eq('id', sectionId);
+      const response = await fetch(
+        `${supabaseUrl}/rest/v1/product_content_sections?id=eq.${sectionId}`,
+        {
+          method: 'DELETE',
+          headers: {
+            'apikey': supabaseAnonKey,
+            'Authorization': `Bearer ${supabaseAnonKey}`,
+          },
+        }
+      );
 
-      if (error) throw error;
+      if (!response.ok) {
+        throw new Error('Erreur lors de la suppression');
+      }
 
       setSections(sections.filter((s) => s.id !== sectionId));
       toast.success('Section supprimée');
+
+      // Revalidate cache
+      await revalidateCache();
     } catch (error) {
       console.error('Error deleting section:', error);
       toast.error('Erreur lors de la suppression');
@@ -197,18 +276,32 @@ export default function ProductContentManagement() {
   };
 
   const handleToggleEnabled = async (sectionId: string, enabled: boolean) => {
-    const supabase = createClient();
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
     try {
-      const { error } = await supabase
-        .from('product_content_sections')
-        .update({ is_enabled: enabled })
-        .eq('id', sectionId);
+      const response = await fetch(
+        `${supabaseUrl}/rest/v1/product_content_sections?id=eq.${sectionId}`,
+        {
+          method: 'PATCH',
+          headers: {
+            'apikey': supabaseAnonKey,
+            'Authorization': `Bearer ${supabaseAnonKey}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ is_enabled: enabled }),
+        }
+      );
 
-      if (error) throw error;
+      if (!response.ok) {
+        throw new Error('Erreur lors de la modification');
+      }
 
       setSections(sections.map((s: any) => (s.id === sectionId ? { ...s, is_enabled: enabled } : s)));
       toast.success(enabled ? 'Section activée' : 'Section désactivée');
+
+      // Revalidate cache
+      await revalidateCache();
     } catch (error) {
       console.error('Error toggling section:', error);
       toast.error('Erreur lors de la modification');
@@ -227,20 +320,49 @@ export default function ProductContentManagement() {
 
     if (!targetProductsInput) return;
 
-    const targetProductIds = targetProductsInput.split(',').map((id: any) => id.trim());
+    const targetProductIds = targetProductsInput.split(',').map((id: string) => id.trim());
 
-    const supabase = createClient();
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+
+    const headers = {
+      'apikey': supabaseAnonKey,
+      'Authorization': `Bearer ${supabaseAnonKey}`,
+      'Content-Type': 'application/json',
+      'Prefer': 'return=representation',
+    };
+
     let successCount = 0;
 
     for (const targetId of targetProductIds) {
       try {
-        const { data, error } = await supabase.rpc('duplicate_product_sections', {
-          p_source_product_id: productId,
-          p_target_product_id: targetId,
-        });
+        // Duplicate each section to the target product
+        for (const section of sections) {
+          const newSectionData = {
+            product_id: targetId,
+            section_type: section.section_type,
+            title: section.title,
+            content: section.content,
+            images: section.images,
+            is_enabled: section.is_enabled,
+            display_order: section.display_order,
+            layout_variant: section.layout_variant,
+            metadata: section.metadata,
+          };
 
-        if (error) throw error;
+          const response = await fetch(
+            `${supabaseUrl}/rest/v1/product_content_sections`,
+            {
+              method: 'POST',
+              headers,
+              body: JSON.stringify(newSectionData),
+            }
+          );
 
+          if (!response.ok) {
+            console.error(`Error duplicating section to ${targetId}`);
+          }
+        }
         successCount++;
       } catch (error) {
         console.error(`Error duplicating to ${targetId}:`, error);
@@ -248,6 +370,9 @@ export default function ProductContentManagement() {
     }
 
     toast.success(`Sections dupliquées vers ${successCount}/${targetProductIds.length} produits`);
+
+    // Revalidate cache
+    await revalidateCache();
   };
 
   const handleAddImage = () => {
@@ -359,11 +484,8 @@ export default function ProductContentManagement() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-          <p>Chargement...</p>
-        </div>
+      <div className="flex items-center justify-center h-64">
+        <LoadingSpinner size="lg" />
       </div>
     );
   }
