@@ -11,44 +11,35 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 export const metadata: Metadata = {
-  title: 'Accessoires | Monster Phone Boutique',
-  description: 'Découvrez notre gamme complète d\'accessoires pour smartphones et gaming : coques, protections, câbles, chargeurs et plus encore.',
+  title: 'Tablettes | Monster Phone Boutique',
+  description: 'Découvrez notre sélection de tablettes tactiles. Performances et mobilité pour le travail et les loisirs.',
 };
 
-export default async function AccessoiresPage() {
+export default async function TablettesPage() {
   const [allProducts, categories, brands] = await Promise.all([
     getActiveProducts(),
     getAllCategories(),
     getAllBrands()
   ]);
 
-  // Trouver la catégorie Accessoires et toutes ses sous-catégories
-  const accessoiresCategory = categories.find((cat: any) =>
-    cat.name.toLowerCase() === 'accessoires' || cat.slug === 'accessoires'
+  // Filtrer uniquement les produits de la catégorie Tablettes
+  const tablettesCategory = categories.find((cat: any) =>
+    cat.name.toLowerCase() === 'tablettes' || cat.slug === 'tablettes'
   );
 
-  // Récupérer les IDs de la catégorie Accessoires + toutes ses sous-catégories
-  const accessoiresCategoryIds: string[] = [];
-  if (accessoiresCategory) {
-    accessoiresCategoryIds.push(accessoiresCategory.id);
-    const subcategories = categories.filter((cat: any) => cat.parent_id === accessoiresCategory.id);
-    subcategories.forEach((sub: any) => accessoiresCategoryIds.push(sub.id));
-  }
-
-  // Filtrer les produits qui appartiennent à Accessoires ou ses sous-catégories
-  const accessoiresProducts = accessoiresCategoryIds.length > 0
-    ? allProducts.filter((product: any) => accessoiresCategoryIds.includes(product.category_id))
+  const tablettesProducts = tablettesCategory
+    ? allProducts.filter((product: any) => product.category_id === tablettesCategory.id)
     : [];
 
   return (
     <>
       <Header />
       <main className="min-h-screen pt-[180px]">
-        <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white py-12">
+        <div className="bg-gradient-to-r from-indigo-600 to-blue-600 text-white py-12">
           <div className="container mx-auto px-4">
-            <h1 className="text-4xl font-bold mb-4">Accessoires</h1>
+            <h1 className="text-4xl font-bold mb-4">Tablettes</h1>
             <p className="text-xl opacity-90">
-              Protégez et personnalisez vos appareils avec nos accessoires de qualité
+              Tablettes tactiles performantes pour le travail et les loisirs
             </p>
           </div>
         </div>
@@ -63,7 +54,7 @@ export default async function AccessoiresPage() {
           </div>
         }>
           <ProductsClient
-            initialProducts={accessoiresProducts}
+            initialProducts={tablettesProducts}
             categories={categories}
             brands={brands}
           />

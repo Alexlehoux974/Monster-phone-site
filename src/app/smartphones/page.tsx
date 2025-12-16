@@ -11,33 +11,24 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 export const metadata: Metadata = {
-  title: 'Accessoires | Monster Phone Boutique',
-  description: 'Découvrez notre gamme complète d\'accessoires pour smartphones et gaming : coques, protections, câbles, chargeurs et plus encore.',
+  title: 'Smartphones | Monster Phone Boutique',
+  description: 'Découvrez notre sélection de smartphones de qualité. Des modèles performants pour tous les budgets.',
 };
 
-export default async function AccessoiresPage() {
+export default async function SmartphonesPage() {
   const [allProducts, categories, brands] = await Promise.all([
     getActiveProducts(),
     getAllCategories(),
     getAllBrands()
   ]);
 
-  // Trouver la catégorie Accessoires et toutes ses sous-catégories
-  const accessoiresCategory = categories.find((cat: any) =>
-    cat.name.toLowerCase() === 'accessoires' || cat.slug === 'accessoires'
+  // Filtrer uniquement les produits de la catégorie Smartphones
+  const smartphonesCategory = categories.find((cat: any) =>
+    cat.name.toLowerCase() === 'smartphones' || cat.slug === 'smartphones'
   );
 
-  // Récupérer les IDs de la catégorie Accessoires + toutes ses sous-catégories
-  const accessoiresCategoryIds: string[] = [];
-  if (accessoiresCategory) {
-    accessoiresCategoryIds.push(accessoiresCategory.id);
-    const subcategories = categories.filter((cat: any) => cat.parent_id === accessoiresCategory.id);
-    subcategories.forEach((sub: any) => accessoiresCategoryIds.push(sub.id));
-  }
-
-  // Filtrer les produits qui appartiennent à Accessoires ou ses sous-catégories
-  const accessoiresProducts = accessoiresCategoryIds.length > 0
-    ? allProducts.filter((product: any) => accessoiresCategoryIds.includes(product.category_id))
+  const smartphonesProducts = smartphonesCategory
+    ? allProducts.filter((product: any) => product.category_id === smartphonesCategory.id)
     : [];
 
   return (
@@ -46,9 +37,9 @@ export default async function AccessoiresPage() {
       <main className="min-h-screen pt-[180px]">
         <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white py-12">
           <div className="container mx-auto px-4">
-            <h1 className="text-4xl font-bold mb-4">Accessoires</h1>
+            <h1 className="text-4xl font-bold mb-4">Smartphones</h1>
             <p className="text-xl opacity-90">
-              Protégez et personnalisez vos appareils avec nos accessoires de qualité
+              Découvrez notre gamme de smartphones performants et élégants
             </p>
           </div>
         </div>
@@ -63,7 +54,7 @@ export default async function AccessoiresPage() {
           </div>
         }>
           <ProductsClient
-            initialProducts={accessoiresProducts}
+            initialProducts={smartphonesProducts}
             categories={categories}
             brands={brands}
           />

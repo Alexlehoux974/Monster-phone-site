@@ -113,19 +113,26 @@ export const SupabaseDropdownMenu = ({
         {/* Colonne 1: Sous-catégories OU Titre seul pour catégories sans sous-catégories */}
         {hasSubcategories ? (
           <div className="min-w-[200px] bg-gradient-to-b from-gray-50 to-white border-r border-gray-200 max-h-[600px] flex flex-col">
-            <div className="p-3 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-indigo-50 flex-shrink-0">
+            <Link
+              href={`/${category.slug}`}
+              onClick={onClose}
+              className="p-3 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-indigo-50 flex-shrink-0 hover:from-blue-100 hover:to-indigo-100 transition-colors cursor-pointer block"
+            >
               <h3 className="font-bold text-gray-900 text-lg">{category.name}</h3>
-            </div>
+              <p className="text-sm text-gray-500 mt-0.5">Voir toute la collection</p>
+            </Link>
             <div className="flex-1 overflow-y-auto" style={{
               scrollbarWidth: 'thin',
               scrollbarColor: '#9ca3af #f3f4f6'
             }}>
               <div className="py-2 px-2">
                 {category.subcategories!.map((subcat: any) => (
-                  <button
+                  <Link
                     key={subcat.slug}
+                    href={`/${category.slug}/${subcat.slug}`}
+                    onClick={onClose}
                     className={cn(
-                      "w-full text-left px-4 py-3 text-sm font-medium transition-all duration-200",
+                      "w-full text-left px-4 py-3 text-sm font-medium transition-all duration-200 block",
                       hoveredSubcategory === subcat.slug
                         ? "bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 border-l-4 border-blue-600"
                         : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
@@ -139,7 +146,7 @@ export const SupabaseDropdownMenu = ({
                         hoveredSubcategory === subcat.slug ? "translate-x-1" : ""
                       )} />
                     </div>
-                  </button>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -149,7 +156,11 @@ export const SupabaseDropdownMenu = ({
         {/* Colonne 2: Produits (pour catégories sans sous-catégories ou avec sous-catégorie sélectionnée) */}
         {(!hasSubcategories || hoveredSubcategory) && (
           <div className="min-w-[300px] bg-white max-h-[600px] flex flex-col">
-            <div className="p-3 border-b border-gray-200 bg-gradient-to-r from-purple-50 to-pink-50 flex-shrink-0">
+            <Link
+              href={hoveredSubcategory ? `/${category.slug}/${hoveredSubcategory}` : `/${category.slug}`}
+              onClick={onClose}
+              className="p-3 border-b border-gray-200 bg-gradient-to-r from-purple-50 to-pink-50 flex-shrink-0 hover:from-purple-100 hover:to-pink-100 transition-colors cursor-pointer block"
+            >
               <h4 className="font-bold text-gray-900 text-base">
                 {!hasSubcategories && category.name}
                 {hasSubcategories && hoveredSubcategory && (
@@ -157,9 +168,9 @@ export const SupabaseDropdownMenu = ({
                 )}
               </h4>
               <p className="text-sm text-gray-600 mt-1">
-                {loading ? 'Chargement...' : `${products.length} produit${products.length > 1 ? 's' : ''}`}
+                {loading ? 'Chargement...' : `${products.length} produit${products.length > 1 ? 's' : ''} - Voir tout`}
               </p>
-            </div>
+            </Link>
             <div className="flex-1 overflow-y-auto p-4" style={{
               scrollbarWidth: 'thin',
               scrollbarColor: '#9ca3af #f3f4f6'
@@ -172,7 +183,11 @@ export const SupabaseDropdownMenu = ({
                 </div>
               ) : products.length > 0 ? (
                 <div className="grid gap-2">
-                  {products.map((product: any) => (
+                  {products.map((product: any) => {
+                    // Récupérer l'image du produit depuis variants ou directement
+                    const productImage = product.variants?.[0]?.images?.[0] || '';
+
+                    return (
                     <Link
                       key={product.id}
                       href={`/produit/${product.urlSlug || product.id}`}
@@ -180,23 +195,15 @@ export const SupabaseDropdownMenu = ({
                       onClick={onClose}
                     >
                       <div className="flex items-start space-x-2">
-                        <div className="w-12 h-12 bg-black border border-gray-800 rounded overflow-hidden flex-shrink-0 shadow-sm">
-                          {product.variants?.[0]?.images && product.variants[0].images.length > 0 && !product.variants[0].images[0].includes('placeholder') ? (
-                            <ImageWithFallback
-                              src={product.variants[0].images[0]}
-                              alt={product.name}
-                              width={48}
-                              height={48}
-                              className="w-full h-full object-contain"
-                              productCategory={product.categoryName}
-                            />
-                          ) : (
-                            <div className="w-full h-full flex items-center justify-center">
-                              <svg className="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                                <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
-                              </svg>
-                            </div>
-                          )}
+                        <div className="w-12 h-12 bg-gray-100 border border-gray-200 rounded overflow-hidden flex-shrink-0 shadow-sm relative">
+                          <ImageWithFallback
+                            src={productImage}
+                            alt={product.name}
+                            width={48}
+                            height={48}
+                            className="w-full h-full object-contain"
+                            productCategory={product.categoryName}
+                          />
                         </div>
                         <div className="flex-1">
                           <p className="text-sm font-semibold text-gray-900 whitespace-normal">
@@ -217,7 +224,8 @@ export const SupabaseDropdownMenu = ({
                         </div>
                       </div>
                     </Link>
-                  ))}
+                    );
+                  })}
                 </div>
               ) : (
                 <p className="text-sm text-gray-500 text-center py-4">
