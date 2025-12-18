@@ -1,8 +1,15 @@
 import { createClient } from '@supabase/supabase-js';
 import { NextResponse, NextRequest } from 'next/server';
+import { verifyAdminRole, unauthorizedResponse } from '@/lib/auth/admin-guard';
 
-// Route temporaire pour créer l'admin - À SUPPRIMER après utilisation
+// Route pour créer un admin - SUPER_ADMIN ONLY
 export async function POST(request: NextRequest) {
+  // CRITICAL: Only super_admin can create new admin users
+  const authResult = await verifyAdminRole(request, ['super_admin']);
+  if (!authResult.authorized) {
+    return unauthorizedResponse(authResult);
+  }
+
   try {
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
     const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;

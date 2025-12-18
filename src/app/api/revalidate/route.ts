@@ -1,7 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { revalidatePath, revalidateTag } from 'next/cache';
+import { verifyAdminAuth, verifyCronSecret, unauthorizedResponse } from '@/lib/auth/admin-guard';
 
 export async function POST(request: NextRequest) {
+  // SECURITY: Verify admin authentication OR revalidation secret
+  const isCronJob = verifyCronSecret(request);
+  if (!isCronJob) {
+    const authResult = await verifyAdminAuth(request);
+    if (!authResult.authorized) {
+      return unauthorizedResponse(authResult);
+    }
+  }
+
   try {
     const body = await request.json();
     const { path, tag } = body;

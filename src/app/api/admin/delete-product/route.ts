@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
+import { verifyAdminRole, unauthorizedResponse } from '@/lib/auth/admin-guard';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
@@ -13,6 +14,12 @@ const supabase = createClient(supabaseUrl, supabaseServiceKey, {
 });
 
 export async function POST(request: NextRequest) {
+  // Verify admin authentication - only super_admin and admin can delete products
+  const authResult = await verifyAdminRole(request, ['super_admin', 'admin']);
+  if (!authResult.authorized) {
+    return unauthorizedResponse(authResult);
+  }
+
   try {
     const { productId, productName } = await request.json();
 

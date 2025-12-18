@@ -1,6 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { verifyAdminAuth, unauthorizedResponse } from '@/lib/auth/admin-guard';
 
 export async function GET(request: NextRequest) {
+  // Verify admin authentication
+  const authResult = await verifyAdminAuth(request);
+  if (!authResult.authorized) {
+    return unauthorizedResponse(authResult);
+  }
+
   try {
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
     const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;

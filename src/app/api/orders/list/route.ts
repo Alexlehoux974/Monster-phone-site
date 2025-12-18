@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient as createSupabaseClient } from '@supabase/supabase-js';
+import { cookies } from 'next/headers';
 
 export const dynamic = 'force-dynamic';
 
@@ -21,17 +22,72 @@ function getSupabaseAdmin() {
 }
 
 /**
+ * Get authenticated user from request
+ */
+async function getAuthenticatedUser(request: NextRequest) {
+  const supabase = getSupabaseAdmin();
+
+  // Try Authorization header first
+  const authHeader = request.headers.get('authorization');
+  let token = authHeader?.replace('Bearer ', '');
+
+  // Try cookies if no header
+  if (!token) {
+    const cookieStore = await cookies();
+    const supabaseCookie = cookieStore.get('sb-nswlznqoadjffpxkagoz-auth-token');
+    if (supabaseCookie) {
+      try {
+        const sessionData = JSON.parse(supabaseCookie.value);
+        token = sessionData?.access_token;
+      } catch {
+        // Cookie parsing failed
+      }
+    }
+  }
+
+  if (!token) {
+    return null;
+  }
+
+  const { data: { user }, error } = await supabase.auth.getUser(token);
+  if (error || !user) {
+    return null;
+  }
+
+  // Check if user is admin
+  const { data: adminUser } = await supabase
+    .from('admin_users')
+    .select('role')
+    .eq('email', user.email)
+    .eq('is_active', true)
+    .single();
+
+  return {
+    id: user.id,
+    email: user.email,
+    isAdmin: !!adminUser,
+  };
+}
+
+/**
  * API Route pour récupérer les commandes d'un utilisateur
- *
- * Query params:
- * - userId: ID de l'utilisateur (optionnel)
- * - email: Email du client (optionnel, prioritaire si fourni)
+ * SECURITY: User can only access their own orders unless admin
  */
 export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams;
-    const userId = searchParams.get('userId');
-    const email = searchParams.get('email');
+    const requestedUserId = searchParams.get('userId');
+    const requestedEmail = searchParams.get('email');
+
+    // SECURITY: Authenticate the user
+    const authenticatedUser = await getAuthenticatedUser(request);
+
+    if (!authenticatedUser) {
+      return NextResponse.json(
+        { error: 'Authentication required' },
+        { status: 401 }
+      );
+    }
 
     const supabase = getSupabaseAdmin();
 
@@ -52,29 +108,34 @@ export async function GET(request: NextRequest) {
       `)
       .order('created_at', { ascending: false });
 
-    // Si userId ET email sont fournis, récupérer les commandes par userId OU par email
-    if (userId && email) {
+    // SECURITY: Non-admin users can only see their own orders
+    if (!authenticatedUser.isAdmin) {
+      // User can only access orders matching their own userId or email
       const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
-      if (uuidRegex.test(userId)) {
-        // Récupérer les commandes où user_id = userId OU customer_email = email
-        query = query.or(`user_id.eq.${userId},customer_email.eq.${email}`);
-      } else {
-        // userId invalide, utiliser seulement l'email
-        query = query.eq('customer_email', email);
-      }
-    } else if (userId) {
-      // Seulement userId fourni
-      const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+      // Build filter for user's own orders only
+      query = query.or(`user_id.eq.${authenticatedUser.id},customer_email.eq.${authenticatedUser.email}`);
+    } else {
+      // Admin can filter by any userId or email
+      if (requestedUserId && requestedEmail) {
+        const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
-      if (uuidRegex.test(userId)) {
-        query = query.eq('user_id', userId);
+        if (uuidRegex.test(requestedUserId)) {
+          query = query.or(`user_id.eq.${requestedUserId},customer_email.eq.${requestedEmail}`);
+        } else {
+          query = query.eq('customer_email', requestedEmail);
+        }
+      } else if (requestedUserId) {
+        const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+        if (uuidRegex.test(requestedUserId)) {
+          query = query.eq('user_id', requestedUserId);
+        }
+      } else if (requestedEmail) {
+        query = query.eq('customer_email', requestedEmail);
       }
-    } else if (email) {
-      // Seulement email fourni
-      query = query.eq('customer_email', email);
+      // Admin without filters gets all orders
     }
-    // Sinon, retourner toutes les commandes (temporaire pour le développement)
 
     const { data: orders, error } = await query;
 

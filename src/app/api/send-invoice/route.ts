@@ -2,9 +2,19 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/client';
 import resend from '@/lib/email/resend';
 import { InvoiceEmail } from '@/lib/email/templates/invoice';
+import { verifyAdminAuth, verifyCronSecret, unauthorizedResponse } from '@/lib/auth/admin-guard';
 import * as React from 'react';
 
 export async function POST(request: NextRequest) {
+  // SECURITY: Verify admin authentication OR cron secret (for automated invoice sending)
+  const isCronJob = verifyCronSecret(request);
+  if (!isCronJob) {
+    const authResult = await verifyAdminAuth(request);
+    if (!authResult.authorized) {
+      return unauthorizedResponse(authResult);
+    }
+  }
+
   try {
     const { orderId } = await request.json();
 

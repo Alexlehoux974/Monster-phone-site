@@ -20,10 +20,9 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  // Allow Cloudflare tunnel and direct IP dev origins
+  // Allow Cloudflare tunnel for dev origins (IP removed for security)
   allowedDevOrigins: [
     'tomorrow-travelling-tap-round.trycloudflare.com',
-    '193.203.191.71',
   ],
   // Désactiver COMPLÈTEMENT le cache Next.js pour forcer les refreshes
   experimental: {

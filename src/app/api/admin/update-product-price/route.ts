@@ -1,7 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase/admin-client';
+import { verifyAdminRole, unauthorizedResponse } from '@/lib/auth/admin-guard';
 
 export async function POST(request: NextRequest) {
+  // Verify admin authentication - only super_admin and admin can update prices
+  const authResult = await verifyAdminRole(request, ['super_admin', 'admin']);
+  if (!authResult.authorized) {
+    return unauthorizedResponse(authResult);
+  }
+
   try {
     const body = await request.json();
     const { productId, price } = body;

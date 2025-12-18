@@ -2,9 +2,19 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/client';
 import resend from '@/lib/email/resend';
 import { AbandonedCartEmail } from '@/lib/email/templates/abandoned-cart';
+import { verifyAdminAuth, verifyCronSecret, unauthorizedResponse } from '@/lib/auth/admin-guard';
 import * as React from 'react';
 
 export async function POST(request: NextRequest) {
+  // SECURITY: Verify admin authentication OR cron secret
+  const isCronJob = verifyCronSecret(request);
+  if (!isCronJob) {
+    const authResult = await verifyAdminAuth(request);
+    if (!authResult.authorized) {
+      return unauthorizedResponse(authResult);
+    }
+  }
+
   try {
     const { cartId } = await request.json();
 
@@ -107,6 +117,14 @@ export async function POST(request: NextRequest) {
 
 // Route pour envoyer les relances automatiquement (CRON)
 export async function GET(request: NextRequest) {
+  // SECURITY: Verify cron secret for automated tasks
+  if (!verifyCronSecret(request)) {
+    return NextResponse.json(
+      { error: 'Unauthorized - Invalid cron secret' },
+      { status: 401 }
+    );
+  }
+
   try {
     const supabase = createClient();
     const now = new Date();

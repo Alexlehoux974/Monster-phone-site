@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
+import { cookies } from 'next/headers';
 import Stripe from 'stripe';
 
 export const dynamic = 'force-dynamic';
@@ -18,6 +19,54 @@ function getSupabase() {
   );
 }
 
+/**
+ * Get authenticated user from request
+ */
+async function getAuthenticatedUser(request: NextRequest) {
+  const supabase = getSupabase();
+
+  // Try Authorization header first
+  const authHeader = request.headers.get('authorization');
+  let token = authHeader?.replace('Bearer ', '');
+
+  // Try cookies if no header
+  if (!token) {
+    const cookieStore = await cookies();
+    const supabaseCookie = cookieStore.get('sb-nswlznqoadjffpxkagoz-auth-token');
+    if (supabaseCookie) {
+      try {
+        const sessionData = JSON.parse(supabaseCookie.value);
+        token = sessionData?.access_token;
+      } catch {
+        // Cookie parsing failed
+      }
+    }
+  }
+
+  if (!token) {
+    return null;
+  }
+
+  const { data: { user }, error } = await supabase.auth.getUser(token);
+  if (error || !user) {
+    return null;
+  }
+
+  // Check if user is admin
+  const { data: adminUser } = await supabase
+    .from('admin_users')
+    .select('role')
+    .eq('email', user.email)
+    .eq('is_active', true)
+    .single();
+
+  return {
+    id: user.id,
+    email: user.email,
+    isAdmin: !!adminUser,
+  };
+}
+
 export async function GET(request: NextRequest) {
   try {
     const stripe = getStripe();
@@ -32,12 +81,31 @@ export async function GET(request: NextRequest) {
       );
     }
 
+    // SECURITY: Authenticate user
+    const authenticatedUser = await getAuthenticatedUser(request);
+
     // Récupérer la commande
     const { data: order, error: orderError } = await supabase
       .from('orders')
       .select('*')
       .eq('stripe_session_id', sessionId)
       .single();
+
+    // SECURITY: Verify ownership or admin status
+    if (order && authenticatedUser) {
+      const isOwner = order.user_id === authenticatedUser.id ||
+                      order.customer_email === authenticatedUser.email;
+      if (!isOwner && !authenticatedUser.isAdmin) {
+        return NextResponse.json(
+          { error: 'Access denied' },
+          { status: 403 }
+        );
+      }
+    } else if (order && !authenticatedUser) {
+      // For unauthenticated access (e.g., order confirmation page right after checkout),
+      // we allow access only if the session_id matches - this is a one-time use token from Stripe
+      // This is acceptable because stripe_session_id is only known by the person who placed the order
+    }
 
     if (orderError || !order) {
       console.error('Commande non trouvée dans Supabase, récupération depuis Stripe...');

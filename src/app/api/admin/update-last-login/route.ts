@@ -1,7 +1,14 @@
 import { createClient } from '@supabase/supabase-js';
 import { NextRequest, NextResponse } from 'next/server';
+import { verifyAdminAuth, unauthorizedResponse } from '@/lib/auth/admin-guard';
 
 export async function POST(request: NextRequest) {
+  // Verify admin authentication
+  const authResult = await verifyAdminAuth(request);
+  if (!authResult.authorized) {
+    return unauthorizedResponse(authResult);
+  }
+
   try {
     const { email } = await request.json();
 

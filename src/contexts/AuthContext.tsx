@@ -180,8 +180,29 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       throw new Error('Tous les champs sont requis');
     }
 
-    if (password.length < 6) {
-      throw new Error('Le mot de passe doit contenir au moins 6 caractères');
+    // SECURITY: Enforce strong password policy
+    if (password.length < 12) {
+      throw new Error('Le mot de passe doit contenir au moins 12 caractères');
+    }
+
+    // Check for at least one uppercase letter
+    if (!/[A-Z]/.test(password)) {
+      throw new Error('Le mot de passe doit contenir au moins une majuscule');
+    }
+
+    // Check for at least one lowercase letter
+    if (!/[a-z]/.test(password)) {
+      throw new Error('Le mot de passe doit contenir au moins une minuscule');
+    }
+
+    // Check for at least one number
+    if (!/[0-9]/.test(password)) {
+      throw new Error('Le mot de passe doit contenir au moins un chiffre');
+    }
+
+    // Check for at least one special character
+    if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)) {
+      throw new Error('Le mot de passe doit contenir au moins un caractère spécial (!@#$%^&*...)');
     }
 
     // Vérifier si l'email est valide

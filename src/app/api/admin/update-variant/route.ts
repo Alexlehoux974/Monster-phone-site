@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
+import { verifyAdminAuth, unauthorizedResponse } from '@/lib/auth/admin-guard';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
@@ -12,6 +13,12 @@ const supabase = createClient(supabaseUrl, supabaseServiceKey, {
 });
 
 export async function POST(request: NextRequest) {
+  // Verify admin authentication
+  const authResult = await verifyAdminAuth(request);
+  if (!authResult.authorized) {
+    return unauthorizedResponse(authResult);
+  }
+
   try {
     const { variantId, data } = await request.json();
 

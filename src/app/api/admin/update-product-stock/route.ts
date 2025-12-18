@@ -1,7 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase/admin-client';
+import { verifyAdminAuth, unauthorizedResponse } from '@/lib/auth/admin-guard';
 
 export async function POST(request: NextRequest) {
+  // Verify admin authentication
+  const authResult = await verifyAdminAuth(request);
+  if (!authResult.authorized) {
+    return unauthorizedResponse(authResult);
+  }
+
   try {
     const body = await request.json();
     const { productId, stock } = body;
