@@ -262,6 +262,7 @@ export async function getAdminSession() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${session.access_token}`,
       },
       body: JSON.stringify({ email: session.user.email }),
       signal: controller.signal,
