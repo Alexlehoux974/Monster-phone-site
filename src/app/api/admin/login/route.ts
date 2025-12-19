@@ -142,10 +142,12 @@ export async function POST(request: NextRequest) {
       }
     });
 
-    // Set HTTP-only cookie for middleware authentication
-    // Cookie expires when the token expires
+    // Set HTTP cookie for middleware authentication
+    // Use base64 encoding to handle special characters in JSON
     const cookieMaxAge = authData.expires_in || 3600;
-    response.cookies.set('sb-nswlznqoadjffpxkagoz-auth-token', JSON.stringify(sessionData), {
+    const cookieValue = Buffer.from(JSON.stringify(sessionData)).toString('base64');
+
+    response.cookies.set('sb-nswlznqoadjffpxkagoz-auth-token', cookieValue, {
       httpOnly: false, // Allow client-side access for logout
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
@@ -153,7 +155,7 @@ export async function POST(request: NextRequest) {
       maxAge: cookieMaxAge,
     });
 
-    console.log('🍪 [LOGIN API] Auth cookie set, expires in:', cookieMaxAge, 'seconds');
+    console.log('🍪 [LOGIN API] Auth cookie set (base64 encoded), expires in:', cookieMaxAge, 'seconds');
 
     return response;
   } catch (error) {

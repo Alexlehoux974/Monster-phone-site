@@ -40,8 +40,16 @@ export async function middleware(request: NextRequest) {
     }
 
     try {
-      // Parse the cookie to get the access token
-      const sessionData = JSON.parse(authCookie.value);
+      // Parse the cookie to get the access token (base64 encoded)
+      let sessionData;
+      try {
+        // Try base64 decode first (new format)
+        const decoded = Buffer.from(authCookie.value, 'base64').toString('utf-8');
+        sessionData = JSON.parse(decoded);
+      } catch {
+        // Fallback to direct JSON parse (old format)
+        sessionData = JSON.parse(authCookie.value);
+      }
       const accessToken = sessionData?.access_token;
 
       if (!accessToken) {
