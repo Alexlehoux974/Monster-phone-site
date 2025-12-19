@@ -151,6 +151,22 @@ export async function signInAdmin(email: string, password: string) {
 export async function signOutAdmin() {
   try {
     console.log('🚪 [signOutAdmin] Signing out...');
+
+    // Call logout API to clear the HTTP cookie
+    try {
+      await fetch('/api/admin/logout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      console.log('✅ [signOutAdmin] Logout API called, cookie cleared');
+    } catch (apiError) {
+      console.warn('⚠️ [signOutAdmin] Logout API failed:', apiError);
+      // Continue with localStorage cleanup even if API fails
+    }
+
+    // Also clear localStorage
     const storageKey = 'sb-nswlznqoadjffpxkagoz-auth-token';
     localStorage.removeItem(storageKey);
     console.log('✅ [signOutAdmin] Session removed from localStorage');

@@ -120,17 +120,20 @@ export async function POST(request: NextRequest) {
 
     console.log('✅ [LOGIN API] Login complete');
 
-    // Return session data that client can store
-    return NextResponse.json({
+    // Prepare session data
+    const sessionData = {
+      access_token: authData.access_token,
+      refresh_token: authData.refresh_token,
+      expires_at: expiresAt,
+      expires_in: authData.expires_in,
+      token_type: authData.token_type,
+      user: authData.user
+    };
+
+    // Create response with session data
+    const response = NextResponse.json({
       success: true,
-      session: {
-        access_token: authData.access_token,
-        refresh_token: authData.refresh_token,
-        expires_at: expiresAt, // Use calculated expires_at
-        expires_in: authData.expires_in,
-        token_type: authData.token_type,
-        user: authData.user
-      },
+      session: sessionData,
       user: authData.user,
       admin: {
         id: admin.id,
@@ -138,6 +141,21 @@ export async function POST(request: NextRequest) {
         role: admin.role
       }
     });
+
+    // Set HTTP-only cookie for middleware authentication
+    // Cookie expires when the token expires
+    const cookieMaxAge = authData.expires_in || 3600;
+    response.cookies.set('sb-nswlznqoadjffpxkagoz-auth-token', JSON.stringify(sessionData), {
+      httpOnly: false, // Allow client-side access for logout
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      path: '/',
+      maxAge: cookieMaxAge,
+    });
+
+    console.log('🍪 [LOGIN API] Auth cookie set, expires in:', cookieMaxAge, 'seconds');
+
+    return response;
   } catch (error) {
     console.error('❌ [LOGIN API] Error during login:', error);
     return NextResponse.json(
