@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { createClient } from '@/lib/supabase/server';
+import { checkRateLimit, RATE_LIMIT_CONFIGS, getClientIP } from '@/lib/rate-limit';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
@@ -23,18 +24,28 @@ function getStripe() {
 
 export async function POST(request: NextRequest) {
   try {
+    // Rate limiting: 10 checkouts par IP par heure
+    const clientIP = getClientIP(request);
+    const rateLimitResult = checkRateLimit(clientIP, 'checkout', RATE_LIMIT_CONFIGS.checkout);
+
+    if (!rateLimitResult.allowed) {
+      return NextResponse.json(
+        { error: 'Trop de tentatives. Veuillez patienter quelques minutes.' },
+        {
+          status: 429,
+          headers: {
+            'Retry-After': String(rateLimitResult.retryAfter),
+          }
+        }
+      );
+    }
+
     const stripe = getStripe();
     const body = await request.json();
     const { items, customerInfo, userId, shippingCost, shippingMethod } = body;
 
-    // 🔍 DEBUG: Log userId reçu par l'API
-    console.log('🔍 [API create-checkout-session]', {
-      receivedUserId: userId,
-      userIdType: typeof userId,
-      hasCustomerInfo: !!customerInfo,
-      customerEmail: customerInfo?.email,
-      timestamp: new Date().toISOString()
-    });
+    // Log minimal sans PII (sécurité/RGPD)
+    console.log('🔍 [API create-checkout-session] items:', items?.length || 0);
 
     if (!items || items.length === 0) {
       return NextResponse.json(
@@ -207,12 +218,8 @@ export async function POST(request: NextRequest) {
       shipping_method: shippingMethod || 'standard',
     };
 
-    console.log('🔍 [API avant envoi Stripe]', {
-      userId: userId,
-      userIdInMetadata: metadataToSend.user_id,
-      metadataKeys: Object.keys(metadataToSend),
-      timestamp: new Date().toISOString()
-    });
+    // Log minimal (sécurité)
+    console.log('🔍 [API checkout] Creating Stripe session...');
 
     // Créer la session Stripe Checkout
     const session = await stripe.checkout.sessions.create({
@@ -237,17 +244,13 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ sessionId: session.id, url: session.url });
   } catch (error: any) {
-    console.error('❌ Erreur création session Stripe:', error);
-    console.error('Type:', error.type);
-    console.error('Code:', error.code);
-    console.error('Stack:', error.stack);
+    // Log erreur sans stack trace exposé au client
+    console.error('❌ Erreur création session Stripe:', error.message);
 
+    // Réponse générique au client (ne pas exposer les détails internes)
     return NextResponse.json(
       {
-        error: error.message || 'Erreur lors de la création de la session de paiement',
-        type: error.type,
-        code: error.code,
-        raw: error.raw?.message
+        error: 'Erreur lors de la création de la session de paiement. Veuillez réessayer.',
       },
       { status: 500 }
     );

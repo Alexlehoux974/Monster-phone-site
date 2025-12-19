@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
 
     // Delete the auth cookie by setting it with maxAge 0
     response.cookies.set('sb-nswlznqoadjffpxkagoz-auth-token', '', {
-      httpOnly: false,
+      httpOnly: true, // Doit correspondre au cookie de login
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
       path: '/',

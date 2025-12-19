@@ -1,7 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { checkRateLimit, RATE_LIMIT_CONFIGS, getClientIP } from '@/lib/rate-limit';
 
 export async function POST(request: NextRequest) {
   try {
+    // Rate limiting: 5 tentatives par IP par 15 minutes
+    const clientIP = getClientIP(request);
+    const rateLimitResult = checkRateLimit(clientIP, 'admin-login', RATE_LIMIT_CONFIGS.login);
+
+    if (!rateLimitResult.allowed) {
+      return NextResponse.json(
+        { error: `Trop de tentatives de connexion. Réessayez dans ${rateLimitResult.retryAfter} secondes.` },
+        {
+          status: 429,
+          headers: {
+            'Retry-After': String(rateLimitResult.retryAfter),
+            'X-RateLimit-Remaining': '0',
+          }
+        }
+      );
+    }
+
     const { email, password } = await request.json();
 
     if (!email || !password) {
@@ -23,7 +41,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    console.log('🔐 [LOGIN API] Attempting login for:', email);
+    console.log('🔐 [LOGIN API] Login attempt...');
 
     // Step 1: Verify admin status via REST API (bypasses RLS with service role key)
     console.log('📡 [LOGIN API] Verifying admin status...');
@@ -57,7 +75,7 @@ export async function POST(request: NextRequest) {
     }
 
     const admin = adminData[0];
-    console.log('✅ [LOGIN API] Admin verified:', admin.email);
+    console.log('✅ [LOGIN API] Admin verified');
 
     // Step 2: Sign in with Supabase Auth API using REST
     console.log('🔑 [LOGIN API] Calling Supabase Auth API...');
@@ -148,7 +166,7 @@ export async function POST(request: NextRequest) {
     const cookieValue = Buffer.from(JSON.stringify(sessionData)).toString('base64');
 
     response.cookies.set('sb-nswlznqoadjffpxkagoz-auth-token', cookieValue, {
-      httpOnly: false, // Allow client-side access for logout
+      httpOnly: true, // Sécurisé: empêche l'accès JavaScript (protection XSS)
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
       path: '/',

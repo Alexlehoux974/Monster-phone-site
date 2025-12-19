@@ -1,13 +1,81 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
+import { checkRateLimit, RATE_LIMIT_CONFIGS, getClientIP } from '@/lib/rate-limit';
+
+// Validation de mot de passe sécurisée
+function validatePassword(password: string): { valid: boolean; error?: string } {
+  if (!password) {
+    return { valid: false, error: 'Mot de passe requis' };
+  }
+  if (password.length < 8) {
+    return { valid: false, error: 'Le mot de passe doit contenir au moins 8 caractères' };
+  }
+  if (!/[A-Z]/.test(password)) {
+    return { valid: false, error: 'Le mot de passe doit contenir au moins une majuscule' };
+  }
+  if (!/[a-z]/.test(password)) {
+    return { valid: false, error: 'Le mot de passe doit contenir au moins une minuscule' };
+  }
+  if (!/[0-9]/.test(password)) {
+    return { valid: false, error: 'Le mot de passe doit contenir au moins un chiffre' };
+  }
+  return { valid: true };
+}
+
+// Validation d'email basique
+function validateEmail(email: string): boolean {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
 
 export async function POST(request: NextRequest) {
   try {
+    // Rate limiting: 3 inscriptions par IP par heure
+    const clientIP = getClientIP(request);
+    const rateLimitResult = checkRateLimit(clientIP, 'signup', RATE_LIMIT_CONFIGS.signup);
+
+    if (!rateLimitResult.allowed) {
+      return NextResponse.json(
+        { error: `Trop de tentatives d'inscription. Réessayez dans ${Math.ceil((rateLimitResult.retryAfter || 60) / 60)} minutes.` },
+        {
+          status: 429,
+          headers: {
+            'Retry-After': String(rateLimitResult.retryAfter),
+          }
+        }
+      );
+    }
+
     const { email, password, name, phone, address } = await request.json();
 
     if (!email || !password || !name) {
       return NextResponse.json(
         { error: 'Email, mot de passe et nom requis' },
+        { status: 400 }
+      );
+    }
+
+    // Validation de l'email
+    if (!validateEmail(email)) {
+      return NextResponse.json(
+        { error: 'Format d\'email invalide' },
+        { status: 400 }
+      );
+    }
+
+    // Validation renforcée du mot de passe
+    const passwordValidation = validatePassword(password);
+    if (!passwordValidation.valid) {
+      return NextResponse.json(
+        { error: passwordValidation.error },
+        { status: 400 }
+      );
+    }
+
+    // Validation du nom (longueur raisonnable, pas de caractères dangereux)
+    if (name.length < 2 || name.length > 100) {
+      return NextResponse.json(
+        { error: 'Le nom doit contenir entre 2 et 100 caractères' },
         { status: 400 }
       );
     }
@@ -31,7 +99,7 @@ export async function POST(request: NextRequest) {
       }
     });
 
-    console.log('🔐 [SIGNUP API] Creating user:', email);
+    console.log('🔐 [SIGNUP API] Creating user...');
 
     // Créer l'utilisateur avec email auto-confirmé
     const { data: userData, error: createError } = await supabaseAdmin.auth.admin.createUser({
@@ -68,7 +136,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    console.log('✅ [SIGNUP API] User created:', userData.user.id);
+    console.log('✅ [SIGNUP API] User created');
 
     // Créer le profil dans la table profiles
     const profileData: any = {

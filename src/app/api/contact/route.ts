@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import { checkRateLimit, RATE_LIMIT_CONFIGS, getClientIP } from '@/lib/rate-limit';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -21,6 +22,22 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export async function POST(request: Request) {
   try {
+    // Rate limiting: 5 messages par IP par heure
+    const clientIP = getClientIP(request);
+    const rateLimitResult = checkRateLimit(clientIP, 'contact', RATE_LIMIT_CONFIGS.contact);
+
+    if (!rateLimitResult.allowed) {
+      return NextResponse.json(
+        { error: `Trop de messages envoyés. Réessayez dans ${Math.ceil((rateLimitResult.retryAfter || 60) / 60)} minutes.` },
+        {
+          status: 429,
+          headers: {
+            'Retry-After': String(rateLimitResult.retryAfter),
+          }
+        }
+      );
+    }
+
     const body = await request.json();
     const { name, email, phone, subject, message } = body;
 

@@ -2,20 +2,35 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { cookies } from 'next/headers';
 
+// Validation de mot de passe sécurisée
+function validatePassword(password: string): { valid: boolean; error?: string } {
+  if (!password) {
+    return { valid: false, error: 'Mot de passe requis' };
+  }
+  if (password.length < 8) {
+    return { valid: false, error: 'Le mot de passe doit contenir au moins 8 caractères' };
+  }
+  if (!/[A-Z]/.test(password)) {
+    return { valid: false, error: 'Le mot de passe doit contenir au moins une majuscule' };
+  }
+  if (!/[a-z]/.test(password)) {
+    return { valid: false, error: 'Le mot de passe doit contenir au moins une minuscule' };
+  }
+  if (!/[0-9]/.test(password)) {
+    return { valid: false, error: 'Le mot de passe doit contenir au moins un chiffre' };
+  }
+  return { valid: true };
+}
+
 export async function POST(request: NextRequest) {
   try {
     const { password } = await request.json();
 
-    if (!password) {
+    // Validation renforcée du mot de passe
+    const passwordValidation = validatePassword(password);
+    if (!passwordValidation.valid) {
       return NextResponse.json(
-        { error: 'Mot de passe requis' },
-        { status: 400 }
-      );
-    }
-
-    if (password.length < 6) {
-      return NextResponse.json(
-        { error: 'Le mot de passe doit contenir au moins 6 caractères' },
+        { error: passwordValidation.error },
         { status: 400 }
       );
     }
