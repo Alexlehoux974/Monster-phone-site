@@ -37,6 +37,7 @@ async function supabaseRest<T>(
 
   const response = await fetch(url, {
     ...options,
+    cache: 'no-store',
     headers: {
       'apikey': apiKey,
       'Authorization': `Bearer ${apiKey}`,

@@ -10,6 +10,12 @@ import FlashDeals from '@/components/FlashDeals';
 import ProductCollectionsSupabase from '@/components/ProductCollectionsSupabase';
 import Footer from '@/components/Footer';
 import type { Metadata } from 'next';
+
+// Forcer le rendu dynamique pour que les modifications admin soient visibles immédiatement
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+export const fetchCache = 'force-no-store';
+
 import { getProductsByCategoryId } from '@/lib/supabase/api-rest';
 import { supabaseProductToLegacy } from '@/lib/supabase/adapters';
 import { sortProductsByPriority } from '@/lib/utils';
