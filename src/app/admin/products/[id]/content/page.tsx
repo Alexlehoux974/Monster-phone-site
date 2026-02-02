@@ -11,6 +11,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { toast } from 'sonner';
 import { ArrowLeft, Plus, Save, Trash2, Eye, EyeOff, GripVertical, Copy, X } from 'lucide-react';
 import LoadingSpinner from '@/components/admin/LoadingSpinner';
+import { cn } from '@/lib/utils';
 
 // Interface EXACTE correspondant à ProductContentCards.tsx
 interface ProductContentSection {
@@ -44,6 +45,40 @@ interface Product {
   name: string;
   brand: string;
 }
+
+// Composant RadioOption avec zone cliquable étendue
+const RadioOption = ({ value, label, currentValue }: {
+  value: string;
+  label: string;
+  currentValue: string;
+}) => {
+  const emoji = label.split(' ')[0];
+  const text = label.slice(emoji.length + 1);
+  const isSelected = currentValue === value;
+
+  return (
+    <label
+      htmlFor={`type_${value}`}
+      className={cn(
+        "flex items-center gap-3 px-4 py-3 rounded-lg border-2 cursor-pointer transition-all",
+        "hover:border-red-400 hover:bg-red-50",
+        isSelected
+          ? "border-red-600 bg-red-50 shadow-sm"
+          : "border-gray-200 bg-white"
+      )}
+    >
+      <RadioGroupItem value={value} id={`type_${value}`} className="sr-only" />
+      <div className={cn(
+        "w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0",
+        isSelected ? "border-red-600" : "border-gray-300"
+      )}>
+        {isSelected && <div className="w-2 h-2 rounded-full bg-red-600" />}
+      </div>
+      <span className="text-xl shrink-0">{emoji}</span>
+      <span className="flex-1 text-sm">{text}</span>
+    </label>
+  );
+};
 
 export default function ProductContentManagement() {
   const params = useParams();
@@ -644,7 +679,7 @@ export default function ProductContentManagement() {
             <div className="space-y-6">
               {/* Section Type */}
               <div>
-                <Label htmlFor="section_type">Type de section (EXACT selon ProductContentCards.tsx)</Label>
+                <Label className="text-base font-semibold mb-3 block">Type de section</Label>
                 <RadioGroup
                   value={editingSection.section_type}
                   onValueChange={(value) =>
@@ -653,31 +688,14 @@ export default function ProductContentManagement() {
                       section_type: value as ProductContentSection['section_type'],
                     })
                   }
+                  className="grid grid-cols-1 md:grid-cols-2 gap-3"
                 >
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="image_gallery" id="type_image_gallery" />
-                    <Label htmlFor="type_image_gallery">{sectionTypeLabels['image_gallery']}</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="description_card" id="type_description_card" />
-                    <Label htmlFor="type_description_card">{sectionTypeLabels['description_card']}</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="specs_grid" id="type_specs_grid" />
-                    <Label htmlFor="type_specs_grid">{sectionTypeLabels['specs_grid']}</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="features_list" id="type_features_list" />
-                    <Label htmlFor="type_features_list">{sectionTypeLabels['features_list']}</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="engagement_card" id="type_engagement_card" />
-                    <Label htmlFor="type_engagement_card">{sectionTypeLabels['engagement_card']}</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="custom" id="type_custom" />
-                    <Label htmlFor="type_custom">{sectionTypeLabels['custom']}</Label>
-                  </div>
+                  <RadioOption value="image_gallery" label={sectionTypeLabels['image_gallery']} currentValue={editingSection.section_type} />
+                  <RadioOption value="description_card" label={sectionTypeLabels['description_card']} currentValue={editingSection.section_type} />
+                  <RadioOption value="specs_grid" label={sectionTypeLabels['specs_grid']} currentValue={editingSection.section_type} />
+                  <RadioOption value="features_list" label={sectionTypeLabels['features_list']} currentValue={editingSection.section_type} />
+                  <RadioOption value="engagement_card" label={sectionTypeLabels['engagement_card']} currentValue={editingSection.section_type} />
+                  <RadioOption value="custom" label={sectionTypeLabels['custom']} currentValue={editingSection.section_type} />
                 </RadioGroup>
               </div>
 
@@ -757,7 +775,7 @@ export default function ProductContentManagement() {
                 <div className="border-t pt-6">
                   <div className="flex items-center justify-between mb-4">
                     <Label>Specs (pour grille 4 colonnes)</Label>
-                    <Button onClick={handleAddSpec} variant="outline" size="sm">
+                    <Button type="button" onClick={handleAddSpec} variant="outline" size="sm">
                       <Plus className="h-4 w-4 mr-2" />
                       Ajouter une spec
                     </Button>
@@ -809,7 +827,7 @@ export default function ProductContentManagement() {
                 <div className="border-t pt-6">
                   <div className="flex items-center justify-between mb-4">
                     <Label>Points forts (pour liste avec CheckCircle2)</Label>
-                    <Button onClick={handleAddFeature} variant="outline" size="sm">
+                    <Button type="button" onClick={handleAddFeature} variant="outline" size="sm">
                       <Plus className="h-4 w-4 mr-2" />
                       Ajouter un point fort
                     </Button>
