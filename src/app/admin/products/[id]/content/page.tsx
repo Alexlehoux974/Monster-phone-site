@@ -151,12 +151,25 @@ export default function ProductContentManagement() {
   // Revalidate cache after content changes
   const revalidateCache = async () => {
     try {
-      await fetch('/api/revalidate', {
+      // Récupérer le token d'auth stocké dans localStorage
+      const sessionData = localStorage.getItem('admin_session');
+      const token = sessionData ? JSON.parse(sessionData).access_token : null;
+
+      const response = await fetch('/api/revalidate', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          ...(token && { 'Authorization': `Bearer ${token}` }),
+        },
+        credentials: 'include', // Envoyer les cookies aussi
         body: JSON.stringify({ tag: 'products' }),
       });
-      console.log('✅ [CONTENT] Cache revalidated');
+
+      if (!response.ok) {
+        console.error('⚠️ [CONTENT] Revalidation failed:', response.status);
+      } else {
+        console.log('✅ [CONTENT] Cache revalidated');
+      }
     } catch (error) {
       console.error('⚠️ [CONTENT] Revalidation error (non-blocking):', error);
     }

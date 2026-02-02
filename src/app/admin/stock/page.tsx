@@ -439,18 +439,29 @@ export default function StockManagementPage() {
       // Revalidate the main site to update stock display
       console.log('🔄 [SAVE STOCK] Revalidating site cache...');
       try {
-        await fetch('/api/revalidate', {
+        // Récupérer le token d'auth stocké dans localStorage
+        const sessionData = localStorage.getItem('admin_session');
+        const token = sessionData ? JSON.parse(sessionData).access_token : null;
+
+        const revalidateResponse = await fetch('/api/revalidate', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            ...(token && { 'Authorization': `Bearer ${token}` }),
           },
+          credentials: 'include',
           body: JSON.stringify({
             path: `/produit/${row.sku}`,
             tag: 'products'
           }),
         });
-        console.log('✅ [SAVE STOCK] Site cache revalidated');
-        } catch (revalidateError) {
+
+        if (!revalidateResponse.ok) {
+          console.error('⚠️ [SAVE STOCK] Revalidation failed:', revalidateResponse.status);
+        } else {
+          console.log('✅ [SAVE STOCK] Site cache revalidated');
+        }
+      } catch (revalidateError) {
         console.error('⚠️ [SAVE STOCK] Revalidation error (non-blocking):', revalidateError);
       }
 
