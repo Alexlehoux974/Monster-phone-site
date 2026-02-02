@@ -440,8 +440,15 @@ export default function StockManagementPage() {
       console.log('🔄 [SAVE STOCK] Revalidating site cache...');
       try {
         // Récupérer le token d'auth stocké dans localStorage
-        const sessionData = localStorage.getItem('admin_session');
-        const token = sessionData ? JSON.parse(sessionData).access_token : null;
+        let token: string | null = null;
+        try {
+          const sessionData = localStorage.getItem('admin_session');
+          if (sessionData) {
+            token = JSON.parse(sessionData).access_token || null;
+          }
+        } catch {
+          // Ignore parsing errors
+        }
 
         const revalidateResponse = await fetch('/api/revalidate', {
           method: 'POST',

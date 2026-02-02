@@ -152,8 +152,15 @@ export default function ProductContentManagement() {
   const revalidateCache = async () => {
     try {
       // Récupérer le token d'auth stocké dans localStorage
-      const sessionData = localStorage.getItem('admin_session');
-      const token = sessionData ? JSON.parse(sessionData).access_token : null;
+      let token: string | null = null;
+      try {
+        const sessionData = localStorage.getItem('admin_session');
+        if (sessionData) {
+          token = JSON.parse(sessionData).access_token || null;
+        }
+      } catch {
+        // Ignore parsing errors
+      }
 
       const response = await fetch('/api/revalidate', {
         method: 'POST',
