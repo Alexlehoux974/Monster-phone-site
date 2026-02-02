@@ -151,10 +151,10 @@ export default function ProductContentManagement() {
   // Revalidate cache after content changes
   const revalidateCache = async () => {
     try {
-      // Récupérer le token d'auth stocké dans localStorage
+      // Récupérer le token d'auth stocké dans localStorage (même clé que le système d'auth)
       let token: string | null = null;
       try {
-        const sessionData = localStorage.getItem('admin_session');
+        const sessionData = localStorage.getItem('sb-nswlznqoadjffpxkagoz-auth-token');
         if (sessionData) {
           token = JSON.parse(sessionData).access_token || null;
         }
@@ -168,7 +168,7 @@ export default function ProductContentManagement() {
           'Content-Type': 'application/json',
           ...(token && { 'Authorization': `Bearer ${token}` }),
         },
-        credentials: 'include', // Envoyer les cookies aussi
+        credentials: 'include',
         body: JSON.stringify({ tag: 'products' }),
       });
 

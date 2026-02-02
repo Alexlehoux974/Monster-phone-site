@@ -439,10 +439,10 @@ export default function StockManagementPage() {
       // Revalidate the main site to update stock display
       console.log('🔄 [SAVE STOCK] Revalidating site cache...');
       try {
-        // Récupérer le token d'auth stocké dans localStorage
+        // Récupérer le token d'auth stocké dans localStorage (même clé que le système d'auth)
         let token: string | null = null;
         try {
-          const sessionData = localStorage.getItem('admin_session');
+          const sessionData = localStorage.getItem('sb-nswlznqoadjffpxkagoz-auth-token');
           if (sessionData) {
             token = JSON.parse(sessionData).access_token || null;
           }
