@@ -606,7 +606,11 @@ export default function ProductContentManagement() {
               sections.map((section: any) => (
                 <div
                   key={section.id}
-                  className="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow"
+                  className="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow cursor-pointer border-2 border-transparent hover:border-red-200"
+                  onClick={() => {
+                    setEditingSection(section);
+                    setIsNewSection(false);
+                  }}
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex items-start gap-4 flex-1">
@@ -631,7 +635,7 @@ export default function ProductContentManagement() {
                         </p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
                       <Button
                         variant="ghost"
                         size="sm"
