@@ -436,10 +436,9 @@ export default function StockManagementPage() {
         );
       }
 
-      // Revalidate the main site to update stock display
-      console.log('🔄 [SAVE STOCK] Revalidating site cache...');
-      try {
-        // Récupérer le token d'auth stocké dans localStorage (même clé que le système d'auth)
+      // Revalidate the main site to update stock display (non-blocking to avoid Router Cache issues)
+      console.log('🔄 [SAVE STOCK] Revalidating site cache (non-blocking)...');
+      {
         let token: string | null = null;
         try {
           const sessionData = localStorage.getItem('sb-nswlznqoadjffpxkagoz-auth-token');
@@ -450,7 +449,7 @@ export default function StockManagementPage() {
           // Ignore parsing errors
         }
 
-        const revalidateResponse = await fetch('/api/revalidate', {
+        fetch('/api/revalidate', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -461,15 +460,12 @@ export default function StockManagementPage() {
             path: `/produit/${row.sku}`,
             tag: 'products'
           }),
+        }).then(r => {
+          if (!r.ok) console.error('⚠️ [SAVE STOCK] Revalidation failed:', r.status);
+          else console.log('✅ [SAVE STOCK] Site cache revalidated');
+        }).catch(e => {
+          console.error('⚠️ [SAVE STOCK] Revalidation error (non-blocking):', e);
         });
-
-        if (!revalidateResponse.ok) {
-          console.error('⚠️ [SAVE STOCK] Revalidation failed:', revalidateResponse.status);
-        } else {
-          console.log('✅ [SAVE STOCK] Site cache revalidated');
-        }
-      } catch (revalidateError) {
-        console.error('⚠️ [SAVE STOCK] Revalidation error (non-blocking):', revalidateError);
       }
 
       console.log('🎉 [SAVE STOCK] All operations completed successfully');

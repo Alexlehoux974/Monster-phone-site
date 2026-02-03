@@ -26,8 +26,10 @@ export async function POST(request: NextRequest) {
       revalidateTag(tag);
       }
 
-    // Always revalidate the main products page
-    revalidatePath('/');
+    // Revalidate the products listing page
+    // NOTE: Do NOT revalidate '/' - it purges the entire Next.js Router Cache,
+    // which causes admin layout to remount and freeze navigation.
+    // The homepage is covered by revalidateTag('products') below.
     revalidatePath('/produits');
 
     // Revalidate all product detail pages

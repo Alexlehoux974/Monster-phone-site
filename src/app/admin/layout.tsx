@@ -2,13 +2,12 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { getAdminSession, signOutAdmin } from '@/lib/supabase/admin';
 import type { AdminUser } from '@/lib/supabase/admin';
 import {
   LayoutDashboard,
   Package,
-  DollarSign,
   Tag,
   Megaphone,
   LogOut,
@@ -31,6 +30,25 @@ const navigation: NavItem[] = [
   { name: 'Bannières', href: '/admin/banners', icon: Megaphone },
 ];
 
+// Helper to safely read from sessionStorage
+function getCachedAdmin(): AdminUser | null {
+  try {
+    const cached = sessionStorage.getItem('admin-user-data');
+    return cached ? JSON.parse(cached) : null;
+  } catch {
+    return null;
+  }
+}
+
+// Helper to check if auth was already verified in this browser session
+function wasAuthChecked(): boolean {
+  try {
+    return sessionStorage.getItem('admin-auth-checked') === 'true';
+  } catch {
+    return false;
+  }
+}
+
 export default function AdminLayout({
   children,
 }: {
@@ -38,66 +56,112 @@ export default function AdminLayout({
 }) {
   const router = useRouter();
   const pathname = usePathname();
-  const [admin, setAdmin] = useState<AdminUser | null>(null);
-  const [loading, setLoading] = useState(true);
+
+  // CRITICAL FIX: Use sessionStorage to survive component remounts.
+  // When Next.js invalidates the Router Cache (e.g. after revalidatePath),
+  // the layout can remount. Without sessionStorage, the loading spinner
+  // would cover the entire screen and block all navigation.
+  const [admin, setAdmin] = useState<AdminUser | null>(() => getCachedAdmin());
+  const [loading, setLoading] = useState(() => {
+    // If we already verified auth in this browser session, don't show spinner
+    if (typeof window !== 'undefined' && wasAuthChecked()) {
+      return false;
+    }
+    return true;
+  });
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const hasCheckedAuth = useRef(false);
 
   useEffect(() => {
-    // Prevent re-checking auth on pathname changes
-    if (hasCheckedAuth.current) {
-      console.log('✅ [ADMIN LAYOUT] Auth already checked, skipping');
-      return;
-    }
-
-    console.log('🚀 [ADMIN LAYOUT] useEffect triggered on mount');
-
     // Skip auth check on login page
     if (pathname === '/admin/login') {
-      console.log('⏭️ [ADMIN LAYOUT] Skipping auth check on login page');
       setLoading(false);
       return;
     }
 
-    const checkAdmin = async () => {
-      // Wait a bit for localStorage to be ready (race condition fix)
-      console.log('⏳ [ADMIN LAYOUT] Waiting 100ms for localStorage sync...');
-      await new Promise(resolve => setTimeout(resolve, 100));
+    const alreadyChecked = wasAuthChecked();
 
-      console.log('🔐 [ADMIN LAYOUT] Starting admin check...');
+    const checkAdmin = async () => {
+      // Small delay only on first-ever check to let things settle
+      if (!alreadyChecked) {
+        await new Promise(resolve => setTimeout(resolve, 100));
+      }
+
       try {
         const { session, admin: adminData, error } = await getAdminSession();
 
-        console.log('🔍 [ADMIN LAYOUT] Session:', !!session, 'Admin:', !!adminData, 'Error:', error?.message);
-        if (adminData) {
-          console.log('📧 Email:', adminData.email, '👤 Rôle:', adminData.role);
-        }
-
         if (error || !adminData || !session) {
-          console.log('❌ [ADMIN LAYOUT] Redirecting to login, reason:', error?.message || 'No admin data');
+          // Auth failed - clear cached data and redirect
+          try {
+            sessionStorage.removeItem('admin-auth-checked');
+            sessionStorage.removeItem('admin-user-data');
+          } catch { /* ignore */ }
           router.push('/admin/login');
           return;
         }
 
-        console.log('✅ [ADMIN LAYOUT] Setting admin state');
+        // Auth succeeded - cache admin data in sessionStorage
         setAdmin(adminData);
+        try {
+          sessionStorage.setItem('admin-auth-checked', 'true');
+          sessionStorage.setItem('admin-user-data', JSON.stringify(adminData));
+        } catch { /* ignore */ }
       } catch (err) {
         console.error('❌ [ADMIN LAYOUT] Unexpected error:', err);
+        try {
+          sessionStorage.removeItem('admin-auth-checked');
+          sessionStorage.removeItem('admin-user-data');
+        } catch { /* ignore */ }
         router.push('/admin/login');
       } finally {
-        console.log('🏁 [ADMIN LAYOUT] Setting loading to false');
-        hasCheckedAuth.current = true;
         setLoading(false);
       }
     };
 
-    checkAdmin();
-  }, [router]); // Only check auth once on mount, router is stable
+    if (!alreadyChecked) {
+      // First time: blocking auth check with loading spinner
+      checkAdmin();
+    } else {
+      // Already checked in this session: run auth check in background (non-blocking)
+      // This refreshes the token if needed without blocking the UI
+      checkAdmin();
+
+      // Also do a quick localStorage token refresh if expired
+      const storageKey = 'sb-nswlznqoadjffpxkagoz-auth-token';
+      try {
+        const stored = localStorage.getItem(storageKey);
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          const now = Math.floor(Date.now() / 1000);
+          const expiresAt = parsed.expires_at;
+          if (expiresAt && expiresAt <= now && parsed.refresh_token) {
+            fetch('/api/admin/refresh', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ refresh_token: parsed.refresh_token }),
+            })
+              .then(r => r.ok ? r.json() : null)
+              .then(data => {
+                if (data?.session) {
+                  localStorage.setItem(storageKey, JSON.stringify(data.session));
+                }
+              })
+              .catch(() => {});
+          }
+        }
+      } catch {
+        // Ignore localStorage errors
+      }
+    }
+  }, [router, pathname]);
 
   const handleSignOut = async () => {
+    // Clear sessionStorage cache
+    try {
+      sessionStorage.removeItem('admin-auth-checked');
+      sessionStorage.removeItem('admin-user-data');
+    } catch { /* ignore */ }
     await signOutAdmin();
     router.push('/admin/login');
-    router.refresh();
   };
 
   // Ne pas afficher le layout sur la page de login
@@ -106,7 +170,6 @@ export default function AdminLayout({
   }
 
   if (loading) {
-    console.log('🔄 [ADMIN LAYOUT] Rendering loading spinner');
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-900">
         <div className="w-12 h-12 border-4 border-red-600 border-t-transparent rounded-full animate-spin" />
@@ -114,7 +177,6 @@ export default function AdminLayout({
     );
   }
 
-  console.log('✅ [ADMIN LAYOUT] Rendering main layout with children');
   return (
     <div className="min-h-screen bg-gray-900">
       {/* Sidebar mobile */}

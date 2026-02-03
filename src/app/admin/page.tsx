@@ -1,9 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { getDashboardStats } from '@/lib/supabase/admin';
-import { createClient } from '@/lib/supabase/client';
 import {
   Package,
   CheckCircle,
@@ -12,7 +10,6 @@ import {
   Megaphone,
   TrendingUp,
   ArrowUp,
-  ArrowDown,
 } from 'lucide-react';
 
 interface DashboardStats {
@@ -24,59 +21,17 @@ interface DashboardStats {
 }
 
 export default function AdminDashboard() {
-  console.log('🎯 [ADMIN DASHBOARD] Component rendering...');
-  const router = useRouter();
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [loading, setLoading] = useState(true);
-  const [checking, setChecking] = useState(true);
 
   useEffect(() => {
-    console.log('🔍 [ADMIN DASHBOARD] checkAuth useEffect triggered');
-    const checkAuth = async () => {
-      // Lire directement depuis localStorage au lieu d'utiliser getSession() qui bloque
-      const storageKey = 'sb-nswlznqoadjffpxkagoz-auth-token';
-      const storedSession = localStorage.getItem(storageKey);
-
-      if (!storedSession) {
-        router.push('/admin/login');
-        return;
-      }
-
-      try {
-        const parsedData = JSON.parse(storedSession);
-        const expiresAt = parsedData.expires_at;
-        const now = Math.floor(Date.now() / 1000);
-
-        if (!expiresAt || expiresAt <= now) {
-          // Session expirée
-          router.push('/admin/login');
-          return;
-        }
-
-        // Session valide
-        setChecking(false);
-      } catch (error) {
-        console.error('Error parsing session:', error);
-        router.push('/admin/login');
-      }
-    };
-
-    checkAuth();
-  }, [router]);
-
-  useEffect(() => {
-    console.log('📊 [ADMIN DASHBOARD] loadStats useEffect triggered, checking=', checking);
-    if (checking) return;
-
+    // Auth is already handled by the admin layout - just load stats
     const loadStats = async () => {
-      console.log('⏳ [ADMIN DASHBOARD] Loading stats...');
       try {
         const data = await getDashboardStats();
-        console.log('✅ [ADMIN DASHBOARD] Stats loaded:', data);
         setStats(data);
       } catch (error) {
         console.error('❌ [ADMIN DASHBOARD] Erreur chargement statistiques:', error);
-        // Afficher des stats vides en cas d'erreur
         setStats({
           totalProducts: 0,
           activeProducts: 0,
@@ -85,13 +40,12 @@ export default function AdminDashboard() {
           activeBanners: 0,
         });
       } finally {
-        // Toujours arrêter le loading, même en cas d'erreur
         setLoading(false);
       }
     };
 
     loadStats();
-  }, [checking]);
+  }, []);
 
   if (loading) {
     return (

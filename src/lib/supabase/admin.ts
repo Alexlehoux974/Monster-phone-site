@@ -229,10 +229,60 @@ export async function getAdminSession() {
         const expiresDate = new Date(expiresAt * 1000);
         const timeLeft = Math.floor((expiresAt - now) / 60);
         console.log('✅ [getAdminSession] Session valid, expires at:', expiresDate.toLocaleString(), `(${timeLeft} minutes left)`);
+
+        // Proactive refresh if less than 5 minutes remaining
+        if (timeLeft < 5 && parsedData.refresh_token) {
+          console.log('⏰ [getAdminSession] Token expiring soon, refreshing proactively...');
+          try {
+            const refreshResponse = await fetch('/api/admin/refresh', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ refresh_token: parsedData.refresh_token }),
+              signal: AbortSignal.timeout(10000),
+            });
+
+            if (refreshResponse.ok) {
+              const refreshData = await refreshResponse.json();
+              localStorage.setItem(storageKey, JSON.stringify(refreshData.session));
+              session = refreshData.session;
+              console.log('✅ [getAdminSession] Proactive refresh successful');
+            }
+          } catch {
+            // Non-blocking: if proactive refresh fails, continue with current valid token
+            console.warn('⚠️ [getAdminSession] Proactive refresh failed, using current token');
+          }
+        }
       } else {
+        // Token expired - try to refresh it
         const expiresDate = new Date(expiresAt * 1000);
-        console.log('❌ [getAdminSession] Session expired at:', expiresDate.toLocaleString());
-        error = new Error('Session expirée');
+        console.log('⏰ [getAdminSession] Session expired at:', expiresDate.toLocaleString(), '- attempting refresh...');
+
+        if (parsedData.refresh_token) {
+          try {
+            const refreshResponse = await fetch('/api/admin/refresh', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ refresh_token: parsedData.refresh_token }),
+              signal: AbortSignal.timeout(10000),
+            });
+
+            if (refreshResponse.ok) {
+              const refreshData = await refreshResponse.json();
+              // Update localStorage with new session
+              localStorage.setItem(storageKey, JSON.stringify(refreshData.session));
+              session = refreshData.session;
+              console.log('✅ [getAdminSession] Token refreshed successfully, new expiry:', new Date((refreshData.session.expires_at) * 1000).toLocaleString());
+            } else {
+              console.error('❌ [getAdminSession] Token refresh failed:', refreshResponse.status);
+              error = new Error('Session expirée');
+            }
+          } catch (refreshError) {
+            console.error('❌ [getAdminSession] Token refresh error:', refreshError);
+            error = new Error('Session expirée');
+          }
+        } else {
+          error = new Error('Session expirée');
+        }
       }
     } else {
       console.log('❌ [getAdminSession] No session in localStorage');
@@ -633,7 +683,7 @@ export async function getDashboardStats() {
     console.log('📊 [getDashboardStats] Fetching products with variants...');
     const productsResponse = await fetch(
       `${supabaseUrl}/rest/v1/products?select=id,status,stock_quantity,product_variants(id,stock)&order=name.asc`,
-      { headers }
+      { headers, signal: AbortSignal.timeout(10000) }
     );
 
     if (!productsResponse.ok) {
@@ -676,7 +726,7 @@ export async function getDashboardStats() {
     console.log('📊 [getDashboardStats] Fetching total collections...');
     const collectionsResponse = await fetch(
       `${supabaseUrl}/rest/v1/collections?is_active=eq.true&select=*`,
-      { headers: { ...headers, 'Prefer': 'count=exact' }, method: 'HEAD' }
+      { headers: { ...headers, 'Prefer': 'count=exact' }, method: 'HEAD', signal: AbortSignal.timeout(10000) }
     );
     const totalCollections = parseInt(collectionsResponse.headers.get('content-range')?.split('/')[1] || '0');
     console.log('✅ [getDashboardStats] Total collections:', totalCollections);
@@ -685,7 +735,7 @@ export async function getDashboardStats() {
     console.log('📊 [getDashboardStats] Fetching active banners...');
     const bannersResponse = await fetch(
       `${supabaseUrl}/rest/v1/promo_banners?is_active=eq.true&select=*`,
-      { headers: { ...headers, 'Prefer': 'count=exact' }, method: 'HEAD' }
+      { headers: { ...headers, 'Prefer': 'count=exact' }, method: 'HEAD', signal: AbortSignal.timeout(10000) }
     );
     const activeBanners = parseInt(bannersResponse.headers.get('content-range')?.split('/')[1] || '0');
     console.log('✅ [getDashboardStats] Active banners:', activeBanners);

@@ -162,7 +162,8 @@ export async function POST(request: NextRequest) {
 
     // Set HTTP cookie for middleware authentication
     // Use base64 encoding to handle special characters in JSON
-    const cookieMaxAge = authData.expires_in || 3600;
+    // Cookie maxAge is 7 days (refresh_token needs to survive past access_token expiry)
+    const cookieMaxAge = 7 * 24 * 60 * 60; // 7 days
     const cookieValue = Buffer.from(JSON.stringify(sessionData)).toString('base64');
 
     response.cookies.set('sb-nswlznqoadjffpxkagoz-auth-token', cookieValue, {

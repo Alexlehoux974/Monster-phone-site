@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -297,8 +298,8 @@ export default function ProductContentManagement() {
         toast.success('Section mise à jour avec succès');
       }
 
-      // Revalidate cache to update the site
-      await revalidateCache();
+      // Revalidate cache to update the site (non-blocking to avoid navigation issues)
+      revalidateCache();
 
       setEditingSection(null);
       setIsNewSection(false);
@@ -350,7 +351,7 @@ export default function ProductContentManagement() {
 
       setSections(sections.filter((s) => s.id !== sectionId));
       toast.success('Section supprimée');
-      await revalidateCache();
+      revalidateCache();
     } catch (error) {
       console.error('Error deleting section:', error);
       toast.error('Erreur lors de la suppression');
@@ -383,7 +384,7 @@ export default function ProductContentManagement() {
 
       setSections(sections.map((s: any) => (s.id === sectionId ? { ...s, is_enabled: enabled } : s)));
       toast.success(enabled ? 'Section activée' : 'Section désactivée');
-      await revalidateCache();
+      revalidateCache();
     } catch (error) {
       console.error('Error toggling section:', error);
       toast.error('Erreur lors de la modification');
@@ -453,8 +454,8 @@ export default function ProductContentManagement() {
 
     toast.success(`Sections dupliquées vers ${successCount}/${targetProductIds.length} produits`);
 
-    // Revalidate cache
-    await revalidateCache();
+    // Revalidate cache (non-blocking)
+    revalidateCache();
   };
 
   const handleAddImage = () => {
@@ -593,11 +594,13 @@ export default function ProductContentManagement() {
           <div>
             <Button
               variant="ghost"
-              onClick={() => router.push('/admin/stock')}
+              asChild
               className="mb-4"
             >
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Retour au stock
+              <Link href="/admin/stock">
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Retour au stock
+              </Link>
             </Button>
             <h1 className="text-3xl font-bold">
               Gestion du contenu - {product.brand} {product.name}
