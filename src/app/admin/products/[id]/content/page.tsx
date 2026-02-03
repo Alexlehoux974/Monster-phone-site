@@ -574,9 +574,6 @@ export default function ProductContentManagement() {
             <h1 className="text-3xl font-bold">
               Gestion du contenu - {product.brand} {product.name}
             </h1>
-            <p className="text-sm text-gray-600 mt-2">
-              ⚠️ Les types et structure doivent correspondre exactement à ProductContentCards.tsx
-            </p>
           </div>
           <div className="flex gap-2">
             <Button onClick={handleDuplicateToProducts} variant="outline">
