@@ -221,15 +221,22 @@ export default function ProductContentManagement() {
 
     setSaving(true);
 
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+    // Récupérer le token admin depuis localStorage
+    let token: string | null = null;
+    try {
+      const sessionData = localStorage.getItem('sb-nswlznqoadjffpxkagoz-auth-token');
+      if (sessionData) {
+        token = JSON.parse(sessionData).access_token || null;
+      }
+    } catch {
+      // Ignore parsing errors
+    }
 
-    const headers = {
-      'apikey': supabaseAnonKey,
-      'Authorization': `Bearer ${supabaseAnonKey}`,
-      'Content-Type': 'application/json',
-      'Prefer': 'return=representation',
-    };
+    if (!token) {
+      toast.error('Session expirée. Reconnectez-vous.');
+      setSaving(false);
+      return;
+    }
 
     try {
       const sectionData = {
@@ -245,38 +252,45 @@ export default function ProductContentManagement() {
       };
 
       if (isNewSection) {
-        // Insert new section via REST API
-        const response = await fetch(
-          `${supabaseUrl}/rest/v1/product_content_sections`,
-          {
-            method: 'POST',
-            headers,
-            body: JSON.stringify(sectionData),
-          }
-        );
+        const response = await fetch('/api/admin/supabase', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            operation: 'insert',
+            table: 'product_content_sections',
+            data: sectionData,
+          }),
+        });
 
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.message || 'Erreur lors de l\'ajout');
+        const result = await response.json();
+        if (!response.ok || result.error) {
+          throw new Error(result.error || 'Erreur lors de l\'ajout');
         }
 
-        const newSection = await response.json();
-        setSections([...sections, Array.isArray(newSection) ? newSection[0] : newSection]);
+        const newSection = Array.isArray(result.data) ? result.data[0] : result.data;
+        setSections([...sections, newSection]);
         toast.success('Section ajoutée avec succès');
       } else {
-        // Update existing section via REST API
-        const response = await fetch(
-          `${supabaseUrl}/rest/v1/product_content_sections?id=eq.${editingSection.id}`,
-          {
-            method: 'PATCH',
-            headers,
-            body: JSON.stringify(sectionData),
-          }
-        );
+        const response = await fetch('/api/admin/supabase', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            operation: 'update',
+            table: 'product_content_sections',
+            data: sectionData,
+            filters: [{ column: 'id', value: editingSection.id }],
+          }),
+        });
 
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.message || 'Erreur lors de la mise à jour');
+        const result = await response.json();
+        if (!response.ok || result.error) {
+          throw new Error(result.error || 'Erreur lors de la mise à jour');
         }
 
         setSections(sections.map((s: any) => (s.id === editingSection.id ? { ...editingSection, ...sectionData } : s)));
@@ -296,32 +310,46 @@ export default function ProductContentManagement() {
     }
   };
 
+  // Helper pour récupérer le token admin
+  const getAdminToken = (): string | null => {
+    try {
+      const sessionData = localStorage.getItem('sb-nswlznqoadjffpxkagoz-auth-token');
+      if (sessionData) {
+        return JSON.parse(sessionData).access_token || null;
+      }
+    } catch {
+      // Ignore
+    }
+    return null;
+  };
+
   const handleDeleteSection = async (sectionId: string) => {
     if (!confirm('Êtes-vous sûr de vouloir supprimer cette section ?')) return;
 
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+    const token = getAdminToken();
+    if (!token) { toast.error('Session expirée. Reconnectez-vous.'); return; }
 
     try {
-      const response = await fetch(
-        `${supabaseUrl}/rest/v1/product_content_sections?id=eq.${sectionId}`,
-        {
-          method: 'DELETE',
-          headers: {
-            'apikey': supabaseAnonKey,
-            'Authorization': `Bearer ${supabaseAnonKey}`,
-          },
-        }
-      );
+      const response = await fetch('/api/admin/supabase', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          operation: 'delete',
+          table: 'product_content_sections',
+          filters: [{ column: 'id', value: sectionId }],
+        }),
+      });
 
-      if (!response.ok) {
-        throw new Error('Erreur lors de la suppression');
+      const result = await response.json();
+      if (!response.ok || result.error) {
+        throw new Error(result.error || 'Erreur lors de la suppression');
       }
 
       setSections(sections.filter((s) => s.id !== sectionId));
       toast.success('Section supprimée');
-
-      // Revalidate cache
       await revalidateCache();
     } catch (error) {
       console.error('Error deleting section:', error);
@@ -330,31 +358,31 @@ export default function ProductContentManagement() {
   };
 
   const handleToggleEnabled = async (sectionId: string, enabled: boolean) => {
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+    const token = getAdminToken();
+    if (!token) { toast.error('Session expirée. Reconnectez-vous.'); return; }
 
     try {
-      const response = await fetch(
-        `${supabaseUrl}/rest/v1/product_content_sections?id=eq.${sectionId}`,
-        {
-          method: 'PATCH',
-          headers: {
-            'apikey': supabaseAnonKey,
-            'Authorization': `Bearer ${supabaseAnonKey}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ is_enabled: enabled }),
-        }
-      );
+      const response = await fetch('/api/admin/supabase', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          operation: 'update',
+          table: 'product_content_sections',
+          data: { is_enabled: enabled },
+          filters: [{ column: 'id', value: sectionId }],
+        }),
+      });
 
-      if (!response.ok) {
-        throw new Error('Erreur lors de la modification');
+      const result = await response.json();
+      if (!response.ok || result.error) {
+        throw new Error(result.error || 'Erreur lors de la modification');
       }
 
       setSections(sections.map((s: any) => (s.id === sectionId ? { ...s, is_enabled: enabled } : s)));
       toast.success(enabled ? 'Section activée' : 'Section désactivée');
-
-      // Revalidate cache
       await revalidateCache();
     } catch (error) {
       console.error('Error toggling section:', error);
