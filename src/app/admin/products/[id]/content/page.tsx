@@ -672,6 +672,17 @@ export default function ProductContentManagement() {
         {/* Edit Form */}
         {editingSection && (
           <div className="bg-white rounded-lg p-8 shadow-lg">
+            <Button
+              variant="ghost"
+              onClick={() => {
+                setEditingSection(null);
+                setIsNewSection(false);
+              }}
+              className="mb-4"
+            >
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Retour
+            </Button>
             <h2 className="text-2xl font-bold mb-6">
               {isNewSection ? 'Nouvelle section' : 'Modifier la section'}
             </h2>
