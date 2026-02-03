@@ -455,7 +455,6 @@ export default function StockManagementPage() {
             'Content-Type': 'application/json',
             ...(token && { 'Authorization': `Bearer ${token}` }),
           },
-          credentials: 'include',
           body: JSON.stringify({
             path: `/produit/${row.sku}`,
             tag: 'products'

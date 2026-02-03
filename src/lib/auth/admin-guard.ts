@@ -43,7 +43,14 @@ export async function verifyAdminAuth(request: NextRequest): Promise<AuthResult>
       const supabaseCookie = cookieStore.get('sb-nswlznqoadjffpxkagoz-auth-token');
       if (supabaseCookie) {
         try {
-          const sessionData = JSON.parse(supabaseCookie.value);
+          // Cookie may be base64-encoded or plain JSON
+          let sessionData;
+          try {
+            const decoded = Buffer.from(supabaseCookie.value, 'base64').toString('utf-8');
+            sessionData = JSON.parse(decoded);
+          } catch {
+            sessionData = JSON.parse(supabaseCookie.value);
+          }
           token = sessionData?.access_token;
         } catch {
           // Cookie parsing failed

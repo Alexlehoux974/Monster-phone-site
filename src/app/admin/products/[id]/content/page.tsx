@@ -203,7 +203,6 @@ export default function ProductContentManagement() {
           'Content-Type': 'application/json',
           ...(token && { 'Authorization': `Bearer ${token}` }),
         },
-        credentials: 'include',
         body: JSON.stringify({ tag: 'products' }),
       });
 
