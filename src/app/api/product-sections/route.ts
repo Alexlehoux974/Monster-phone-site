@@ -42,9 +42,16 @@ export async function GET(request: NextRequest) {
     const count = sections ? sections.length : 0;
     console.log(`✅ [API] Fetched ${count} sections for product ${productId}`);
 
-    return NextResponse.json({
-      sections: sections || []
-    });
+    return NextResponse.json(
+      { sections: sections || [] },
+      {
+        headers: {
+          'Cache-Control': 'no-store, no-cache, must-revalidate',
+          'CDN-Cache-Control': 'no-store',
+          'Vercel-CDN-Cache-Control': 'no-store',
+        },
+      }
+    );
   } catch (error: any) {
     console.error('❌ [API] Server error:', error);
     return NextResponse.json({
@@ -53,3 +60,5 @@ export async function GET(request: NextRequest) {
     }, { status: 500 });
   }
 }
+
+export const dynamic = 'force-dynamic';

@@ -57,7 +57,7 @@ export default function ProductContentCards({ productId, productCategory, produc
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
 
-        const response = await fetch(apiUrl, { signal: controller.signal });
+        const response = await fetch(apiUrl, { signal: controller.signal, cache: 'no-store' });
         clearTimeout(timeoutId);
 
         console.log('📡 [ProductContentCards CLIENT] Response status:', response.status, response.ok);
