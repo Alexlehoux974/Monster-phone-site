@@ -731,95 +731,153 @@ export default function ProductContentManagement() {
                 </div>
               </div>
 
-              {/* Title */}
-              <div>
-                <Label htmlFor="title">Titre</Label>
-                <Input
-                  id="title"
-                  value={editingSection.title || ''}
-                  onChange={(e) =>
-                    setEditingSection({ ...editingSection, title: e.target.value })
-                  }
-                  placeholder="Titre de la section"
-                />
-              </div>
-
-              {/* Content */}
-              <div>
-                <Label htmlFor="content">Contenu (HTML supporté)</Label>
-                <Textarea
-                  id="content"
-                  value={editingSection.content || ''}
-                  onChange={(e) =>
-                    setEditingSection({ ...editingSection, content: e.target.value })
-                  }
-                  placeholder="<p>Votre contenu ici...</p>"
-                  rows={10}
-                  className="font-mono text-sm"
-                />
-              </div>
-
-              {/* Layout Variant */}
-              <div>
-                <Label htmlFor="layout_variant">Disposition (image-left-text-right ou autre)</Label>
-                <Input
-                  id="layout_variant"
-                  value={editingSection.layout_variant}
-                  onChange={(e) =>
-                    setEditingSection({
-                      ...editingSection,
-                      layout_variant: e.target.value,
-                    })
-                  }
-                  placeholder="image-left-text-right"
-                />
-                <p className="text-xs text-gray-500 mt-1">
-                  Utilisé par description_card, features_list, engagement_card. Exemple: "image-left-text-right"
-                </p>
-              </div>
-
-              {/* Images */}
-              <div>
-                <Label>Images (Google Drive URLs)</Label>
-                <div className="space-y-2 mt-2">
-                  {editingSection.images.map((url, index) => (
-                    <div key={index} className="flex items-center gap-2">
-                      <Input value={url} readOnly className="flex-1" />
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => handleRemoveImage(index)}
-                        className="text-red-600"
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  ))}
-                  <Button onClick={handleAddImage} variant="outline" size="sm">
-                    <Plus className="h-4 w-4 mr-2" />
-                    Ajouter une image
-                  </Button>
+              {/* Titre — tous les types sauf image_gallery */}
+              {editingSection.section_type !== 'image_gallery' && (
+                <div>
+                  <Label htmlFor="title">Titre</Label>
+                  <Input
+                    id="title"
+                    value={editingSection.title || ''}
+                    onChange={(e) =>
+                      setEditingSection({ ...editingSection, title: e.target.value })
+                    }
+                    placeholder="Titre de la section"
+                  />
                 </div>
-              </div>
+              )}
 
-              {/* Metadata - Specs (for specs_grid) */}
-              {editingSection.section_type === 'specs_grid' && (
-                <div className="border-t pt-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <Label>Specs (pour grille 4 colonnes)</Label>
-                    <Button type="button" onClick={handleAddSpec} variant="outline" size="sm">
+              {/* ─── GALERIE D'IMAGES ─── */}
+              {editingSection.section_type === 'image_gallery' && (
+                <div>
+                  <Label>Images (URLs)</Label>
+                  <p className="text-xs text-gray-500 mb-2">Grille de 4 colonnes sur desktop</p>
+                  <div className="space-y-2 mt-2">
+                    {editingSection.images.map((url, index) => (
+                      <div key={index} className="flex items-center gap-2">
+                        <Input
+                          value={url}
+                          onChange={(e) => {
+                            const newImages = [...editingSection.images];
+                            newImages[index] = e.target.value;
+                            setEditingSection({ ...editingSection, images: newImages });
+                          }}
+                          placeholder="https://..."
+                          className="flex-1"
+                        />
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          type="button"
+                          onClick={() => handleRemoveImage(index)}
+                          className="text-red-600"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    ))}
+                    <Button type="button" onClick={handleAddImage} variant="outline" size="sm">
                       <Plus className="h-4 w-4 mr-2" />
-                      Ajouter une spec
+                      Ajouter une image
                     </Button>
                   </div>
-                  <div className="space-y-4">
+                </div>
+              )}
+
+              {/* ─── DESCRIPTION AVEC IMAGE ─── */}
+              {editingSection.section_type === 'description_card' && (
+                <>
+                  <div>
+                    <Label htmlFor="content">Description</Label>
+                    <Textarea
+                      id="content"
+                      value={editingSection.content || ''}
+                      onChange={(e) =>
+                        setEditingSection({ ...editingSection, content: e.target.value })
+                      }
+                      placeholder="Décrivez le produit..."
+                      rows={6}
+                    />
+                  </div>
+                  <div>
+                    <Label>Image d'illustration</Label>
+                    <div className="space-y-2 mt-2">
+                      {editingSection.images.length > 0 ? (
+                        <div className="flex items-center gap-2">
+                          <Input
+                            value={editingSection.images[0]}
+                            onChange={(e) =>
+                              setEditingSection({ ...editingSection, images: [e.target.value] })
+                            }
+                            placeholder="https://..."
+                            className="flex-1"
+                          />
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            type="button"
+                            onClick={() => setEditingSection({ ...editingSection, images: [] })}
+                            className="text-red-600"
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      ) : (
+                        <Button type="button" onClick={handleAddImage} variant="outline" size="sm">
+                          <Plus className="h-4 w-4 mr-2" />
+                          Ajouter une image
+                        </Button>
+                      )}
+                    </div>
+                  </div>
+                  <div>
+                    <Label>Disposition</Label>
+                    <div className="grid grid-cols-2 gap-3 mt-2">
+                      <div
+                        onClick={() => setEditingSection({ ...editingSection, layout_variant: 'image-left-text-right' })}
+                        className={cn(
+                          "p-3 rounded-lg border-2 cursor-pointer text-center text-sm transition-all",
+                          editingSection.layout_variant === 'image-left-text-right'
+                            ? "border-red-600 bg-red-50"
+                            : "border-gray-200 hover:border-red-400"
+                        )}
+                      >
+                        Image à gauche
+                      </div>
+                      <div
+                        onClick={() => setEditingSection({ ...editingSection, layout_variant: 'text-left-image-right' })}
+                        className={cn(
+                          "p-3 rounded-lg border-2 cursor-pointer text-center text-sm transition-all",
+                          editingSection.layout_variant === 'text-left-image-right'
+                            ? "border-red-600 bg-red-50"
+                            : "border-gray-200 hover:border-red-400"
+                        )}
+                      >
+                        Image à droite
+                      </div>
+                    </div>
+                  </div>
+                </>
+              )}
+
+              {/* ─── GRILLE DE SPECS ─── */}
+              {editingSection.section_type === 'specs_grid' && (
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <Label>Caractéristiques techniques</Label>
+                    <Button type="button" onClick={handleAddSpec} variant="outline" size="sm">
+                      <Plus className="h-4 w-4 mr-2" />
+                      Ajouter
+                    </Button>
+                  </div>
+                  <div className="space-y-3">
                     {(editingSection.metadata.specs || []).map((spec, index) => (
-                      <div key={index} className="p-4 border rounded-lg space-y-2">
-                        <div className="flex items-center justify-between mb-2">
+                      <div key={index} className="p-4 border rounded-lg">
+                        <div className="flex items-center justify-between mb-3">
                           <span className="text-sm font-semibold">Spec #{index + 1}</span>
                           <Button
                             variant="ghost"
                             size="sm"
+                            type="button"
                             onClick={() => handleRemoveSpec(index)}
                             className="text-red-600"
                           >
@@ -828,7 +886,7 @@ export default function ProductContentManagement() {
                         </div>
                         <div className="grid grid-cols-2 gap-2">
                           <Input
-                            placeholder="Icon (emoji: 🔋)"
+                            placeholder="Emoji (ex: 🔋)"
                             value={spec.icon}
                             onChange={(e) => handleUpdateSpec(index, 'icon', e.target.value)}
                           />
@@ -838,87 +896,191 @@ export default function ProductContentManagement() {
                             onChange={(e) => handleUpdateSpec(index, 'label', e.target.value)}
                           />
                           <Input
-                            placeholder="Value (ex: 5000 mAh)"
+                            placeholder="Valeur (ex: 5000 mAh)"
                             value={spec.value}
                             onChange={(e) => handleUpdateSpec(index, 'value', e.target.value)}
                           />
                           <Input
-                            placeholder="Details (optionnel)"
+                            placeholder="Détails (optionnel)"
                             value={spec.details || ''}
                             onChange={(e) => handleUpdateSpec(index, 'details', e.target.value)}
                           />
                         </div>
                       </div>
                     ))}
+                    {(editingSection.metadata.specs || []).length === 0 && (
+                      <p className="text-sm text-gray-400 text-center py-4">Aucune spec. Cliquez "Ajouter" pour commencer.</p>
+                    )}
                   </div>
                 </div>
               )}
 
-              {/* Metadata - Features (for features_list) */}
+              {/* ─── LISTE DE POINTS FORTS ─── */}
               {editingSection.section_type === 'features_list' && (
-                <div className="border-t pt-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <Label>Points forts (pour liste avec CheckCircle2)</Label>
-                    <Button type="button" onClick={handleAddFeature} variant="outline" size="sm">
-                      <Plus className="h-4 w-4 mr-2" />
-                      Ajouter un point fort
-                    </Button>
+                <>
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <Label>Points forts</Label>
+                      <Button type="button" onClick={handleAddFeature} variant="outline" size="sm">
+                        <Plus className="h-4 w-4 mr-2" />
+                        Ajouter
+                      </Button>
+                    </div>
+                    <div className="space-y-2">
+                      {(editingSection.metadata.features || []).map((feature, index) => (
+                        <div key={index} className="flex items-center gap-2">
+                          <span className="text-green-600 shrink-0">✓</span>
+                          <Input
+                            placeholder="Texte du point fort"
+                            value={feature.text}
+                            onChange={(e) => handleUpdateFeature(index, 'text', e.target.value)}
+                            className="flex-1"
+                          />
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            type="button"
+                            onClick={() => handleRemoveFeature(index)}
+                            className="text-red-600"
+                          >
+                            <X className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      ))}
+                      {(editingSection.metadata.features || []).length === 0 && (
+                        <p className="text-sm text-gray-400 text-center py-4">Aucun point fort. Cliquez "Ajouter" pour commencer.</p>
+                      )}
+                    </div>
                   </div>
-                  <div className="space-y-2">
-                    {(editingSection.metadata.features || []).map((feature, index) => (
-                      <div key={index} className="flex items-center gap-2">
-                        <Input
-                          placeholder="Icon (non affiché, CheckCircle2 utilisé)"
-                          value={feature.icon}
-                          onChange={(e) => handleUpdateFeature(index, 'icon', e.target.value)}
-                          className="w-24"
-                        />
-                        <Input
-                          placeholder="Texte du point fort"
-                          value={feature.text}
-                          onChange={(e) => handleUpdateFeature(index, 'text', e.target.value)}
-                          className="flex-1"
-                        />
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => handleRemoveFeature(index)}
-                          className="text-red-600"
-                        >
-                          <X className="h-4 w-4" />
+                  <div>
+                    <Label>Image d'illustration (optionnelle)</Label>
+                    <div className="space-y-2 mt-2">
+                      {editingSection.images.length > 0 ? (
+                        <div className="flex items-center gap-2">
+                          <Input
+                            value={editingSection.images[0]}
+                            onChange={(e) =>
+                              setEditingSection({ ...editingSection, images: [e.target.value] })
+                            }
+                            placeholder="https://..."
+                            className="flex-1"
+                          />
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            type="button"
+                            onClick={() => setEditingSection({ ...editingSection, images: [] })}
+                            className="text-red-600"
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      ) : (
+                        <Button type="button" onClick={handleAddImage} variant="outline" size="sm">
+                          <Plus className="h-4 w-4 mr-2" />
+                          Ajouter une image
                         </Button>
-                      </div>
-                    ))}
+                      )}
+                    </div>
                   </div>
+                </>
+              )}
+
+              {/* ─── ENCART ENGAGEMENT ─── */}
+              {editingSection.section_type === 'engagement_card' && (
+                <div>
+                  <Label htmlFor="content">Texte de l'engagement</Label>
+                  <Textarea
+                    id="content"
+                    value={editingSection.content || ''}
+                    onChange={(e) =>
+                      setEditingSection({ ...editingSection, content: e.target.value })
+                    }
+                    placeholder="Pourquoi nous choisir..."
+                    rows={4}
+                  />
                 </div>
               )}
 
-              {/* Display Order */}
-              <div>
-                <Label htmlFor="display_order">Ordre d'affichage</Label>
-                <Input
-                  id="display_order"
-                  type="number"
-                  value={editingSection.display_order}
-                  onChange={(e) =>
-                    setEditingSection({
-                      ...editingSection,
-                      display_order: parseInt(e.target.value),
-                    })
-                  }
-                />
-              </div>
+              {/* ─── PERSONNALISÉ ─── */}
+              {editingSection.section_type === 'custom' && (
+                <>
+                  <div>
+                    <Label htmlFor="content">Contenu HTML</Label>
+                    <Textarea
+                      id="content"
+                      value={editingSection.content || ''}
+                      onChange={(e) =>
+                        setEditingSection({ ...editingSection, content: e.target.value })
+                      }
+                      placeholder="<p>Contenu libre...</p>"
+                      rows={10}
+                      className="font-mono text-sm"
+                    />
+                  </div>
+                  <div>
+                    <Label>Images</Label>
+                    <div className="space-y-2 mt-2">
+                      {editingSection.images.map((url, index) => (
+                        <div key={index} className="flex items-center gap-2">
+                          <Input
+                            value={url}
+                            onChange={(e) => {
+                              const newImages = [...editingSection.images];
+                              newImages[index] = e.target.value;
+                              setEditingSection({ ...editingSection, images: newImages });
+                            }}
+                            placeholder="https://..."
+                            className="flex-1"
+                          />
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            type="button"
+                            onClick={() => handleRemoveImage(index)}
+                            className="text-red-600"
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      ))}
+                      <Button type="button" onClick={handleAddImage} variant="outline" size="sm">
+                        <Plus className="h-4 w-4 mr-2" />
+                        Ajouter une image
+                      </Button>
+                    </div>
+                  </div>
+                </>
+              )}
 
-              {/* Enabled Toggle */}
-              <div className="flex items-center gap-2">
-                <Switch
-                  id="is_enabled"
-                  checked={editingSection.is_enabled}
-                  onCheckedChange={(checked) =>
-                    setEditingSection({ ...editingSection, is_enabled: checked })
-                  }
-                />
-                <Label htmlFor="is_enabled">Section activée</Label>
+              {/* ─── Paramètres communs ─── */}
+              <div className="border-t pt-6 space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="display_order">Ordre d'affichage</Label>
+                    <Input
+                      id="display_order"
+                      type="number"
+                      value={editingSection.display_order}
+                      onChange={(e) =>
+                        setEditingSection({
+                          ...editingSection,
+                          display_order: parseInt(e.target.value),
+                        })
+                      }
+                    />
+                  </div>
+                  <div className="flex items-center gap-2 pt-6">
+                    <Switch
+                      id="is_enabled"
+                      checked={editingSection.is_enabled}
+                      onCheckedChange={(checked) =>
+                        setEditingSection({ ...editingSection, is_enabled: checked })
+                      }
+                    />
+                    <Label htmlFor="is_enabled">Section activée</Label>
+                  </div>
+                </div>
               </div>
 
               {/* Actions */}
