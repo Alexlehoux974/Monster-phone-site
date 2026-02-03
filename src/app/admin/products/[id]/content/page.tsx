@@ -688,48 +688,50 @@ export default function ProductContentManagement() {
             </h2>
 
             <div className="space-y-6">
-              {/* Section Type */}
-              <div>
-                <Label className="text-base font-semibold mb-3 block">Type de section</Label>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  <RadioOption
-                    value="image_gallery"
-                    label={sectionTypeLabels['image_gallery']}
-                    currentValue={editingSection.section_type}
-                    onSelect={(value) => setEditingSection({...editingSection, section_type: value as ProductContentSection['section_type']})}
-                  />
-                  <RadioOption
-                    value="description_card"
-                    label={sectionTypeLabels['description_card']}
-                    currentValue={editingSection.section_type}
-                    onSelect={(value) => setEditingSection({...editingSection, section_type: value as ProductContentSection['section_type']})}
-                  />
-                  <RadioOption
-                    value="specs_grid"
-                    label={sectionTypeLabels['specs_grid']}
-                    currentValue={editingSection.section_type}
-                    onSelect={(value) => setEditingSection({...editingSection, section_type: value as ProductContentSection['section_type']})}
-                  />
-                  <RadioOption
-                    value="features_list"
-                    label={sectionTypeLabels['features_list']}
-                    currentValue={editingSection.section_type}
-                    onSelect={(value) => setEditingSection({...editingSection, section_type: value as ProductContentSection['section_type']})}
-                  />
-                  <RadioOption
-                    value="engagement_card"
-                    label={sectionTypeLabels['engagement_card']}
-                    currentValue={editingSection.section_type}
-                    onSelect={(value) => setEditingSection({...editingSection, section_type: value as ProductContentSection['section_type']})}
-                  />
-                  <RadioOption
-                    value="custom"
-                    label={sectionTypeLabels['custom']}
-                    currentValue={editingSection.section_type}
-                    onSelect={(value) => setEditingSection({...editingSection, section_type: value as ProductContentSection['section_type']})}
-                  />
+              {/* Type de section affiché uniquement lors de la création */}
+              {isNewSection && (
+                <div>
+                  <Label className="text-base font-semibold mb-3 block">Type de section</Label>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <RadioOption
+                      value="image_gallery"
+                      label={sectionTypeLabels['image_gallery']}
+                      currentValue={editingSection.section_type}
+                      onSelect={(value) => setEditingSection({...editingSection, section_type: value as ProductContentSection['section_type']})}
+                    />
+                    <RadioOption
+                      value="description_card"
+                      label={sectionTypeLabels['description_card']}
+                      currentValue={editingSection.section_type}
+                      onSelect={(value) => setEditingSection({...editingSection, section_type: value as ProductContentSection['section_type']})}
+                    />
+                    <RadioOption
+                      value="specs_grid"
+                      label={sectionTypeLabels['specs_grid']}
+                      currentValue={editingSection.section_type}
+                      onSelect={(value) => setEditingSection({...editingSection, section_type: value as ProductContentSection['section_type']})}
+                    />
+                    <RadioOption
+                      value="features_list"
+                      label={sectionTypeLabels['features_list']}
+                      currentValue={editingSection.section_type}
+                      onSelect={(value) => setEditingSection({...editingSection, section_type: value as ProductContentSection['section_type']})}
+                    />
+                    <RadioOption
+                      value="engagement_card"
+                      label={sectionTypeLabels['engagement_card']}
+                      currentValue={editingSection.section_type}
+                      onSelect={(value) => setEditingSection({...editingSection, section_type: value as ProductContentSection['section_type']})}
+                    />
+                    <RadioOption
+                      value="custom"
+                      label={sectionTypeLabels['custom']}
+                      currentValue={editingSection.section_type}
+                      onSelect={(value) => setEditingSection({...editingSection, section_type: value as ProductContentSection['section_type']})}
+                    />
+                  </div>
                 </div>
-              </div>
+              )}
 
               {/* Titre — tous les types sauf image_gallery */}
               {editingSection.section_type !== 'image_gallery' && (
