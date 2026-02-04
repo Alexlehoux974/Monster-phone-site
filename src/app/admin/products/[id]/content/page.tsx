@@ -145,7 +145,13 @@ export default function ProductContentManagement() {
         if (sectionsResponse.ok) {
           const sectionsData = await sectionsResponse.json();
           console.log('✅ [CONTENT] Sections loaded:', sectionsData?.length || 0);
-          setSections(sectionsData || []);
+          // Normalize null fields to safe defaults
+          const normalizedSections = (sectionsData || []).map((s: any) => ({
+            ...s,
+            images: s.images || [],
+            metadata: s.metadata || {},
+          }));
+          setSections(normalizedSections);
         } else {
           console.error('❌ [CONTENT] Sections fetch error:', sectionsResponse.status);
           toast.error('Erreur lors du chargement des sections');
@@ -634,7 +640,11 @@ export default function ProductContentManagement() {
                   key={section.id}
                   className="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow cursor-pointer border-2 border-transparent hover:border-red-200"
                   onClick={() => {
-                    setEditingSection(section);
+                    setEditingSection({
+                      ...section,
+                      images: section.images || [],
+                      metadata: section.metadata || {},
+                    });
                     setIsNewSection(false);
                   }}
                 >
@@ -655,7 +665,7 @@ export default function ProductContentManagement() {
                           {section.content?.replace(/<[^>]*>/g, '') || 'Pas de contenu'}
                         </p>
                         <p className="text-xs text-gray-500 mt-2">
-                          {section.images.length} image(s) • Ordre: {section.display_order}
+                          {(section.images || []).length} image(s) • Ordre: {section.display_order}
                           {section.metadata?.specs && ` • ${section.metadata.specs.length} specs`}
                           {section.metadata?.features && ` • ${section.metadata.features.length} features`}
                         </p>
@@ -677,7 +687,11 @@ export default function ProductContentManagement() {
                         variant="ghost"
                         size="sm"
                         onClick={() => {
-                          setEditingSection(section);
+                          setEditingSection({
+                            ...section,
+                            images: section.images || [],
+                            metadata: section.metadata || {},
+                          });
                           setIsNewSection(false);
                         }}
                       >
