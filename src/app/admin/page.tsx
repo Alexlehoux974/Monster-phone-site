@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
+import Link from 'next/link';
 import { getDashboardStats } from '@/lib/supabase/admin';
 import {
   Package,
@@ -24,28 +25,36 @@ export default function AdminDashboard() {
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    // Auth is already handled by the admin layout - just load stats
-    const loadStats = async () => {
-      try {
-        const data = await getDashboardStats();
-        setStats(data);
-      } catch (error) {
-        console.error('❌ [ADMIN DASHBOARD] Erreur chargement statistiques:', error);
-        setStats({
-          totalProducts: 0,
-          activeProducts: 0,
-          outOfStock: 0,
-          totalCollections: 0,
-          activeBanners: 0,
-        });
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadStats();
+  const loadStats = useCallback(async (showSpinner = false) => {
+    if (showSpinner) setLoading(true);
+    try {
+      const data = await getDashboardStats();
+      setStats(data);
+    } catch (error) {
+      console.error('❌ [ADMIN DASHBOARD] Erreur chargement statistiques:', error);
+      setStats({
+        totalProducts: 0,
+        activeProducts: 0,
+        outOfStock: 0,
+        totalCollections: 0,
+        activeBanners: 0,
+      });
+    } finally {
+      setLoading(false);
+    }
   }, []);
+
+  // Load stats on mount
+  useEffect(() => {
+    loadStats(true);
+  }, [loadStats]);
+
+  // Refresh stats when tab regains focus (after editing stock, processing orders, etc.)
+  useEffect(() => {
+    const handleFocus = () => loadStats(false);
+    window.addEventListener('focus', handleFocus);
+    return () => window.removeEventListener('focus', handleFocus);
+  }, [loadStats]);
 
   if (loading) {
     return (
@@ -183,7 +192,7 @@ export default function AdminDashboard() {
             Actions rapides
           </h3>
           <div className="space-y-3">
-            <a
+            <Link
               href="/admin/stock"
               className="flex items-center gap-3 p-3 rounded-lg bg-gray-700/50 hover:bg-gray-700 transition-colors group"
             >
@@ -193,8 +202,8 @@ export default function AdminDashboard() {
                 <p className="text-xs text-gray-400">Mise à jour des quantités</p>
               </div>
               <ArrowUp className="w-4 h-4 text-gray-500 group-hover:text-white transition-colors" />
-            </a>
-            <a
+            </Link>
+            <Link
               href="/admin/banners"
               className="flex items-center gap-3 p-3 rounded-lg bg-gray-700/50 hover:bg-gray-700 transition-colors group"
             >
@@ -204,7 +213,7 @@ export default function AdminDashboard() {
                 <p className="text-xs text-gray-400">Gérer les annonces</p>
               </div>
               <ArrowUp className="w-4 h-4 text-gray-500 group-hover:text-white transition-colors" />
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -224,13 +233,13 @@ export default function AdminDashboard() {
                 {stats.outOfStock} produit{stats.outOfStock > 1 ? 's sont' : ' est'} actuellement en rupture de stock.
                 Pensez à mettre à jour les quantités pour éviter les pertes de ventes.
               </p>
-              <a
+              <Link
                 href="/admin/stock"
                 className="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg transition-colors"
               >
                 Gérer le stock
                 <ArrowUp className="w-4 h-4" />
-              </a>
+              </Link>
             </div>
           </div>
         </div>
