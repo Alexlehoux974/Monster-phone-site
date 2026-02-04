@@ -166,7 +166,7 @@ export async function POST(request: NextRequest) {
     const cookieMaxAge = 7 * 24 * 60 * 60; // 7 days
     const cookieValue = Buffer.from(JSON.stringify(sessionData)).toString('base64');
 
-    response.cookies.set('sb-nswlznqoadjffpxkagoz-auth-token', cookieValue, {
+    response.cookies.set('mp-admin-auth', cookieValue, {
       httpOnly: true, // Sécurisé: empêche l'accès JavaScript (protection XSS)
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',

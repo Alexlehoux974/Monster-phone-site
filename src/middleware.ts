@@ -24,7 +24,7 @@ export function middleware(request: NextRequest) {
   //   - Admin layout (getAdminSession on first mount)
   //   - Each API route (verifyAdminAuth with Bearer token)
   if (request.nextUrl.pathname.startsWith('/admin') && request.nextUrl.pathname !== '/admin/login') {
-    const authCookie = request.cookies.get('sb-nswlznqoadjffpxkagoz-auth-token');
+    const authCookie = request.cookies.get('mp-admin-auth');
 
     if (!authCookie?.value) {
       const loginUrl = new URL('/admin/login', request.url);

@@ -40,7 +40,7 @@ export async function verifyAdminAuth(request: NextRequest): Promise<AuthResult>
     // If no Authorization header, try to get from cookies (for browser requests)
     if (!token) {
       const cookieStore = await cookies();
-      const supabaseCookie = cookieStore.get('sb-nswlznqoadjffpxkagoz-auth-token');
+      const supabaseCookie = cookieStore.get('mp-admin-auth');
       if (supabaseCookie) {
         try {
           // Cookie may be base64-encoded or plain JSON
