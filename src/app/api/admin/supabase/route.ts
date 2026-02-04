@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase/admin-client';
-import { createClient } from '@/lib/supabase/server';
 
 /**
  * Generic admin API route for Supabase operations
@@ -30,9 +29,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Vérifier l'authentification avec le token explicite
-    const supabase = await createClient();
-    const { data: { user }, error: userError } = await supabase.auth.getUser(token);
+    // Vérifier l'authentification avec le client admin (PAS le client SSR qui écrase les cookies)
+    const adminClient = createAdminClient();
+    const { data: { user }, error: userError } = await adminClient.auth.getUser(token);
 
     console.log('🔍 [Admin API] Auth check:', {
       hasUser: !!user,
@@ -49,7 +48,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Vérifier que l'utilisateur est admin
-    const { data: adminCheck, error: adminError } = await supabase
+    const { data: adminCheck, error: adminError } = await adminClient
       .from('admin_users')
       .select('id')
       .eq('email', user.email)
@@ -66,8 +65,7 @@ export async function POST(request: NextRequest) {
 
     console.log('✅ [Admin API] User is admin:', user.email);
 
-    // Utiliser le client admin pour les opérations (bypass RLS)
-    const adminClient = createAdminClient();
+    // Utiliser le même client admin pour les opérations (bypass RLS)
     let query: any;
 
     switch (operation) {

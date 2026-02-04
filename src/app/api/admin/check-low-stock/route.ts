@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase/server';
+import { createAdminClient } from '@/lib/supabase/admin-client';
 import { Resend } from 'resend';
 import LowStockNotification from '@/lib/email/templates/low-stock';
 
@@ -21,10 +21,10 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const supabase = await createClient();
+    const adminClient = createAdminClient();
 
     // Récupérer tous les produits avec leurs variants
-    const { data: products, error } = await supabase
+    const { data: products, error } = await adminClient
       .from('products_full')
       .select('id, name, slug, stock_quantity, variants, image_url');
 
