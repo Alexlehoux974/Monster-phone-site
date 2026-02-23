@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { createClient } from '@/lib/supabase/server';
+import { createAdminClient } from '@/lib/supabase/admin-client';
 import { checkRateLimit, RATE_LIMIT_CONFIGS, getClientIP } from '@/lib/rate-limit';
 
 export const dynamic = 'force-dynamic';
@@ -143,8 +144,9 @@ export async function POST(request: NextRequest) {
     // Générer un ID unique pour cette session de panier
     const cartSessionId = `cart_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
-    // Stocker les items dans Supabase (contournement de la limite Stripe de 500 caractères)
-    const { error: cartError } = await supabase
+    // Stocker les items dans Supabase via service role (contournement de la limite Stripe de 500 caractères)
+    const supabaseAdmin = createAdminClient();
+    const { error: cartError } = await supabaseAdmin
       .from('pending_carts')
       .insert({
         session_id: cartSessionId,

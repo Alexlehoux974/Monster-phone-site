@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { createClient } from '@/lib/supabase/server';
+import { createAdminClient } from '@/lib/supabase/admin-client';
 import { sendOrderConfirmation } from '@/lib/email/send-order-confirmation';
 
 export const dynamic = 'force-dynamic';
@@ -224,9 +225,10 @@ export async function POST(request: NextRequest) {
         }
       }
 
-      // Nettoyer le panier temporaire si présent
+      // Nettoyer le panier temporaire si présent (via service role car RLS activé)
       if (cartSessionId) {
-        await supabase
+        const supabaseAdmin = createAdminClient();
+        await supabaseAdmin
           .from('pending_carts')
           .delete()
           .eq('session_id', cartSessionId);

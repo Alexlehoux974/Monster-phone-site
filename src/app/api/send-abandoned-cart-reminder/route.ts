@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase/client';
+import { createAdminClient } from '@/lib/supabase/admin-client';
 import resend from '@/lib/email/resend';
 import { AbandonedCartEmail } from '@/lib/email/templates/abandoned-cart';
 import { verifyAdminAuth, verifyCronSecret, unauthorizedResponse } from '@/lib/auth/admin-guard';
@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const supabase = createClient();
+    const supabase = createAdminClient();
 
     // Récupérer le panier abandonné
     const { data: cart, error: cartError } = await supabase
@@ -126,7 +126,7 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const supabase = createClient();
+    const supabase = createAdminClient();
     const now = new Date();
 
     // 1ère relance : 3h ±30min après création (fenêtre 2h30-3h30)

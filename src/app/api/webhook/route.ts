@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { createClient } from '@/lib/supabase/client';
+import { createAdminClient } from '@/lib/supabase/admin-client';
 import resend from '@/lib/email/resend';
 import { OrderConfirmationEmail } from '@/lib/email/templates/order-confirmation';
 import * as React from 'react';
@@ -201,7 +202,8 @@ export async function POST(request: NextRequest) {
           expires_at: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(), // Expire dans 24h
         };
 
-        const { error: cartError } = await supabase
+        const supabaseAdmin = createAdminClient();
+        const { error: cartError } = await supabaseAdmin
           .from('abandoned_carts')
           .insert([cartData]);
 
