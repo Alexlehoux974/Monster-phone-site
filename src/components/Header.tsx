@@ -29,7 +29,7 @@ const PromoBar = () => (
         <span className="hidden sm:block text-xs">•</span>
         <div className="hidden md:flex items-center gap-1.5">
           <Flame className="w-4 h-4" />
-          <span>LIVRAISON GRATUITE DÈS 50€</span>
+          <span>LIVRAISON GRATUITE DÈS 100€</span>
         </div>
       </div>
     </div>
@@ -1166,9 +1166,9 @@ export default function Header() {
                               Paiement rapide
                             </button>
                           </div>
-                          {getCartTotal() < 50 && (
+                          {getCartTotal() < 100 && (
                             <p className="text-xs text-gray-600 text-center mt-3">
-                              Plus que {(50 - getCartTotal()).toFixed(2)} € pour la livraison gratuite !
+                              Plus que {(100 - getCartTotal()).toFixed(2)} € pour la livraison gratuite !
                             </p>
                           )}
                         </div>

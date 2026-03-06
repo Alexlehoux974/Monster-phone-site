@@ -261,11 +261,11 @@ export default function PromotionsPage() {
     // Ajouter les métadonnées SEO
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute('content', 'Découvrez nos promotions exceptionnelles sur les smartphones gaming HONOR, accessoires MUVIT et montres connectées. Livraison gratuite dès 50€ à La Réunion.');
+      metaDescription.setAttribute('content', 'Découvrez nos promotions exceptionnelles sur les smartphones gaming HONOR, accessoires MUVIT et montres connectées. Livraison gratuite dès 100€ à La Réunion.');
     } else {
       const meta = document.createElement('meta');
       meta.name = 'description';
-      meta.content = 'Découvrez nos promotions exceptionnelles sur les smartphones gaming HONOR, accessoires MUVIT et montres connectées. Livraison gratuite dès 50€ à La Réunion.';
+      meta.content = 'Découvrez nos promotions exceptionnelles sur les smartphones gaming HONOR, accessoires MUVIT et montres connectées. Livraison gratuite dès 100€ à La Réunion.';
       document.head.appendChild(meta);
     }
 
@@ -384,7 +384,7 @@ export default function PromotionsPage() {
                 <span className="text-xl font-bold">OFFRES À DURÉE LIMITÉE</span>
                 <Clock className="w-6 h-6 animate-pulse" />
               </div>
-              <p>Profitez de nos prix exceptionnels avant la fin du mois ! Livraison gratuite dès 50€ à La Réunion.</p>
+              <p>Profitez de nos prix exceptionnels avant la fin du mois ! Livraison gratuite dès 100€ à La Réunion.</p>
             </motion.div>
 
             {/* Filtres et tri */}

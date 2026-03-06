@@ -309,7 +309,7 @@ export default function PlanDuSitePage() {
                       <ShoppingBag className="w-8 h-8 text-blue-600" />
                     </div>
                     <h3 className="font-semibold text-gray-900 mb-2">Livraison 48h</h3>
-                    <p className="text-sm text-gray-700">Partout à La Réunion, gratuit dès 50€</p>
+                    <p className="text-sm text-gray-700">Partout à La Réunion, gratuit dès 100€</p>
                   </div>
                   
                   <div className="text-center">

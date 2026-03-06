@@ -274,7 +274,7 @@ export const AbandonedCartEmail: React.FC<AbandonedCartEmailProps> = ({
             <h3>🎁 Pourquoi choisir Monster Phone ?</h3>
             <div className="benefit-item">
               <span className="benefit-icon">✅</span>
-              <span><strong>Livraison Gratuite</strong> dès 50€ d'achat</span>
+              <span><strong>Livraison Gratuite</strong> dès 100€ d'achat</span>
             </div>
             <div className="benefit-item">
               <span className="benefit-icon">🔒</span>

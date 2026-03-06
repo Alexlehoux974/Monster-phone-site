@@ -18,7 +18,7 @@ export default function PanierPage() {
   const [promoDiscount, setPromoDiscount] = useState(0);
 
   const subtotal = getCartTotal();
-  const shipping = subtotal >= 50 ? 0 : 4.99;
+  const shipping = subtotal >= 100 ? 0 : 4.99;
   const discount = promoDiscount;
   const total = subtotal + shipping - discount;
 
@@ -84,26 +84,26 @@ export default function PanierPage() {
           <h1 className="text-3xl font-bold mb-4">Mon Panier ({items.length} article{items.length > 1 ? 's' : ''})</h1>
 
           {/* Barre de progression livraison gratuite */}
-          {subtotal < 50 && (
+          {subtotal < 100 && (
             <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg p-4 mb-6">
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-2">
                   <Truck className="w-5 h-5 text-blue-600" />
                   <span className="font-medium text-blue-900">
-                    Plus que {(50 - subtotal).toFixed(2)}€ pour la livraison gratuite !
+                    Plus que {(100 - subtotal).toFixed(2)}€ pour la livraison gratuite !
                   </span>
                 </div>
-                <span className="text-sm text-blue-700">{Math.round((subtotal / 50) * 100)}%</span>
+                <span className="text-sm text-blue-700">{Math.round((subtotal / 100) * 100)}%</span>
               </div>
               <div className="w-full bg-blue-200 rounded-full h-2.5">
                 <div
                   className="bg-blue-600 h-2.5 rounded-full transition-all duration-500"
-                  style={{ width: `${Math.min((subtotal / 50) * 100, 100)}%` }}
+                  style={{ width: `${Math.min((subtotal / 100) * 100, 100)}%` }}
                 />
               </div>
             </div>
           )}
-          {subtotal >= 50 && (
+          {subtotal >= 100 && (
             <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6 flex items-center gap-3">
               <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
                 <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -272,7 +272,7 @@ export default function PanierPage() {
                   <Truck className="w-8 h-8 text-blue-600 flex-shrink-0" />
                   <div>
                     <p className="font-semibold text-sm">Livraison gratuite</p>
-                    <p className="text-xs text-gray-600">Dès 50€ d&apos;achat</p>
+                    <p className="text-xs text-gray-600">Dès 100€ d&apos;achat</p>
                   </div>
                 </div>
                 <div className="bg-white rounded-lg p-4 flex items-center space-x-3">
@@ -405,7 +405,7 @@ export default function PanierPage() {
 
                 {/* Informations supplémentaires */}
                 <div className="mt-6 space-y-2 text-xs text-gray-600">
-                  <p>✓ Livraison gratuite dès 50€ d&apos;achat</p>
+                  <p>✓ Livraison gratuite dès 100€ d&apos;achat</p>
                   <p>✓ Retours gratuits sous 30 jours</p>
                   <p>✓ Service client disponible 7j/7</p>
                   <p>✓ Garantie satisfait ou remboursé</p>

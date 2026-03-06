@@ -12,11 +12,11 @@ export default function ConditionsGeneralesPage() {
     
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute('content', 'Consultez les conditions générales de vente de Monster Phone Boutique. Livraison gratuite dès 50€, garantie 24 mois, retours 14 jours. Service client La Réunion.');
+      metaDescription.setAttribute('content', 'Consultez les conditions générales de vente de Monster Phone Boutique. Livraison gratuite dès 100€, garantie 24 mois, retours 14 jours. Service client La Réunion.');
     } else {
       const meta = document.createElement('meta');
       meta.name = 'description';
-      meta.content = 'Consultez les conditions générales de vente de Monster Phone Boutique. Livraison gratuite dès 50€, garantie 24 mois, retours 14 jours. Service client La Réunion.';
+      meta.content = 'Consultez les conditions générales de vente de Monster Phone Boutique. Livraison gratuite dès 100€, garantie 24 mois, retours 14 jours. Service client La Réunion.';
       document.head.appendChild(meta);
     }
   }, []);
@@ -84,7 +84,7 @@ export default function ConditionsGeneralesPage() {
                   <li>Les prix sont exprimés en euros toutes taxes comprises (TTC)</li>
                   <li>Les prix incluent la TVA au taux en vigueur à La Réunion</li>
                   <li>Les prix peuvent être modifiés à tout moment mais ne s&apos;appliquent qu&apos;aux commandes futures</li>
-                  <li>Frais de livraison : gratuits dès 50€ d&apos;achat</li>
+                  <li>Frais de livraison : gratuits dès 100€ d&apos;achat</li>
                 </ul>
 
                 <h3 className="text-lg font-semibold text-gray-800 mb-2 mt-4">2.2 Modalités de paiement</h3>
@@ -109,7 +109,7 @@ export default function ConditionsGeneralesPage() {
                 <h3 className="text-lg font-semibold text-gray-800 mb-2 mt-4">3.2 Délais</h3>
                 <ul className="list-disc pl-6 space-y-2">
                   <li><strong>Express (24h)</strong> : Nord et Ouest de l&apos;île - 10€</li>
-                  <li><strong>Standard (48h)</strong> : Toute l&apos;île - Gratuit dès 50€</li>
+                  <li><strong>Standard (48h)</strong> : Toute l&apos;île - Gratuit dès 100€</li>
                   <li><strong>Retrait en boutique</strong> : Gratuit, sur RDV au Port</li>
                   <li><strong>Zones difficiles d&apos;accès</strong> : 72h maximum + 5€</li>
                 </ul>

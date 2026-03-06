@@ -21,15 +21,15 @@ import {
 
 export default function LivraisonGratuitePage() {
   useEffect(() => {
-    document.title = 'Livraison Gratuite dès 50€ | Monster Phone Boutique Réunion 974';
+    document.title = 'Livraison Gratuite dès 100€ | Monster Phone Boutique Réunion 974';
     
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute('content', 'Livraison gratuite dès 50€ d\'achat à La Réunion. Livraison 24h-48h, service express, emballage sécurisé. Monster Phone Boutique 974.');
+      metaDescription.setAttribute('content', 'Livraison gratuite dès 100€ d\'achat à La Réunion. Livraison 24h-48h, service express, emballage sécurisé. Monster Phone Boutique 974.');
     } else {
       const meta = document.createElement('meta');
       meta.name = 'description';
-      meta.content = 'Livraison gratuite dès 50€ d\'achat à La Réunion. Livraison 24h-48h, service express, emballage sécurisé. Monster Phone Boutique 974.';
+      meta.content = 'Livraison gratuite dès 100€ d\'achat à La Réunion. Livraison 24h-48h, service express, emballage sécurisé. Monster Phone Boutique 974.';
       document.head.appendChild(meta);
     }
   }, []);
@@ -63,7 +63,7 @@ export default function LivraisonGratuitePage() {
 
   const deliveryOptions = [
     {
-      title: "Standard (GRATUITE dès 50€)",
+      title: "Standard (GRATUITE dès 100€)",
       price: "0€",
       time: "24-48h",
       description: "Livraison à domicile ou en point relais",
@@ -119,7 +119,7 @@ export default function LivraisonGratuitePage() {
                 LIVRAISON GRATUITE
               </div>
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                Livraison Gratuite dès 50€
+                Livraison Gratuite dès 100€
               </h1>
               <p className="text-xl text-gray-900 max-w-3xl mx-auto">
                 Recevez vos produits gaming partout à La Réunion, rapidement et en toute sécurité
@@ -138,7 +138,7 @@ export default function LivraisonGratuitePage() {
               className="bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-lg p-8 mb-8 text-center"
             >
               <Euro className="w-16 h-16 mx-auto mb-4" />
-              <h2 className="text-3xl font-bold mb-2">50€ d&apos;achat = Livraison GRATUITE</h2>
+              <h2 className="text-3xl font-bold mb-2">100€ d&apos;achat = Livraison GRATUITE</h2>
               <p className="text-xl opacity-100 mb-4">
                 Profitez de la livraison gratuite partout à La Réunion
               </p>
@@ -376,7 +376,7 @@ export default function LivraisonGratuitePage() {
                 <div>
                   <h3 className="font-semibold text-amber-900 mb-2">Informations importantes</h3>
                   <ul className="space-y-2 text-amber-900 text-sm">
-                    <li>• <strong>Seuil de gratuité :</strong> 50€ HT (hors frais de port éventuels)</li>
+                    <li>• <strong>Seuil de gratuité :</strong> 100€ HT (hors frais de port éventuels)</li>
                     <li>• <strong>Commandes avant 16h :</strong> Expédition le jour même</li>
                     <li>• <strong>Weekend et jours fériés :</strong> Pas de livraison, préparation reportée</li>
                     <li>• <strong>Adresse incomplète :</strong> Peut retarder la livraison</li>

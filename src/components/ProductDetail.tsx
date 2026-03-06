@@ -34,6 +34,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                         product.variants?.[0];
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | undefined>(defaultVariant);
   const [variants, setVariants] = useState<ProductVariant[]>(product.variants || []);
+  const [productName, setProductName] = useState(product.name);
   const [productPrice, setProductPrice] = useState(product.basePrice);
   const [productStockQuantity, setProductStockQuantity] = useState(defaultVariant?.stock || 0);
   const [adminDiscountPercent, setAdminDiscountPercent] = useState(defaultVariant?.adminDiscountPercent || 0);
@@ -74,6 +75,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
     setSelectedVariant(newDefaultVariant);
 
     // Réinitialiser tous les états avec les nouvelles données du produit
+    setProductName(product.name);
     setProductPrice(product.basePrice);
     setProductStockQuantity(newDefaultVariant?.stock || 0);
     setAdminDiscountPercent(newDefaultVariant?.adminDiscountPercent || 0);
@@ -137,6 +139,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
         table: 'products',
         filter: `id=eq.${product.id}`
       }, (payload) => {
+        if (payload.new.name) setProductName(payload.new.name);
         setProductPrice(payload.new.price);
         setProductStockQuantity(payload.new.stock_quantity || 0);
         setAdminDiscountPercent(payload.new.admin_discount_percent || 0);
@@ -220,7 +223,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
   const handleAddToCart = () => {
     addToCart(product, quantity, selectedVariant?.color);
-    toast.success(`${product.name} ajouté au panier`, {
+    toast.success(`${productName} ajouté au panier`, {
       description: selectedVariant ? `Couleur: ${selectedVariant.color}` : undefined,
     });
 
@@ -287,7 +290,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   const handleShare = () => {
     if (navigator.share) {
       navigator.share({
-        title: product.name,
+        title: productName,
         text: product.shortDescription || product.fullDescription,
         url: window.location.href,
       });
@@ -317,7 +320,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           <ChevronRight className="h-4 w-4 text-gray-400" />
           <Link href={`/nos-produits?category=${encodeURIComponent(product.categoryName)}`} className="hover:text-red-600 transition-colors">{product.categoryName}</Link>
           <ChevronRight className="h-4 w-4 text-gray-400" />
-          <span className="text-gray-900 font-semibold">{product.name}</span>
+          <span className="text-gray-900 font-semibold">{productName}</span>
         </nav>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
@@ -493,7 +496,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
             <div className="flex items-start justify-between mb-2">
               <div>
                 <p className="text-sm text-gray-600 mb-1">{product.brandName}</p>
-                <h1 className="text-3xl font-bold text-gray-900">{product.name}</h1>
+                <h1 className="text-3xl font-bold text-gray-900">{productName}</h1>
                 {product.sku && (
                   <p className="text-sm text-gray-500 mt-1">Réf: {product.sku}</p>
                 )}
@@ -703,7 +706,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
             <div className="grid grid-cols-2 gap-2">
               <div className="flex items-center gap-2 text-sm text-gray-600">
                 <Truck className="h-4 w-4 text-green-600" />
-                <span>Livraison gratuite dès 50€</span>
+                <span>Livraison gratuite dès 100€</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-gray-600">
                 <Shield className="h-4 w-4 text-blue-600" />

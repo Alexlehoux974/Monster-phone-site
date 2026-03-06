@@ -174,11 +174,11 @@ describe('CheckoutPage', () => {
     const totalsSection = summarySection?.querySelector('.border-t.pt-4');
     expect(totalsSection?.textContent).toContain('29.99 €');
 
-    // Livraison standard (sous 50€)
+    // Livraison standard (sous 100€)
     expect(totalsSection?.textContent).toContain('4.99 €');
   });
 
-  it('should show free shipping for orders over 50€', async () => {
+  it('should show free shipping for orders over 100€', async () => {
     const expensiveProduct = { ...mockProduct, price: '60.00€' };
     const cartItems = [{ product: expensiveProduct, quantity: 1 }];
     

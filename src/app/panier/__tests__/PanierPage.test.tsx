@@ -170,11 +170,11 @@ describe('PanierPage', () => {
     const subtotalElements = screen.getAllByText('109.97 €');
     expect(subtotalElements.length).toBeGreaterThan(0);
     
-    // Livraison gratuite car > 50€
+    // Livraison gratuite car > 100€
     expect(screen.getByText('Gratuit')).toBeInTheDocument();
   });
 
-  it('should show shipping cost for orders under 50€', () => {
+  it('should show shipping cost for orders under 100€', () => {
     const cartItems = [{ product: mockProduct1, quantity: 1 }]; // 29.99€
 
     render(
@@ -188,7 +188,7 @@ describe('PanierPage', () => {
     
     // Dans le composant actuel, il n'y a pas de message "Plus que X pour livraison gratuite"
     // mais il y a un message dans les informations supplémentaires
-    expect(screen.getByText('✓ Livraison gratuite dès 50€ d\'achat')).toBeInTheDocument();
+    expect(screen.getByText('✓ Livraison gratuite dès 100€ d\'achat')).toBeInTheDocument();
   });
 
   it('should apply promo code', async () => {

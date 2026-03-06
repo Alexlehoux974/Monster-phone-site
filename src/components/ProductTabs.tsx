@@ -99,7 +99,7 @@ export default function ProductTabs({ product }: ProductTabsProps) {
                   <div>
                     <p className="font-semibold">Frais de port offerts</p>
                     <p className="text-sm text-gray-600">
-                      Pour toute commande supérieure à 50€
+                      Pour toute commande supérieure à 100€
                     </p>
                   </div>
                 </div>

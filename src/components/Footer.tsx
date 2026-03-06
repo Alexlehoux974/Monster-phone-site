@@ -324,7 +324,7 @@ export default function Footer() {
             </h3>
             <ul className="space-y-2">
               <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
-                <Link href="/services/livraison-gratuite" className="text-gray-100 hover:text-white transition-colors">Livraison gratuite dès 50€</Link>
+                <Link href="/services/livraison-gratuite" className="text-gray-100 hover:text-white transition-colors">Livraison gratuite dès 100€</Link>
               </motion.li>
               <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
                 <Link href="/services/retours-30-jours" className="text-gray-100 hover:text-white transition-colors">Retours sous 30 jours</Link>

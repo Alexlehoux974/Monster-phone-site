@@ -409,7 +409,7 @@ export default function ContactPage() {
                     <Navigation className="w-8 h-8" />
                   </div>
                   <h3 className="font-semibold mb-2">Livraison 48h</h3>
-                  <p className="text-sm text-white">Partout sur l&apos;île, gratuit dès 50€</p>
+                  <p className="text-sm text-white">Partout sur l&apos;île, gratuit dès 100€</p>
                 </div>
                 <div className="text-center">
                   <div className="bg-white/10 rounded-full p-4 w-16 h-16 mx-auto mb-4 flex items-center justify-center">

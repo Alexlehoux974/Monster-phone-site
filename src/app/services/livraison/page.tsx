@@ -27,10 +27,10 @@ export default function LivraisonPage() {
                 LIVRAISON À LA RÉUNION
               </div>
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                Livraison gratuite dès 50€
+                Livraison gratuite dès 100€
               </h1>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Profitez de la livraison gratuite partout à la Réunion pour toute commande de 50€ et plus. 
+                Profitez de la livraison gratuite partout à la Réunion pour toute commande de 100€ et plus. 
                 Des tarifs préférentiels pour les commandes inférieures.
               </p>
             </motion.div>
@@ -87,7 +87,7 @@ export default function LivraisonPage() {
                   <h3 className="text-lg font-bold text-gray-900 mb-2">Gratuit</h3>
                   <p className="text-green-600 font-bold text-2xl mb-2">0€</p>
                   <p className="text-sm text-gray-600">
-                    Pour les commandes de 50€ et plus
+                    Pour les commandes de 100€ et plus
                   </p>
                   <Badge className="mt-3 bg-green-100 text-green-800">Recommandé</Badge>
                 </div>

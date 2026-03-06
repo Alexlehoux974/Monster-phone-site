@@ -286,7 +286,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
 
   return {
     title: `${product.name} | ${product.brandName} | Monster Phone Boutique`,
-    description: product.shortDescription || `Découvrez ${product.name} de ${product.brandName}. Livraison gratuite à La Réunion dès 50€. Garantie 2 ans.`,
+    description: product.shortDescription || `Découvrez ${product.name} de ${product.brandName}. Livraison gratuite à La Réunion dès 100€. Garantie 2 ans.`,
     keywords: `${product.name}, ${product.brandName}, ${product.categoryName}, La Réunion, 974, Monster Phone`,
     openGraph: {
       title: product.name,

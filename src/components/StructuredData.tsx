@@ -90,7 +90,7 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
               '@type': 'OfferShippingDetails',
               shippingRate: {
                 '@type': 'MonetaryAmount',
-                value: price >= 50 ? '0' : '5.90',
+                value: price >= 100 ? '0' : '5.90',
                 currency: 'EUR',
               },
               shippingDestination: {

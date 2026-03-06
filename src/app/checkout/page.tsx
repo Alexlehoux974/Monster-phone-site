@@ -351,7 +351,7 @@ function CheckoutContent() {
   };
 
   const subtotal = getCartTotal();
-  const shipping = formData.shippingMethod === 'express' ? 9.99 : (subtotal >= 50 ? 0 : 4.99);
+  const shipping = formData.shippingMethod === 'express' ? 9.99 : (subtotal >= 100 ? 0 : 4.99);
   const total = subtotal + shipping;
 
   // Plus de système d'étapes - checkout en page unique pour conversion optimale
@@ -640,7 +640,7 @@ function CheckoutContent() {
                         <p className="text-sm text-gray-600">3-5 jours ouvrés</p>
                       </div>
                       <span className="font-medium">
-                        {subtotal >= 50 ? 'Gratuit' : '4,99 €'}
+                        {subtotal >= 100 ? 'Gratuit' : '4,99 €'}
                       </span>
                     </label>
 

@@ -22,7 +22,7 @@ import { sortProductsByPriority } from '@/lib/utils';
 
 export const metadata: Metadata = {
   title: 'Monster Phone Boutique | Accessoires Gaming à La Réunion',
-  description: 'Découvrez les meilleurs accessoires gaming pour smartphones à La Réunion. Livraison gratuite dès 50€, garantie 2 ans.',
+  description: 'Découvrez les meilleurs accessoires gaming pour smartphones à La Réunion. Livraison gratuite dès 100€, garantie 2 ans.',
   keywords: 'Monster Phone, accessoires gaming, smartphones, La Réunion, 974, gaming mobile, HONOR, MY WAY, MUVIT',
   openGraph: {
     title: 'Monster Phone Boutique - Accessoires Gaming à La Réunion',

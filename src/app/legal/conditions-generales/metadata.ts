@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Conditions Générales de Vente | Monster Phone Boutique La Réunion',
-  description: 'Consultez les conditions générales de vente de Monster Phone Boutique. Livraison gratuite dès 50€, garantie 24 mois, retours 14 jours. Service client La Réunion.',
+  description: 'Consultez les conditions générales de vente de Monster Phone Boutique. Livraison gratuite dès 100€, garantie 24 mois, retours 14 jours. Service client La Réunion.',
   keywords: [
     'conditions générales vente monster phone',
     'cgv smartphone réunion',

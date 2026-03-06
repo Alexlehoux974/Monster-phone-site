@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Promotions Monster Phone | Smartphones Gaming en Promo La Réunion 974',
-  description: 'Découvrez nos promotions exceptionnelles sur les smartphones gaming HONOR, accessoires MUVIT et montres connectées. Livraison gratuite dès 50€ à La Réunion.',
+  description: 'Découvrez nos promotions exceptionnelles sur les smartphones gaming HONOR, accessoires MUVIT et montres connectées. Livraison gratuite dès 100€ à La Réunion.',
   keywords: [
     'promotions smartphone réunion',
     'téléphone gaming promo 974',
