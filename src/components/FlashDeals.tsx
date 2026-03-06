@@ -222,7 +222,7 @@ const FlashDeals = () => {
           className="text-center mt-8"
         >
           <Link
-            href="/nos-produits?promo=true"
+            href="/offres-flash"
             className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-red-600 text-white px-6 py-3 rounded-full font-medium hover:shadow-lg hover:scale-105 transition-all"
           >
             <Zap className="w-5 h-5" />
