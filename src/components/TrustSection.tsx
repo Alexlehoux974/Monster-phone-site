@@ -118,7 +118,7 @@ export default function TrustSection() {
     <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {trustFeatures.map((feature, index) => (
             <div key={index} className="text-center group">
               <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 text-white rounded-full mb-4 group-hover:scale-110 transition-transform duration-300">
