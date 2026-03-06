@@ -387,7 +387,7 @@ const MonsterPhoneHero = () => {
             >
               Smartphones
             </motion.span>
-            {" "}et d&apos;accessoires gaming.
+            {" "}et d&apos;accessoires fait pour vous
           </motion.p>
 
           {/* CTA Buttons */}

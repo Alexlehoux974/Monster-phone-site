@@ -97,13 +97,13 @@ export default async function Home() {
         {/* Section Smartphones */}
         <FeaturedProductsSupabase
           products={featuredSmartphones}
-          title="Nos Smartphones Gaming"
+          title="Nos Smartphones HONOR"
         />
 
         {/* Section Écouteurs */}
         <FeaturedProductsSupabase
           products={featuredEcouteurs}
-          title="Nos Écouteurs Gaming"
+          title="Nos écouteurs"
         />
 
         {/* Flash Deals - S'affiche si des promos existent */}

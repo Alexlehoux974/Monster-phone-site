@@ -30,8 +30,8 @@ export default function FeaturesSection() {
             },
             {
               icon: Zap,
-              title: "Performance Max",
-              description: "Optimisé pour les sessions gaming intensives",
+              title: "SAV Local à Proximité",
+              description: "Un service après-vente en cas de besoin",
             },
             {
               icon: Star,

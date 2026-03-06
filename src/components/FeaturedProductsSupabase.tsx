@@ -60,7 +60,7 @@ export default function FeaturedProductsSupabase({ products: initialProducts, ti
             {title || 'Nos Produits Phares'}
           </h2>
           <p className="text-xl text-gray-800 max-w-2xl mx-auto">
-            Découvrez notre sélection d&apos;accessoires et smartphones gaming,
+            Découvrez notre sélection d&apos;accessoires et smartphones,
             choisis pour leur innovation et leur qualité exceptionnelle.
           </p>
         </div>
