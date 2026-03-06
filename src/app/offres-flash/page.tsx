@@ -53,7 +53,7 @@ export default function OffresFlashPage() {
     <div className="min-h-screen bg-gray-50">
       <Header />
 
-      <main className="pt-[110px]">
+      <main className="pt-[150px]">
         {/* Hero section */}
         <section className="bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white py-16 relative overflow-hidden">
           <div className="absolute inset-0">
