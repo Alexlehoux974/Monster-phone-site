@@ -427,7 +427,7 @@ const MonsterPhoneHero = () => {
                 </motion.span>
               </motion.div>
               
-              <Link href="/promotions">
+              <Link href="/offres-flash">
                 <Button className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-8 py-4 text-lg shadow-xl border-0 font-semibold">
                   <Sparkles className="w-5 h-5 mr-2 animate-pulse" />
                   Offres Spéciales
