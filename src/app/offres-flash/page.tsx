@@ -665,7 +665,7 @@ export default function OffresFlashPage() {
                       Voir tous nos produits
                     </Link>
                   </Button>
-                  <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-orange-600" asChild>
+                  <Button size="lg" className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-orange-600 font-semibold" asChild>
                     <Link href="/smartphones">
                       Nos Smartphones
                     </Link>
