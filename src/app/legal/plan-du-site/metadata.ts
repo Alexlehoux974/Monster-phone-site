@@ -2,11 +2,11 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Plan du Site | Monster Phone Boutique Navigation La Réunion',
-  description: 'Plan du site Monster Phone Boutique. Retrouvez facilement toutes les sections : smartphones gaming, accessoires, promotions, contact, pages légales.',
+  description: 'Plan du site Monster Phone Boutique. Retrouvez facilement toutes les sections : smartphones, accessoires, promotions, contact, pages légales.',
   keywords: [
     'plan site monster phone',
     'navigation boutique réunion',
-    'sitemap téléphone gaming',
+    'sitemap téléphone réunion',
     'pages monster phone',
     'structure site 974',
     'index navigation'

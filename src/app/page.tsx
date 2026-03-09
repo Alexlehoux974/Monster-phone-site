@@ -21,12 +21,12 @@ import { supabaseProductToLegacy } from '@/lib/supabase/adapters';
 import { sortProductsByPriority } from '@/lib/utils';
 
 export const metadata: Metadata = {
-  title: 'Monster Phone Boutique | Accessoires Gaming à La Réunion',
-  description: 'Découvrez les meilleurs accessoires gaming pour smartphones à La Réunion. Livraison gratuite dès 100€, garantie 2 ans.',
-  keywords: 'Monster Phone, accessoires gaming, smartphones, La Réunion, 974, gaming mobile, HONOR, MY WAY, MUVIT',
+  title: 'Monster Phone Boutique | Smartphones & Multimédia à La Réunion',
+  description: 'Découvrez nos smartphones HONOR, écouteurs, montres connectées et accessoires à La Réunion. Livraison gratuite dès 100€, garantie 2 ans.',
+  keywords: 'Monster Phone, smartphones, accessoires téléphone, La Réunion, 974, HONOR, MY WAY, MUVIT, écouteurs, montres connectées, multimédia',
   openGraph: {
-    title: 'Monster Phone Boutique - Accessoires Gaming à La Réunion',
-    description: 'La référence des accessoires gaming pour smartphones à La Réunion. Livraison express 24h/48h.',
+    title: 'Monster Phone Boutique - Smartphones & Multimédia à La Réunion',
+    description: 'Votre spécialiste smartphones et multimédia à La Réunion. Livraison express 24h/48h.',
     url: 'https://monster-phone.re',
     siteName: 'Monster Phone Boutique',
     images: [
@@ -42,8 +42,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Monster Phone Boutique | Accessoires Gaming',
-    description: 'Les meilleurs accessoires gaming pour smartphones à La Réunion',
+    title: 'Monster Phone Boutique | Smartphones & Multimédia',
+    description: 'Votre spécialiste smartphones et multimédia à La Réunion',
     images: ['https://monster-phone.re/og-image.jpg'],
   },
   alternates: {

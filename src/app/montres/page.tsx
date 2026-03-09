@@ -11,8 +11,8 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 export const metadata: Metadata = {
-  title: 'Montres Connectées | Monster Phone Boutique',
-  description: 'Montres connectées et smartwatches pour rester connecté avec style. Suivi fitness, notifications et plus.',
+  title: 'Montres Connectées HiFuture | Monster Phone Boutique La Réunion',
+  description: 'Montres connectées HiFuture à La Réunion : Evo 2, Aura 2, Lume. Sport, santé, notifications. Livraison express 24/48h, garantie 2 ans.',
 };
 
 export default async function MontresPage() {

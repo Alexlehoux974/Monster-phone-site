@@ -69,7 +69,7 @@ export async function POST(request: NextRequest) {
     await resend.emails.send({
       from: 'Monster Phone Boutique <contact@monster-phone.re>',
       to: cart.customer_email,
-      subject: `🛒 ${cart.customer_name}, votre panier vous attend ! Ne ratez pas ces produits gaming`,
+      subject: `🛒 ${cart.customer_name}, votre panier vous attend ! Ne ratez pas ces produits`,
       react: AbandonedCartEmail({
         customerName: cart.customer_name || 'Cher client',
         customerEmail: cart.customer_email,
@@ -188,7 +188,7 @@ export async function GET(request: NextRequest) {
         await resend.emails.send({
           from: 'Monster Phone Boutique <contact@monster-phone.re>',
           to: cart.customer_email,
-          subject: `🛒 ${cart.customer_name}, votre panier vous attend ! Ne ratez pas ces produits gaming`,
+          subject: `🛒 ${cart.customer_name}, votre panier vous attend ! Ne ratez pas ces produits`,
           react: AbandonedCartEmail({
             customerName: cart.customer_name || 'Cher client',
             customerEmail: cart.customer_email,

@@ -11,8 +11,8 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 export const metadata: Metadata = {
-  title: 'LED & Éclairage | Monster Phone Boutique',
-  description: 'Découvrez notre gamme d\'éclairage LED. Ampoules connectées, bandeaux LED, néons et accessoires lumineux.',
+  title: 'Éclairage LED Monster Illuminescence | Monster Phone Boutique La Réunion',
+  description: 'Éclairage LED Monster Illuminescence à La Réunion : ampoules connectées, barres LED, rubans lumineux. Livraison express 24/48h.',
 };
 
 export default async function LEDPage() {

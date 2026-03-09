@@ -11,8 +11,8 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 export const metadata: Metadata = {
-  title: 'Audio | Monster Phone Boutique',
-  description: 'Casques, écouteurs, enceintes Bluetooth et accessoires audio de qualité supérieure pour votre expérience sonore.',
+  title: 'Écouteurs, Casques & Enceintes | Monster Phone Boutique La Réunion',
+  description: 'Écouteurs Monster, casques MUVIT et enceintes HiFuture à La Réunion. Audio premium, livraison gratuite dès 100€. Garantie 2 ans.',
 };
 
 export default async function AudioPage() {

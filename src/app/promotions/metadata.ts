@@ -1,13 +1,13 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Promotions Monster Phone | Smartphones Gaming en Promo La Réunion 974',
-  description: 'Découvrez nos promotions exceptionnelles sur les smartphones gaming HONOR, accessoires MUVIT et montres connectées. Livraison gratuite dès 100€ à La Réunion.',
+  title: 'Promotions Monster Phone | Smartphones & Accessoires en Promo La Réunion 974',
+  description: 'Découvrez nos promotions exceptionnelles sur les smartphones HONOR, accessoires MUVIT et montres connectées. Livraison gratuite dès 100€ à La Réunion.',
   keywords: [
     'promotions smartphone réunion',
-    'téléphone gaming promo 974',
+    'téléphone promo 974',
     'honor promotion réunion',
-    'accessoires gaming pas cher',
+    'accessoires téléphone pas cher',
     'montres connectées promo',
     'soldes téléphone réunion',
     'offres spéciales monster phone'
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
   creator: 'Monster Phone Boutique',
   publisher: 'Monster Phone Boutique',
   openGraph: {
-    title: 'Promotions Smartphones Gaming | Monster Phone Boutique Réunion',
-    description: 'Profitez de nos promotions exceptionnelles sur les smartphones gaming et accessoires. Jusqu\'à -20% sur une sélection de produits.',
+    title: 'Promotions Smartphones & Accessoires | Monster Phone Boutique Réunion',
+    description: 'Profitez de nos promotions exceptionnelles sur les smartphones et accessoires. Jusqu\'à -20% sur une sélection de produits.',
     url: 'https://monster-phone.re/promotions',
     siteName: 'Monster Phone Boutique',
     locale: 'fr_FR',
@@ -33,8 +33,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Promotions Smartphones Gaming La Réunion',
-    description: 'Profitez de nos promotions exceptionnelles sur les smartphones gaming et accessoires.',
+    title: 'Promotions Smartphones & Accessoires La Réunion',
+    description: 'Profitez de nos promotions exceptionnelles sur les smartphones et accessoires.',
     images: ['/LOGO-MONSTER-PHONE.png']
   },
   robots: {

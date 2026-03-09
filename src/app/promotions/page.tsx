@@ -256,26 +256,26 @@ export default function PromotionsPage() {
   const categories = Array.from(new Set(productsWithPromotions.map(p => p.categoryName)));
 
   useEffect(() => {
-    document.title = 'Promotions Monster Phone | Smartphones Gaming en Promo La Réunion 974';
+    document.title = 'Promotions Monster Phone | Smartphones & Accessoires en Promo La Réunion 974';
     
     // Ajouter les métadonnées SEO
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute('content', 'Découvrez nos promotions exceptionnelles sur les smartphones gaming HONOR, accessoires MUVIT et montres connectées. Livraison gratuite dès 100€ à La Réunion.');
+      metaDescription.setAttribute('content', 'Découvrez nos promotions exceptionnelles sur les smartphones HONOR, accessoires MUVIT et montres connectées. Livraison gratuite dès 100€ à La Réunion.');
     } else {
       const meta = document.createElement('meta');
       meta.name = 'description';
-      meta.content = 'Découvrez nos promotions exceptionnelles sur les smartphones gaming HONOR, accessoires MUVIT et montres connectées. Livraison gratuite dès 100€ à La Réunion.';
+      meta.content = 'Découvrez nos promotions exceptionnelles sur les smartphones HONOR, accessoires MUVIT et montres connectées. Livraison gratuite dès 100€ à La Réunion.';
       document.head.appendChild(meta);
     }
 
     const keywords = document.querySelector('meta[name="keywords"]');
     if (keywords) {
-      keywords.setAttribute('content', 'promotions smartphone réunion, téléphone gaming promo 974, honor promotion réunion, accessoires gaming pas cher, montres connectées promo, soldes téléphone réunion');
+      keywords.setAttribute('content', 'promotions smartphone réunion, téléphone promo 974, honor promotion réunion, accessoires téléphone pas cher, montres connectées promo, soldes téléphone réunion');
     } else {
       const meta = document.createElement('meta');
       meta.name = 'keywords';
-      meta.content = 'promotions smartphone réunion, téléphone gaming promo 974, honor promotion réunion, accessoires gaming pas cher, montres connectées promo, soldes téléphone réunion';
+      meta.content = 'promotions smartphone réunion, téléphone promo 974, honor promotion réunion, accessoires téléphone pas cher, montres connectées promo, soldes téléphone réunion';
       document.head.appendChild(meta);
     }
   }, []);
@@ -336,7 +336,7 @@ export default function PromotionsPage() {
                   transition={{ duration: 0.8, delay: 0.3 }}
                   className="text-xl text-gray-100 max-w-3xl mx-auto mb-8"
                 >
-                  Découvrez nos offres exceptionnelles sur une sélection de smartphones gaming, 
+                  Découvrez nos offres exceptionnelles sur une sélection de smartphones,
                   accessoires et gadgets high-tech. Promotions limitées dans le temps !
                 </motion.p>
                 
@@ -573,7 +573,7 @@ export default function PromotionsPage() {
                 Pas encore trouvé votre bonheur ?
               </h2>
               <p className="text-xl mb-6 opacity-90">
-                Découvrez notre gamme complète de produits gaming et high-tech
+                Découvrez notre gamme complète de smartphones et accessoires
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" variant="secondary" asChild>

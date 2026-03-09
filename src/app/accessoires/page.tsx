@@ -11,8 +11,8 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 export const metadata: Metadata = {
-  title: 'Accessoires | Monster Phone Boutique',
-  description: 'Découvrez notre gamme complète d\'accessoires pour smartphones et gaming : coques, protections, câbles, chargeurs et plus encore.',
+  title: 'Accessoires Téléphone | Monster Phone Boutique La Réunion',
+  description: 'Coques, chargeurs, câbles et protections pour smartphone à La Réunion. Marques MY WAY, MUVIT, Tiger Power. Livraison express 24/48h.',
 };
 
 export default async function AccessoiresPage() {

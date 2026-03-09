@@ -28,11 +28,11 @@ export default function PlanDuSitePage() {
     
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute('content', 'Plan du site Monster Phone Boutique. Retrouvez facilement toutes les sections : smartphones gaming, accessoires, promotions, contact, pages légales.');
+      metaDescription.setAttribute('content', 'Plan du site Monster Phone Boutique. Retrouvez facilement toutes les sections : smartphones, accessoires, promotions, contact, pages légales.');
     } else {
       const meta = document.createElement('meta');
       meta.name = 'description';
-      meta.content = 'Plan du site Monster Phone Boutique. Retrouvez facilement toutes les sections : smartphones gaming, accessoires, promotions, contact, pages légales.';
+      meta.content = 'Plan du site Monster Phone Boutique. Retrouvez facilement toutes les sections : smartphones, accessoires, promotions, contact, pages légales.';
       document.head.appendChild(meta);
     }
   }, []);
@@ -52,17 +52,17 @@ export default function PlanDuSitePage() {
       description: "Catalogue complet de nos produits",
       color: "green",
       subcategories: [
-        { name: "Smartphones Gaming", url: "/nos-produits?category=smartphones" },
+        { name: "Smartphones", url: "/nos-produits?category=smartphones" },
         { name: "Accessoires", url: "/nos-produits?category=accessoires" },
         { name: "Montres Connectées", url: "/nos-produits?category=montres" },
-        { name: "Audio Gaming", url: "/nos-produits?category=audio" }
+        { name: "Audio", url: "/nos-produits?category=audio" }
       ]
     },
     {
       title: "Accessoires",
       icon: Headphones,
       url: "/accessoires",
-      description: "Découvrez notre gamme d'accessoires gaming",
+      description: "Découvrez notre gamme d'accessoires",
       color: "purple"
     },
     {
@@ -342,7 +342,7 @@ export default function PlanDuSitePage() {
                 Monster Phone Boutique
               </h2>
               <p className="text-lg opacity-90 mb-4">
-                Votre spécialiste en téléphonie gaming à La Réunion
+                Votre spécialiste en téléphones et multimédia à La Réunion
               </p>
               <div className="flex items-center justify-center gap-4 text-sm opacity-80">
                 <div className="flex items-center gap-1">

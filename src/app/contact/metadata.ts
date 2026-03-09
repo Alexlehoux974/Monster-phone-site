@@ -1,23 +1,23 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Contact Monster Phone Boutique La Réunion | Téléphones Gaming 974',
-  description: 'Contactez Monster Phone Boutique à La Réunion. Spécialiste smartphones gaming HONOR, accessoires MUVIT. 16 Rue Claude Chappe, ZAE 2000, 97290 Le Port. Tel: 02 62 02 51 02',
+  title: 'Contact Monster Phone Boutique La Réunion | Téléphones & Multimédia 974',
+  description: 'Contactez Monster Phone Boutique à La Réunion. Spécialiste smartphones HONOR, accessoires MUVIT et multimédia. 16 Rue Claude Chappe, ZAE 2000, 97290 Le Port. Tel: 02 62 02 51 02',
   keywords: [
     'contact monster phone',
-    'téléphone gaming réunion',
+    'téléphone multimédia réunion',
     'boutique smartphone 974',
     'le port réunion',
     'honor réunion',
     'réparation téléphone réunion',
-    'accessoires gaming réunion'
+    'accessoires téléphone réunion'
   ],
   authors: [{ name: 'Monster Phone Boutique' }],
   creator: 'Monster Phone Boutique',
   publisher: 'Monster Phone Boutique',
   openGraph: {
     title: 'Contact Monster Phone Boutique La Réunion',
-    description: 'Contactez votre spécialiste en téléphones gaming à La Réunion. Showroom au Port, livraison 48h dans toute l\'île.',
+    description: 'Contactez votre spécialiste en téléphones et multimédia à La Réunion. Showroom au Port, livraison 48h dans toute l\'île.',
     url: 'https://monster-phone.re/contact',
     siteName: 'Monster Phone Boutique',
     locale: 'fr_FR',
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Contact Monster Phone Boutique La Réunion',
-    description: 'Contactez votre spécialiste en téléphones gaming à La Réunion. Showroom au Port.',
+    description: 'Contactez votre spécialiste en téléphones et multimédia à La Réunion. Showroom au Port.',
     images: ['/LOGO-MONSTER-PHONE.png']
   },
   robots: {

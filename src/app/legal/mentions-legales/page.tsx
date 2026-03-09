@@ -333,7 +333,7 @@ export default function MentionsLegalesPage() {
 
                 <div className="mt-8 p-4 bg-gray-100 rounded-lg text-center">
                   <p className="text-gray-800 text-sm">
-                    <strong className="text-gray-900">ZR INDIAN OCEAN - Monster Phone</strong> - Votre spécialiste en téléphonie gaming à La Réunion
+                    <strong className="text-gray-900">ZR INDIAN OCEAN - Monster Phone</strong> - Votre spécialiste en téléphones et multimédia à La Réunion
                   </p>
                 </div>
               </div>

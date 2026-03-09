@@ -34,7 +34,7 @@ export default function TestimonialsSection() {
       name: "Thomas R.",
       location: "Saint-Paul",
       rating: 5,
-      comment: "Batterie MONSTER N-Lite 206 au top ! Charge super rapide, design premium. Parfaite pour mes sessions gaming intensives. Je recommande vivement !",
+      comment: "Batterie MONSTER N-Lite 206 au top ! Charge super rapide, design premium. Parfaite pour une utilisation intensive. Je recommande vivement !",
       product: "Batterie MONSTER",
       verified: true
     },

@@ -21,11 +21,11 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Monster Phone Boutique | Téléphones Gaming La Réunion 974",
+    default: "Monster Phone Boutique | Téléphones & Multimédia La Réunion 974",
     template: "%s | Monster Phone Boutique"
   },
-  description: "Monster Phone Boutique - Spécialiste smartphones gaming HONOR, accessoires MUVIT à La Réunion. Service après-vente, livraison gratuite dès 100€.",
-  keywords: ["Monster Phone", "smartphones gaming", "HONOR", "MUVIT", "La Réunion", "974", "accessoires téléphone", "gaming mobile"],
+  description: "Monster Phone Boutique - Spécialiste smartphones HONOR, accessoires MUVIT et multimédia à La Réunion. Service après-vente, livraison gratuite dès 100€.",
+  keywords: ["Monster Phone", "smartphones", "HONOR", "MUVIT", "La Réunion", "974", "accessoires téléphone", "multimédia", "écouteurs", "montres connectées"],
   authors: [{ name: "Monster Phone Boutique" }],
   creator: "Monster Phone Boutique",
   publisher: "Monster Phone Boutique",
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     creator: '@monsterphone974',
   },
   verification: {
-    google: 'google-site-verification-code',
+    google: 'GAc5MnONdB2RrX_xzWG2d24tMIH6-Vp4DkZw8jhvP_0',
   },
   category: 'e-commerce',
 };

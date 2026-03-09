@@ -94,7 +94,7 @@ export default function SupportTechniquePage() {
                     <li>• Configuration initiale et transfert de données</li>
                     <li>• Paramétrage des comptes et synchronisation</li>
                     <li>• Installation et configuration d&apos;applications</li>
-                    <li>• Optimisation des performances gaming</li>
+                    <li>• Optimisation des performances</li>
                     <li>• Mise à jour logicielle et sécurité</li>
                     <li>• Résolution de problèmes de connectivité</li>
                   </ul>

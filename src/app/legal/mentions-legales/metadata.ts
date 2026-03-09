@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   publisher: 'Monster Phone Boutique',
   openGraph: {
     title: 'Mentions Légales | Monster Phone Boutique',
-    description: 'Informations légales de Monster Phone Boutique, spécialiste téléphones gaming La Réunion.',
+    description: 'Informations légales de Monster Phone Boutique, spécialiste téléphones et multimédia La Réunion.',
     url: 'https://monster-phone.re/legal/mentions-legales',
     siteName: 'Monster Phone Boutique',
     locale: 'fr_FR',

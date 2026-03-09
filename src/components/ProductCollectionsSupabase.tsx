@@ -23,7 +23,7 @@ interface CollectionConfig {
 const collectionsConfig: CollectionConfig[] = [
   {
     id: 'smartphones',
-    title: 'Smartphones Gaming',
+    title: 'Smartphones',
     shortTitle: 'Smartphones',
     icon: Smartphone,
     categorySlug: 'smartphones',
@@ -56,7 +56,7 @@ const collectionsConfig: CollectionConfig[] = [
   },
   {
     id: 'accessoires',
-    title: 'Accessoires Gaming',
+    title: 'Accessoires',
     shortTitle: 'Accessoires',
     icon: Cable,
     categorySlug: 'divers',

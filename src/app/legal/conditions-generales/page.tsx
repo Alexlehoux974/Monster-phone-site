@@ -71,7 +71,7 @@ export default function ConditionsGeneralesPage() {
                   monster-phone.re exploité par Monster Phone Boutique, société située à La Réunion.
                 </p>
                 <p>
-                  Monster Phone Boutique est spécialisée dans la vente de smartphones gaming, accessoires high-tech, 
+                  Monster Phone Boutique est spécialisée dans la vente de smartphones, accessoires et multimédia,
                   montres connectées et produits électroniques exclusivement à La Réunion (974).
                 </p>
 

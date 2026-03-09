@@ -216,7 +216,7 @@ export const AbandonedCartEmail: React.FC<AbandonedCartEmailProps> = ({
       <div className="container">
         <div className="header">
           <h1>🛒 Votre panier vous attend !</h1>
-          <p>Ne laissez pas partir ces produits gaming</p>
+          <p>Ne laissez pas partir ces produits</p>
         </div>
 
         <div className="content">
@@ -226,7 +226,7 @@ export const AbandonedCartEmail: React.FC<AbandonedCartEmailProps> = ({
 
           <p>
             Nous avons remarqué que vous avez laissé des articles dans votre panier.
-            Vos équipements gaming préférés sont toujours disponibles !
+            Vos articles préférés sont toujours disponibles !
           </p>
 
           <div className="urgency-banner">
@@ -289,8 +289,8 @@ export const AbandonedCartEmail: React.FC<AbandonedCartEmailProps> = ({
               <span><strong>Retours Gratuits</strong> sous 30 jours</span>
             </div>
             <div className="benefit-item">
-              <span className="benefit-icon">🎮</span>
-              <span><strong>Produits Gaming</strong> testés et approuvés</span>
+              <span className="benefit-icon">📱</span>
+              <span><strong>Produits</strong> testés et approuvés</span>
             </div>
           </div>
 

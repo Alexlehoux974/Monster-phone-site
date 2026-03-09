@@ -12,7 +12,7 @@ const categories = [
     href: '/nos-produits?category=Smartphones',
     color: 'from-orange-500 to-red-600',
     bgColor: 'bg-orange-50',
-    description: 'Gaming & 5G',
+    description: 'HONOR & 5G',
   },
   {
     id: 'montres',
@@ -39,7 +39,7 @@ const categories = [
     href: '/nos-produits?category=LED',
     color: 'from-yellow-500 to-orange-600',
     bgColor: 'bg-yellow-50',
-    description: 'Éclairage Gaming',
+    description: 'Éclairage Connecté',
   },
   {
     id: 'accessoires',
@@ -66,7 +66,7 @@ const CategoriesGrid = () => {
             Nos Catégories
           </h2>
           <p className="text-gray-600 text-sm md:text-base">
-            Explorez notre sélection gaming
+            Explorez notre sélection multimédia
           </p>
         </motion.div>
 

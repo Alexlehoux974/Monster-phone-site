@@ -36,7 +36,7 @@ const BrandShowcase = () => {
       displayName: 'MONSTER',
       bgColor: 'bg-gradient-to-br from-orange-500 to-red-600',
       textColor: 'text-white',
-      description: 'Gaming & Audio Premium',
+      description: 'Audio Premium',
       productCount: getBrandProductCount('Monster') + getBrandProductCount('MONSTER'),
       gradient: 'from-orange-500 to-red-600',
     },

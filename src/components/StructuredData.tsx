@@ -29,14 +29,15 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
           ],
           address: {
             '@type': 'PostalAddress',
-            addressLocality: 'Saint-Denis',
+            streetAddress: '16 Rue Claude Chappe, ZAE 2000',
+            addressLocality: 'Le Port',
             addressRegion: 'La Réunion',
-            postalCode: '97400',
+            postalCode: '97290',
             addressCountry: 'FR',
           },
           contactPoint: {
             '@type': 'ContactPoint',
-            telephone: '+262692XXXXXX',
+            telephone: '+262262025102',
             contactType: 'customer service',
             areaServed: 'RE',
             availableLanguage: ['French'],
@@ -85,6 +86,14 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
             seller: {
               '@type': 'Organization',
               name: 'Monster Phone Boutique',
+            },
+            hasMerchantReturnPolicy: {
+              '@type': 'MerchantReturnPolicy',
+              applicableCountry: 'FR',
+              returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+              merchantReturnDays: 30,
+              returnMethod: 'https://schema.org/ReturnByMail',
+              returnFees: 'https://schema.org/FreeReturn',
             },
             shippingDetails: {
               '@type': 'OfferShippingDetails',

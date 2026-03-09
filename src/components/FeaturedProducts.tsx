@@ -24,7 +24,7 @@ export default function FeaturedProducts({ products, title, hideDescription = fa
           </h2>
           {!hideDescription && (
             <p className="text-xl text-gray-800 max-w-2xl mx-auto">
-              Découvrez notre sélection d&apos;accessoires et smartphones gaming,
+              Découvrez notre sélection de smartphones et accessoires,
               choisis pour leur innovation et leur qualité exceptionnelle.
             </p>
           )}

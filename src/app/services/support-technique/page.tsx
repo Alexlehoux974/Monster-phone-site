@@ -30,11 +30,11 @@ export default function SupportTechniquePage() {
     
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute('content', 'Support technique Monster Phone Boutique. Assistance personnalisée, formation, dépannage, configuration. Experts en téléphonie gaming à La Réunion.');
+      metaDescription.setAttribute('content', 'Support technique Monster Phone Boutique. Assistance personnalisée, formation, dépannage, configuration. Experts en téléphonie et multimédia à La Réunion.');
     } else {
       const meta = document.createElement('meta');
       meta.name = 'description';
-      meta.content = 'Support technique Monster Phone Boutique. Assistance personnalisée, formation, dépannage, configuration. Experts en téléphonie gaming à La Réunion.';
+      meta.content = 'Support technique Monster Phone Boutique. Assistance personnalisée, formation, dépannage, configuration. Experts en téléphonie et multimédia à La Réunion.';
       document.head.appendChild(meta);
     }
   }, []);
@@ -52,7 +52,7 @@ export default function SupportTechniquePage() {
       description: "Accompagnement personnalisé pour maîtriser votre appareil",
       icon: BookOpen,
       color: "green",
-      services: ["Fonctions de base", "Applications spécialisées", "Optimisation gaming", "Trucs et astuces"]
+      services: ["Fonctions de base", "Applications spécialisées", "Optimisation performances", "Trucs et astuces"]
     },
     {
       title: "Dépannage à distance",
@@ -62,8 +62,8 @@ export default function SupportTechniquePage() {
       services: ["Diagnostic en ligne", "Réparation logicielle", "Mise à jour système", "Récupération données"]
     },
     {
-      title: "Support gaming",
-      description: "Expertise dédiée aux performances gaming",
+      title: "Support avancé",
+      description: "Expertise dédiée aux performances de vos appareils",
       icon: Monitor,
       color: "orange",
       services: ["Optimisation FPS", "Configuration contrôleurs", "Streaming setup", "Performance analysis"]
@@ -76,8 +76,8 @@ export default function SupportTechniquePage() {
       answer: "Vérifiez les applications en arrière-plan, réduisez la luminosité, désactivez les services non utilisés. Notre équipe peut effectuer un diagnostic approfondi."
     },
     {
-      question: "Comment optimiser mon smartphone pour le gaming ?",
-      answer: "Activez le mode performance, fermez les applications inutiles, utilisez un refroidisseur si nécessaire. Nous proposons une configuration gaming personnalisée."
+      question: "Comment optimiser les performances de mon smartphone ?",
+      answer: "Activez le mode performance, fermez les applications inutiles, libérez de l'espace de stockage. Nous proposons une configuration personnalisée."
     },
     {
       question: "Problème de connexion WiFi",
@@ -158,7 +158,7 @@ export default function SupportTechniquePage() {
                 Support Technique
               </h1>
               <p className="text-2xl text-gray-900 max-w-3xl mx-auto">
-                Assistance technique experte pour tous vos appareils gaming et téléphonie
+                Assistance technique experte pour tous vos appareils et téléphones
               </p>
               <div className="mt-4 text-sm text-gray-900">
                 <Calendar className="w-4 h-4 inline mr-1" />
@@ -174,7 +174,7 @@ export default function SupportTechniquePage() {
               className="bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg p-8 mb-8 text-center"
             >
               <Zap className="w-16 h-16 mx-auto mb-4" />
-              <h2 className="text-4xl font-bold mb-2">Expertise Technique Gaming</h2>
+              <h2 className="text-4xl font-bold mb-2">Expertise Technique</h2>
               <p className="text-2xl mb-4">
                 Nos techniciens certifiés vous accompagnent pour optimiser vos performances
               </p>
@@ -363,7 +363,7 @@ export default function SupportTechniquePage() {
                   <div className="bg-purple-100 rounded-full p-4 w-16 h-16 mx-auto mb-4 flex items-center justify-center">
                     <Monitor className="w-8 h-8 text-purple-600" />
                   </div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Setup gaming</h3>
+                  <h3 className="font-semibold text-gray-900 mb-2">Setup avancé</h3>
                   <p className="text-sm text-gray-800">
                     Configuration optimale pour les jeux mobiles et streaming
                   </p>

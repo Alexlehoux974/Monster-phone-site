@@ -2,11 +2,11 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Nos Produits | Monster Phone Boutique',
-  description: 'Découvrez notre gamme complète d\'accessoires gaming : smartphones HONOR, audio Monster, chargeurs, luminaires et plus.',
-  keywords: 'smartphones, accessoires gaming, HONOR, Monster, MY WAY, MUVIT, La Réunion, 974',
+  description: 'Découvrez notre gamme complète de smartphones HONOR, audio Monster, chargeurs, luminaires et accessoires à La Réunion.',
+  keywords: 'smartphones, accessoires téléphone, HONOR, Monster, MY WAY, MUVIT, La Réunion, 974',
   openGraph: {
     title: 'Nos Produits - Monster Phone Boutique',
-    description: 'La gamme complète d\'accessoires gaming et smartphones à La Réunion.',
+    description: 'La gamme complète de smartphones et accessoires à La Réunion.',
     url: 'https://monster-phone.re/nos-produits',
     siteName: 'Monster Phone Boutique',
     images: [

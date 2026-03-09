@@ -69,26 +69,26 @@ export default function ContactPage() {
   };
 
   useEffect(() => {
-    document.title = 'Contact Monster Phone Boutique La Réunion | Téléphones Gaming 974';
+    document.title = 'Contact Monster Phone Boutique La Réunion | Téléphones & Multimédia 974';
     
     // Ajouter les métadonnées SEO
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute('content', 'Contactez Monster Phone Boutique à La Réunion. Spécialiste smartphones gaming HONOR, accessoires MUVIT. 16 Rue Claude Chappe, ZAE 2000, 97290 Le Port. Tel: 02 62 02 51 02');
+      metaDescription.setAttribute('content', 'Contactez Monster Phone Boutique à La Réunion. Spécialiste smartphones HONOR, accessoires MUVIT. 16 Rue Claude Chappe, ZAE 2000, 97290 Le Port. Tel: 02 62 02 51 02');
     } else {
       const meta = document.createElement('meta');
       meta.name = 'description';
-      meta.content = 'Contactez Monster Phone Boutique à La Réunion. Spécialiste smartphones gaming HONOR, accessoires MUVIT. 16 Rue Claude Chappe, ZAE 2000, 97290 Le Port. Tel: 02 62 02 51 02';
+      meta.content = 'Contactez Monster Phone Boutique à La Réunion. Spécialiste smartphones HONOR, accessoires MUVIT. 16 Rue Claude Chappe, ZAE 2000, 97290 Le Port. Tel: 02 62 02 51 02';
       document.head.appendChild(meta);
     }
 
     const keywords = document.querySelector('meta[name="keywords"]');
     if (keywords) {
-      keywords.setAttribute('content', 'contact monster phone, téléphone gaming réunion, boutique smartphone 974, sainte marie réunion, honor réunion, réparation téléphone réunion');
+      keywords.setAttribute('content', 'contact monster phone, téléphone multimédia réunion, boutique smartphone 974, sainte marie réunion, honor réunion, réparation téléphone réunion');
     } else {
       const meta = document.createElement('meta');
       meta.name = 'keywords';
-      meta.content = 'contact monster phone, téléphone gaming réunion, boutique smartphone 974, sainte marie réunion, honor réunion, réparation téléphone réunion';
+      meta.content = 'contact monster phone, téléphone multimédia réunion, boutique smartphone 974, sainte marie réunion, honor réunion, réparation téléphone réunion';
       document.head.appendChild(meta);
     }
   }, []);
@@ -120,8 +120,8 @@ export default function ContactPage() {
                 </span>
               </h1>
               <p className="text-2xl text-gray-900 max-w-3xl mx-auto">
-                Notre équipe d&apos;experts est à votre écoute pour vous conseiller sur nos produits gaming 
-                et vous accompagner dans vos projets high-tech.
+                Notre équipe d&apos;experts est à votre écoute pour vous conseiller sur nos produits
+                et vous accompagner dans vos achats.
               </p>
             </motion.div>
 
@@ -355,7 +355,7 @@ export default function ContactPage() {
                   <div className="grid grid-cols-1 gap-3">
                     <Badge variant="outline" className="justify-start p-3">
                       <CheckCircle className="w-4 h-4 mr-2 text-green-600" />
-                      Smartphones gaming HONOR
+                      Smartphones HONOR
                     </Badge>
                     <Badge variant="outline" className="justify-start p-3">
                       <CheckCircle className="w-4 h-4 mr-2 text-green-600" />

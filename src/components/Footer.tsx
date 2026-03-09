@@ -229,7 +229,7 @@ export default function Footer() {
               </motion.div>
             </Link>
             <p className="text-gray-100 text-base leading-relaxed pr-4">
-              Votre boutique spécialisée en smartphones gaming et accessoires high-tech à La Réunion.
+              Votre boutique spécialisée en smartphones et accessoires multimédia à La Réunion.
               <br className="mb-2" />
               Des produits innovants pour les passionnés de technologie aux meilleurs prix.
             </p>

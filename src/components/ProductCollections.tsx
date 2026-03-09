@@ -19,14 +19,14 @@ interface Collection {
 }
 
 const ProductCollections = () => {
-  const [activeCollection, setActiveCollection] = useState<string>('gaming');
+  const [activeCollection, setActiveCollection] = useState<string>('smartphones');
   const scrollRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
   // Filtrer et trier les produits par collection avec priorité
   const collections: Collection[] = [
     {
-      id: 'gaming',
-      title: 'Smartphones Gaming Pack Complet',
+      id: 'smartphones',
+      title: 'Smartphones Pack Complet',
       icon: Flame,
       emoji: '🔥',
       description: 'Pack complet inclus : écouteurs, chargeur, protection, coque',
@@ -37,7 +37,7 @@ const ProductCollections = () => {
     },
     {
       id: 'accessories',
-      title: 'Accessoires Gaming Essentiels',
+      title: 'Accessoires Essentiels',
       icon: Gamepad2,
       emoji: '🎮',
       categoryName: 'Accessoires', // Catégorie principale pour le filtre

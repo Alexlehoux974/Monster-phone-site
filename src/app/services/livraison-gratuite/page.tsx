@@ -122,7 +122,7 @@ export default function LivraisonGratuitePage() {
                 Livraison Gratuite dès 100€
               </h1>
               <p className="text-xl text-gray-900 max-w-3xl mx-auto">
-                Recevez vos produits gaming partout à La Réunion, rapidement et en toute sécurité
+                Recevez vos produits partout à La Réunion, rapidement et en toute sécurité
               </p>
               <div className="mt-4 text-sm text-gray-900">
                 <Calendar className="w-4 h-4 inline mr-1" />

@@ -195,7 +195,7 @@ function generateGoogleMerchantXml(products: ProductRow[]): string {
   <channel>
     <title>Monster Phone Boutique - Catalogue Produits</title>
     <link>${SITE_URL}</link>
-    <description>Smartphones gaming, accessoires et audio à La Réunion</description>
+    <description>Smartphones, accessoires et audio à La Réunion</description>
     ${items.join('\n')}
   </channel>
 </rss>`;

@@ -17,7 +17,7 @@ export default function FeaturesSection() {
             Pourquoi choisir Monster Phone ?
           </h3>
           <p className="text-xl text-gray-100 max-w-3xl mx-auto">
-            Nous révolutionnons l&apos;expérience gaming mobile avec des accessoires de qualité premium
+            Des smartphones et accessoires de qualité premium pour tous vos besoins
           </p>
         </motion.div>
 

@@ -92,7 +92,7 @@ export function isFeaturedProduct(product: { badges?: string[]; price?: number; 
 const PRIORITY_CATEGORY_IDS = [
   '3fa6e04b-2cab-46db-8a85-f6865909d51c', // Écouteurs
   '80194285-ea90-40ff-8e2a-8edbe3609330', // Smartphones
-  '1273f118-da30-41c3-818e-c7cb1b1c1b19', // Smartphones Gaming
+  '1273f118-da30-41c3-818e-c7cb1b1c1b19', // Smartphones
   '6a9f5e42-d28c-433e-9c0c-29ee2f264ee0', // Smartphones 5G
 ];
 
