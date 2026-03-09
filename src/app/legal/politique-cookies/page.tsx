@@ -18,7 +18,7 @@ export default function PolitiqueCookiesPage() {
   return (
     <>
       <div className="min-h-screen bg-gray-50 overflow-x-hidden">
-        <div className="pt-[110px]">
+        <div className="pt-[130px]">
           <Header />
         </div>
 
