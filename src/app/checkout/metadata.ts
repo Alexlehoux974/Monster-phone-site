@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     siteName: 'Monster Phone Boutique',
   },
   alternates: {
-    canonical: 'https://monsterphone.re/checkout',
+    canonical: 'https://monster-phone.re/checkout',
   },
   robots: {
     index: false, // Page de checkout, pas d'indexation

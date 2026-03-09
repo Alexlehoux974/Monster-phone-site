@@ -334,7 +334,7 @@ export const InvoiceEmail: React.FC<InvoiceEmailProps> = ({
           <p className="footer-company">Monster Phone Boutique</p>
           <p>La Réunion, France 🇷🇪</p>
           <p style={{ marginTop: '10px' }}>
-            Email : contact@monsterphone.re | Tél : [À compléter]
+            Email : contact@monster-phone.re | Tél : [À compléter]
           </p>
 
           <div className="legal">

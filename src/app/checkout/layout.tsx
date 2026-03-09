@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Paiement Sécurisé - Monster Phone Boutique',
     description: 'Finalisez votre commande Monster Phone en toute sécurité.',
-    url: 'https://monsterphone.re/checkout',
+    url: 'https://monster-phone.re/checkout',
     siteName: 'Monster Phone Boutique',
     locale: 'fr_FR',
     type: 'website',

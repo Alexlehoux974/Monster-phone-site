@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Mon Compte - Monster Phone Boutique',
     description: 'Accédez à votre espace personnel Monster Phone et gérez vos informations.',
-    url: 'https://monsterphone.re/compte',
+    url: 'https://monster-phone.re/compte',
     siteName: 'Monster Phone Boutique',
     locale: 'fr_FR',
     type: 'website',

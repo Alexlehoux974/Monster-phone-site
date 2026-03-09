@@ -3,7 +3,7 @@ import { createClient } from '@/lib/supabase/client';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const supabase = createClient();
-  const baseUrl = 'https://monsterphone.re';
+  const baseUrl = 'https://monster-phone.re';
   
   // Pages statiques principales
   const staticPages = [

@@ -16,6 +16,6 @@ export default function robots(): MetadataRoute.Robots {
         ],
       },
     ],
-    sitemap: 'https://monsterphone.re/sitemap.xml',
+    sitemap: 'https://monster-phone.re/sitemap.xml',
   };
 }

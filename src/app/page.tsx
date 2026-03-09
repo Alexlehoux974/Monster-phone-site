@@ -27,11 +27,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Monster Phone Boutique - Accessoires Gaming à La Réunion',
     description: 'La référence des accessoires gaming pour smartphones à La Réunion. Livraison express 24h/48h.',
-    url: 'https://monsterphone.re',
+    url: 'https://monster-phone.re',
     siteName: 'Monster Phone Boutique',
     images: [
       {
-        url: 'https://monsterphone.re/og-image.jpg',
+        url: 'https://monster-phone.re/og-image.jpg',
         width: 1200,
         height: 630,
         alt: 'Monster Phone Boutique',
@@ -44,10 +44,10 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Monster Phone Boutique | Accessoires Gaming',
     description: 'Les meilleurs accessoires gaming pour smartphones à La Réunion',
-    images: ['https://monsterphone.re/og-image.jpg'],
+    images: ['https://monster-phone.re/og-image.jpg'],
   },
   alternates: {
-    canonical: 'https://monsterphone.re',
+    canonical: 'https://monster-phone.re',
   },
   robots: {
     index: true,

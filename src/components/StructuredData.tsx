@@ -21,8 +21,8 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
           '@context': 'https://schema.org',
           '@type': 'Organization',
           name: 'Monster Phone Boutique',
-          url: 'https://monsterphone.re',
-          logo: 'https://monsterphone.re/LOGO-MONSTER-PHONE.png',
+          url: 'https://monster-phone.re',
+          logo: 'https://monster-phone.re/LOGO-MONSTER-PHONE.png',
           sameAs: [
             'https://www.facebook.com/monsterphone974',
             'https://www.instagram.com/monsterphone974',
@@ -48,12 +48,12 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
           '@context': 'https://schema.org',
           '@type': 'WebSite',
           name: 'Monster Phone Boutique',
-          url: 'https://monsterphone.re',
+          url: 'https://monster-phone.re',
           potentialAction: {
             '@type': 'SearchAction',
             target: {
               '@type': 'EntryPoint',
-              urlTemplate: 'https://monsterphone.re/nos-produits?search={search_term_string}',
+              urlTemplate: 'https://monster-phone.re/nos-produits?search={search_term_string}',
             },
             'query-input': 'required name=search_term_string',
           },
@@ -70,7 +70,7 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
           '@type': 'Product',
           name: product.name,
           description: product.shortDescription || product.fullDescription,
-          image: product.variants?.[0]?.images?.[0] || 'https://monsterphone.re/placeholder-product.png',
+          image: product.variants?.[0]?.images?.[0] || 'https://monster-phone.re/placeholder-product.png',
           brand: {
             '@type': 'Brand',
             name: product.brandName,

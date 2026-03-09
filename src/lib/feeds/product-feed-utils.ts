@@ -2,7 +2,7 @@
  * Utilitaires pour la génération des flux produits (Google Merchant Center, Meta)
  */
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://monsterphone.re';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://monster-phone.re';
 const CLOUDINARY_BASE = 'https://res.cloudinary.com/monster-phone/image/upload';
 
 /**

@@ -34,11 +34,11 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://monsterphone.re'),
+  metadataBase: new URL('https://monster-phone.re'),
   openGraph: {
     type: 'website',
     locale: 'fr_FR',
-    url: 'https://monsterphone.re',
+    url: 'https://monster-phone.re',
     siteName: 'Monster Phone Boutique',
     images: [
       {

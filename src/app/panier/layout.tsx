@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Mon Panier - Monster Phone Boutique',
     description: 'Votre panier Monster Phone - Livraison gratuite dès 100€ à La Réunion.',
-    url: 'https://monsterphone.re/panier',
+    url: 'https://monster-phone.re/panier',
     siteName: 'Monster Phone Boutique',
     locale: 'fr_FR',
     type: 'website',

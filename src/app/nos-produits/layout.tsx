@@ -7,11 +7,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Nos Produits - Monster Phone Boutique',
     description: 'La gamme complète d\'accessoires gaming et smartphones à La Réunion.',
-    url: 'https://monsterphone.re/nos-produits',
+    url: 'https://monster-phone.re/nos-produits',
     siteName: 'Monster Phone Boutique',
     images: [
       {
-        url: 'https://monsterphone.re/og-products.jpg',
+        url: 'https://monster-phone.re/og-products.jpg',
         width: 1200,
         height: 630,
         alt: 'Produits Monster Phone',
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     type: 'website',
   },
   alternates: {
-    canonical: 'https://monsterphone.re/nos-produits',
+    canonical: 'https://monster-phone.re/nos-produits',
   },
   robots: {
     index: true,

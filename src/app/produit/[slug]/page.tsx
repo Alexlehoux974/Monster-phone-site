@@ -215,7 +215,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
     },
     offers: {
       '@type': 'Offer',
-      url: `https://monsterphone.re/produit/${product.urlSlug}`,
+      url: `https://monster-phone.re/produit/${product.urlSlug}`,
       priceCurrency: 'EUR',
       price: product.basePrice,
       itemCondition: 'https://schema.org/NewCondition',
@@ -291,7 +291,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
     openGraph: {
       title: product.name,
       description: product.shortDescription,
-      url: `https://monsterphone.re/produit/${product.urlSlug}`,
+      url: `https://monster-phone.re/produit/${product.urlSlug}`,
       siteName: 'Monster Phone Boutique',
       images: (product.variants?.[0]?.images || []).map(image => ({
         url: getWorkingImageUrl(image, product.categoryName),
@@ -309,7 +309,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
       images: [transformedFirstImage],
     },
     alternates: {
-      canonical: `https://monsterphone.re/produit/${product.urlSlug}`,
+      canonical: `https://monster-phone.re/produit/${product.urlSlug}`,
     },
     robots: {
       index: true,

@@ -14,7 +14,7 @@ import {
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://monsterphone.re';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://monster-phone.re';
 
 // Créer le client Supabase avec la clé service
 function getSupabaseClient() {
