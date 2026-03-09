@@ -151,14 +151,6 @@ export default function ProductDetail({ product }: ProductDetailProps) {
     };
   }, [product.id, selectedVariant?.id]);
 
-  // Mettre à jour le prix et la promotion lorsque le variant sélectionné change
-  useEffect(() => {
-    if (selectedVariant) {
-      // Utiliser la promotion du variant sélectionné
-      setAdminDiscountPercent(selectedVariant.adminDiscountPercent || 0);
-    }
-  }, [selectedVariant]);
-
   // Combiner toutes les images : images de toutes les variantes
   const getAllImages = () => {
     const allImages: { src: string; variant?: string; variantColor?: string }[] = [];
@@ -191,6 +183,13 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   };
 
   const allImages = getAllImages();
+
+  // Mettre à jour le prix et la promotion lorsque le variant sélectionné change
+  useEffect(() => {
+    if (selectedVariant) {
+      setAdminDiscountPercent(selectedVariant.adminDiscountPercent || 0);
+    }
+  }, [selectedVariant]);
 
   // ✨ IMPORTANT: Fallback image MUST also be transformed from Cloudinary ID to full URL
   const fallbackImage = product.variants?.[0]?.images?.[0];
@@ -574,9 +573,14 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                 value={selectedVariant?.color}
                 onValueChange={(value) => {
                   const variant = variants?.find(v => v.color === value);
+                  if (!variant) return;
                   setSelectedVariant(variant);
-                  setSelectedImageIndex(0);
                   setQuantity(1);
+                  // Trouver la première image de ce variant dans la galerie
+                  const idx = allImages.findIndex(img => img.variant === value);
+                  if (idx >= 0) {
+                    setSelectedImageIndex(idx);
+                  }
                 }}
                 className="flex flex-wrap gap-2"
               >
