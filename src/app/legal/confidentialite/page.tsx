@@ -50,7 +50,7 @@ export default function ConfidentialitePage() {
               </p>
               <div className="mt-4 text-sm text-gray-900">
                 <Calendar className="w-4 h-4 inline mr-1" />
-                Dernière mise à jour : 28 juillet 2025
+                Derniere mise a jour : 9 mars 2026
               </div>
             </motion.div>
 
@@ -243,18 +243,42 @@ export default function ConfidentialitePage() {
                   <li><strong>Mise à jour</strong> : Systèmes régulièrement mis à jour</li>
                 </ul>
 
-                <h2 className="text-2xl font-bold text-gray-900 mb-4 mt-8">8. Cookies</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-4 mt-8">8. Cookies et traceurs</h2>
                 <p>
-                  Notre site utilise des cookies pour améliorer votre expérience. 
-                  Vous pouvez gérer vos préférences via le bandeau cookies ou les paramètres de votre navigateur.
+                  Notre site utilise des cookies et traceurs pour ameliorer votre experience.
+                  Vous pouvez gerer vos preferences a tout moment via le bandeau cookies, le lien
+                  &laquo; Gerer mes cookies &raquo; en pied de page, ou les parametres de votre navigateur.
+                </p>
+                <p>
+                  Pour une information complete sur chaque cookie utilise (nom, finalite, duree),
+                  consultez notre{' '}
+                  <a href="/legal/politique-cookies" className="text-blue-600 hover:text-blue-700 underline">
+                    Politique de cookies detaillee
+                  </a>.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-2 mt-4">Types de cookies</h3>
-                <ul className="list-disc pl-6 space-y-1">
-                  <li><strong>Techniques</strong> : Nécessaires au fonctionnement (panier, connexion)</li>
-                  <li><strong>Statistiques</strong> : Mesure d&apos;audience anonyme (Google Analytics)</li>
-                  <li><strong>Marketing</strong> : Personnalisation des offres (avec consentement)</li>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2 mt-4">Categories de cookies</h3>
+                <ul className="list-disc pl-6 space-y-2">
+                  <li><strong>Essentiels</strong> : Necessaires au fonctionnement du site (panier, connexion, consentement). Toujours actifs.</li>
+                  <li><strong>Analytiques</strong> : Mesure d&apos;audience via Google Analytics 4 / Google Tag Manager (cookies <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">_ga</code>, <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">_ga_*</code>, <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">_gid</code>). Soumis a votre consentement.</li>
+                  <li><strong>Marketing</strong> : Publicite ciblee via Meta Pixel (cookies <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">_fbp</code>, <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">_fbc</code>). Soumis a votre consentement.</li>
+                  <li><strong>Paiement</strong> : Securisation des transactions via Stripe (cookies <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">__stripe_mid</code>, <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">__stripe_sid</code>). Necessaires au paiement.</li>
                 </ul>
+
+                <h3 className="text-lg font-semibold text-gray-900 mb-2 mt-4">Meta Conversion API (CAPI)</h3>
+                <p>
+                  En complement du Meta Pixel (cote navigateur), nous utilisons la <strong>Conversion API</strong> de Meta.
+                  Cette technologie envoie les evenements de conversion (consultation produit, ajout au panier, achat)
+                  directement depuis notre serveur vers Meta. Les donnees envoyees sont limitees aux evenements e-commerce
+                  et soumises a votre consentement marketing. Un systeme de deduplication empeche le double comptage.
+                </p>
+
+                <h3 className="text-lg font-semibold text-gray-900 mb-2 mt-4">Google Consent Mode V2</h3>
+                <p>
+                  Notre site implemente le <strong>Google Consent Mode V2</strong>, qui garantit qu&apos;aucun cookie
+                  analytique ou publicitaire n&apos;est depose avant votre consentement explicite. Par defaut,
+                  tous les stockages (analytics, publicite) sont refuses jusqu&apos;a votre choix.
+                </p>
 
                 <div className="mt-8 p-4 bg-red-50 border border-red-200 rounded-lg">
                   <div className="flex items-center gap-2 text-red-900 mb-2">

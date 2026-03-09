@@ -362,7 +362,10 @@ export default function Footer() {
                 <Link href="/legal/confidentialite" className="text-gray-100 hover:text-white transition-colors">Politique de confidentialité</Link>
               </motion.li>
               <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
-                <Link href="/legal/mentions-legales" className="text-gray-100 hover:text-white transition-colors">Mentions légales</Link>
+                <Link href="/legal/mentions-legales" className="text-gray-100 hover:text-white transition-colors">Mentions legales</Link>
+              </motion.li>
+              <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
+                <Link href="/legal/politique-cookies" className="text-gray-100 hover:text-white transition-colors">Politique de cookies</Link>
               </motion.li>
               <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
                 <Link href="/legal/plan-du-site" className="text-gray-100 hover:text-white transition-colors">Plan du site</Link>

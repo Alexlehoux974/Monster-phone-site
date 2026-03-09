@@ -39,6 +39,22 @@ export default function CookieConsent() {
     }
   }, []);
 
+  // Listen for openCookieSettings event to reopen the banner
+  useEffect(() => {
+    const handleOpenSettings = () => {
+      // Load current preferences
+      const savedPreferences = localStorage.getItem(COOKIE_PREFERENCES_KEY);
+      if (savedPreferences) {
+        setPreferences(JSON.parse(savedPreferences));
+      }
+      setShowDetails(true);
+      setIsVisible(true);
+    };
+
+    window.addEventListener('openCookieSettings', handleOpenSettings);
+    return () => window.removeEventListener('openCookieSettings', handleOpenSettings);
+  }, []);
+
   const saveConsent = (acceptAll: boolean) => {
     const finalPreferences = acceptAll
       ? { necessary: true, analytics: true, marketing: true }
@@ -124,12 +140,19 @@ export default function CookieConsent() {
                   <p className="text-gray-600 text-sm leading-relaxed">
                     Ce site utilise des cookies pour améliorer votre expérience de navigation,
                     analyser le trafic et personnaliser le contenu. En cliquant sur « Tout accepter »,
-                    vous consentez à notre utilisation des cookies.{' '}
+                    vous consentez a notre utilisation des cookies.{' '}
                     <Link
-                      href="/politique-de-confidentialite"
+                      href="/legal/politique-cookies"
                       className="text-blue-600 hover:text-blue-700 underline"
                     >
-                      Politique de confidentialité
+                      Politique de cookies
+                    </Link>
+                    {' | '}
+                    <Link
+                      href="/legal/confidentialite"
+                      className="text-blue-600 hover:text-blue-700 underline"
+                    >
+                      Confidentialite
                     </Link>
                   </p>
                 </div>
