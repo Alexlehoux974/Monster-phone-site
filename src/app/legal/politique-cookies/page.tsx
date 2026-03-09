@@ -22,7 +22,7 @@ export default function PolitiqueCookiesPage() {
           <Header />
         </div>
 
-        <main className="px-4 sm:px-6 lg:px-8 py-8">
+        <main className="px-4 sm:px-6 lg:px-8 py-8 pb-16">
           <div className="max-w-4xl mx-auto">
 
             {/* Hero */}
