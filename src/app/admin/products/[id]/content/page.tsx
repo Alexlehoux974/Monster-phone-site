@@ -11,6 +11,7 @@ import { Switch } from '@/components/ui/switch';
 import { toast } from 'sonner';
 import { ArrowLeft, Plus, Save, Trash2, Eye, EyeOff, GripVertical, Copy, X } from 'lucide-react';
 import LoadingSpinner from '@/components/admin/LoadingSpinner';
+import ImageManager from '@/components/admin/ImageManager';
 import { cn } from '@/lib/utils';
 
 // Interface EXACTE correspondant à ProductContentCards.tsx
@@ -44,6 +45,7 @@ interface Product {
   id: string;
   name: string;
   brand: string;
+  url_slug: string;
 }
 
 // Composant RadioOption avec zone cliquable étendue
@@ -109,8 +111,8 @@ export default function ProductContentManagement() {
       try {
         // Load product with brand (LEFT JOIN to avoid failure if no brand)
         const productResponse = await fetch(
-          `${supabaseUrl}/rest/v1/products?select=id,name,brands(name)&id=eq.${productId}`,
-          { headers, signal: AbortSignal.timeout(10000) }
+          `${supabaseUrl}/rest/v1/products?select=id,name,url_slug,brands(name)&id=eq.${productId}`,
+          { headers, signal: AbortSignal.timeout(30000) }
         );
 
         if (!productResponse.ok) {
@@ -134,12 +136,13 @@ export default function ProductContentManagement() {
           id: prod.id,
           name: prod.name,
           brand: prod.brands?.name || '',
+          url_slug: prod.url_slug || '',
         });
 
         // Load sections
         const sectionsResponse = await fetch(
           `${supabaseUrl}/rest/v1/product_content_sections?product_id=eq.${productId}&order=display_order.asc`,
-          { headers, signal: AbortSignal.timeout(10000) }
+          { headers, signal: AbortSignal.timeout(30000) }
         );
 
         if (sectionsResponse.ok) {
@@ -463,27 +466,6 @@ export default function ProductContentManagement() {
     revalidateCache();
   };
 
-  const handleAddImage = () => {
-    if (!editingSection) return;
-
-    const imageUrl = prompt('Entrez l\'URL de l\'image (Google Drive):');
-
-    if (imageUrl) {
-      setEditingSection({
-        ...editingSection,
-        images: [...editingSection.images, imageUrl],
-      });
-    }
-  };
-
-  const handleRemoveImage = (index: number) => {
-    if (!editingSection) return;
-
-    setEditingSection({
-      ...editingSection,
-      images: editingSection.images.filter((_, i) => i !== index),
-    });
-  };
 
   // Metadata management functions
   const handleAddSpec = () => {
@@ -597,16 +579,20 @@ export default function ProductContentManagement() {
         {/* Header */}
         <div className="mb-8 flex items-center justify-between">
           <div>
-            <Button
-              variant="ghost"
-              asChild
-              className="mb-4"
-            >
-              <Link href="/admin/stock">
-                <ArrowLeft className="h-4 w-4 mr-2" />
-                Retour au stock
-              </Link>
-            </Button>
+            <div className="flex items-center gap-2 mb-4">
+              <Button variant="ghost" asChild>
+                <Link href="/admin/stock">
+                  <ArrowLeft className="h-4 w-4 mr-2" />
+                  Retour au stock
+                </Link>
+              </Button>
+              <span className="text-gray-300">|</span>
+              <Button variant="ghost" asChild>
+                <Link href={`/admin/products/${productId}/images`}>
+                  Images variants
+                </Link>
+              </Button>
+            </div>
             <h1 className="text-3xl font-bold">
               Gestion du contenu - {product.brand} {product.name}
             </h1>
@@ -795,36 +781,16 @@ export default function ProductContentManagement() {
               {/* ─── GALERIE D'IMAGES ─── */}
               {editingSection.section_type === 'image_gallery' && (
                 <div>
-                  <Label>Images (URLs)</Label>
+                  <Label>Images</Label>
                   <p className="text-xs text-gray-500 mb-2">Grille de 4 colonnes sur desktop</p>
-                  <div className="space-y-2 mt-2">
-                    {editingSection.images.map((url, index) => (
-                      <div key={index} className="flex items-center gap-2">
-                        <Input
-                          value={url}
-                          onChange={(e) => {
-                            const newImages = [...editingSection.images];
-                            newImages[index] = e.target.value;
-                            setEditingSection({ ...editingSection, images: newImages });
-                          }}
-                          placeholder="https://..."
-                          className="flex-1"
-                        />
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          type="button"
-                          onClick={() => handleRemoveImage(index)}
-                          className="text-red-600"
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    ))}
-                    <Button type="button" onClick={handleAddImage} variant="outline" size="sm">
-                      <Plus className="h-4 w-4 mr-2" />
-                      Ajouter une image
-                    </Button>
+                  <div className="mt-2">
+                    <ImageManager
+                      images={editingSection.images}
+                      onChange={(imgs) => setEditingSection({ ...editingSection, images: imgs })}
+                      folder={`products/${product?.url_slug || 'unknown'}/cms`}
+                      maxImages={4}
+                      multiple
+                    />
                   </div>
                 </div>
               )}
@@ -845,34 +811,15 @@ export default function ProductContentManagement() {
                     />
                   </div>
                   <div>
-                    <Label>Image d'illustration</Label>
-                    <div className="space-y-2 mt-2">
-                      {editingSection.images.length > 0 ? (
-                        <div className="flex items-center gap-2">
-                          <Input
-                            value={editingSection.images[0]}
-                            onChange={(e) =>
-                              setEditingSection({ ...editingSection, images: [e.target.value] })
-                            }
-                            placeholder="https://..."
-                            className="flex-1"
-                          />
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            type="button"
-                            onClick={() => setEditingSection({ ...editingSection, images: [] })}
-                            className="text-red-600"
-                          >
-                            <Trash2 className="h-4 w-4" />
-                          </Button>
-                        </div>
-                      ) : (
-                        <Button type="button" onClick={handleAddImage} variant="outline" size="sm">
-                          <Plus className="h-4 w-4 mr-2" />
-                          Ajouter une image
-                        </Button>
-                      )}
+                    <Label>Image d&apos;illustration</Label>
+                    <div className="mt-2">
+                      <ImageManager
+                        images={editingSection.images}
+                        onChange={(imgs) => setEditingSection({ ...editingSection, images: imgs })}
+                        folder={`products/${product?.url_slug || 'unknown'}/cms`}
+                        maxImages={1}
+                        multiple={false}
+                      />
                     </div>
                   </div>
                   <div>
@@ -999,34 +946,15 @@ export default function ProductContentManagement() {
                     </div>
                   </div>
                   <div>
-                    <Label>Image d'illustration (optionnelle)</Label>
-                    <div className="space-y-2 mt-2">
-                      {editingSection.images.length > 0 ? (
-                        <div className="flex items-center gap-2">
-                          <Input
-                            value={editingSection.images[0]}
-                            onChange={(e) =>
-                              setEditingSection({ ...editingSection, images: [e.target.value] })
-                            }
-                            placeholder="https://..."
-                            className="flex-1"
-                          />
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            type="button"
-                            onClick={() => setEditingSection({ ...editingSection, images: [] })}
-                            className="text-red-600"
-                          >
-                            <Trash2 className="h-4 w-4" />
-                          </Button>
-                        </div>
-                      ) : (
-                        <Button type="button" onClick={handleAddImage} variant="outline" size="sm">
-                          <Plus className="h-4 w-4 mr-2" />
-                          Ajouter une image
-                        </Button>
-                      )}
+                    <Label>Image d&apos;illustration (optionnelle)</Label>
+                    <div className="mt-2">
+                      <ImageManager
+                        images={editingSection.images}
+                        onChange={(imgs) => setEditingSection({ ...editingSection, images: imgs })}
+                        folder={`products/${product?.url_slug || 'unknown'}/cms`}
+                        maxImages={1}
+                        multiple={false}
+                      />
                     </div>
                   </div>
                 </>
@@ -1034,18 +962,32 @@ export default function ProductContentManagement() {
 
               {/* ─── ENCART ENGAGEMENT ─── */}
               {editingSection.section_type === 'engagement_card' && (
-                <div>
-                  <Label htmlFor="content">Texte de l'engagement</Label>
-                  <Textarea
-                    id="content"
-                    value={editingSection.content || ''}
-                    onChange={(e) =>
-                      setEditingSection({ ...editingSection, content: e.target.value })
-                    }
-                    placeholder="Pourquoi nous choisir..."
-                    rows={4}
-                  />
-                </div>
+                <>
+                  <div>
+                    <Label htmlFor="content">Texte de l&apos;engagement</Label>
+                    <Textarea
+                      id="content"
+                      value={editingSection.content || ''}
+                      onChange={(e) =>
+                        setEditingSection({ ...editingSection, content: e.target.value })
+                      }
+                      placeholder="Pourquoi nous choisir..."
+                      rows={4}
+                    />
+                  </div>
+                  <div>
+                    <Label>Image d&apos;illustration (optionnelle)</Label>
+                    <div className="mt-2">
+                      <ImageManager
+                        images={editingSection.images}
+                        onChange={(imgs) => setEditingSection({ ...editingSection, images: imgs })}
+                        folder={`products/${product?.url_slug || 'unknown'}/cms`}
+                        maxImages={1}
+                        multiple={false}
+                      />
+                    </div>
+                  </div>
+                </>
               )}
 
               {/* ─── PERSONNALISÉ ─── */}
@@ -1066,34 +1008,13 @@ export default function ProductContentManagement() {
                   </div>
                   <div>
                     <Label>Images</Label>
-                    <div className="space-y-2 mt-2">
-                      {editingSection.images.map((url, index) => (
-                        <div key={index} className="flex items-center gap-2">
-                          <Input
-                            value={url}
-                            onChange={(e) => {
-                              const newImages = [...editingSection.images];
-                              newImages[index] = e.target.value;
-                              setEditingSection({ ...editingSection, images: newImages });
-                            }}
-                            placeholder="https://..."
-                            className="flex-1"
-                          />
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            type="button"
-                            onClick={() => handleRemoveImage(index)}
-                            className="text-red-600"
-                          >
-                            <Trash2 className="h-4 w-4" />
-                          </Button>
-                        </div>
-                      ))}
-                      <Button type="button" onClick={handleAddImage} variant="outline" size="sm">
-                        <Plus className="h-4 w-4 mr-2" />
-                        Ajouter une image
-                      </Button>
+                    <div className="mt-2">
+                      <ImageManager
+                        images={editingSection.images}
+                        onChange={(imgs) => setEditingSection({ ...editingSection, images: imgs })}
+                        folder={`products/${product?.url_slug || 'unknown'}/cms`}
+                        multiple
+                      />
                     </div>
                   </div>
                 </>

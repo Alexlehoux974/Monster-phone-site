@@ -56,7 +56,10 @@ export function getWorkingImageUrl(originalUrl: string, productCategory?: string
   }
 
   // Otherwise it's a Cloudinary identifier - convert to full URL
-  return `https://res.cloudinary.com/monster-phone/image/upload/v1763527513/${originalUrl}.png`;
+  // Support both legacy IDs (no extension) and new IDs (with extension)
+  const hasExtension = /\.\w{3,4}$/.test(originalUrl);
+  const id = hasExtension ? originalUrl : `${originalUrl}.png`;
+  return `https://res.cloudinary.com/monster-phone/image/upload/f_auto,q_auto/${id}`;
 }
 
 /**
