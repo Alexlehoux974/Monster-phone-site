@@ -463,14 +463,14 @@ const MobileMenu = ({
 
   return (
     <>
-      {/* Backdrop flouté */}
+      {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[190]"
+        className="fixed inset-0 bg-black/50 z-[190]"
         onClick={onClose}
       />
 
-      {/* Menu mobile - MÊME STRUCTURE que desktop */}
-      <div className="fixed top-[7.5rem] left-4 right-4 bottom-16 bg-white z-[200] flex flex-col rounded-2xl shadow-2xl overflow-hidden">
+      {/* Menu mobile plein écran */}
+      <div className="fixed inset-0 bg-white z-[200] flex flex-col" style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}>
         {/* Header simple */}
         <div className="bg-white px-4 py-3 border-b border-gray-200 flex items-center justify-between flex-shrink-0">
           <h2 className="text-lg font-semibold text-gray-900">Menu</h2>
@@ -479,8 +479,8 @@ const MobileMenu = ({
           </button>
         </div>
 
-        {/* Liste avec accordéon - EXACTEMENT comme desktop */}
-        <div className="flex-1 overflow-y-auto">
+        {/* Liste avec accordéon */}
+        <div className="flex-1 overflow-y-auto overscroll-contain" style={{ WebkitOverflowScrolling: 'touch' }}>
           {/* Liens directs - Tous nos produits et Promotions */}
           <div className="border-b border-gray-200">
             <Link
@@ -1186,14 +1186,14 @@ export default function Header() {
                 <User className="h-5 w-5" />
               </Link>
 
-              {/* Menu mobile */}
+              {/* Menu mobile - touch target min 44x44px */}
               <button
-                className="lg:hidden p-1 text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                className="lg:hidden p-2.5 -m-1 text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors touch-manipulation"
                 onClick={() => {
                   setIsMenuOpen(!isMenuOpen);
                 }}
               >
-                {isMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+                {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
               </button>
             </div>
           </div>

@@ -130,7 +130,10 @@ export function supabaseProductToLegacy(product: ProductFullView): Product {
   const finalDiscountPercent = adminDiscountPercent > 0 ? adminDiscountPercent : product.discount_percentage;
 
   // Generate IDs and slugs from names
-  const categoryName = mapCategoryToLegacy(product.category_name || '');
+  const originalCategoryName = product.category_name || '';
+  const categoryName = mapCategoryToLegacy(originalCategoryName);
+  // Si la catégorie a été mappée vers un parent, l'original est une sous-catégorie
+  const inferredSubcategory = categoryName !== originalCategoryName ? originalCategoryName : undefined;
   const brandSlug = (brandName || '').toLowerCase().replace(/\s+/g, '-');
   const categorySlug = categoryName.toLowerCase().replace(/\s+/g, '-');
 
@@ -145,7 +148,7 @@ export function supabaseProductToLegacy(product: ProductFullView): Product {
     categoryId: product.category_id || '', // Utiliser category_id de ProductFullView
     categoryName,
     categorySlug,
-    subcategory: product.subcategory_name || undefined,
+    subcategory: product.subcategory_name || inferredSubcategory || undefined,
     basePrice: finalPrice,
     originalPrice: finalOriginalPrice,
     discountPercent: finalDiscountPercent,
@@ -176,6 +179,7 @@ export function supabaseProductToLegacy(product: ProductFullView): Product {
  */
 function mapCategoryToLegacy(supabaseCategory: string): string {
   const mapping: Record<string, string> = {
+    // Catégories racines
     'smartphones': 'Smartphones',
     'tablettes': 'Tablettes',
     'audio': 'Audio',
@@ -186,10 +190,63 @@ function mapCategoryToLegacy(supabaseCategory: string): string {
     'eclairage led': 'LED',
     'accessoires': 'Accessoires',
     'appareils photo': 'Appareils Photo',
-    'appareils-photo': 'Appareils Photo'
+    'appareils-photo': 'Appareils Photo',
+
+    // Sous-catégories Audio → Audio
+    'écouteurs': 'Audio',
+    'ecouteurs': 'Audio',
+    'casques': 'Audio',
+    'casques-audio': 'Audio',
+    'enceintes': 'Audio',
+    'gaming audio': 'Audio',
+    'gaming-audio': 'Audio',
+    'micro': 'Audio',
+
+    // Sous-catégories LED → LED
+    'barre led': 'LED',
+    'barre-led': 'LED',
+    'néon': 'LED',
+    'neon': 'LED',
+    'kits éclairage': 'LED',
+    'kits-eclairage': 'LED',
+    'ampoules': 'LED',
+    'rgb': 'LED',
+    'cables lumineux': 'LED',
+    'cables-lumineux': 'LED',
+    'câbles lumineux': 'LED',
+
+    // Sous-catégories Accessoires → Accessoires
+    'batteries externes': 'Accessoires',
+    'batteries-externes': 'Accessoires',
+    'chargeurs': 'Accessoires',
+    'câbles': 'Accessoires',
+    'cables': 'Accessoires',
+    'divers': 'Accessoires',
+    'accessoires-divers': 'Accessoires',
+
+    // Sous-catégories Montres → Montres
+    'montres connectées': 'Montres',
+    'montres-connectees': 'Montres',
+    'montres sport': 'Montres',
+    'montres-sport': 'Montres',
+
+    // Sous-catégories Smartphones → Smartphones
+    'smartphones gaming': 'Smartphones',
+    'smartphones-gaming': 'Smartphones',
+    'smartphones 5g': 'Smartphones',
+    'smartphones-5g': 'Smartphones',
+    'téléphones classiques': 'Smartphones',
+    'telephones-classiques': 'Smartphones',
+
+    // Sous-catégories Tablettes → Tablettes
+    'tablettes gaming': 'Tablettes',
+    'tablettes-gaming': 'Tablettes',
+
+    // Sous-catégories Appareils Photo
+    'accessoires photo': 'Appareils Photo',
+    'accessoires-photo': 'Appareils Photo',
   };
 
-  // ✅ FIX: Rendre insensible à la casse
   const lowerCategory = supabaseCategory.toLowerCase();
   return mapping[lowerCategory] || supabaseCategory;
 }
