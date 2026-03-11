@@ -122,11 +122,11 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
               ))}
               {product.rating && product.rating.count > 0 && (
                 <span className="text-sm text-gray-600 ml-1">
-                  ({product.rating.count} avis)
+                  ({product.rating.count} avis*)
                 </span>
               )}
             </div>
-            
+
             <div className="flex items-center gap-4 mb-4">
               <span className="text-2xl font-bold text-blue-600">
                 {formatPrice(finalPrice)}
@@ -267,7 +267,7 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
           ))}
           {product.rating && product.rating.count > 0 && (
             <span className="text-sm text-gray-600 ml-1">
-              ({product.rating.count} avis)
+              ({product.rating.count} avis*)
             </span>
           )}
         </div>

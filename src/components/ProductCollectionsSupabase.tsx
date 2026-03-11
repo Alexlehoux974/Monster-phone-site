@@ -144,7 +144,7 @@ const FeaturedProductCard = ({
                 i < Math.floor(product.rating?.average || 0) ? "text-yellow-400" : "text-gray-300"
               )}>★</span>
             ))}
-            <span className="text-xs text-gray-500 ml-1">({product.rating?.count || 0} avis)</span>
+            <span className="text-xs text-gray-500 ml-1">({product.rating?.count || 0} avis*)</span>
           </div>
 
           {/* Prix */}

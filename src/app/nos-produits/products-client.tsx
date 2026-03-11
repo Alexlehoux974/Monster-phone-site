@@ -324,7 +324,7 @@ function ProductsClientContent({
                       ))}
                       {product.total_reviews > 0 && (
                         <span className="text-sm text-gray-600 ml-1">
-                          ({product.total_reviews} avis)
+                          ({product.total_reviews} avis*)
                         </span>
                       )}
                     </div>
@@ -399,7 +399,7 @@ function ProductsClientContent({
                         ))}
                         {product.total_reviews > 0 && (
                           <span className="text-sm text-gray-600 ml-1">
-                            ({product.total_reviews} avis)
+                            ({product.total_reviews} avis*)
                           </span>
                         )}
                       </div>

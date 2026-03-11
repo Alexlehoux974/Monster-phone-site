@@ -188,7 +188,7 @@ const BestSellers = () => {
                     >
                       <Star className="w-3 h-3 text-yellow-500 fill-yellow-500" />
                       <span className="text-xs font-medium">{product.rating.average.toFixed(1)}</span>
-                      <span className="text-xs text-gray-500">({product.rating.count})</span>
+                      <span className="text-xs text-gray-500">({product.rating.count}*)</span>
                     </motion.div>
                   )}
                 </motion.div>

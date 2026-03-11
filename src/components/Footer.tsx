@@ -481,6 +481,9 @@ export default function Footer() {
             <div className="text-xs text-gray-400">
               Développé avec ❤️ par ARA-CORP / <a href="https://digiqo.fr/" target="_blank" rel="noopener noreferrer" className="hover:text-gray-200 transition-colors">Digiqo.fr</a>
             </div>
+            <div className="text-[10px] text-gray-500 mt-2">
+              * Les notes et avis affichés sont basés sur des évaluations vérifiées provenant de sites fiables (Amazon, GSMArena, TechRadar, Trusted Reviews, etc.)
+            </div>
           </motion.div>
         </div>
       </div>

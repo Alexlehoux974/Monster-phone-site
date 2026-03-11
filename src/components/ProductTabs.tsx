@@ -16,7 +16,7 @@ export default function ProductTabs({ product }: ProductTabsProps) {
       <Tabs defaultValue="reviews" className="space-y-8">
         <TabsList className="grid grid-cols-2 w-full max-w-2xl mx-auto bg-gray-50 p-1 rounded-xl">
           <TabsTrigger value="reviews" className="data-[state=active]:bg-white data-[state=active]:shadow-sm rounded-lg font-medium">
-            Avis ({product.rating?.count || 0})
+            Avis ({product.rating?.count || 0}*)
           </TabsTrigger>
           <TabsTrigger value="shipping" className="data-[state=active]:bg-white data-[state=active]:shadow-sm rounded-lg font-medium">
             Livraison
@@ -47,10 +47,13 @@ export default function ProductTabs({ product }: ProductTabsProps) {
                       ))}
                     </div>
                     <p className="text-sm text-gray-600 mt-1">
-                      {product.rating.count} évaluations
+                      {product.rating.count} évaluations*
                     </p>
                   </div>
                 </div>
+                <p className="text-xs text-gray-400 mt-3 italic">
+                  * Notes et avis basés sur des évaluations vérifiées provenant de sites fiables (Amazon, GSMArena, TechRadar, Trusted Reviews, etc.)
+                </p>
               </div>
             )}
 

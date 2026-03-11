@@ -540,7 +540,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                     {product.rating?.average?.toFixed(1) || "0.0"}
                   </span>
                 </div>
-                <span className="text-gray-600">({product.rating?.count || 0} avis)</span>
+                <span className="text-gray-600">({product.rating?.count || 0} avis*)</span>
               </div>
             )}
           </div>
