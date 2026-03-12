@@ -65,6 +65,7 @@ export async function GET(request: NextRequest) {
         brand_id,
         brands!inner(name),
         product_images(url, is_primary),
+        product_variants(images, color, is_default),
         product_tags(tag)
       `)
       .eq('category_id', currentProduct.category_id)
@@ -127,6 +128,7 @@ export async function GET(request: NextRequest) {
         brand_id: product.brand_id,
         brands: product.brands,
         product_images: product.product_images,
+        product_variants: product.product_variants,
         similarity_score: Math.round(score * 100) / 100
       };
     });

@@ -34,7 +34,7 @@ const categories = [
   },
   {
     id: 'led',
-    name: 'LED',
+    name: 'Éclairage LED',
     icon: Lightbulb,
     href: '/nos-produits?category=LED',
     color: 'from-yellow-500 to-orange-600',

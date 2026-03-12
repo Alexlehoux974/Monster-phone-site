@@ -58,13 +58,13 @@ function ProductsClientContent({
     priceRange: [0, 2000],
     hasPromo: false,
     minRating: 0,
-    inStock: false,
+    inStock: true,
     brands: searchParams.get('brand') ? [searchParams.get('brand')!] : [],
     categories: searchParams.get('category') ? [searchParams.get('category')!] : []
   });
   
   // Tri et pagination
-  const [sortOption, setSortOption] = useState<SortOption>('relevance');
+  const [sortOption, setSortOption] = useState<SortOption>('bestseller');
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(12);
 
@@ -101,8 +101,11 @@ function ProductsClientContent({
       const matchesRating = !filters.minRating || 
                            (product.average_rating && product.average_rating >= filters.minRating);
       
-      // Stock - ProductFullView n'a pas stock_quantity, on suppose tous en stock
-      const matchesStock = !filters.inStock || true;
+      // Stock - vérifier le stock des variants
+      const matchesStock = !filters.inStock ||
+        (product.variants && product.variants.length > 0
+          ? product.variants.some((v: any) => v.stock > 0)
+          : product.status !== 'out-of-stock');
 
       // Marques - utiliser brand_name directement depuis ProductFullView
       const matchesBrand = filters.brands.length === 0 ||
@@ -163,6 +166,13 @@ function ProductsClientContent({
         sorted = sortedByPriority.map(p => productIdMap.get(p.id)!).filter(Boolean);
         break;
     }
+
+    // Toujours pousser les produits en rupture de stock en fin de liste
+    sorted.sort((a, b) => {
+      const aInStock = a.variants?.some((v: any) => v.stock > 0) ? 0 : 1;
+      const bInStock = b.variants?.some((v: any) => v.stock > 0) ? 0 : 1;
+      return aInStock - bInStock;
+    });
 
     return sorted;
   }, [filteredProducts, sortOption, brands, categories]);
@@ -283,10 +293,12 @@ function ProductsClientContent({
           ) : viewMode === 'grid' ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {paginatedProducts.map((product: any) => {
-                // Utiliser la première image du produit ou un placeholder
-                const productImage = product.images && product.images.length > 0
+                // Chercher l'image dans images, puis dans les variants, puis placeholder
+                const productImage = (product.images && product.images.length > 0)
                   ? product.images[0]
-                  : '/images/placeholder-product.jpg';
+                  : (product.variants && product.variants.length > 0 && product.variants[0].images && product.variants[0].images.length > 0)
+                    ? product.variants[0].images[0]
+                    : '/images/placeholder-product.jpg';
 
                 return (
                 <div key={product.id} className="bg-white rounded-lg shadow-sm hover:shadow-lg transition-shadow">
@@ -359,10 +371,12 @@ function ProductsClientContent({
           ) : (
             <div className="space-y-4">
               {paginatedProducts.map((product: any) => {
-                // Utiliser la première image du produit ou un placeholder
-                const productImage = product.images && product.images.length > 0
+                // Chercher l'image dans images, puis dans les variants, puis placeholder
+                const productImage = (product.images && product.images.length > 0)
                   ? product.images[0]
-                  : '/images/placeholder-product.jpg';
+                  : (product.variants && product.variants.length > 0 && product.variants[0].images && product.variants[0].images.length > 0)
+                    ? product.variants[0].images[0]
+                    : '/images/placeholder-product.jpg';
 
                 return (
                 <div key={product.id} className="bg-white rounded-lg shadow-sm hover:shadow-lg transition-shadow p-4">

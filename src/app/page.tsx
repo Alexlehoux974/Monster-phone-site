@@ -83,7 +83,7 @@ export default async function Home() {
     sortOrder: 'desc'
   });
   const ecouteurs = ecouteursData.map(supabaseProductToLegacy);
-  const featuredEcouteurs = sortProductsByPriority(ecouteurs);
+  const featuredEcouteurs = sortProductsByPriority(ecouteurs).slice(0, 6);
 
   return (
     <div className="min-h-screen">
@@ -97,13 +97,15 @@ export default async function Home() {
         {/* Section Smartphones */}
         <FeaturedProductsSupabase
           products={featuredSmartphones}
-          title="Nos Smartphones HONOR"
+          title="Nos Smartphones Vedettes"
         />
 
         {/* Section Écouteurs */}
         <FeaturedProductsSupabase
           products={featuredEcouteurs}
           title="Nos écouteurs"
+          viewAllHref="/audio/ecouteurs"
+          viewAllLabel="Voir tous nos écouteurs"
         />
 
         {/* Flash Deals - S'affiche si des promos existent */}

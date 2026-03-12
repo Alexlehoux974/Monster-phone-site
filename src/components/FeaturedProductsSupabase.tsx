@@ -12,9 +12,11 @@ import { sortProductsByPriority } from '@/lib/utils';
 interface FeaturedProductsSupabaseProps {
   products: Product[];
   title?: string;
+  viewAllHref?: string;
+  viewAllLabel?: string;
 }
 
-export default function FeaturedProductsSupabase({ products: initialProducts, title }: FeaturedProductsSupabaseProps) {
+export default function FeaturedProductsSupabase({ products: initialProducts, title, viewAllHref, viewAllLabel }: FeaturedProductsSupabaseProps) {
   const [products, setProducts] = useState<Product[]>(initialProducts);
 
   useEffect(() => {
@@ -79,10 +81,10 @@ export default function FeaturedProductsSupabase({ products: initialProducts, ti
         {/* CTA vers catalogue complet */}
         <div className="text-center mt-12">
           <Link
-            href="/nos-produits"
+            href={viewAllHref || "/nos-produits"}
             className="inline-flex items-center bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105"
           >
-            Voir tous nos produits
+            {viewAllLabel || "Voir tous nos produits"}
             <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>

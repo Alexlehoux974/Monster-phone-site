@@ -114,7 +114,8 @@ async function getRelatedProducts(brandName: string, currentProductId: string) {
       *,
       brand:brands!inner(*),
       category:categories!products_category_id_fkey(*),
-      product_variants(*)
+      product_variants(*),
+      product_images(url, is_primary)
     `)
     .eq('brand.name', brandName)
     .neq('id', currentProductId)
@@ -163,7 +164,9 @@ async function getRelatedProducts(brandName: string, currentProductId: string) {
       average_rating: item.average_rating || undefined,
       total_reviews: item.total_reviews || undefined,
       variants: item.product_variants || undefined,
-      images: item.images || undefined,
+      images: item.images || (item.product_images?.length > 0
+        ? [item.product_images.find((img: any) => img.is_primary)?.url || item.product_images[0].url]
+        : undefined),
       specifications: item.specifications || undefined,
       highlights: item.highlights || undefined,
       badges: item.badges || undefined,

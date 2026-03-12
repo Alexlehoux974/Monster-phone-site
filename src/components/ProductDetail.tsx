@@ -305,7 +305,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
       return;
     }
     handleAddToCart();
-    router.push('/panier');
+    router.push('/checkout');
   };
 
   return (

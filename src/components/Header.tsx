@@ -424,7 +424,7 @@ const MobileMenu = ({
     { name: '📱 Smartphones', slug: 'smartphones', subcategories: [] },
     { name: '🎧 Audio & Chargement', slug: 'audio', subcategories: [] },
     { name: '⌚ Montres Connectées', slug: 'montres', subcategories: [] },
-    { name: '💡 Créativité & LED', slug: 'led', subcategories: [] },
+    { name: '💡 Éclairage LED', slug: 'led', subcategories: [] },
     { name: '🔧 Accessoires', slug: 'accessoires', subcategories: [] },
   ];
 

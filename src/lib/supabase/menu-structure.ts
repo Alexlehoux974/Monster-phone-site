@@ -69,7 +69,7 @@ export const MENU_STRUCTURE: MenuCategory[] = [
     ]
   },
   {
-    name: 'LED',
+    name: 'Éclairage LED',
     slug: 'led',
     // Pas de subcategories - affichage direct des produits
   },

@@ -129,8 +129,13 @@ export default function SimilarProducts({ categorySlug, brandSlug, currentProduc
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
         {products.map((product: any) => {
-          const imageUrl = product.product_images?.find(img => img.is_primary)?.url
+          // Chercher l'image : product_images d'abord, puis variants, puis placeholder
+          const variantImage = product.product_variants
+            ?.find((v: any) => v.is_default)?.images?.[0]
+            || product.product_variants?.[0]?.images?.[0];
+          const imageUrl = product.product_images?.find((img: any) => img.is_primary)?.url
             || product.product_images?.[0]?.url
+            || variantImage
             || '/placeholder-monster.svg';
 
           const hasDiscount = product.original_price && product.original_price > product.price;
