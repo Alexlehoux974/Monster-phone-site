@@ -11,9 +11,26 @@ export default function TrustSection() {
   });
   const statsRef = useRef<HTMLDivElement>(null);
 
+  const getClientCount = useCallback(() => {
+    const baseDate = new Date('2026-03-12');
+    const baseCount = 16472;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const diffDays = Math.floor((today.getTime() - baseDate.getTime()) / (1000 * 60 * 60 * 24));
+
+    let total = baseCount;
+    for (let i = 1; i <= diffDays; i++) {
+      // Génère un nombre pseudo-aléatoire déterministe (3-6) par jour
+      const seed = baseDate.getTime() + i * 86400000;
+      const rand = ((seed * 9301 + 49297) % 233280) / 233280;
+      total += 3 + Math.floor(rand * 4); // entre 3 et 6
+    }
+    return total;
+  }, []);
+
   const animateNumbers = useCallback(() => {
     const finalStats = {
-      clients: 16472,
+      clients: getClientCount(),
       rating: 4.8,
       delivery: 24,
       satisfaction: 98
@@ -41,7 +58,7 @@ export default function TrustSection() {
         setAnimatedStats(finalStats);
       }
     }, stepDuration);
-  }, []);
+  }, [getClientCount]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
