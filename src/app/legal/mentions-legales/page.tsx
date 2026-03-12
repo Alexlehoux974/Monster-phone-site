@@ -97,7 +97,7 @@ export default function MentionsLegalesPage() {
                     </div>
                     <div>
                       <h3 className="font-semibold text-blue-900 mb-2">Webmaster</h3>
-                      <p className="text-blue-800">ARA-CORP<br/>
+                      <p className="text-blue-800">Digiqo.fr<br/>
                       02 62 02 51 02</p>
                     </div>
                     <div>
@@ -106,7 +106,7 @@ export default function MentionsLegalesPage() {
                     </div>
                     <div>
                       <h3 className="font-semibold text-blue-900 mb-2">Crédits</h3>
-                      <p className="text-blue-800">ARA-CORP / Digiqo.fr</p>
+                      <p className="text-blue-800">Digiqo.fr</p>
                     </div>
                   </div>
                 </div>
