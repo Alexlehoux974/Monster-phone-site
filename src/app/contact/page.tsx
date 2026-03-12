@@ -18,8 +18,7 @@ import {
   Smartphone,
   CheckCircle,
   AlertCircle,
-  Navigation,
-  Calendar
+  Navigation
 } from 'lucide-react';
 
 export default function ContactPage() {
@@ -96,7 +95,7 @@ export default function ContactPage() {
   return (
     <>
       <div className="min-h-screen bg-gray-50 overflow-x-hidden">
-        <div className="pt-[110px]">
+        <div className="pt-[140px]">
           <Header />
         
         <main className="px-4 sm:px-6 lg:px-8 py-8">
@@ -337,12 +336,6 @@ export default function ContactPage() {
                       <span className="text-gray-900">Dimanche</span>
                       <span className="font-medium text-red-600">Fermé</span>
                     </div>
-                  </div>
-                  <div className="mt-4 p-3 bg-blue-50 rounded-lg">
-                    <p className="text-sm text-blue-900">
-                      <Calendar className="w-4 h-4 inline mr-1" />
-                      Showroom sur rendez-vous uniquement
-                    </p>
                   </div>
                 </div>
 
