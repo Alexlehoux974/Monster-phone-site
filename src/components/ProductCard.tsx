@@ -1,13 +1,14 @@
 'use client';
 
 import Link from 'next/link';
-import { Heart, ShoppingCart, Star, Check, Zap, Shield } from 'lucide-react';
+import { Heart, ShoppingCart, Star, Check, Zap, Shield, Eye } from 'lucide-react';
 import { Product } from '@/data/products';
 import { useCart } from '@/contexts/CartContext';
 import { useState } from 'react';
 import ImageWithFallback from './ImageWithFallback';
 import { formatPrice, cn, isCompletelyOutOfStock } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
+import QuickViewModal from './QuickViewModal';
 
 interface ProductCardProps {
   product: Product;
@@ -20,6 +21,7 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
   const [isAdding, setIsAdding] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [selectedVariant, setSelectedVariant] = useState(product.variants?.[0]);
+  const [quickViewOpen, setQuickViewOpen] = useState(false);
 
   const mainImage = selectedVariant?.images?.[0] || product.variants?.[0]?.images?.[0] || '';
   const hasDiscount = (product.discountPercent && product.discountPercent > 0) || (product.originalPrice && product.originalPrice > product.basePrice);
@@ -240,7 +242,17 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
               2 ans Garantie
             </Badge>
           </div>
-          
+
+          {/* Quick View button */}
+          <button
+            onClick={(e) => { e.preventDefault(); e.stopPropagation(); setQuickViewOpen(true); }}
+            className="absolute bottom-2 right-2 z-10 bg-white/90 hover:bg-white text-gray-700 p-2 rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-all duration-200 hover:scale-110"
+            aria-label="Aperçu rapide"
+            title="Aperçu rapide"
+          >
+            <Eye className="w-4 h-4" />
+          </button>
+
           <ImageWithFallback
             src={mainImage}
             alt={product.name}
@@ -347,6 +359,15 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
           </button>
         </div>
       </div>
+
+      {/* Quick View Modal */}
+      {quickViewOpen && (
+        <QuickViewModal
+          product={product}
+          isOpen={quickViewOpen}
+          onClose={() => setQuickViewOpen(false)}
+        />
+      )}
     </div>
   );
 }

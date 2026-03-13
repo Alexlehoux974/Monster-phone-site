@@ -77,7 +77,9 @@ function ProduitsSupabasePageContent() {
     minRating: 0,
     inStock: false,
     brands: [],
-    categories: []
+    categories: [],
+    storage: [],
+    ram: []
   });
   
   // Tri et pagination
@@ -494,7 +496,9 @@ function ProduitsSupabasePageContent() {
                       minRating: 0,
                       inStock: false,
                       brands: [],
-                      categories: []
+                      categories: [],
+                      storage: [],
+                      ram: []
                     });
                     setSearchQuery('');
                   }}

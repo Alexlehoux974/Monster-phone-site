@@ -60,7 +60,9 @@ function ProductsClientContent({
     minRating: 0,
     inStock: true,
     brands: searchParams.get('brand') ? [searchParams.get('brand')!] : [],
-    categories: searchParams.get('category') ? [searchParams.get('category')!] : []
+    categories: searchParams.get('category') ? [searchParams.get('category')!] : [],
+    storage: [],
+    ram: []
   });
   
   // Tri et pagination
@@ -114,9 +116,31 @@ function ProductsClientContent({
       // Catégories - utiliser category_name directement depuis ProductFullView
       const matchesCategory = filters.categories.length === 0 ||
                              filters.categories.includes(product.category_name);
-      
-      return matchesSearch && matchesPrice && matchesPromo && 
-             matchesRating && matchesStock && matchesBrand && matchesCategory;
+
+      // Stockage et RAM - extraire depuis specifications (objet JSON ou tableau)
+      const specs = product.specifications;
+      const getSpecValue = (key: string): string | undefined => {
+        if (!specs) return undefined;
+        if (Array.isArray(specs)) {
+          const found = specs.find((s: any) => s.label === key || s.key === key);
+          return found?.value;
+        }
+        return (specs as any)[key] || (specs as any)[key.toLowerCase()];
+      };
+      const matchesStorage = filters.storage.length === 0 ||
+        filters.storage.some(v => {
+          const val = getSpecValue('Stockage') || getSpecValue('storage');
+          return val && val.includes(v);
+        });
+      const matchesRam = filters.ram.length === 0 ||
+        filters.ram.some(v => {
+          const val = getSpecValue('RAM') || getSpecValue('ram');
+          return val && val.includes(v);
+        });
+
+      return matchesSearch && matchesPrice && matchesPromo &&
+             matchesRating && matchesStock && matchesBrand && matchesCategory &&
+             matchesStorage && matchesRam;
     });
   }, [initialProducts, searchQuery, filters]);
 

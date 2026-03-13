@@ -19,6 +19,8 @@ export interface FilterState {
   inStock: boolean;
   brands: string[];
   categories: string[];
+  storage: string[];
+  ram: string[];
 }
 
 export default function FilterPanel({ products, onFiltersChange, initialFilters }: FilterPanelProps) {
@@ -60,7 +62,9 @@ export default function FilterPanel({ products, onFiltersChange, initialFilters 
       minRating: 0,
       inStock: false,
       brands: [],
-      categories: []
+      categories: [],
+      storage: [],
+      ram: []
     };
   });
 
@@ -117,19 +121,33 @@ export default function FilterPanel({ products, onFiltersChange, initialFilters 
       minRating: 0,
       inStock: false,
       brands: [],
-      categories: []
+      categories: [],
+      storage: [],
+      ram: []
     };
     setFilters(defaultFilters);
     setTempPriceRange([minPrice, maxPrice]);
   };
 
-  const activeFilterCount = 
+  const activeFilterCount =
     (filters.priceRange[0] !== minPrice || filters.priceRange[1] !== maxPrice ? 1 : 0) +
     (filters.hasPromo ? 1 : 0) +
     (filters.minRating > 0 ? 1 : 0) +
     (filters.inStock ? 1 : 0) +
     filters.brands.length +
-    filters.categories.length;
+    filters.categories.length +
+    filters.storage.length +
+    filters.ram.length;
+
+  // Extraire les valeurs de stockage et RAM uniques depuis les specifications des produits
+  const uniqueStorage = Array.from(new Set(
+    safeProducts
+      .flatMap(p => (p.specifications || []).filter((s: any) => s.label === 'Stockage').map((s: any) => s.value))
+  )).sort();
+  const uniqueRam = Array.from(new Set(
+    safeProducts
+      .flatMap(p => (p.specifications || []).filter((s: any) => s.label === 'RAM').map((s: any) => s.value))
+  )).sort();
 
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
@@ -387,6 +405,102 @@ export default function FilterPanel({ products, onFiltersChange, initialFilters 
                   </label>
                 );
               })}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Section Stockage (conditionnelle) */}
+      {uniqueStorage.length > 0 && (
+        <div className="mb-4 pb-4 border-b border-gray-100">
+          <button
+            onClick={() => toggleSection('storage')}
+            className="w-full flex items-center justify-between py-2 text-left hover:text-blue-600 transition-colors"
+          >
+            <span className="font-medium">
+              Stockage
+              {filters.storage.length > 0 && (
+                <Badge variant="secondary" className="ml-2 bg-blue-100 text-blue-700">
+                  {filters.storage.length}
+                </Badge>
+              )}
+            </span>
+            {expandedSections.has('storage') ? (
+              <ChevronUp className="w-4 h-4" />
+            ) : (
+              <ChevronDown className="w-4 h-4" />
+            )}
+          </button>
+
+          {expandedSections.has('storage') && (
+            <div className="mt-3 space-y-2">
+              {uniqueStorage.map((val: string) => (
+                <label
+                  key={val}
+                  className="flex items-center gap-3 cursor-pointer py-1.5 px-2 hover:bg-gray-50 rounded transition-colors"
+                >
+                  <input
+                    type="checkbox"
+                    checked={filters.storage.includes(val)}
+                    onChange={() => setFilters(prev => ({
+                      ...prev,
+                      storage: prev.storage.includes(val)
+                        ? prev.storage.filter(s => s !== val)
+                        : [...prev.storage, val]
+                    }))}
+                    className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                  />
+                  <span className="text-sm">{val}</span>
+                </label>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Section RAM (conditionnelle) */}
+      {uniqueRam.length > 0 && (
+        <div className="mb-4">
+          <button
+            onClick={() => toggleSection('ram')}
+            className="w-full flex items-center justify-between py-2 text-left hover:text-blue-600 transition-colors"
+          >
+            <span className="font-medium">
+              RAM
+              {filters.ram.length > 0 && (
+                <Badge variant="secondary" className="ml-2 bg-blue-100 text-blue-700">
+                  {filters.ram.length}
+                </Badge>
+              )}
+            </span>
+            {expandedSections.has('ram') ? (
+              <ChevronUp className="w-4 h-4" />
+            ) : (
+              <ChevronDown className="w-4 h-4" />
+            )}
+          </button>
+
+          {expandedSections.has('ram') && (
+            <div className="mt-3 space-y-2">
+              {uniqueRam.map((val: string) => (
+                <label
+                  key={val}
+                  className="flex items-center gap-3 cursor-pointer py-1.5 px-2 hover:bg-gray-50 rounded transition-colors"
+                >
+                  <input
+                    type="checkbox"
+                    checked={filters.ram.includes(val)}
+                    onChange={() => setFilters(prev => ({
+                      ...prev,
+                      ram: prev.ram.includes(val)
+                        ? prev.ram.filter(r => r !== val)
+                        : [...prev.ram, val]
+                    }))}
+                    className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                  />
+                  <span className="text-sm">{val}</span>
+                </label>
+              ))}
             </div>
           )}
         </div>

@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { Star, Shield, Truck, RefreshCw, Clock, Award, ChevronRight, ChevronLeft, Check, Package, Phone, CreditCard, Lock, Heart, Share2, Minus, Plus, ZoomIn } from 'lucide-react';
+import { Star, Shield, Truck, RefreshCw, Clock, Award, ChevronRight, ChevronLeft, Check, Package, Phone, CreditCard, Lock, Heart, Share2, Minus, Plus, ZoomIn, Eye, X } from 'lucide-react';
 import { Product, ProductVariant } from '@/data/products';
 import { formatPrice, cn } from '@/lib/utils';
 import { useCart } from '@/contexts/CartContext';
@@ -43,6 +43,19 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   const [wishlistLoading, setWishlistLoading] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [viewerCount, setViewerCount] = useState(() => Math.floor(Math.random() * 8) + 3);
+
+  // Varier légèrement le viewer count toutes les 15-30s
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setViewerCount(prev => {
+        const delta = Math.random() > 0.5 ? 1 : -1;
+        return Math.max(2, Math.min(15, prev + delta));
+      });
+    }, (Math.random() * 15000) + 15000);
+    return () => clearInterval(interval);
+  }, []);
 
   // Vérifier si le produit est dans la wishlist
   useEffect(() => {
@@ -327,12 +340,9 @@ export default function ProductDetail({ product }: ProductDetailProps) {
         <div className="space-y-4">
           {/* Image principale avec navigation */}
           <div className="relative">
-            <div 
-              className={cn(
-                "relative aspect-square bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl overflow-hidden shadow-xl cursor-zoom-in group",
-                isZoomed && "cursor-zoom-out"
-              )}
-              onClick={() => setIsZoomed(!isZoomed)}
+            <div
+              className="relative aspect-square bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl overflow-hidden shadow-xl cursor-zoom-in group"
+              onClick={() => setLightboxOpen(true)}
             >
               {hasDiscount && (
                 <Badge className="absolute top-4 left-4 z-10 bg-gradient-to-r from-red-500 to-red-600 text-white border-0 px-3 py-1.5 font-bold shadow-lg">
@@ -355,10 +365,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                 alt={product.name}
                 productCategory={product.categoryName}
                 fill
-                className={cn(
-                  "object-contain transition-transform duration-300",
-                  isZoomed && "scale-150"
-                )}
+                className="object-contain transition-transform duration-300"
                 priority
               />
             </div>
@@ -561,6 +568,10 @@ export default function ProductDetail({ product }: ProductDetailProps) {
               )}
             </div>
             <p className="text-sm text-gray-600 mt-1">Prix TTC - Éco-participation incluse</p>
+            <div className="flex items-center gap-2 text-green-600 text-sm font-medium mt-2">
+              <Shield className="w-4 h-4" />
+              Meilleur prix garanti à La Réunion
+            </div>
           </div>
 
           {/* Sélecteur de variantes */}
@@ -663,6 +674,14 @@ export default function ProductDetail({ product }: ProductDetailProps) {
               ) : null}
             </div>
 
+            {/* Viewer count - social proof */}
+            {isInStock && (
+              <div className="flex items-center gap-2 text-orange-600 text-sm">
+                <Eye className="w-4 h-4" />
+                <span>{viewerCount} personnes regardent ce produit</span>
+              </div>
+            )}
+
             <Button
               onClick={handleAddToCart}
               disabled={!isInStock || quantity > currentStock}
@@ -738,30 +757,32 @@ export default function ProductDetail({ product }: ProductDetailProps) {
             </div>
           </div>
 
-          {/* Paiement sécurisé */}
+          {/* Paiement sécurisé avec logos */}
           <div className="border-t pt-4">
             <div className="flex items-center gap-2 mb-3">
               <Lock className="h-4 w-4 text-green-600" />
               <span className="text-sm font-semibold">Paiement 100% sécurisé</span>
             </div>
-            <div className="flex gap-2">
-              <Badge variant="outline">
-                <CreditCard className="h-3 w-3 mr-1" />
-                Visa
-              </Badge>
-              <Badge variant="outline">
-                <CreditCard className="h-3 w-3 mr-1" />
-                Mastercard
-              </Badge>
-              <Badge variant="outline">
+            <div className="flex items-center gap-3 flex-wrap">
+              {[
+                { name: 'Visa', src: '/payment-logos/visa.webp' },
+                { name: 'Mastercard', src: '/payment-logos/mastercard.webp' },
+                { name: 'American Express', src: '/payment-logos/american-express.png' },
+                { name: 'Stripe', src: '/payment-logos/stripe.png' },
+              ].map((m) => (
+                <div key={m.name} className="bg-gray-50 border border-gray-200 rounded-md px-2 py-1.5 flex items-center justify-center" style={{ minWidth: '60px', height: '36px' }}>
+                  <Image src={m.src} alt={m.name} width={48} height={28} className="object-contain" style={{ height: 'auto', maxHeight: '24px' }} />
+                </div>
+              ))}
+              <Badge variant="outline" className="text-xs">
                 <CreditCard className="h-3 w-3 mr-1" />
                 PayPal
               </Badge>
-              <Badge variant="outline">
-                <CreditCard className="h-3 w-3 mr-1" />
+              <Badge variant="outline" className="text-xs">
                 Apple Pay
               </Badge>
             </div>
+            <p className="text-xs text-gray-500 mt-2">SSL 256-bit &bull; Certifié PCI DSS &bull; Données cryptées</p>
           </div>
         </div>
       </div>
@@ -769,6 +790,101 @@ export default function ProductDetail({ product }: ProductDetailProps) {
       {/* Product Content Cards - CMS-managed content with modern card layout */}
       <ProductContentCards productId={product.id} productCategory={product.categoryName} productBrand={product.brandName} />
       </div>
+
+      {/* Lightbox galerie fullscreen */}
+      {lightboxOpen && (
+        <div
+          className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center"
+          onClick={() => setLightboxOpen(false)}
+          onTouchStart={(e) => {
+            const touch = e.touches[0];
+            (e.currentTarget as any)._touchStartX = touch.clientX;
+          }}
+          onTouchEnd={(e) => {
+            const startX = (e.currentTarget as any)._touchStartX;
+            if (startX === undefined) return;
+            const endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+            if (Math.abs(diff) > 50) {
+              if (diff > 0 && selectedImageIndex < allImages.length - 1) {
+                setSelectedImageIndex(prev => prev + 1);
+              } else if (diff < 0 && selectedImageIndex > 0) {
+                setSelectedImageIndex(prev => prev - 1);
+              }
+            }
+            delete (e.currentTarget as any)._touchStartX;
+          }}
+        >
+          {/* Bouton fermer */}
+          <button
+            onClick={() => setLightboxOpen(false)}
+            className="absolute top-4 right-4 z-10 text-white bg-white/20 hover:bg-white/30 rounded-full p-2 transition-colors"
+            aria-label="Fermer"
+          >
+            <X className="h-6 w-6" />
+          </button>
+
+          {/* Compteur */}
+          <div className="absolute top-4 left-4 text-white/70 text-sm">
+            {selectedImageIndex + 1} / {allImages.length}
+          </div>
+
+          {/* Image */}
+          <div
+            className="relative w-full h-full max-w-4xl max-h-[80vh] mx-4"
+            onClick={(e) => e.stopPropagation()}
+            style={{ touchAction: 'pinch-zoom' }}
+          >
+            <ImageWithFallback
+              src={allImages[selectedImageIndex]?.src || transformedFallback}
+              alt={product.name}
+              productCategory={product.categoryName}
+              fill
+              className="object-contain"
+              sizes="100vw"
+            />
+          </div>
+
+          {/* Navigation gauche */}
+          {allImages.length > 1 && selectedImageIndex > 0 && (
+            <button
+              onClick={(e) => { e.stopPropagation(); setSelectedImageIndex(prev => prev - 1); }}
+              className="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 text-white bg-white/20 hover:bg-white/30 rounded-full p-3 transition-colors"
+              aria-label="Image précédente"
+            >
+              <ChevronLeft className="h-6 w-6" />
+            </button>
+          )}
+
+          {/* Navigation droite */}
+          {allImages.length > 1 && selectedImageIndex < allImages.length - 1 && (
+            <button
+              onClick={(e) => { e.stopPropagation(); setSelectedImageIndex(prev => prev + 1); }}
+              className="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 text-white bg-white/20 hover:bg-white/30 rounded-full p-3 transition-colors"
+              aria-label="Image suivante"
+            >
+              <ChevronRight className="h-6 w-6" />
+            </button>
+          )}
+
+          {/* Miniatures en bas */}
+          {allImages.length > 1 && (
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 bg-black/50 rounded-full px-3 py-2">
+              {allImages.map((img, i) => (
+                <button
+                  key={i}
+                  onClick={(e) => { e.stopPropagation(); setSelectedImageIndex(i); }}
+                  className={cn(
+                    "w-2.5 h-2.5 rounded-full transition-all",
+                    i === selectedImageIndex ? "bg-white scale-125" : "bg-white/40 hover:bg-white/60"
+                  )}
+                  aria-label={`Image ${i + 1}`}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

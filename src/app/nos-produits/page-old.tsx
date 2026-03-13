@@ -29,7 +29,9 @@ export default function SmartphonesPage() {
     minRating: 0,
     inStock: false,
     brands: [],
-    categories: []
+    categories: [],
+    storage: [],
+    ram: []
   });
   
   // Tri et pagination
@@ -347,7 +349,9 @@ export default function SmartphonesPage() {
                         minRating: 0,
                         inStock: false,
                         brands: [],
-                        categories: []
+                        categories: [],
+                        storage: [],
+                        ram: []
                       });
                     }}
                   >
