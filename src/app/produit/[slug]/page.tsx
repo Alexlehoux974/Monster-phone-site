@@ -375,7 +375,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
   return (
     <div className="min-h-screen">
       <Header />
-      <main className="pt-[150px]">
+      <main className="pt-[120px] sm:pt-[140px] lg:pt-[176px]">
         <ProductDetail product={product} />
 
         {/* Tabs section - Description, Avis, Livraison */}

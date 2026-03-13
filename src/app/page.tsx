@@ -107,11 +107,9 @@ export default async function Home() {
   return (
     <div className="min-h-screen">
       <Header />
-      <div className="pt-[110px]">
+      <div className="pt-[120px] sm:pt-[140px] lg:pt-[176px]">
         <MonsterPhoneHero featuredProduct={heroProduct} />
-        <div className="hidden md:block">
-          <SmartphonePackBanner />
-        </div>
+        <SmartphonePackBanner />
 
         {/* Section Smartphones */}
         <FeaturedProductsSupabase

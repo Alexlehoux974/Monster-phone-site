@@ -879,15 +879,15 @@ export default function Header() {
       >
         <div className="w-full px-6">
           {/* Header principal */}
-          <div className="flex items-center justify-between gap-3 h-32">
+          <div className="flex items-center justify-between gap-2 sm:gap-3 h-20 sm:h-24 lg:h-32">
             {/* Logo */}
-            <Link href="/" className="flex-shrink-0 group relative overflow-hidden py-2">
+            <Link href="/" className="flex-shrink-0 group relative overflow-hidden py-1 sm:py-2">
               <Image
                 src="/LOGO-MONSTER-PHONE.png"
                 alt="Monster Phone"
                 width={400}
                 height={200}
-                className="h-28 w-auto object-contain transition-all duration-300 group-hover:scale-105"
+                className="h-14 sm:h-20 lg:h-28 w-auto object-contain transition-all duration-300 group-hover:scale-105"
                 priority
               />
             </Link>

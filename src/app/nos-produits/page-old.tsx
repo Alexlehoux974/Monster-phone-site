@@ -154,7 +154,7 @@ export default function SmartphonesPage() {
   return (
     <div className="min-h-screen bg-gray-50 overflow-x-hidden">
       <Header />
-      <div className="pt-[110px] min-h-screen flex flex-col">
+      <div className="pt-[120px] sm:pt-[140px] lg:pt-[176px] min-h-screen flex flex-col">
         {/* Layout principal avec Grid CSS */}
         <div className="flex-1 grid grid-cols-1 lg:grid-cols-[280px_1fr]">
           {/* Sidebar avec FilterPanel - Desktop */}

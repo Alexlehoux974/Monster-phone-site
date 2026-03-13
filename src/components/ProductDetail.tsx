@@ -44,14 +44,14 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [viewerCount, setViewerCount] = useState(() => Math.floor(Math.random() * 8) + 3);
+  const [viewerCount, setViewerCount] = useState(() => Math.floor(Math.random() * 4) + 2);
 
   // Varier légèrement le viewer count toutes les 15-30s
   useEffect(() => {
     const interval = setInterval(() => {
       setViewerCount(prev => {
         const delta = Math.random() > 0.5 ? 1 : -1;
-        return Math.max(2, Math.min(15, prev + delta));
+        return Math.max(1, Math.min(7, prev + delta));
       });
     }, (Math.random() * 15000) + 15000);
     return () => clearInterval(interval);

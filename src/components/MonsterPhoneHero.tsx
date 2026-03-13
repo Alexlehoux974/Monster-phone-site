@@ -356,7 +356,7 @@ const MonsterPhoneHero = ({ featuredProduct }: { featuredProduct?: HeroFeaturedP
         </div>
 
         {/* Main Content */}
-        <div className="relative z-10 text-center px-4 max-w-6xl mx-auto">
+        <div className="relative z-10 text-center px-4 max-w-6xl mx-auto pt-4 sm:pt-6">
           {/* Badge supprimé selon la demande */}
 
           {/* Main Title */}

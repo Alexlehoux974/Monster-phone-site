@@ -336,7 +336,7 @@ export default function ProduitSupabasePage() {
     return (
       <div className="min-h-screen bg-gray-50">
         <Header />
-        <div className="flex items-center justify-center min-h-[60vh] pt-[110px]">
+        <div className="flex items-center justify-center min-h-[60vh] pt-[120px] sm:pt-[140px] lg:pt-[176px]">
           <div className="text-center">
             <Loader2 className="w-12 h-12 animate-spin text-orange-500 mx-auto mb-4" />
             <p className="text-gray-600">Chargement du produit...</p>
@@ -351,7 +351,7 @@ export default function ProduitSupabasePage() {
     return (
       <div className="min-h-screen bg-gray-50">
         <Header />
-        <div className="flex items-center justify-center min-h-[60vh] pt-[110px]">
+        <div className="flex items-center justify-center min-h-[60vh] pt-[120px] sm:pt-[140px] lg:pt-[176px]">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 text-red-500 mx-auto mb-4" />
             <h1 className="text-2xl font-bold text-gray-900 mb-2">Produit non trouvé</h1>
@@ -367,7 +367,7 @@ export default function ProduitSupabasePage() {
     <div className="min-h-screen bg-gray-50">
       <Header />
 
-      <main className="container mx-auto px-4 py-8 pt-[110px]">
+      <main className="container mx-auto px-4 py-8 pt-[120px] sm:pt-[140px] lg:pt-[176px]">
         {/* Composant ProductDetail existant - key force le remount complet */}
         <ProductDetail
           key={`${product.id}-${product.price}-${product.stockQuantity}`}
