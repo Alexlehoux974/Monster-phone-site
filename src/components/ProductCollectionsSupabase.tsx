@@ -109,6 +109,7 @@ const ProductCard = ({
                 alt={product.name}
                 width={120}
                 height={120}
+                sizes="(max-width: 640px) 120px, 140px"
                 className="object-contain max-h-[120px] sm:max-h-[140px] w-auto group-hover:scale-105 transition-transform duration-300"
               />
             </div>
@@ -181,6 +182,7 @@ const FeaturedProductCard = ({
               alt={product.name}
               width={220}
               height={220}
+              sizes="(max-width: 640px) 180px, 220px"
               className="object-contain max-h-[180px] sm:max-h-[220px] w-auto group-hover:scale-105 transition-transform duration-500"
             />
           </div>

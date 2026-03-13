@@ -24,11 +24,11 @@ const nextConfig: NextConfig = {
   allowedDevOrigins: [
     'tomorrow-travelling-tap-round.trycloudflare.com',
   ],
-  // Désactiver COMPLÈTEMENT le cache Next.js pour forcer les refreshes
+  // Cache client-side : 60s dynamique, 5 min statique (ISR gère le server-side)
   experimental: {
     staleTimes: {
-      dynamic: 0,
-      static: 0,
+      dynamic: 60,
+      static: 300,
     },
   },
   // Headers pour contrôler le cache

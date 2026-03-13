@@ -28,7 +28,7 @@ export default function GoogleTagManager() {
       {/* Script de configuration du Consent Mode - DOIT être avant GTM */}
       <Script
         id="gtm-consent-mode"
-        strategy="beforeInteractive"
+        strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: `
             window.dataLayer = window.dataLayer || [];

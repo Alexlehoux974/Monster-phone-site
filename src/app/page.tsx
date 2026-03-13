@@ -1,22 +1,24 @@
+import dynamic from 'next/dynamic';
 import Header from '@/components/Header';
 import MonsterPhoneHero from '@/components/MonsterPhoneHero';
 import type { HeroFeaturedProduct } from '@/components/MonsterPhoneHero';
 import SmartphonePackBanner from '@/components/SmartphonePackBanner';
-import TrustSection from '@/components/TrustSection';
 import FeaturedProductsSupabase from '@/components/FeaturedProductsSupabase';
-import BrandCarousel from '@/components/BrandCarousel';
-import FeaturesSection from '@/components/FeaturesSection';
-import TestimonialsSection from '@/components/TestimonialsSection';
-import FlashDeals from '@/components/FlashDeals';
-import ProductCollectionsSupabase from '@/components/ProductCollectionsSupabase';
 import PromoBanner from '@/components/PromoBanner';
-import Footer from '@/components/Footer';
 import type { Metadata } from 'next';
 
-// Forcer le rendu dynamique pour que les modifications admin soient visibles immédiatement
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
-export const fetchCache = 'force-no-store';
+// Lazy load des composants sous le fold — réduit le bundle JS initial
+const FlashDeals = dynamic(() => import('@/components/FlashDeals'));
+const ProductCollectionsSupabase = dynamic(() => import('@/components/ProductCollectionsSupabase'));
+const BrandCarousel = dynamic(() => import('@/components/BrandCarousel'));
+const TrustSection = dynamic(() => import('@/components/TrustSection'));
+const FeaturesSection = dynamic(() => import('@/components/FeaturesSection'));
+const TestimonialsSection = dynamic(() => import('@/components/TestimonialsSection'));
+const Footer = dynamic(() => import('@/components/Footer'));
+
+// ISR : revalide toutes les 60s — les modifs admin apparaissent sous 1 min
+// tout en bénéficiant du cache CDN entre les requêtes
+export const revalidate = 60;
 
 import { getProductsByCategoryId, getNewProducts } from '@/lib/supabase/api-rest';
 import { supabaseProductToLegacy } from '@/lib/supabase/adapters';
