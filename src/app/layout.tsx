@@ -6,6 +6,7 @@ import { AuthProvider } from "@/contexts/AuthContextSimple";
 import StructuredData from "@/components/StructuredData";
 import { Toaster } from "sonner";
 import CookieConsent from "@/components/CookieConsent";
+import FloatingContact from "@/components/FloatingContact";
 import GoogleTagManager, { GoogleTagManagerNoscript } from "@/components/tracking/GoogleTagManager";
 import MetaPixel from "@/components/tracking/MetaPixel";
 
@@ -93,6 +94,7 @@ export default function RootLayout({
           <CartProvider>
             {children}
             <Toaster position="bottom-right" richColors />
+            <FloatingContact />
             <CookieConsent />
           </CartProvider>
         </AuthProvider>

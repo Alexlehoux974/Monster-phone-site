@@ -4,7 +4,10 @@ import React, { useRef, useEffect, useState } from "react";
 import Link from "next/link";
 import { motion, useMotionValue, animate, useMotionTemplate } from "framer-motion";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 import { ShoppingCart, Users, ThumbsUp, Truck, Sparkles, TrendingDown, Clock } from "lucide-react";
+import { getWorkingImageUrl } from "@/lib/image-utils";
+import { formatPrice } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 // import { Card } from "@/components/ui/card";
 // import { Badge } from "@/components/ui/badge";
@@ -275,8 +278,19 @@ const TextShimmer = ({ children, className, duration = 2 }: { children: string; 
 //   );
 // };
 
+// Featured product info passed from server
+export interface HeroFeaturedProduct {
+  name: string;
+  urlSlug: string;
+  basePrice: number;
+  originalPrice?: number;
+  discountPercent?: number;
+  imageUrl: string;
+  brandName: string;
+}
+
 // Main Hero Component
-const MonsterPhoneHero = () => {
+const MonsterPhoneHero = ({ featuredProduct }: { featuredProduct?: HeroFeaturedProduct }) => {
   const color = useMotionValue("#8B5CF6");
 
   useEffect(() => {
@@ -436,6 +450,48 @@ const MonsterPhoneHero = () => {
               </Link>
             </motion.div>
           </motion.div>
+
+          {/* Featured Product Spotlight */}
+          {featuredProduct && (
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.7 }}
+              className="mt-10"
+            >
+              <Link href={`/produit/${featuredProduct.urlSlug}`}>
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  className="inline-flex flex-col sm:flex-row items-center gap-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 max-w-lg mx-auto"
+                >
+                  <div className="relative w-40 h-40 flex-shrink-0">
+                    <Image
+                      src={getWorkingImageUrl(featuredProduct.imageUrl)}
+                      alt={featuredProduct.name}
+                      fill
+                      className="object-contain drop-shadow-2xl"
+                      sizes="160px"
+                    />
+                  </div>
+                  <div className="text-left">
+                    <p className="text-xs text-gray-300 uppercase tracking-wider mb-1">Produit vedette</p>
+                    <h3 className="text-lg font-bold text-white mb-2">{featuredProduct.name}</h3>
+                    <div className="flex items-center gap-3">
+                      <span className="text-2xl font-bold text-white">{formatPrice(featuredProduct.basePrice)}</span>
+                      {featuredProduct.originalPrice && featuredProduct.originalPrice > featuredProduct.basePrice && (
+                        <span className="text-base text-gray-400 line-through">{formatPrice(featuredProduct.originalPrice)}</span>
+                      )}
+                    </div>
+                    {featuredProduct.discountPercent && featuredProduct.discountPercent > 0 && (
+                      <span className="inline-block mt-2 px-2 py-0.5 rounded-full text-xs font-bold bg-red-500 text-white">
+                        -{featuredProduct.discountPercent}%
+                      </span>
+                    )}
+                  </div>
+                </motion.div>
+              </Link>
+            </motion.div>
+          )}
 
         </div>
       </motion.section>

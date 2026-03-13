@@ -69,9 +69,9 @@ export default function FeaturedProductsSupabase({ products: initialProducts, ti
 
         {/* Tous les produits en une seule rangée scrollable */}
         <div className="relative">
-          <div className="flex overflow-x-auto scrollbar-hide gap-6 pb-4 px-2">
+          <div className="flex overflow-x-auto scrollbar-hide gap-6 pb-4 px-2 snap-x snap-mandatory">
             {products.map((product: any) => (
-              <div key={product.id} className="flex-shrink-0 w-80">
+              <div key={product.id} className="flex-shrink-0 w-[75vw] sm:w-80 snap-start">
                 <ProductCard product={product} />
               </div>
             ))}

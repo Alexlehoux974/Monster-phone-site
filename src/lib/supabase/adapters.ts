@@ -166,7 +166,7 @@ export function supabaseProductToLegacy(product: ProductFullView): Product {
     energyClass: undefined, // Not available in ProductFullView
     tags: [], // Not available in ProductFullView
     isFeatured: false, // Not available in ProductFullView
-    isNewArrival: false, // Not available in ProductFullView
+    isNewArrival: !!(product as any).is_new_arrival || false,
     showOnHomepage: false, // Not available in ProductFullView
     status: (product.status as 'active' | 'draft' | 'out-of-stock') || 'active',
     variants,

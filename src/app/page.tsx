@@ -1,5 +1,6 @@
 import Header from '@/components/Header';
 import MonsterPhoneHero from '@/components/MonsterPhoneHero';
+import type { HeroFeaturedProduct } from '@/components/MonsterPhoneHero';
 import SmartphonePackBanner from '@/components/SmartphonePackBanner';
 import TrustSection from '@/components/TrustSection';
 import FeaturedProductsSupabase from '@/components/FeaturedProductsSupabase';
@@ -8,6 +9,7 @@ import FeaturesSection from '@/components/FeaturesSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import FlashDeals from '@/components/FlashDeals';
 import ProductCollectionsSupabase from '@/components/ProductCollectionsSupabase';
+import PromoBanner from '@/components/PromoBanner';
 import Footer from '@/components/Footer';
 import type { Metadata } from 'next';
 
@@ -16,9 +18,10 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 export const fetchCache = 'force-no-store';
 
-import { getProductsByCategoryId } from '@/lib/supabase/api-rest';
+import { getProductsByCategoryId, getNewProducts } from '@/lib/supabase/api-rest';
 import { supabaseProductToLegacy } from '@/lib/supabase/adapters';
 import { sortProductsByPriority } from '@/lib/utils';
+import { getWorkingImageUrl } from '@/lib/image-utils';
 
 export const metadata: Metadata = {
   title: 'Monster Phone Boutique | Smartphones & Multimédia à La Réunion',
@@ -85,11 +88,27 @@ export default async function Home() {
   const ecouteurs = ecouteursData.map(supabaseProductToLegacy);
   const featuredEcouteurs = sortProductsByPriority(ecouteurs).slice(0, 6);
 
+  // Récupérer les nouveautés (produits ajoutés dans les 60 derniers jours)
+  const newProductsData = await getNewProducts(60, 8);
+  const newArrivals = newProductsData.map(supabaseProductToLegacy);
+
+  // Construire le produit flagship pour le hero
+  const flagship = featuredSmartphones[0];
+  const heroProduct: HeroFeaturedProduct | undefined = flagship ? {
+    name: flagship.name,
+    urlSlug: flagship.urlSlug,
+    basePrice: flagship.basePrice,
+    originalPrice: flagship.originalPrice,
+    discountPercent: flagship.discountPercent,
+    imageUrl: flagship.variants?.[0]?.images?.[0] || '',
+    brandName: flagship.brandName,
+  } : undefined;
+
   return (
     <div className="min-h-screen">
       <Header />
       <div className="pt-[110px]">
-        <MonsterPhoneHero />
+        <MonsterPhoneHero featuredProduct={heroProduct} />
         <div className="hidden md:block">
           <SmartphonePackBanner />
         </div>
@@ -99,6 +118,16 @@ export default async function Home() {
           products={featuredSmartphones}
           title="Nos Smartphones Vedettes"
         />
+
+        {/* Section Nouveautés */}
+        {newArrivals.length > 0 && (
+          <FeaturedProductsSupabase
+            products={newArrivals}
+            title="Nouveautés"
+            viewAllHref="/nos-produits?sort=newest"
+            viewAllLabel="Voir toutes les nouveautés"
+          />
+        )}
 
         {/* Section Écouteurs */}
         <FeaturedProductsSupabase
@@ -111,8 +140,28 @@ export default async function Home() {
         {/* Flash Deals - S'affiche si des promos existent */}
         <FlashDeals />
 
+        {/* Bannière promo */}
+        <PromoBanner
+          icon="🚚"
+          title="Livraison gratuite dès 100€"
+          subtitle="Recevez vos produits directement chez vous à La Réunion en 24h/48h"
+          ctaText="Découvrir nos offres"
+          ctaHref="/nos-produits"
+          bgGradient="from-emerald-600 via-teal-600 to-cyan-700"
+        />
+
         {/* Collections par catégorie avec tabs (Smartphones, Montres, Audio, LED, Accessoires) */}
         <ProductCollectionsSupabase />
+
+        {/* Bannière promo garantie */}
+        <PromoBanner
+          icon="🛡️"
+          title="Garantie 2 ans sur tous nos produits"
+          subtitle="Service après-vente local à La Réunion — échange ou réparation rapide"
+          ctaText="En savoir plus"
+          ctaHref="/services/garantie"
+          bgGradient="from-indigo-600 via-blue-600 to-purple-700"
+        />
 
         <BrandCarousel />
         <TrustSection />

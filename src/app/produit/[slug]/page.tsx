@@ -174,6 +174,15 @@ async function getRelatedProducts(brandName: string, currentProductId: string) {
       reviews: []
     };
 
+    // ✨ TRANSFORM product-level images from Cloudinary IDs to full URLs
+    if (product.images && product.images.length > 0) {
+      product.images = product.images.map(img =>
+        img.startsWith('http')
+          ? img
+          : `https://res.cloudinary.com/monster-phone/image/upload/v1763527513/${img}.png`
+      );
+    }
+
     // ✨ TRANSFORM all variant images from Cloudinary IDs to full URLs (SSR-safe)
     if (product.variants && product.variants.length > 0) {
       product.variants = product.variants.map(variant => ({

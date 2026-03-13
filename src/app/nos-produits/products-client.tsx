@@ -222,7 +222,7 @@ function ProductsClientContent({
           <Button
             onClick={() => setSidebarOpen(!sidebarOpen)}
             variant="outline"
-            className="lg:hidden"
+            className="lg:hidden min-h-[48px] min-w-[48px] px-4"
           >
             <Filter className="w-5 h-5 mr-2" />
             Filtres
@@ -264,14 +264,18 @@ function ProductsClientContent({
           />
         </aside>
 
-        {/* Mobile Sidebar */}
+        {/* Mobile Bottom Sheet Filters */}
         {sidebarOpen && (
           <div className="fixed inset-0 z-50 lg:hidden">
             <div className="absolute inset-0 bg-black/50" onClick={() => setSidebarOpen(false)} />
-            <div className="absolute left-0 top-0 h-full w-80 bg-white p-6 overflow-y-auto">
+            <div className="absolute bottom-0 left-0 right-0 bg-white rounded-t-2xl p-6 max-h-[85vh] overflow-y-auto animate-in slide-in-from-bottom duration-300" style={{ paddingBottom: 'env(safe-area-inset-bottom, 16px)' }}>
+              {/* Poignée */}
+              <div className="flex justify-center mb-3">
+                <div className="w-10 h-1 bg-gray-300 rounded-full" />
+              </div>
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-lg font-semibold">Filtres</h2>
-                <button onClick={() => setSidebarOpen(false)}>
+                <button onClick={() => setSidebarOpen(false)} className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100">
                   <X className="w-6 h-6" />
                 </button>
               </div>
@@ -280,6 +284,12 @@ function ProductsClientContent({
                 onFiltersChange={handleFiltersChange}
                 initialFilters={filters}
               />
+              <button
+                onClick={() => setSidebarOpen(false)}
+                className="w-full mt-4 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg min-h-[48px] transition-colors"
+              >
+                Voir les résultats ({sortedProducts.length})
+              </button>
             </div>
           </div>
         )}

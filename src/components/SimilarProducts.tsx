@@ -125,7 +125,7 @@ export default function SimilarProducts({ categorySlug, brandSlug, currentProduc
 
       <div
         id="similar-products-scroll"
-        className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth"
+        className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory"
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
         {products.map((product: any) => {
@@ -147,7 +147,7 @@ export default function SimilarProducts({ categorySlug, brandSlug, currentProduc
             <Link
               key={product.id}
               href={`/produit-supabase/${product.url_slug}`}
-              className="flex-none w-[280px] group"
+              className="flex-none w-[75vw] sm:w-[280px] snap-start group"
             >
               <div className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow">
                 {/* Image */}

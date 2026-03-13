@@ -652,6 +652,7 @@ export default function Header() {
   const [dropdownOpen, setDropdownOpen] = useState<string | null>(null);
   const [clickedMenu, setClickedMenu] = useState<string | null>(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
   const [allProducts, setAllProducts] = useState<Product[]>([]);
   const [menuStructure, setMenuStructure] = useState<CategoryStructure[]>([]);
 
@@ -1012,8 +1013,12 @@ export default function Header() {
             {/* Actions */}
             <div className="flex items-center gap-2 flex-shrink-0">
               {/* Recherche mobile */}
-              <button className="lg:hidden p-1 text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
-                <Search className="h-4 w-4" />
+              <button
+                className="lg:hidden p-2.5 text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
+                onClick={() => setIsMobileSearchOpen(true)}
+                aria-label="Rechercher"
+              >
+                <Search className="h-5 w-5" />
               </button>
 
               {/* Panier avec aperçu */}
@@ -1024,7 +1029,7 @@ export default function Header() {
                 <button
                   onMouseEnter={() => setIsCartOpen(true)}
                   onClick={() => setIsCartOpen(!isCartOpen)}
-                  className="relative p-1.5 text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                  className="relative p-2.5 text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
                 >
                   <ShoppingCart className="h-5 w-5" />
                   {getItemCount() > 0 && (
@@ -1212,6 +1217,60 @@ export default function Header() {
         allProducts={allProducts}
       />
     )}
+
+      {/* Overlay recherche mobile */}
+      {isMobileSearchOpen && (
+        <div className="fixed inset-0 z-[250] bg-white lg:hidden">
+          <div className="flex items-center gap-3 p-4 border-b border-gray-200">
+            <form onSubmit={(e) => { handleSearchSubmit(e); setIsMobileSearchOpen(false); }} className="flex-1 relative">
+              <input
+                type="text"
+                placeholder="Rechercher un produit..."
+                value={searchQuery}
+                onChange={handleSearchChange}
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-red-500 min-h-[48px]"
+                autoFocus
+              />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+            </form>
+            <button
+              onClick={() => { setIsMobileSearchOpen(false); setSearchQuery(''); setShowSuggestions(false); }}
+              className="p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center text-gray-600"
+            >
+              <X className="h-6 w-6" />
+            </button>
+          </div>
+          {/* Suggestions */}
+          {searchSuggestions.length > 0 && (
+            <div className="overflow-y-auto max-h-[calc(100vh-80px)]">
+              {searchSuggestions.map((product: any) => {
+                const imageUrl = product.variants?.[0]?.images?.[0] || '/placeholder-monster.svg';
+                return (
+                  <Link
+                    key={product.id}
+                    href={`/produit/${product.urlSlug}`}
+                    onClick={() => { setIsMobileSearchOpen(false); setSearchQuery(''); setShowSuggestions(false); }}
+                    className="flex items-center gap-4 p-4 border-b border-gray-100 hover:bg-gray-50 min-h-[64px]"
+                  >
+                    <div className="w-12 h-12 relative flex-shrink-0 bg-gray-100 rounded">
+                      <Image
+                        src={imageUrl}
+                        alt={product.name}
+                        fill
+                        className="object-contain rounded"
+                      />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium text-gray-900 truncate">{product.name}</p>
+                      <p className="text-sm text-red-600 font-semibold">{product.basePrice?.toFixed(2)} €</p>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      )}
   </>
   );
 }
