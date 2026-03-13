@@ -15,6 +15,8 @@ import {
 } from 'lucide-react';
 import { trackPurchase } from '@/lib/tracking/events';
 import type { GA4Item } from '@/lib/tracking/types';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 interface OrderDetails {
   id: string;
@@ -153,8 +155,9 @@ function CheckoutSuccessContent() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 py-12 px-4">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+      <Header />
+      <div className="max-w-4xl mx-auto px-4 py-12 pt-[120px] sm:pt-[140px] lg:pt-[176px]">
         {/* Hero Success Section */}
         <div className="bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl shadow-xl p-8 md:p-12 mb-8 text-white relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32"></div>
@@ -375,6 +378,7 @@ function CheckoutSuccessContent() {
           </p>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

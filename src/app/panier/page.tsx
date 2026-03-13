@@ -9,6 +9,7 @@ import Footer from '@/components/Footer';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Trash2, Plus, Minus, ShoppingBag, ArrowRight, Package, Truck, Shield, CreditCard } from 'lucide-react';
+import { toast } from 'sonner';
 
 export default function PanierPage() {
   const { items, removeFromCart, updateQuantity, getCartTotal, clearCart } = useCart();
@@ -31,16 +32,21 @@ export default function PanierPage() {
   };
 
   const handleApplyPromo = () => {
-    // Simulation de codes promo
-    if (promoCode.toUpperCase() === 'MONSTER10') {
+    if (!promoCode.trim()) return;
+    const code = promoCode.toUpperCase().trim();
+    if (code === 'MONSTER10') {
       setPromoDiscount(subtotal * 0.1);
-    } else if (promoCode.toUpperCase() === 'BIENVENUE') {
+      toast.success('Code promo appliqué : -10%');
+    } else if (code === 'BIENVENUE') {
       setPromoDiscount(5);
+      toast.success('Code promo appliqué : -5€');
     } else {
       setPromoDiscount(0);
-      alert('Code promo invalide');
+      toast.error('Code promo invalide');
     }
   };
+
+  const [showClearConfirm, setShowClearConfirm] = useState(false);
 
   const handleCheckout = () => {
     // ✅ Toujours rediriger vers le checkout, même si non authentifié
@@ -53,7 +59,7 @@ export default function PanierPage() {
       <div className="min-h-screen bg-gray-50">
         <Header />
 
-        <main className="container mx-auto px-4 py-16 pt-[150px]">
+        <main className="container mx-auto px-4 py-16 pt-[120px] sm:pt-[140px] lg:pt-[176px]">
           <div className="max-w-4xl mx-auto text-center">
             <ShoppingBag className="w-24 h-24 text-gray-300 mx-auto mb-6" />
             <h1 className="text-3xl font-bold mb-4">Votre panier est vide</h1>
@@ -79,7 +85,7 @@ export default function PanierPage() {
     <div className="min-h-screen bg-gray-50">
       <Header />
 
-      <main className="container mx-auto px-4 py-8 pt-[150px]">
+      <main className="container mx-auto px-4 py-8 pt-[120px] sm:pt-[140px] lg:pt-[176px]">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-3xl font-bold mb-4">Mon Panier ({items.length} article{items.length > 1 ? 's' : ''})</h1>
 
@@ -257,12 +263,30 @@ export default function PanierPage() {
                   >
                     ← Continuer mes achats
                   </Link>
-                  <button
-                    onClick={clearCart}
-                    className="text-red-600 hover:text-red-800 font-medium"
-                  >
-                    Vider le panier
-                  </button>
+                  {showClearConfirm ? (
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm text-gray-600">Vider le panier ?</span>
+                      <button
+                        onClick={() => { clearCart(); setShowClearConfirm(false); toast.success('Panier vidé'); }}
+                        className="text-red-600 hover:text-red-800 font-medium text-sm"
+                      >
+                        Confirmer
+                      </button>
+                      <button
+                        onClick={() => setShowClearConfirm(false)}
+                        className="text-gray-500 hover:text-gray-700 font-medium text-sm"
+                      >
+                        Annuler
+                      </button>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => setShowClearConfirm(true)}
+                      className="text-red-600 hover:text-red-800 font-medium"
+                    >
+                      Vider le panier
+                    </button>
+                  )}
                 </div>
               </div>
 
@@ -316,24 +340,6 @@ export default function PanierPage() {
                     >
                       Appliquer
                     </button>
-                  </div>
-                  {/* Codes promo disponibles - plus visible */}
-                  <div className="mt-3 p-3 bg-amber-50 border border-amber-200 rounded-lg">
-                    <p className="text-sm font-medium text-amber-800 mb-1">🎁 Codes disponibles :</p>
-                    <div className="flex flex-wrap gap-2">
-                      <button
-                        onClick={() => setPromoCode('MONSTER10')}
-                        className="text-xs px-2 py-1 bg-amber-100 text-amber-800 rounded font-mono hover:bg-amber-200 transition-colors"
-                      >
-                        MONSTER10 (-10%)
-                      </button>
-                      <button
-                        onClick={() => setPromoCode('BIENVENUE')}
-                        className="text-xs px-2 py-1 bg-amber-100 text-amber-800 rounded font-mono hover:bg-amber-200 transition-colors"
-                      >
-                        BIENVENUE (-5€)
-                      </button>
-                    </div>
                   </div>
                 </div>
 

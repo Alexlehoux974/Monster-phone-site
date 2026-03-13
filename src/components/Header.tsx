@@ -1079,8 +1079,14 @@ export default function Header() {
                               ? item.product.variants.find((v: any) => v.color === item.variant)
                               : item.product.variants[0];
 
-                            // Price is already a number in the Product interface
-                            const price = item.product.basePrice;
+                            // Appliquer la réduction admin si elle existe
+                            const basePrice = typeof item.product.basePrice === 'string'
+                              ? parseFloat(item.product.basePrice)
+                              : item.product.basePrice;
+                            const adminDiscount = selectedVariant?.adminDiscountPercent || 0;
+                            const price = adminDiscount > 0
+                              ? basePrice * (1 - adminDiscount / 100)
+                              : basePrice;
                             return (
                               <div key={`${item.product.id}-${item.variant}`} className="p-4 border-b border-gray-100 hover:bg-gray-50">
                                 <div className="flex items-start space-x-3">

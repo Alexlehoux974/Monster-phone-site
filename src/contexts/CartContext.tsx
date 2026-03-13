@@ -88,9 +88,8 @@ export function CartProvider({ children, initialItems }: { children: ReactNode; 
         return;
       }
       availableStock = selectedVariant.stock || 0;
-    } else if (productToAdd.variants?.[0]?.stock || 0 !== undefined) {
-      // Produit sans variants: utiliser stockQuantity
-      availableStock = productToAdd.variants?.[0]?.stock || 0;
+    } else if (productToAdd.variants?.[0]?.stock !== undefined) {
+      availableStock = productToAdd.variants[0].stock;
     } else {
       // Fallback: utiliser le stock total des variantes
       availableStock = productToAdd.variants?.reduce((sum, v) => sum + (v.stock || 0), 0) || 0;
@@ -163,9 +162,8 @@ export function CartProvider({ children, initialItems }: { children: ReactNode; 
           if (item.product.variants && item.product.variants.length > 0 && item.variant) {
             const selectedVariant = item.product.variants?.find(v => v.color === item.variant);
             availableStock = selectedVariant?.stock || 0;
-          } else if (item.product.variants?.[0]?.stock || 0 !== undefined) {
-            // Produit sans variants: utiliser stockQuantity
-            availableStock = item.product.variants?.[0]?.stock || 0;
+          } else if (item.product.variants?.[0]?.stock !== undefined) {
+            availableStock = item.product.variants[0].stock;
           } else {
             availableStock = item.product.variants?.reduce((sum, v) => sum + (v.stock || 0), 0) || 0;
           }

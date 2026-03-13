@@ -6,10 +6,6 @@ import { useAuth } from '@/contexts/AuthContextSimple';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import ProductSuggestions from '@/components/ProductSuggestions';
-import { useProductSuggestions } from '@/hooks/useProductSuggestions';
-import { useProducts } from '@/lib/supabase/hooks';
-import { supabaseProductToLegacy } from '@/lib/supabase/adapters';
 import Image from 'next/image';
 import { trackBeginCheckout } from '@/lib/tracking/events';
 import type { GA4Item } from '@/lib/tracking/types';
@@ -18,8 +14,6 @@ import {
   Truck,
   Shield,
   Package,
-  Check,
-  ChevronRight,
   MapPin,
   Phone,
   Mail,
@@ -43,12 +37,11 @@ export default function CheckoutPage() {
 }
 
 function CheckoutContent() {
-  const { items, getCartTotal, clearCart, createOrder } = useCart();
+  const { items, getCartTotal, clearCart } = useCart();
   const { user, isAuthenticated, isLoading } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isProcessing, setIsProcessing] = useState(false);
-  const [orderComplete, setOrderComplete] = useState(false);
   const [showCanceledMessage, setShowCanceledMessage] = useState(false);
 
   // Détecter si l'utilisateur revient après avoir annulé sur Stripe
@@ -58,13 +51,6 @@ function CheckoutContent() {
     }
   }, [searchParams]);
   // Suppression du système d'étapes pour un checkout en 1 seule page
-
-  // Récupérer tous les produits actifs depuis Supabase
-  const { products: supabaseProducts } = useProducts();
-  const availableProducts = supabaseProducts.map(p => supabaseProductToLegacy(p));
-
-  // Suggestions de produits basées sur le panier
-  const suggestions = useProductSuggestions(items, availableProducts, 4);
 
   // État du formulaire avec récupération LocalStorage
   const [formData, setFormData] = useState(() => {
@@ -99,15 +85,6 @@ function CheckoutContent() {
       // Mode de livraison
       shippingMethod: 'standard',
 
-      // Mode de paiement
-      paymentMethod: 'card',
-
-      // Informations de paiement (simulées)
-      cardNumber: '',
-      cardName: '',
-      cardExpiry: '',
-      cardCvv: '',
-
       // Options
       newsletter: false,
       terms: false,
@@ -123,13 +100,10 @@ function CheckoutContent() {
     if (isLoading) return;
 
     // Rediriger vers le panier uniquement si vide
-    if (items.length === 0 && !orderComplete) {
+    if (items.length === 0) {
       router.push('/panier');
     }
-
-    // ✅ NE PLUS BLOQUER si non authentifié - permettre le checkout invité
-    // Les utilisateurs peuvent passer commande sans compte
-  }, [items, router, orderComplete, isLoading]);
+  }, [items, router, isLoading]);
 
   // 📊 Tracking GA4 - begin_checkout (une seule fois au chargement)
   useEffect(() => {
@@ -276,18 +250,7 @@ function CheckoutContent() {
         postalCode: formData.postalCode,
       };
 
-      // 🔍 DEBUG: Capturer userId dans une variable AVANT toute opération
       const capturedUserId = user?.id || null;
-      const capturedUserEmail = user?.email || null;
-
-      console.log('🔍 [Checkout Debug]', {
-        isAuthenticated,
-        hasUser: !!user,
-        userId: capturedUserId,
-        userEmail: capturedUserEmail,
-        userIdType: typeof capturedUserId,
-        timestamp: new Date().toISOString()
-      });
 
       // Créer une session Stripe Checkout
       const response = await fetch('/api/create-checkout-session', {
@@ -344,7 +307,7 @@ function CheckoutContent() {
         throw new Error('URL de paiement manquante');
       }
     } catch (error: any) {
-      console.error('❌ Erreur paiement:', error);
+      console.error('Erreur paiement:', error);
       setErrors({ ...errors, submit: error.message || 'Erreur réseau. Veuillez réessayer.' });
       setIsProcessing(false);
     }
@@ -354,76 +317,11 @@ function CheckoutContent() {
   const shipping = formData.shippingMethod === 'express' ? 9.99 : (subtotal >= 100 ? 0 : 4.99);
   const total = subtotal + shipping;
 
-  // Plus de système d'étapes - checkout en page unique pour conversion optimale
-
-  if (orderComplete) {
-    return (
-      <div className="min-h-screen bg-gray-50">
-        <Header />
-
-        <main className="container mx-auto px-4 py-16 pt-[150px]">
-          <div className="max-w-3xl mx-auto">
-            {/* Message de succès */}
-            <div className="bg-white rounded-lg shadow-lg p-8 text-center">
-              <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Check className="w-10 h-10 text-green-600" />
-              </div>
-              <h1 className="text-3xl font-bold mb-4">Commande confirmée !</h1>
-              <p className="text-xl text-gray-600 mb-2">
-                Merci pour votre commande #{`CMD${Date.now().toString().slice(-6)}`}
-              </p>
-              <p className="text-gray-600 mb-8">
-                Vous recevrez un email de confirmation dans quelques instants.
-              </p>
-
-              <div className="bg-gray-50 rounded-lg p-6 mb-8">
-                <h3 className="font-semibold mb-4">Détails de livraison</h3>
-                <div className="text-left space-y-2 text-sm">
-                  <p><strong>Destinataire :</strong> {formData.firstName} {formData.lastName}</p>
-                  <p><strong>Adresse :</strong> {formData.address}, {formData.postalCode} {formData.city}</p>
-                  <p><strong>Email :</strong> {formData.email}</p>
-                  <p><strong>Téléphone :</strong> {formData.phone}</p>
-                  <p><strong>Livraison :</strong> {formData.shippingMethod === 'express' ? 'Express (24-48h)' : 'Standard (3-5 jours)'}</p>
-                </div>
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button
-                  onClick={() => router.push('/nos-produits')}
-                  className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
-                >
-                  Continuer mes achats
-                </button>
-                <button
-                  onClick={() => router.push('/compte')}
-                  className="px-6 py-3 border border-gray-300 rounded-lg font-medium hover:bg-gray-50 transition-colors"
-                >
-                  Voir mes commandes
-                </button>
-              </div>
-            </div>
-
-            {/* Suggestions de produits */}
-            <div className="mt-12">
-              <ProductSuggestions 
-                products={suggestions}
-                title="Complétez votre équipement"
-                subtitle="D'autres clients ont aussi acheté ces produits"
-              />
-            </div>
-          </div>
-        </main>
-
-        <Footer />
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
 
-      <main className="container mx-auto px-4 py-8 pt-[150px]">
+      <main className="container mx-auto px-4 py-8 pt-[120px] sm:pt-[140px] lg:pt-[176px]">
         <div className="max-w-6xl mx-auto">
           {/* En-tête avec étapes */}
           <div className="mb-8">
