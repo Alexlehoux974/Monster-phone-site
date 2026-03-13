@@ -1,12 +1,13 @@
 'use client';
 
-import { Battery, Shield } from 'lucide-react';
+import { Battery, Shield, Smartphone } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const SmartphonePackBanner = () => {
   const items = [
-    { icon: Battery, label: 'Chargeur' },
+    { icon: Battery, label: 'Chargeur complet' },
     { icon: Shield, label: 'Protection vitre' },
+    { icon: Smartphone, label: 'Coque de protection' },
   ];
 
   return (

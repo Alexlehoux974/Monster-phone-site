@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { createClient } from '@/lib/supabase/client';
 import { cn } from '@/lib/utils';
 import ImageWithFallback from '@/components/ImageWithFallback';
-import { FileText, BarChart3, Star, Lightbulb, CheckCircle2, Headphones, Battery, Shield, Smartphone } from 'lucide-react';
+import { FileText, BarChart3, Star, Lightbulb, CheckCircle2, Battery, Shield, Smartphone } from 'lucide-react';
 
 interface ProductContentSection {
   id: string;
@@ -37,9 +37,10 @@ interface ProductContentCardsProps {
   productId: string;
   productCategory: string;
   productBrand?: string;
+  productSlug?: string;
 }
 
-export default function ProductContentCards({ productId, productCategory, productBrand }: ProductContentCardsProps) {
+export default function ProductContentCards({ productId, productCategory, productBrand, productSlug }: ProductContentCardsProps) {
   const [sections, setSections] = useState<ProductContentSection[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -158,7 +159,7 @@ export default function ProductContentCards({ productId, productCategory, produc
 
         return (
           <div key={section.id}>
-            {shouldShowHonorBanner && <HonorPackBanner />}
+            {shouldShowHonorBanner && <HonorPackBanner productSlug={productSlug} />}
             {(() => {
               switch (section.section_type) {
                 case 'image_gallery':
@@ -187,7 +188,9 @@ export default function ProductContentCards({ productId, productCategory, produc
 }
 
 // Bannière Pack HONOR
-function HonorPackBanner() {
+function HonorPackBanner({ productSlug }: { productSlug?: string }) {
+  const isX7C8 = productSlug?.includes('x7c-8') || productSlug?.includes('x7c8');
+
   return (
     <div className="bg-gradient-to-r from-orange-500 via-orange-600 to-red-600 text-white py-4 px-4 relative overflow-hidden mb-12 rounded-2xl">
       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-shimmer"></div>
@@ -199,21 +202,19 @@ function HonorPackBanner() {
           </div>
           <div className="flex items-center gap-3 sm:gap-4 flex-wrap justify-center">
             <div className="flex items-center gap-1.5 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1.5">
-              <Headphones className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
-              <span className="text-xs sm:text-sm font-medium">Écouteurs</span>
-            </div>
-            <div className="flex items-center gap-1.5 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1.5">
               <Battery className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
-              <span className="text-xs sm:text-sm font-medium">Chargeur</span>
+              <span className="text-xs sm:text-sm font-medium">Chargeur complet</span>
             </div>
             <div className="flex items-center gap-1.5 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1.5">
               <Shield className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
               <span className="text-xs sm:text-sm font-medium">Protection vitre</span>
             </div>
-            <div className="flex items-center gap-1.5 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1.5">
-              <Smartphone className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
-              <span className="text-xs sm:text-sm font-medium">Coque</span>
-            </div>
+            {!isX7C8 && (
+              <div className="flex items-center gap-1.5 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1.5">
+                <Smartphone className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
+                <span className="text-xs sm:text-sm font-medium">Coque de protection</span>
+              </div>
+            )}
           </div>
         </div>
         <div className="mt-2 text-center text-xs sm:text-sm opacity-90">
