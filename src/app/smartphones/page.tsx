@@ -12,7 +12,7 @@ export const revalidate = 0;
 
 export const metadata: Metadata = {
   title: 'Smartphones HONOR | Monster Phone Boutique La Réunion',
-  description: 'Smartphones HONOR à La Réunion : X9C, X7C, X6C, X5B. Livraison express 24/48h, garantie 2 ans. Pack complet avec écouteurs, chargeur et coque offerts.',
+  description: 'Smartphones HONOR à La Réunion : X9C, X7C, X6C, X5B. Livraison express 24/48h, garantie 2 ans. Pack complet avec chargeur et protection vitre offerts.',
 };
 
 export default async function SmartphonesPage() {

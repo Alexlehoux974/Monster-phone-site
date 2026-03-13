@@ -29,7 +29,7 @@ const ProductCollections = () => {
       title: 'Smartphones Pack Complet',
       icon: Flame,
       emoji: '🔥',
-      description: 'Pack complet inclus : écouteurs, chargeur, protection, coque',
+      description: 'Pack complet inclus : chargeur et protection vitre',
       categoryName: 'Smartphones', // Nom réel de la catégorie pour le filtre
       products: sortProductsByPriority(
         PRODUCTS.filter(p => p.categoryName === 'Smartphones')

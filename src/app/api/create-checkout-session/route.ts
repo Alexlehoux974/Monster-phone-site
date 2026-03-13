@@ -23,8 +23,37 @@ function getStripe() {
   });
 }
 
+// Sanitize une chaîne : supprime HTML, caractères dangereux, trim, limite la longueur
+function sanitize(input: unknown, maxLength = 255): string {
+  if (typeof input !== 'string') return '';
+  return input
+    .replace(/<[^>]*>/g, '')
+    .replace(/[<>"'`;(){}]/g, '')
+    .trim()
+    .slice(0, maxLength);
+}
+
 export async function POST(request: NextRequest) {
   try {
+    // CSRF : vérifier que la requête vient de notre domaine
+    const origin = request.headers.get('origin');
+    const referer = request.headers.get('referer');
+    const allowedOrigins = [
+      process.env.NEXT_PUBLIC_BASE_URL,
+      'https://monster-phone.re',
+      'https://www.monster-phone.re',
+    ].filter(Boolean);
+
+    const isOriginValid = origin && allowedOrigins.some(allowed => origin.startsWith(allowed!));
+    const isRefererValid = referer && allowedOrigins.some(allowed => referer.startsWith(allowed!));
+
+    if (!isOriginValid && !isRefererValid) {
+      return NextResponse.json(
+        { error: 'Requête non autorisée.' },
+        { status: 403 }
+      );
+    }
+
     // Rate limiting: 10 checkouts par IP par heure
     const clientIP = getClientIP(request);
     const rateLimitResult = checkRateLimit(clientIP, 'checkout', RATE_LIMIT_CONFIGS.checkout);
@@ -43,7 +72,17 @@ export async function POST(request: NextRequest) {
 
     const stripe = getStripe();
     const body = await request.json();
-    const { items, customerInfo, userId, shippingCost, shippingMethod } = body;
+    const { items, userId, shippingCost, shippingMethod } = body;
+
+    // Sanitize les données client (anti-XSS / injection)
+    const customerInfo = body.customerInfo ? {
+      name: sanitize(body.customerInfo.name, 100),
+      email: sanitize(body.customerInfo.email, 254),
+      phone: sanitize(body.customerInfo.phone, 20),
+      address: sanitize(body.customerInfo.address, 200),
+      city: sanitize(body.customerInfo.city, 100),
+      postalCode: sanitize(body.customerInfo.postalCode, 10),
+    } : null;
 
     // Log minimal sans PII (sécurité/RGPD)
     console.log('🔍 [API create-checkout-session] items:', items?.length || 0);

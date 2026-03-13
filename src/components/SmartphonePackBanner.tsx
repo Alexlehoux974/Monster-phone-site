@@ -1,14 +1,12 @@
 'use client';
 
-import { Headphones, Battery, Shield, Smartphone } from 'lucide-react';
+import { Battery, Shield } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const SmartphonePackBanner = () => {
   const items = [
-    { icon: Headphones, label: 'Écouteurs' },
     { icon: Battery, label: 'Chargeur' },
     { icon: Shield, label: 'Protection vitre' },
-    { icon: Smartphone, label: 'Coque', hasAsterisk: true },
   ];
 
   return (
@@ -43,9 +41,6 @@ const SmartphonePackBanner = () => {
               >
                 <item.icon className="w-4 h-4 sm:w-5 sm:h-5" />
                 <span className="text-xs sm:text-sm font-medium">{item.label}</span>
-                {item.hasAsterisk && (
-                  <span className="absolute -top-1 -right-1 text-yellow-300 font-bold text-sm">*</span>
-                )}
               </motion.div>
             ))}
           </div>
@@ -58,14 +53,6 @@ const SmartphonePackBanner = () => {
           transition={{ delay: 0.8 }}
         >
           ✨ Pack complet offert avec chaque smartphone
-        </motion.div>
-        <motion.div
-          className="mt-1 text-center text-[10px] sm:text-xs opacity-75"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.75 }}
-          transition={{ delay: 1 }}
-        >
-          * Le HONOR X7C n&apos;est pas équipé de coque car gradé 5 étoiles contre les chutes
         </motion.div>
       </div>
     </motion.div>

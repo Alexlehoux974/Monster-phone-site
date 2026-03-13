@@ -28,7 +28,7 @@ const collectionsConfig: CollectionConfig[] = [
     icon: Smartphone,
     categorySlug: 'smartphones',
     href: '/nos-produits?category=Smartphones',
-    description: 'Pack complet inclus : écouteurs, chargeur, protection, coque',
+    description: 'Pack complet inclus : chargeur et protection vitre',
   },
   {
     id: 'montres',

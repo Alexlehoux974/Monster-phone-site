@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import ProductDetail from '@/components/ProductDetail';
 import ProductTabs from '@/components/ProductTabs';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FeaturedProducts from '@/components/FeaturedProducts';
@@ -376,6 +377,14 @@ export default async function ProductPage({ params }: ProductPageProps) {
     <div className="min-h-screen">
       <Header />
       <main className="pt-[120px] sm:pt-[140px] lg:pt-[176px]">
+        <div className="max-w-7xl mx-auto px-4 pt-4">
+          <Breadcrumbs items={[
+            { label: 'Accueil', href: '/' },
+            { label: product.categoryName, href: `/nos-produits?category=${encodeURIComponent(product.categoryName)}` },
+            { label: product.brandName, href: `/nos-produits?brand=${encodeURIComponent(product.brandName)}` },
+            { label: product.name },
+          ]} />
+        </div>
         <ProductDetail product={product} />
 
         {/* Tabs section - Description, Avis, Livraison */}
