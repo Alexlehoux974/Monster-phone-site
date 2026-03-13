@@ -43,7 +43,6 @@ export default function ImageWithFallback({
   // useMemo ensures workingUrl is recalculated when src or productCategory changes
   const workingUrl = useMemo(() => {
     const transformed = getWorkingImageUrl(src, productCategory);
-    console.log(`🖼️  [ImageWithFallback] Transforming: "${src}" → "${transformed}"`);
     return transformed;
   }, [src, productCategory]);
   const defaultFallback = useMemo(() => fallbackSrc || getCategoryPlaceholder(productCategory || 'default'), [fallbackSrc, productCategory]);
@@ -53,8 +52,6 @@ export default function ImageWithFallback({
 
   // Derive imgSrc directly from workingUrl and error state - no useState needed!
   const imgSrc = hasError ? defaultFallback : workingUrl;
-
-  console.log(`🎨 [ImageWithFallback] Final imgSrc: "${imgSrc}" (hasError: ${hasError})`);
 
   useEffect(() => {
     // Reset error state when src changes
@@ -96,10 +93,10 @@ export default function ImageWithFallback({
           className
         )}
         priority={priority}
+        loading={priority ? undefined : 'lazy'}
         quality={quality}
         placeholder={placeholder}
         blurDataURL={blurDataURL}
-        unoptimized={true}
       />
     </>
   );

@@ -18,14 +18,14 @@ const SmartphonePackBanner = () => {
       transition={{ duration: 0.5 }}
       className="bg-gradient-to-r from-orange-500 via-orange-600 to-red-600 text-white py-4 px-4 relative overflow-hidden"
     >
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-shimmer" />
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <motion.div
             initial={{ scale: 0.8 }}
-            animate={{ scale: [0.8, 1.1, 1] }}
-            transition={{ duration: 1, repeat: Infinity, repeatDelay: 3 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 0.5 }}
             className="text-2xl font-bold flex items-center gap-2"
           >
             <span>🎁</span>
@@ -39,7 +39,7 @@ const SmartphonePackBanner = () => {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.1 + 0.3 }}
-                className="flex items-center gap-1.5 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1.5 relative"
+                className="flex items-center gap-1.5 bg-white/20 rounded-full px-3 py-1.5 relative"
               >
                 <item.icon className="w-4 h-4 sm:w-5 sm:h-5" />
                 <span className="text-xs sm:text-sm font-medium">{item.label}</span>
