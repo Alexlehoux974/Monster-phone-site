@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { Heart, ShoppingCart, Star, Check, Zap, Shield, Eye } from 'lucide-react';
+import { StarRating } from '@/components/StarRating';
 import { Product } from '@/data/products';
 import { useCart } from '@/contexts/CartContext';
 import { useState } from 'react';
@@ -115,17 +116,7 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
             
             {/* Note */}
             <div className="flex items-center gap-1 mb-3">
-              {[...Array(5)].map((_, i) => (
-                <Star
-                  key={i}
-                  className={cn(
-                    "w-4 h-4",
-                    i < Math.floor(product.rating?.average || 0)
-                      ? "fill-yellow-400 text-yellow-400"
-                      : "text-gray-300"
-                  )}
-                />
-              ))}
+              <StarRating average={product.rating?.average || 0} size="sm" />
               {product.rating && product.rating.count > 0 && (
                 <span className="text-sm text-gray-600 ml-1">
                   ({product.rating.count} avis*)
@@ -279,17 +270,7 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
 
         {/* Note et avis */}
         <div className="flex items-center gap-1 mb-3">
-          {[...Array(5)].map((_, i) => (
-            <Star
-              key={i}
-              className={cn(
-                "w-4 h-4",
-                i < Math.floor(product.rating?.average || 0)
-                  ? "fill-yellow-400 text-yellow-400"
-                  : "text-gray-300"
-              )}
-            />
-          ))}
+          <StarRating average={product.rating?.average || 0} size="sm" />
           {product.rating && product.rating.count > 0 && (
             <span className="text-sm text-gray-600 ml-1">
               ({product.rating.count} avis*)

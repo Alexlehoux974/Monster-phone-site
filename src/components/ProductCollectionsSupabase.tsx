@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { ChevronRight, Smartphone, Watch, Headphones, Lightbulb, Cable, ShoppingCart, Eye, Star, Trophy } from 'lucide-react';
+import { StarRating } from '@/components/StarRating';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -121,12 +122,7 @@ const ProductCard = ({
               {product.name}
             </h3>
             <div className="flex items-center gap-1 mb-1.5">
-              {[...Array(5)].map((_, i) => (
-                <span key={i} className={cn(
-                  "text-xs",
-                  i < Math.floor(product.rating?.average || 0) ? "text-yellow-400" : "text-gray-300"
-                )}>★</span>
-              ))}
+              <StarRating average={product.rating?.average || 0} size="sm" />
               <span className="text-[10px] text-gray-400 ml-0.5">({product.rating?.count || 0})</span>
             </div>
 
@@ -205,12 +201,7 @@ const FeaturedProductCard = ({
 
             {/* Note avec étoiles */}
             <div className="flex items-center gap-1 mb-3">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className={cn(
-                  "w-4 h-4",
-                  i < Math.floor(product.rating?.average || 0) ? "text-yellow-400 fill-yellow-400" : "text-gray-300"
-                )} />
-              ))}
+              <StarRating average={product.rating?.average || 0} size="sm" />
               <span className="text-sm text-gray-500 ml-1">({product.rating?.count || 0} avis*)</span>
             </div>
 

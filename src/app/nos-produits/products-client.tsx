@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Filter, X, Search, Grid, List, ShoppingCart, Star } from 'lucide-react';
+import { StarRating } from '@/components/StarRating';
 import FilterPanel, { FilterState } from '@/components/FilterPanel';
 import Pagination from '@/components/Pagination';
 import SortDropdown, { SortOption } from '@/components/SortDropdown';
@@ -358,16 +359,7 @@ function ProductsClientContent({
                       </Link>
                     </h3>
                     <div className="flex items-center gap-1 mb-2">
-                      {[...Array(5)].map((_, i) => (
-                        <Star
-                          key={i}
-                          className={`w-4 h-4 ${
-                            i < Math.floor(product.average_rating || 0)
-                              ? 'fill-yellow-400 text-yellow-400'
-                              : 'text-gray-300'
-                          }`}
-                        />
-                      ))}
+                      <StarRating average={product.average_rating || 0} size="sm" />
                       {product.total_reviews > 0 && (
                         <span className="text-sm text-gray-600 ml-1">
                           ({product.total_reviews} avis*)
@@ -435,16 +427,7 @@ function ProductsClientContent({
                         <p className="text-sm text-gray-600 mb-2 line-clamp-2">{product.short_description}</p>
                       )}
                       <div className="flex items-center gap-1 mb-3">
-                        {[...Array(5)].map((_, i) => (
-                          <Star
-                            key={i}
-                            className={`w-4 h-4 ${
-                              i < Math.floor(product.average_rating || 0)
-                                ? 'fill-yellow-400 text-yellow-400'
-                                : 'text-gray-300'
-                            }`}
-                          />
-                        ))}
+                        <StarRating average={product.average_rating || 0} size="sm" />
                         {product.total_reviews > 0 && (
                           <span className="text-sm text-gray-600 ml-1">
                             ({product.total_reviews} avis*)

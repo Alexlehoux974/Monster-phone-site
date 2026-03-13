@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Star, Shield, Truck, RefreshCw, Clock, Award, ChevronRight, ChevronLeft, Check, Package, Phone, CreditCard, Lock, Heart, Share2, Minus, Plus, ZoomIn, Eye, X } from 'lucide-react';
+import { StarRating } from '@/components/StarRating';
 import { Product, ProductVariant } from '@/data/products';
 import { formatPrice, cn } from '@/lib/utils';
 import { useCart } from '@/contexts/CartContext';
@@ -531,22 +532,8 @@ export default function ProductDetail({ product }: ProductDetailProps) {
             {/* Note et avis */}
             {product.rating && product.rating.count > 0 && (
               <div className="flex items-center gap-2 mt-3">
-                <div className="flex items-center">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star
-                      key={i}
-                      className={cn(
-                        "h-5 w-5",
-                        i < Math.floor(product.rating?.average || 0)
-                          ? "text-yellow-400 fill-current"
-                          : "text-gray-300"
-                      )}
-                    />
-                  ))}
-                  <span className="ml-2 font-semibold">
-                    {product.rating?.average?.toFixed(1) || "0.0"}
-                  </span>
-                </div>
+                <StarRating average={product.rating?.average || 0} size="md" />
+                <span className="ml-1 font-semibold">{product.rating?.average?.toFixed(1) || "0.0"}</span>
                 <span className="text-gray-600">({product.rating?.count || 0} avis*)</span>
               </div>
             )}

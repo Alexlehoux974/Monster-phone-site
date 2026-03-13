@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Star, Truck, Package, Clock, RefreshCw, Shield, Award } from 'lucide-react';
+import { StarRating } from '@/components/StarRating';
 import { cn } from '@/lib/utils';
 import type { Product } from '@/data/products';
 
@@ -34,17 +35,7 @@ export default function ProductTabs({ product }: ProductTabsProps) {
                       {product.rating.average.toFixed(1)}
                     </p>
                     <div className="flex items-center mt-2">
-                      {Array.from({ length: 5 }).map((_, i) => (
-                        <Star
-                          key={i}
-                          className={cn(
-                            "h-4 w-4",
-                            i < Math.floor(product.rating?.average || 0)
-                              ? "text-yellow-400 fill-current"
-                              : "text-gray-300"
-                          )}
-                        />
-                      ))}
+                      <StarRating average={product.rating?.average || 0} size="sm" />
                     </div>
                     <p className="text-sm text-gray-600 mt-1">
                       {product.rating.count} évaluations*
