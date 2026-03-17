@@ -60,7 +60,7 @@ interface SupabaseProduct {
   short_description?: string;
   price: number;
   original_price?: number;
-  discount_percentage?: number;
+  discount?: number;
   status: 'active' | 'draft' | 'out-of-stock';
   repairability_index?: number;
   das_head?: string;
@@ -228,7 +228,7 @@ async function migrateProduct(product: Product) {
       short_description: product.shortDescription,
       price: product.basePrice,
       original_price: product.originalPrice,
-      discount_percentage: product.discountPercent,
+      discount: product.discountPercent,
       status: (product.status as 'active' | 'draft' | 'out-of-stock') || 'active',
       repairability_index: product.repairabilityIndex,
       das_head: product.dasHead,

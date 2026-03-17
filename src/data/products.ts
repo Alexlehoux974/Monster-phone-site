@@ -7126,7 +7126,2309 @@ export const PRODUCTS: Product[] = [
       },
       "reviews": []
     }
+  },
+{
+  "id": "9279ad1e-f530-47c3-863f-3277ebbcd280",
+  "airtableId": "9279ad1e-f530-47c3-863f-3277ebbcd280",
+  "sku": "SKU-0120",
+  "name": "HONOR X5C 4+",
+  "urlSlug": "honor-x5c-4",
+  "shortDescription": "Smartphone HONOR X5C avec écran 6.77\" HD+ 90Hz, batterie 5260 mAh et appareil photo 50 MP",
+  "fullDescription": "<div class=\"max-w-4xl mx-auto\">\n  <h3 class=\"text-2xl font-bold text-gray-900 mb-6\">HONOR X5C - L'essentiel à petit prix</h3>\n  <p class=\"text-gray-700 mb-4\">Le HONOR X5C est le smartphone idéal pour ceux qui recherchent l'essentiel à petit prix. Doté d'une batterie longue durée de 5260 mAh et d'un écran LCD HD+ de 6,77 pouces avec un taux de rafraîchissement de 90 Hz, il offre une expérience fluide au quotidien.</p>\n  <p class=\"text-gray-700 mb-4\">Son appareil photo de 50 MP capture vos moments avec une qualité surprenante pour son segment de prix, tandis que le processeur MediaTek Helio G81 assure des performances fiables sous Android 15 avec MagicOS 9.0.</p>\n  <p class=\"text-gray-700\">Avec 4 Go de RAM et 64 Go de stockage extensible par microSD, le HONOR X5C couvre tous vos besoins essentiels : navigation, réseaux sociaux, photos et communication.</p>\n</div>",
+  "originalPrice": null,
+  "basePrice": 89.9,
+  "discountPercent": 0,
+  "brandId": "0787543a-2ab3-4c65-850d-9abb59ca4d4c",
+  "brandName": "HONOR",
+  "brandSlug": "honor",
+  "categoryId": "80194285-ea90-40ff-8e2a-8edbe3609330",
+  "categoryName": "Smartphones",
+  "categorySlug": "smartphones",
+  "features": [
+    "Écran 6.77\" HD+ 90Hz",
+    "Batterie 5260 mAh",
+    "Appareil photo 50 MP",
+    "Android 15 + MagicOS 9.0",
+    "Stockage extensible microSD"
+  ],
+  "specifications": [
+    {
+      "label": "Écran",
+      "value": "6.77\" LCD IPS HD+ 720x1600, 90 Hz"
+    },
+    {
+      "label": "Processeur",
+      "value": "MediaTek Helio G81, Octa-core 2.0 GHz, 12 nm"
+    },
+    {
+      "label": "RAM",
+      "value": "4 Go"
+    },
+    {
+      "label": "Stockage",
+      "value": "64 Go (extensible microSD)"
+    },
+    {
+      "label": "Batterie",
+      "value": "5260 mAh, charge 15W"
+    },
+    {
+      "label": "Caméra arrière",
+      "value": "50 MP (f/1.8)"
+    },
+    {
+      "label": "Caméra avant",
+      "value": "5 MP (f/2.2)"
+    },
+    {
+      "label": "Système",
+      "value": "Android 15 + MagicOS 9.0"
+    },
+    {
+      "label": "Connectivité",
+      "value": "4G LTE, WiFi 5, Bluetooth 5.1, NFC"
+    },
+    {
+      "label": "Dimensions",
+      "value": "167.0 x 77.0 x 7.9 mm"
+    },
+    {
+      "label": "Poids",
+      "value": "186 g"
+    },
+    {
+      "label": "Sécurité",
+      "value": "Capteur d'empreintes latéral"
+    }
+  ],
+  "repairabilityIndex": 8.1,
+  "dasHead": "0,69 W/kg",
+  "dasBody": "0,88 W/kg",
+  "dasLimb": "1,87 W/kg",
+  "energyClass": "",
+  "tags": [],
+  "isFeatured": false,
+  "isNewArrival": true,
+  "showOnHomepage": false,
+  "status": "active",
+  "variants": [
+    {
+      "id": "3b3def45-8e65-4066-857a-b61782a3a26e",
+      "color": "Bleu",
+      "colorCode": "#0066CC",
+      "ean": "6936520878017",
+      "stock": 0,
+      "is_default": true,
+      "images": [],
+      "adminDiscountPercent": 0,
+      "capacity": "4/64",
+      "size": null
+    },
+    {
+      "id": "1579c613-ce1f-4063-a9ef-20b1b97f1430",
+      "color": "Noir",
+      "colorCode": "#000000",
+      "ean": "6936520878000",
+      "stock": 0,
+      "is_default": false,
+      "images": [],
+      "adminDiscountPercent": 0,
+      "capacity": "4/64",
+      "size": null
+    }
+  ],
+  "rating": {
+    "average": 0,
+    "count": 0,
+    "distribution": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0
+    },
+    "reviews": []
   }
+},
+{
+  "id": "3dbffcf3-a505-4410-ba6d-445aedef4382",
+  "airtableId": "3dbffcf3-a505-4410-ba6d-445aedef4382",
+  "sku": "SKU-0121",
+  "name": "HONOR X7D 5G 8+",
+  "urlSlug": "honor-x7d-5g-8",
+  "shortDescription": "Smartphone HONOR X7D 5G avec batterie 6500 mAh, Snapdragon 6s Gen 3 et écran 120Hz",
+  "fullDescription": "<div class=\"max-w-4xl mx-auto\">\n  <h3 class=\"text-2xl font-bold text-gray-900 mb-6\">HONOR X7D 5G - Endurance et connectivité 5G</h3>\n  <p class=\"text-gray-700 mb-4\">Le HONOR X7D 5G allie endurance et connectivité de nouvelle génération. Sa batterie massive de 6500 mAh avec charge rapide 35W assure une autonomie exceptionnelle, tandis que la 5G via le Snapdragon 6s Gen 3 offre des vitesses de connexion ultra-rapides.</p>\n  <p class=\"text-gray-700 mb-4\">Certifié IP65 et SGS 5 étoiles pour la résistance aux chutes, c'est un compagnon robuste au quotidien. Son écran LCD 120 Hz de 6,77 pouces et son appareil photo 50 MP complètent un ensemble très équilibré pour un budget maîtrisé.</p>\n  <p class=\"text-gray-700\">Avec 8 Go de RAM et 256 Go de stockage, le HONOR X7D 5G offre un espace généreux pour toutes vos applications et contenus multimédias.</p>\n</div>",
+  "originalPrice": null,
+  "basePrice": 219.9,
+  "discountPercent": 0,
+  "brandId": "0787543a-2ab3-4c65-850d-9abb59ca4d4c",
+  "brandName": "HONOR",
+  "brandSlug": "honor",
+  "categoryId": "80194285-ea90-40ff-8e2a-8edbe3609330",
+  "categoryName": "Smartphones",
+  "categorySlug": "smartphones",
+  "features": [
+    "5G avec Snapdragon 6s Gen 3",
+    "Batterie 6500 mAh + charge 35W",
+    "Écran 6.77\" 120Hz",
+    "Certifié IP65",
+    "Appareil photo 50 MP"
+  ],
+  "specifications": [
+    {
+      "label": "Écran",
+      "value": "6.77\" TFT LCD HD+ 720x1600, 120 Hz, 850 nits"
+    },
+    {
+      "label": "Processeur",
+      "value": "Qualcomm Snapdragon 6s Gen 3, Octa-core 2.3 GHz, 6 nm"
+    },
+    {
+      "label": "RAM",
+      "value": "8 Go"
+    },
+    {
+      "label": "Stockage",
+      "value": "256 Go"
+    },
+    {
+      "label": "Batterie",
+      "value": "6500 mAh, charge rapide 35W HONOR SuperCharge"
+    },
+    {
+      "label": "Caméra arrière",
+      "value": "50 MP (f/1.8) + 2 MP profondeur"
+    },
+    {
+      "label": "Caméra avant",
+      "value": "5 MP (f/2.2)"
+    },
+    {
+      "label": "Système",
+      "value": "Android 15 + MagicOS 9.0"
+    },
+    {
+      "label": "Connectivité",
+      "value": "5G, 4G LTE, WiFi 5, Bluetooth 5.1, NFC, USB-C"
+    },
+    {
+      "label": "Résistance",
+      "value": "IP65, SGS 5 étoiles anti-chute"
+    },
+    {
+      "label": "Dimensions",
+      "value": "166.9 x 76.8 x 8.2 mm"
+    },
+    {
+      "label": "Poids",
+      "value": "206 g"
+    },
+    {
+      "label": "Sécurité",
+      "value": "Capteur d'empreintes latéral"
+    }
+  ],
+  "repairabilityIndex": null,
+  "dasHead": null,
+  "dasBody": null,
+  "dasLimb": null,
+  "energyClass": "",
+  "tags": [],
+  "isFeatured": false,
+  "isNewArrival": true,
+  "showOnHomepage": false,
+  "status": "active",
+  "variants": [
+    {
+      "id": "df27900a-9498-4bb9-af8d-5bc02f71ddf9",
+      "color": "Noir",
+      "colorCode": "#000000",
+      "ean": "6936520876846",
+      "stock": 0,
+      "is_default": true,
+      "images": [],
+      "adminDiscountPercent": 0,
+      "capacity": "8/256",
+      "size": null
+    },
+    {
+      "id": "c9cec024-d9a9-4d21-b859-8efca0047218",
+      "color": "Gold",
+      "colorCode": "#FFD700",
+      "ean": "6936520876853",
+      "stock": 0,
+      "is_default": false,
+      "images": [],
+      "adminDiscountPercent": 0,
+      "capacity": "8/256",
+      "size": null
+    }
+  ],
+  "rating": {
+    "average": 0,
+    "count": 0,
+    "distribution": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0
+    },
+    "reviews": []
+  }
+},
+{
+  "id": "0eb7fc68-f813-483e-93fe-33cec70236be",
+  "airtableId": "0eb7fc68-f813-483e-93fe-33cec70236be",
+  "sku": "SKU-0122",
+  "name": "HONOR 400 LITE 5G 8+8",
+  "urlSlug": "honor-400-lite-5g-8-8",
+  "shortDescription": "Smartphone HONOR 400 Lite 5G avec écran AMOLED 120Hz, appareil photo 108 MP et charge 35W",
+  "fullDescription": "<div class=\"max-w-4xl mx-auto\">\n  <h3 class=\"text-2xl font-bold text-gray-900 mb-6\">HONOR 400 Lite 5G - La photo 108 MP en AMOLED</h3>\n  <p class=\"text-gray-700 mb-4\">Le HONOR 400 Lite 5G repousse les limites du milieu de gamme avec son écran AMOLED 120 Hz de 6,7 pouces d'une luminosité éclatante de 3500 nits et son capteur photo principal de 108 MP avec zoom sans perte 3x.</p>\n  <p class=\"text-gray-700 mb-4\">Propulsé par le Dimensity 7025 Ultra et 8+8 Go de RAM (dont 8 Go de RAM virtuelle), il assure une fluidité exemplaire en multitâche et en jeu. Sa finesse de 7,3 mm et son poids plume de 171 g en font l'un des smartphones les plus élégants de sa catégorie.</p>\n  <p class=\"text-gray-700\">Certifié IP65 et équipé d'un capteur d'empreintes sous l'écran, il fonctionne sous Android 15 avec MagicOS 9.0 et la connectivité 5G pour des performances sans compromis.</p>\n</div>",
+  "originalPrice": 299.9,
+  "basePrice": 249.9,
+  "discountPercent": 0,
+  "brandId": "0787543a-2ab3-4c65-850d-9abb59ca4d4c",
+  "brandName": "HONOR",
+  "brandSlug": "honor",
+  "categoryId": "80194285-ea90-40ff-8e2a-8edbe3609330",
+  "categoryName": "Smartphones",
+  "categorySlug": "smartphones",
+  "features": [
+    "Écran AMOLED 6.7\" 120Hz, 3500 nits",
+    "Appareil photo 108 MP + zoom 3x",
+    "5G Dimensity 7025 Ultra",
+    "8+8 Go RAM virtuelle",
+    "Certifié IP65"
+  ],
+  "specifications": [
+    {
+      "label": "Écran",
+      "value": "6.7\" AMOLED FHD+ 1080x2412, 120 Hz, 3500 nits, DCI-P3"
+    },
+    {
+      "label": "Processeur",
+      "value": "MediaTek Dimensity 7025 Ultra, Octa-core 2.5 GHz, 6 nm"
+    },
+    {
+      "label": "RAM",
+      "value": "8 Go + 8 Go RAM virtuelle"
+    },
+    {
+      "label": "Stockage",
+      "value": "256 Go"
+    },
+    {
+      "label": "Batterie",
+      "value": "5230 mAh, charge rapide 35W HONOR SuperCharge"
+    },
+    {
+      "label": "Caméra arrière",
+      "value": "108 MP Samsung HM6 (f/1.75, zoom 3x) + 5 MP ultra-grand-angle"
+    },
+    {
+      "label": "Caméra avant",
+      "value": "16 MP (f/2.45)"
+    },
+    {
+      "label": "Système",
+      "value": "Android 15 + MagicOS 9.0"
+    },
+    {
+      "label": "Connectivité",
+      "value": "5G, 4G LTE, WiFi 5 MIMO, Bluetooth 5.3, NFC, USB-C"
+    },
+    {
+      "label": "Résistance",
+      "value": "IP65"
+    },
+    {
+      "label": "Dimensions",
+      "value": "161.0 x 74.6 x 7.3 mm"
+    },
+    {
+      "label": "Poids",
+      "value": "171 g"
+    },
+    {
+      "label": "Sécurité",
+      "value": "Capteur d'empreintes sous l'écran"
+    }
+  ],
+  "repairabilityIndex": 8.3,
+  "dasHead": "0,85 W/kg",
+  "dasBody": "1,30 W/kg",
+  "dasLimb": "2,95 W/kg",
+  "energyClass": "",
+  "tags": [],
+  "isFeatured": false,
+  "isNewArrival": true,
+  "showOnHomepage": false,
+  "status": "active",
+  "variants": [
+    {
+      "id": "11ffb09c-3e24-4181-bec1-8dfdf2b359db",
+      "color": "Noir",
+      "colorCode": "#000000",
+      "ean": "6936520868216",
+      "stock": 0,
+      "is_default": true,
+      "images": [],
+      "adminDiscountPercent": 0,
+      "capacity": "8+8/256",
+      "size": null
+    },
+    {
+      "id": "256c391e-a0cc-43b4-903f-8d28db36c0c8",
+      "color": "Vert",
+      "colorCode": "#2E8B57",
+      "ean": "6936520868230",
+      "stock": 0,
+      "is_default": false,
+      "images": [],
+      "adminDiscountPercent": 0,
+      "capacity": "8+8/256",
+      "size": null
+    }
+  ],
+  "rating": {
+    "average": 0,
+    "count": 0,
+    "distribution": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0
+    },
+    "reviews": []
+  }
+},
+{
+  "id": "129305f4-953e-4094-8677-0db6b4098d06",
+  "airtableId": "129305f4-953e-4094-8677-0db6b4098d06",
+  "sku": "SKU-0123",
+  "name": "HONOR X9D 12+",
+  "urlSlug": "honor-x9d-12",
+  "shortDescription": "Smartphone HONOR X9D avec batterie 8300 mAh, écran AMOLED QHD 6000 nits et IP68/IP69K",
+  "fullDescription": "<div class=\"max-w-4xl mx-auto\">\n  <h3 class=\"text-2xl font-bold text-gray-900 mb-6\">HONOR X9D - Endurance extrême et robustesse IP69K</h3>\n  <p class=\"text-gray-700 mb-4\">Le HONOR X9D est taillé pour l'endurance extrême avec sa batterie colossale de 8300 mAh et sa charge rapide 66W. Son écran AMOLED QHD de 6,79 pouces offre une luminosité record de 6000 nits pour une visibilité parfaite en toute condition.</p>\n  <p class=\"text-gray-700 mb-4\">Certifié IP68/IP69K, il résiste à l'immersion jusqu'à 6 mètres et aux jets d'eau haute pression, ce qui en fait l'un des smartphones les plus robustes du marché.</p>\n  <p class=\"text-gray-700\">Le Snapdragon 6 Gen 4 gravé en 4 nm avec GPU Adreno 810, 12 Go de RAM et l'appareil photo 108 MP avec OIS complètent un ensemble haut de gamme à prix contenu.</p>\n</div>",
+  "originalPrice": null,
+  "basePrice": 389.9,
+  "discountPercent": 0,
+  "brandId": "0787543a-2ab3-4c65-850d-9abb59ca4d4c",
+  "brandName": "HONOR",
+  "brandSlug": "honor",
+  "categoryId": "80194285-ea90-40ff-8e2a-8edbe3609330",
+  "categoryName": "Smartphones",
+  "categorySlug": "smartphones",
+  "features": [
+    "Batterie 8300 mAh + charge 66W",
+    "Écran AMOLED QHD 6000 nits",
+    "IP68/IP69K ultra-robuste",
+    "Snapdragon 6 Gen 4 (4 nm)",
+    "Appareil photo 108 MP OIS"
+  ],
+  "specifications": [
+    {
+      "label": "Écran",
+      "value": "6.79\" AMOLED QHD 1200x2640, 120 Hz, 6000 nits"
+    },
+    {
+      "label": "Processeur",
+      "value": "Qualcomm Snapdragon 6 Gen 4, Octa-core, 4 nm, GPU Adreno 810"
+    },
+    {
+      "label": "RAM",
+      "value": "12 Go"
+    },
+    {
+      "label": "Stockage",
+      "value": "256 Go"
+    },
+    {
+      "label": "Batterie",
+      "value": "8300 mAh, charge rapide 66W, charge inversée filaire"
+    },
+    {
+      "label": "Caméra arrière",
+      "value": "108 MP Samsung HM6 (OIS, zoom 10x) + 5 MP ultra-grand-angle"
+    },
+    {
+      "label": "Caméra avant",
+      "value": "16 MP (punch-hole)"
+    },
+    {
+      "label": "Système",
+      "value": "Android 15 + MagicOS 9.0"
+    },
+    {
+      "label": "Connectivité",
+      "value": "5G, WiFi 6, Bluetooth 5.2 (aptX HD), NFC, USB-C"
+    },
+    {
+      "label": "Résistance",
+      "value": "IP68 + IP69K (immersion 6m + jets haute pression)"
+    },
+    {
+      "label": "Dimensions",
+      "value": "161.9 x 76.1 x 7.8 mm"
+    },
+    {
+      "label": "Poids",
+      "value": "193 g"
+    },
+    {
+      "label": "Vidéo",
+      "value": "Enregistrement 4K"
+    }
+  ],
+  "repairabilityIndex": null,
+  "dasHead": null,
+  "dasBody": null,
+  "dasLimb": null,
+  "energyClass": "",
+  "tags": [],
+  "isFeatured": false,
+  "isNewArrival": true,
+  "showOnHomepage": false,
+  "status": "active",
+  "variants": [
+    {
+      "id": "2dabd72e-6217-405b-af99-eb34d1572c94",
+      "color": "Noir",
+      "colorCode": "#000000",
+      "ean": "6936520881130",
+      "stock": 0,
+      "is_default": true,
+      "images": [],
+      "adminDiscountPercent": 0,
+      "capacity": "12/256",
+      "size": null
+    },
+    {
+      "id": "2ec54771-b7c4-44ac-a723-2d5d444a3113",
+      "color": "Gold",
+      "colorCode": "#FFD700",
+      "ean": "6936520881154",
+      "stock": 0,
+      "is_default": false,
+      "images": [],
+      "adminDiscountPercent": 0,
+      "capacity": "12/256",
+      "size": null
+    }
+  ],
+  "rating": {
+    "average": 0,
+    "count": 0,
+    "distribution": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0
+    },
+    "reviews": []
+  }
+},
+{
+  "id": "61ad1e11-8b8f-4be2-891c-25ac5bae2860",
+  "airtableId": "61ad1e11-8b8f-4be2-891c-25ac5bae2860",
+  "sku": "SKU-0124",
+  "name": "HONOR PAD 10",
+  "urlSlug": "honor-pad-10",
+  "shortDescription": "Tablette HONOR Pad 10 avec écran 12.1\" 2.5K 120Hz, Snapdragon 7 Gen 3 et 6 haut-parleurs",
+  "fullDescription": "<div class=\"max-w-4xl mx-auto\">\n  <h3 class=\"text-2xl font-bold text-gray-900 mb-6\">HONOR Pad 10 - Grand écran 2.5K et son immersif</h3>\n  <p class=\"text-gray-700 mb-4\">La HONOR Pad 10 est une tablette multimédia polyvalente dotée d'un grand écran 2.5K de 12,1 pouces à 120 Hz, idéal pour le divertissement et la productivité.</p>\n  <p class=\"text-gray-700 mb-4\">Propulsée par le Snapdragon 7 Gen 3 (4 nm) et équipée de 6 haut-parleurs avec HONOR Spatial Audio, elle offre une expérience audiovisuelle immersive. Compatible avec le stylet HONOR Magic Pencil 3 pour la prise de notes et le dessin.</p>\n  <p class=\"text-gray-700\">Sa batterie de 10 100 mAh avec charge rapide 35W garantit une autonomie exceptionnelle. Son design en métal ultra-fin de seulement 6,29 mm d'épaisseur et 525 g en font un compagnon portable et élégant.</p>\n</div>",
+  "originalPrice": 299.9,
+  "basePrice": 249.9,
+  "discountPercent": 0,
+  "brandId": "0787543a-2ab3-4c65-850d-9abb59ca4d4c",
+  "brandName": "HONOR",
+  "brandSlug": "honor",
+  "categoryId": "d5a2e3f4-9b8c-4d7e-8f1a-2b3c4d5e6f7a",
+  "categoryName": "Tablettes",
+  "categorySlug": "tablettes",
+  "features": [
+    "Écran 12.1\" 2.5K 120Hz",
+    "6 haut-parleurs Spatial Audio",
+    "Snapdragon 7 Gen 3 (4 nm)",
+    "Batterie 10 100 mAh + charge 35W",
+    "Compatible HONOR Magic Pencil 3"
+  ],
+  "specifications": [
+    {
+      "label": "Écran",
+      "value": "12.1\" IPS LCD 2.5K (2560x1600), 120 Hz, 500 nits, DCI-P3"
+    },
+    {
+      "label": "Processeur",
+      "value": "Qualcomm Snapdragon 7 Gen 3, Octa-core 2.63 GHz, 4 nm"
+    },
+    {
+      "label": "RAM",
+      "value": "8 Go"
+    },
+    {
+      "label": "Stockage",
+      "value": "256 Go (UFS 3.1)"
+    },
+    {
+      "label": "Batterie",
+      "value": "10 100 mAh, charge rapide 35W HONOR SuperCharge"
+    },
+    {
+      "label": "Caméra arrière",
+      "value": "8 MP (f/2.0)"
+    },
+    {
+      "label": "Caméra avant",
+      "value": "8 MP (f/2.0)"
+    },
+    {
+      "label": "Système",
+      "value": "Android 15 + MagicOS 9.0"
+    },
+    {
+      "label": "Audio",
+      "value": "6 haut-parleurs, HONOR Spatial Audio, 2 microphones"
+    },
+    {
+      "label": "Connectivité",
+      "value": "WiFi 6, Bluetooth 5.3, USB-C (WiFi uniquement)"
+    },
+    {
+      "label": "Dimensions",
+      "value": "277.07 x 179.28 x 6.29 mm"
+    },
+    {
+      "label": "Poids",
+      "value": "525 g"
+    },
+    {
+      "label": "Matériaux",
+      "value": "Corps métal"
+    }
+  ],
+  "repairabilityIndex": 8.1,
+  "dasHead": null,
+  "dasBody": null,
+  "dasLimb": null,
+  "energyClass": "",
+  "tags": [],
+  "isFeatured": false,
+  "isNewArrival": true,
+  "showOnHomepage": false,
+  "status": "active",
+  "variants": [
+    {
+      "id": "ec0fad6e-0ee9-4311-8578-eb96e99b344e",
+      "color": "Gris",
+      "colorCode": "#808080",
+      "ean": "6936520869718",
+      "stock": 0,
+      "is_default": true,
+      "images": [],
+      "adminDiscountPercent": 0,
+      "capacity": null,
+      "size": null
+    }
+  ],
+  "rating": {
+    "average": 0,
+    "count": 0,
+    "distribution": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0
+    },
+    "reviews": []
+  }
+},
+{
+  "id": "9c689b89-49eb-4391-a7b7-1b6a2fc459b9",
+  "airtableId": "9c689b89-49eb-4391-a7b7-1b6a2fc459b9",
+  "sku": "SKU-0125",
+  "name": "ECOUTEUR HONOR CHOICE EARBUDS X5",
+  "urlSlug": "ecouteur-honor-choice-earbuds-x5",
+  "shortDescription": "Écouteurs TWS HONOR Choice Earbuds X5 avec ANC 30 dB, Bluetooth 5.3 et 35h d'autonomie",
+  "fullDescription": "<div class=\"max-w-4xl mx-auto\">\n  <h3 class=\"text-2xl font-bold text-gray-900 mb-6\">HONOR Choice Earbuds X5 - ANC et autonomie record</h3>\n  <p class=\"text-gray-700 mb-4\">Les HONOR Choice Earbuds X5 offrent une expérience audio immersive grâce à leur réduction active du bruit de 30 dB et leurs haut-parleurs dynamiques de 10 mm.</p>\n  <p class=\"text-gray-700 mb-4\">Avec une autonomie totale de 35 heures grâce au boîtier de charge et une certification IP54, ils accompagnent facilement toutes vos activités quotidiennes.</p>\n  <p class=\"text-gray-700\">Le Bluetooth 5.3 assure une connexion stable et économe en énergie, tandis que la double technologie micro ENC garantit des appels clairs même en environnement bruyant. Ultra-légers à seulement 4,26 g par écouteur.</p>\n</div>",
+  "originalPrice": null,
+  "basePrice": 34.9,
+  "discountPercent": 0,
+  "brandId": "0787543a-2ab3-4c65-850d-9abb59ca4d4c",
+  "brandName": "HONOR",
+  "brandSlug": "honor",
+  "categoryId": "032b2296-f6e4-4529-a019-c5c74fbc64e1",
+  "categoryName": "Audio",
+  "categorySlug": "audio",
+  "features": [
+    "ANC 30 dB + mode transparence",
+    "Bluetooth 5.3",
+    "35h d'autonomie totale",
+    "IP54 résistant eau/poussière",
+    "Ultra-léger : 4.26g par écouteur"
+  ],
+  "specifications": [
+    {
+      "label": "Type",
+      "value": "TWS intra-auriculaires"
+    },
+    {
+      "label": "Transducteur",
+      "value": "10 mm dynamique (32 ohm)"
+    },
+    {
+      "label": "ANC",
+      "value": "Réduction active du bruit jusqu'à 30 dB + mode transparence"
+    },
+    {
+      "label": "Bluetooth",
+      "value": "5.3 dual-mode (AAC, SBC)"
+    },
+    {
+      "label": "Autonomie",
+      "value": "9h (ANC off) / 35h total avec boîtier"
+    },
+    {
+      "label": "Batterie écouteur",
+      "value": "45 mAh par écouteur"
+    },
+    {
+      "label": "Batterie boîtier",
+      "value": "460 mAh"
+    },
+    {
+      "label": "Charge",
+      "value": "USB-C"
+    },
+    {
+      "label": "Étanchéité",
+      "value": "IP54"
+    },
+    {
+      "label": "Microphone",
+      "value": "Double micro ENC"
+    },
+    {
+      "label": "Poids",
+      "value": "4.26 g par écouteur"
+    },
+    {
+      "label": "Dimensions boîtier",
+      "value": "58.9 x 58.9 x 24.3 mm"
+    }
+  ],
+  "repairabilityIndex": null,
+  "dasHead": null,
+  "dasBody": null,
+  "dasLimb": null,
+  "energyClass": "",
+  "tags": [],
+  "isFeatured": false,
+  "isNewArrival": true,
+  "showOnHomepage": false,
+  "status": "active",
+  "variants": [
+    {
+      "id": "70d6a897-7a1c-4c26-a5fc-4fcfb9c52b66",
+      "color": "Blanc",
+      "colorCode": "#FFFFFF",
+      "ean": "6975840260126",
+      "stock": 0,
+      "is_default": true,
+      "images": [],
+      "adminDiscountPercent": 0,
+      "capacity": null,
+      "size": null
+    }
+  ],
+  "rating": {
+    "average": 0,
+    "count": 0,
+    "distribution": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0
+    },
+    "reviews": []
+  }
+},
+{
+  "id": "0d32ff6e-3b63-4379-b261-d3a0b04f1e99",
+  "airtableId": "0d32ff6e-3b63-4379-b261-d3a0b04f1e99",
+  "sku": "SKU-0126",
+  "name": "ADAPTATEUR UNIVERSEL DE VOYAGE MY WAY",
+  "urlSlug": "adaptateur-universel-voyage-my-way",
+  "shortDescription": "Adaptateur de voyage universel compatible 150+ pays avec fusible de protection intégré",
+  "fullDescription": "<div class=\"max-w-4xl mx-auto\">\n  <h3 class=\"text-2xl font-bold text-gray-900 mb-6\">Adaptateur Universel de Voyage My Way</h3>\n  <p class=\"text-gray-700 mb-4\">L'adaptateur universel de voyage My Way vous accompagne partout dans le monde. Compatible avec les prises de plus de 150 pays (Europe, USA, Royaume-Uni, Australie), il vous permet de brancher vos appareils en toute sécurité grâce à son fusible de protection intégré.</p>\n  <p class=\"text-gray-700\">Son format compact et son design coulissant tout-en-un en font le compagnon idéal de tous vos déplacements professionnels et personnels.</p>\n</div>",
+  "originalPrice": null,
+  "basePrice": 14.9,
+  "discountPercent": 0,
+  "brandId": "a1b2c3d4-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
+  "brandName": "MY WAY",
+  "brandSlug": "my-way",
+  "categoryId": "5c4b3a2f-8e7d-4c6b-9a5c-3b2d4e6f8a9c",
+  "categoryName": "Accessoires",
+  "categorySlug": "accessoires",
+  "features": [
+    "Compatible 150+ pays (EU/US/UK/AUS)",
+    "Fusible de protection 8A intégré",
+    "Design compact coulissant",
+    "100-240V AC, 50/60Hz"
+  ],
+  "specifications": [
+    {
+      "label": "Compatibilité",
+      "value": "Prises EU, US, UK, AUS (150+ pays)"
+    },
+    {
+      "label": "Tension d'entrée",
+      "value": "100-240V AC, 50/60Hz"
+    },
+    {
+      "label": "Courant max",
+      "value": "8A"
+    },
+    {
+      "label": "Puissance max",
+      "value": "880W (110V) / 1840W (230V)"
+    },
+    {
+      "label": "Fusible",
+      "value": "8A intégré"
+    },
+    {
+      "label": "Matériau",
+      "value": "ABS ignifuge"
+    },
+    {
+      "label": "Poids",
+      "value": "~120 g"
+    }
+  ],
+  "repairabilityIndex": null,
+  "dasHead": null,
+  "dasBody": null,
+  "dasLimb": null,
+  "energyClass": "",
+  "tags": [],
+  "isFeatured": false,
+  "isNewArrival": true,
+  "showOnHomepage": false,
+  "status": "active",
+  "variants": [
+    {
+      "id": "f32aa6c4-7b88-48cf-9110-6a252c7f28a1",
+      "color": "Blanc",
+      "colorCode": "#FFFFFF",
+      "ean": "3663111197716",
+      "stock": 0,
+      "is_default": true,
+      "images": [],
+      "adminDiscountPercent": 0,
+      "capacity": null,
+      "size": null
+    }
+  ],
+  "rating": {
+    "average": 0,
+    "count": 0,
+    "distribution": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0
+    },
+    "reviews": []
+  }
+},
+{
+  "id": "ade860ad-0614-4ac3-b4ca-a269ce4ff213",
+  "airtableId": "ade860ad-0614-4ac3-b4ca-a269ce4ff213",
+  "sku": "SKU-0127",
+  "name": "HUB USB C 6 EN 1 MUVIT HDMI",
+  "urlSlug": "hub-usb-c-6-en-1-muvit-hdmi",
+  "shortDescription": "Hub USB-C 6-en-1 Muvit avec HDMI 4K@60Hz, USB-C PD 100W, 2 USB-A et lecteur SD",
+  "fullDescription": "<div class=\"max-w-4xl mx-auto\">\n  <h3 class=\"text-2xl font-bold text-gray-900 mb-6\">Hub USB-C 6-en-1 Muvit For Change</h3>\n  <p class=\"text-gray-700 mb-4\">Le Hub USB-C 6-en-1 Muvit For Change transforme votre port USB-C en une station de connectivité complète. Profitez d'une sortie HDMI 4K à 60Hz, de deux ports USB-A, d'un lecteur de cartes SD/Micro SD et d'une recharge USB-C Power Delivery 100W.</p>\n  <p class=\"text-gray-700\">Le tout dans un boîtier compact en aluminium et plastique recyclé, conçu dans une démarche éco-responsable. Plug & Play, aucun pilote nécessaire.</p>\n</div>",
+  "originalPrice": null,
+  "basePrice": 34.9,
+  "discountPercent": 0,
+  "brandId": "5b8a13ee-afad-4e68-b2c0-5d7922d91f5d",
+  "brandName": "MUVIT",
+  "brandSlug": "muvit",
+  "categoryId": "5c4b3a2f-8e7d-4c6b-9a5c-3b2d4e6f8a9c",
+  "categoryName": "Accessoires",
+  "categorySlug": "accessoires",
+  "features": [
+    "HDMI 4K @ 60Hz",
+    "USB-C PD 100W pass-through",
+    "2 ports USB-A (3.0 + 2.0)",
+    "Lecteur SD + Micro SD",
+    "Plastique 100% recyclé"
+  ],
+  "specifications": [
+    {
+      "label": "Entrée",
+      "value": "USB-C"
+    },
+    {
+      "label": "Sortie vidéo",
+      "value": "HDMI Ultra HD 4K @ 60Hz"
+    },
+    {
+      "label": "USB-C",
+      "value": "Power Delivery 100W (pass-through)"
+    },
+    {
+      "label": "USB-A 1",
+      "value": "USB 3.0 (5 Gb/s)"
+    },
+    {
+      "label": "USB-A 2",
+      "value": "USB 2.0 (480 Mb/s)"
+    },
+    {
+      "label": "Lecteur cartes",
+      "value": "SD + Micro SD / TF"
+    },
+    {
+      "label": "Matériaux",
+      "value": "Aluminium + plastique TPE & ABS 100% recyclé"
+    },
+    {
+      "label": "Compatibilité",
+      "value": "MacBook Pro/Air, PC USB-C, tablettes, Samsung DeX"
+    }
+  ],
+  "repairabilityIndex": null,
+  "dasHead": null,
+  "dasBody": null,
+  "dasLimb": null,
+  "energyClass": "",
+  "tags": [],
+  "isFeatured": false,
+  "isNewArrival": true,
+  "showOnHomepage": false,
+  "status": "active",
+  "variants": [
+    {
+      "id": "68caa3aa-8dc6-4573-ae82-c2b25911993a",
+      "color": "Gris",
+      "colorCode": "#808080",
+      "ean": "3663111197068",
+      "stock": 0,
+      "is_default": true,
+      "images": [],
+      "adminDiscountPercent": 0,
+      "capacity": null,
+      "size": null
+    }
+  ],
+  "rating": {
+    "average": 0,
+    "count": 0,
+    "distribution": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0
+    },
+    "reviews": []
+  }
+},
+{
+  "id": "32ff2134-cb4e-456b-a78f-1b32827835f1",
+  "airtableId": "32ff2134-cb4e-456b-a78f-1b32827835f1",
+  "sku": "SKU-0128",
+  "name": "HUB USB C 3 EN 1 MUVIT HDMI",
+  "urlSlug": "hub-usb-c-3-en-1-muvit-hdmi",
+  "shortDescription": "Hub USB-C 3-en-1 Muvit avec HDMI 4K@30Hz, USB-A 3.0 et USB-C PD",
+  "fullDescription": "<div class=\"max-w-4xl mx-auto\">\n  <h3 class=\"text-2xl font-bold text-gray-900 mb-6\">Hub USB-C 3-en-1 Muvit HDMI</h3>\n  <p class=\"text-gray-700 mb-4\">L'adaptateur USB-C 3-en-1 Muvit vous offre l'essentiel de la connectivité : une sortie HDMI 4K pour projeter vos contenus sur grand écran, un port USB-A 3.0 pour connecter vos périphériques et un port USB-C Power Delivery pour recharger simultanément votre appareil.</p>\n  <p class=\"text-gray-700\">Compact et léger, il se glisse facilement dans votre sac. Plug & Play, compatible avec tous les appareils USB-C.</p>\n</div>",
+  "originalPrice": null,
+  "basePrice": 24.9,
+  "discountPercent": 0,
+  "brandId": "5b8a13ee-afad-4e68-b2c0-5d7922d91f5d",
+  "brandName": "MUVIT",
+  "brandSlug": "muvit",
+  "categoryId": "5c4b3a2f-8e7d-4c6b-9a5c-3b2d4e6f8a9c",
+  "categoryName": "Accessoires",
+  "categorySlug": "accessoires",
+  "features": [
+    "HDMI 4K @ 30Hz",
+    "USB-A 3.0 (5 Gb/s)",
+    "USB-C PD pass-through",
+    "Compact et Plug & Play"
+  ],
+  "specifications": [
+    {
+      "label": "Entrée",
+      "value": "USB-C mâle"
+    },
+    {
+      "label": "Sortie vidéo",
+      "value": "HDMI 4K @ 30Hz"
+    },
+    {
+      "label": "USB-A",
+      "value": "USB 3.0 (5 Gb/s)"
+    },
+    {
+      "label": "USB-C",
+      "value": "Power Delivery pass-through (jusqu'à 100W)"
+    },
+    {
+      "label": "Câble intégré",
+      "value": "~15 cm"
+    },
+    {
+      "label": "Compatibilité",
+      "value": "MacBook, PC USB-C, tablettes, Samsung DeX"
+    }
+  ],
+  "repairabilityIndex": null,
+  "dasHead": null,
+  "dasBody": null,
+  "dasLimb": null,
+  "energyClass": "",
+  "tags": [],
+  "isFeatured": false,
+  "isNewArrival": true,
+  "showOnHomepage": false,
+  "status": "active",
+  "variants": [
+    {
+      "id": "2150fb40-0bd4-44e7-9cad-0ed7d830e559",
+      "color": "Gris",
+      "colorCode": "#808080",
+      "ean": "3663111197044",
+      "stock": 0,
+      "is_default": true,
+      "images": [],
+      "adminDiscountPercent": 0,
+      "capacity": null,
+      "size": null
+    }
+  ],
+  "rating": {
+    "average": 0,
+    "count": 0,
+    "distribution": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0
+    },
+    "reviews": []
+  }
+},
+{
+  "id": "67f3c962-2cf5-42bc-a49a-5e18a465f717",
+  "airtableId": "67f3c962-2cf5-42bc-a49a-5e18a465f717",
+  "sku": "SKU-0129",
+  "name": "CHARGEUR TIGER POWER GAN 65W 2 USB C",
+  "urlSlug": "chargeur-tiger-power-gan-65w-2-usb-c",
+  "shortDescription": "Chargeur GaN 65W Tiger Power avec 2 ports USB-C, Power Delivery 3.0 et PPS",
+  "fullDescription": "<div class=\"max-w-4xl mx-auto\">\n  <h3 class=\"text-2xl font-bold text-gray-900 mb-6\">Chargeur Tiger Power GaN 65W - Puissance compacte</h3>\n  <p class=\"text-gray-700 mb-4\">Le chargeur Tiger Power GaN 65W offre une puissance de charge exceptionnelle dans un format ultra-compact de seulement 132g. Grâce à la technologie GaN (Nitrure de Gallium), il délivre jusqu'à 65W via ses deux ports USB-C.</p>\n  <p class=\"text-gray-700 mb-4\">Chargez simultanément un ordinateur portable et un smartphone (45W + 20W). Atteignez 50% de batterie en seulement 30 minutes grâce au protocole Power Delivery 3.0 et PPS.</p>\n  <p class=\"text-gray-700\">Compatible avec MacBook Air/Pro, iPhone, iPad, Samsung Galaxy, Nintendo Switch et tous les appareils USB-C.</p>\n</div>",
+  "originalPrice": null,
+  "basePrice": 49.9,
+  "discountPercent": 0,
+  "brandId": "bfada6a7-6a64-4429-b6c5-90b518ad6345",
+  "brandName": "TIGER POWER",
+  "brandSlug": "tiger-power",
+  "categoryId": "5c4b3a2f-8e7d-4c6b-9a5c-3b2d4e6f8a9c",
+  "categoryName": "Accessoires",
+  "categorySlug": "accessoires",
+  "features": [
+    "Technologie GaN ultra-compact (132g)",
+    "65W de puissance totale",
+    "2 ports USB-C simultanés (45W + 20W)",
+    "Power Delivery 3.0 + PPS",
+    "50% en 30 minutes"
+  ],
+  "specifications": [
+    {
+      "label": "Technologie",
+      "value": "GaN (Nitrure de Gallium)"
+    },
+    {
+      "label": "Puissance totale",
+      "value": "65W"
+    },
+    {
+      "label": "Ports",
+      "value": "2x USB-C"
+    },
+    {
+      "label": "Sortie USB-C",
+      "value": "5V/3A, 9V/3A, 12V/3A, 15V/3A, 20V/3.25A"
+    },
+    {
+      "label": "PPS",
+      "value": "3.3-11V/3A, 3.3-21V/3A"
+    },
+    {
+      "label": "Double sortie",
+      "value": "45W + 20W simultané"
+    },
+    {
+      "label": "Entrée",
+      "value": "AC 100-240V, 50/60Hz"
+    },
+    {
+      "label": "Dimensions",
+      "value": "55 x 35.6 x 91 mm"
+    },
+    {
+      "label": "Poids",
+      "value": "132 g"
+    },
+    {
+      "label": "Protocoles",
+      "value": "USB Power Delivery 3.0, PPS"
+    }
+  ],
+  "repairabilityIndex": null,
+  "dasHead": null,
+  "dasBody": null,
+  "dasLimb": null,
+  "energyClass": "",
+  "tags": [],
+  "isFeatured": false,
+  "isNewArrival": true,
+  "showOnHomepage": false,
+  "status": "active",
+  "variants": [
+    {
+      "id": "924f4063-f936-4072-8b31-92f0dbff7e35",
+      "color": "Blanc",
+      "colorCode": "#FFFFFF",
+      "ean": "3663111183887",
+      "stock": 0,
+      "is_default": true,
+      "images": [],
+      "adminDiscountPercent": 0,
+      "capacity": null,
+      "size": null
+    }
+  ],
+  "rating": {
+    "average": 0,
+    "count": 0,
+    "distribution": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0
+    },
+    "reviews": []
+  }
+},
+{
+  "id": "f0eb2ed2-d277-4f56-b18e-95f20bcf36f2",
+  "airtableId": "f0eb2ed2-d277-4f56-b18e-95f20bcf36f2",
+  "sku": "SKU-0130",
+  "name": "PACK MUVIT RECHARGE VOITURE + 8 ADAPTATEURS",
+  "urlSlug": "pack-muvit-recharge-voiture-8-adaptateurs",
+  "shortDescription": "Pack de charge universel Muvit avec chargeur secteur, allume-cigare et 8 connecteurs",
+  "fullDescription": "<div class=\"max-w-4xl mx-auto\">\n  <h3 class=\"text-2xl font-bold text-gray-900 mb-6\">Pack Muvit Recharge Universel</h3>\n  <p class=\"text-gray-700 mb-4\">Le Pack Muvit Recharge Universel est la solution de charge tout-en-un pour tous vos appareils mobiles. Comprenant un chargeur secteur, un chargeur voiture allume-cigare et 8 connecteurs universels, il permet de recharger tous les téléphones portables, que ce soit à la maison, au bureau ou en voiture.</p>\n  <p class=\"text-gray-700\">Le tout est livré dans une pratique pochette en daim pour un transport facile et organisé.</p>\n</div>",
+  "originalPrice": null,
+  "basePrice": 19.9,
+  "discountPercent": 0,
+  "brandId": "5b8a13ee-afad-4e68-b2c0-5d7922d91f5d",
+  "brandName": "MUVIT",
+  "brandSlug": "muvit",
+  "categoryId": "5c4b3a2f-8e7d-4c6b-9a5c-3b2d4e6f8a9c",
+  "categoryName": "Accessoires",
+  "categorySlug": "accessoires",
+  "features": [
+    "Chargeur secteur + allume-cigare inclus",
+    "8 connecteurs universels",
+    "Compatible téléphones depuis 2007",
+    "Pochette de rangement fournie"
+  ],
+  "specifications": [
+    {
+      "label": "Chargeur secteur",
+      "value": "1x USB, 100-240V AC"
+    },
+    {
+      "label": "Chargeur voiture",
+      "value": "Allume-cigare 12V/24V, 1x USB"
+    },
+    {
+      "label": "Connecteurs",
+      "value": "8 (Mini USB, Micro USB, Lightning, etc.)"
+    },
+    {
+      "label": "Sortie USB",
+      "value": "5V / 1A"
+    },
+    {
+      "label": "Accessoire",
+      "value": "Pochette en daim"
+    }
+  ],
+  "repairabilityIndex": null,
+  "dasHead": null,
+  "dasBody": null,
+  "dasLimb": null,
+  "energyClass": "",
+  "tags": [],
+  "isFeatured": false,
+  "isNewArrival": true,
+  "showOnHomepage": false,
+  "status": "active",
+  "variants": [
+    {
+      "id": "e75a04f2-fa18-4440-aec1-40fef0b96ce3",
+      "color": "Noir",
+      "colorCode": "#000000",
+      "ean": "3700615001054",
+      "stock": 0,
+      "is_default": true,
+      "images": [],
+      "adminDiscountPercent": 0,
+      "capacity": null,
+      "size": null
+    }
+  ],
+  "rating": {
+    "average": 0,
+    "count": 0,
+    "distribution": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0
+    },
+    "reviews": []
+  }
+},
+
+{
+  "id": "2d60c8e2-cce3-48fd-b93e-94f91fb5aac6",
+  "airtableId": "2d60c8e2-cce3-48fd-b93e-94f91fb5aac6",
+  "sku": "SKU-0132",
+  "name": "MONSTER CABLE ESSENTIAL JACK 3.5MM/2 RCA 1.5M",
+  "urlSlug": "monster-cable-essential-jack-3-5mm-2-rca-1-5m",
+  "shortDescription": "Câble audio Monster Essentials Jack 3.5mm vers 2 RCA, 1.5m, OFC plaqué or",
+  "fullDescription": "<div class=\"max-w-4xl mx-auto\">\n  <h3 class=\"text-2xl font-bold text-gray-900 mb-6\">MONSTER CABLE ESSENTIAL JACK 3.5MM/2 RCA 1.5M</h3>\n  <p class=\"text-gray-700 mb-4\">Le câble Monster Essentials offre une connexion audio haute fidélité grâce à ses conducteurs en cuivre OFC (Oxygen-Free Copper) et ses connecteurs plaqués or 24K résistants à la corrosion.</p>\n  <p class=\"text-gray-700\">Sa gaine Duraflex Monster résiste à l'abrasion et aux torsions pour une durabilité exceptionnelle au quotidien. Idéal pour relier vos sources audio à vos équipements Hi-Fi, enceintes ou casques.</p>\n</div>",
+  "originalPrice": null,
+  "basePrice": 9.9,
+  "discountPercent": 0,
+  "brandId": "491a212f-a6ce-4ca8-ac19-29969c4f1ddb",
+  "brandName": "MONSTER",
+  "brandSlug": "monster",
+  "categoryId": "5c4b3a2f-8e7d-4c6b-9a5c-3b2d4e6f8a9c",
+  "categoryName": "Accessoires",
+  "categorySlug": "accessoires",
+  "features": [
+    "Conducteurs OFC (cuivre désoxygéné)",
+    "Connecteurs plaqués or 24K",
+    "Gaine Duraflex résistante",
+    "Garantie Monster"
+  ],
+  "specifications": [
+    {
+      "label": "Connecteurs",
+      "value": "Jack 3.5mm mâle vers 2x RCA mâle"
+    },
+    {
+      "label": "Longueur",
+      "value": "1.50 m"
+    },
+    {
+      "label": "Conducteurs",
+      "value": "OFC (Oxygen-Free Copper)"
+    },
+    {
+      "label": "Connecteurs",
+      "value": "Plaqués or 24K"
+    },
+    {
+      "label": "Gaine",
+      "value": "Duraflex Monster"
+    }
+  ],
+  "repairabilityIndex": null,
+  "dasHead": null,
+  "dasBody": null,
+  "dasLimb": null,
+  "energyClass": "",
+  "tags": [],
+  "isFeatured": false,
+  "isNewArrival": true,
+  "showOnHomepage": false,
+  "status": "active",
+  "variants": [
+    {
+      "id": "01cf818d-b2dd-4f72-952f-110cc0b623b7",
+      "color": "Noir",
+      "colorCode": "#000000",
+      "ean": "850015401428",
+      "stock": 0,
+      "is_default": true,
+      "images": [],
+      "adminDiscountPercent": 0,
+      "capacity": null,
+      "size": null
+    }
+  ],
+  "rating": {
+    "average": 0,
+    "count": 0,
+    "distribution": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0
+    },
+    "reviews": []
+  }
+},
+{
+  "id": "4742f6a0-8dcb-4807-862a-aaaef9b80dc7",
+  "airtableId": "4742f6a0-8dcb-4807-862a-aaaef9b80dc7",
+  "sku": "SKU-0133",
+  "name": "MONSTER CABLE ESSENTIAL RCA/RCA M/M 1.5M",
+  "urlSlug": "monster-cable-essential-rca-rca-m-m-1-5m",
+  "shortDescription": "Câble audio Monster Essentials RCA mâle/mâle, 1.5m, double blindage OFC",
+  "fullDescription": "<div class=\"max-w-4xl mx-auto\">\n  <h3 class=\"text-2xl font-bold text-gray-900 mb-6\">MONSTER CABLE ESSENTIAL RCA/RCA M/M 1.5M</h3>\n  <p class=\"text-gray-700 mb-4\">Le câble Monster Essentials offre une connexion audio haute fidélité grâce à ses conducteurs en cuivre OFC (Oxygen-Free Copper) et ses connecteurs plaqués or 24K résistants à la corrosion.</p>\n  <p class=\"text-gray-700\">Sa gaine Duraflex Monster résiste à l'abrasion et aux torsions pour une durabilité exceptionnelle au quotidien. Idéal pour relier vos sources audio à vos équipements Hi-Fi, enceintes ou casques.</p>\n</div>",
+  "originalPrice": null,
+  "basePrice": 12.9,
+  "discountPercent": 0,
+  "brandId": "491a212f-a6ce-4ca8-ac19-29969c4f1ddb",
+  "brandName": "MONSTER",
+  "brandSlug": "monster",
+  "categoryId": "5c4b3a2f-8e7d-4c6b-9a5c-3b2d4e6f8a9c",
+  "categoryName": "Accessoires",
+  "categorySlug": "accessoires",
+  "features": [
+    "Conducteurs OFC (cuivre désoxygéné)",
+    "Connecteurs plaqués or 24K",
+    "Gaine Duraflex résistante",
+    "Garantie Monster"
+  ],
+  "specifications": [
+    {
+      "label": "Connecteurs",
+      "value": "RCA mâle vers RCA mâle"
+    },
+    {
+      "label": "Longueur",
+      "value": "1.50 m"
+    },
+    {
+      "label": "Conducteurs",
+      "value": "OFC (Oxygen-Free Copper)"
+    },
+    {
+      "label": "Connecteurs",
+      "value": "Plaqués or 24K"
+    },
+    {
+      "label": "Gaine",
+      "value": "Duraflex Monster"
+    }
+  ],
+  "repairabilityIndex": null,
+  "dasHead": null,
+  "dasBody": null,
+  "dasLimb": null,
+  "energyClass": "",
+  "tags": [],
+  "isFeatured": false,
+  "isNewArrival": true,
+  "showOnHomepage": false,
+  "status": "active",
+  "variants": [
+    {
+      "id": "e8534099-d0a8-4de0-a0dd-3371c347f7de",
+      "color": "Noir",
+      "colorCode": "#000000",
+      "ean": "850015401053",
+      "stock": 0,
+      "is_default": true,
+      "images": [],
+      "adminDiscountPercent": 0,
+      "capacity": null,
+      "size": null
+    }
+  ],
+  "rating": {
+    "average": 0,
+    "count": 0,
+    "distribution": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0
+    },
+    "reviews": []
+  }
+},
+{
+  "id": "17052c40-b503-442a-8d9d-cd2f00563831",
+  "airtableId": "17052c40-b503-442a-8d9d-cd2f00563831",
+  "sku": "SKU-0134",
+  "name": "MONSTER CABLE ESSENTIAL JACK 3.5 M/M 1.5M",
+  "urlSlug": "monster-cable-essential-jack-3-5-m-m-1-5m",
+  "shortDescription": "Câble audio Monster Essentials Jack 3.5mm mâle/mâle, 1.5m, OFC plaqué or",
+  "fullDescription": "<div class=\"max-w-4xl mx-auto\">\n  <h3 class=\"text-2xl font-bold text-gray-900 mb-6\">MONSTER CABLE ESSENTIAL JACK 3.5 M/M 1.5M</h3>\n  <p class=\"text-gray-700 mb-4\">Le câble Monster Essentials offre une connexion audio haute fidélité grâce à ses conducteurs en cuivre OFC (Oxygen-Free Copper) et ses connecteurs plaqués or 24K résistants à la corrosion.</p>\n  <p class=\"text-gray-700\">Sa gaine Duraflex Monster résiste à l'abrasion et aux torsions pour une durabilité exceptionnelle au quotidien. Idéal pour relier vos sources audio à vos équipements Hi-Fi, enceintes ou casques.</p>\n</div>",
+  "originalPrice": null,
+  "basePrice": 7.9,
+  "discountPercent": 0,
+  "brandId": "491a212f-a6ce-4ca8-ac19-29969c4f1ddb",
+  "brandName": "MONSTER",
+  "brandSlug": "monster",
+  "categoryId": "5c4b3a2f-8e7d-4c6b-9a5c-3b2d4e6f8a9c",
+  "categoryName": "Accessoires",
+  "categorySlug": "accessoires",
+  "features": [
+    "Conducteurs OFC (cuivre désoxygéné)",
+    "Connecteurs plaqués or 24K",
+    "Gaine Duraflex résistante",
+    "Garantie Monster"
+  ],
+  "specifications": [
+    {
+      "label": "Connecteurs",
+      "value": "Jack 3.5mm mâle vers Jack 3.5mm mâle"
+    },
+    {
+      "label": "Longueur",
+      "value": "1.50 m"
+    },
+    {
+      "label": "Conducteurs",
+      "value": "OFC (Oxygen-Free Copper)"
+    },
+    {
+      "label": "Connecteurs",
+      "value": "Plaqués or 24K"
+    },
+    {
+      "label": "Gaine",
+      "value": "Duraflex Monster"
+    }
+  ],
+  "repairabilityIndex": null,
+  "dasHead": null,
+  "dasBody": null,
+  "dasLimb": null,
+  "energyClass": "",
+  "tags": [],
+  "isFeatured": false,
+  "isNewArrival": true,
+  "showOnHomepage": false,
+  "status": "active",
+  "variants": [
+    {
+      "id": "c20ec98d-e14d-4979-becd-a15c71de57f1",
+      "color": "Noir",
+      "colorCode": "#000000",
+      "ean": "850015401497",
+      "stock": 0,
+      "is_default": true,
+      "images": [],
+      "adminDiscountPercent": 0,
+      "capacity": null,
+      "size": null
+    }
+  ],
+  "rating": {
+    "average": 0,
+    "count": 0,
+    "distribution": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0
+    },
+    "reviews": []
+  }
+},
+{
+  "id": "f8487aa6-e431-4e91-90b7-b51898b92710",
+  "airtableId": "f8487aa6-e431-4e91-90b7-b51898b92710",
+  "sku": "SKU-0135",
+  "name": "MONSTER CABLE ESSENTIAL REPARTITEUR JACK 3.5MM M/2F 0.15M",
+  "urlSlug": "monster-cable-essential-repartiteur-jack-3-5mm-m-2f-0-15m",
+  "shortDescription": "Répartiteur audio Monster Essentials Jack 3.5mm mâle vers 2 femelles, 0.15m",
+  "fullDescription": "<div class=\"max-w-4xl mx-auto\">\n  <h3 class=\"text-2xl font-bold text-gray-900 mb-6\">MONSTER CABLE ESSENTIAL REPARTITEUR JACK 3.5MM M/2F 0.15M</h3>\n  <p class=\"text-gray-700 mb-4\">Le câble Monster Essentials offre une connexion audio haute fidélité grâce à ses conducteurs en cuivre OFC (Oxygen-Free Copper) et ses connecteurs plaqués or 24K résistants à la corrosion.</p>\n  <p class=\"text-gray-700\">Sa gaine Duraflex Monster résiste à l'abrasion et aux torsions pour une durabilité exceptionnelle au quotidien. Idéal pour relier vos sources audio à vos équipements Hi-Fi, enceintes ou casques.</p>\n</div>",
+  "originalPrice": null,
+  "basePrice": 6.9,
+  "discountPercent": 0,
+  "brandId": "491a212f-a6ce-4ca8-ac19-29969c4f1ddb",
+  "brandName": "MONSTER",
+  "brandSlug": "monster",
+  "categoryId": "5c4b3a2f-8e7d-4c6b-9a5c-3b2d4e6f8a9c",
+  "categoryName": "Accessoires",
+  "categorySlug": "accessoires",
+  "features": [
+    "Conducteurs OFC (cuivre désoxygéné)",
+    "Connecteurs plaqués or 24K",
+    "Gaine Duraflex résistante",
+    "Garantie Monster"
+  ],
+  "specifications": [
+    {
+      "label": "Connecteurs",
+      "value": "Jack 3.5mm mâle vers 2x Jack 3.5mm femelle"
+    },
+    {
+      "label": "Longueur",
+      "value": "0.15 m"
+    },
+    {
+      "label": "Conducteurs",
+      "value": "OFC (Oxygen-Free Copper)"
+    },
+    {
+      "label": "Connecteurs",
+      "value": "Plaqués or 24K"
+    },
+    {
+      "label": "Gaine",
+      "value": "Duraflex Monster"
+    }
+  ],
+  "repairabilityIndex": null,
+  "dasHead": null,
+  "dasBody": null,
+  "dasLimb": null,
+  "energyClass": "",
+  "tags": [],
+  "isFeatured": false,
+  "isNewArrival": true,
+  "showOnHomepage": false,
+  "status": "active",
+  "variants": [
+    {
+      "id": "2ef6eb7c-24ba-47ec-a135-4ff164f599ae",
+      "color": "Noir",
+      "colorCode": "#000000",
+      "ean": "850015401411",
+      "stock": 0,
+      "is_default": true,
+      "images": [],
+      "adminDiscountPercent": 0,
+      "capacity": null,
+      "size": null
+    }
+  ],
+  "rating": {
+    "average": 0,
+    "count": 0,
+    "distribution": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0
+    },
+    "reviews": []
+  }
+},
+{
+  "id": "2b311ecc-582e-4dfc-9ef0-54669a741f85",
+  "airtableId": "2b311ecc-582e-4dfc-9ef0-54669a741f85",
+  "sku": "SKU-0136",
+  "name": "MONSTER MULTIPRISE PARAFOUDRE 4 PRISES",
+  "urlSlug": "monster-multiprise-parafoudre-4-prises",
+  "shortDescription": "Multiprise parafoudre Monster 4 prises avec protection 608 Joules et filtration secteur",
+  "fullDescription": "<div class=\"max-w-4xl mx-auto\">\n  <h3 class=\"text-2xl font-bold text-gray-900 mb-6\">Monster Power - Multiprise Parafoudre 4 Prises</h3>\n  <p class=\"text-gray-700 mb-4\">La multiprise Monster Power 4 prises offre une protection parafoudre de 608 Joules avec la technologie exclusive MOV Fireproof qui protège votre domicile autant que vos équipements grâce à des composants enveloppés de céramique anti-incendie résistant à 750°C.</p>\n  <p class=\"text-gray-700\">Sa filtration du courant électrique élimine les interférences secteur et améliore la qualité de l'image et du son de vos appareils. Garantie Monster à hauteur de 100 000 € sur les équipements connectés.</p>\n</div>",
+  "originalPrice": null,
+  "basePrice": 24.9,
+  "discountPercent": 0,
+  "brandId": "491a212f-a6ce-4ca8-ac19-29969c4f1ddb",
+  "brandName": "MONSTER",
+  "brandSlug": "monster",
+  "categoryId": "5c4b3a2f-8e7d-4c6b-9a5c-3b2d4e6f8a9c",
+  "categoryName": "Accessoires",
+  "categorySlug": "accessoires",
+  "features": [
+    "Protection parafoudre 608 Joules",
+    "Technologie MOV Fireproof",
+    "Filtration secteur intégrée",
+    "Garantie 100 000 € équipements",
+    "Interrupteur On/Off LED"
+  ],
+  "specifications": [
+    {
+      "label": "Prises",
+      "value": "4 prises protégées (Type E, norme française)"
+    },
+    {
+      "label": "Protection",
+      "value": "608 Joules"
+    },
+    {
+      "label": "Technologie",
+      "value": "MOV Fireproof (céramique 750°C)"
+    },
+    {
+      "label": "Filtration",
+      "value": "Filtration secteur intégrée"
+    },
+    {
+      "label": "Cordon",
+      "value": "1.40 m"
+    },
+    {
+      "label": "Interrupteur",
+      "value": "On/Off avec témoin LED"
+    },
+    {
+      "label": "Dimensions",
+      "value": "70 x 85 x 92 mm"
+    },
+    {
+      "label": "Poids",
+      "value": "770 g"
+    },
+    {
+      "label": "Garantie équipements",
+      "value": "100 000 €"
+    }
+  ],
+  "repairabilityIndex": null,
+  "dasHead": null,
+  "dasBody": null,
+  "dasLimb": null,
+  "energyClass": "",
+  "tags": [],
+  "isFeatured": false,
+  "isNewArrival": true,
+  "showOnHomepage": false,
+  "status": "active",
+  "variants": [
+    {
+      "id": "997fa643-cf8c-4c71-99e1-d89e62f8352b",
+      "color": "Noir",
+      "colorCode": "#000000",
+      "ean": "850017011410",
+      "stock": 0,
+      "is_default": true,
+      "images": [],
+      "adminDiscountPercent": 0,
+      "capacity": null,
+      "size": null
+    }
+  ],
+  "rating": {
+    "average": 0,
+    "count": 0,
+    "distribution": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0
+    },
+    "reviews": []
+  }
+},
+{
+  "id": "6844f13b-c5cb-4c20-ba42-b991bafe418a",
+  "airtableId": "6844f13b-c5cb-4c20-ba42-b991bafe418a",
+  "sku": "SKU-0137",
+  "name": "MONTRE HIFUTURE ZONE 3",
+  "urlSlug": "montre-hifuture-zone-3",
+  "shortDescription": "Montre connectée HiFuture Zone 3 avec écran AMOLED 1.96\", appels Bluetooth et 100+ sports",
+  "fullDescription": "<div class=\"max-w-4xl mx-auto\">\n  <h3 class=\"text-2xl font-bold text-gray-900 mb-6\">HiFuture Zone 3 - Élégance et performance</h3>\n  <p class=\"text-gray-700 mb-4\">La HiFuture Zone 3 allie élégance et performance avec son écran AMOLED de 1,96 pouces et sa construction en acier inoxydable premium. Suivez votre santé 24/7 avec plus de 100 modes sportifs, le monitoring cardiaque, SpO2 et le suivi du sommeil.</p>\n  <p class=\"text-gray-700\">Passez vos appels directement depuis votre poignet grâce au Bluetooth intégré. Avec 7 jours d'autonomie et une étanchéité IP68, c'est le compagnon idéal pour un quotidien actif et connecté.</p>\n</div>",
+  "originalPrice": null,
+  "basePrice": 42.9,
+  "discountPercent": 0,
+  "brandId": "a44be79d-dac2-4ba6-8497-625a0a79196d",
+  "brandName": "HIFUTURE",
+  "brandSlug": "hifuture",
+  "categoryId": "c8f5a3d2-9e4b-4a7c-8b5f-2d3e4f5a6b7c",
+  "categoryName": "Montres",
+  "categorySlug": "montres",
+  "features": [
+    "Écran AMOLED 1.96\"",
+    "Appels Bluetooth",
+    "100+ modes sportifs",
+    "IP68 étanche",
+    "7 jours d'autonomie"
+  ],
+  "specifications": [
+    {
+      "label": "Écran",
+      "value": "1.96\" AMOLED"
+    },
+    {
+      "label": "Batterie",
+      "value": "350 mAh, ~7 jours d'autonomie"
+    },
+    {
+      "label": "Capteurs santé",
+      "value": "Fréquence cardiaque 24/7, SpO2, suivi du sommeil"
+    },
+    {
+      "label": "Sports",
+      "value": "100+ modes sportifs"
+    },
+    {
+      "label": "Étanchéité",
+      "value": "IP68 (1 ATM)"
+    },
+    {
+      "label": "Bluetooth",
+      "value": "Appels Bluetooth intégrés"
+    },
+    {
+      "label": "Application",
+      "value": "HiFuture Fit"
+    },
+    {
+      "label": "Compatibilité",
+      "value": "iOS 9.0+ / Android 5.0+"
+    },
+    {
+      "label": "Cadrans",
+      "value": "100+ cadrans personnalisables"
+    },
+    {
+      "label": "Boîtier",
+      "value": "Acier inoxydable + bracelet silicone"
+    },
+    {
+      "label": "Dimensions",
+      "value": "45.7 x 38.6 x 11.8 mm"
+    }
+  ],
+  "repairabilityIndex": null,
+  "dasHead": null,
+  "dasBody": null,
+  "dasLimb": null,
+  "energyClass": "",
+  "tags": [],
+  "isFeatured": false,
+  "isNewArrival": true,
+  "showOnHomepage": false,
+  "status": "active",
+  "variants": [
+    {
+      "id": "b6cbff5f-2a84-4c24-913a-824edc1ca716",
+      "color": "Noir",
+      "colorCode": "#000000",
+      "ean": "6972576183002",
+      "stock": 0,
+      "is_default": true,
+      "images": [],
+      "adminDiscountPercent": 0,
+      "capacity": null,
+      "size": null
+    },
+    {
+      "id": "4d18d4a3-29dd-47eb-8bd6-17d8f27eac94",
+      "color": "Gris",
+      "colorCode": "#808080",
+      "ean": "6972576183019",
+      "stock": 0,
+      "is_default": false,
+      "images": [],
+      "adminDiscountPercent": 0,
+      "capacity": null,
+      "size": null
+    },
+    {
+      "id": "0564fe0d-a599-4ab3-bcca-b2609574fe54",
+      "color": "Rose Gold",
+      "colorCode": "#B76E79",
+      "ean": "6972576183026",
+      "stock": 0,
+      "is_default": false,
+      "images": [],
+      "adminDiscountPercent": 0,
+      "capacity": null,
+      "size": null
+    }
+  ],
+  "rating": {
+    "average": 0,
+    "count": 0,
+    "distribution": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0
+    },
+    "reviews": []
+  }
+},
+
+{
+  "id": "4d61dfbb-bfbe-45bf-9f82-5fd6e3106abb",
+  "airtableId": "4d61dfbb-bfbe-45bf-9f82-5fd6e3106abb",
+  "sku": "SKU-0139",
+  "name": "MONTRE HIFUTURE GO PRO 2",
+  "urlSlug": "montre-hifuture-go-pro-2",
+  "shortDescription": "Montre connectée HiFuture GO PRO 2 avec écran AMOLED 1.32\" rond et design acier inoxydable",
+  "fullDescription": "<div class=\"max-w-4xl mx-auto\">\n  <h3 class=\"text-2xl font-bold text-gray-900 mb-6\">HiFuture GO PRO 2 - Élégance horlogère connectée</h3>\n  <p class=\"text-gray-700 mb-4\">Inspirée du savoir-faire horloger suisse, la HiFuture GO PRO 2 est une montre connectée premium en acier inoxydable avec un écran AMOLED de 1,32 pouces d'une clarté exceptionnelle (360x360px).</p>\n  <p class=\"text-gray-700\">Propulsée par l'intelligence Syntra AI et un processeur dual-core, elle offre un suivi santé complet avec jusqu'à 10 jours d'autonomie grâce à sa batterie de 430 mAh. Un accessoire raffiné qui allie élégance classique et technologie moderne.</p>\n</div>",
+  "originalPrice": null,
+  "basePrice": 65.9,
+  "discountPercent": 0,
+  "brandId": "a44be79d-dac2-4ba6-8497-625a0a79196d",
+  "brandName": "HIFUTURE",
+  "brandSlug": "hifuture",
+  "categoryId": "c8f5a3d2-9e4b-4a7c-8b5f-2d3e4f5a6b7c",
+  "categoryName": "Montres",
+  "categorySlug": "montres",
+  "features": [
+    "Écran AMOLED 1.32\" rond (360x360)",
+    "Boîtier acier inoxydable",
+    "Syntra AI dual-core",
+    "10 jours d'autonomie",
+    "100+ cadrans"
+  ],
+  "specifications": [
+    {
+      "label": "Écran",
+      "value": "1.32\" AMOLED rond, 360x360 px"
+    },
+    {
+      "label": "Processeur",
+      "value": "Dual-core avec Syntra AI"
+    },
+    {
+      "label": "Batterie",
+      "value": "430 mAh, jusqu'à 10 jours"
+    },
+    {
+      "label": "Capteurs santé",
+      "value": "Fréquence cardiaque 24/7, SpO2, suivi du sommeil"
+    },
+    {
+      "label": "Étanchéité",
+      "value": "1 ATM"
+    },
+    {
+      "label": "Bluetooth",
+      "value": "5.0"
+    },
+    {
+      "label": "Application",
+      "value": "HiFuture Fit / GloryFit"
+    },
+    {
+      "label": "Compatibilité",
+      "value": "iOS / Android"
+    },
+    {
+      "label": "Matériaux",
+      "value": "Acier inoxydable intégral"
+    },
+    {
+      "label": "Cadrans",
+      "value": "100+ cadrans personnalisables"
+    }
+  ],
+  "repairabilityIndex": null,
+  "dasHead": null,
+  "dasBody": null,
+  "dasLimb": null,
+  "energyClass": "",
+  "tags": [],
+  "isFeatured": false,
+  "isNewArrival": true,
+  "showOnHomepage": false,
+  "status": "active",
+  "variants": [
+    {
+      "id": "dcb27ec0-6dbc-4920-990f-609b0da90317",
+      "color": "Gold",
+      "colorCode": "#FFD700",
+      "ean": "6972576182678",
+      "stock": 0,
+      "is_default": true,
+      "images": [],
+      "adminDiscountPercent": 0,
+      "capacity": null,
+      "size": null
+    }
+  ],
+  "rating": {
+    "average": 0,
+    "count": 0,
+    "distribution": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0
+    },
+    "reviews": []
+  }
+},
+
+{
+  "id": "dd75f0d7-f671-45e1-a254-a2f3bf6c25c8",
+  "airtableId": "dd75f0d7-f671-45e1-a254-a2f3bf6c25c8",
+  "sku": "SKU-0141",
+  "name": "CASQUE ANC HIFUTURE TOUR MK2",
+  "urlSlug": "casque-anc-hifuture-tour-mk2",
+  "shortDescription": "Casque sans fil HiFuture Tour MK2 avec ANC hybride, drivers 40mm et 40h d'autonomie",
+  "fullDescription": "<div class=\"max-w-4xl mx-auto\">\n  <h3 class=\"text-2xl font-bold text-gray-900 mb-6\">HiFuture Tour MK2 - ANC hybride et son Hi-Fi</h3>\n  <p class=\"text-gray-700 mb-4\">Le casque HiFuture Tour MK2 offre une expérience sonore immersive grâce à ses drivers dynamiques 40 mm et sa technologie Hybrid ANC qui élimine efficacement les bruits ambiants.</p>\n  <p class=\"text-gray-700\">Son design pliable en métal, ses coussinets à mémoire de forme haute densité et ses 40 heures d'autonomie (sans ANC) en font le compagnon idéal pour les longs trajets. Bluetooth 5.4 et 4 microphones MEMS pour des appels cristallins.</p>\n</div>",
+  "originalPrice": null,
+  "basePrice": 47.9,
+  "discountPercent": 0,
+  "brandId": "a44be79d-dac2-4ba6-8497-625a0a79196d",
+  "brandName": "HIFUTURE",
+  "brandSlug": "hifuture",
+  "categoryId": "032b2296-f6e4-4529-a019-c5c74fbc64e1",
+  "categoryName": "Audio",
+  "categorySlug": "audio",
+  "features": [
+    "ANC Hybride (feedforward + feedback)",
+    "Drivers 40 mm Hi-Fi",
+    "40h d'autonomie (sans ANC)",
+    "Bluetooth 5.4",
+    "Design pliable métal"
+  ],
+  "specifications": [
+    {
+      "label": "Type",
+      "value": "Circum-auriculaire (over-ear) ANC"
+    },
+    {
+      "label": "Transducteur",
+      "value": "40 mm dynamique Hi-Fi"
+    },
+    {
+      "label": "ANC",
+      "value": "Hybrid ANC (~30 dB)"
+    },
+    {
+      "label": "Bluetooth",
+      "value": "5.4 (SBC, AAC)"
+    },
+    {
+      "label": "Réponse en fréquence",
+      "value": "20 Hz - 20 kHz"
+    },
+    {
+      "label": "Microphones",
+      "value": "4 MEMS microphones (ENC)"
+    },
+    {
+      "label": "Batterie",
+      "value": "400 mAh"
+    },
+    {
+      "label": "Autonomie",
+      "value": "40h sans ANC / 20h avec ANC"
+    },
+    {
+      "label": "Charge",
+      "value": "USB-C, ~2h"
+    },
+    {
+      "label": "Portée",
+      "value": "10 m"
+    },
+    {
+      "label": "Coussinets",
+      "value": "Mousse à mémoire haute densité"
+    },
+    {
+      "label": "Design",
+      "value": "Pliable, arceau métal ajustable"
+    }
+  ],
+  "repairabilityIndex": null,
+  "dasHead": null,
+  "dasBody": null,
+  "dasLimb": null,
+  "energyClass": "",
+  "tags": [],
+  "isFeatured": false,
+  "isNewArrival": true,
+  "showOnHomepage": false,
+  "status": "active",
+  "variants": [
+    {
+      "id": "df992b5f-6743-48be-af87-0d80e74ec8df",
+      "color": "Noir",
+      "colorCode": "#000000",
+      "ean": "6972576183149",
+      "stock": 0,
+      "is_default": true,
+      "images": [],
+      "adminDiscountPercent": 0,
+      "capacity": null,
+      "size": null
+    },
+    {
+      "id": "7d331a71-dfab-40f1-96c3-4fd987c1e0cd",
+      "color": "Blanc",
+      "colorCode": "#FFFFFF",
+      "ean": "6972576183156",
+      "stock": 0,
+      "is_default": false,
+      "images": [],
+      "adminDiscountPercent": 0,
+      "capacity": null,
+      "size": null
+    }
+  ],
+  "rating": {
+    "average": 0,
+    "count": 0,
+    "distribution": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0
+    },
+    "reviews": []
+  }
+},
+{
+  "id": "0b17e551-6843-4bd3-9ee8-7ecee01a6700",
+  "airtableId": "0b17e551-6843-4bd3-9ee8-7ecee01a6700",
+  "sku": "SKU-0142",
+  "name": "ECOUTEUR HIFUTURE MATE 2 PRO",
+  "urlSlug": "ecouteur-hifuture-mate-2-pro",
+  "shortDescription": "Écouteurs open-ear HiFuture Mate 2 Pro avec Qualcomm aptX Adaptive et 30h d'autonomie",
+  "fullDescription": "<div class=\"max-w-4xl mx-auto\">\n  <h3 class=\"text-2xl font-bold text-gray-900 mb-6\">HiFuture Mate 2 Pro - Open-Ear Qualcomm aptX</h3>\n  <p class=\"text-gray-700 mb-4\">Les écouteurs HiFuture Mate 2 Pro adoptent un design open-ear ultra-léger de seulement 7 g par écouteur, vous permettant de rester connecté à votre environnement tout en profitant d'un son premium.</p>\n  <p class=\"text-gray-700\">Équipés du chipset Qualcomm QCC3040 avec support aptX Adaptive et de drivers 15.4 mm, ils délivrent des basses profondes et des aigus cristallins. Certification IPX5 et autonomie de 30 heures pour le sport et l'usage quotidien.</p>\n</div>",
+  "originalPrice": null,
+  "basePrice": 37.9,
+  "discountPercent": 0,
+  "brandId": "a44be79d-dac2-4ba6-8497-625a0a79196d",
+  "brandName": "HIFUTURE",
+  "brandSlug": "hifuture",
+  "categoryId": "032b2296-f6e4-4529-a019-c5c74fbc64e1",
+  "categoryName": "Audio",
+  "categorySlug": "audio",
+  "features": [
+    "Design open-ear ultra-léger (7g)",
+    "Qualcomm QCC3040 + aptX Adaptive",
+    "Drivers 15.4 mm",
+    "IPX5 résistant eau",
+    "30h d'autonomie totale"
+  ],
+  "specifications": [
+    {
+      "label": "Type",
+      "value": "TWS Open-Ear avec crochets d'oreille"
+    },
+    {
+      "label": "Transducteur",
+      "value": "15.4 mm"
+    },
+    {
+      "label": "Chipset",
+      "value": "Qualcomm QCC3040"
+    },
+    {
+      "label": "Bluetooth",
+      "value": "5.2 (SBC, AAC, aptX Adaptive)"
+    },
+    {
+      "label": "Microphones",
+      "value": "4 microphones ENC"
+    },
+    {
+      "label": "Batterie écouteur",
+      "value": "70 mAh par écouteur"
+    },
+    {
+      "label": "Batterie boîtier",
+      "value": "500 mAh"
+    },
+    {
+      "label": "Autonomie",
+      "value": "20-30h total avec boîtier"
+    },
+    {
+      "label": "Étanchéité",
+      "value": "IPX5"
+    },
+    {
+      "label": "Poids",
+      "value": "7 g par écouteur"
+    },
+    {
+      "label": "Commandes",
+      "value": "Tactiles"
+    },
+    {
+      "label": "Portée",
+      "value": "10 m"
+    }
+  ],
+  "repairabilityIndex": null,
+  "dasHead": null,
+  "dasBody": null,
+  "dasLimb": null,
+  "energyClass": "",
+  "tags": [],
+  "isFeatured": false,
+  "isNewArrival": true,
+  "showOnHomepage": false,
+  "status": "active",
+  "variants": [
+    {
+      "id": "d34d0782-d382-4f58-b075-f5bf91017681",
+      "color": "Noir",
+      "colorCode": "#000000",
+      "ean": "6972576181503",
+      "stock": 0,
+      "is_default": true,
+      "images": [],
+      "adminDiscountPercent": 0,
+      "capacity": null,
+      "size": null
+    }
+  ],
+  "rating": {
+    "average": 0,
+    "count": 0,
+    "distribution": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0
+    },
+    "reviews": []
+  }
+},
+{
+  "id": "ff05229f-5bf0-441d-b473-8c70e15131cf",
+  "airtableId": "ff05229f-5bf0-441d-b473-8c70e15131cf",
+  "sku": "SKU-0143",
+  "name": "ENCEINTE HIFUTURE LINO S",
+  "urlSlug": "enceinte-hifuture-lino-s",
+  "shortDescription": "Enceinte portable Bluetooth HiFuture Lino S, compacte et colorée avec autonomie longue durée",
+  "fullDescription": "<div class=\"max-w-4xl mx-auto\">\n  <h3 class=\"text-2xl font-bold text-gray-900 mb-6\">HiFuture Lino S - Son portable coloré</h3>\n  <p class=\"text-gray-700 mb-4\">L'enceinte portable HiFuture Lino S combine un design compact et coloré avec une qualité sonore surprenante pour son format. Disponible en plusieurs coloris tendance, elle se glisse facilement dans un sac pour accompagner toutes vos sorties.</p>\n  <p class=\"text-gray-700\">Résistante aux éclaboussures et dotée d'une batterie longue durée, c'est l'accessoire musical idéal pour profiter de votre musique partout, à la maison, en pique-nique ou à la plage.</p>\n</div>",
+  "originalPrice": null,
+  "basePrice": 27.9,
+  "discountPercent": 0,
+  "brandId": "a44be79d-dac2-4ba6-8497-625a0a79196d",
+  "brandName": "HIFUTURE",
+  "brandSlug": "hifuture",
+  "categoryId": "032b2296-f6e4-4529-a019-c5c74fbc64e1",
+  "categoryName": "Audio",
+  "categorySlug": "audio",
+  "features": [
+    "Design compact et coloré",
+    "Bluetooth 5.3",
+    "Résistance aux éclaboussures",
+    "Autonomie longue durée",
+    "Charge USB-C"
+  ],
+  "specifications": [
+    {
+      "label": "Type",
+      "value": "Enceinte portable Bluetooth"
+    },
+    {
+      "label": "Bluetooth",
+      "value": "5.3"
+    },
+    {
+      "label": "Puissance",
+      "value": "5-10W RMS"
+    },
+    {
+      "label": "Autonomie",
+      "value": "8-12 heures"
+    },
+    {
+      "label": "Étanchéité",
+      "value": "IPX5"
+    },
+    {
+      "label": "Charge",
+      "value": "USB-C"
+    }
+  ],
+  "repairabilityIndex": null,
+  "dasHead": null,
+  "dasBody": null,
+  "dasLimb": null,
+  "energyClass": "",
+  "tags": [],
+  "isFeatured": false,
+  "isNewArrival": true,
+  "showOnHomepage": false,
+  "status": "active",
+  "variants": [
+    {
+      "id": "3cf0889e-26da-4470-9f54-415b22cedefd",
+      "color": "Noir",
+      "colorCode": "#000000",
+      "ean": "6972576182838",
+      "stock": 0,
+      "is_default": true,
+      "images": [],
+      "adminDiscountPercent": 0,
+      "capacity": null,
+      "size": null
+    },
+    {
+      "id": "0a8fceb6-fe14-4c5a-b55c-88d6d54e2889",
+      "color": "Bleu",
+      "colorCode": "#0066CC",
+      "ean": "6972576182869",
+      "stock": 0,
+      "is_default": false,
+      "images": [],
+      "adminDiscountPercent": 0,
+      "capacity": null,
+      "size": null
+    },
+    {
+      "id": "5d0386be-992f-4094-8042-4fad5ce4b41d",
+      "color": "Violet",
+      "colorCode": "#800080",
+      "ean": "6972576182852",
+      "stock": 0,
+      "is_default": false,
+      "images": [],
+      "adminDiscountPercent": 0,
+      "capacity": null,
+      "size": null
+    }
+  ],
+  "rating": {
+    "average": 0,
+    "count": 0,
+    "distribution": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0
+    },
+    "reviews": []
+  }
+},
+{
+  "id": "c3caf886-af6b-440d-a7b6-f599aea7ecaa",
+  "airtableId": "c3caf886-af6b-440d-a7b6-f599aea7ecaa",
+  "sku": "SKU-0144",
+  "name": "PARTYBOX HIFUTURE BOOMBEAT",
+  "urlSlug": "partybox-hifuture-boombeat",
+  "shortDescription": "Enceinte party HiFuture BoomBeat 100W avec 2 micros sans fil, éclairage RGB et karaoke",
+  "fullDescription": "<div class=\"max-w-4xl mx-auto\">\n  <h3 class=\"text-2xl font-bold text-gray-900 mb-6\">HiFuture BoomBeat - La Party Speaker ultime</h3>\n  <p class=\"text-gray-700 mb-4\">La HiFuture BoomBeat est l'enceinte party ultime, délivrant 100W de puissance grâce à sa configuration 4 haut-parleurs (2 tweeters + 2 woofers) pour un son puissant et équilibré.</p>\n  <p class=\"text-gray-700 mb-4\">Livrée avec deux microphones sans fil pour des sessions karaoké endiablées, elle brille de mille feux grâce à son éclairage RGB synchronisé avec la musique.</p>\n  <p class=\"text-gray-700\">Son mode TWS pour coupler deux enceintes, son DSP intégré avec égaliseur multi-bandes et sa batterie haute capacité en font le cœur de la fête, partout et à tout moment.</p>\n</div>",
+  "originalPrice": null,
+  "basePrice": 145.9,
+  "discountPercent": 0,
+  "brandId": "a44be79d-dac2-4ba6-8497-625a0a79196d",
+  "brandName": "HIFUTURE",
+  "brandSlug": "hifuture",
+  "categoryId": "da7f55c0-35f7-4cbb-9262-24352fdb44f3",
+  "categoryName": "Enceintes",
+  "categorySlug": "enceintes",
+  "features": [
+    "100W de puissance (2 tweeters + 2 woofers)",
+    "2 microphones sans fil inclus",
+    "Éclairage RGB synchronisé",
+    "Mode karaoké",
+    "TWS pour coupler 2 enceintes"
+  ],
+  "specifications": [
+    {
+      "label": "Type",
+      "value": "Enceinte party / karaoké"
+    },
+    {
+      "label": "Puissance",
+      "value": "100W total"
+    },
+    {
+      "label": "Configuration",
+      "value": "2 tweeters + 2 woofers"
+    },
+    {
+      "label": "Bluetooth",
+      "value": "5.0 / 5.3"
+    },
+    {
+      "label": "Microphones",
+      "value": "2 microphones sans fil inclus"
+    },
+    {
+      "label": "Éclairage",
+      "value": "RGB synchronisé avec la musique"
+    },
+    {
+      "label": "DSP",
+      "value": "Intégré avec EQ multi-bandes"
+    },
+    {
+      "label": "TWS",
+      "value": "Oui (appairage de 2 enceintes)"
+    },
+    {
+      "label": "Connectivité",
+      "value": "Bluetooth, AUX, USB"
+    },
+    {
+      "label": "Power Bank",
+      "value": "Oui (5V/1A)"
+    },
+    {
+      "label": "Batterie",
+      "value": "Haute capacité (8000-12000 mAh)"
+    }
+  ],
+  "repairabilityIndex": null,
+  "dasHead": null,
+  "dasBody": null,
+  "dasLimb": null,
+  "energyClass": "",
+  "tags": [],
+  "isFeatured": false,
+  "isNewArrival": true,
+  "showOnHomepage": false,
+  "status": "active",
+  "variants": [
+    {
+      "id": "e264f5fc-160b-4dbe-85f3-615c8fa311c2",
+      "color": "Noir",
+      "colorCode": "#000000",
+      "ean": "6972576183057",
+      "stock": 0,
+      "is_default": true,
+      "images": [],
+      "adminDiscountPercent": 0,
+      "capacity": null,
+      "size": null
+    }
+  ],
+  "rating": {
+    "average": 0,
+    "count": 0,
+    "distribution": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0
+    },
+    "reviews": []
+  }
+}
 ];
 
 export default PRODUCTS;

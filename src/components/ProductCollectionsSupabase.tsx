@@ -36,7 +36,7 @@ const collectionsConfig: CollectionConfig[] = [
     title: 'Montres Connectées',
     shortTitle: 'Montres',
     icon: Watch,
-    categorySlug: 'connectees',
+    categorySlug: 'montres',
     href: '/montres',
   },
   {
@@ -60,7 +60,7 @@ const collectionsConfig: CollectionConfig[] = [
     title: 'Accessoires',
     shortTitle: 'Accessoires',
     icon: Cable,
-    categorySlug: 'divers',
+    categorySlug: 'accessoires',
     href: '/accessoires',
   },
 ];
