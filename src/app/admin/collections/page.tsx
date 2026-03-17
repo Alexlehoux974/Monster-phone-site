@@ -97,7 +97,7 @@ export default function CollectionsManagementPage() {
       const collectionsWithCounts = await Promise.all(
         (collectionsData || []).map(async (collection: any) => {
           const countResponse = await fetch(
-            `${auth.url}/rest/v1/collection_products?collection_id=eq.${collection.id}`,
+            `${auth.url}/rest/v1/product_collections?collection_id=eq.${collection.id}`,
             {
               headers: { ...auth.headers, 'Prefer': 'count=exact' },
               method: 'HEAD'
@@ -133,7 +133,7 @@ export default function CollectionsManagementPage() {
 
       // Get collection products with embedded product data
       const response = await fetch(
-        `${auth.url}/rest/v1/collection_products?collection_id=eq.${collectionId}&select=product_id,products(id,name,sku)&order=display_order.asc`,
+        `${auth.url}/rest/v1/product_collections?collection_id=eq.${collectionId}&select=product_id,products(id,name,sku)&order=display_order.asc`,
         { headers: auth.headers }
       );
 
@@ -199,7 +199,7 @@ export default function CollectionsManagementPage() {
       }
 
       const response = await fetch(
-        `${auth.url}/rest/v1/collection_products`,
+        `${auth.url}/rest/v1/product_collections`,
         {
           method: 'POST',
           headers: auth.headers,
@@ -241,7 +241,7 @@ export default function CollectionsManagementPage() {
       }
 
       const response = await fetch(
-        `${auth.url}/rest/v1/collection_products?collection_id=eq.${selectedCollection}&product_id=eq.${productId}`,
+        `${auth.url}/rest/v1/product_collections?collection_id=eq.${selectedCollection}&product_id=eq.${productId}`,
         {
           method: 'DELETE',
           headers: auth.headers,
