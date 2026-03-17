@@ -16,25 +16,63 @@ import { generateMenuStructureFromProducts, type CategoryStructure } from '@/lib
 import { MENU_STRUCTURE as FIXED_MENU_STRUCTURE, type MenuCategory } from '@/lib/supabase/menu-structure';
 import { SupabaseDropdownMenu } from '@/components/HeaderSupabase';
 
-// Composant pour la barre d'urgence promotionnelle
-const PromoBar = () => (
-  <div className="bg-gradient-to-r from-red-600 via-orange-600 to-red-600 text-white px-3 relative overflow-hidden min-h-[3rem] flex items-center">
-    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer" />
-    <div className="max-w-7xl mx-auto text-center relative z-10 w-full">
-      <div className="flex items-center justify-center gap-2 text-sm font-medium flex-wrap">
-        <div className="flex items-center gap-1.5">
-          <Truck className="w-4 h-4" />
-          <span>LIVRAISON EXPRESS 24H/48H À LA RÉUNION</span>
-        </div>
-        <span className="hidden sm:block text-xs">•</span>
-        <div className="hidden md:flex items-center gap-1.5">
-          <Flame className="w-4 h-4" />
-          <span>LIVRAISON GRATUITE DÈS 100€</span>
+// Composant pour la barre d'urgence promotionnelle (depuis Supabase)
+const PromoBar = () => {
+  const [banner, setBanner] = useState<{ message: string; is_active: boolean } | null>(null);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    const fetchBanner = async () => {
+      try {
+        const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+        const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+        if (!url || !key) { setLoaded(true); return; }
+        const res = await fetch(
+          `${url}/rest/v1/promo_banners?is_active=eq.true&order=display_order.asc&limit=1`,
+          { headers: { apikey: key, Authorization: `Bearer ${key}` }, cache: 'no-store' }
+        );
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.length > 0) setBanner(data[0]);
+        }
+      } catch {}
+      setLoaded(true);
+    };
+    fetchBanner();
+  }, []);
+
+  // Fallback hardcodé pendant le chargement
+  const message = banner?.message || 'LIVRAISON EXPRESS 24H/48H À LA RÉUNION • LIVRAISON GRATUITE DÈS 100€';
+
+  // Si chargé et bannière désactivée, ne rien afficher
+  if (loaded && !banner) return null;
+
+  // Séparer les parties du message par •
+  const parts = message.split('•').map(p => p.trim()).filter(Boolean);
+
+  return (
+    <div className="bg-gradient-to-r from-red-600 via-orange-600 to-red-600 text-white px-3 relative overflow-hidden min-h-[3rem] flex items-center">
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer" />
+      <div className="max-w-7xl mx-auto text-center relative z-10 w-full">
+        <div className="flex items-center justify-center gap-2 text-sm font-medium flex-wrap">
+          <div className="flex items-center gap-1.5">
+            <Truck className="w-4 h-4" />
+            <span>{parts[0]}</span>
+          </div>
+          {parts[1] && (
+            <>
+              <span className="hidden sm:block text-xs">•</span>
+              <div className="hidden md:flex items-center gap-1.5">
+                <Flame className="w-4 h-4" />
+                <span>{parts[1]}</span>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 // Composant DropdownMenu avec support complet des sous-catégories
 const DropdownMenu = ({ 
