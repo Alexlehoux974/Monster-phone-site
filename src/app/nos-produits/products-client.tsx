@@ -345,7 +345,7 @@ function ProductsClientContent({
                         fill
                         className="object-cover"
                       />
-                      {product.discount && product.discount > 0 && (
+                      {product.discount > 0 && (
                         <span className="absolute top-2 left-2 bg-red-600 text-white px-2 py-1 rounded text-xs">
                           -{product.discount}%
                         </span>
