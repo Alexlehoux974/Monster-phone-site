@@ -230,8 +230,14 @@ function ProductsClientContent({
     <div className="container mx-auto px-4 pt-32 pb-8">
       {/* Header Section */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-4">Nos Produits</h1>
-        
+        <h1 className="text-3xl font-bold mb-3">Tous nos produits</h1>
+        <p className="text-gray-600 mb-6 max-w-3xl text-sm leading-relaxed">
+          Votre boutique tech de confiance à La Réunion. Retrouvez nos smartphones <strong>HONOR</strong>,
+          l&apos;audio premium <strong>Monster</strong> et <strong>HiFuture</strong>, les montres connectées,
+          l&apos;éclairage LED intelligent et tous les accessoires <strong>Muvit</strong>, <strong>My Way</strong> et
+          <strong> Tiger Power</strong>. Livraison express 24-48h sur toute l&apos;île, garantie 2 ans et SAV local.
+        </p>
+
         {/* Search Bar */}
         <div className="flex gap-4 mb-6">
           <div className="flex-1 relative">

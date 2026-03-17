@@ -1,10 +1,20 @@
 import { Suspense } from 'react';
+import { Metadata } from 'next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import BrandCarousel from '@/components/BrandCarousel';
 import ProductsClient from './products-client';
 import ProductCardSkeleton from '@/components/ProductCardSkeleton';
 import { getActiveProducts, getAllCategories, getAllBrands } from '@/lib/supabase/api-rest';
+
+export const metadata: Metadata = {
+  title: 'Tous nos produits | Monster Phone - Boutique Tech à La Réunion',
+  description: 'Découvrez tous nos produits : smartphones HONOR, audio Monster & HiFuture, montres connectées, éclairage LED, accessoires Muvit & Tiger Power. Livraison express 24-48h à La Réunion, garantie 2 ans.',
+  openGraph: {
+    title: 'Tous nos produits | Monster Phone La Réunion',
+    description: 'Smartphones, audio, montres, LED et accessoires. Livraison express 24-48h à La Réunion.',
+  },
+};
 
 // Force dynamic rendering and disable cache
 export const dynamic = 'force-dynamic';
