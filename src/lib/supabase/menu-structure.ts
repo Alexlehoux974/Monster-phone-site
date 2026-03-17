@@ -47,10 +47,6 @@ export const MENU_STRUCTURE: MenuCategory[] = [
       {
         name: 'Casques',
         slug: 'casques',
-      },
-      {
-        name: 'Micro',
-        slug: 'micro',
       }
     ]
   },
