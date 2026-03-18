@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 
 const WHATSAPP_NUMBER = '262692000000'; // TODO: remplacer par le vrai numéro
 
@@ -14,6 +15,7 @@ interface Message {
 const now = () => new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
 
 export default function FloatingContact() {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<Message[]>([
@@ -55,6 +57,9 @@ export default function FloatingContact() {
       ]);
     }, 1000);
   };
+
+  // Masquer sur le panel admin
+  if (pathname?.startsWith('/admin')) return null;
 
   return (
     <div className="fixed bottom-6 right-4 z-[80] flex flex-col items-end">
