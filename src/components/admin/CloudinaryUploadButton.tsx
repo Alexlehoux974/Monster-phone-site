@@ -28,13 +28,48 @@ export default function CloudinaryUploadButton({
     try {
       const filesToUpload = multiple ? Array.from(files) : [files[0]];
 
+      // Get token from localStorage and refresh if expired
+      const storageKey = 'sb-nswlznqoadjffpxkagoz-auth-token';
+      let storedSession = localStorage.getItem(storageKey);
+      let sessionData = storedSession ? JSON.parse(storedSession) : null;
+
+      if (sessionData) {
+        const now = Math.floor(Date.now() / 1000);
+        const expiresAt = sessionData.expires_at || 0;
+        // Refresh if expired or expiring within 60 seconds
+        if (expiresAt - now < 60 && sessionData.refresh_token) {
+          try {
+            const refreshRes = await fetch('/api/admin/refresh', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ refresh_token: sessionData.refresh_token }),
+            });
+            if (refreshRes.ok) {
+              const refreshData = await refreshRes.json();
+              localStorage.setItem(storageKey, JSON.stringify(refreshData.session));
+              sessionData = refreshData.session;
+            }
+          } catch {
+            // Continue with existing token
+          }
+        }
+      }
+
+      const accessToken = sessionData?.access_token || null;
+
       for (const file of filesToUpload) {
         const formData = new FormData();
         formData.append('file', file);
         formData.append('folder', folder);
 
+        const headers: HeadersInit = {};
+        if (accessToken) {
+          headers['Authorization'] = `Bearer ${accessToken}`;
+        }
+
         const res = await fetch('/api/admin/cloudinary-upload', {
           method: 'POST',
+          headers,
           body: formData,
           credentials: 'include',
         });
