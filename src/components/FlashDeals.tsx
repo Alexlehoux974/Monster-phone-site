@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Clock, Zap, TrendingDown } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, animate, useMotionTemplate } from 'framer-motion';
 import Link from 'next/link';
 import ProductCard from '@/components/ProductCard';
 import { cn } from '@/lib/utils';
@@ -17,6 +17,20 @@ interface TimeLeft {
 const FlashDeals = () => {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({ hours: 23, minutes: 59, seconds: 59 });
   const [isUrgent, setIsUrgent] = useState(false);
+
+  // Aurora gradient animation (same as hero)
+  const auroraColor = useMotionValue("#8B5CF6");
+
+  useEffect(() => {
+    animate(auroraColor, ["#8B5CF6", "#3B82F6", "#10B981", "#F59E0B", "#EF4444", "#8B5CF6"], {
+      ease: "easeInOut",
+      duration: 8,
+      repeat: Infinity,
+      repeatType: "reverse",
+    });
+  }, [auroraColor]);
+
+  const auroraBg = useMotionTemplate`radial-gradient(125% 125% at 50% 0%, #020617 50%, ${auroraColor})`;
 
   // Récupérer les produits en promotion depuis Supabase (minimum 15% de réduction)
   const { products: supabaseProducts, loading } = useDiscountedProducts(15);
@@ -78,13 +92,10 @@ const FlashDeals = () => {
   }
 
   return (
-    <section className="py-12 lg:py-16 bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white relative overflow-hidden">
-      {/* Effets de fond animés */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-orange-500/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-red-500/20 rounded-full blur-3xl animate-pulse delay-1000" />
-      </div>
-
+    <motion.section
+      style={{ backgroundImage: auroraBg }}
+      className="py-12 lg:py-16 text-white relative overflow-hidden"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* En-tête avec compte à rebours */}
         <div className="flex flex-col lg:flex-row items-center justify-between mb-8 gap-4">
@@ -236,7 +247,7 @@ const FlashDeals = () => {
           </Link>
         </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
