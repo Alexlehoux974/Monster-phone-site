@@ -349,19 +349,6 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   };
 }
 
-// Générer les pages statiques pour tous les produits
-export async function generateStaticParams() {
-  const supabase = createClient();
-  const { data: products } = await supabase
-    .from('products')
-    .select('url_slug')
-    .eq('status', 'active');
-
-  return products?.map((product: any) => ({
-    slug: product.url_slug,
-  })) || [];
-}
-
 export default async function ProductPage({ params }: ProductPageProps) {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
