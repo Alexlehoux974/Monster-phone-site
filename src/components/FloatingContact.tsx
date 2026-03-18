@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 
-const WHATSAPP_NUMBER = '262692000000'; // TODO: remplacer par le vrai numéro
+const WHATSAPP_NUMBER = '262693630384';
 
 interface Message {
   id: number;
@@ -21,7 +21,7 @@ export default function FloatingContact() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 1,
-      text: 'Bonjour ! 👋 Bienvenue chez Monster Phone. Notre assistant est en cours de mise en place et sera bientôt disponible pour répondre à vos questions.',
+      text: 'Bonjour ! 👋 Bienvenue chez Monster Phone. Comment pouvons-nous vous aider ? Notre équipe est disponible pour répondre à toutes vos questions.',
       from: 'bot',
       time: now(),
     },
@@ -40,8 +40,9 @@ export default function FloatingContact() {
     setMessages((prev) => [...prev, userMsg]);
     setInput('');
 
-    // Envoyer vers WhatsApp dans un nouvel onglet
-    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+    // Préfixer le message avec l'expéditeur pour identifier la source
+    const prefixedText = `[Monster-phone.re] ${text}`;
+    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(prefixedText)}`;
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
 
     // Message de confirmation
@@ -108,14 +109,30 @@ export default function FloatingContact() {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Input désactivé - bientôt disponible */}
+          {/* Input */}
           <div className="p-3 bg-[#F0F0F0] flex-shrink-0">
-            <div className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-gray-200 text-gray-500 text-sm min-h-[44px]">
-              <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <span>Bientôt disponible</span>
-            </div>
+            <form
+              onSubmit={(e) => { e.preventDefault(); handleSend(); }}
+              className="flex items-center gap-2"
+            >
+              <input
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Tapez votre message..."
+                className="flex-1 px-4 py-2.5 rounded-full bg-white text-gray-900 text-sm border border-gray-200 focus:outline-none focus:border-[#25D366] min-h-[44px]"
+              />
+              <button
+                type="submit"
+                disabled={!input.trim()}
+                className="w-10 h-10 rounded-full bg-[#25D366] hover:bg-[#20BD5A] disabled:opacity-40 disabled:hover:bg-[#25D366] text-white flex items-center justify-center transition-colors flex-shrink-0"
+                aria-label="Envoyer"
+              >
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+                </svg>
+              </button>
+            </form>
           </div>
         </div>
       )}
