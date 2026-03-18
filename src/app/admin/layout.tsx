@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { motion, useMotionValue, animate, useMotionTemplate } from 'framer-motion';
 import { getAdminSession, signOutAdmin } from '@/lib/supabase/admin';
 import type { AdminUser } from '@/lib/supabase/admin';
 import {
@@ -132,6 +133,20 @@ export default function AdminLayout({
     );
   }
 
+  // Aurora gradient animation (same as hero)
+  const sidebarColor = useMotionValue("#8B5CF6");
+
+  useEffect(() => {
+    animate(sidebarColor, ["#8B5CF6", "#3B82F6", "#10B981", "#F59E0B", "#EF4444", "#8B5CF6"], {
+      ease: "easeInOut",
+      duration: 8,
+      repeat: Infinity,
+      repeatType: "reverse",
+    });
+  }, [sidebarColor]);
+
+  const sidebarBg = useMotionTemplate`radial-gradient(ellipse 150% 100% at 50% 100%, #020617 60%, ${sidebarColor})`;
+
   return (
     <div className="min-h-screen bg-gray-900">
       {/* Sidebar mobile */}
@@ -143,20 +158,21 @@ export default function AdminLayout({
       />
 
       {/* Sidebar */}
-      <aside
-        className={`fixed top-0 left-0 z-50 h-full w-64 bg-gray-800 border-r border-gray-700 transform transition-transform lg:translate-x-0 ${
+      <motion.aside
+        style={{ backgroundImage: sidebarBg }}
+        className={`fixed top-0 left-0 z-50 h-full w-64 border-r border-white/10 transform transition-transform lg:translate-x-0 overflow-hidden ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         {/* Logo et titre */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-700">
+        <div className="flex items-center justify-between p-6 border-b border-white/10">
           <div>
             <h1 className="text-xl font-bold text-white">Admin Panel</h1>
             <p className="text-sm text-gray-400 mt-1">Monster Phone</p>
           </div>
           <button
             onClick={() => setSidebarOpen(false)}
-            className="lg:hidden p-2 rounded-lg hover:bg-gray-700 text-gray-400"
+            className="lg:hidden p-2 rounded-lg hover:bg-white/10 text-gray-400"
           >
             <X className="w-5 h-5" />
           </button>
@@ -174,8 +190,8 @@ export default function AdminLayout({
                 href={item.href}
                 className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
                   isActive
-                    ? 'bg-gradient-to-r from-red-600 to-orange-600 text-white'
-                    : 'text-gray-400 hover:bg-gray-700 hover:text-white'
+                    ? 'bg-white/15 text-white shadow-lg backdrop-blur-sm'
+                    : 'text-gray-400 hover:bg-white/10 hover:text-white'
                 }`}
               >
                 <Icon className="w-5 h-5" />
@@ -186,8 +202,8 @@ export default function AdminLayout({
         </nav>
 
         {/* User info et déconnexion */}
-        <div className="p-4 border-t border-gray-700">
-          <div className="mb-3 px-4 py-2 bg-gray-900/50 rounded-lg">
+        <div className="p-4 border-t border-white/10">
+          <div className="mb-3 px-4 py-2 bg-black/30 backdrop-blur-sm rounded-lg">
             <p className="text-sm text-gray-400">Connecté en tant que</p>
             <p className="text-sm font-medium text-white truncate mt-1">
               {admin?.email}
@@ -204,7 +220,7 @@ export default function AdminLayout({
             <span className="font-medium">Déconnexion</span>
           </button>
         </div>
-      </aside>
+      </motion.aside>
 
       {/* Main content */}
       <div className="lg:pl-64">
