@@ -10,6 +10,30 @@ import { MENU_STRUCTURE, type MenuCategory } from '@/lib/supabase/menu-structure
 import type { Product } from '@/data/products';
 import ImageWithFallback from '@/components/ImageWithFallback';
 
+/**
+ * Extraire le début de la description HTML d'un produit pour l'afficher dans le menu.
+ * Récupère le texte du premier <p> (hors titres/h3), nettoie le HTML, tronque à ~120 chars.
+ */
+export function getMenuDescription(fullDescription: string): string {
+  if (!fullDescription) return '';
+  // Extraire le contenu du premier <p>...</p>
+  const pMatch = fullDescription.match(/<p[^>]*>([\s\S]*?)<\/p>/i);
+  if (!pMatch) return '';
+  const rawText = pMatch[1]
+    .replace(/<[^>]*>/g, ' ')  // Supprimer les balises HTML internes (strong, em, etc.)
+    .replace(/\s+/g, ' ')
+    .trim();
+  // Ignorer les placeholders
+  if (!rawText || rawText.includes('[PLACEHOLDER]') || rawText.includes('Description à compléter')) {
+    return '';
+  }
+  // Tronquer proprement à ~120 caractères sur une limite de mot
+  if (rawText.length <= 120) return rawText;
+  const truncated = rawText.substring(0, 120);
+  const lastSpace = truncated.lastIndexOf(' ');
+  return (lastSpace > 80 ? truncated.substring(0, lastSpace) : truncated) + '…';
+}
+
 // Hook pour obtenir les produits d'une catégorie/sous-catégorie
 export const useMenuProducts = (
   category?: string,
@@ -216,11 +240,17 @@ export const SupabaseDropdownMenu = ({
                                 : product.basePrice}
                             </p>
                           )}
-                          {product.shortDescription && (
-                            <p className="text-xs text-gray-600 mt-1 whitespace-normal">
-                              {product.shortDescription}
-                            </p>
-                          )}
+                          {(() => {
+                            // Utiliser shortDescription si valide, sinon début de fullDescription
+                            const desc = (product.shortDescription && !product.shortDescription.includes('[PLACEHOLDER]') && !product.shortDescription.includes('Description à compléter'))
+                              ? product.shortDescription
+                              : getMenuDescription(product.fullDescription);
+                            return desc ? (
+                              <p className="text-xs text-gray-600 mt-1 whitespace-normal">
+                                {desc}
+                              </p>
+                            ) : null;
+                          })()}
                         </div>
                       </div>
                     </Link>

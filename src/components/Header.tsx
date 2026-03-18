@@ -14,7 +14,7 @@ import ImageWithFallback from '@/components/ImageWithFallback';
 import { useSupabaseProducts, useSupabaseCategories } from '@/hooks/useSupabaseData';
 import { generateMenuStructureFromProducts, type CategoryStructure } from '@/lib/supabase/adapters';
 import { MENU_STRUCTURE as FIXED_MENU_STRUCTURE, type MenuCategory } from '@/lib/supabase/menu-structure';
-import { SupabaseDropdownMenu } from '@/components/HeaderSupabase';
+import { SupabaseDropdownMenu, getMenuDescription } from '@/components/HeaderSupabase';
 
 // Composant pour la barre d'urgence promotionnelle (depuis Supabase)
 const PromoBar = () => {
@@ -392,11 +392,16 @@ const DropdownMenu = ({
                                         : product.basePrice}
                                     </p>
                                   )}
-                                  {product.shortDescription && (
-                                    <p className="text-xs text-gray-600 mt-1 whitespace-normal">
-                                      {product.shortDescription}
-                                    </p>
-                                  )}
+                                  {(() => {
+                                    const desc = (product.shortDescription && !product.shortDescription.includes('[PLACEHOLDER]') && !product.shortDescription.includes('Description à compléter'))
+                                      ? product.shortDescription
+                                      : getMenuDescription(product.fullDescription);
+                                    return desc ? (
+                                      <p className="text-xs text-gray-600 mt-1 whitespace-normal">
+                                        {desc}
+                                      </p>
+                                    ) : null;
+                                  })()}
                                 </div>
                               </div>
                             </Link>
@@ -657,11 +662,16 @@ const MobileMenu = ({
                                             : product.basePrice}
                                         </p>
                                       )}
-                                      {product.shortDescription && (
-                                        <p className="text-xs text-gray-600 mt-1 whitespace-normal">
-                                          {product.shortDescription}
-                                        </p>
-                                      )}
+                                      {(() => {
+                                        const desc = (product.shortDescription && !product.shortDescription.includes('[PLACEHOLDER]') && !product.shortDescription.includes('Description à compléter'))
+                                          ? product.shortDescription
+                                          : getMenuDescription(product.fullDescription);
+                                        return desc ? (
+                                          <p className="text-xs text-gray-600 mt-1 whitespace-normal">
+                                            {desc}
+                                          </p>
+                                        ) : null;
+                                      })()}
                                     </div>
                                   </div>
                                 </Link>
