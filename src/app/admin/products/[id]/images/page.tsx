@@ -112,9 +112,37 @@ export default function ProductImagesManagement() {
     setSaving(variantId);
 
     try {
+      // Get fresh token from localStorage + refresh if needed
+      const storageKey = 'sb-nswlznqoadjffpxkagoz-auth-token';
+      const storedSession = localStorage.getItem(storageKey);
+      let sessionData = storedSession ? JSON.parse(storedSession) : null;
+
+      if (sessionData) {
+        const now = Math.floor(Date.now() / 1000);
+        if ((sessionData.expires_at || 0) - now < 60 && sessionData.refresh_token) {
+          try {
+            const refreshRes = await fetch('/api/admin/refresh', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ refresh_token: sessionData.refresh_token }),
+            });
+            if (refreshRes.ok) {
+              const refreshData = await refreshRes.json();
+              localStorage.setItem(storageKey, JSON.stringify(refreshData.session));
+              sessionData = refreshData.session;
+            }
+          } catch { /* continue */ }
+        }
+      }
+
+      const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+      if (sessionData?.access_token) {
+        headers['Authorization'] = `Bearer ${sessionData.access_token}`;
+      }
+
       const res = await fetch('/api/admin/update-variant', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers,
         credentials: 'include',
         body: JSON.stringify({
           variantId,
