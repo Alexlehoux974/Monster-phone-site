@@ -5,7 +5,7 @@ import { Heart, ShoppingCart, Star, Check, Zap, Shield, Eye } from 'lucide-react
 import { StarRating } from '@/components/StarRating';
 import { Product } from '@/data/products';
 import { useCart } from '@/contexts/CartContext';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import ImageWithFallback from './ImageWithFallback';
 import { formatPrice, cn, isCompletelyOutOfStock } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
@@ -23,6 +23,29 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
   const [showSuccess, setShowSuccess] = useState(false);
   const [selectedVariant, setSelectedVariant] = useState(product.variants?.[0]);
   const [quickViewOpen, setQuickViewOpen] = useState(false);
+  const hoverTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const variantIndexRef = useRef(0);
+
+  useEffect(() => {
+    return () => { if (hoverTimerRef.current) clearInterval(hoverTimerRef.current); };
+  }, []);
+
+  const variants = product.variants || [];
+  const variantsWithImages = variants.filter(v => v.images && v.images.length > 0);
+
+  const startHoverCycle = () => {
+    if (hoverTimerRef.current) return;
+    if (variantsWithImages.length <= 1) return;
+    variantIndexRef.current = variantsWithImages.findIndex(v => v.id === selectedVariant?.id) || 0;
+    hoverTimerRef.current = setInterval(() => {
+      variantIndexRef.current = (variantIndexRef.current + 1) % variantsWithImages.length;
+      setSelectedVariant(variantsWithImages[variantIndexRef.current]);
+    }, 3000);
+  };
+
+  const stopHoverCycle = () => {
+    if (hoverTimerRef.current) { clearInterval(hoverTimerRef.current); hoverTimerRef.current = null; }
+  };
 
   const mainImage = selectedVariant?.images?.[0] || product.variants?.[0]?.images?.[0] || '';
   const hasDiscount = (product.discountPercent && product.discountPercent > 0) || (product.originalPrice && product.originalPrice > product.basePrice);
@@ -191,7 +214,11 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
   return (
     <div className={cn("bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 group", className)}>
       <Link href={`/produit/${product.urlSlug}`}>
-        <div className="relative aspect-square overflow-hidden rounded-t-lg bg-gray-50">
+        <div
+          className="relative aspect-square overflow-hidden rounded-t-lg bg-gray-50"
+          onMouseEnter={startHoverCycle}
+          onMouseLeave={stopHoverCycle}
+        >
           {/* Voile semi-transparent pour produits en rupture */}
           {outOfStock && (
             <div className="absolute inset-0 bg-white/30 z-[5]" />
