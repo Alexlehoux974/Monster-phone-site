@@ -342,7 +342,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           <div className="relative">
             <div
               className="relative aspect-square bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl overflow-hidden shadow-xl cursor-zoom-in group"
-              onClick={() => setLightboxOpen(true)}}
+              onClick={() => setLightboxOpen(true)}
             >
               {hasDiscount && (
                 <Badge className="absolute top-4 left-4 z-10 bg-gradient-to-r from-red-500 to-red-600 text-white border-0 px-3 py-1.5 font-bold shadow-lg">
