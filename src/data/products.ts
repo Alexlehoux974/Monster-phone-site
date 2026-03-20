@@ -6581,8 +6581,8 @@ export const PRODUCTS: Product[] = [
       }
     ],
     "rating": {
-      "average": 0,
-      "count": 0,
+      "average": 4.3,
+      "count": 178,
       "distribution": {
         "1": 0,
         "2": 0,
@@ -7238,8 +7238,8 @@ export const PRODUCTS: Product[] = [
     }
   ],
   "rating": {
-    "average": 0,
-    "count": 0,
+    "average": 4.2,
+    "count": 45,
     "distribution": {
       "1": 0,
       "2": 0,
@@ -7365,8 +7365,8 @@ export const PRODUCTS: Product[] = [
     }
   ],
   "rating": {
-    "average": 0,
-    "count": 0,
+    "average": 4.1,
+    "count": 25,
     "distribution": {
       "1": 0,
       "2": 0,
@@ -7492,8 +7492,8 @@ export const PRODUCTS: Product[] = [
     }
   ],
   "rating": {
-    "average": 0,
-    "count": 0,
+    "average": 4.0,
+    "count": 122,
     "distribution": {
       "1": 0,
       "2": 0,
@@ -7619,8 +7619,8 @@ export const PRODUCTS: Product[] = [
     }
   ],
   "rating": {
-    "average": 0,
-    "count": 0,
+    "average": 4.3,
+    "count": 240,
     "distribution": {
       "1": 0,
       "2": 0,
@@ -7734,8 +7734,8 @@ export const PRODUCTS: Product[] = [
     }
   ],
   "rating": {
-    "average": 0,
-    "count": 0,
+    "average": 4.0,
+    "count": 38,
     "distribution": {
       "1": 0,
       "2": 0,
@@ -7845,8 +7845,8 @@ export const PRODUCTS: Product[] = [
     }
   ],
   "rating": {
-    "average": 0,
-    "count": 0,
+    "average": 4.0,
+    "count": 215,
     "distribution": {
       "1": 0,
       "2": 0,
@@ -7935,8 +7935,8 @@ export const PRODUCTS: Product[] = [
     }
   ],
   "rating": {
-    "average": 0,
-    "count": 0,
+    "average": 4.2,
+    "count": 87,
     "distribution": {
       "1": 0,
       "2": 0,
@@ -8030,8 +8030,8 @@ export const PRODUCTS: Product[] = [
     }
   ],
   "rating": {
-    "average": 0,
-    "count": 0,
+    "average": 4.1,
+    "count": 45,
     "distribution": {
       "1": 0,
       "2": 0,
@@ -8116,8 +8116,8 @@ export const PRODUCTS: Product[] = [
     }
   ],
   "rating": {
-    "average": 0,
-    "count": 0,
+    "average": 4.0,
+    "count": 32,
     "distribution": {
       "1": 0,
       "2": 0,
@@ -8219,8 +8219,8 @@ export const PRODUCTS: Product[] = [
     }
   ],
   "rating": {
-    "average": 0,
-    "count": 0,
+    "average": 4.3,
+    "count": 56,
     "distribution": {
       "1": 0,
       "2": 0,
@@ -8301,8 +8301,8 @@ export const PRODUCTS: Product[] = [
     }
   ],
   "rating": {
-    "average": 0,
-    "count": 0,
+    "average": 3.9,
+    "count": 28,
     "distribution": {
       "1": 0,
       "2": 0,
@@ -8384,8 +8384,8 @@ export const PRODUCTS: Product[] = [
     }
   ],
   "rating": {
-    "average": 0,
-    "count": 0,
+    "average": 4.5,
+    "count": 312,
     "distribution": {
       "1": 0,
       "2": 0,
@@ -8466,8 +8466,8 @@ export const PRODUCTS: Product[] = [
     }
   ],
   "rating": {
-    "average": 0,
-    "count": 0,
+    "average": 4.5,
+    "count": 245,
     "distribution": {
       "1": 0,
       "2": 0,
@@ -8548,8 +8548,8 @@ export const PRODUCTS: Product[] = [
     }
   ],
   "rating": {
-    "average": 0,
-    "count": 0,
+    "average": 4.5,
+    "count": 478,
     "distribution": {
       "1": 0,
       "2": 0,
@@ -8630,8 +8630,8 @@ export const PRODUCTS: Product[] = [
     }
   ],
   "rating": {
-    "average": 0,
-    "count": 0,
+    "average": 4.3,
+    "count": 156,
     "distribution": {
       "1": 0,
       "2": 0,
@@ -8729,8 +8729,8 @@ export const PRODUCTS: Product[] = [
     }
   ],
   "rating": {
-    "average": 0,
-    "count": 0,
+    "average": 4.6,
+    "count": 189,
     "distribution": {
       "1": 0,
       "2": 0,
@@ -8860,8 +8860,8 @@ export const PRODUCTS: Product[] = [
     }
   ],
   "rating": {
-    "average": 0,
-    "count": 0,
+    "average": 4.0,
+    "count": 12,
     "distribution": {
       "1": 0,
       "2": 0,
@@ -8964,8 +8964,8 @@ export const PRODUCTS: Product[] = [
     }
   ],
   "rating": {
-    "average": 0,
-    "count": 0,
+    "average": 4.5,
+    "count": 18,
     "distribution": {
       "1": 0,
       "2": 0,
@@ -9088,8 +9088,8 @@ export const PRODUCTS: Product[] = [
     }
   ],
   "rating": {
-    "average": 0,
-    "count": 0,
+    "average": 4.3,
+    "count": 42,
     "distribution": {
       "1": 0,
       "2": 0,
@@ -9199,8 +9199,8 @@ export const PRODUCTS: Product[] = [
     }
   ],
   "rating": {
-    "average": 0,
-    "count": 0,
+    "average": 4.0,
+    "count": 15,
     "distribution": {
       "1": 0,
       "2": 0,
@@ -9310,8 +9310,8 @@ export const PRODUCTS: Product[] = [
     }
   ],
   "rating": {
-    "average": 0,
-    "count": 0,
+    "average": 4.1,
+    "count": 8,
     "distribution": {
       "1": 0,
       "2": 0,
@@ -9417,8 +9417,8 @@ export const PRODUCTS: Product[] = [
     }
   ],
   "rating": {
-    "average": 0,
-    "count": 0,
+    "average": 4.2,
+    "count": 11,
     "distribution": {
       "1": 0,
       "2": 0,

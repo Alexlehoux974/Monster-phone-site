@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -46,6 +46,14 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   const [isZoomed, setIsZoomed] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [viewerCount, setViewerCount] = useState(() => Math.floor(Math.random() * 4) + 2);
+  const hoverTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Cleanup du timer hover au démontage
+  useEffect(() => {
+    return () => {
+      if (hoverTimerRef.current) clearInterval(hoverTimerRef.current);
+    };
+  }, []);
 
   // Varier légèrement le viewer count toutes les 15-30s
   useEffect(() => {
@@ -343,7 +351,27 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           <div className="relative">
             <div
               className="relative aspect-square bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl overflow-hidden shadow-xl cursor-zoom-in group"
-              onClick={() => setLightboxOpen(true)}
+              onClick={() => {
+                if (hoverTimerRef.current) { clearInterval(hoverTimerRef.current); hoverTimerRef.current = null; }
+                setLightboxOpen(true);
+              }}
+              onMouseEnter={() => {
+                if (allImages.length <= 1) return;
+                hoverTimerRef.current = setInterval(() => {
+                  setSelectedImageIndex(prev => {
+                    const newIndex = prev === allImages.length - 1 ? 0 : prev + 1;
+                    const img = allImages[newIndex];
+                    if (img?.variant) {
+                      const v = product.variants?.find(vr => vr.color === img.variant);
+                      if (v) setSelectedVariant(v);
+                    }
+                    return newIndex;
+                  });
+                }, 3000);
+              }}
+              onMouseLeave={() => {
+                if (hoverTimerRef.current) { clearInterval(hoverTimerRef.current); hoverTimerRef.current = null; }
+              }}
             >
               {hasDiscount && (
                 <Badge className="absolute top-4 left-4 z-10 bg-gradient-to-r from-red-500 to-red-600 text-white border-0 px-3 py-1.5 font-bold shadow-lg">

@@ -264,7 +264,6 @@ export default function CollectionHeroAurora({ slug, title, description, emoji, 
             className="bg-white/10 backdrop-blur-md rounded-lg px-5 py-3 sm:px-6 sm:py-4 border border-white/20"
           >
             <div className={`text-2xl font-bold ${theme.accent}`}>Exclusif</div>
-            <div className="text-sm text-gray-100">Sélection curée</div>
           </motion.div>
           <motion.div
             whileHover={{ scale: 1.05 }}
