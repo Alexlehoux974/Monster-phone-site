@@ -5,7 +5,7 @@ import { Heart, ShoppingCart, Star, Check, Zap, Shield, Eye } from 'lucide-react
 import { StarRating } from '@/components/StarRating';
 import { Product } from '@/data/products';
 import { useCart } from '@/contexts/CartContext';
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import ImageWithFallback from './ImageWithFallback';
 import { formatPrice, cn, isCompletelyOutOfStock } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
@@ -23,48 +23,8 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
   const [showSuccess, setShowSuccess] = useState(false);
   const [selectedVariant, setSelectedVariant] = useState(product.variants?.[0]);
   const [quickViewOpen, setQuickViewOpen] = useState(false);
-  const [displayedImage, setDisplayedImage] = useState(product.variants?.[0]?.images?.[0] || '');
-  const hoverTimerRef = useRef<NodeJS.Timeout | null>(null);
-  const variantIndexRef = useRef(0);
 
-  useEffect(() => {
-    return () => { if (hoverTimerRef.current) clearInterval(hoverTimerRef.current); };
-  }, []);
-
-  const variants = product.variants || [];
-  const variantsWithImages = variants.filter(v => v.images && v.images.length > 0);
-
-  const preloadAndSwitch = (variant: typeof variants[0]) => {
-    const nextSrc = variant.images?.[0] || '';
-    if (!nextSrc) return;
-    const img = new window.Image();
-    img.onload = () => {
-      setSelectedVariant(variant);
-      setDisplayedImage(nextSrc);
-    };
-    img.src = nextSrc.startsWith('http') ? nextSrc : `https://res.cloudinary.com/monster-phone/image/upload/f_auto,q_auto/${nextSrc}`;
-  };
-
-  const startHoverCycle = () => {
-    if (hoverTimerRef.current) return;
-    if (variantsWithImages.length <= 1) return;
-    variantIndexRef.current = variantsWithImages.findIndex(v => v.id === selectedVariant?.id) || 0;
-    hoverTimerRef.current = setInterval(() => {
-      variantIndexRef.current = (variantIndexRef.current + 1) % variantsWithImages.length;
-      preloadAndSwitch(variantsWithImages[variantIndexRef.current]);
-    }, 3000);
-  };
-
-  const stopHoverCycle = () => {
-    if (hoverTimerRef.current) { clearInterval(hoverTimerRef.current); hoverTimerRef.current = null; }
-    const defaultVariant = product.variants?.[0];
-    if (defaultVariant) {
-      setSelectedVariant(defaultVariant);
-      setDisplayedImage(defaultVariant.images?.[0] || '');
-    }
-  };
-
-  const mainImage = displayedImage || selectedVariant?.images?.[0] || product.variants?.[0]?.images?.[0] || '';
+  const mainImage = selectedVariant?.images?.[0] || product.variants?.[0]?.images?.[0] || '';
   const hasDiscount = (product.discountPercent && product.discountPercent > 0) || (product.originalPrice && product.originalPrice > product.basePrice);
   const hasAdminDiscount = selectedVariant?.adminDiscountPercent && selectedVariant.adminDiscountPercent > 0;
   const outOfStock = isCompletelyOutOfStock(product);
@@ -231,11 +191,7 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
   return (
     <div className={cn("bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 group", className)}>
       <Link href={`/produit/${product.urlSlug}`}>
-        <div
-          className="relative aspect-square overflow-hidden rounded-t-lg bg-gray-50"
-          onMouseEnter={startHoverCycle}
-          onMouseLeave={stopHoverCycle}
-        >
+        <div className="relative aspect-square overflow-hidden rounded-t-lg bg-gray-50">
           {/* Voile semi-transparent pour produits en rupture */}
           {outOfStock && (
             <div className="absolute inset-0 bg-white/30 z-[5]" />
