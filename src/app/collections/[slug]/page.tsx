@@ -1,17 +1,16 @@
+import { Suspense } from 'react';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import CollectionPage from '@/components/CollectionPage';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import BrandCarousel from '@/components/BrandCarousel';
+import ProductsClient from '@/app/nos-produits/products-client';
+import ProductCardSkeleton from '@/components/ProductCardSkeleton';
+import CollectionHeroAurora from '@/components/CollectionHeroAurora';
 import { getCollectionBySlug, getProductsByCollection, getAllCategories, getAllBrands } from '@/lib/supabase/api';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
-
-const collectionGradients: Record<string, { from: string; to: string }> = {
-  'nouveautes': { from: 'from-green-500', to: 'to-emerald-600' },
-  'best-sellers': { from: 'from-orange-500', to: 'to-red-600' },
-  'promotions': { from: 'from-red-500', to: 'to-pink-600' },
-};
-const defaultGradient = { from: 'from-blue-600', to: 'to-purple-600' };
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -58,20 +57,37 @@ export default async function CollectionSlugPage({ params }: Props) {
     getAllBrands(),
   ]);
 
-  const gradient = collectionGradients[slug] || defaultGradient;
-  const title = collection.name;
-
   return (
-    <CollectionPage
-      title={title}
-      description={collection.description || `Découvrez notre sélection ${collection.name}`}
-      gradientFrom={gradient.from}
-      gradientTo={gradient.to}
-      products={products}
-      categories={categories}
-      brands={brands}
-      parentCategory="Collections"
-      parentCategorySlug="collections"
-    />
+    <>
+      <Header />
+      <main className="min-h-screen pt-[120px] sm:pt-[140px] lg:pt-[176px]">
+        <div className="px-4 sm:px-6 lg:px-8 py-8">
+          <div className="max-w-7xl mx-auto">
+            <CollectionHeroAurora
+              slug={slug}
+              title={collection.name}
+              description={collection.description || `Découvrez notre sélection ${collection.name}`}
+              productCount={products.length}
+            />
+
+            <Suspense fallback={
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {[...Array(12)].map((_, i) => (
+                  <ProductCardSkeleton key={i} />
+                ))}
+              </div>
+            }>
+              <ProductsClient
+                initialProducts={products}
+                categories={categories}
+                brands={brands}
+              />
+            </Suspense>
+          </div>
+        </div>
+      </main>
+      <BrandCarousel />
+      <Footer />
+    </>
   );
 }
