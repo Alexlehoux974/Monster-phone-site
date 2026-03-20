@@ -181,6 +181,8 @@ function ProductsClientContent({
         sorted.sort((a, b) => (b.average_rating || 0) - (a.average_rating || 0));
         break;
       case 'newest':
+        sorted.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+        break;
       case 'bestseller':
       case 'relevance':
       default:

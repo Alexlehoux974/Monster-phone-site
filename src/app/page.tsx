@@ -124,7 +124,7 @@ export default async function Home() {
           <FeaturedProductsSupabase
             products={newArrivals}
             title="Nouveautés"
-            viewAllHref="/nos-produits?sort=newest"
+            viewAllHref="/collections/nouveautes"
             viewAllLabel="Voir toutes les nouveautés"
           />
         )}

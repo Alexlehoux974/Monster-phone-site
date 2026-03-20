@@ -28,20 +28,17 @@ export function createClient(forceNew = false) {
 
   // Browser-side: destroy and recreate if forceNew is true
   if (forceNew && window.__supabaseClient) {
-    console.log('🔄 [createClient] Destroying old client instance...');
     delete window.__supabaseClient;
     window.__supabaseClientCreating = false;
   }
 
   // Browser-side: use global singleton to ensure same instance across all bundles
   if (window.__supabaseClient) {
-    console.log('♻️ [createClient] Reusing existing Supabase client instance');
     return window.__supabaseClient;
   }
 
   // Prevent race condition: if another call is already creating the client, wait
   if (window.__supabaseClientCreating) {
-    console.log('⏳ [createClient] Waiting for client creation to complete...');
     // Wait for the other call to finish creating the client
     const checkInterval = setInterval(() => {
       if (window.__supabaseClient) {
@@ -82,7 +79,6 @@ export function createClient(forceNew = false) {
   });
 
   window.__supabaseClientCreating = false;
-  console.log('🔧 [createClient] Created new Supabase client instance');
 
   return window.__supabaseClient;
 }
@@ -241,6 +237,7 @@ export interface ProductFullView {
   badges?: string[];
   videos?: any[];
   reviews?: any[];
+  created_at?: string;
 }
 
 // Helper functions for fetching data
