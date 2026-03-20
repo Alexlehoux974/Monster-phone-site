@@ -356,6 +356,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                 setLightboxOpen(true);
               }}
               onMouseEnter={() => {
+                if (hoverTimerRef.current) return;
                 if (allImages.length <= 1) return;
                 hoverTimerRef.current = setInterval(() => {
                   setSelectedImageIndex(prev => {
@@ -369,7 +370,10 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                   });
                 }, 3000);
               }}
-              onMouseLeave={() => {
+              onMouseLeave={(e) => {
+                const container = e.currentTarget;
+                const related = e.relatedTarget as Node | null;
+                if (related && container.contains(related)) return;
                 if (hoverTimerRef.current) { clearInterval(hoverTimerRef.current); hoverTimerRef.current = null; }
               }}
             >
