@@ -23,6 +23,7 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
   const [showSuccess, setShowSuccess] = useState(false);
   const [selectedVariant, setSelectedVariant] = useState(product.variants?.[0]);
   const [quickViewOpen, setQuickViewOpen] = useState(false);
+  const [displayedImage, setDisplayedImage] = useState(product.variants?.[0]?.images?.[0] || '');
   const hoverTimerRef = useRef<NodeJS.Timeout | null>(null);
   const variantIndexRef = useRef(0);
 
@@ -33,21 +34,37 @@ export default function ProductCard({ product, className = '', viewMode = 'grid'
   const variants = product.variants || [];
   const variantsWithImages = variants.filter(v => v.images && v.images.length > 0);
 
+  const preloadAndSwitch = (variant: typeof variants[0]) => {
+    const nextSrc = variant.images?.[0] || '';
+    if (!nextSrc) return;
+    const img = new window.Image();
+    img.onload = () => {
+      setSelectedVariant(variant);
+      setDisplayedImage(nextSrc);
+    };
+    img.src = nextSrc.startsWith('http') ? nextSrc : `https://res.cloudinary.com/monster-phone/image/upload/f_auto,q_auto/${nextSrc}`;
+  };
+
   const startHoverCycle = () => {
     if (hoverTimerRef.current) return;
     if (variantsWithImages.length <= 1) return;
     variantIndexRef.current = variantsWithImages.findIndex(v => v.id === selectedVariant?.id) || 0;
     hoverTimerRef.current = setInterval(() => {
       variantIndexRef.current = (variantIndexRef.current + 1) % variantsWithImages.length;
-      setSelectedVariant(variantsWithImages[variantIndexRef.current]);
+      preloadAndSwitch(variantsWithImages[variantIndexRef.current]);
     }, 3000);
   };
 
   const stopHoverCycle = () => {
     if (hoverTimerRef.current) { clearInterval(hoverTimerRef.current); hoverTimerRef.current = null; }
+    const defaultVariant = product.variants?.[0];
+    if (defaultVariant) {
+      setSelectedVariant(defaultVariant);
+      setDisplayedImage(defaultVariant.images?.[0] || '');
+    }
   };
 
-  const mainImage = selectedVariant?.images?.[0] || product.variants?.[0]?.images?.[0] || '';
+  const mainImage = displayedImage || selectedVariant?.images?.[0] || product.variants?.[0]?.images?.[0] || '';
   const hasDiscount = (product.discountPercent && product.discountPercent > 0) || (product.originalPrice && product.originalPrice > product.basePrice);
   const hasAdminDiscount = selectedVariant?.adminDiscountPercent && selectedVariant.adminDiscountPercent > 0;
   const outOfStock = isCompletelyOutOfStock(product);
