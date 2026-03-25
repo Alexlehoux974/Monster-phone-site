@@ -22,15 +22,20 @@ export default async function LEDPage() {
     getAllBrands()
   ]);
 
-  // Filtrer uniquement les produits de la catégorie LED
+  // Trouver la catégorie LED et toutes ses sous-catégories
   const ledCategory = categories.find((cat: any) =>
-    cat.name.toLowerCase() === 'led' ||
-    cat.slug === 'led' ||
-    cat.name.toLowerCase().includes('led')
+    (cat.name.toLowerCase() === 'led' || cat.slug === 'led') && !cat.parent_id
   );
 
-  const ledProducts = ledCategory
-    ? allProducts.filter((product: any) => product.category_id === ledCategory.id)
+  const ledCategoryIds: string[] = [];
+  if (ledCategory) {
+    ledCategoryIds.push(ledCategory.id);
+    const subcategories = categories.filter((cat: any) => cat.parent_id === ledCategory.id);
+    subcategories.forEach((sub: any) => ledCategoryIds.push(sub.id));
+  }
+
+  const ledProducts = ledCategoryIds.length > 0
+    ? allProducts.filter((product: any) => ledCategoryIds.includes(product.category_id))
     : [];
 
   return (
