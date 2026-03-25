@@ -182,6 +182,7 @@ export default function ContactPage() {
                         value={formData.name}
                         onChange={handleChange}
                         required
+                        aria-required="true"
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                         placeholder="Votre nom"
                       />
@@ -211,6 +212,7 @@ export default function ContactPage() {
                       value={formData.email}
                       onChange={handleChange}
                       required
+                      aria-required="true"
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                       placeholder="votre@email.com"
                     />
@@ -225,6 +227,7 @@ export default function ContactPage() {
                       value={formData.subject}
                       onChange={handleChange}
                       required
+                      aria-required="true"
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                     >
                       <option value="" className="text-gray-900">Sélectionnez un sujet</option>
@@ -246,6 +249,7 @@ export default function ContactPage() {
                       value={formData.message}
                       onChange={handleChange}
                       required
+                      aria-required="true"
                       rows={5}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors resize-none"
                       placeholder="Décrivez votre demande..."

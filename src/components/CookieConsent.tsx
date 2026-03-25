@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Cookie, X, Settings, Check } from 'lucide-react';
 import Link from 'next/link';
@@ -115,6 +115,40 @@ export default function CookieConsent() {
     setPreferences(prev => ({ ...prev, [key]: !prev[key] }));
   };
 
+  const dialogRef = useRef<HTMLDivElement>(null);
+
+  // Escape + focus trap
+  useEffect(() => {
+    if (!isVisible) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsVisible(false);
+        return;
+      }
+
+      // Focus trap
+      if (e.key === 'Tab' && dialogRef.current) {
+        const focusableElements = dialogRef.current.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        const first = focusableElements[0];
+        const last = focusableElements[focusableElements.length - 1];
+
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last?.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first?.focus();
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isVisible]);
+
   return (
     <AnimatePresence>
       {isVisible && (
@@ -125,7 +159,7 @@ export default function CookieConsent() {
           transition={{ type: 'spring', damping: 25, stiffness: 300 }}
           className="fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6"
         >
-          <div className="max-w-4xl mx-auto bg-white/95 backdrop-blur-lg rounded-2xl shadow-2xl border border-gray-200 overflow-hidden max-h-[70vh] overflow-y-auto">
+          <div ref={dialogRef} role="dialog" aria-modal="true" aria-labelledby="cookie-consent-title" className="max-w-4xl mx-auto bg-white/95 backdrop-blur-lg rounded-2xl shadow-2xl border border-gray-200 overflow-hidden max-h-[70vh] overflow-y-auto">
             {/* Main Banner */}
             <div className="p-6">
               <div className="flex items-start gap-4">
@@ -134,7 +168,7 @@ export default function CookieConsent() {
                 </div>
 
                 <div className="flex-1 min-w-0">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  <h3 id="cookie-consent-title" className="text-lg font-semibold text-gray-900 mb-2">
                     🍪 Nous utilisons des cookies
                   </h3>
                   <p className="text-gray-600 text-sm leading-relaxed">
@@ -187,7 +221,7 @@ export default function CookieConsent() {
                         </div>
                         <div className="flex items-center gap-2">
                           <span className="text-xs text-gray-400">Toujours actif</span>
-                          <div className="w-12 h-6 bg-blue-600 rounded-full flex items-center justify-end px-1 cursor-not-allowed">
+                          <div role="switch" aria-checked="true" aria-label="Cookies essentiels (toujours actif)" className="w-12 h-6 bg-blue-600 rounded-full flex items-center justify-end px-1 cursor-not-allowed">
                             <div className="w-4 h-4 bg-white rounded-full" />
                           </div>
                         </div>
@@ -203,6 +237,9 @@ export default function CookieConsent() {
                         </div>
                         <button
                           onClick={() => togglePreference('analytics')}
+                          role="switch"
+                          aria-checked={preferences.analytics}
+                          aria-label="Cookies analytiques"
                           className={`w-12 h-6 rounded-full flex items-center px-1 transition-colors ${
                             preferences.analytics ? 'bg-blue-600 justify-end' : 'bg-gray-300 justify-start'
                           }`}
@@ -221,6 +258,9 @@ export default function CookieConsent() {
                         </div>
                         <button
                           onClick={() => togglePreference('marketing')}
+                          role="switch"
+                          aria-checked={preferences.marketing}
+                          aria-label="Cookies marketing"
                           className={`w-12 h-6 rounded-full flex items-center px-1 transition-colors ${
                             preferences.marketing ? 'bg-blue-600 justify-end' : 'bg-gray-300 justify-start'
                           }`}

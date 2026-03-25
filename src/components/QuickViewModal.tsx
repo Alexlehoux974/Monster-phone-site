@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import { X, ShoppingCart, Check, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Product } from '@/data/products';
@@ -21,6 +21,53 @@ export default function QuickViewModal({ product, isOpen, onClose }: QuickViewMo
   const [selectedVariant, setSelectedVariant] = useState(product.variants?.[0]);
   const [imageIndex, setImageIndex] = useState(0);
   const [added, setAdded] = useState(false);
+  const modalRef = useRef<HTMLDivElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
+
+  // Focus trap et gestion clavier
+  useEffect(() => {
+    if (!isOpen) return;
+
+    // Sauvegarder l'élément focalisé avant l'ouverture
+    previousFocusRef.current = document.activeElement as HTMLElement;
+
+    // Focus le modal
+    const timer = setTimeout(() => {
+      modalRef.current?.focus();
+    }, 50);
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+        return;
+      }
+
+      // Focus trap : garder le focus dans le modal
+      if (e.key === 'Tab' && modalRef.current) {
+        const focusableElements = modalRef.current.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        const first = focusableElements[0];
+        const last = focusableElements[focusableElements.length - 1];
+
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last?.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first?.focus();
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      clearTimeout(timer);
+      // Restaurer le focus
+      previousFocusRef.current?.focus();
+    };
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
@@ -48,10 +95,15 @@ export default function QuickViewModal({ product, isOpen, onClose }: QuickViewMo
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" onClick={onClose}>
-      <div className="absolute inset-0 bg-black/50" />
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" onClick={onClose} role="presentation">
+      <div className="absolute inset-0 bg-black/50" aria-hidden="true" />
       <div
-        className="relative bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+        ref={modalRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="quickview-title"
+        tabIndex={-1}
+        className="relative bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto outline-none"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Bouton fermer */}
@@ -85,16 +137,18 @@ export default function QuickViewModal({ product, isOpen, onClose }: QuickViewMo
                   <button
                     onClick={() => setImageIndex(prev => prev - 1)}
                     className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-1 shadow"
+                    aria-label="Image précédente"
                   >
-                    <ChevronLeft className="h-4 w-4" />
+                    <ChevronLeft className="h-4 w-4" aria-hidden="true" />
                   </button>
                 )}
                 {imageIndex < images.length - 1 && (
                   <button
                     onClick={() => setImageIndex(prev => prev + 1)}
                     className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-1 shadow"
+                    aria-label="Image suivante"
                   >
-                    <ChevronRight className="h-4 w-4" />
+                    <ChevronRight className="h-4 w-4" aria-hidden="true" />
                   </button>
                 )}
               </>
@@ -104,7 +158,7 @@ export default function QuickViewModal({ product, isOpen, onClose }: QuickViewMo
           {/* Infos */}
           <div className="p-5 flex flex-col">
             <p className="text-sm text-gray-500 mb-1">{product.brandName}</p>
-            <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2">{product.name}</h3>
+            <h3 id="quickview-title" className="text-lg font-bold text-gray-900 mb-2 line-clamp-2">{product.name}</h3>
 
             {/* Prix */}
             <div className="flex items-end gap-2 mb-3">
@@ -124,8 +178,8 @@ export default function QuickViewModal({ product, isOpen, onClose }: QuickViewMo
             {/* Sélecteur de variantes */}
             {product.variants && product.variants.length > 1 && (
               <div className="mb-4">
-                <p className="text-sm font-medium text-gray-700 mb-2">Couleur :</p>
-                <div className="flex flex-wrap gap-2">
+                <p className="text-sm font-medium text-gray-700 mb-2" id="quickview-color-label">Couleur :</p>
+                <div className="flex flex-wrap gap-2" role="group" aria-labelledby="quickview-color-label">
                   {product.variants.map(v => (
                     <button
                       key={v.color}

@@ -8,15 +8,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
-    "test:e2e": "playwright test",
-    "test:e2e:ui": "playwright test --ui",
-    "test:e2e:debug": "playwright test --debug",
-    "test:e2e:report": "playwright show-report",
     "db:migrate": "tsx supabase/migrations/002_migrate_products_data.ts",
-    "db:setup": "echo 'Apply migration 001_initial_schema.sql in Supabase dashboard first, then run npm run db:migrate'"
+    "db:setup": "echo 'Apply migration 001_initial_schema.sql in Supabase dashboard first, then run npm run db:migrate'",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@radix-ui/react-label": "^2.1.7",
@@ -47,21 +42,19 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@playwright/test": "^1.56.0",
     "@tailwindcss/postcss": "^4",
-    "@testing-library/jest-dom": "^6.6.4",
-    "@testing-library/react": "^16.3.0",
-    "@types/jest": "^30.0.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^6.0.1",
     "eslint": "^9",
     "eslint-config-next": "15.4.2",
-    "jest": "^30.0.5",
-    "jest-environment-jsdom": "^30.0.5",
-    "playwright": "^1.56.0",
+    "jsdom": "^29.0.1",
     "tailwindcss": "^4",
     "tsx": "^4.19.1",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.1.1"
   }
 }

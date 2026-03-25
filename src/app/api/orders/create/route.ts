@@ -179,6 +179,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Créer les order_items dans la table dédiée
+    const warnings: string[] = [];
     if (items && items.length > 0) {
       // ✅ Pour chaque item avec un variant, trouver son UUID dans product_variants
       const orderItems = await Promise.all(items.map(async (item: any) => {
@@ -224,6 +225,7 @@ export async function POST(request: NextRequest) {
 
       if (itemsError) {
         console.error('⚠️ Error creating order_items:', itemsError);
+        warnings.push('order_items_failed');
       } else {
         // Décrémenter le stock après création de la commande
         try {
@@ -232,10 +234,11 @@ export async function POST(request: NextRequest) {
 
           if (stockError) {
             console.error('⚠️ Error decrementing stock:', stockError);
+            warnings.push('stock_decrement_failed');
           }
         } catch (stockErr: any) {
           console.error('⚠️ Stock decrement failed:', stockErr.message);
-          // Continue anyway - order is created, stock can be adjusted manually if needed
+          warnings.push('stock_decrement_failed');
         }
       }
     }
@@ -263,12 +266,13 @@ export async function POST(request: NextRequest) {
       });
     } catch (emailErr: any) {
       console.error('⚠️ Email sending failed:', emailErr.message);
-      // Continue anyway - order is created, email can be resent manually if needed
+      warnings.push('email_confirmation_failed');
     }
 
     return NextResponse.json({
       order,
       alreadyExists: false,
+      ...(warnings.length > 0 && { warnings }),
     });
   } catch (error: any) {
     console.error('❌ Error in orders/create:', error);

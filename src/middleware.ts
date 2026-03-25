@@ -13,9 +13,25 @@ export function middleware(request: NextRequest) {
     'camera=(), microphone=(), geolocation=(), interest-cohort=()'
   );
   // CSP - restrictive but allows necessary resources
+  // Note: 'unsafe-inline' is required for GTM/Meta Pixel inline scripts and Next.js style injection
+  // 'unsafe-eval' removed from script-src for better XSS protection
+  // worker-src added for Stripe and analytics service workers
   response.headers.set(
     'Content-Security-Policy',
-    "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com https://www.googletagmanager.com https://connect.facebook.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https: http:; connect-src 'self' https://*.supabase.co https://api.stripe.com https://*.stripe.com https://www.google-analytics.com https://region1.google-analytics.com https://www.facebook.com wss://*.supabase.co; frame-src https://js.stripe.com https://hooks.stripe.com https://www.facebook.com; object-src 'none'; base-uri 'self'"
+    [
+      "default-src 'self'",
+      "script-src 'self' 'unsafe-inline' https://js.stripe.com https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://ssl.google-analytics.com",
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+      "font-src 'self' https://fonts.gstatic.com",
+      "img-src 'self' data: blob: https: http:",
+      "connect-src 'self' https://*.supabase.co https://api.stripe.com https://*.stripe.com https://www.google-analytics.com https://region1.google-analytics.com https://analytics.google.com https://www.facebook.com https://graph.facebook.com wss://*.supabase.co",
+      "frame-src https://js.stripe.com https://hooks.stripe.com https://www.facebook.com",
+      "worker-src 'self' blob:",
+      "object-src 'none'",
+      "base-uri 'self'",
+      "form-action 'self' https://checkout.stripe.com",
+      "upgrade-insecure-requests",
+    ].join('; ')
   );
 
   // Admin routes: only check that the auth cookie EXISTS.

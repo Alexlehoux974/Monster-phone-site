@@ -941,7 +941,7 @@ export default function Header() {
             </Link>
 
             {/* Navigation centrale */}
-            <nav className="hidden xl:flex items-center gap-1 overflow-visible flex-1" ref={menuRef}>
+            <nav aria-label="Navigation principale" className="hidden xl:flex items-center gap-1 overflow-visible flex-1" ref={menuRef}>
               {/* Génération des menus à partir de FIXED_MENU_STRUCTURE */}
               {FIXED_MENU_STRUCTURE.map((category: MenuCategory) => {
                 return (
@@ -982,17 +982,19 @@ export default function Header() {
             
             {/* Barre de recherche desktop */}
             <div className="relative hidden xl:flex flex-shrink-0" ref={searchRef}>
-              <form onSubmit={handleSearchSubmit} className="relative">
+              <form onSubmit={handleSearchSubmit} className="relative" role="search" aria-label="Rechercher un produit">
                 <input
                   type="text"
                   placeholder="Rechercher un produit..."
+                  aria-label="Rechercher un produit"
                   value={searchQuery}
                   onChange={handleSearchChange}
                   onFocus={() => searchQuery.length > 1 && setShowSuggestions(true)}
                   className="w-64 px-3 py-1.5 pr-8 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-sm"
                 />
-                <button 
+                <button
                   type="submit"
+                  aria-label="Lancer la recherche"
                   className="absolute right-1.5 top-1/2 -translate-y-1/2 p-0.5 text-gray-900 hover:text-blue-600 transition-colors"
                 >
                   <Search className="h-4 w-4" />
@@ -1040,7 +1042,7 @@ export default function Header() {
             </div>
             
             {/* Navigation tablette (version simplifiée) */}
-            <nav className="hidden lg:flex xl:hidden items-center space-x-1">
+            <nav aria-label="Navigation tablette" className="hidden lg:flex xl:hidden items-center space-x-1">
               {menuStructure.map((category: any) => {
                 const menuIcon = category.name.substring(0, 2);
                 const menuLabel = category.name.substring(3).split(' ')[0]; // Premier mot seulement pour tablette
@@ -1079,12 +1081,13 @@ export default function Header() {
                   onClick={() => setIsCartOpen(!isCartOpen)}
                   className="relative p-2.5 text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
                 >
-                  <ShoppingCart className="h-5 w-5" />
+                  <ShoppingCart className="h-5 w-5" aria-hidden="true" />
                   {getItemCount() > 0 && (
-                    <span className="absolute -top-0.5 -right-0.5 bg-red-500 text-white text-[9px] rounded-full h-3.5 w-3.5 flex items-center justify-center font-medium">
+                    <span className="absolute -top-0.5 -right-0.5 bg-red-500 text-white text-[9px] rounded-full h-3.5 w-3.5 flex items-center justify-center font-medium" aria-hidden="true">
                       {getItemCount()}
                     </span>
                   )}
+                  <span className="sr-only">Panier{getItemCount() > 0 ? `, ${getItemCount()} article${getItemCount() > 1 ? 's' : ''}` : ''}</span>
                 </button>
 
                 {/* Dropdown du panier */}
@@ -1100,8 +1103,9 @@ export default function Header() {
                         <button
                           onClick={() => setIsCartOpen(false)}
                           className="text-gray-400 hover:text-gray-600"
+                          aria-label="Fermer le panier"
                         >
-                          <X className="w-5 h-5" />
+                          <X className="w-5 h-5" aria-hidden="true" />
                         </button>
                       </h3>
                     </div>
@@ -1169,15 +1173,17 @@ export default function Header() {
                                       <button
                                         onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
                                         className="text-gray-400 hover:text-gray-600"
+                                        aria-label={`Réduire la quantité de ${item.product.name}`}
                                       >
-                                        <Minus className="w-4 h-4" />
+                                        <Minus className="w-4 h-4" aria-hidden="true" />
                                       </button>
-                                      <span className="text-sm font-medium">{item.quantity}</span>
+                                      <span className="text-sm font-medium" aria-label={`Quantité : ${item.quantity}`}>{item.quantity}</span>
                                       <button
                                         onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
                                         className="text-gray-400 hover:text-gray-600"
+                                        aria-label={`Augmenter la quantité de ${item.product.name}`}
                                       >
-                                        <Plus className="w-4 h-4" />
+                                        <Plus className="w-4 h-4" aria-hidden="true" />
                                       </button>
                                     </div>
                                   </div>
@@ -1188,8 +1194,9 @@ export default function Header() {
                                     <button
                                       onClick={() => removeFromCart(item.product.id)}
                                       className="text-red-500 hover:text-red-700 mt-1"
+                                      aria-label={`Supprimer ${item.product.name} du panier`}
                                     >
-                                      <Trash2 className="w-4 h-4" />
+                                      <Trash2 className="w-4 h-4" aria-hidden="true" />
                                     </button>
                                   </div>
                                 </div>
@@ -1241,8 +1248,9 @@ export default function Header() {
               <Link
                 href="/compte"
                 className="p-1.5 text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors inline-block"
+                aria-label="Mon compte"
               >
-                <User className="h-5 w-5" />
+                <User className="h-5 w-5" aria-hidden="true" />
               </Link>
 
               {/* Menu mobile - touch target min 44x44px */}
@@ -1251,8 +1259,11 @@ export default function Header() {
                 onClick={() => {
                   setIsMenuOpen(!isMenuOpen);
                 }}
+                aria-label={isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu de navigation'}
+                aria-expanded={isMenuOpen}
+                aria-haspopup="menu"
               >
-                {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+                {isMenuOpen ? <X className="h-5 w-5" aria-hidden="true" /> : <Menu className="h-5 w-5" aria-hidden="true" />}
               </button>
             </div>
           </div>
@@ -1276,22 +1287,24 @@ export default function Header() {
       {isMobileSearchOpen && (
         <div className="fixed inset-0 z-[250] bg-white lg:hidden">
           <div className="flex items-center gap-3 p-4 border-b border-gray-200">
-            <form onSubmit={(e) => { handleSearchSubmit(e); setIsMobileSearchOpen(false); }} className="flex-1 relative">
+            <form onSubmit={(e) => { handleSearchSubmit(e); setIsMobileSearchOpen(false); }} className="flex-1 relative" role="search" aria-label="Rechercher un produit">
               <input
                 type="text"
                 placeholder="Rechercher un produit..."
+                aria-label="Rechercher un produit"
                 value={searchQuery}
                 onChange={handleSearchChange}
                 className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-red-500 min-h-[48px]"
                 autoFocus
               />
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" aria-hidden="true" />
             </form>
             <button
               onClick={() => { setIsMobileSearchOpen(false); setSearchQuery(''); setShowSuggestions(false); }}
               className="p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center text-gray-600"
+              aria-label="Fermer la recherche"
             >
-              <X className="h-6 w-6" />
+              <X className="h-6 w-6" aria-hidden="true" />
             </button>
           </div>
           {/* Suggestions */}

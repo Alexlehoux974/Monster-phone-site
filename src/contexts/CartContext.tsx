@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, useRef, ReactNode } from 'react';
 import { Product } from '@/data/products';
 import { ProductFullView } from '@/lib/supabase/client';
 import { supabaseProductToLegacy } from '@/lib/supabase/adapters';
@@ -37,6 +37,7 @@ export const CartContext = createContext<CartContextType | undefined>(undefined)
 export function CartProvider({ children, initialItems }: { children: ReactNode; initialItems?: CartItem[] }) {
   const [items, setItems] = useState<CartItem[]>(initialItems || []);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [cartAnnouncement, setCartAnnouncement] = useState('');
 
   // Charger le panier depuis localStorage au montage
   useEffect(() => {
@@ -101,10 +102,13 @@ export function CartProvider({ children, initialItems }: { children: ReactNode; 
       return;
     }
     
+    // Annonce pour les lecteurs d'écran
+    setCartAnnouncement(`${productToAdd.name} ajouté au panier`);
+
     setItems(currentItems => {
       // Pour les tests avec variants, on vérifie si le produit avec ce variant existe déjà
-      const existingItemIndex = currentItems.findIndex(item => 
-        item.product.id === productToAdd.id && 
+      const existingItemIndex = currentItems.findIndex(item =>
+        item.product.id === productToAdd.id &&
         (variant ? item.variant === variant : !item.variant)
       );
 
@@ -143,6 +147,10 @@ export function CartProvider({ children, initialItems }: { children: ReactNode; 
   };
 
   const removeFromCart = (productId: string) => {
+    const removedItem = items.find(item => item.product.id === productId);
+    if (removedItem) {
+      setCartAnnouncement(`${removedItem.product.name} retiré du panier`);
+    }
     setItems(currentItems => currentItems.filter(item => item.product.id !== productId));
   };
 
@@ -323,7 +331,15 @@ export function CartProvider({ children, initialItems }: { children: ReactNode; 
     createOrder,
   };
 
-  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
+  return (
+    <CartContext.Provider value={value}>
+      {children}
+      {/* Region aria-live pour annoncer les changements du panier aux lecteurs d'écran */}
+      <div aria-live="polite" aria-atomic="true" className="sr-only">
+        {cartAnnouncement}
+      </div>
+    </CartContext.Provider>
+  );
 }
 
 export function useCart() {

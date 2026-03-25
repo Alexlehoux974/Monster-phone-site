@@ -199,8 +199,9 @@ export default function FilterPanel({ products, onFiltersChange, initialFilters 
                 className="w-24 px-2 py-1 border border-gray-300 rounded text-sm"
                 min={minPrice}
                 max={tempPriceRange[1]}
+                aria-label="Prix minimum en euros"
               />
-              <span className="text-gray-500">-</span>
+              <span className="text-gray-500" aria-hidden="true">-</span>
               <input
                 type="number"
                 value={tempPriceRange[1]}
@@ -208,6 +209,7 @@ export default function FilterPanel({ products, onFiltersChange, initialFilters 
                 className="w-24 px-2 py-1 border border-gray-300 rounded text-sm"
                 min={tempPriceRange[0]}
                 max={maxPrice}
+                aria-label="Prix maximum en euros"
               />
               <span className="text-sm text-gray-600">€</span>
             </div>
@@ -222,6 +224,10 @@ export default function FilterPanel({ products, onFiltersChange, initialFilters 
                   value={tempPriceRange[0]}
                   onChange={(e) => handlePriceChange([Number(e.target.value), tempPriceRange[1]])}
                   className="w-full"
+                  aria-label={`Prix minimum : ${tempPriceRange[0]}€`}
+                  aria-valuemin={minPrice}
+                  aria-valuemax={maxPrice}
+                  aria-valuenow={tempPriceRange[0]}
                 />
                 <input
                   type="range"
@@ -230,6 +236,10 @@ export default function FilterPanel({ products, onFiltersChange, initialFilters 
                   value={tempPriceRange[1]}
                   onChange={(e) => handlePriceChange([tempPriceRange[0], Number(e.target.value)])}
                   className="w-full"
+                  aria-label={`Prix maximum : ${tempPriceRange[1]}€`}
+                  aria-valuemin={minPrice}
+                  aria-valuemax={maxPrice}
+                  aria-valuenow={tempPriceRange[1]}
                 />
               </div>
             </div>

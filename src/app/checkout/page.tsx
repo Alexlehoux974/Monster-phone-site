@@ -379,6 +379,9 @@ function CheckoutContent() {
                             type="text"
                             name="firstName"
                             autoComplete="given-name"
+                            aria-required="true"
+                            aria-invalid={!!errors.firstName}
+                            aria-describedby={errors.firstName ? 'firstName-error' : undefined}
                             value={formData.firstName}
                             onChange={handleInputChange}
                             className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
@@ -386,7 +389,7 @@ function CheckoutContent() {
                             }`}
                           />
                           {errors.firstName && (
-                            <p className="text-red-500 text-xs mt-1">{errors.firstName}</p>
+                            <p id="firstName-error" role="alert" className="text-red-500 text-xs mt-1">{errors.firstName}</p>
                           )}
                         </div>
 
@@ -399,6 +402,9 @@ function CheckoutContent() {
                             type="text"
                             name="lastName"
                             autoComplete="family-name"
+                            aria-required="true"
+                            aria-invalid={!!errors.lastName}
+                            aria-describedby={errors.lastName ? 'lastName-error' : undefined}
                             value={formData.lastName}
                             onChange={handleInputChange}
                             className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
@@ -406,7 +412,7 @@ function CheckoutContent() {
                             }`}
                           />
                           {errors.lastName && (
-                            <p className="text-red-500 text-xs mt-1">{errors.lastName}</p>
+                            <p id="lastName-error" role="alert" className="text-red-500 text-xs mt-1">{errors.lastName}</p>
                           )}
                         </div>
 
@@ -420,6 +426,9 @@ function CheckoutContent() {
                             type="email"
                             name="email"
                             autoComplete="email"
+                            aria-required="true"
+                            aria-invalid={!!errors.email}
+                            aria-describedby={errors.email ? 'email-error' : undefined}
                             value={formData.email}
                             onChange={handleInputChange}
                             className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
@@ -427,7 +436,7 @@ function CheckoutContent() {
                             }`}
                           />
                           {errors.email && (
-                            <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+                            <p id="email-error" role="alert" className="text-red-500 text-xs mt-1">{errors.email}</p>
                           )}
                         </div>
 
@@ -441,6 +450,9 @@ function CheckoutContent() {
                             type="tel"
                             name="phone"
                             autoComplete="tel"
+                            aria-required="true"
+                            aria-invalid={!!errors.phone}
+                            aria-describedby={errors.phone ? 'phone-error' : undefined}
                             value={formData.phone}
                             onChange={handleInputChange}
                             placeholder="+262 6 92 XX XX XX"
@@ -449,7 +461,7 @@ function CheckoutContent() {
                             }`}
                           />
                           {errors.phone && (
-                            <p className="text-red-500 text-xs mt-1">{errors.phone}</p>
+                            <p id="phone-error" role="alert" className="text-red-500 text-xs mt-1">{errors.phone}</p>
                           )}
                         </div>
 
@@ -462,6 +474,9 @@ function CheckoutContent() {
                             type="text"
                             name="address"
                             autoComplete="street-address"
+                            aria-required="true"
+                            aria-invalid={!!errors.address}
+                            aria-describedby={errors.address ? 'address-error' : undefined}
                             value={formData.address}
                             onChange={handleInputChange}
                             placeholder="123 Rue de la Paix"
@@ -470,7 +485,7 @@ function CheckoutContent() {
                             }`}
                           />
                           {errors.address && (
-                            <p className="text-red-500 text-xs mt-1">{errors.address}</p>
+                            <p id="address-error" role="alert" className="text-red-500 text-xs mt-1">{errors.address}</p>
                           )}
                         </div>
 
@@ -483,6 +498,9 @@ function CheckoutContent() {
                             type="text"
                             name="city"
                             autoComplete="address-level2"
+                            aria-required="true"
+                            aria-invalid={!!errors.city}
+                            aria-describedby={errors.city ? 'city-error' : undefined}
                             value={formData.city}
                             onChange={handleInputChange}
                             placeholder="Saint-Denis"
@@ -491,7 +509,7 @@ function CheckoutContent() {
                             }`}
                           />
                           {errors.city && (
-                            <p className="text-red-500 text-xs mt-1">{errors.city}</p>
+                            <p id="city-error" role="alert" className="text-red-500 text-xs mt-1">{errors.city}</p>
                           )}
                         </div>
 
@@ -504,6 +522,9 @@ function CheckoutContent() {
                             type="text"
                             name="postalCode"
                             autoComplete="postal-code"
+                            aria-required="true"
+                            aria-invalid={!!errors.postalCode}
+                            aria-describedby={errors.postalCode ? 'postalCode-error' : undefined}
                             value={formData.postalCode}
                             onChange={handleInputChange}
                             placeholder="97400"
@@ -512,7 +533,7 @@ function CheckoutContent() {
                             }`}
                           />
                           {errors.postalCode && (
-                            <p className="text-red-500 text-xs mt-1">{errors.postalCode}</p>
+                            <p id="postalCode-error" role="alert" className="text-red-500 text-xs mt-1">{errors.postalCode}</p>
                           )}
                         </div>
                       </div>
