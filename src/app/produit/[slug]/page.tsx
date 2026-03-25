@@ -367,7 +367,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
         <div className="max-w-7xl mx-auto px-4 pt-4">
           <Breadcrumbs items={[
             { label: 'Accueil', href: '/' },
-            { label: product.categoryName, href: `/nos-produits?category=${encodeURIComponent(product.categoryName)}` },
+            { label: product.categoryName, href: {'Smartphones': '/smartphones', 'Tablettes': '/tablettes', 'Audio': '/audio', 'Montres': '/montres', 'LED': '/led', 'Accessoires': '/accessoires'}[product.categoryName] || `/nos-produits?category=${encodeURIComponent(product.categoryName)}` },
             { label: product.brandName, href: `/nos-produits?brand=${encodeURIComponent(product.brandName)}` },
             { label: product.name },
           ]} />

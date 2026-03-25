@@ -1048,7 +1048,7 @@ export default function Header() {
                 return (
                   <Link
                     key={category.slug}
-                    href={`/nos-produits?category=${encodeURIComponent(category.name.substring(3))}`}
+                    href={`/${category.slug}`}
                     className="flex items-center gap-2 text-gray-900 hover:text-blue-600 px-3 py-2 text-base font-bold transition-colors rounded-lg hover:bg-blue-50"
                   >
                     <span className="text-lg">{menuIcon}</span>

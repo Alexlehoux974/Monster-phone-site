@@ -52,10 +52,10 @@ export default function PlanDuSitePage() {
       description: "Catalogue complet de nos produits",
       color: "green",
       subcategories: [
-        { name: "Smartphones", url: "/nos-produits?category=smartphones" },
-        { name: "Accessoires", url: "/nos-produits?category=accessoires" },
-        { name: "Montres Connectées", url: "/nos-produits?category=montres" },
-        { name: "Audio", url: "/nos-produits?category=audio" }
+        { name: "Smartphones", url: "/smartphones" },
+        { name: "Accessoires", url: "/accessoires" },
+        { name: "Montres Connectées", url: "/montres" },
+        { name: "Audio", url: "/audio" }
       ]
     },
     {

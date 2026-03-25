@@ -28,7 +28,7 @@ const collectionsConfig: CollectionConfig[] = [
     shortTitle: 'Smartphones',
     icon: Smartphone,
     categorySlug: 'smartphones',
-    href: '/nos-produits?category=Smartphones',
+    href: '/smartphones',
     description: 'Pack complet inclus : chargeur et protection vitre',
   },
   {
@@ -53,7 +53,7 @@ const collectionsConfig: CollectionConfig[] = [
     shortTitle: 'LED',
     icon: Lightbulb,
     categorySlug: 'led',
-    href: '/nos-produits?category=LED',
+    href: '/led',
   },
   {
     id: 'accessoires',
