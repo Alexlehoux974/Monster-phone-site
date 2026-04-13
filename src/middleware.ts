@@ -13,10 +13,10 @@ export function middleware(request: NextRequest) {
     'camera=(), microphone=(), geolocation=(), interest-cohort=()'
   );
   // CSP - restrictive but allows necessary resources
-  // Note: 'unsafe-inline' is required for GTM/Meta Pixel inline scripts and Next.js style injection
-  // 'unsafe-eval' removed from script-src for better XSS protection
-  // worker-src added for Stripe and analytics service workers
-  response.headers.set(
+  // Skip CSP in dev to avoid upgrade-insecure-requests breaking HTTP over LAN/IP
+  const isDev = process.env.NODE_ENV !== 'production';
+  if (!isDev) {
+    response.headers.set(
     'Content-Security-Policy',
     [
       "default-src 'self'",
@@ -33,6 +33,7 @@ export function middleware(request: NextRequest) {
       "upgrade-insecure-requests",
     ].join('; ')
   );
+  }
 
   // Admin routes: only check that the auth cookie EXISTS.
   // Do NOT parse, decode, or validate the cookie content here.

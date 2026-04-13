@@ -9,6 +9,7 @@ import CookieConsent from "@/components/CookieConsent";
 import FloatingContact from "@/components/FloatingContact";
 import GoogleTagManager, { GoogleTagManagerNoscript } from "@/components/tracking/GoogleTagManager";
 import MetaPixel from "@/components/tracking/MetaPixel";
+import PageViewTracker from "@/components/tracking/PageViewTracker";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -97,6 +98,7 @@ export default function RootLayout({
         </a>
         {/* GTM noscript fallback */}
         <GoogleTagManagerNoscript />
+        <PageViewTracker />
         <AuthProvider>
           <CartProvider>
             <main id="main-content">
