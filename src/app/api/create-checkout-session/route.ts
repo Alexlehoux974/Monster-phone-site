@@ -307,7 +307,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(
       {
-        error: `Erreur paiement [checkpoint=${checkpoint}] ${error?.type || 'Error'}: ${error?.message || 'inconnue'}${error?.param ? ` (param=${error.param})` : ''}`,
+        error: 'Erreur lors de la création de la session de paiement. Veuillez réessayer.',
       },
       { status: 500 }
     );
