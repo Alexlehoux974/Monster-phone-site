@@ -34,6 +34,7 @@ function sanitize(input: unknown, maxLength = 255): string {
 }
 
 export async function POST(request: NextRequest) {
+  let checkpoint = 'init';
   try {
     // CSRF : vérifier que la requête vient de notre domaine
     const origin = request.headers.get('origin');
@@ -96,8 +97,10 @@ export async function POST(request: NextRequest) {
     }
 
     // ✅ VALIDATION DU STOCK CÔTÉ SERVEUR (Sécurité)
+    checkpoint = 'creating-supabase-client';
     const supabase = await createClient();
 
+    checkpoint = 'validating-stock';
     for (const item of items) {
       // Récupérer le produit depuis Supabase pour vérifier le stock en temps réel
       // Note: Utiliser 'products' au lieu de 'products_full' car products_full n'a pas stock_quantity
@@ -185,7 +188,9 @@ export async function POST(request: NextRequest) {
     const cartSessionId = `cart_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
     // Stocker les items dans Supabase via service role (contournement de la limite Stripe de 500 caractères)
+    checkpoint = 'creating-admin-client';
     const supabaseAdmin = createAdminClient();
+    checkpoint = 'inserting-pending-cart';
     const { error: cartError } = await supabaseAdmin
       .from('pending_carts')
       .insert({
@@ -264,6 +269,7 @@ export async function POST(request: NextRequest) {
     console.log('🔍 [API checkout] Creating Stripe session...');
 
     // Créer la session Stripe Checkout
+    checkpoint = 'creating-stripe-session';
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: lineItems,
@@ -288,6 +294,7 @@ export async function POST(request: NextRequest) {
   } catch (error: any) {
     const keyPrefix = process.env.STRIPE_SECRET_KEY?.slice(0, 8) || 'missing';
     console.error('STRIPE_CHECKOUT_ERROR', JSON.stringify({
+      checkpoint,
       message: error?.message,
       type: error?.type,
       code: error?.code,
@@ -300,7 +307,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(
       {
-        error: 'Erreur lors de la création de la session de paiement. Veuillez réessayer.',
+        error: `Erreur paiement [checkpoint=${checkpoint}] ${error?.type || 'Error'}: ${error?.message || 'inconnue'}${error?.param ? ` (param=${error.param})` : ''}`,
       },
       { status: 500 }
     );
