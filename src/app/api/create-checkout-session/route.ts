@@ -46,8 +46,9 @@ export async function POST(request: NextRequest) {
 
     const isOriginValid = origin && allowedOrigins.some(allowed => origin.startsWith(allowed!));
     const isRefererValid = referer && allowedOrigins.some(allowed => referer.startsWith(allowed!));
+    const isDev = process.env.NODE_ENV === 'development';
 
-    if (!isOriginValid && !isRefererValid) {
+    if (!isDev && !isOriginValid && !isRefererValid) {
       return NextResponse.json(
         { error: 'Requête non autorisée.' },
         { status: 403 }
@@ -229,7 +230,7 @@ export async function POST(request: NextRequest) {
           product_data: {
             name: item.name,
             ...(description && { description }), // N'inclure que si description existe
-            images: item.image_url ? [item.image_url] : [],
+            images: item.image_url && /^https?:\/\//.test(item.image_url) ? [item.image_url] : [],
             metadata: {
               product_id: item.id,
               brand: item.brand_name || '',
@@ -285,10 +286,18 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ sessionId: session.id, url: session.url });
   } catch (error: any) {
-    // Log erreur sans stack trace exposé au client
-    console.error('❌ Erreur création session Stripe:', error.message);
+    const keyPrefix = process.env.STRIPE_SECRET_KEY?.slice(0, 8) || 'missing';
+    console.error('STRIPE_CHECKOUT_ERROR', JSON.stringify({
+      message: error?.message,
+      type: error?.type,
+      code: error?.code,
+      statusCode: error?.statusCode,
+      param: error?.param,
+      requestId: error?.requestId,
+      raw: error?.raw,
+      keyPrefix,
+    }));
 
-    // Réponse générique au client (ne pas exposer les détails internes)
     return NextResponse.json(
       {
         error: 'Erreur lors de la création de la session de paiement. Veuillez réessayer.',

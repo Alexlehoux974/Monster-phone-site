@@ -89,27 +89,6 @@ export async function getActiveProducts(options?: {
 
   const data = await supabaseRest<any>('products', params);
 
-  // Debug: Log products with images to understand data structure
-  if (data.length > 0) {
-    console.log('🔍 [DEBUG] Total products returned:', data.length);
-    console.log('🔍 [DEBUG] First 3 products:');
-    data.slice(0, 3).forEach((p: any, i: number) => {
-      console.log(`  ${i + 1}. ${p.name}:`);
-      console.log(`     - images: ${p.images ? JSON.stringify(p.images.slice(0, 2)) : 'null'}`);
-      console.log(`     - product_images: ${p.product_images?.length || 0} items`);
-    });
-
-    // Show products WITH images
-    const withImages = data.filter((p: any) => p.images && p.images.length > 0);
-    console.log(`🔍 [DEBUG] Products WITH images: ${withImages.length}/${data.length}`);
-    if (withImages.length > 0) {
-      console.log('   Examples:');
-      withImages.slice(0, 3).forEach((p: any) => {
-        console.log(`   - ${p.name}: ${p.images.length} images`);
-      });
-    }
-  }
-
   // Transform to ProductFullView format
   const transformed = data.map(product => {
     // PRIORITÉ: products.images (Cloudinary URLs complets) > product_images (potentiellement cassés)
@@ -136,14 +115,6 @@ export async function getActiveProducts(options?: {
       images: productImages
     };
   }) as ProductFullView[];
-
-  // Debug: Log products WITH images after transformation
-  const afterWithImages = transformed.filter(p => p.images && p.images.length > 0);
-  console.log(`🔍 [AFTER TRANSFORM] Products WITH images: ${afterWithImages.length}/${transformed.length}`);
-  if (afterWithImages.length > 0) {
-    console.log('   First product with images:', afterWithImages[0].name);
-    console.log('   Its images:', afterWithImages[0].images?.slice(0, 2));
-  }
 
   return transformed;
 }
@@ -207,8 +178,6 @@ export async function getProductsByCategory(
     includeSubcategories?: boolean;
   }
 ): Promise<ProductFullView[]> {
-  console.log(`🔍 [getProductsByCategory] CALLED with slug="${categorySlug}", includeSubcategories=${options?.includeSubcategories}`);
-
   // D'abord, récupérer la catégorie et ses enfants si nécessaire
   let categoryIds: string[] = [];
 
@@ -254,16 +223,6 @@ export async function getProductsByCategory(
 
   const data = await supabaseRest<any>('products', params);
 
-  // Debug: Log what we received
-  console.log(`🔍 [getProductsByCategory] Searching for categorySlug="${categorySlug}", categoryIds=[${categoryIds.join(', ')}]`);
-  console.log(`🔍 [getProductsByCategory] Total products from DB: ${data.length}`);
-  if (data.length > 0) {
-    console.log(`🔍 [getProductsByCategory] First 3 products category info:`);
-    data.slice(0, 3).forEach((p: any, i: number) => {
-      console.log(`  ${i + 1}. ${p.name}: category_id=${p.category_id}, category?.slug=${p.category?.slug}`);
-    });
-  }
-
   // Filtrer par catégorie ou sous-catégories
   const filtered = data.filter(p => {
     // Match direct sur le slug de la catégorie
@@ -277,9 +236,6 @@ export async function getProductsByCategory(
 
     return false;
   });
-
-  console.log(`🔍 [getProductsByCategory] Filtered to ${filtered.length} products for "${categorySlug}"`);
-
 
   return filtered.map(product => {
     // PRIORITÉ: products.images (Cloudinary URLs complets) > product_images

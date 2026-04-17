@@ -9,6 +9,7 @@ import Footer from '@/components/Footer';
 import Image from 'next/image';
 import { trackBeginCheckout } from '@/lib/tracking/events';
 import type { GA4Item } from '@/lib/tracking/types';
+import { getWorkingImageUrl } from '@/lib/image-utils';
 import {
   CreditCard,
   Truck,
@@ -281,7 +282,7 @@ function CheckoutContent() {
               description: item.product.shortDescription || item.product.fullDescription,
               price: finalPrice,
               quantity: item.quantity,
-              image_url: variantObj?.images?.[0] || '',
+              image_url: variantObj?.images?.[0] ? getWorkingImageUrl(variantObj.images[0]) : '',
               brand_name: item.product.brandName,
               category_name: item.product.categoryName,
               variant: item.variant || null,
