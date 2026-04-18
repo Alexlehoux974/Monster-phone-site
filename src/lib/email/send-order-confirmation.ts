@@ -50,6 +50,7 @@ export async function sendOrderConfirmation(params: SendOrderConfirmationParams)
     const { data, error } = await resend.emails.send({
       from: 'Monster Phone Boutique <commandes@monster-phone.re>',
       to: params.customerEmail,
+      bcc: 'commande@monster-phone.re',
       subject: `✅ Confirmation de commande #${params.orderNumber}`,
       html: emailHtml,
     });
