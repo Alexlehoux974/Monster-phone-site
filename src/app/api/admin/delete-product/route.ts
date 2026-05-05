@@ -2,23 +2,24 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { verifyAdminRole, unauthorizedResponse } from '@/lib/auth/admin-guard';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
-
-// Utiliser le service role key pour avoir tous les droits
-const supabase = createClient(supabaseUrl, supabaseServiceKey, {
-  auth: {
-    autoRefreshToken: false,
-    persistSession: false
-  }
-});
-
 export async function POST(request: NextRequest) {
   // Verify admin authentication - only super_admin and admin can delete products
   const authResult = await verifyAdminRole(request, ['super_admin', 'admin']);
   if (!authResult.authorized) {
     return unauthorizedResponse(authResult);
   }
+
+  // Lazy-instantiate Supabase client (évite l'évaluation à module-load time
+  // pendant `next build`/Collecting page data, qui crashe si les env vars
+  // ne sont pas exposées au build).
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+  const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+  const supabase = createClient(supabaseUrl, supabaseServiceKey, {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false
+    }
+  });
 
   try {
     const { productId, productName } = await request.json();

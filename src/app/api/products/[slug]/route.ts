@@ -6,17 +6,18 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 export const fetchCache = 'force-no-store';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
-
-// Client Supabase avec service role key pour contourner RLS
-const supabase = createClient(supabaseUrl, supabaseServiceKey);
-
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
+    // Lazy-instantiate Supabase client (évite l'éval à module-load time
+    // pendant `next build`/Collecting page data).
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+    const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+    // Client Supabase avec service role key pour contourner RLS
+    const supabase = createClient(supabaseUrl, supabaseServiceKey);
+
     const { slug } = await params;
     console.log('🔍 [API] Fetching product with slug:', slug);
 
