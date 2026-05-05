@@ -5,6 +5,10 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
+    // Cloudinary fait déjà l'optimisation (f_auto,q_auto). On bypasse /_next/image
+    // pour ne pas consommer le quota Vercel Image Optimization (5000 srcs/mois sur free)
+    // qui retournait 402 et cassait l'affichage des images sur tout le site.
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
